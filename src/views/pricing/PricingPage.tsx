@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { PricingCard } from '../../components/ui/pricing-card';
+import { PricingCard } from '../../components/pricing/PricingCard';
 import { products } from '../../stripe-config';
 import { getUserSubscription } from '../../lib/stripe';
 import Logo from '../../components/ui/Logo';
 import { Link } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
-import { PricingToggle } from './PricingToggle';
 
 export default function PricingPage() {
   const [subscription, setSubscription] = useState<any>(null);
@@ -29,51 +28,9 @@ export default function PricingPage() {
     fetchSubscription();
   }, []);
 
-  const standardPlanFeatures = [
-    {
-      title: "Core Features",
-      items: [
-        "AI-Powered Product Matching",
-        "Real-Time Inventory Sync",
-        "Live Analytics & Vibe Trends",
-        "Terpene Effect Explorer"
-      ]
-    },
-    {
-      title: "Team Features",
-      items: [
-        "Staff Dashboard & Query Logs",
-        "Priority Email Support",
-        "Unlimited SKUs",
-        "User Management"
-      ]
-    }
-  ];
-
-  const premiumAddons = [
-    {
-      title: "Additional Features",
-      items: [
-        "Custom AI Model Training",
-        "Multi-Location Support",
-        "Custom Integrations",
-        "Dedicated Account Manager"
-      ]
-    },
-    {
-      title: "Enterprise Features",
-      items: [
-        "Enterprise SLA",
-        "Advanced Security Controls",
-        "Custom Reporting",
-        "Quarterly Business Reviews"
-      ]
-    }
-  ];
-
   return (
     <div className="min-h-screen">
-      <header className="bg-white bg-opacity-30 backdrop-blur-md shadow-sm">
+      <header className="bg-white bg-opacity-90 backdrop-blur-md shadow-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             <Logo size="md" />
@@ -81,7 +38,7 @@ export default function PricingPage() {
             <div className="flex gap-4">
               <Link 
                 to="/auth/login"
-                className="px-6 py-3 bg-white/40 backdrop-blur-sm rounded-xl border border-gray-200/30 text-gray-900 font-medium hover:bg-white/60 hover:shadow-md transition-all duration-300"
+                className="px-6 py-3 bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200 text-gray-900 font-medium hover:bg-white hover:shadow-md transition-all duration-300"
               >
                 Log In
               </Link>
@@ -96,7 +53,7 @@ export default function PricingPage() {
         </div>
       </header>
 
-      <section className="py-20 bg-transparent">
+      <section className="py-20 bg-transparent bg-opacity-30 backdrop-blur-xl">
         <div className="container mx-auto px-4">
           <motion.div 
             className="text-center mb-8"
@@ -108,7 +65,35 @@ export default function PricingPage() {
             <p className="text-xl text-gray-600">All the power. No confusing tiers.</p>
           </motion.div>
           
-          <PricingToggle isYearly={isYearly} setIsYearly={setIsYearly} />
+          {/* Pricing Toggle */}
+          <motion.div 
+            className="flex justify-center items-center mb-12"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            <span className={`mr-3 font-medium ${!isYearly ? 'text-primary-600' : 'text-gray-500'}`}>Monthly</span>
+            <div 
+              className="relative w-16 h-8 bg-gray-200 rounded-full cursor-pointer shadow-inner"
+              onClick={() => setIsYearly(!isYearly)}
+            >
+              <motion.div 
+                className="absolute w-6 h-6 bg-primary-500 rounded-full top-1 shadow-md"
+                animate={{ x: isYearly ? 34 : 2 }}
+                transition={{ type: "spring", stiffness: 500, damping: 30 }}
+              />
+            </div>
+            <span className={`ml-3 font-medium ${isYearly ? 'text-primary-600' : 'text-gray-500'}`}>Yearly</span>
+            {isYearly && (
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="ml-2 px-2 py-1 bg-primary-100 text-primary-800 rounded-lg text-xs font-medium"
+              >
+                Save 17% (2 months free!)
+              </motion.div>
+            )}
+          </motion.div>
 
           {isLoading ? (
             <div className="flex justify-center items-center py-12">
@@ -116,29 +101,47 @@ export default function PricingPage() {
               <span className="ml-2 text-gray-600">Loading subscription data...</span>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-              <PricingCard
-                title={isYearly ? "Annual Plan" : "Standard Plan"}
-                description={isYearly ? "Commit for the year and save. Two months free!" : "Everything you need to run a smarter dispensary."}
-                price={isYearly ? "$2,490" : "$249"}
-                originalPrice={isYearly ? "$2,988" : undefined}
-                period={isYearly ? "/year" : "/month"}
-                features={standardPlanFeatures}
-                buttonText={isYearly ? "Subscribe Annually" : "Get Started"}
-                buttonLink="/auth/signup"
-                highlighted
-                isCurrentPlan={subscription?.price_id === products[0].priceId && 
-                              ['active', 'trialing'].includes(subscription?.subscription_status)}
-              />
-              <PricingCard
-                title="Premium Add-ons"
-                description="Enhance your capabilities with enterprise-grade features"
-                price="From $49"
-                period="/month"
-                features={premiumAddons}
-                buttonText="Contact Sales"
-                buttonLink="/contact"
-              />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              <div className="flex flex-col h-full">
+                <PricingCard
+                  title={isYearly ? "Annual Plan" : "Standard Plan"}
+                  price={isYearly ? "$2,490" : "$249"}
+                  period={isYearly ? "/year" : "/month"}
+                  description={isYearly ? "Commit for the year and save. Two months free!" : "Everything you need to run a smarter dispensary."}
+                  features={[
+                    'AI-Powered Product Matching',
+                    'Real-Time Inventory Sync',
+                    'Live Analytics & Vibe Trends',
+                    'Terpene Effect Explorer',
+                    'Staff Dashboard & Query Logs',
+                    'Priority Email Support',
+                    'Unlimited SKUs'
+                  ]}
+                  priceId={products[0].priceId}
+                  mode="subscription"
+                  buttonText={isYearly ? "Subscribe Yearly" : "Subscribe Monthly"}
+                  highlighted
+                  isCurrentPlan={subscription?.price_id === products[0].priceId && 
+                                ['active', 'trialing'].includes(subscription?.subscription_status)}
+                />
+              </div>
+              <div className="flex flex-col h-full">
+                <PricingCard
+                  title="Premium Add-ons"
+                  price="From $49"
+                  period="/month"
+                  description="Enhance your capabilities"
+                  features={[
+                    'Custom AI Model Training',
+                    'Multi-Location Support',
+                    'Custom Integrations',
+                    'Dedicated Account Manager',
+                    'Enterprise SLA'
+                  ]}
+                  buttonText="Contact Sales"
+                  buttonLink="/contact"
+                />
+              </div>
             </div>
           )}
           
