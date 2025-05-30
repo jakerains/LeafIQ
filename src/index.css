@@ -27,13 +27,15 @@ body {
   width: auto;
   height: auto;
   object-fit: cover;
-  filter: blur(3px); /* Reduced blur from 5px to 3px */
+  /* Removed blur filter completely */
 }
 
 .content-overlay {
   position: relative;
   z-index: 1;
-  /* Removed background-color and backdrop-filter */
+  /* Add a very subtle background with no blur for clean edges */
+  background-color: rgba(255, 255, 255, 0.85);
+  /* No backdrop filter for cleaner edges */
 }
 
 /* Improve glassmorphism cards visibility over video */
