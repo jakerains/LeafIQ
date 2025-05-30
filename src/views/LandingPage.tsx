@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ShimmerButton } from '../components/ui/shimmer-button';
-import { BentoDemo } from '../components/ui/bento-demo';
+import { FeaturesSection } from '../components/ui/bento-demo';
 
 const LandingPage = () => {
   return (
@@ -112,17 +112,8 @@ const LandingPage = () => {
         </div>
       </header>
 
-      {/* Features Section with BentoGrid */}
-      <section className="py-20 bg-gradient-to-b from-white to-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-display font-bold mb-4 text-gray-900">Everything You Need</h2>
-            <p className="text-xl text-gray-700">Powerful features to help your dispensary thrive</p>
-          </div>
-
-          <BentoDemo />
-        </div>
-      </section>
+      {/* Features Section */}
+      <FeaturesSection />
 
       {/* Pricing Section */}
       <section className="py-20 bg-white bg-opacity-80">
