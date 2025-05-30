@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Logo from '../components/ui/Logo';
 import { ShimmerButton } from '../components/ui/shimmer-button';
-import { Brain, Package, Target, Users, Zap, Lock } from 'lucide-react';
+import { BentoDemo } from '../components/ui/bento-demo';
 
 const LandingPage = () => {
   return (
@@ -112,7 +112,7 @@ const LandingPage = () => {
         </div>
       </header>
 
-      {/* Features Section */}
+      {/* Features Section with BentoGrid */}
       <section className="py-20 bg-white bg-opacity-90">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
@@ -120,38 +120,7 @@ const LandingPage = () => {
             <p className="text-xl text-gray-600">Powerful features to help your dispensary thrive</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <FeatureCard 
-              icon={<Brain className="w-8 h-8 text-primary-600" />}
-              title="AI-Powered Recommendations"
-              description="Match customers with perfect products using our advanced AI engine that understands terpene profiles and desired effects."
-            />
-            <FeatureCard 
-              icon={<Package className="w-8 h-8 text-primary-600" />}
-              title="Smart Inventory Management"
-              description="Real-time tracking and automated reordering suggestions to keep your best sellers in stock."
-            />
-            <FeatureCard 
-              icon={<Target className="w-8 h-8 text-primary-600" />}
-              title="Customer Insights"
-              description="Deep analytics on customer preferences and buying patterns to optimize your product mix."
-            />
-            <FeatureCard 
-              icon={<Users className="w-8 h-8 text-primary-600" />}
-              title="Staff Management"
-              description="Role-based access control and performance tracking for your team members."
-            />
-            <FeatureCard 
-              icon={<Zap className="w-8 h-8 text-primary-600" />}
-              title="Real-time Analytics"
-              description="Live dashboards showing sales, inventory levels, and customer satisfaction metrics."
-            />
-            <FeatureCard 
-              icon={<Lock className="w-8 h-8 text-primary-600" />}
-              title="Enterprise Security"
-              description="Bank-grade encryption and compliance with all relevant data protection regulations."
-            />
-          </div>
+          <BentoDemo />
         </div>
       </section>
 
@@ -243,26 +212,6 @@ const LandingPage = () => {
         </div>
       </footer>
     </div>
-  );
-};
-
-const FeatureCard = ({ icon, title, description }: { 
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}) => {
-  return (
-    <motion.div 
-      className="p-6 bg-white rounded-2xl shadow-lg border border-gray-100"
-      whileHover={{ y: -4 }}
-      transition={{ duration: 0.2 }}
-    >
-      <div className="w-12 h-12 bg-primary-50 rounded-xl flex items-center justify-center mb-4">
-        {icon}
-      </div>
-      <h3 className="text-xl font-semibold mb-2">{title}</h3>
-      <p className="text-gray-600">{description}</p>
-    </motion.div>
   );
 };
 
