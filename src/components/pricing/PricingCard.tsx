@@ -83,7 +83,7 @@ export function PricingCard({
             <div className="flex flex-col">
               <span className="text-4xl font-bold">{price}</span>
               <div className="flex items-center gap-2 mt-1">
-                <span className="text-lg line-through opacity-70">{monthlyPrice}/month × 12</span>
+                <span className="text-lg line-through opacity-70">${parseInt(monthlyPrice.replace('$', '')) * 12}</span>
                 <span className="text-sm bg-primary-400 px-2 py-0.5 rounded-full">2 months free!</span>
               </div>
             </div>
@@ -94,7 +94,9 @@ export function PricingCard({
             </div>
           )}
         </div>
-        <p className={`mb-6 ${highlighted ? 'text-primary-100' : 'text-gray-600'}`}>{description}</p>
+        <p className={`mb-6 ${highlighted ? 'text-primary-100' : 'text-gray-600'}`}>
+          {isYearly && highlighted ? "" : description}
+        </p>
         <ul className="space-y-3 mb-8">
           {features.map((feature, index) => (
             <li key={index} className="flex items-center">

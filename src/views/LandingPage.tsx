@@ -177,7 +177,7 @@ const LandingPage = () => {
                 title={isYearly ? "Annual Plan" : "Standard Plan"}
                 price={isYearly ? "$2,490" : "$249"}
                 period={isYearly ? "/year" : "/month"}
-                description={isYearly ? "Commit for the year and save. Two months free!" : "Everything you need to run a smarter dispensary."}
+                description={isYearly ? "" : "Everything you need to run a smarter dispensary."}
                 features={[
                   'AI-Powered Product Matching',
                   'Real-Time Inventory Sync',
@@ -190,6 +190,8 @@ const LandingPage = () => {
                 buttonText="Get Started"
                 buttonLink="/auth/signup"
                 highlighted
+                isYearly={isYearly}
+                monthlyPrice="$249"
               />
             </div>
             <div className="flex flex-col h-full">
@@ -300,7 +302,9 @@ const PricingCard = ({
   features, 
   buttonText, 
   buttonLink,
-  highlighted = false 
+  highlighted = false,
+  isYearly = false,
+  monthlyPrice = ""
 }: {
   title: string;
   price: string;
@@ -310,6 +314,8 @@ const PricingCard = ({
   buttonText: string;
   buttonLink: string;
   highlighted?: boolean;
+  isYearly?: boolean;
+  monthlyPrice?: string;
 }) => {
   return (
     <motion.div 
@@ -326,10 +332,24 @@ const PricingCard = ({
       <div>
         <h3 className="text-2xl font-semibold mb-2">{title}</h3>
         <div className="mb-4">
-          <span className="text-4xl font-bold">{price}</span>
-          {period && <span className="text-lg">{period}</span>}
+          {isYearly && monthlyPrice && highlighted ? (
+            <div className="flex flex-col">
+              <span className="text-4xl font-bold">{price}</span>
+              <div className="flex items-center gap-2 mt-1">
+                <span className="text-lg line-through opacity-70">${parseInt(monthlyPrice.replace('$', '')) * 12}</span>
+                <span className="text-sm bg-primary-400 px-2 py-0.5 rounded-full">2 months free!</span>
+              </div>
+            </div>
+          ) : (
+            <div>
+              <span className="text-4xl font-bold">{price}</span>
+              {period && <span className="text-lg">{period}</span>}
+            </div>
+          )}
         </div>
-        <p className={`mb-6 ${highlighted ? 'text-primary-100' : 'text-gray-600'}`}>{description}</p>
+        <p className={`mb-6 ${highlighted ? 'text-primary-100' : 'text-gray-600'}`}>
+          {isYearly && highlighted ? "" : description}
+        </p>
         <ul className="space-y-3 mb-8">
           {features.map((feature, index) => (
             <li key={index} className="flex items-center">

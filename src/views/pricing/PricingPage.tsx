@@ -107,7 +107,7 @@ export default function PricingPage() {
                   title={isYearly ? "Annual Plan" : "Standard Plan"}
                   price={isYearly ? "$2,490" : "$249"}
                   period={isYearly ? "/year" : "/month"}
-                  description={isYearly ? "Commit for the year and save. Two months free!" : "Everything you need to run a smarter dispensary."}
+                  description={isYearly ? "" : "Everything you need to run a smarter dispensary."}
                   features={[
                     'AI-Powered Product Matching',
                     'Real-Time Inventory Sync',
