@@ -1,0 +1,130 @@
+import { useState, useEffect } from 'react';
+import { useAuthStore } from '../../stores/authStore';
+import { Settings } from '../../types';
+import Logo from '../../components/ui/Logo';
+import Button from '../../components/ui/Button';
+import { Routes, Route, useNavigate, Link, useLocation } from 'react-router-dom';
+import { LogOut, RefreshCw, Database, Settings as SettingsIcon, Activity, Package, BrainCircuit, LayoutDashboard } from 'lucide-react';
+import { motion } from 'framer-motion';
+import AdminDashboard from './AdminDashboard';
+import AdminInventory from './AdminInventory';
+import AdminAIModel from './AdminAIModel';
+import AdminSettings from './AdminSettings';
+
+const AdminView = () => {
+  const { logout } = useAuthStore();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const currentPath = location.pathname;
+  
+  // Extract the active tab from the URL
+  const getActiveTab = () => {
+    if (currentPath.includes('/inventory')) return 'inventory';
+    if (currentPath.includes('/ai-model')) return 'ai-model';
+    if (currentPath.includes('/settings')) return 'settings';
+    return 'dashboard'; // Default tab
+  };
+
+  const [activeTab, setActiveTab] = useState(getActiveTab());
+
+  // Update active tab when URL changes
+  useEffect(() => {
+    setActiveTab(getActiveTab());
+  }, [currentPath]);
+
+  // Handle tab clicks
+  const handleTabClick = (tab: string) => {
+    setActiveTab(tab);
+    navigate(`/admin/${tab === 'dashboard' ? '' : tab}`);
+  };
+
+  return (
+    <div className="min-h-screen">
+      <header className="bg-white bg-opacity-90 backdrop-blur-md shadow-sm">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex justify-between items-center">
+            <Logo size="md" />
+            
+            <Button 
+              variant="ghost"
+              leftIcon={<LogOut size={18} />}
+              onClick={logout}
+            >
+              Logout
+            </Button>
+          </div>
+        </div>
+      </header>
+      
+      <div className="container mx-auto px-4 py-6">
+        <div className="mb-8">
+          <h1 className="text-3xl font-display font-semibold mb-2">Admin Dashboard</h1>
+          <p className="text-gray-600">
+            Manage your dispensary's inventory, AI model, and system settings.
+          </p>
+        </div>
+        
+        {/* Navigation Tabs */}
+        <div className="bg-white bg-opacity-90 backdrop-blur-md rounded-xl mb-6 p-1 flex overflow-x-auto">
+          <button
+            onClick={() => handleTabClick('dashboard')}
+            className={`flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all ${
+              activeTab === 'dashboard'
+                ? 'bg-primary-500 text-white shadow-md'
+                : 'text-gray-600 hover:bg-gray-100'
+            }`}
+          >
+            <LayoutDashboard size={16} className="mr-2" />
+            Dashboard
+          </button>
+          
+          <button
+            onClick={() => handleTabClick('inventory')}
+            className={`flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all ${
+              activeTab === 'inventory'
+                ? 'bg-primary-500 text-white shadow-md'
+                : 'text-gray-600 hover:bg-gray-100'
+            }`}
+          >
+            <Package size={16} className="mr-2" />
+            Inventory
+          </button>
+          
+          <button
+            onClick={() => handleTabClick('ai-model')}
+            className={`flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all ${
+              activeTab === 'ai-model'
+                ? 'bg-primary-500 text-white shadow-md'
+                : 'text-gray-600 hover:bg-gray-100'
+            }`}
+          >
+            <BrainCircuit size={16} className="mr-2" />
+            AI Model
+          </button>
+          
+          <button
+            onClick={() => handleTabClick('settings')}
+            className={`flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all ${
+              activeTab === 'settings'
+                ? 'bg-primary-500 text-white shadow-md'
+                : 'text-gray-600 hover:bg-gray-100'
+            }`}
+          >
+            <SettingsIcon size={16} className="mr-2" />
+            Settings
+          </button>
+        </div>
+        
+        {/* Routes for different admin sections */}
+        <Routes>
+          <Route path="/" element={<AdminDashboard />} />
+          <Route path="/inventory" element={<AdminInventory />} />
+          <Route path="/ai-model" element={<AdminAIModel />} />
+          <Route path="/settings" element={<AdminSettings />} />
+        </Routes>
+      </div>
+    </div>
+  );
+};
+
+export default AdminView;
