@@ -13,7 +13,7 @@ const LandingPage = () => {
             <img 
               src="/leafiq-logo.png" 
               alt="LeafIQ" 
-              className="h-16"
+              className="h-16 drop-shadow-lg filter drop-shadow-lg shadow-primary-500/50"
             />
             <div className="space-x-4">
               <Link 
