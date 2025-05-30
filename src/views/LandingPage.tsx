@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import Logo from '../components/ui/Logo';
 import { ShimmerButton } from '../components/ui/shimmer-button';
 import { BentoDemo } from '../components/ui/bento-demo';
 
@@ -11,7 +10,11 @@ const LandingPage = () => {
       <header className="relative overflow-hidden min-h-screen flex items-center">
         <div className="container mx-auto px-4 py-16">
           <nav className="flex justify-between items-center mb-16">
-            <Logo size="lg" />
+            <img 
+              src="/leafiq-logo.png" 
+              alt="LeafIQ" 
+              className="h-16"
+            />
             <div className="space-x-4">
               <Link 
                 to="/auth/login"
