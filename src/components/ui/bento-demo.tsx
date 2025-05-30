@@ -162,7 +162,7 @@ function FeaturesSection() {
             </div>
           </motion.div>
           
-          <h2 className="text-4xl font-display font-bold mb-4 bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">🌿 Everything You Need</h2>
+          <h2 className="text-4xl font-display font-bold mb-4 bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">Everything You Need</h2>
           <p className="text-xl text-gray-600">Powerful, intuitive tools to help your dispensary grow smarter—without growing your overhead.</p>
         </motion.div>
 
