@@ -1,9 +1,10 @@
 import { ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import Logo from '../../components/ui/Logo';
+import { Outlet } from 'react-router-dom';
 
 interface AuthLayoutProps {
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 const AuthLayout = ({ children }: AuthLayoutProps) => {
@@ -19,7 +20,7 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          {children}
+          {children || <Outlet />}
         </motion.div>
       </main>
     </div>
