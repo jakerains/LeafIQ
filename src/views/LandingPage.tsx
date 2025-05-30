@@ -2,7 +2,6 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ShimmerButton } from '../components/ui/shimmer-button';
 import { FeaturesSection } from '../components/ui/bento-demo';
-import { GradientText } from '../components/ui/gradient-text';
 
 const LandingPage = () => {
   return (
@@ -41,11 +40,7 @@ const LandingPage = () => {
                 transition={{ duration: 0.5 }}
               >
                 Transform Your 
-                <GradientText 
-                  colors={["#16a34a", "#22c55e", "#16a34a"]} 
-                  animationSpeed={5}
-                  className="font-bold font-display"
-                > Dispensary </GradientText>
+                <span className="bg-gradient-to-r from-primary-600 to-primary-500 bg-clip-text text-transparent"> Dispensary </span>
                 <span className="text-gray-900">Experience</span>
               </motion.h1>
               <motion.p 
