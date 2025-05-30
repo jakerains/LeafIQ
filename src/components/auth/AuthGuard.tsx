@@ -10,9 +10,10 @@ interface AuthGuardProps {
 }
 
 const AuthGuard = ({ children, requiredRole }: AuthGuardProps) => {
-  const { role, isInitialized } = useAuthStore();
+  const { role, isInitialized, user } = useAuthStore();
   
   console.log(`AuthGuard checking - Required: ${requiredRole}, Current: ${role}, Initialized: ${isInitialized}`);
+  console.log('User info:', user);
   
   // If auth hasn't initialized yet, show a loading state
   if (!isInitialized) {

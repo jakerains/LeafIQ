@@ -15,11 +15,24 @@ import CheckoutCanceled from './views/checkout/CheckoutCanceled';
 import SubscriptionDetails from './views/account/SubscriptionDetails';
 
 function App() {
-  const { initializeAuth } = useAuthStore();
+  const { initializeAuth, isInitialized } = useAuthStore();
   
   useEffect(() => {
+    // Initialize auth state when app loads
     initializeAuth();
   }, [initializeAuth]);
+
+  // Show loading state while auth is initializing
+  if (!isInitialized) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="font-sans antialiased text-gray-900">

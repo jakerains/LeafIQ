@@ -17,7 +17,7 @@ const LoginForm = ({ role }: LoginFormProps) => {
   const [passcode, setPasscode] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { login } = useAuthStore();
+  const { login, setUser } = useAuthStore();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -36,6 +36,18 @@ const LoginForm = ({ role }: LoginFormProps) => {
         
         if (signInError) throw signInError;
         
+        console.log("Login successful:", data);
+        
+        // Store user data in auth store
+        if (data?.user) {
+          setUser({
+            id: data.user.id,
+            email: data.user.email,
+            organizationId: data.profile?.organization_id,
+            role: data.profile?.role || 'admin'
+          });
+        }
+        
         // Navigate to admin dashboard on successful login
         navigate('/admin');
       } else {
@@ -49,7 +61,7 @@ const LoginForm = ({ role }: LoginFormProps) => {
           throw new Error('Invalid passcode. Please try again.');
         }
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error('Login error:', err);
       setError(err.message || 'Login failed. Please try again.');
     } finally {

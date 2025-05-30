@@ -4,9 +4,11 @@ import { motion } from 'framer-motion';
 import { Building2, Mail, Lock, AlertCircle } from 'lucide-react';
 import Button from '../ui/Button';
 import { signUp } from '../../lib/supabase';
+import { useAuthStore } from '../../stores/authStore';
 
 const RegisterForm = () => {
   const navigate = useNavigate();
+  const { setUser } = useAuthStore();
   const [formData, setFormData] = useState({
     organizationName: '',
     email: '',
@@ -36,10 +38,23 @@ const RegisterForm = () => {
 
       if (error) throw error;
 
+      console.log("Registration successful:", data);
+      
+      // Store user data in auth store
+      if (data?.user) {
+        setUser({
+          id: data.user.id,
+          email: data.user.email,
+          organizationId: data.profile?.organization_id,
+          role: 'admin'
+        });
+      }
+
       // Registration successful
       navigate('/admin');
-    } catch (err) {
-      setError(err.message);
+    } catch (err: any) {
+      setError(err.message || 'Registration failed. Please try again.');
+      console.error('Registration error:', err);
     } finally {
       setIsLoading(false);
     }
