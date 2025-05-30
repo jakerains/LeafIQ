@@ -123,6 +123,8 @@ export default function PricingPage() {
                   highlighted
                   isCurrentPlan={subscription?.price_id === products[0].priceId && 
                                 ['active', 'trialing'].includes(subscription?.subscription_status)}
+                  isYearly={isYearly}
+                  monthlyPrice="$249"
                 />
               </div>
               <div className="flex flex-col h-full">
