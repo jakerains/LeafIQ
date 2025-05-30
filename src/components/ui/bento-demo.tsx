@@ -41,7 +41,7 @@ const FeatureCard = ({
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true, margin: "-50px" }}
-      className={`group p-8 bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 ${colorMap[color].hoverBg} ${colorMap[color].shadowColor}`}
+      className={`group p-8 bg-white bg-opacity-70 backdrop-blur-sm rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 ${colorMap[color].hoverBg} ${colorMap[color].shadowColor}`}
     >
       <div className={`w-14 h-14 ${colorMap[color].iconBg} rounded-xl flex items-center justify-center mb-6`}>
         <motion.div
@@ -110,7 +110,7 @@ function FeaturesSection() {
   ];
 
   return (
-    <section className="py-24 relative overflow-hidden bg-gradient-to-b from-gray-50 to-white">
+    <section className="py-24 relative overflow-hidden bg-transparent backdrop-blur-lg">
       {/* Background elements */}
       <div className="absolute inset-0 pointer-events-none opacity-10">
         <div className="absolute top-0 left-0 w-full h-full">
