@@ -171,39 +171,43 @@ const LandingPage = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <PricingCard
-              title={isYearly ? "Annual Plan" : "Standard Plan"}
-              price={isYearly ? "$2,490" : "$249"}
-              period={isYearly ? "/year" : "/month"}
-              description={isYearly ? "Commit for the year and save. Two months free!" : "Everything you need to run a smarter dispensary."}
-              features={[
-                'AI-Powered Product Matching',
-                'Real-Time Inventory Sync',
-                'Live Analytics & Vibe Trends',
-                'Terpene Effect Explorer',
-                'Staff Dashboard & Query Logs',
-                'Priority Email Support',
-                'Unlimited SKUs'
-              ]}
-              buttonText="Get Started"
-              buttonLink="/auth/signup"
-              highlighted
-            />
-            <PricingCard
-              title="Premium Add-ons"
-              price="From $49"
-              period="/month"
-              description="Enhance your capabilities"
-              features={[
-                'Custom AI Model Training',
-                'Multi-Location Support',
-                'Custom Integrations',
-                'Dedicated Account Manager',
-                'Enterprise SLA'
-              ]}
-              buttonText="Contact Sales"
-              buttonLink="/contact"
-            />
+            <div className="flex flex-col h-full">
+              <PricingCard
+                title={isYearly ? "Annual Plan" : "Standard Plan"}
+                price={isYearly ? "$2,490" : "$249"}
+                period={isYearly ? "/year" : "/month"}
+                description={isYearly ? "Commit for the year and save. Two months free!" : "Everything you need to run a smarter dispensary."}
+                features={[
+                  'AI-Powered Product Matching',
+                  'Real-Time Inventory Sync',
+                  'Live Analytics & Vibe Trends',
+                  'Terpene Effect Explorer',
+                  'Staff Dashboard & Query Logs',
+                  'Priority Email Support',
+                  'Unlimited SKUs'
+                ]}
+                buttonText="Get Started"
+                buttonLink="/auth/signup"
+                highlighted
+              />
+            </div>
+            <div className="flex flex-col h-full">
+              <PricingCard
+                title="Premium Add-ons"
+                price="From $49"
+                period="/month"
+                description="Enhance your capabilities"
+                features={[
+                  'Custom AI Model Training',
+                  'Multi-Location Support',
+                  'Custom Integrations',
+                  'Dedicated Account Manager',
+                  'Enterprise SLA'
+                ]}
+                buttonText="Contact Sales"
+                buttonLink="/contact"
+              />
+            </div>
           </div>
           
           <div className="mt-16 max-w-3xl mx-auto">
@@ -309,47 +313,40 @@ const PricingCard = ({
   return (
     <motion.div 
       className={cn(
-        `p-8 rounded-2xl relative ${
+        `p-8 rounded-2xl h-full flex flex-col justify-between ${
           highlighted 
             ? 'bg-primary-500 text-white shadow-xl scale-105' 
-            : 'bg-white bg-opacity-20 backdrop-blur-lg text-gray-900 border border-white/20'
+            : 'bg-white bg-opacity-20 backdrop-blur-2xl text-gray-900 border border-white/20'
         }`
       )}
       whileHover={{ y: -4 }}
       transition={{ duration: 0.2 }}
     >
-      <h3 className="text-2xl font-semibold mb-2">{title}</h3>
-      <div className="mb-4">
-        <span className="text-4xl font-bold">{price}</span>
-        {period && <span className="text-lg">{period}</span>}
-      </div>
-      <p className={`mb-6 ${highlighted ? 'text-primary-100' : 'text-gray-600'}`}>{description}</p>
-      <ul className="space-y-3 mb-8">
-        {features.map((feature, index) => (
-          <li key={index} className="flex items-center">
-            <svg 
-              className={`w-5 h-5 mr-2 ${highlighted ? 'text-primary-200' : 'text-primary-500'}`}
-              fill="none" 
-              stroke="currentColor" 
-              viewBox="0 0 24 24"
-            >
-              <path 
-                strokeLinecap="round" 
-                strokeLinejoin="round" 
-                strokeWidth={2} 
-                d="M5 13l4 4L19 7" 
+      <div>
+        <h3 className="text-2xl font-semibold mb-2">{title}</h3>
+        <div className="mb-4">
+          <span className="text-4xl font-bold">{price}</span>
+          {period && <span className="text-lg">{period}</span>}
+        </div>
+        <p className={`mb-6 ${highlighted ? 'text-primary-100' : 'text-gray-600'}`}>{description}</p>
+        <ul className="space-y-3 mb-8">
+          {features.map((feature, index) => (
+            <li key={index} className="flex items-center">
+              <Check 
+                className={`w-5 h-5 mr-2 ${highlighted ? 'text-primary-200' : 'text-primary-500'}`}
               />
-            </svg>
-            {feature}
-          </li>
-        ))}
-      </ul>
-      <div className="mt-auto pt-4">
+              {feature}
+            </li>
+          ))}
+        </ul>
+      </div>
+      
+      <div className="mt-auto">
         <Link to={buttonLink}>
           <ShimmerButton
             className="w-full"
             shimmerColor={highlighted ? "#ffffff" : "#22c55e"}
-            background={highlighted ? "rgba(255, 255, 255, 0.1)" : "rgba(34, 197, 94, 0.1)"}
+            background={highlighted ? "rgba(255, 255, 255, 0.1)" : "rgba(34, 197, 94, 1)"}
           >
             {buttonText}
           </ShimmerButton>

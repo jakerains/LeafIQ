@@ -64,53 +64,57 @@ export function PricingCard({
 
   return (
     <motion.div 
-      className={`p-8 rounded-2xl ${
+      className={`p-8 rounded-2xl h-full flex flex-col justify-between ${
         highlighted 
           ? 'bg-primary-500 text-white shadow-xl scale-105' 
-          : 'bg-white bg-opacity-20 backdrop-blur-lg text-gray-900 border border-white/20'
+          : 'bg-white bg-opacity-20 backdrop-blur-2xl text-gray-900 border border-white/20'
       }`}
       whileHover={{ y: -4 }}
       transition={{ duration: 0.2 }}
     >
-      <h3 className="text-2xl font-semibold mb-2">{title}</h3>
-      <div className="mb-4">
-        <span className="text-4xl font-bold">{price}</span>
-        {period && <span className="text-lg">{period}</span>}
-      </div>
-      <p className={`mb-6 ${highlighted ? 'text-primary-100' : 'text-gray-600'}`}>{description}</p>
-      <ul className="space-y-3 mb-8">
-        {features.map((feature, index) => (
-          <li key={index} className="flex items-center">
-            <Check 
-              className={`w-5 h-5 mr-2 ${highlighted ? 'text-primary-200' : 'text-primary-500'}`}
-            />
-            {feature}
-          </li>
-        ))}
-      </ul>
-      
-      {isCurrentPlan ? (
-        <div className={`w-full py-3 px-4 text-center rounded-lg ${highlighted ? 'bg-white bg-opacity-20' : 'bg-primary-100'} font-medium`}>
-          Current Plan
+      <div>
+        <h3 className="text-2xl font-semibold mb-2">{title}</h3>
+        <div className="mb-4">
+          <span className="text-4xl font-bold">{price}</span>
+          {period && <span className="text-lg">{period}</span>}
         </div>
-      ) : (
-        <ShimmerButton
-          className="w-full"
-          shimmerColor={highlighted ? "#ffffff" : "#22c55e"}
-          background={highlighted ? "rgba(255, 255, 255, 0.1)" : "rgba(34, 197, 94, 1)"}
-          onClick={handlePurchase}
-          disabled={isLoading}
-        >
-          {isLoading ? (
-            <>
-              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-              Processing...
-            </>
-          ) : (
-            buttonText
-          )}
-        </ShimmerButton>
-      )}
+        <p className={`mb-6 ${highlighted ? 'text-primary-100' : 'text-gray-600'}`}>{description}</p>
+        <ul className="space-y-3 mb-8">
+          {features.map((feature, index) => (
+            <li key={index} className="flex items-center">
+              <Check 
+                className={`w-5 h-5 mr-2 ${highlighted ? 'text-primary-200' : 'text-primary-500'}`}
+              />
+              {feature}
+            </li>
+          ))}
+        </ul>
+      </div>
+      
+      <div className="mt-auto">
+        {isCurrentPlan ? (
+          <div className={`w-full py-3 px-4 text-center rounded-lg ${highlighted ? 'bg-white bg-opacity-20' : 'bg-primary-100'} font-medium`}>
+            Current Plan
+          </div>
+        ) : (
+          <ShimmerButton
+            className="w-full"
+            shimmerColor={highlighted ? "#ffffff" : "#22c55e"}
+            background={highlighted ? "rgba(255, 255, 255, 0.1)" : "rgba(34, 197, 94, 1)"}
+            onClick={handlePurchase}
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <>
+                <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                Processing...
+              </>
+            ) : (
+              buttonText
+            )}
+          </ShimmerButton>
+        )}
+      </div>
     </motion.div>
   );
 }

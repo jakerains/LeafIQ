@@ -102,50 +102,46 @@ export default function PricingPage() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              <PricingCard
-                title="Standard Plan"
-                price={isYearly ? "$207" : "$249"}
-                period={isYearly ? "/month" : "/month"}
-                description="Everything you need to run a smarter dispensary."
-                features={[
-                  'AI-Powered Product Matching',
-                  'Real-Time Inventory Sync',
-                  'Live Analytics & Vibe Trends',
-                  'Terpene Effect Explorer',
-                  'Staff Dashboard & Query Logs',
-                  'Priority Email Support',
-                  'Unlimited SKUs'
-                ]}
-                priceId={products[0].priceId}
-                mode="subscription"
-                buttonText={isYearly ? "Subscribe Yearly" : "Subscribe Monthly"}
-                highlighted
-                isCurrentPlan={subscription?.price_id === products[0].priceId && 
-                              ['active', 'trialing'].includes(subscription?.subscription_status)}
-              />
-              <PricingCard
-                title={isYearly ? "Annual Plan" : "Premium Add-ons"}
-                price={isYearly ? "$2,490" : "From $49"}
-                period={isYearly ? "/year" : "/month"}
-                description={isYearly ? "Commit for the year and save. Two months free!" : "Enhance your capabilities"}
-                features={isYearly ? [
-                  'All Standard Plan Features',
-                  'Annual Billing (Save 17%)',
-                  'Cancel Anytime',
-                  'Priority Support',
-                  'Quarterly Strategy Sessions',
-                  'Advanced Usage Reports',
-                  'Early Access to New Features'
-                ] : [
-                  'Custom AI Model Training',
-                  'Multi-Location Support',
-                  'Custom Integrations',
-                  'Dedicated Account Manager',
-                  'Enterprise SLA'
-                ]}
-                buttonText="Contact Sales"
-                buttonLink="/contact"
-              />
+              <div className="flex flex-col h-full">
+                <PricingCard
+                  title={isYearly ? "Annual Plan" : "Standard Plan"}
+                  price={isYearly ? "$2,490" : "$249"}
+                  period={isYearly ? "/year" : "/month"}
+                  description={isYearly ? "Commit for the year and save. Two months free!" : "Everything you need to run a smarter dispensary."}
+                  features={[
+                    'AI-Powered Product Matching',
+                    'Real-Time Inventory Sync',
+                    'Live Analytics & Vibe Trends',
+                    'Terpene Effect Explorer',
+                    'Staff Dashboard & Query Logs',
+                    'Priority Email Support',
+                    'Unlimited SKUs'
+                  ]}
+                  priceId={products[0].priceId}
+                  mode="subscription"
+                  buttonText={isYearly ? "Subscribe Yearly" : "Subscribe Monthly"}
+                  highlighted
+                  isCurrentPlan={subscription?.price_id === products[0].priceId && 
+                                ['active', 'trialing'].includes(subscription?.subscription_status)}
+                />
+              </div>
+              <div className="flex flex-col h-full">
+                <PricingCard
+                  title="Premium Add-ons"
+                  price="From $49"
+                  period="/month"
+                  description="Enhance your capabilities"
+                  features={[
+                    'Custom AI Model Training',
+                    'Multi-Location Support',
+                    'Custom Integrations',
+                    'Dedicated Account Manager',
+                    'Enterprise SLA'
+                  ]}
+                  buttonText="Contact Sales"
+                  buttonLink="/contact"
+                />
+              </div>
             </div>
           )}
           
