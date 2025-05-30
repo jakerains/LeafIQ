@@ -13,23 +13,20 @@ const LandingPage = () => {
             <img 
               src="/leafiq-logo.png" 
               alt="LeafIQ" 
-              className="h-16 drop-shadow-lg filter drop-shadow-lg shadow-primary-500/50"
+              className="h-24 drop-shadow-lg filter shadow-primary-500/50"
             />
-            <div className="space-x-4">
+            <div className="flex gap-4">
               <Link 
                 to="/auth/login"
-                className="px-4 py-2 text-gray-900 hover:text-primary-600 transition-colors"
+                className="px-6 py-3 bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200 text-gray-900 font-medium hover:bg-white hover:shadow-md transition-all duration-300"
               >
-                Login
+                Log In
               </Link>
-              <Link to="/auth/signup">
-                <ShimmerButton
-                  shimmerColor="#22c55e"
-                  background="rgba(34, 197, 94, 1)"
-                  className="relative z-10"
-                >
-                  Get Started
-                </ShimmerButton>
+              <Link 
+                to="/auth/signup"
+                className="px-6 py-3 bg-primary-500 text-white rounded-xl font-medium hover:bg-primary-600 shadow-md hover:shadow-lg transition-all duration-300"
+              >
+                Sign Up
               </Link>
             </div>
           </nav>
@@ -239,11 +236,13 @@ const PricingCard = ({
 }) => {
   return (
     <motion.div 
-      className={`p-8 rounded-2xl ${
-        highlighted 
-          ? 'bg-primary-500 text-white shadow-xl scale-105' 
-          : 'bg-white text-gray-900 border border-gray-100'
-      }`}
+      className={cn(
+        `p-8 rounded-2xl ${
+          highlighted 
+            ? 'bg-primary-500 text-white shadow-xl scale-105' 
+            : 'bg-white text-gray-900 border border-gray-100'
+        }`
+      )}
       whileHover={{ y: -4 }}
       transition={{ duration: 0.2 }}
     >
@@ -285,5 +284,10 @@ const PricingCard = ({
     </motion.div>
   );
 };
+
+// Utility function for merging class names
+function cn(...classes: any[]) {
+  return classes.filter(Boolean).join(' ');
+}
 
 export default LandingPage;
