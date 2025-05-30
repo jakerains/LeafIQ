@@ -46,10 +46,10 @@ const BentoCard = ({
       "group relative col-span-1 flex flex-col justify-between overflow-hidden rounded-xl",
       // light styles
       "bg-white border border-gray-100 shadow-md hover:shadow-xl transition-all duration-300",
+      "bg-gradient-to-br from-white via-gray-50 to-white",
       className,
     )}
   >
-    <div className="absolute inset-0 opacity-50 bg-gradient-to-br from-white via-gray-50 to-white">{background}</div>
     <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 p-6 transition-all duration-300 group-hover:-translate-y-10">
       <div className="w-16 h-16 bg-primary-50 rounded-xl flex items-center justify-center mb-2">
         <Icon className="h-8 w-8 text-primary-600 transition-all duration-300 ease-in-out group-hover:scale-90" />
