@@ -82,6 +82,7 @@ export default {
         "spin-around": "spin-around calc(var(--speed) * 2) infinite linear",
         'fade-in': 'fade-in 0.3s ease-in-out',
         'slide-up': 'slide-up 0.3s ease-in-out',
+        gradient: "gradient var(--animation-duration, 8s) linear infinite",
       },
       keyframes: {
         "spin-around": {
@@ -110,6 +111,11 @@ export default {
         'slide-up': {
           '0%': { transform: 'translateY(10px)', opacity: 0 },
           '100%': { transform: 'translateY(0)', opacity: 1 },
+        },
+        gradient: {
+          "0%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+          "100%": { backgroundPosition: "0% 50%" },
         },
       },
     },
