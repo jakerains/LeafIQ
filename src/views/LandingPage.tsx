@@ -135,46 +135,82 @@ const LandingPage = () => {
       <FeaturesSection />
 
       {/* Pricing Section */}
-      <section className="py-20 bg-white bg-opacity-80">
+      <section className="py-20 bg-transparent bg-opacity-30 backdrop-blur-xl">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-display font-bold mb-4">Simple, Transparent Pricing</h2>
-            <p className="text-xl text-gray-600">Everything you need to grow your dispensary</p>
+            <h2 className="text-4xl font-display font-bold mb-4">💵 Clear, Honest Pricing</h2>
+            <p className="text-xl text-gray-600">All the power. No confusing tiers.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <PricingCard
-              title="Standard"
-              price="$99"
+              title="Standard Plan"
+              price="$249"
               period="/month"
-              description="Complete dispensary management solution"
+              description="Everything you need to run a smarter dispensary."
               features={[
-                'AI-Powered Recommendations',
-                'Unlimited Products',
-                'Real-time Inventory Management',
-                'Advanced Analytics',
-                'Staff Management',
-                'Priority Support'
+                'AI-Powered Product Matching',
+                'Real-Time Inventory Sync',
+                'Live Analytics & Vibe Trends',
+                'Terpene Effect Explorer',
+                'Staff Dashboard & Query Logs',
+                'Priority Email Support',
+                'Unlimited SKUs'
               ]}
               buttonText="Get Started"
               buttonLink="/auth/signup"
               highlighted
             />
             <PricingCard
-              title="Premium Add-ons"
-              price="From $49"
-              period="/month"
-              description="Enhance your capabilities"
+              title="Annual Plan"
+              price="$2,490"
+              period="/year"
+              description="Commit for the year and save. Two months free!"
               features={[
-                'Custom AI Model Training',
-                'Multi-Location Support',
-                'Custom Integrations',
-                'Dedicated Account Manager',
-                'Enterprise SLA'
+                'All Standard Plan Features',
+                'Annual Billing (Save 17%)',
+                'Cancel Anytime',
+                'Priority Support',
+                'Quarterly Strategy Sessions',
+                'Advanced Usage Reports',
+                'Early Access to New Features'
               ]}
               buttonText="Contact Sales"
               buttonLink="/contact"
             />
+          </div>
+          
+          <div className="mt-16 max-w-3xl mx-auto">
+            <h3 className="text-2xl font-display font-bold mb-6 text-center">Optional Enhancements</h3>
+            <div className="bg-white bg-opacity-20 backdrop-blur-xl rounded-2xl p-6 border border-white/20">
+              <p className="text-lg mb-4">Expand LeafIQ as your needs grow:</p>
+              <ul className="space-y-2 mb-6">
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>Custom AI tuning with your store's historical data</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>Multi-location management dashboard</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>Deep POS & menu integrations (Dutchie, Jane, Weedmaps, etc.)</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-primary-500 mr-2">•</span>
+                  <span>Dedicated account manager & enterprise SLA</span>
+                </li>
+              </ul>
+              <div className="text-center">
+                <Link 
+                  to="/contact"
+                  className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-xl font-medium hover:from-primary-600 hover:to-secondary-600 shadow-md hover:shadow-lg transition-all duration-300"
+                >
+                  Contact Sales for details
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -250,7 +286,7 @@ const PricingCard = ({
         `p-8 rounded-2xl ${
           highlighted 
             ? 'bg-primary-500 text-white shadow-xl scale-105' 
-            : 'bg-white text-gray-900 border border-gray-100'
+            : 'bg-white bg-opacity-20 backdrop-blur-lg text-gray-900 border border-white/20'
         }`
       )}
       whileHover={{ y: -4 }}
