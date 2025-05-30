@@ -172,10 +172,10 @@ const LandingPage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <PricingCard
-              title="Standard Plan"
-              price={isYearly ? "$207" : "$249"}
-              period={isYearly ? "/month" : "/month"}
-              description="Everything you need to run a smarter dispensary."
+              title={isYearly ? "Annual Plan" : "Standard Plan"}
+              price={isYearly ? "$2,490" : "$249"}
+              period={isYearly ? "/year" : "/month"}
+              description={isYearly ? "Commit for the year and save. Two months free!" : "Everything you need to run a smarter dispensary."}
               features={[
                 'AI-Powered Product Matching',
                 'Real-Time Inventory Sync',
@@ -190,19 +190,11 @@ const LandingPage = () => {
               highlighted
             />
             <PricingCard
-              title={isYearly ? "Annual Plan" : "Premium Add-ons"}
-              price={isYearly ? "$2,490" : "From $49"}
-              period={isYearly ? "/year" : "/month"}
-              description={isYearly ? "Commit for the year and save. Two months free!" : "Enhance your capabilities"}
-              features={isYearly ? [
-                'All Standard Plan Features',
-                'Annual Billing (Save 17%)',
-                'Cancel Anytime',
-                'Priority Support',
-                'Quarterly Strategy Sessions',
-                'Advanced Usage Reports',
-                'Early Access to New Features'
-              ] : [
+              title="Premium Add-ons"
+              price="From $49"
+              period="/month"
+              description="Enhance your capabilities"
+              features={[
                 'Custom AI Model Training',
                 'Multi-Location Support',
                 'Custom Integrations',
@@ -317,7 +309,7 @@ const PricingCard = ({
   return (
     <motion.div 
       className={cn(
-        `p-8 rounded-2xl ${
+        `p-8 rounded-2xl relative ${
           highlighted 
             ? 'bg-primary-500 text-white shadow-xl scale-105' 
             : 'bg-white bg-opacity-20 backdrop-blur-lg text-gray-900 border border-white/20'
@@ -352,15 +344,17 @@ const PricingCard = ({
           </li>
         ))}
       </ul>
-      <Link to={buttonLink}>
-        <ShimmerButton
-          className="w-full"
-          shimmerColor={highlighted ? "#ffffff" : "#22c55e"}
-          background={highlighted ? "rgba(255, 255, 255, 0.1)" : "rgba(34, 197, 94, 1)"}
-        >
-          {buttonText}
-        </ShimmerButton>
-      </Link>
+      <div className="mt-auto pt-4">
+        <Link to={buttonLink}>
+          <ShimmerButton
+            className="w-full"
+            shimmerColor={highlighted ? "#ffffff" : "#22c55e"}
+            background={highlighted ? "rgba(255, 255, 255, 0.1)" : "rgba(34, 197, 94, 0.1)"}
+          >
+            {buttonText}
+          </ShimmerButton>
+        </Link>
+      </div>
     </motion.div>
   );
 };
