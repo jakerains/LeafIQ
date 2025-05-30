@@ -1,9 +1,12 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ShimmerButton } from '../components/ui/shimmer-button';
 import { FeaturesSection } from '../components/ui/bento-demo';
 
 const LandingPage = () => {
+  const [isYearly, setIsYearly] = useState(false);
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -137,16 +140,41 @@ const LandingPage = () => {
       {/* Pricing Section */}
       <section className="py-20 bg-transparent bg-opacity-30 backdrop-blur-xl">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <div className="text-center mb-8">
             <h2 className="text-4xl font-display font-bold mb-4">💵 Clear, Honest Pricing</h2>
             <p className="text-xl text-gray-600">All the power. No confusing tiers.</p>
+          </div>
+          
+          {/* Pricing Toggle */}
+          <div className="flex justify-center items-center mb-12">
+            <span className={`mr-3 font-medium ${!isYearly ? 'text-primary-600' : 'text-gray-500'}`}>Monthly</span>
+            <div 
+              className="relative w-16 h-8 bg-gray-200 rounded-full cursor-pointer shadow-inner"
+              onClick={() => setIsYearly(!isYearly)}
+            >
+              <motion.div 
+                className="absolute w-6 h-6 bg-primary-500 rounded-full top-1 shadow-md"
+                animate={{ x: isYearly ? 34 : 2 }}
+                transition={{ type: "spring", stiffness: 500, damping: 30 }}
+              />
+            </div>
+            <span className={`ml-3 font-medium ${isYearly ? 'text-primary-600' : 'text-gray-500'}`}>Yearly</span>
+            {isYearly && (
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="ml-2 px-2 py-1 bg-primary-100 text-primary-800 rounded-lg text-xs font-medium"
+              >
+                Save 17% (2 months free!)
+              </motion.div>
+            )}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <PricingCard
               title="Standard Plan"
-              price="$249"
-              period="/month"
+              price={isYearly ? "$207" : "$249"}
+              period={isYearly ? "/month" : "/month"}
               description="Everything you need to run a smarter dispensary."
               features={[
                 'AI-Powered Product Matching',
@@ -162,11 +190,11 @@ const LandingPage = () => {
               highlighted
             />
             <PricingCard
-              title="Annual Plan"
-              price="$2,490"
-              period="/year"
-              description="Commit for the year and save. Two months free!"
-              features={[
+              title={isYearly ? "Annual Plan" : "Premium Add-ons"}
+              price={isYearly ? "$2,490" : "From $49"}
+              period={isYearly ? "/year" : "/month"}
+              description={isYearly ? "Commit for the year and save. Two months free!" : "Enhance your capabilities"}
+              features={isYearly ? [
                 'All Standard Plan Features',
                 'Annual Billing (Save 17%)',
                 'Cancel Anytime',
@@ -174,6 +202,12 @@ const LandingPage = () => {
                 'Quarterly Strategy Sessions',
                 'Advanced Usage Reports',
                 'Early Access to New Features'
+              ] : [
+                'Custom AI Model Training',
+                'Multi-Location Support',
+                'Custom Integrations',
+                'Dedicated Account Manager',
+                'Enterprise SLA'
               ]}
               buttonText="Contact Sales"
               buttonLink="/contact"

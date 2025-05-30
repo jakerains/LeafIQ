@@ -67,7 +67,7 @@ export function PricingCard({
       className={`p-8 rounded-2xl ${
         highlighted 
           ? 'bg-primary-500 text-white shadow-xl scale-105' 
-          : 'bg-white text-gray-900 border border-gray-100'
+          : 'bg-white bg-opacity-20 backdrop-blur-lg text-gray-900 border border-white/20'
       }`}
       whileHover={{ y: -4 }}
       transition={{ duration: 0.2 }}
