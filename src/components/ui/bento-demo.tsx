@@ -86,7 +86,7 @@ function FeaturesSection() {
     {
       icon: Leaf,
       title: "Terpene Intelligence",
-      description: "Move beyond "Indica or Sativa." Equip staff with detailed terpene breakdowns, effect pairings, and science-backed talking points that build customer trust.",
+      description: "Move beyond \"Indica or Sativa." Equip staff with detailed terpene breakdowns, effect pairings, and science-backed talking points that build customer trust.",
       color: "accent"
     },
     {
