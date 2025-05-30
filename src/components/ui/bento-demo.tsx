@@ -23,7 +23,6 @@ const features = [
     href: "/",
     cta: "Learn more",
     color: "primary",
-    pattern: "circuit",
     className: "md:col-span-2 md:row-span-2",
   },
   {
@@ -33,7 +32,6 @@ const features = [
     href: "/",
     cta: "Learn more",
     color: "secondary",
-    pattern: "dots",
     className: "md:col-span-1",
   },
   {
@@ -43,7 +41,6 @@ const features = [
     href: "/",
     cta: "Learn more",
     color: "accent",
-    pattern: "waves",
     className: "md:col-span-1 md:row-span-1",
   },
   {
@@ -53,7 +50,6 @@ const features = [
     href: "/",
     cta: "Explore terpenes",
     color: "primary",
-    pattern: "dots",
     className: "md:col-span-1",
   },
   {
@@ -63,7 +59,6 @@ const features = [
     href: "/",
     cta: "View analytics",
     color: "accent",
-    pattern: "lines",
     className: "md:col-span-2",
   },
   {
@@ -73,7 +68,6 @@ const features = [
     href: "/",
     cta: "Learn more",
     color: "secondary",
-    pattern: "dots",
     className: "md:col-span-1",
   },
   {
@@ -83,7 +77,6 @@ const features = [
     href: "/",
     cta: "See how it works",
     color: "primary",
-    pattern: "waves",
     className: "md:col-span-1",
   },
   {
@@ -93,7 +86,6 @@ const features = [
     href: "/",
     cta: "Increase sales",
     color: "accent",
-    pattern: "circuit",
     className: "md:col-span-1",
   },
   {
@@ -103,7 +95,6 @@ const features = [
     href: "/",
     cta: "View patterns",
     color: "secondary",
-    pattern: "lines",
     className: "md:col-span-1",
   },
 ];
@@ -136,7 +127,7 @@ function BentoDemo() {
           <div className="flex items-center justify-center mb-4">
             <motion.div 
               className="w-16 h-16 bg-primary-50 rounded-2xl flex items-center justify-center"
-              whileHover={{ rotate: 5 }}
+              whileHover={{ rotate: 5, scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               <BarChart3 className="w-8 h-8 text-primary-600" />

@@ -31,7 +31,6 @@ const BentoCard = ({
   cta,
   index,
   color = "primary",
-  pattern = "dots",
 }: {
   name: string;
   className?: string;
@@ -41,7 +40,6 @@ const BentoCard = ({
   cta: string;
   index: number;
   color?: "primary" | "secondary" | "accent";
-  pattern?: "dots" | "lines" | "circuit" | "waves";
 }) => {
   const colorMap = {
     primary: {
@@ -73,119 +71,6 @@ const BentoCard = ({
     },
   };
 
-  // Create pattern elements based on type
-  const renderPattern = () => {
-    switch (pattern) {
-      case "dots":
-        return (
-          <div className="absolute inset-0 opacity-20">
-            {Array.from({ length: 12 }).map((_, i) => (
-              <motion.div
-                key={`dot-${i}`}
-                className={`absolute h-3 w-3 rounded-full ${colorMap[color].medium}`}
-                style={{
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
-                  opacity: 0.3 + Math.random() * 0.7,
-                }}
-                initial={{ scale: 0 }}
-                animate={{ 
-                  scale: [0, 1, 1, 0],
-                  opacity: [0, 0.7, 0.7, 0],
-                }}
-                transition={{
-                  duration: 10 + Math.random() * 10,
-                  repeat: Infinity,
-                  delay: Math.random() * 5,
-                }}
-              />
-            ))}
-          </div>
-        );
-      case "lines":
-        return (
-          <div className="absolute inset-0 opacity-10 overflow-hidden">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <motion.div
-                key={`line-${i}`}
-                className={`absolute h-[1px] w-[100px] ${colorMap[color].dark}`}
-                style={{
-                  top: `${Math.random() * 100}%`,
-                  left: `-50px`,
-                  rotate: `${Math.random() * 60 - 30}deg`,
-                  opacity: 0.3 + Math.random() * 0.7,
-                }}
-                animate={{
-                  left: ["0%", "120%"],
-                }}
-                transition={{
-                  duration: 10 + Math.random() * 20,
-                  repeat: Infinity,
-                  delay: Math.random() * 5,
-                  ease: "linear",
-                }}
-              />
-            ))}
-          </div>
-        );
-      case "circuit":
-        return (
-          <div className="absolute inset-0 opacity-10">
-            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <pattern id="circuit-pattern" patternUnits="userSpaceOnUse" width="100" height="100">
-                  <path d="M10,10 L90,10 L90,90 L10,90 Z" fill="none" stroke="currentColor" strokeWidth="1" className={colorMap[color].text} />
-                  <circle cx="10" cy="10" r="2" className={colorMap[color].text} />
-                  <circle cx="90" cy="10" r="2" className={colorMap[color].text} />
-                  <circle cx="90" cy="90" r="2" className={colorMap[color].text} />
-                  <circle cx="10" cy="90" r="2" className={colorMap[color].text} />
-                  <path d="M30,10 L30,30 L50,30 L50,50 L70,50 L70,70 L90,70" fill="none" stroke="currentColor" strokeWidth="1" className={colorMap[color].text} />
-                </pattern>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#circuit-pattern)" />
-            </svg>
-          </div>
-        );
-      case "waves":
-        return (
-          <div className="absolute inset-0 opacity-10 overflow-hidden">
-            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-              <motion.path
-                d="M0,50 Q25,30 50,50 Q75,70 100,50 Q125,30 150,50 Q175,70 200,50 Q225,30 250,50 Q275,70 300,50"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1"
-                className={colorMap[color].text}
-                initial={{ y: -100 }}
-                animate={{ y: 300 }}
-                transition={{
-                  duration: 15,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-              />
-              <motion.path
-                d="M0,50 Q25,70 50,50 Q75,30 100,50 Q125,70 150,50 Q175,30 200,50 Q225,70 250,50 Q275,30 300,50"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1"
-                className={colorMap[color].text}
-                initial={{ y: -50 }}
-                animate={{ y: 250 }}
-                transition={{
-                  duration: 20,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-              />
-            </svg>
-          </div>
-        );
-      default:
-        return null;
-    }
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -199,26 +84,67 @@ const BentoCard = ({
         className,
       )}
     >
-      {/* Background Gradient */}
+      {/* Animated Gradient Background */}
       <div className={`absolute inset-0 bg-gradient-to-br ${colorMap[color].gradient} opacity-50`}></div>
       
-      {/* Pattern Background */}
-      {renderPattern()}
+      {/* Animated Background - Circuit-like pattern */}
+      <div className="absolute inset-0 opacity-10 overflow-hidden">
+        <motion.div 
+          className={`absolute w-full h-full ${colorMap[color].text}`}
+          animate={{
+            backgroundPosition: ['0% 0%', '100% 100%']
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            repeatType: 'reverse',
+            ease: 'linear'
+          }}
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='currentColor' fill-opacity='0.2' fill-rule='evenodd'/%3E%3C/svg%3E")`,
+            backgroundSize: '300px 300px',
+          }}
+        />
+      </div>
       
       {/* Icon with glowing effect */}
       <div className="z-10 p-6">
         <div className="relative">
           <motion.div 
             className={`w-16 h-16 ${colorMap[color].light} rounded-xl flex items-center justify-center mb-4 overflow-hidden`}
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ 
+              scale: 1.05, 
+              rotate: 5,
+              boxShadow: '0 0 15px rgba(0, 0, 0, 0.1)'
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 300,
+              damping: 15
+            }}
           >
             <motion.div 
               className={`absolute inset-0 bg-gradient-to-r ${colorMap[color].gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-700`}
               initial={{ opacity: 0 }}
-              animate={{ opacity: [0, 0.5, 0] }}
-              transition={{ duration: 3, repeat: Infinity }}
+              animate={{ 
+                opacity: [0, 0.6, 0],
+                scale: [1, 1.1, 1] 
+              }}
+              transition={{ 
+                duration: 3, 
+                repeat: Infinity,
+                repeatType: "reverse" 
+              }}
             />
-            <Icon className={`h-8 w-8 ${colorMap[color].text} transition-all duration-300 group-hover:scale-110`} />
+            <motion.div
+              className={`h-8 w-8 ${colorMap[color].text} transition-all duration-300`}
+              whileHover={{ 
+                scale: 1.2,
+                rotate: 10
+              }}
+            >
+              <Icon />
+            </motion.div>
           </motion.div>
         </div>
         
@@ -253,16 +179,25 @@ const BentoCard = ({
         </motion.a>
       </div>
       
-      {/* Hover Overlay */}
+      {/* Animated Border Effect */}
       <motion.div 
-        className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-10 bg-white transition-opacity duration-500"
-        whileHover={{ opacity: 0.2 }}
+        className="absolute inset-0 pointer-events-none opacity-0 rounded-xl"
+        initial={{ opacity: 0 }}
+        whileHover={{ 
+          opacity: 0.5,
+          boxShadow: `0 0 0 2px ${color === 'primary' ? '#22c55e' : color === 'secondary' ? '#14b8a6' : '#10b981'}`
+        }}
+        transition={{ duration: 0.3 }}
       />
       
       {/* Interactive Corner Accent */}
       <div className="absolute top-0 right-0">
         <motion.div
           className={`w-20 h-20 ${colorMap[color].medium} rotate-45 -translate-y-10 translate-x-10 group-hover:translate-y-[-35px] group-hover:translate-x-[35px] transition-all duration-500 ease-out opacity-50 group-hover:opacity-70`}
+          whileHover={{
+            rotate: 50,
+            scale: 1.1
+          }}
         />
       </div>
     </motion.div>
