@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { Check } from 'lucide-react';
 import { ShimmerButton } from '../components/ui/shimmer-button';
 import { FeaturesSection } from '../components/ui/bento-demo';
+import { PricingCard } from '../components/ui/pricing-card';
+import { PricingToggle } from './pricing/PricingToggle';
 
 const LandingPage = () => {
   const [isYearly, setIsYearly] = useState(false);
@@ -146,48 +148,37 @@ const LandingPage = () => {
             <p className="text-xl text-gray-600">All the power. No confusing tiers.</p>
           </div>
           
-          {/* Pricing Toggle */}
-          <div className="flex justify-center items-center mb-12">
-            <span className={`mr-3 font-medium ${!isYearly ? 'text-primary-600' : 'text-gray-500'}`}>Monthly</span>
-            <div 
-              className="relative w-16 h-8 bg-gray-200 rounded-full cursor-pointer shadow-inner"
-              onClick={() => setIsYearly(!isYearly)}
-            >
-              <motion.div 
-                className="absolute w-6 h-6 bg-primary-500 rounded-full top-1 shadow-md"
-                animate={{ x: isYearly ? 34 : 2 }}
-                transition={{ type: "spring", stiffness: 500, damping: 30 }}
-              />
-            </div>
-            <span className={`ml-3 font-medium ${isYearly ? 'text-primary-600' : 'text-gray-500'}`}>Yearly</span>
-            {isYearly && (
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="ml-2 px-2 py-1 bg-primary-100 text-primary-800 rounded-lg text-xs font-medium"
-              >
-                Save 17% (2 months free!)
-              </motion.div>
-            )}
-          </div>
+          <PricingToggle isYearly={isYearly} setIsYearly={setIsYearly} />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <div className="flex flex-col h-full">
               <PricingCard
                 title={isYearly ? "Annual Plan" : "Standard Plan"}
-                price={isYearly ? "$2,490" : "$249"}
-                period={isYearly ? "/year" : "/month"}
                 description={isYearly ? "Commit for the year and save. Two months free!" : "Everything you need to run a smarter dispensary."}
+                price={isYearly ? "$2,490" : "$249"}
+                originalPrice={isYearly ? "$2,988" : undefined}
+                period={isYearly ? "/year" : "/month"}
                 features={[
-                  'AI-Powered Product Matching',
-                  'Real-Time Inventory Sync',
-                  'Live Analytics & Vibe Trends',
-                  'Terpene Effect Explorer',
-                  'Staff Dashboard & Query Logs',
-                  'Priority Email Support',
-                  'Unlimited SKUs'
+                  {
+                    title: "Core Features",
+                    items: [
+                      "AI-Powered Product Matching",
+                      "Real-Time Inventory Sync",
+                      "Live Analytics & Vibe Trends",
+                      "Terpene Effect Explorer"
+                    ]
+                  },
+                  {
+                    title: "Support Features",
+                    items: [
+                      "Staff Dashboard & Query Logs",
+                      "Priority Email Support",
+                      "Unlimited SKUs",
+                      isYearly ? "Quarterly Strategy Sessions" : "Standard Support"
+                    ]
+                  }
                 ]}
-                buttonText="Get Started"
+                buttonText={isYearly ? "Subscribe Annually" : "Get Started"}
                 buttonLink="/auth/signup"
                 highlighted
               />
@@ -195,15 +186,28 @@ const LandingPage = () => {
             <div className="flex flex-col h-full">
               <PricingCard
                 title="Premium Add-ons"
+                description="Enhance your capabilities with enterprise-grade features"
                 price="From $49"
                 period="/month"
-                description="Enhance your capabilities"
                 features={[
-                  'Custom AI Model Training',
-                  'Multi-Location Support',
-                  'Custom Integrations',
-                  'Dedicated Account Manager',
-                  'Enterprise SLA'
+                  {
+                    title: "Additional Features",
+                    items: [
+                      "Custom AI Model Training",
+                      "Multi-Location Support",
+                      "Custom Integrations",
+                      "Dedicated Account Manager"
+                    ]
+                  },
+                  {
+                    title: "Enterprise Features",
+                    items: [
+                      "Enterprise SLA",
+                      "Advanced Security Controls",
+                      "Custom Reporting",
+                      "Quarterly Business Reviews"
+                    ]
+                  }
                 ]}
                 buttonText="Contact Sales"
                 buttonLink="/contact"
@@ -291,75 +295,5 @@ const LandingPage = () => {
     </div>
   );
 };
-
-const PricingCard = ({ 
-  title, 
-  price, 
-  period = "", 
-  description, 
-  features, 
-  buttonText, 
-  buttonLink,
-  highlighted = false 
-}: {
-  title: string;
-  price: string;
-  period?: string;
-  description: string;
-  features: string[];
-  buttonText: string;
-  buttonLink: string;
-  highlighted?: boolean;
-}) => {
-  return (
-    <motion.div 
-      className={cn(
-        `p-8 rounded-2xl h-full flex flex-col justify-between ${
-          highlighted 
-            ? 'bg-primary-500 text-white shadow-xl scale-105' 
-            : 'bg-white bg-opacity-20 backdrop-blur-2xl text-gray-900 border border-white/20'
-        }`
-      )}
-      whileHover={{ y: -4 }}
-      transition={{ duration: 0.2 }}
-    >
-      <div>
-        <h3 className="text-2xl font-semibold mb-2">{title}</h3>
-        <div className="mb-4">
-          <span className="text-4xl font-bold">{price}</span>
-          {period && <span className="text-lg">{period}</span>}
-        </div>
-        <p className={`mb-6 ${highlighted ? 'text-primary-100' : 'text-gray-600'}`}>{description}</p>
-        <ul className="space-y-3 mb-8">
-          {features.map((feature, index) => (
-            <li key={index} className="flex items-center">
-              <Check 
-                className={`w-5 h-5 mr-2 ${highlighted ? 'text-primary-200' : 'text-primary-500'}`}
-              />
-              {feature}
-            </li>
-          ))}
-        </ul>
-      </div>
-      
-      <div className="mt-auto">
-        <Link to={buttonLink}>
-          <ShimmerButton
-            className="w-full"
-            shimmerColor={highlighted ? "#ffffff" : "#22c55e"}
-            background={highlighted ? "rgba(255, 255, 255, 0.1)" : "rgba(34, 197, 94, 1)"}
-          >
-            {buttonText}
-          </ShimmerButton>
-        </Link>
-      </div>
-    </motion.div>
-  );
-};
-
-// Utility function for merging class names
-function cn(...classes: any[]) {
-  return classes.filter(Boolean).join(' ');
-}
 
 export default LandingPage;
