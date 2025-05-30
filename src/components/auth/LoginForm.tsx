@@ -100,7 +100,7 @@ const LoginForm = ({ role }: LoginFormProps) => {
           // Email/password login form
           <div className="space-y-4 mb-6">
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="email\" className="block text-sm font-medium text-gray-700 mb-1">
                 Email Address
               </label>
               <div className="relative">
