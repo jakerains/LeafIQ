@@ -4,24 +4,28 @@ import { Settings } from '../../types';
 import Logo from '../../components/ui/Logo';
 import Button from '../../components/ui/Button';
 import { Routes, Route, useNavigate, Link, useLocation } from 'react-router-dom';
-import { LogOut, RefreshCw, Database, Settings as SettingsIcon, Activity, Package, BrainCircuit, LayoutDashboard } from 'lucide-react';
+import { LogOut, RefreshCw, Database, Settings as SettingsIcon, Activity, Package, BrainCircuit, LayoutDashboard, CreditCard } from 'lucide-react';
 import { motion } from 'framer-motion';
 import AdminDashboard from './AdminDashboard';
 import AdminInventory from './AdminInventory';
 import AdminAIModel from './AdminAIModel';
 import AdminSettings from './AdminSettings';
+import SubscriptionDetails from '../account/SubscriptionDetails';
+import { getUserSubscription } from '../../lib/stripe';
 
 const AdminView = () => {
   const { logout } = useAuthStore();
   const navigate = useNavigate();
   const location = useLocation();
   const currentPath = location.pathname;
+  const [subscription, setSubscription] = useState<any>(null);
   
   // Extract the active tab from the URL
   const getActiveTab = () => {
     if (currentPath.includes('/inventory')) return 'inventory';
     if (currentPath.includes('/ai-model')) return 'ai-model';
     if (currentPath.includes('/settings')) return 'settings';
+    if (currentPath.includes('/subscription')) return 'subscription';
     return 'dashboard'; // Default tab
   };
 
@@ -31,6 +35,20 @@ const AdminView = () => {
   useEffect(() => {
     setActiveTab(getActiveTab());
   }, [currentPath]);
+
+  // Fetch subscription data
+  useEffect(() => {
+    async function fetchSubscription() {
+      try {
+        const data = await getUserSubscription();
+        setSubscription(data);
+      } catch (error) {
+        console.error('Error fetching subscription:', error);
+      }
+    }
+
+    fetchSubscription();
+  }, []);
 
   // Handle tab clicks
   const handleTabClick = (tab: string) => {
@@ -45,13 +63,20 @@ const AdminView = () => {
           <div className="flex justify-between items-center">
             <Logo size="md" />
             
-            <Button 
-              variant="ghost"
-              leftIcon={<LogOut size={18} />}
-              onClick={logout}
-            >
-              Logout
-            </Button>
+            <div className="flex items-center space-x-4">
+              {subscription && ['active', 'trialing'].includes(subscription.subscription_status) && (
+                <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">
+                  Premium Plan
+                </span>
+              )}
+              <Button 
+                variant="ghost"
+                leftIcon={<LogOut size={18} />}
+                onClick={logout}
+              >
+                Logout
+              </Button>
+            </div>
           </div>
         </div>
       </header>
@@ -113,6 +138,18 @@ const AdminView = () => {
             <SettingsIcon size={16} className="mr-2" />
             Settings
           </button>
+
+          <button
+            onClick={() => navigate('/account/subscription')}
+            className={`flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all ${
+              activeTab === 'subscription'
+                ? 'bg-primary-500 text-white shadow-md'
+                : 'text-gray-600 hover:bg-gray-100'
+            }`}
+          >
+            <CreditCard size={16} className="mr-2" />
+            Subscription
+          </button>
         </div>
         
         {/* Routes for different admin sections */}
@@ -121,6 +158,7 @@ const AdminView = () => {
           <Route path="/inventory" element={<AdminInventory />} />
           <Route path="/ai-model" element={<AdminAIModel />} />
           <Route path="/settings" element={<AdminSettings />} />
+          <Route path="/subscription" element={<SubscriptionDetails />} />
         </Routes>
       </div>
     </div>

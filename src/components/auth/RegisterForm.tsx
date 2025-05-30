@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Building2, Mail, Lock } from 'lucide-react';
+import { Building2, Mail, Lock, AlertCircle } from 'lucide-react';
 import Button from '../ui/Button';
 import { signUp } from '../../lib/supabase';
 
@@ -63,6 +63,13 @@ const RegisterForm = () => {
           Get started with LeafIQ for your dispensary
         </p>
       </div>
+
+      {error && (
+        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm flex items-start">
+          <AlertCircle className="w-5 h-5 mr-2 flex-shrink-0 mt-0.5" />
+          <span>{error}</span>
+        </div>
+      )}
 
       <form onSubmit={handleSubmit}>
         <div className="space-y-4">
@@ -139,10 +146,6 @@ const RegisterForm = () => {
               />
             </div>
           </div>
-
-          {error && (
-            <p className="text-red-600 text-sm">{error}</p>
-          )}
 
           <Button
             type="submit"
