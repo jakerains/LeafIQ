@@ -73,38 +73,38 @@ function FeaturesSection() {
   const features = [
     {
       icon: Brain,
-      title: "AI-Powered Product Matching",
-      description: "Instantly connect shoppers with the perfect product based on how they want to feel. Uses terpene profiles and cannabinoid data—not guesswork.",
+      title: "AI-Powered Recommendations",
+      description: "Match customers with perfect products using advanced AI that understands terpene profiles and desired effects.",
       color: "primary"
     },
     {
       icon: LineChart,
-      title: "Live Inventory Sync",
-      description: "Your menu is always accurate. Pulls directly from your POS or ecommerce backend to reflect what's truly in stock—down to the variant.",
+      title: "Real-time Analytics",
+      description: "Track performance with live dashboards showing sales, inventory levels, and customer satisfaction metrics.",
       color: "secondary"
     },
     {
       icon: ShieldCheck,
-      title: "Privacy-First Architecture",
-      description: "Enterprise-grade encryption and compliance with all relevant data protection regulations.",
+      title: "Enterprise Security",
+      description: "Bank-grade encryption and compliance with all relevant data protection regulations.",
       color: "accent"
     },
     {
       icon: Leaf,
-      title: "Smart Terpene Intelligence",
-      description: "Give your staff superpowers. Every recommendation comes backed by transparent terpene breakdowns and effect logic.",
+      title: "Terpene Intelligence",
+      description: "Detailed terpene profiles for every product, helping staff provide expert guidance on effects.",
       color: "primary"
     },
     {
       icon: UserCircle,
-      title: "Built-In Staff Tools",
-      description: "Role-based dashboards and query logs help your team stay sharp and aligned, with less training required.",
+      title: "Staff Management",
+      description: "Role-based access control and performance tracking for your team members.",
       color: "secondary"
     },
     {
       icon: MessageSquare,
-      title: "Customer Behavior Analytics",
-      description: "Understand buying patterns, top search intents, and strain sentiment to stock smarter and sell faster.",
+      title: "Customer Insights",
+      description: "Deep analytics on customer preferences and buying patterns to optimize your product mix.",
       color: "accent"
     }
   ];
@@ -162,7 +162,7 @@ function FeaturesSection() {
             </div>
           </motion.div>
           
-          <h2 className="text-4xl font-display font-bold mb-4 bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">⚡ Why LeafIQ?</h2>
+          <h2 className="text-4xl font-display font-bold mb-4 bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">Everything You Need</h2>
           <p className="text-xl text-gray-600">Powerful features to help your dispensary thrive in an evolving market</p>
         </motion.div>
 
