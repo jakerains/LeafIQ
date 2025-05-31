@@ -1,8 +1,6 @@
 import { motion } from 'framer-motion';
 import GlassCard from '../../components/ui/GlassCard';
-import { Target, Package, Brain } from 'lucide-react';
 import { VercelV0Chat } from '../../components/ui/v0-ai-chat';
-import { ShimmerButton } from '../../components/ui/shimmer-button';
 
 interface KioskHomeProps {
   onSearch: (query: string) => void;
@@ -44,7 +42,7 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
       >
         {/* Personalized Matches Card */}
         <motion.div 
-          className="relative overflow-hidden rounded-2xl shadow-xl"
+          className="relative overflow-hidden rounded-2xl shadow-xl h-[320px]"
           variants={item}
           whileHover={{ y: -8, transition: { duration: 0.3 } }}
         >
@@ -53,20 +51,16 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
             <img 
               src="/3-yep.jpg" 
               alt="" 
-              className="w-full h-full object-cover opacity-20 brightness-[0.8] saturate-[0.7]"
+              className="w-full h-full object-cover opacity-60"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-primary-900/90 to-primary-800/70 mix-blend-multiply" />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary-900/80 to-transparent" />
           </div>
           
           {/* Card content */}
           <div className="relative z-10 p-6 flex flex-col items-center text-white h-full">
-            <div className="bg-primary-400/30 backdrop-blur-md p-4 rounded-full mb-4">
-              <Target className="h-8 w-8 text-primary-50" />
-            </div>
+            <h3 className="text-xl font-bold mt-auto mb-2">Personalized Matches</h3>
             
-            <h3 className="text-xl font-bold mb-2">Personalized Matches</h3>
-            
-            <p className="text-primary-100 mb-4">
+            <p className="text-white/90 mb-4">
               Find products perfectly suited to your experience, based on your unique preferences and desired effects.
             </p>
             
@@ -80,7 +74,7 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
         
         {/* In-Stock Guarantee Card */}
         <motion.div 
-          className="relative overflow-hidden rounded-2xl shadow-xl" 
+          className="relative overflow-hidden rounded-2xl shadow-xl h-[320px]" 
           variants={item}
           whileHover={{ y: -8, transition: { duration: 0.3 } }}
         >
@@ -89,20 +83,16 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
             <img 
               src="/3-yep.jpg" 
               alt="" 
-              className="w-full h-full object-cover opacity-20 brightness-[0.8] saturate-[0.7]"
+              className="w-full h-full object-cover opacity-60"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-secondary-900/90 to-secondary-800/70 mix-blend-multiply" />
+            <div className="absolute inset-0 bg-gradient-to-t from-secondary-900/80 to-transparent" />
           </div>
           
           {/* Card content */}
           <div className="relative z-10 p-6 flex flex-col items-center text-white h-full">
-            <div className="bg-secondary-400/30 backdrop-blur-md p-4 rounded-full mb-4">
-              <Package className="h-8 w-8 text-secondary-50" />
-            </div>
+            <h3 className="text-xl font-bold mt-auto mb-2">In-Stock Guarantee</h3>
             
-            <h3 className="text-xl font-bold mb-2">In-Stock Guarantee</h3>
-            
-            <p className="text-secondary-100 mb-4">
+            <p className="text-white/90 mb-4">
               All recommendations available right now in store, with real-time inventory tracking to ensure availability.
             </p>
             
@@ -116,7 +106,7 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
         
         {/* Expert Guidance Card */}
         <motion.div 
-          className="relative overflow-hidden rounded-2xl shadow-xl" 
+          className="relative overflow-hidden rounded-2xl shadow-xl h-[320px]" 
           variants={item}
           whileHover={{ y: -8, transition: { duration: 0.3 } }}
         >
@@ -125,20 +115,16 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
             <img 
               src="/3-yep.jpg" 
               alt="" 
-              className="w-full h-full object-cover opacity-20 brightness-[0.8] saturate-[0.7]"
+              className="w-full h-full object-cover opacity-60"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-accent-900/90 to-accent-800/70 mix-blend-multiply" />
+            <div className="absolute inset-0 bg-gradient-to-t from-accent-900/80 to-transparent" />
           </div>
           
           {/* Card content */}
           <div className="relative z-10 p-6 flex flex-col items-center text-white h-full">
-            <div className="bg-accent-400/30 backdrop-blur-md p-4 rounded-full mb-4">
-              <Brain className="h-8 w-8 text-accent-50" />
-            </div>
+            <h3 className="text-xl font-bold mt-auto mb-2">Expert Guidance</h3>
             
-            <h3 className="text-xl font-bold mb-2">Expert Guidance</h3>
-            
-            <p className="text-accent-100 mb-4">
+            <p className="text-white/90 mb-4">
               Our knowledgeable staff provides personalized insights on any recommendation, helping you make informed choices.
             </p>
             
