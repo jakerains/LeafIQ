@@ -1,78 +1,75 @@
-import React, { ButtonHTMLAttributes } from 'react';
-import { twMerge } from 'tailwind-merge';
-import { motion } from 'framer-motion';
+import * as React from "react"
+import { Slot } from "@radix-ui/react-slot"
+import { cva, type VariantProps } from "class-variance-authority"
+import { Loader2 } from "lucide-react"
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'accent' | 'ghost';
-  size?: 'sm' | 'md' | 'lg';
-  isLoading?: boolean;
-  isFullWidth?: boolean;
-  leftIcon?: React.ReactNode;
-  rightIcon?: React.ReactNode;
+import { cn } from "../../lib/utils"
+
+const buttonVariants = cva(
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  {
+    variants: {
+      variant: {
+        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        destructive:
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+        outline:
+          "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
+        secondary:
+          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
+        link: "text-primary underline-offset-4 hover:underline",
+        primary: "bg-primary text-primary-foreground hover:bg-primary/90",
+        accent: "bg-accent text-accent-foreground hover:bg-accent/80",
+      },
+      size: {
+        default: "h-10 px-4 py-2",
+        sm: "h-9 rounded-md px-3",
+        lg: "h-11 rounded-md px-8",
+        icon: "h-10 w-10",
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+      size: "default",
+    },
+  },
+)
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean
+  leftIcon?: React.ReactElement
+  rightIcon?: React.ReactElement
+  isLoading?: boolean
+  isFullWidth?: boolean
 }
 
-const Button = ({
-  children,
-  variant = 'primary',
-  size = 'md',
-  isLoading = false,
-  isFullWidth = false,
-  leftIcon,
-  rightIcon,
-  className,
-  disabled,
-  ...props
-}: ButtonProps) => {
-  const baseStyles = "inline-flex items-center justify-center rounded-2xl font-medium transition-all duration-300";
-  
-  const variantStyles = {
-    primary: "bg-primary-500 text-white hover:bg-primary-600 shadow-md hover:shadow-lg",
-    secondary: "bg-secondary-500 text-white hover:bg-secondary-600 shadow-md hover:shadow-lg",
-    accent: "bg-accent-500 text-white hover:bg-accent-600 shadow-md hover:shadow-lg",
-    ghost: "bg-transparent hover:bg-gray-100 text-gray-700"
-  };
-  
-  const sizeStyles = {
-    sm: "text-sm px-3 py-1.5",
-    md: "text-base px-4 py-2",
-    lg: "text-lg px-6 py-3"
-  };
-  
-  const loadingStyles = isLoading ? "opacity-80 cursor-wait" : "";
-  const disabledStyles = disabled ? "opacity-60 cursor-not-allowed pointer-events-none" : "";
-  const fullWidthStyles = isFullWidth ? "w-full" : "";
-  
-  const buttonStyles = twMerge(
-    baseStyles,
-    variantStyles[variant],
-    sizeStyles[size],
-    loadingStyles,
-    disabledStyles,
-    fullWidthStyles,
-    className
-  );
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, leftIcon, rightIcon, isLoading, isFullWidth, children, disabled, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button"
+    
+    return (
+      <Comp
+        className={cn(
+          buttonVariants({ variant, size, className }),
+          isFullWidth && "w-full",
+          isLoading && "pointer-events-none opacity-60"
+        )}
+        ref={ref}
+        disabled={disabled || isLoading}
+        {...props}
+      >
+        {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+        {!isLoading && leftIcon && <span className="mr-2">{leftIcon}</span>}
+        {children}
+        {!isLoading && rightIcon && <span className="ml-2">{rightIcon}</span>}
+      </Comp>
+    )
+  },
+)
+Button.displayName = "Button"
 
-  return (
-    <motion.button
-      className={buttonStyles}
-      disabled={disabled || isLoading}
-      whileTap={{ scale: 0.98 }}
-      whileHover={{ y: -2 }}
-      {...props}
-    >
-      {isLoading ? (
-        <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-solid border-current border-r-transparent" />
-      ) : leftIcon ? (
-        <span className="mr-2">{leftIcon}</span>
-      ) : null}
-      
-      {children}
-      
-      {rightIcon && !isLoading && (
-        <span className="ml-2">{rightIcon}</span>
-      )}
-    </motion.button>
-  );
-};
-
-export default Button;
+export { Button, buttonVariants }
+export default Button
