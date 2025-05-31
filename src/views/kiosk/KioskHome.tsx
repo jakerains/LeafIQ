@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { VercelV0Chat } from '../../components/ui/v0-ai-chat';
+import VercelV0Chat from '../../components/ui/v0-ai-chat';
 import InfoModal from '../../components/ui/InfoModal';
 
 interface KioskHomeProps {
