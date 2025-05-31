@@ -144,10 +144,11 @@ export function VercelV0Chat({ onSearch, isLoading = false }: VercelV0ChatProps)
     };
 
     const handleSuggestionClick = (suggestion: string) => {
-        if (selectedSuggestions.includes(suggestion)) {
-            setSelectedSuggestions(prev => prev.filter(s => s !== suggestion));
-        } else {
-            setSelectedSuggestions(prev => [...prev, suggestion]);
+        // Instead of adding to selectedSuggestions, set the input value directly
+        setValue(suggestion);
+        // Focus the textarea after setting the value
+        if (textareaRef.current) {
+            textareaRef.current.focus();
         }
     };
 
@@ -273,23 +274,6 @@ export function VercelV0Chat({ onSearch, isLoading = false }: VercelV0ChatProps)
                     </motion.button>
                 </div>
 
-                {selectedSuggestions.length > 0 && (
-                    <div className="flex flex-wrap gap-2 mb-4 justify-center">
-                        {selectedSuggestions.map((suggestion) => (
-                            <motion.button
-                                key={suggestion}
-                                onClick={() => handleSuggestionClick(suggestion)}
-                                className="px-4 py-2 bg-primary-100 text-primary-800 rounded-full text-sm font-medium border border-primary-200 hover:bg-primary-200 transition-all duration-200 flex items-center gap-1"
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                            >
-                                {suggestion}
-                                <X size={14} className="ml-1" />
-                            </motion.button>
-                        ))}
-                    </div>
-                )}
-
                 <div className="flex items-center justify-center gap-3 mt-4 flex-wrap">
                     {(isActivityMode ? activitySuggestions : vibeSuggestions)[currentSuggestionSet].map((suggestion) => (
                         <ActionButton
@@ -297,8 +281,8 @@ export function VercelV0Chat({ onSearch, isLoading = false }: VercelV0ChatProps)
                             icon={getIconForSuggestion(suggestion)}
                             label={suggestion}
                             onClick={() => handleSuggestionClick(suggestion)}
-                            disabled={isLoading}
-                            isSelected={selectedSuggestions.includes(suggestion)}
+                            disabled={isLoading} 
+                            isSelected={value === suggestion}
                         />
                     ))}
                 </div>
