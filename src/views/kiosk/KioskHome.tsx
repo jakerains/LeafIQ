@@ -66,7 +66,7 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
           {/* Card background image - shows in top 2/3 */}
           <div className="absolute inset-0 z-0">
             <img 
-              src="/3-yep.jpg" 
+              src="/1.jpg" 
               alt="" 
               className="w-full h-full object-cover"
             />
@@ -102,7 +102,7 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
           {/* Card background image - shows in top 2/3 */}
           <div className="absolute inset-0 z-0">
             <img 
-              src="/3-yep.jpg" 
+              src="/2.jpg" 
               alt="" 
               className="w-full h-full object-cover"
             />
@@ -175,7 +175,7 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
         <div className="space-y-6">
           <div className="flex items-start gap-4">
             <img 
-              src="/3-yep.jpg" 
+              src="/1.jpg" 
               alt="Budtender explaining product" 
               className="w-40 h-40 object-cover rounded-lg"
             />
@@ -237,7 +237,7 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
         <div className="space-y-6">
           <div className="flex items-start gap-4">
             <img 
-              src="/3-yep.jpg" 
+              src="/2.jpg" 
               alt="Inventory display" 
               className="w-40 h-40 object-cover rounded-lg"
             />
