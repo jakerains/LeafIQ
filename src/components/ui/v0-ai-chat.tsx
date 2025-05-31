@@ -456,7 +456,7 @@ export function VercelV0Chat({ onSearch, isLoading = false }: VercelV0ChatProps)
                                 className={cn(
                                     "px-1.5 py-1.5 rounded-lg text-sm transition-colors border flex items-center justify-between gap-1",
                                     value.trim() && !isLoading && !isChatLoading
-                                        ? "bg-primary-500 text-white border-primary-500 hover:bg-primary-600 cursor-pointer"
+                                        ? "bg-primary-500 text-white border-primary-500 hover:bg-primary-600 cursor-pointer active:translate-y-0.5 active:shadow-inner"
                                         : "text-gray-400 border-gray-300 cursor-not-allowed"
                                 )}
                             >
@@ -482,39 +482,123 @@ export function VercelV0Chat({ onSearch, isLoading = false }: VercelV0ChatProps)
                     <motion.div className="flex items-center gap-2">
                         <motion.button
                             onClick={() => changeMode('vibe')}
-                            className={`flex items-center gap-2 px-4 py-2 ${mode === 'vibe' 
+                            className={`flex items-center gap-2 px-4 py-2 rounded-full shadow-md transition-all duration-300 relative overflow-hidden ${
+                                mode === 'vibe' 
                                 ? 'bg-gradient-to-r from-primary-500 to-primary-600 text-white' 
-                                : 'bg-gray-100 text-gray-700'} rounded-full shadow-md transition-all duration-300`}
-                            whileHover={{ y: -2 }}
-                            whileTap={{ scale: 0.97 }}
+                                : 'bg-gray-100 text-gray-700'
+                            }`}
+                            whileHover={{ 
+                                y: -2,
+                                boxShadow: "0 6px 10px rgba(0, 0, 0, 0.15)"
+                            }}
+                            whileTap={{ 
+                                y: 0,
+                                scale: 0.97,
+                                boxShadow: "0 2px 3px rgba(0, 0, 0, 0.1)",
+                                transition: { duration: 0.1 }
+                            }}
                             disabled={isLoading || isChatLoading}
                         >
+                            {/* Glimmer effect overlay */}
+                            {mode === 'vibe' && (
+                                <motion.div
+                                    className="absolute inset-0 w-40 h-full bg-white opacity-0"
+                                    animate={{ 
+                                        x: ["0%", "100%"],
+                                        opacity: [0, 0.3, 0],
+                                        rotateZ: 0
+                                    }}
+                                    transition={{ 
+                                        duration: 1.5,
+                                        repeat: Infinity, 
+                                        repeatType: "loop",
+                                        ease: "linear",
+                                        repeatDelay: 1
+                                    }}
+                                />
+                            )}
                             <HeartHandshake className="w-5 h-5" />
                             <span>Vibe Planner</span>
                         </motion.button>
                         
                         <motion.button
                             onClick={() => changeMode('activity')}
-                            className={`flex items-center gap-2 px-4 py-2 ${mode === 'activity' 
+                            className={`flex items-center gap-2 px-4 py-2 rounded-full shadow-md transition-all duration-300 relative overflow-hidden ${
+                                mode === 'activity' 
                                 ? 'bg-gradient-to-r from-primary-500 to-primary-600 text-white' 
-                                : 'bg-gray-100 text-gray-700'} rounded-full shadow-md transition-all duration-300`}
-                            whileHover={{ y: -2 }}
-                            whileTap={{ scale: 0.97 }}
+                                : 'bg-gray-100 text-gray-700'
+                            }`}
+                            whileHover={{ 
+                                y: -2,
+                                boxShadow: "0 6px 10px rgba(0, 0, 0, 0.15)"
+                            }}
+                            whileTap={{ 
+                                y: 0,
+                                scale: 0.97,
+                                boxShadow: "0 2px 3px rgba(0, 0, 0, 0.1)",
+                                transition: { duration: 0.1 }
+                            }}
                             disabled={isLoading || isChatLoading}
                         >
+                            {/* Glimmer effect overlay */}
+                            {mode === 'activity' && (
+                                <motion.div
+                                    className="absolute inset-0 w-40 h-full bg-white opacity-0"
+                                    animate={{ 
+                                        x: ["0%", "100%"],
+                                        opacity: [0, 0.3, 0],
+                                        rotateZ: 0
+                                    }}
+                                    transition={{ 
+                                        duration: 1.5,
+                                        repeat: Infinity, 
+                                        repeatType: "loop",
+                                        ease: "linear",
+                                        repeatDelay: 1
+                                    }}
+                                />
+                            )}
                             <CalendarDays className="w-5 h-5" />
                             <span>Activity Planner</span>
                         </motion.button>
                         
                         <motion.button
                             onClick={() => changeMode('cannabis')}
-                            className={`flex items-center gap-2 px-4 py-2 ${mode === 'cannabis' 
+                            className={`flex items-center gap-2 px-4 py-2 rounded-full shadow-md transition-all duration-300 relative overflow-hidden ${
+                                mode === 'cannabis' 
                                 ? 'bg-gradient-to-r from-primary-500 to-primary-600 text-white' 
-                                : 'bg-gray-100 text-gray-700'} rounded-full shadow-md transition-all duration-300`}
-                            whileHover={{ y: -2 }}
-                            whileTap={{ scale: 0.97 }}
+                                : 'bg-gray-100 text-gray-700'
+                            }`}
+                            whileHover={{ 
+                                y: -2,
+                                boxShadow: "0 6px 10px rgba(0, 0, 0, 0.15)"
+                            }}
+                            whileTap={{ 
+                                y: 0,
+                                scale: 0.97,
+                                boxShadow: "0 2px 3px rgba(0, 0, 0, 0.1)",
+                                transition: { duration: 0.1 }
+                            }}
                             disabled={isLoading || isChatLoading}
                         >
+                            {/* Glimmer effect overlay */}
+                            {mode === 'cannabis' && (
+                                <motion.div
+                                    className="absolute inset-0 w-40 h-full bg-white opacity-0"
+                                    animate={{ 
+                                        x: ["0%", "100%"],
+                                        opacity: [0, 0.3, 0],
+                                        rotateZ: 0
+                                    }}
+                                    transition={{ 
+                                        duration: 1.5,
+                                        repeat: Infinity, 
+                                        repeatType: "loop",
+                                        ease: "linear",
+                                        repeatDelay: 1
+                                    }}
+                                />
+                            )}
                             <Book className="w-5 h-5" />
                             <span>Cannabis Questions</span>
                         </motion.button>
@@ -581,18 +665,42 @@ function ActionButton({ icon, label, onClick, disabled = false, isSelected = fal
         <motion.button
             type="button"
             className={cn(
-                "flex items-center gap-2 px-4 py-2 rounded-full border transition-colors shadow-sm",
+                "flex items-center gap-2 px-4 py-2 rounded-full border transition-colors shadow-sm relative overflow-hidden",
                 disabled
                     ? "text-gray-400 cursor-not-allowed"
                     : isSelected
                         ? "bg-primary-100 text-primary-800 border-primary-200 hover:bg-primary-200"
                         : "bg-white text-gray-700 border-gray-200 hover:text-gray-900 hover:bg-gray-50"
             )}
-            whileHover={disabled ? {} : { y: -2, boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}
-            whileTap={disabled ? {} : { scale: 0.97 }}
+            whileHover={disabled ? {} : { 
+                y: -2, 
+                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" 
+            }}
+            whileTap={disabled ? {} : { 
+                scale: 0.97,
+                y: 0,
+                boxShadow: "0 1px 2px rgba(0, 0, 0, 0.1)",
+                transition: { duration: 0.1 }
+            }}
             onClick={onClick}
             disabled={disabled}
         >
+            {/* Glimmer effect for non-disabled buttons */}
+            {!disabled && !isSelected && (
+                <motion.div
+                    className="absolute inset-0 w-20 h-full bg-white opacity-0"
+                    initial={{ opacity: 0, x: "-100%" }}
+                    whileHover={{ 
+                        x: ["0%", "100%"],
+                        opacity: [0, 0.15, 0],
+                        rotateZ: 0
+                    }}
+                    transition={{ 
+                        duration: 0.8,
+                        ease: "easeInOut"
+                    }}
+                />
+            )}
             {icon}
             <span className="text-xs">{label}</span>
         </motion.button>
