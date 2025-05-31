@@ -44,15 +44,11 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
       >
         <GlassCard className="text-center p-4">
           <motion.div variants={item}>
-            <ShimmerButton
-              className="mb-3 mx-auto"
-              shimmerColor="#22c55e"
-              background="rgba(34, 197, 94, 0.1)"
-            >
+            <div className="mb-3 mx-auto">
               <div className="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
                 <Target size={24} className="text-primary-600" />
               </div>
-            </ShimmerButton>
+            </div>
             <h3 className="text-lg font-semibold mb-1">Personalized Matches</h3>
             <p className="text-gray-600 text-sm">Find products perfectly suited to your experience.</p>
           </motion.div>
