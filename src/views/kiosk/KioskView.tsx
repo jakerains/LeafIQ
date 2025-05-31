@@ -60,7 +60,7 @@ const KioskView = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <div className="container mx-auto px-4 py-16 flex-1 flex flex-col">
-        <header className="flex flex-col items-center mb-12 mt-8">
+        <header className="flex flex-col items-center mb-8 mt-8">
           <img 
             src="/leafiq-logo.png" 
             alt="LeafIQ" 
