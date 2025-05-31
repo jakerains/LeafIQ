@@ -279,18 +279,6 @@ const KioskResults = ({
           Based on your desire to feel <span className="font-semibold text-primary-600">"{searchQuery}"</span>
         </p>
         
-        {updatedIsAIPowered && (
-          <motion.p
-            className="mt-2 inline-flex items-center gap-1 px-3 py-1 bg-primary-100 text-primary-800 rounded-full text-sm font-medium"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-          >
-            <Sparkles size={14} className="text-primary-600" />
-            AI-Powered Recommendations
-          </motion.p>
-        )}
-        
         {/* Recommendation blurb with chatbot toggle */}
         <motion.div
           className="mt-4 bg-white bg-opacity-70 backdrop-blur-sm rounded-xl border border-gray-100 shadow-sm overflow-hidden"
@@ -389,6 +377,19 @@ const KioskResults = ({
                 </button>
               </div>
             </motion.div>
+          )}
+          
+          {/* AI-Powered Recommendations badge moved below the chatbox */}
+          {updatedIsAIPowered && (
+            <motion.p
+              className="mt-2 inline-flex items-center gap-1 px-3 py-1 bg-primary-100 text-primary-800 rounded-full text-sm font-medium"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2 }}
+            >
+              <Sparkles size={14} className="text-primary-600" />
+              AI-Powered Recommendations
+            </motion.p>
           )}
         </motion.div>
       </motion.div>
