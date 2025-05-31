@@ -46,25 +46,26 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
           variants={item}
           whileHover={{ y: -8, transition: { duration: 0.3 } }}
         >
-          {/* Card background image */}
+          {/* Card background image - shows in top 2/3 */}
           <div className="absolute inset-0 z-0">
             <img 
               src="/3-yep.jpg" 
               alt="" 
-              className="w-full h-full object-cover opacity-60"
+              className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-primary-900/80 to-transparent" />
+            {/* Gradient overlay that gets stronger at bottom to support text */}
+            <div className="absolute inset-0 bg-gradient-to-t from-primary-900/90 via-primary-900/40 to-primary-900/10" />
           </div>
           
-          {/* Card content */}
-          <div className="relative z-10 p-6 flex flex-col items-center text-white h-full">
-            <h3 className="text-xl font-bold mt-auto mb-2">Personalized Matches</h3>
-            
-            <p className="text-white/90 mb-4">
-              Find products perfectly suited to your experience, based on your unique preferences and desired effects.
-            </p>
-            
-            <div className="mt-auto">
+          {/* Card content - positioned at bottom third */}
+          <div className="relative z-10 p-6 flex flex-col justify-end h-full">
+            <div className="mt-auto"> {/* Pushes all content to bottom */}
+              <h3 className="text-xl font-bold text-white mb-2">Personalized Matches</h3>
+              
+              <p className="text-white/90 mb-4">
+                Find products perfectly suited to your experience, based on your unique preferences and desired effects.
+              </p>
+              
               <div className="inline-flex items-center justify-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-xl text-sm font-medium text-white border border-white/20 hover:bg-white/20 transition-colors cursor-pointer">
                 Learn More
               </div>
@@ -78,25 +79,26 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
           variants={item}
           whileHover={{ y: -8, transition: { duration: 0.3 } }}
         >
-          {/* Card background image */}
+          {/* Card background image - shows in top 2/3 */}
           <div className="absolute inset-0 z-0">
             <img 
               src="/3-yep.jpg" 
               alt="" 
-              className="w-full h-full object-cover opacity-60"
+              className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-secondary-900/80 to-transparent" />
+            {/* Gradient overlay that gets stronger at bottom to support text */}
+            <div className="absolute inset-0 bg-gradient-to-t from-secondary-900/90 via-secondary-900/40 to-secondary-900/10" />
           </div>
           
-          {/* Card content */}
-          <div className="relative z-10 p-6 flex flex-col items-center text-white h-full">
-            <h3 className="text-xl font-bold mt-auto mb-2">In-Stock Guarantee</h3>
-            
-            <p className="text-white/90 mb-4">
-              All recommendations available right now in store, with real-time inventory tracking to ensure availability.
-            </p>
-            
-            <div className="mt-auto">
+          {/* Card content - positioned at bottom third */}
+          <div className="relative z-10 p-6 flex flex-col justify-end h-full">
+            <div className="mt-auto"> {/* Pushes all content to bottom */}
+              <h3 className="text-xl font-bold text-white mb-2">In-Stock Guarantee</h3>
+              
+              <p className="text-white/90 mb-4">
+                All recommendations available right now in store, with real-time inventory tracking to ensure availability.
+              </p>
+              
               <div className="inline-flex items-center justify-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-xl text-sm font-medium text-white border border-white/20 hover:bg-white/20 transition-colors cursor-pointer">
                 Learn More
               </div>
@@ -110,25 +112,26 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
           variants={item}
           whileHover={{ y: -8, transition: { duration: 0.3 } }}
         >
-          {/* Card background image */}
+          {/* Card background image - shows in top 2/3 */}
           <div className="absolute inset-0 z-0">
             <img 
               src="/3-yep.jpg" 
               alt="" 
-              className="w-full h-full object-cover opacity-60"
+              className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-accent-900/80 to-transparent" />
+            {/* Gradient overlay that gets stronger at bottom to support text */}
+            <div className="absolute inset-0 bg-gradient-to-t from-accent-900/90 via-accent-900/40 to-accent-900/10" />
           </div>
           
-          {/* Card content */}
-          <div className="relative z-10 p-6 flex flex-col items-center text-white h-full">
-            <h3 className="text-xl font-bold mt-auto mb-2">Expert Guidance</h3>
-            
-            <p className="text-white/90 mb-4">
-              Our knowledgeable staff provides personalized insights on any recommendation, helping you make informed choices.
-            </p>
-            
-            <div className="mt-auto">
+          {/* Card content - positioned at bottom third */}
+          <div className="relative z-10 p-6 flex flex-col justify-end h-full">
+            <div className="mt-auto"> {/* Pushes all content to bottom */}
+              <h3 className="text-xl font-bold text-white mb-2">Expert Guidance</h3>
+              
+              <p className="text-white/90 mb-4">
+                Our knowledgeable staff provides personalized insights on any recommendation, helping you make informed choices.
+              </p>
+              
               <div className="inline-flex items-center justify-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-xl text-sm font-medium text-white border border-white/20 hover:bg-white/20 transition-colors cursor-pointer">
                 Learn More
               </div>
