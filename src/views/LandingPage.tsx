@@ -125,7 +125,7 @@ const LandingPage = () => {
               >
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-primary-500 to-primary-300 rounded-2xl blur opacity-30"></div>
                 <img
-                  src="/canifield.jpg"
+                  src="/leafie-use3.jpeg"
                   alt="LeafIQ Dashboard"
                   className="rounded-2xl shadow-2xl relative z-10 border border-gray-300/20 backdrop-blur-sm bg-black/20"
                 />
