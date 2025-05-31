@@ -142,7 +142,10 @@ const LandingPage = () => {
       <section className="py-20 bg-transparent bg-opacity-30 backdrop-blur-xl">
         <div className="container mx-auto px-4">
           <div className="text-center mb-8">
-            <h2 className="text-4xl font-display font-bold mb-4">💵 Clear, Honest Pricing</h2>
+            <h2 className="text-4xl font-display font-bold mb-4">
+              <span className="text-black">💵 Clear, Honest </span>
+              <span className="bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">Pricing</span>
+            </h2>
             <p className="text-xl text-gray-600">All the power. No confusing tiers.</p>
           </div>
           
