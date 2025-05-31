@@ -117,19 +117,24 @@ const LandingPage = () => {
               </motion.div>
             </div>
             <div className="flex-1">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-                className="relative"
-              >
-                <div className="absolute -inset-0.5 bg-gradient-to-r from-primary-500 to-primary-300 rounded-2xl blur opacity-30"></div>
-                <img
-                  src="/leafie-use3.jpeg"
-                  alt="LeafIQ Dashboard"
-                  className="rounded-2xl shadow-2xl relative z-10 border border-gray-300/20 backdrop-blur-sm bg-black/20"
-                />
-              </motion.div>
+              <div className="flex justify-center">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="relative w-5/6"
+                >
+                  <div className="absolute -inset-1 bg-gradient-to-r from-primary-500 to-primary-300 rounded-2xl blur-md opacity-40"></div>
+                  <div className="absolute -inset-0.5 bg-white/10 rounded-2xl backdrop-blur-sm"></div>
+                  <img
+                    src="/leafie-use3.jpeg"
+                    alt="LeafIQ Dashboard"
+                    className="rounded-2xl shadow-2xl relative z-10 border-2 border-white/30 backdrop-blur-sm"
+                  />
+                  <div className="absolute -bottom-3 -right-3 w-24 h-24 bg-primary-500/20 rounded-full blur-xl"></div>
+                  <div className="absolute -top-3 -left-3 w-16 h-16 bg-accent-500/20 rounded-full blur-xl"></div>
+                </motion.div>
+              </div>
             </div>
           </div>
         </div>
