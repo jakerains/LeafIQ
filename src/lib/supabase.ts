@@ -214,7 +214,7 @@ export const logSearchQuery = async (query: {
   search_phrase: string;
   user_type: 'kiosk' | 'staff';
   returned_product_ids: string[];
-  organization_id: string;
+  organization_id?: string;
 }) => {
   console.log('Logging search query:', query);
   
@@ -225,13 +225,10 @@ export const logSearchQuery = async (query: {
       return;
     }
 
-    // Ensure organization_id is provided
-    if (!query.organization_id) {
-      console.warn('Skipping search query logging: organization_id is required');
-      return;
-    }
+    // Use default organization ID if none provided
+    const organization_id = query.organization_id || 'd85af8c9-0d4a-451c-bc25-8c669c71142e';
 
-    // Attempt to insert the search query with organization_id
+    // Attempt to insert the search query
     const { error } = await supabase
       .from('search_queries')
       .insert([
@@ -240,12 +237,13 @@ export const logSearchQuery = async (query: {
           user_type: query.user_type,
           returned_product_ids: query.returned_product_ids,
           timestamp: new Date().toISOString(),
-          organization_id: query.organization_id
+          organization_id: organization_id
         }
       ]);
 
     if (error) {
-      console.error('Error logging search query:', error);
+      // Log the error but don't throw it to prevent breaking the app flow
+      console.error('Error logging search query:', error.message);
     }
   } catch (err) {
     console.error('Failed to log search query:', err);

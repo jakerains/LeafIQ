@@ -151,7 +151,7 @@ export const recommendProducts = async (
             search_phrase: vibe,
             user_type: userType,
             returned_product_ids: aiMatchedProducts.map(p => p.id),
-            organization_id: organizationId
+            organization_id: organizationId || 'd85af8c9-0d4a-451c-bc25-8c669c71142e' // Default org ID if none provided
           });
         }
         
@@ -211,7 +211,7 @@ export const recommendProducts = async (
         search_phrase: vibe,
         user_type: userType,
         returned_product_ids: sortedProducts.slice(0, maxResults).map(p => p.id),
-        organization_id: organizationId
+        organization_id: organizationId || 'd85af8c9-0d4a-451c-bc25-8c669c71142e' // Default org ID if none provided
       });
     }
     
