@@ -307,12 +307,11 @@ export const recommendProducts = async (
     // Parse the vibe to get target terpene profile
     const { terpeneProfile: targetProfile, effects } = parseVibeToTerpeneProfile(vibe);
     
-    // Filter out unavailable products
+    // Filter products by category if needed
     let availableProducts = products.filter(p => 
       p.variant.is_available && p.variant.inventory_level > 0
     );
     
-    // Apply category filter if specified
     if (categoryFilter) {
       availableProducts = availableProducts.filter(p => p.category === categoryFilter);
     }
