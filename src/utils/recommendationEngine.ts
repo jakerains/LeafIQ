@@ -86,6 +86,53 @@ export const parseVibeToTerpeneProfile = (vibe: string): {
     }
   }
   
+  // Check if this is a category-specific query
+  if (lowercaseVibe.includes('concentrate') || lowercaseVibe.includes('extract')) {
+    return {
+      terpeneProfile: {
+        myrcene: 0.5,
+        limonene: 0.5,
+        pinene: 0.5,
+        caryophyllene: 0.6
+      },
+      effects: ['Potent Experience', 'Concentrated Effects']
+    };
+  }
+  
+  if (lowercaseVibe.includes('flower') || lowercaseVibe.includes('bud')) {
+    return {
+      terpeneProfile: {
+        myrcene: 0.6,
+        limonene: 0.4,
+        pinene: 0.4,
+        caryophyllene: 0.4
+      },
+      effects: ['Full Spectrum', 'Traditional Experience']
+    };
+  }
+  
+  if (lowercaseVibe.includes('edible')) {
+    return {
+      terpeneProfile: {
+        myrcene: 0.7,
+        limonene: 0.3,
+        caryophyllene: 0.5
+      },
+      effects: ['Long-lasting', 'Body Effects']
+    };
+  }
+  
+  if (lowercaseVibe.includes('vape') || lowercaseVibe.includes('cartridge')) {
+    return {
+      terpeneProfile: {
+        limonene: 0.7,
+        pinene: 0.6,
+        terpinolene: 0.5
+      },
+      effects: ['Quick Onset', 'Precise Dosing']
+    };
+  }
+  
   // Regular vibe-based query
   // Check for direct matches in our mapping
   for (const [mappedVibe, data] of Object.entries(vibesToTerpenes)) {
@@ -132,6 +179,34 @@ export const recommendProducts = async (
 }> => {
   console.log(`Processing recommendation request for: "${vibe}"`);
   
+  // Check if this is a category-specific query
+  const lowercaseVibe = vibe.toLowerCase();
+  const categoryFilters: Record<string, string> = {
+    'concentrate': 'concentrate',
+    'concentrates': 'concentrate',
+    'extracts': 'concentrate',
+    'flower': 'flower',
+    'buds': 'flower',
+    'edible': 'edible',
+    'edibles': 'edible',
+    'vape': 'vaporizer',
+    'vapes': 'vaporizer', 
+    'cartridge': 'vaporizer',
+    'cartridges': 'vaporizer',
+    'vaporizer': 'vaporizer',
+    'vaporizers': 'vaporizer'
+  };
+  
+  let categoryFilter = '';
+  
+  // Check if any category keywords are in the query
+  for (const [keyword, category] of Object.entries(categoryFilters)) {
+    if (lowercaseVibe.includes(keyword)) {
+      categoryFilter = category;
+      break;
+    }
+  }
+  
   try {
     // Try to get AI-powered recommendations first
     const aiResults = await getAIRecommendations(vibe);
@@ -141,7 +216,22 @@ export const recommendProducts = async (
       
       // Map AI results to product objects
       const aiProductIds = aiResults.recommendations.map((rec: any) => rec.productId);
-      const aiMatchedProducts = products.filter(p => aiProductIds.includes(p.id));
+      let aiMatchedProducts = products.filter(p => aiProductIds.includes(p.id));
+      
+      // Apply category filter if specified
+      if (categoryFilter) {
+        aiMatchedProducts = aiMatchedProducts.filter(p => p.category === categoryFilter);
+        
+        // If we don't have enough products after filtering, add more from the same category
+        if (aiMatchedProducts.length < maxResults) {
+          const additionalProducts = products
+            .filter(p => p.category === categoryFilter && !aiMatchedProducts.includes(p))
+            .sort((a, b) => b.thc_percentage - a.thc_percentage)
+            .slice(0, maxResults - aiMatchedProducts.length);
+          
+          aiMatchedProducts = [...aiMatchedProducts, ...additionalProducts];
+        }
+      }
       
       // If we have matched products, return them
       if (aiMatchedProducts.length > 0) {
@@ -172,9 +262,14 @@ export const recommendProducts = async (
     const { terpeneProfile: targetProfile, effects } = parseVibeToTerpeneProfile(vibe);
     
     // Filter out unavailable products
-    const availableProducts = products.filter(p => 
+    let availableProducts = products.filter(p => 
       p.variant.is_available && p.variant.inventory_level > 0
     );
+    
+    // Apply category filter if specified
+    if (categoryFilter) {
+      availableProducts = availableProducts.filter(p => p.category === categoryFilter);
+    }
     
     // If no products are available, return empty array
     if (availableProducts.length === 0) {
@@ -228,9 +323,15 @@ export const recommendProducts = async (
     
     // Final fallback: use the local engine without any Supabase interaction
     const { terpeneProfile: targetProfile, effects } = parseVibeToTerpeneProfile(vibe);
-    const availableProducts = products.filter(p => 
+    
+    // Filter products by category if needed
+    let availableProducts = products.filter(p => 
       p.variant.is_available && p.variant.inventory_level > 0
     );
+    
+    if (categoryFilter) {
+      availableProducts = availableProducts.filter(p => p.category === categoryFilter);
+    }
     
     if (availableProducts.length === 0) {
       return { products: [], effects, isAIPowered: false };

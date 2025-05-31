@@ -100,6 +100,8 @@ const KioskResults = ({
       return `To elevate your spirits, I've selected products rich in limonene and other mood-enhancing terpenes that promote a sense of well-being.`;
     } else if (lowercaseQuery.includes('social') || lowercaseQuery.includes('talk')) {
       return `For social situations, these balanced options help ease conversation while maintaining clarity and presence - perfect for connecting with others.`;
+    } else if (lowercaseQuery.includes('concentrates') || lowercaseQuery.includes('concentrate')) {
+      return `For a more potent experience, I've selected premium concentrates with high THC content and rich terpene profiles that deliver powerful effects.`;
     }
     
     // Default response using the effects
@@ -126,20 +128,25 @@ const KioskResults = ({
       const lowerMessage = chatMessage.toLowerCase();
       let response = '';
       let newSearchQuery = '';
+      let categoryFilter = '';
       
       // Analyze the message to determine intent and context
-      if (lowerMessage.includes('concentrates')) {
+      if (lowerMessage.includes('concentrates') || lowerMessage.includes('concentrate')) {
         response = "You're interested in concentrates! These offer a more potent experience with higher THC levels. Let me update my recommendations to focus on our best concentrate options.";
-        newSearchQuery = "concentrates " + searchQuery;
+        newSearchQuery = searchQuery;
+        categoryFilter = "concentrate"; // Set category filter to concentrates
       } else if (lowerMessage.includes('flower') || lowerMessage.includes('bud')) {
         response = "Looking for flower products? Great choice for a traditional experience. I'll update my recommendations to show our best matching flower strains.";
-        newSearchQuery = "flower " + searchQuery;
+        newSearchQuery = searchQuery;
+        categoryFilter = "flower"; // Set category filter to flower
       } else if (lowerMessage.includes('edible')) {
         response = "Edibles provide a longer-lasting experience with no inhalation. I'll show you our best edible options that match your desired effects.";
-        newSearchQuery = "edibles " + searchQuery;
+        newSearchQuery = searchQuery;
+        categoryFilter = "edible"; // Set category filter to edibles
       } else if (lowerMessage.includes('vape') || lowerMessage.includes('cartridge')) {
         response = "Vaporizers offer convenience and precise dosing. Here are some vape options that should provide the experience you're looking for.";
-        newSearchQuery = "vaporizers " + searchQuery;
+        newSearchQuery = searchQuery;
+        categoryFilter = "vaporizer"; // Set category filter to vaporizers
       } else if (lowerMessage.includes('stronger') || lowerMessage.includes('potent')) {
         response = "I understand you're looking for something more potent. I've updated my recommendations to focus on products with higher THC content and stronger effects.";
         newSearchQuery = "potent " + searchQuery;
@@ -170,9 +177,25 @@ const KioskResults = ({
       // Get new recommendations based on the updated query
       if (newSearchQuery) {
         const newResults = await searchProductsByVibe(newSearchQuery, 'kiosk');
+        let filteredResults = newResults.products;
+        
+        // Apply category filter if specified
+        if (categoryFilter) {
+          // Filter products by the specified category
+          filteredResults = filteredResults.filter(p => p.category.toLowerCase() === categoryFilter.toLowerCase());
+          
+          // If no products match the category filter, try to find products from that category 
+          // that match the original query
+          if (filteredResults.length === 0) {
+            const categoryResults = await searchProductsByVibe(categoryFilter, 'kiosk');
+            filteredResults = categoryResults.products.filter(p => 
+              p.category.toLowerCase() === categoryFilter.toLowerCase()
+            );
+          }
+        }
         
         // Update the results and effects
-        setUpdatedResults(newResults.products);
+        setUpdatedResults(filteredResults);
         setUpdatedEffects(newResults.effects);
         setUpdatedIsAIPowered(newResults.isAIPowered);
         
