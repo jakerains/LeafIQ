@@ -10,7 +10,7 @@ import { motion } from 'framer-motion';
 import { ProductWithVariant } from '../../types';
 import { Settings } from '../../types';
 import { Routes, Route, useNavigate, Link, useLocation } from 'react-router-dom';
-import { RefreshCw, Database, Settings as SettingsIcon, Activity, Package, BrainCircuit, CreditCard, Flask } from 'lucide-react';
+import { RefreshCw, Database, Settings as SettingsIcon, Activity, Package, BrainCircuit, CreditCard, FlaskRound as Flask } from 'lucide-react';
 import AdminDashboard from './AdminDashboard';
 import AdminInventory from './AdminInventory';
 import AdminAIModel from './AdminAIModel';

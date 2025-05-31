@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Flask, Plus, Search, Edit, Trash2, InfoCircle, X, Save, ChevronDown, ChevronUp } from 'lucide-react';
+import { FlaskRound as Flask, Plus, Search, Edit, Trash2, Circle as InfoCircle, X, Save, ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '../../components/ui/button';
 import { cn } from '../../lib/utils';
 import TerpeneInfoModal from './components/TerpeneInfoModal';

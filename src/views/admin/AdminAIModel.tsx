@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { BrainCircuit, Save, RefreshCw, Play, PlusCircle, Trash2, Flask } from 'lucide-react';
+import { BrainCircuit, Save, RefreshCw, Play, PlusCircle, Trash2, FlaskRound as Flask } from 'lucide-react';
 import { Button } from '../../components/ui/button';
 import { vibesToTerpenes } from '../../data/demoData';
 import TerpeneTabs from './components/TerpeneTabs';
