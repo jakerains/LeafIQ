@@ -499,21 +499,18 @@ export function VercelV0Chat({ onSearch, isLoading = false }: VercelV0ChatProps)
                             }}
                             disabled={isLoading || isChatLoading}
                         >
-                            {/* Glimmer effect overlay */}
+                            {/* Glimmer effect - ONLY on hover for active button */}
                             {mode === 'vibe' && (
                                 <motion.div
                                     className="absolute inset-0 w-40 h-full bg-white opacity-0"
-                                    animate={{ 
+                                    initial={{ x: "-100%" }}
+                                    whileHover={{ 
                                         x: ["0%", "100%"],
-                                        opacity: [0, 0.3, 0],
-                                        rotateZ: 0
+                                        opacity: [0, 0.3, 0]
                                     }}
                                     transition={{ 
-                                        duration: 1.5,
-                                        repeat: Infinity, 
-                                        repeatType: "loop",
-                                        ease: "linear",
-                                        repeatDelay: 1
+                                        duration: 0.8,
+                                        ease: "easeInOut"
                                     }}
                                 />
                             )}
@@ -540,21 +537,18 @@ export function VercelV0Chat({ onSearch, isLoading = false }: VercelV0ChatProps)
                             }}
                             disabled={isLoading || isChatLoading}
                         >
-                            {/* Glimmer effect overlay */}
+                            {/* Glimmer effect - ONLY on hover for active button */}
                             {mode === 'activity' && (
                                 <motion.div
                                     className="absolute inset-0 w-40 h-full bg-white opacity-0"
-                                    animate={{ 
+                                    initial={{ x: "-100%" }}
+                                    whileHover={{ 
                                         x: ["0%", "100%"],
-                                        opacity: [0, 0.3, 0],
-                                        rotateZ: 0
+                                        opacity: [0, 0.3, 0]
                                     }}
                                     transition={{ 
-                                        duration: 1.5,
-                                        repeat: Infinity, 
-                                        repeatType: "loop",
-                                        ease: "linear",
-                                        repeatDelay: 1
+                                        duration: 0.8,
+                                        ease: "easeInOut"
                                     }}
                                 />
                             )}
@@ -581,21 +575,18 @@ export function VercelV0Chat({ onSearch, isLoading = false }: VercelV0ChatProps)
                             }}
                             disabled={isLoading || isChatLoading}
                         >
-                            {/* Glimmer effect overlay */}
+                            {/* Glimmer effect - ONLY on hover for active button */}
                             {mode === 'cannabis' && (
                                 <motion.div
                                     className="absolute inset-0 w-40 h-full bg-white opacity-0"
-                                    animate={{ 
+                                    initial={{ x: "-100%" }}
+                                    whileHover={{ 
                                         x: ["0%", "100%"],
-                                        opacity: [0, 0.3, 0],
-                                        rotateZ: 0
+                                        opacity: [0, 0.3, 0]
                                     }}
                                     transition={{ 
-                                        duration: 1.5,
-                                        repeat: Infinity, 
-                                        repeatType: "loop",
-                                        ease: "linear",
-                                        repeatDelay: 1
+                                        duration: 0.8,
+                                        ease: "easeInOut"
                                     }}
                                 />
                             )}
@@ -685,15 +676,14 @@ function ActionButton({ icon, label, onClick, disabled = false, isSelected = fal
             onClick={onClick}
             disabled={disabled}
         >
-            {/* Glimmer effect for non-disabled buttons */}
+            {/* Glimmer effect - now only appears on hover, not as continuous animation */}
             {!disabled && !isSelected && (
                 <motion.div
                     className="absolute inset-0 w-20 h-full bg-white opacity-0"
                     initial={{ opacity: 0, x: "-100%" }}
                     whileHover={{ 
                         x: ["0%", "100%"],
-                        opacity: [0, 0.15, 0],
-                        rotateZ: 0
+                        opacity: [0, 0.15, 0]
                     }}
                     transition={{ 
                         duration: 0.8,
