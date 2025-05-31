@@ -64,7 +64,7 @@ const KioskView = () => {
           <img 
             src="/leafiq-logo.png" 
             alt="LeafIQ" 
-            className="h-24 mb-4 drop-shadow-lg filter shadow-primary-500/50"
+            className="h-48 mb-4 drop-shadow-lg filter shadow-primary-500/50"
           />
           
           <div className="flex items-center space-x-3 absolute top-8 right-8">
