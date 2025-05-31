@@ -63,7 +63,7 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
               <h3 className="text-lg font-bold text-white mb-1">Personalized Matches</h3> {/* Reduced text size and margin */}
               
               <p className="text-white/90 text-sm mb-3"> {/* Reduced text size */}
-                Find products perfectly suited to your experience.
+                Find products perfectly suited to your experience, based on your desired effects and preferences. Our AI-powered system analyzes terpene profiles to match your vibe.
               </p>
               
               <div className="inline-flex items-center justify-center px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-lg text-xs font-medium text-white border border-white/20 hover:bg-white/20 transition-colors cursor-pointer">
@@ -96,7 +96,7 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
               <h3 className="text-lg font-bold text-white mb-1">In-Stock Guarantee</h3> {/* Reduced text size and margin */}
               
               <p className="text-white/90 text-sm mb-3"> {/* Reduced text size */}
-                All recommendations available right now in store.
+                All recommendations available right now in store. Our real-time inventory tracking ensures you'll never leave empty-handed or disappointed by out-of-stock items.
               </p>
               
               <div className="inline-flex items-center justify-center px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-lg text-xs font-medium text-white border border-white/20 hover:bg-white/20 transition-colors cursor-pointer">
@@ -129,7 +129,7 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
               <h3 className="text-lg font-bold text-white mb-1">Expert Guidance</h3> {/* Reduced text size and margin */}
               
               <p className="text-white/90 text-sm mb-3"> {/* Reduced text size */}
-                Our staff provides insights on any recommendation.
+                Our staff provides insights on any recommendation, helping you understand terpene profiles, effects, and dosage guidance for the perfect cannabis experience every time.
               </p>
               
               <div className="inline-flex items-center justify-center px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-lg text-xs font-medium text-white border border-white/20 hover:bg-white/20 transition-colors cursor-pointer">
