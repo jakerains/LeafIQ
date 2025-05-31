@@ -157,7 +157,7 @@ const AdminView = () => {
           </button>
 
           <button
-            onClick={() => navigate('/account/subscription')}
+            onClick={() => handleTabClick('subscription')}
             className={`flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all ${
               activeTab === 'subscription'
                 ? 'bg-primary-500 text-white shadow-md'
