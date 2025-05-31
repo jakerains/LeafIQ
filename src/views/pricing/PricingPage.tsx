@@ -66,33 +66,38 @@ export default function PricingPage() {
           </motion.div>
           
           {/* Pricing Toggle */}
-          <motion.div 
-            className="flex justify-center items-center mb-12"
+          <motion.div
+            className="mb-12"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
           >
-            <span className={`mr-3 font-medium ${!isYearly ? 'text-primary-600' : 'text-gray-500'}`}>Monthly</span>
-            <div 
-              className="relative w-16 h-8 bg-gray-200 rounded-full cursor-pointer shadow-inner"
-              onClick={() => setIsYearly(!isYearly)}
-            >
-              <motion.div 
-                className="absolute w-6 h-6 bg-primary-500 rounded-full top-1 shadow-md"
-                animate={{ x: isYearly ? 34 : 2 }}
-                transition={{ type: "spring", stiffness: 500, damping: 30 }}
-              />
+            <div className="relative">
+              {isYearly && (
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.8, y: -10 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  className="absolute left-1/2 transform -translate-x-1/2 -top-8 px-3 py-1.5 bg-primary-100 text-primary-800 rounded-full text-sm font-medium whitespace-nowrap"
+                >
+                  Save 17% (2 months free!)
+                </motion.div>
+              )}
+              
+              <div className="flex justify-center items-center">
+                <span className={`mr-3 font-medium ${!isYearly ? 'text-primary-600' : 'text-gray-500'}`}>Monthly</span>
+                <div 
+                  className="relative w-16 h-8 bg-gray-200 rounded-full cursor-pointer shadow-inner"
+                  onClick={() => setIsYearly(!isYearly)}
+                >
+                  <motion.div 
+                    className="absolute w-6 h-6 bg-primary-500 rounded-full top-1 shadow-md"
+                    animate={{ x: isYearly ? 34 : 2 }}
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  />
+                </div>
+                <span className={`ml-3 font-medium ${isYearly ? 'text-primary-600' : 'text-gray-500'}`}>Yearly</span>
+              </div>
             </div>
-            <span className={`ml-3 font-medium ${isYearly ? 'text-primary-600' : 'text-gray-500'}`}>Yearly</span>
-            {isYearly && (
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="ml-2 px-2 py-1 bg-primary-100 text-primary-800 rounded-lg text-xs font-medium"
-              >
-                Save 17% (2 months free!)
-              </motion.div>
-            )}
           </motion.div>
 
           {isLoading ? (
