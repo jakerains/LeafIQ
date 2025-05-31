@@ -9,8 +9,19 @@ if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error('Missing Supabase environment variables. Please check your .env file.');
 }
 
-// Create a single supabase client for the entire app
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey);
+// Create a single supabase client for the entire app with custom fetch options
+export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    persistSession: true,
+    autoRefreshToken: true,
+    detectSessionInUrl: true
+  },
+  global: {
+    headers: {
+      'X-Client-Info': 'leafiq-web'
+    }
+  }
+});
 
 // Authentication functions
 export const signUp = async (email: string, password: string, organizationName: string) => {
@@ -101,6 +112,11 @@ export const signIn = async (email: string, password: string) => {
   console.log(`Signing in with email: ${email}`);
   
   try {
+    // Add error handling for empty credentials
+    if (!email || !password) {
+      throw new Error('Email and password are required');
+    }
+
     const { data, error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -134,8 +150,15 @@ export const signIn = async (email: string, password: string) => {
     }
 
     return { data, error: null };
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error in signIn:', error);
+    // Improve error message for network issues
+    if (error.message === 'Failed to fetch') {
+      return { 
+        data: null, 
+        error: new Error('Unable to connect to authentication service. Please check your internet connection and try again.') 
+      };
+    }
     return { data: null, error };
   }
 };

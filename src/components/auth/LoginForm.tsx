@@ -31,28 +31,44 @@ const LoginForm = ({ role }: LoginFormProps) => {
 
     try {
       if (isAuthLayout) {
-        // Email/password login
+        // Validate email and password
+        if (!email.trim() || !password.trim()) {
+          throw new Error('Please enter both email and password');
+        }
+
+        // Email/password login with improved error handling
         const { data, error: signInError } = await signIn(email, password);
         
-        if (signInError) throw signInError;
+        if (signInError) {
+          console.error('Sign in error:', signInError);
+          throw signInError;
+        }
+        
+        if (!data?.user) {
+          throw new Error('Login failed. Please try again.');
+        }
         
         console.log("Login successful:", data);
         
         // Store user data in auth store
-        if (data?.user) {
-          setUser({
-            id: data.user.id,
-            email: data.user.email,
-            organizationId: data.profile?.organization_id,
-            role: data.profile?.role || 'admin'
-          });
-        }
+        setUser({
+          id: data.user.id,
+          email: data.user.email,
+          organizationId: data.profile?.organization_id,
+          role: data.profile?.role || 'admin'
+        });
         
         // Navigate to admin dashboard on successful login
         navigate('/admin');
       } else {
         // Passcode login for staff/admin
-        if (!role) return;
+        if (!role) {
+          throw new Error('Invalid role configuration');
+        }
+        
+        if (!passcode.trim()) {
+          throw new Error('Please enter a passcode');
+        }
         
         console.log(`Attempting to login as ${role} with passcode: ${passcode}`);
         const success = login(role, passcode);
@@ -63,7 +79,7 @@ const LoginForm = ({ role }: LoginFormProps) => {
       }
     } catch (err: any) {
       console.error('Login error:', err);
-      setError(err.message || 'Login failed. Please try again.');
+      setError(err.message || 'Login failed. Please check your credentials and try again.');
     } finally {
       setIsLoading(false);
     }
@@ -95,12 +111,12 @@ const LoginForm = ({ role }: LoginFormProps) => {
         </div>
       )}
       
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="space-y-4">
         {isAuthLayout ? (
           // Email/password login form
           <div className="space-y-4 mb-6">
             <div>
-              <label htmlFor="email\" className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                 Email Address
               </label>
               <div className="relative">
