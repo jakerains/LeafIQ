@@ -87,14 +87,6 @@ function App() {
               </AuthGuard>
             } 
           />
-          <Route
-            path="/account/subscription"
-            element={
-              <AuthGuard requiredRole="admin">
-                <SubscriptionDetails />
-              </AuthGuard>
-            }
-          />
         </Routes>
 
         {/* Version Display - Positioned based on current route */}

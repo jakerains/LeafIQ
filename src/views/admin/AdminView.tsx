@@ -175,7 +175,11 @@ const AdminView = () => {
           <Route path="/inventory" element={<AdminInventory />} />
           <Route path="/ai-model" element={<AdminAIModel />} />
           <Route path="/settings" element={<AdminSettings />} />
-          <Route path="/subscription" element={<SubscriptionDetails />} />
+          <Route path="/subscription" element={
+            <div className="container mx-auto px-4">
+              <SubscriptionDetails />
+            </div>
+          } />
         </Routes>
       </div>
     </div>
