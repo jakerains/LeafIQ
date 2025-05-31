@@ -16,6 +16,7 @@ import {
     CalendarDays,
     HeartHandshake,
     X,
+    Book,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -86,7 +87,9 @@ export function VercelV0Chat({ onSearch, isLoading = false }: VercelV0ChatProps)
         minHeight: 60,
         maxHeight: 200,
     });
-    const [isActivityMode, setIsActivityMode] = useState(false);
+    
+    // Modified to support three modes: 'vibe', 'activity', and 'cannabis'
+    const [mode, setMode] = useState<'vibe' | 'activity' | 'cannabis'>('vibe');
     const [selectedSuggestions, setSelectedSuggestions] = useState<string[]>([]);
 
     // Dynamic suggestion pools
@@ -102,25 +105,45 @@ export function VercelV0Chat({ onSearch, isLoading = false }: VercelV0ChatProps)
         ['Yoga', 'Dancing', 'Cooking', 'Music', 'Relaxing']
     ];
     
+    const cannabisSuggestions = [
+        ['What is THC?', 'CBD benefits', 'Terpenes explained', 'Indica vs Sativa', 'Edible dosing'],
+        ['Cannabis history', 'Medical uses', 'Consumption methods', 'Strain differences', 'CBD vs THC'],
+        ['First-time tips', 'Product storage', 'Tolerance breaks', 'Legal questions', 'Endocannabinoid system']
+    ];
+    
     const [currentSuggestionSet, setCurrentSuggestionSet] = useState(0);
 
     // Rotate suggestions every 10 seconds
     useEffect(() => {
         const timer = setInterval(() => {
-            setCurrentSuggestionSet((prev) => 
-                (prev + 1) % (isActivityMode ? activitySuggestions.length : vibeSuggestions.length)
-            );
+            setCurrentSuggestionSet((prev) => {
+                if (mode === 'vibe') {
+                    return (prev + 1) % vibeSuggestions.length;
+                } else if (mode === 'activity') {
+                    return (prev + 1) % activitySuggestions.length;
+                } else {
+                    return (prev + 1) % cannabisSuggestions.length;
+                }
+            });
         }, 10000);
         return () => clearInterval(timer);
-    }, [isActivityMode]);
+    }, [mode]);
 
     const handleSubmit = () => {
         // Use the value from the input which already contains the selected suggestions
         const finalQuery = value.trim();
             
         if (finalQuery) {
-            // Prefix for activity mode to help the AI understand context
-            const query = isActivityMode ? `Activity: ${finalQuery}` : finalQuery;
+            // Prefix based on mode to help the AI understand context
+            let query;
+            if (mode === 'activity') {
+                query = `Activity: ${finalQuery}`;
+            } else if (mode === 'cannabis') {
+                query = `Cannabis Question: ${finalQuery}`;
+            } else {
+                query = finalQuery;
+            }
+            
             onSearch(query);
             setValue("");
             setSelectedSuggestions([]);
@@ -135,8 +158,9 @@ export function VercelV0Chat({ onSearch, isLoading = false }: VercelV0ChatProps)
         }
     };
 
-    const toggleMode = () => {
-        setIsActivityMode(!isActivityMode);
+    // Toggle between different modes
+    const changeMode = (newMode: 'vibe' | 'activity' | 'cannabis') => {
+        setMode(newMode);
         setValue(""); // Clear input when switching modes
         setSelectedSuggestions([]); // Clear selections when switching modes
         setCurrentSuggestionSet(0); // Reset suggestion set
@@ -176,19 +200,34 @@ export function VercelV0Chat({ onSearch, isLoading = false }: VercelV0ChatProps)
         adjustHeight();
     };
 
+    // Get current suggestions based on mode
+    const getCurrentSuggestions = () => {
+        if (mode === 'vibe') {
+            return vibeSuggestions[currentSuggestionSet];
+        } else if (mode === 'activity') {
+            return activitySuggestions[currentSuggestionSet];
+        } else {
+            return cannabisSuggestions[currentSuggestionSet];
+        }
+    };
+
     return (
         <div className="flex flex-col items-center w-full max-w-4xl mx-auto space-y-8">
             <div className="w-full">
                 <AnimatePresence mode="wait">
                     <motion.h1
-                        key={isActivityMode ? "activity" : "vibe"}
+                        key={mode}
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 20 }}
                         transition={{ duration: 0.3 }}
                         className="text-4xl font-bold text-center text-black font-display mb-8"
                     >
-                        {isActivityMode ? "What are you up to?" : "How do you want to feel?"}
+                        {mode === 'vibe' 
+                            ? "How do you want to feel?" 
+                            : mode === 'activity' 
+                            ? "What are you up to?" 
+                            : "Have cannabis questions?"}
                     </motion.h1>
                 </AnimatePresence>
 
@@ -203,8 +242,10 @@ export function VercelV0Chat({ onSearch, isLoading = false }: VercelV0ChatProps)
                             }}
                             onKeyDown={handleKeyDown}
                             placeholder={
-                                isActivityMode
+                                mode === 'activity'
                                     ? "Describe the activities you're planning (concert, hike, movie night, etc.)..."
+                                    : mode === 'cannabis'
+                                    ? "Ask any question about cannabis, terpenes, consumption methods, etc..."
                                     : "Ask about a specific feeling or effect..."
                             }
                             className={cn(
@@ -277,25 +318,46 @@ export function VercelV0Chat({ onSearch, isLoading = false }: VercelV0ChatProps)
                 </div>
 
                 <div className="flex justify-end mt-3">
-                    <motion.button
-                        onClick={toggleMode}
-                        className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-primary-500 to-accent-500 hover:from-primary-600 hover:to-accent-600 text-white rounded-full shadow-md transition-all duration-300 transform hover:scale-105"
-                        whileHover={{ y: -2 }}
-                        whileTap={{ scale: 0.97 }}
-                        disabled={isLoading}
-                    >
-                        {isActivityMode ? (
-                            <>
-                                <HeartHandshake className="w-5 h-5" />
-                                <span>Vibe Planner</span>
-                            </>
-                        ) : (
-                            <>
-                                <CalendarDays className="w-5 h-5" />
-                                <span>Activity Planner</span>
-                            </>
-                        )}
-                    </motion.button>
+                    <motion.div className="flex items-center gap-2">
+                        <motion.button
+                            onClick={() => changeMode('vibe')}
+                            className={`flex items-center gap-2 px-4 py-2 ${mode === 'vibe' 
+                                ? 'bg-gradient-to-r from-primary-500 to-primary-600 text-white' 
+                                : 'bg-gray-100 text-gray-700'} rounded-full shadow-md transition-all duration-300`}
+                            whileHover={{ y: -2 }}
+                            whileTap={{ scale: 0.97 }}
+                            disabled={isLoading}
+                        >
+                            <HeartHandshake className="w-5 h-5" />
+                            <span>Vibe Planner</span>
+                        </motion.button>
+                        
+                        <motion.button
+                            onClick={() => changeMode('activity')}
+                            className={`flex items-center gap-2 px-4 py-2 ${mode === 'activity' 
+                                ? 'bg-gradient-to-r from-primary-500 to-primary-600 text-white' 
+                                : 'bg-gray-100 text-gray-700'} rounded-full shadow-md transition-all duration-300`}
+                            whileHover={{ y: -2 }}
+                            whileTap={{ scale: 0.97 }}
+                            disabled={isLoading}
+                        >
+                            <CalendarDays className="w-5 h-5" />
+                            <span>Activity Planner</span>
+                        </motion.button>
+                        
+                        <motion.button
+                            onClick={() => changeMode('cannabis')}
+                            className={`flex items-center gap-2 px-4 py-2 ${mode === 'cannabis' 
+                                ? 'bg-gradient-to-r from-primary-500 to-primary-600 text-white' 
+                                : 'bg-gray-100 text-gray-700'} rounded-full shadow-md transition-all duration-300`}
+                            whileHover={{ y: -2 }}
+                            whileTap={{ scale: 0.97 }}
+                            disabled={isLoading}
+                        >
+                            <Book className="w-5 h-5" />
+                            <span>Cannabis Questions</span>
+                        </motion.button>
+                    </motion.div>
                 </div>
 
                 {selectedSuggestions.length > 0 && (
@@ -316,10 +378,10 @@ export function VercelV0Chat({ onSearch, isLoading = false }: VercelV0ChatProps)
                 )}
 
                 <div className="flex items-center justify-center gap-3 mt-4 flex-wrap">
-                    {(isActivityMode ? activitySuggestions : vibeSuggestions)[currentSuggestionSet].map((suggestion) => (
+                    {getCurrentSuggestions().map((suggestion) => (
                         <ActionButton
                             key={suggestion}
-                            icon={getIconForSuggestion(suggestion)}
+                            icon={getIconForSuggestion(suggestion, mode)}
                             label={suggestion}
                             onClick={() => handleSuggestionClick(suggestion)}
                             disabled={isLoading} 
@@ -364,13 +426,17 @@ function ActionButton({ icon, label, onClick, disabled = false, isSelected = fal
 }
 
 // Helper function to get appropriate icon for suggestion
-function getIconForSuggestion(suggestion: string): React.ReactNode {
-    const iconMap: { [key: string]: React.ReactNode } = {
+function getIconForSuggestion(suggestion: string, mode: 'vibe' | 'activity' | 'cannabis'): React.ReactNode {
+    // Define mode-specific icon maps
+    const vibeIconMap: Record<string, React.ReactNode> = {
         'Relaxed': <ImageIcon className="w-4 h-4" />,
         'Energized': <Figma className="w-4 h-4" />,
         'Creative': <FileUp className="w-4 h-4" />,
         'Focused': <MonitorIcon className="w-4 h-4" />,
         'Pain Relief': <CircleUserRound className="w-4 h-4" />,
+    };
+
+    const activityIconMap: Record<string, React.ReactNode> = {
         'Social Event': <CalendarDays className="w-4 h-4" />,
         'Creative Work': <MonitorIcon className="w-4 h-4" />,
         'Hiking': <FileUp className="w-4 h-4" />,
@@ -378,5 +444,18 @@ function getIconForSuggestion(suggestion: string): React.ReactNode {
         'Concert': <Figma className="w-4 h-4" />,
     };
     
-    return iconMap[suggestion] || <ImageIcon className="w-4 h-4" />;
+    const cannabisIconMap: Record<string, React.ReactNode> = {
+        'What is THC?': <Book className="w-4 h-4" />,
+        'CBD benefits': <CircleUserRound className="w-4 h-4" />,
+        'Terpenes explained': <FileUp className="w-4 h-4" />,
+        'Indica vs Sativa': <MonitorIcon className="w-4 h-4" />,
+        'Edible dosing': <Figma className="w-4 h-4" />,
+    };
+    
+    // Choose the appropriate map based on mode
+    const activeMap = mode === 'vibe' ? vibeIconMap : 
+                     mode === 'activity' ? activityIconMap : 
+                     cannabisIconMap;
+    
+    return activeMap[suggestion] || <ImageIcon className="w-4 h-4" />;
 }

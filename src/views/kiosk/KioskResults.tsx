@@ -60,6 +60,17 @@ const KioskResults = ({
       return `I've selected products that complement your ${activity} plans with balanced effects for an enhanced experience.`;
     }
     
+    // Check if this is a cannabis question
+    if (lowercaseQuery.startsWith('cannabis question:')) {
+      // For cannabis education questions, no product recommendation blurb needed
+      if (updatedResults.length === 0) {
+        return `Thanks for your question about cannabis. While I don't have specific products to recommend based on your question, I'm happy to provide information and education.`;
+      }
+      
+      // If we do have product results to show
+      return `Based on your cannabis question, here are some products that might be relevant. Feel free to ask more questions about specific products or cannabis topics.`;
+    }
+    
     // Handle multiple feelings (comma-separated)
     if (query.includes(',')) {
       const feelings = query.split(',').map(f => f.trim().toLowerCase());
@@ -102,6 +113,13 @@ const KioskResults = ({
       return `For social situations, these balanced options help ease conversation while maintaining clarity and presence - perfect for connecting with others.`;
     } else if (lowercaseQuery.includes('concentrates') || lowercaseQuery.includes('concentrate')) {
       return `For a more potent experience, I've selected premium concentrates with high THC content and rich terpene profiles that deliver powerful effects.`;
+    }
+    
+    // Handle cannabis education questions
+    if (lowercaseQuery.includes('thc') || lowercaseQuery.includes('cbd') || 
+        lowercaseQuery.includes('terpene') || lowercaseQuery.includes('strain') ||
+        lowercaseQuery.includes('edible') || lowercaseQuery.includes('effect')) {
+      return `I'm happy to provide information about cannabis. Feel free to ask follow-up questions for more details on this topic.`;
     }
     
     // Default response using the effects
@@ -162,6 +180,14 @@ const KioskResults = ({
       } else if (lowerMessage.includes('anxiety') || lowerMessage.includes('stress')) {
         response = "For anxiety and stress relief, I've found products with balanced CBD:THC ratios and calming terpenes like linalool and limonene that can be particularly effective.";
         newSearchQuery = "anxiety relief " + searchQuery;
+      } else if (lowerMessage.includes('what is') || lowerMessage.includes('how does') || lowerMessage.includes('explain') || 
+                lowerMessage.includes('tell me about') || lowerMessage.includes('difference between')) {
+        // This is likely an educational question - handle differently
+        response = getEducationalResponse(lowerMessage);
+        // For educational questions, we might not need to update product results
+        if (lowerMessage.includes('thc') || lowerMessage.includes('cbd') || lowerMessage.includes('terpene')) {
+          newSearchQuery = "cannabis education";
+        }
       } else {
         // Generic response for other queries
         response = "I've analyzed your preferences and updated my recommendations. These products should better match what you're looking for based on your feedback.";
@@ -219,6 +245,26 @@ const KioskResults = ({
       }]);
     } finally {
       setIsChatLoading(false);
+    }
+  };
+  
+  // Function to generate educational responses about cannabis
+  const getEducationalResponse = (query: string): string => {
+    // Check for common educational questions
+    if (query.includes('thc')) {
+      return "THC (tetrahydrocannabinol) is the primary psychoactive compound in cannabis that creates the 'high' sensation. It works by binding to cannabinoid receptors in the brain, affecting things like thinking, memory, pleasure, coordination, and time perception.";
+    } else if (query.includes('cbd')) {
+      return "CBD (cannabidiol) is a non-psychoactive compound found in cannabis. Unlike THC, it doesn't produce a high. CBD is often used for anxiety, insomnia, and pain relief, and has anti-inflammatory properties. Many users prefer CBD for therapeutic benefits without intoxication.";
+    } else if (query.includes('terpene')) {
+      return "Terpenes are aromatic compounds found in cannabis and many other plants. They give cannabis its distinctive smell and taste but also play a key role in effects. Different terpenes like myrcene (relaxing), limonene (uplifting), and pinene (focusing) contribute to the unique experience of each strain.";
+    } else if (query.includes('indica') || query.includes('sativa') || (query.includes('difference') && query.includes('strain'))) {
+      return "Traditionally, Indica strains are associated with relaxing, sedative effects ('in-da-couch'), while Sativa strains are linked to energizing, cerebral effects. However, modern cannabis science looks beyond this simplistic divide to terpene profiles and cannabinoid ratios, which more accurately predict effects than strain type alone.";
+    } else if (query.includes('edible') && (query.includes('dosing') || query.includes('dose'))) {
+      return "When dosing edibles, start low (5-10mg THC) and go slow. Edibles can take 30-90 minutes to take effect and last 4-8 hours. Unlike smoking, edibles are processed by your liver, creating a stronger, longer-lasting effect. Wait at least 2 hours before considering more, as effects can intensify over time.";
+    } else if (query.includes('medical') || query.includes('medicine')) {
+      return "Medical cannabis is used to treat various conditions including chronic pain, nausea, muscle spasms, anxiety, insomnia, and more. Different cannabinoids and terpenes target different symptoms - THC may help with pain and nausea, while CBD can address inflammation and anxiety. Always consult a healthcare provider about medical cannabis use.";
+    } else {
+      return "That's a great question about cannabis. Cannabis contains over 100 cannabinoids and numerous terpenes that work together to create different effects. The specific effects depend on the chemical profile of the strain, your individual endocannabinoid system, consumption method, and dosage.";
     }
   };
 
