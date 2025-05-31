@@ -26,7 +26,11 @@ const DemoView = () => {
       <div className="container mx-auto px-4 py-16">
         <header className="flex flex-col items-center mb-16">
           <Link to="/" className="mb-8">
-            <Logo size="lg" />
+            <img 
+              src="/leafiq-logo.png" 
+              alt="LeafIQ" 
+              className="h-24 drop-shadow-lg filter shadow-primary-500/50"
+            />
           </Link>
           
           <motion.div 

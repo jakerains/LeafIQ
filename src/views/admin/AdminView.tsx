@@ -66,7 +66,11 @@ const AdminView = () => {
       <header className="bg-white bg-opacity-90 backdrop-blur-md shadow-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
-            <Logo size="md" />
+            <img 
+              src="/leafiq-logo.png" 
+              alt="LeafIQ" 
+              className="h-16 drop-shadow-lg filter shadow-primary-500/50"
+            />
             
             <div className="flex items-center space-x-4">
               {subscription && ['active', 'trialing'].includes(subscription.subscription_status) && (

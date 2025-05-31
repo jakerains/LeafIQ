@@ -11,7 +11,11 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
   return (
     <div className="min-h-screen flex flex-col">
       <header className="container mx-auto px-4 py-8">
-        <Logo size="md" />
+        <img 
+          src="/leafiq-logo.png" 
+          alt="LeafIQ" 
+          className="h-16 drop-shadow-lg filter shadow-primary-500/50"
+        />
       </header>
 
       <main className="flex-1 flex items-center justify-center p-4">
