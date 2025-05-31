@@ -1,0 +1,80 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# React & TypeScript Best Practices
+
+## Component Guidelines
+- Use **functional components** with hooks exclusively
+- Prefer **named exports** over default exports for better tree-shaking
+- Use **TypeScript interfaces** for props, never `any` type
+- Components should be **pure** and predictable
+- Keep components **focused** - single responsibility principle
+
+## TypeScript Standards
+- **Strict mode** enabled - no implicit any, null checks required
+- Use **union types** for controlled values (e.g., `'staff' | 'admin' | 'customer'`)
+- Define **interfaces** for all object shapes
+- Use **generics** for reusable utility types
+- Prefer **type** for unions, **interface** for object shapes
+
+## Hook Usage
+- **Custom hooks** should start with "use" and live in `src/hooks/` or within stores
+- Use **useCallback** for event handlers to prevent unnecessary re-renders
+- Use **useMemo** for expensive calculations
+- Prefer **Zustand stores** over useState for shared state
+- Use **React Query** for server state management
+
+## State Management
+- **Zustand** for client state (user preferences, UI state)
+- **React Query** for server state (API data, caching)
+- **Local state** (useState) only for component-specific UI state
+- **No prop drilling** - use stores for shared state
+
+## Event Handling
+```typescript
+// Preferred: Typed event handlers
+const handleSubmit = useCallback((e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  // Handle submission
+}, [dependencies]);
+
+// Avoid: Generic event handlers
+const handleClick = (e: any) => { ... }
+```
+
+## Component Structure Template
+```typescript
+import { useCallback, useMemo } from 'react';
+import { SomeUtility } from '@/utils/someUtility';
+import { ComponentProps } from './types';
+
+interface Props {
+  title: string;
+  isRequired?: boolean;
+  onAction?: (data: ActionData) => void;
+}
+
+export function ComponentName({ title, isRequired = false, onAction }: Props) {
+  const memoizedValue = useMemo(() => {
+    return someExpensiveCalculation(title);
+  }, [title]);
+
+  const handleAction = useCallback((data: ActionData) => {
+    onAction?.(data);
+  }, [onAction]);
+
+  return (
+    <div className="component-name">
+      {/* Component JSX */}
+    </div>
+  );
+}
+```
+
+## Performance Guidelines
+- Use **React.memo** for expensive components that render frequently
+- **Lazy load** route components with React.lazy()
+- Optimize **large lists** with virtualization if needed
+- **Code split** by routes and feature areas

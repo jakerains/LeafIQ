@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Package, Search, Plus, Pencil, Trash2, Filter, ChevronDown, ChevronUp, X } from 'lucide-react';
-import Button from '../../components/ui/Button';
+import Button from '../../components/ui/button';
 import { useProductsStore } from '../../stores/productsStore';
 import { Product, Variant, ProductWithVariant } from '../../types';
 import ProductForm from './components/ProductForm';

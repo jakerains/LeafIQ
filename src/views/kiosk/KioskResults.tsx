@@ -1,9 +1,12 @@
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { Star, ArrowLeft, Share2, Heart, MessageCircle } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import ProductCard from '../../components/ui/ProductCard';
+import Button from '../../components/ui/button';
 import { ProductWithVariant } from '../../types';
-import { ArrowLeft, Sparkles } from 'lucide-react';
 import { vibesToTerpenes } from '../../data/demoData';
-import Button from '../../components/ui/Button';
+import { Sparkles } from 'lucide-react';
 
 interface KioskResultsProps {
   searchQuery: string;

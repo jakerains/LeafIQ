@@ -1,7 +1,7 @@
-import { useState, FormEvent } from 'react';
+import React, { useState, FormEvent } from 'react';
 import { Search, Mic } from 'lucide-react';
 import { motion } from 'framer-motion';
-import Button from './Button';
+import Button from './button';
 
 interface SearchInputProps {
   onSearch: (query: string) => void;

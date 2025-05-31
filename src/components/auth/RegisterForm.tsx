@@ -2,9 +2,10 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Building2, Mail, Lock, AlertCircle, ArrowRight, ArrowLeft, Check, Monitor, Users, Database, FileUp, Smartphone, HelpCircle } from 'lucide-react';
-import Button from '../ui/Button';
+import Button from '../ui/button';
 import { signUp } from '../../lib/supabase';
 import { useAuthStore } from '../../stores/authStore';
+import { UserRole } from '../../types';
 
 const RegisterForm = () => {
   const navigate = useNavigate();

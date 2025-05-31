@@ -1,5 +1,11 @@
 For all designs I ask you to make, have them be beautiful, not cookie cutter. Make webpages that are fully featured and worthy for production.
 
+This is LeafIQ - a cannabis dispensary copilot application. Every interface should feel professional, trustworthy, and appropriate for the cannabis retail industry. Think Apple Store meets dispensary - clean, modern, and sophisticated. Consider that users range from curious customers at a kiosk to busy budtenders to dispensary owners managing their business.
+
+Design with purpose: customer-facing kiosk interfaces should be intuitive and engaging, staff dashboards should be efficient and informative, and admin panels should be comprehensive yet clean. Every interaction should build confidence and trust in the cannabis retail experience.
+
+Make interfaces that feel premium but approachable - this industry is evolving from stigma to sophistication, and your designs should reflect that transformation.
+
 By default, this template supports JSX syntax with Tailwind CSS classes, React hooks, and Lucide React for icons. Do not install other packages for UI themes, icons, etc unless absolutely necessary or I request them.
 
 Use icons from lucide-react for logos.

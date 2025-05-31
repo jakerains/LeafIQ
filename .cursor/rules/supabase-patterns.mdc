@@ -1,0 +1,133 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Supabase Integration Patterns
+
+## Database Design Principles
+- Use **Row Level Security (RLS)** for all user-facing tables
+- **Soft deletes** for important data (use `deleted_at` timestamp)
+- **UUID primary keys** for all tables
+- **Created/updated timestamps** on all tables
+- **Foreign key constraints** to maintain data integrity
+
+## Authentication & Authorization
+- Use Supabase Auth for user management
+- **Role-based access control** with custom claims:
+  - `admin` - Full system access
+  - `staff` - Dispensary operations
+  - `customer` - Limited kiosk access
+- Store user roles in `user_profiles` table with RLS policies
+
+## Edge Functions Best Practices
+- Keep functions **focused** and **stateless**
+- Use **TypeScript** for all edge functions
+- **Validate inputs** rigorously
+- **Handle errors** gracefully with proper HTTP status codes
+- Use **environment variables** for configuration
+
+## Database Query Patterns
+```typescript
+// Preferred: Type-safe queries with proper error handling
+const { data: products, error } = await supabase
+  .from('products')
+  .select('id, name, price, category')
+  .eq('active', true)
+  .order('name');
+
+if (error) {
+  console.error('Failed to fetch products:', error);
+  throw new Error('Unable to load products');
+}
+
+// Avoid: Untyped queries without error handling
+const data = await supabase.from('products').select('*');
+```
+
+## React Query Integration
+- Use **React Query** for all Supabase data fetching
+- **Cache keys** should be consistent and hierarchical
+- Implement **optimistic updates** for better UX
+- Use **invalidateQueries** after mutations
+
+```typescript
+// Query pattern
+export function useProducts() {
+  return useQuery({
+    queryKey: ['products'],
+    queryFn: async () => {
+      const { data, error } = await supabase
+        .from('products')
+        .select('*')
+        .eq('active', true);
+      
+      if (error) throw error;
+      return data;
+    },
+  });
+}
+
+// Mutation pattern
+export function useCreateProduct() {
+  const queryClient = useQueryClient();
+  
+  return useMutation({
+    mutationFn: async (product: NewProduct) => {
+      const { data, error } = await supabase
+        .from('products')
+        .insert(product)
+        .select()
+        .single();
+      
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['products'] });
+    },
+  });
+}
+```
+
+## Security Guidelines
+- **Never expose** service role key in client code
+- Use **anon key** for client-side operations
+- **Validate permissions** server-side in edge functions
+- **Sanitize inputs** before database operations
+- Use **prepared statements** (built into Supabase client)
+
+## Migration Best Practices
+- **Incremental migrations** - one change per migration
+- **Reversible migrations** when possible
+- **Test migrations** on staging before production
+- **Document breaking changes** in migration comments
+- Use **transactions** for multi-table operations
+
+## File Storage
+- Use **Supabase Storage** for user uploads
+- Implement **file size limits**
+- **Validate file types** before upload
+- Use **signed URLs** for temporary access
+- Organize files in logical **bucket structure**
+
+## Real-time Subscriptions
+```typescript
+// Subscribe to specific table changes
+useEffect(() => {
+  const subscription = supabase
+    .channel('products-changes')
+    .on('postgres_changes', 
+      { event: '*', schema: 'public', table: 'products' },
+      (payload) => {
+        // Handle real-time updates
+        queryClient.invalidateQueries({ queryKey: ['products'] });
+      }
+    )
+    .subscribe();
+
+  return () => {
+    subscription.unsubscribe();
+  };
+}, [queryClient]);
+```

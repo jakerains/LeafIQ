@@ -1,0 +1,155 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Security & Compliance Guidelines
+
+## Cannabis Industry Compliance
+- **Age verification** required for all customer interactions
+- **Track all transactions** with audit trails
+- **Data retention policies** in compliance with local regulations
+- **PII protection** - encrypt sensitive customer data
+- **Inventory tracking** - maintain accurate product quantities
+- **Tax compliance** - proper calculation and reporting
+
+## Authentication Security
+- **Multi-factor authentication** for admin and staff accounts
+- **Strong password requirements** (12+ chars, mixed case, numbers, symbols)
+- **Session timeout** for inactive users (15 minutes for admin, 30 for staff)
+- **Role-based access control** with principle of least privilege
+- **Account lockout** after failed login attempts
+
+## Data Protection
+```typescript
+// Encrypt sensitive data before storage
+const encryptedData = await encrypt(sensitiveData, process.env.ENCRYPTION_KEY!);
+
+// Never log sensitive information
+console.log('User action completed', { 
+  userId: user.id, 
+  action: 'purchase',
+  // Don't log: credit card, SSN, medical info
+});
+
+// Sanitize user inputs
+const sanitizedInput = sanitizeHtml(userInput);
+```
+
+## API Security
+- **Rate limiting** on all public endpoints
+- **Input validation** and sanitization
+- **SQL injection prevention** (use parameterized queries)
+- **CORS configuration** - restrict to known domains
+- **API key management** - rotate keys regularly
+- **Request/response logging** for audit trails
+
+## Payment Processing
+- **PCI DSS compliance** for credit card processing
+- **Never store** full credit card numbers
+- **Tokenization** for recurring payments
+- **SSL/TLS encryption** for all payment transactions
+- **Audit payment flows** regularly
+
+## Access Control Patterns
+```typescript
+// Role-based route protection
+const AdminRoute = ({ children }: { children: React.ReactNode }) => {
+  const { user, hasRole } = useAuth();
+  
+  if (!user || !hasRole('admin')) {
+    return <Navigate to="/auth/login" replace />;
+  }
+  
+  return <>{children}</>;
+};
+
+// Permission-based feature access
+const useCanAccess = (resource: string, action: string) => {
+  const { user } = useAuth();
+  
+  return useMemo(() => {
+    return checkPermission(user?.role, resource, action);
+  }, [user?.role, resource, action]);
+};
+```
+
+## Audit Logging
+- **Log all user actions** with timestamps and user IDs
+- **Track data modifications** (what changed, when, by whom)
+- **Monitor failed authentication attempts**
+- **Alert on suspicious activities**
+- **Immutable audit logs** - write-only, tamper-proof
+
+```typescript
+// Audit log structure
+interface AuditLog {
+  id: string;
+  userId: string;
+  action: string;
+  resource: string;
+  metadata: Record<string, any>;
+  timestamp: string;
+  ipAddress: string;
+  userAgent: string;
+}
+
+// Log critical actions
+const logAction = async (action: string, resource: string, metadata?: any) => {
+  await auditLogger.log({
+    userId: getCurrentUser().id,
+    action,
+    resource,
+    metadata,
+    timestamp: new Date().toISOString(),
+    ipAddress: getClientIP(),
+    userAgent: request.headers['user-agent'],
+  });
+};
+```
+
+## Environment Security
+- **Environment variables** for all secrets and configuration
+- **No hardcoded credentials** in source code
+- **Separate environments** (dev, staging, production)
+- **Secrets rotation** schedule
+- **Backup encryption** for data at rest
+
+## Error Handling
+```typescript
+// Don't expose internal details in error messages
+try {
+  await sensitiveOperation();
+} catch (error) {
+  // Log detailed error internally
+  logger.error('Database operation failed', { 
+    error: error.message, 
+    stack: error.stack,
+    userId: user.id 
+  });
+  
+  // Return generic error to client
+  throw new Error('Operation failed. Please try again.');
+}
+```
+
+## Client-Side Security
+- **Content Security Policy (CSP)** headers
+- **XSS prevention** - sanitize all user inputs
+- **Secure cookie settings** (httpOnly, secure, sameSite)
+- **Local storage encryption** for sensitive client data
+- **Regular dependency updates** to patch vulnerabilities
+
+## Compliance Documentation
+- **Privacy policy** clearly displayed and accessible
+- **Terms of service** with cannabis industry specific terms
+- **Age verification** process documented
+- **Data handling procedures** documented
+- **Incident response plan** for security breaches
+
+## Monitoring & Alerting
+- **Real-time monitoring** of critical operations
+- **Failed authentication alerts**
+- **Unusual activity patterns** detection
+- **System health monitoring**
+- **Performance metric tracking**

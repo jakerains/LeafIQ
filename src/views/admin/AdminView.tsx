@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useAuthStore } from '../../stores/authStore';
 import { Settings } from '../../types';
 import Logo from '../../components/ui/Logo';
-import Button from '../../components/ui/Button';
+import Button from '../../components/ui/button';
 import { Routes, Route, useNavigate, Link, useLocation } from 'react-router-dom';
 import { LogOut, RefreshCw, Database, Settings as SettingsIcon, Activity, Package, BrainCircuit, LayoutDashboard, CreditCard } from 'lucide-react';
 import { motion } from 'framer-motion';

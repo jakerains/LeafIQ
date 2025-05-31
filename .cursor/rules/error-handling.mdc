@@ -1,0 +1,332 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Error Handling & Debugging
+
+## Error Handling Strategy
+- **Fail gracefully** - never crash the entire application
+- **User-friendly messages** - clear, actionable error messages
+- **Comprehensive logging** - detailed internal error tracking
+- **Recovery mechanisms** - retry logic and fallback states
+- **Progressive disclosure** - show appropriate detail levels
+
+## React Error Boundaries
+```tsx
+// Global error boundary for unhandled errors
+export class ErrorBoundary extends Component<
+  { children: React.ReactNode; fallback?: React.ComponentType<any> },
+  { hasError: boolean; error?: Error }
+> {
+  constructor(props: any) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
+    // Log to error reporting service
+    console.error('React Error Boundary caught an error:', error, errorInfo);
+    
+    // Send to monitoring service
+    if (process.env.NODE_ENV === 'production') {
+      // logError(error, errorInfo);
+    }
+  }
+
+  render() {
+    if (this.state.hasError) {
+      const Fallback = this.props.fallback || DefaultErrorFallback;
+      return <Fallback error={this.state.error} />;
+    }
+
+    return this.props.children;
+  }
+}
+```
+
+## API Error Handling
+```typescript
+// Standardized API error response
+interface APIError {
+  message: string;
+  code: string;
+  details?: any;
+  statusCode: number;
+}
+
+// Error handling utility
+export const handleAPIError = (error: any): APIError => {
+  // Supabase error
+  if (error?.code && error?.message) {
+    return {
+      message: getUserFriendlyMessage(error.code),
+      code: error.code,
+      details: error.details,
+      statusCode: getStatusCodeFromError(error),
+    };
+  }
+
+  // Network error
+  if (error?.name === 'NetworkError') {
+    return {
+      message: 'Network connection failed. Please check your internet connection.',
+      code: 'NETWORK_ERROR',
+      statusCode: 0,
+    };
+  }
+
+  // Generic error
+  return {
+    message: 'An unexpected error occurred. Please try again.',
+    code: 'UNKNOWN_ERROR',
+    statusCode: 500,
+  };
+};
+
+// User-friendly error messages
+const getUserFriendlyMessage = (errorCode: string): string => {
+  const messages: Record<string, string> = {
+    'auth/invalid-email': 'Please enter a valid email address.',
+    'auth/user-not-found': 'No account found with this email address.',
+    'auth/wrong-password': 'Incorrect password. Please try again.',
+    'auth/too-many-requests': 'Too many failed attempts. Please try again later.',
+    'PGRST116': 'No records found matching your criteria.',
+    'PGRST301': 'You do not have permission to perform this action.',
+    // Add more mappings as needed
+  };
+
+  return messages[errorCode] || 'An error occurred. Please try again.';
+};
+```
+
+## React Query Error Handling
+```typescript
+// Global error handler for React Query
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: (failureCount, error) => {
+        // Don't retry on 4xx errors
+        if (error?.statusCode >= 400 && error?.statusCode < 500) {
+          return false;
+        }
+        // Retry up to 3 times for other errors
+        return failureCount < 3;
+      },
+      onError: (error) => {
+        // Global error handling
+        console.error('Query error:', error);
+        
+        // Show toast notification for critical errors
+        if (error?.statusCode >= 500) {
+          toast.error('A server error occurred. Please try again.');
+        }
+      },
+    },
+    mutations: {
+      onError: (error) => {
+        console.error('Mutation error:', error);
+        
+        // Handle specific error types
+        const apiError = handleAPIError(error);
+        toast.error(apiError.message);
+      },
+    },
+  },
+});
+
+// Custom hook with error handling
+export function useProductsWithErrorHandling() {
+  return useQuery({
+    queryKey: ['products'],
+    queryFn: async () => {
+      try {
+        const { data, error } = await supabase
+          .from('products')
+          .select('*')
+          .eq('active', true);
+        
+        if (error) throw error;
+        return data;
+      } catch (error) {
+        throw handleAPIError(error);
+      }
+    },
+    meta: {
+      errorMessage: 'Failed to load products',
+    },
+  });
+}
+```
+
+## Form Validation Error Handling
+```typescript
+// Form error handling pattern
+interface FormErrors {
+  [key: string]: string | undefined;
+}
+
+export function useFormValidation<T>(
+  initialValues: T,
+  validationRules: ValidationRules<T>
+) {
+  const [values, setValues] = useState<T>(initialValues);
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+
+  const validate = useCallback((fieldName?: keyof T) => {
+    const newErrors: FormErrors = {};
+    
+    const fieldsToValidate = fieldName ? [fieldName] : Object.keys(validationRules);
+    
+    fieldsToValidate.forEach((field) => {
+      const rule = validationRules[field as keyof T];
+      const value = values[field as keyof T];
+      
+      if (rule?.required && (!value || value === '')) {
+        newErrors[field as string] = `${String(field)} is required`;
+      } else if (rule?.pattern && value && !rule.pattern.test(String(value))) {
+        newErrors[field as string] = rule.message || `Invalid ${String(field)}`;
+      } else if (rule?.custom) {
+        const customError = rule.custom(value, values);
+        if (customError) {
+          newErrors[field as string] = customError;
+        }
+      }
+    });
+
+    setErrors(prev => ({ ...prev, ...newErrors }));
+    return Object.keys(newErrors).length === 0;
+  }, [values, validationRules]);
+
+  return {
+    values,
+    errors,
+    touched,
+    setValues,
+    validate,
+    hasErrors: Object.keys(errors).length > 0,
+  };
+}
+```
+
+## Loading and Error States
+```tsx
+// Component with comprehensive error and loading states
+export function ProductList() {
+  const { data: products, isLoading, error, refetch } = useProductsWithErrorHandling();
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center py-8">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary-600"></div>
+        <span className="ml-2 text-gray-600">Loading products...</span>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-center py-8">
+        <div className="bg-red-50 border border-red-200 rounded-lg p-4 max-w-md mx-auto">
+          <h3 className="text-red-800 font-medium mb-2">Unable to load products</h3>
+          <p className="text-red-600 text-sm mb-4">{error.message}</p>
+          <button
+            onClick={() => refetch()}
+            className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg text-sm"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (!products || products.length === 0) {
+    return (
+      <div className="text-center py-8">
+        <p className="text-gray-500">No products available</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {products.map(product => (
+        <ProductCard key={product.id} product={product} />
+      ))}
+    </div>
+  );
+}
+```
+
+## Error Monitoring & Reporting
+```typescript
+// Error monitoring service integration
+export const errorReporter = {
+  captureError: (error: Error, context?: any) => {
+    if (process.env.NODE_ENV === 'production') {
+      // Send to error monitoring service (Sentry, LogRocket, etc.)
+      console.error('Error captured:', error, context);
+    } else {
+      console.error('Development error:', error, context);
+    }
+  },
+
+  captureMessage: (message: string, level: 'info' | 'warning' | 'error' = 'info') => {
+    if (process.env.NODE_ENV === 'production') {
+      // Send to monitoring service
+      console.log(`[${level.toUpperCase()}] ${message}`);
+    }
+  },
+};
+
+// Usage in error boundaries and catch blocks
+try {
+  await riskyOperation();
+} catch (error) {
+  errorReporter.captureError(error as Error, {
+    operation: 'riskyOperation',
+    userId: user?.id,
+    timestamp: new Date().toISOString(),
+  });
+  throw new Error('Operation failed');
+}
+```
+
+## Debugging Utilities
+```typescript
+// Development debugging helpers
+export const debugUtils = {
+  logRender: (componentName: string, props?: any) => {
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`🔄 ${componentName} rendered`, props);
+    }
+  },
+
+  logStateChange: (stateName: string, oldValue: any, newValue: any) => {
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`📊 ${stateName} changed:`, { from: oldValue, to: newValue });
+    }
+  },
+
+  timeOperation: async <T>(operationName: string, operation: () => Promise<T>): Promise<T> => {
+    const start = performance.now();
+    try {
+      const result = await operation();
+      const duration = performance.now() - start;
+      console.log(`⏱️ ${operationName} completed in ${duration.toFixed(2)}ms`);
+      return result;
+    } catch (error) {
+      const duration = performance.now() - start;
+      console.error(`❌ ${operationName} failed after ${duration.toFixed(2)}ms`, error);
+      throw error;
+    }
+  },
+};
+```

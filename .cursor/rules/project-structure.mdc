@@ -1,0 +1,59 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# LeafIQ Project Structure
+
+## Core Application Architecture
+- **React 18** with TypeScript in strict mode
+- **Vite** for build tooling and development server
+- **Supabase** for backend, authentication, and database
+- **Zustand** for state management
+- **React Router v6** for client-side routing
+- **Tailwind CSS** for styling with custom design system
+- **Tanstack Query** for server state management
+
+## Directory Organization
+
+### Source Structure (`src/`)
+- `components/` - Reusable UI components organized by feature
+  - `auth/` - Authentication-related components
+  - `pricing/` - Pricing and subscription components  
+  - `ui/` - Generic UI components (buttons, modals, etc.)
+- `views/` - Page-level components and layouts
+  - `account/` - User account management
+  - `admin/` - Admin dashboard and management
+  - `auth/` - Authentication pages
+  - `checkout/` - Payment and checkout flows
+  - `kiosk/` - Customer-facing kiosk interface
+  - `staff/` - Staff dashboard and tools
+  - `pricing/` - Pricing page
+- `stores/` - Zustand state stores
+- `types/` - TypeScript type definitions
+- `utils/` - Utility functions and helpers
+- `lib/` - Third-party library configurations
+- `data/` - Static data and constants
+
+### Backend Structure (`supabase/`)
+- `functions/` - Edge functions for serverless backend logic
+- `migrations/` - Database schema migrations
+
+## File Naming Conventions
+- **Components**: PascalCase (e.g., `UserProfile.tsx`)
+- **Hooks**: camelCase starting with "use" (e.g., `useAuthStore.ts`)
+- **Utils**: camelCase (e.g., `formatCurrency.ts`)
+- **Types**: PascalCase with descriptive names (e.g., `UserTypes.ts`)
+- **Constants**: SCREAMING_SNAKE_CASE exported from files (e.g., `API_ENDPOINTS`)
+
+## Import Organization
+1. External libraries (React, third-party packages)
+2. Internal utilities and types
+3. Components (local first, then from other directories)
+4. Relative imports (./filename)
+
+## Role-Based Access
+- **Public**: Landing page, pricing, authentication
+- **Kiosk**: Customer-facing interface (no authentication required)
+- **Staff**: Basic dispensary operations (requires staff role)
+- **Admin**: Full management capabilities (requires admin role)

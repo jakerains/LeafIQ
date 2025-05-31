@@ -1,6 +1,7 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
+import { Loader2 } from "lucide-react"
 
 import { cn } from "../../lib/utils"
 
@@ -18,6 +19,8 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        primary: "bg-primary text-primary-foreground hover:bg-primary/90",
+        accent: "bg-accent text-accent-foreground hover:bg-accent/80",
       },
       size: {
         default: "h-10 px-4 py-2",
@@ -37,20 +40,36 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
+  leftIcon?: React.ReactElement
+  rightIcon?: React.ReactElement
+  isLoading?: boolean
+  isFullWidth?: boolean
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, leftIcon, rightIcon, isLoading, isFullWidth, children, disabled, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
+    
     return (
       <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+        className={cn(
+          buttonVariants({ variant, size, className }),
+          isFullWidth && "w-full",
+          isLoading && "pointer-events-none opacity-60"
+        )}
         ref={ref}
+        disabled={disabled || isLoading}
         {...props}
-      />
+      >
+        {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+        {!isLoading && leftIcon && <span className="mr-2">{leftIcon}</span>}
+        {children}
+        {!isLoading && rightIcon && <span className="ml-2">{rightIcon}</span>}
+      </Comp>
     )
   },
 )
 Button.displayName = "Button"
 
 export { Button, buttonVariants }
+export default Button

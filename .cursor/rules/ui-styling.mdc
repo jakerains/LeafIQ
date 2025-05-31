@@ -1,0 +1,136 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# UI Design & Styling Guidelines
+
+## Design System Principles
+- **Cannabis industry appropriate** - professional, clean, trustworthy
+- **Accessibility first** - WCAG 2.1 AA compliance
+- **Mobile responsive** - mobile-first approach
+- **Consistent spacing** - use Tailwind's spacing scale
+- **Clear visual hierarchy** - typography and color contrast
+
+## Color Palette
+- **Primary Green**: `primary-600` for cannabis/nature theme
+- **Neutral Grays**: `gray-50` to `gray-900` for backgrounds and text
+- **Success Green**: `green-500` for positive actions
+- **Warning Orange**: `orange-500` for cautions
+- **Error Red**: `red-500` for errors
+- **Info Blue**: `blue-500` for information
+
+## Typography Scale
+- **Headings**: Use `font-bold` with appropriate text sizes
+  - `text-4xl` for page titles
+  - `text-2xl` for section headers
+  - `text-xl` for subsection headers
+- **Body Text**: `text-base` with `text-gray-700`
+- **Small Text**: `text-sm` for captions, labels
+- **Font Family**: Default to `font-sans` (system fonts)
+
+## Component Patterns
+
+### Buttons
+```tsx
+// Primary action button
+<button className="bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors">
+  Primary Action
+</button>
+
+// Secondary button
+<button className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-lg transition-colors">
+  Secondary Action
+</button>
+
+// Danger button
+<button className="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded-lg transition-colors">
+  Delete
+</button>
+```
+
+### Form Elements
+```tsx
+// Input field
+<input 
+  type="text"
+  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+  placeholder="Enter value..."
+/>
+
+// Select dropdown
+<select className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+  <option value="">Choose option</option>
+</select>
+```
+
+### Cards
+```tsx
+<div className="bg-white rounded-lg shadow-md border border-gray-200 p-6">
+  <h3 className="text-lg font-semibold text-gray-900 mb-2">Card Title</h3>
+  <p className="text-gray-600">Card content goes here...</p>
+</div>
+```
+
+## Layout Guidelines
+- **Container max-width**: Use `max-w-7xl mx-auto` for main content
+- **Grid systems**: Use CSS Grid or Flexbox, prefer `grid` for 2D layouts
+- **Spacing consistency**: Use `space-y-4` or `gap-4` for consistent spacing
+- **Responsive breakpoints**: Follow Tailwind's breakpoint system
+
+## Animation & Transitions
+- **Subtle animations** - `transition-colors`, `transition-transform`
+- **Duration**: Use `duration-200` for quick interactions
+- **Easing**: Default easing is fine, use `ease-in-out` for smoother feel
+- **Loading states**: Use `animate-spin` for loaders
+
+## Responsive Design
+```tsx
+// Mobile-first responsive classes
+<div className="w-full md:w-1/2 lg:w-1/3">
+  {/* Responsive content */}
+</div>
+
+// Text sizing
+<h1 className="text-2xl md:text-3xl lg:text-4xl font-bold">
+  Responsive Heading
+</h1>
+```
+
+## Accessibility Requirements
+- **Color contrast**: Minimum 4.5:1 for normal text, 3:1 for large text
+- **Focus indicators**: Visible focus rings on interactive elements
+- **Semantic HTML**: Use proper heading hierarchy, form labels
+- **ARIA labels**: For complex interactions and dynamic content
+- **Keyboard navigation**: All interactive elements must be keyboard accessible
+
+## Icon Usage
+- Use **Lucide React** icons consistently
+- **16px** (`w-4 h-4`) for inline icons
+- **20px** (`w-5 h-5`) for button icons
+- **24px** (`w-6 h-6`) for section icons
+- Always include **meaningful alt text** or aria-labels
+
+## Component Composition
+```tsx
+// Prefer composition over large monolithic components
+export function ProductCard({ product }: { product: Product }) {
+  return (
+    <Card>
+      <CardHeader>
+        <ProductImage src={product.image} alt={product.name} />
+      </CardHeader>
+      <CardContent>
+        <ProductInfo product={product} />
+        <ProductActions productId={product.id} />
+      </CardContent>
+    </Card>
+  );
+}
+```
+
+## Performance Considerations
+- **Minimize class strings** - extract repeated patterns into reusable components
+- **Use CSS-in-JS sparingly** - prefer Tailwind classes
+- **Optimize images** - use appropriate formats and sizes
+- **Lazy load** below-the-fold content
