@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Star, ArrowLeft, Share2, Heart, MessageCircle } from 'lucide-react';
+import { Star, ArrowLeft, Share2, Heart, MessageCircle, Send, ChevronDown, ChevronUp, Sparkles } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import ProductCard from '../../components/ui/ProductCard';
 import { ProductWithVariant } from '../../types';
 import { vibesToTerpenes } from '../../data/demoData';
-import { Sparkles } from 'lucide-react';
 import { Button } from '../../components/ui/button';
 
 interface KioskResultsProps {
@@ -23,6 +22,11 @@ const KioskResults = ({
   isAIPowered = false,
   effects: providedEffects
 }: KioskResultsProps) => {
+  const [showChatbot, setShowChatbot] = useState(false);
+  const [chatMessage, setChatMessage] = useState('');
+  const [chatHistory, setChatHistory] = useState<{role: 'user' | 'assistant', content: string}[]>([]);
+  const [isChatLoading, setIsChatLoading] = useState(false);
+  
   // Generate a personalized recommendation blurb based on the search query
   const generateRecommendationBlurb = (query: string, effects: string[]): string => {
     const lowercaseQuery = query.toLowerCase();
@@ -93,6 +97,43 @@ const KioskResults = ({
     
     // Generic fallback
     return `I've found some great matches based on your preferences that should provide the experience you're looking for.`;
+  };
+
+  // Function to handle chat submission
+  const handleChatSubmit = () => {
+    if (!chatMessage.trim()) return;
+    
+    // Add user message to chat history
+    setChatHistory(prev => [...prev, { role: 'user', content: chatMessage }]);
+    
+    // Simulate AI processing
+    setIsChatLoading(true);
+    
+    // In a real implementation, this would call an API
+    setTimeout(() => {
+      // Generate a response based on the user's message
+      let response = '';
+      const lowerMessage = chatMessage.toLowerCase();
+      
+      if (lowerMessage.includes('stronger') || lowerMessage.includes('potent')) {
+        response = "I understand you're looking for something more potent. Let me adjust my recommendations to focus on products with higher THC content and stronger effects.";
+      } else if (lowerMessage.includes('milder') || lowerMessage.includes('gentle')) {
+        response = "If you prefer a milder experience, I can suggest products with more balanced effects and lower THC levels that still provide the benefits you're seeking.";
+      } else if (lowerMessage.includes('pain') || lowerMessage.includes('relief')) {
+        response = "For pain relief, I'd recommend products with higher levels of caryophyllene and myrcene terpenes, which are associated with anti-inflammatory properties.";
+      } else if (lowerMessage.includes('sleep') || lowerMessage.includes('insomnia')) {
+        response = "To help with sleep, look for indica strains with high myrcene and linalool content, which promote relaxation and can help with insomnia.";
+      } else if (lowerMessage.includes('anxiety') || lowerMessage.includes('stress')) {
+        response = "For anxiety and stress relief, products with balanced CBD:THC ratios and calming terpenes like linalool and limonene can be particularly effective.";
+      } else {
+        response = "Thanks for your feedback! I'll refine my recommendations based on your preferences. Is there anything specific about these products you'd like to know more about?";
+      }
+      
+      // Add AI response to chat history
+      setChatHistory(prev => [...prev, { role: 'assistant', content: response }]);
+      setChatMessage('');
+      setIsChatLoading(false);
+    }, 1500);
   };
 
   const recommendationBlurb = generateRecommendationBlurb(searchQuery, providedEffects || []);
@@ -172,8 +213,101 @@ const KioskResults = ({
             AI-Powered Recommendations
           </motion.div>
         )}
+        
+        {/* Recommendation blurb with chatbot toggle */}
+        <motion.div
+          className="mt-4 bg-white bg-opacity-60 backdrop-blur-sm rounded-xl border border-gray-100 shadow-sm overflow-hidden"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+        >
+          <div className="p-4">
+            <div className="flex justify-between items-start">
+              <p className="text-lg text-gray-700 pr-4">
+                {recommendationBlurb}
+              </p>
+              <button 
+                onClick={() => setShowChatbot(!showChatbot)}
+                className="flex-shrink-0 p-2 text-primary-600 hover:text-primary-800 transition-colors rounded-full hover:bg-primary-50"
+                aria-label={showChatbot ? "Hide chat" : "Show chat"}
+              >
+                {showChatbot ? <ChevronUp size={20} /> : <MessageCircle size={20} />}
+              </button>
+            </div>
+          </div>
+          
+          {/* Chatbot interface */}
+          {showChatbot && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              className="border-t border-gray-100"
+            >
+              {/* Chat history */}
+              <div className="max-h-60 overflow-y-auto p-4 space-y-3">
+                {chatHistory.length > 0 ? (
+                  chatHistory.map((message, index) => (
+                    <div 
+                      key={index} 
+                      className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                    >
+                      <div 
+                        className={`max-w-[80%] p-3 rounded-xl ${
+                          message.role === 'user' 
+                            ? 'bg-primary-100 text-primary-800' 
+                            : 'bg-gray-100 text-gray-800'
+                        }`}
+                      >
+                        {message.content}
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-center text-gray-500 py-2">
+                    Ask a question or provide feedback about these recommendations
+                  </div>
+                )}
+              </div>
+              
+              {/* Chat input */}
+              <div className="p-3 border-t border-gray-100 flex items-center gap-2">
+                <input
+                  type="text"
+                  value={chatMessage}
+                  onChange={(e) => setChatMessage(e.target.value)}
+                  placeholder="Ask about these recommendations..."
+                  className="flex-1 px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                  onKeyPress={(e) => {
+                    if (e.key === 'Enter') {
+                      handleChatSubmit();
+                    }
+                  }}
+                  disabled={isChatLoading}
+                />
+                <button
+                  onClick={handleChatSubmit}
+                  disabled={!chatMessage.trim() || isChatLoading}
+                  className={`p-2 rounded-lg ${
+                    chatMessage.trim() && !isChatLoading
+                      ? 'bg-primary-500 text-white hover:bg-primary-600'
+                      : 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                  }`}
+                >
+                  {isChatLoading ? (
+                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  ) : (
+                    <Send size={18} />
+                  )}
+                </button>
+              </div>
+            </motion.div>
+          )}
+        </motion.div>
       </motion.div>
-
+      
+      {/* Remove the standalone blurb since we've integrated it with the chatbot */}
+      
       {results.length > 0 ? (
         <motion.div 
           variants={container}
@@ -200,18 +334,24 @@ const KioskResults = ({
         </motion.div>
       )}
 
-      <motion.div
-        variants={item}
-        className="text-center mt-12 p-6 bg-primary-50 rounded-3xl"
-      >
-        <h3 className="text-2xl font-semibold mb-3">Need more guidance?</h3>
-        <p className="text-gray-700 mb-4">
-          Our knowledgeable staff can provide additional details about these products and help you make the perfect choice.
-        </p>
-        <div className="inline-flex p-3 bg-white rounded-xl shadow-sm">
-          <p className="text-primary-700 font-medium">Just ask for assistance!</p>
-        </div>
-      </motion.div>
+      {!showChatbot && (
+        <motion.div
+          variants={item}
+          className="text-center mt-12 p-6 bg-primary-50 rounded-3xl"
+        >
+          <h3 className="text-2xl font-semibold mb-3">Need more guidance?</h3>
+          <p className="text-gray-700 mb-4">
+            Our knowledgeable staff can provide additional details about these products and help you make the perfect choice.
+          </p>
+          <button 
+            onClick={() => setShowChatbot(true)}
+            className="inline-flex items-center gap-2 p-3 bg-white rounded-xl shadow-sm text-primary-700 font-medium hover:bg-primary-50 transition-colors"
+          >
+            <MessageCircle size={18} />
+            Ask for assistance
+          </button>
+        </motion.div>
+      )}
     </motion.div>
   );
 };
