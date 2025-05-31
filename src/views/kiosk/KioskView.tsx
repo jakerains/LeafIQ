@@ -5,7 +5,7 @@ import KioskHome from './KioskHome';
 import KioskResults from './KioskResults';
 import Logo from '../../components/ui/Logo';
 import { motion } from 'framer-motion';
-import { User } from 'lucide-react';
+import { User, ChevronDown, Home, Settings } from 'lucide-react';
 
 const KioskView = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -13,6 +13,7 @@ const KioskView = () => {
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [isAIPowered, setIsAIPowered] = useState(false);
   const [effects, setEffects] = useState<string[]>([]);
+  const [showAdminMenu, setShowAdminMenu] = useState(false);
   const navigate = useNavigate();
   
   const handleSearch = async (query: string) => {
@@ -48,6 +49,12 @@ const KioskView = () => {
 
   const handleStaffLogin = () => {
     navigate('/admin');
+    setShowAdminMenu(false);
+  };
+
+  const handleDemoHub = () => {
+    navigate('/demo');
+    setShowAdminMenu(false);
   };
 
   return (
@@ -59,16 +66,49 @@ const KioskView = () => {
           </div>
           
           <div className="flex items-center space-x-3 absolute top-8 right-8">
+            <div className="relative">
             <motion.button
-              onClick={handleStaffLogin}
+                onClick={() => setShowAdminMenu(!showAdminMenu)}
               className="flex items-center gap-1 px-3 py-1.5 text-sm bg-white bg-opacity-70 backdrop-blur-sm rounded-xl text-gray-500 hover:bg-opacity-90 hover:text-gray-700 shadow-sm transition-all duration-200"
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.97 }}
-              aria-label="Admin Login"
+                aria-label="Admin Menu"
             >
               <User size={16} />
-              <span>Admin</span>
+                <span>Menu</span>
+                <ChevronDown size={14} className={`transition-transform duration-200 ${showAdminMenu ? 'rotate-180' : ''}`} />
             </motion.button>
+              
+              {showAdminMenu && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  className="absolute top-full mt-2 right-0 w-48 bg-white bg-opacity-95 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200 overflow-hidden z-50"
+                >
+                  <button
+                    onClick={handleDemoHub}
+                    className="w-full px-4 py-3 text-left text-gray-700 hover:bg-gray-100 hover:bg-opacity-80 transition-colors duration-200 flex items-center gap-3"
+                  >
+                    <Home size={16} className="text-blue-500" />
+                    <div>
+                      <div className="font-medium">Demo Hub</div>
+                      <div className="text-xs text-gray-500">Return to demo options</div>
+                    </div>
+                  </button>
+                  <button
+                    onClick={handleStaffLogin}
+                    className="w-full px-4 py-3 text-left text-gray-700 hover:bg-gray-100 hover:bg-opacity-80 transition-colors duration-200 flex items-center gap-3"
+                  >
+                    <Settings size={16} className="text-green-500" />
+                    <div>
+                      <div className="font-medium">Admin Login</div>
+                      <div className="text-xs text-gray-500">Access management tools</div>
+                    </div>
+                  </button>
+                </motion.div>
+              )}
+            </div>
             
             <motion.button
               onClick={handleReset}

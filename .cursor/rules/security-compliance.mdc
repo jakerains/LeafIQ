@@ -1,6 +1,6 @@
 ---
-description:
-globs:
+description: # Security & Compliance Guidelines
+globs: 
 alwaysApply: false
 ---
 # Security & Compliance Guidelines

@@ -1,6 +1,6 @@
 ---
-description:
-globs:
+description: # Error Handling & Debugging
+globs: 
 alwaysApply: false
 ---
 # Error Handling & Debugging

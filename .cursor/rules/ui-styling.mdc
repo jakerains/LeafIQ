@@ -1,6 +1,6 @@
 ---
-description:
-globs:
+description: # UI Design & Styling Guidelines
+globs: 
 alwaysApply: false
 ---
 # UI Design & Styling Guidelines

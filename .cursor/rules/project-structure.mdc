@@ -1,6 +1,6 @@
 ---
-description:
-globs:
+description: # LeafIQ Project Structure
+globs: 
 alwaysApply: false
 ---
 # LeafIQ Project Structure

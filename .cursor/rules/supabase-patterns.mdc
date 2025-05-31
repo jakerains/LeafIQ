@@ -1,6 +1,6 @@
 ---
-description:
-globs:
+description: # Supabase Integration Patterns
+globs: 
 alwaysApply: false
 ---
 # Supabase Integration Patterns

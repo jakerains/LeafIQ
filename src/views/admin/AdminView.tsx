@@ -5,7 +5,7 @@ import SearchInput from '../../components/ui/SearchInput';
 import ProductCard from '../../components/ui/ProductCard';
 import Logo from '../../components/ui/Logo';
 import { Button } from '../../components/ui/button';
-import { LogOut, Search, LayoutDashboard, Sparkles } from 'lucide-react';
+import { LogOut, Search, LayoutDashboard, Sparkles, Home } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { ProductWithVariant } from '../../types';
 import { Settings } from '../../types';
@@ -74,6 +74,14 @@ const AdminView = () => {
                   Premium Plan
                 </span>
               )}
+              <Button 
+                variant="ghost"
+                leftIcon={<Home size={18} />}
+                onClick={() => navigate('/demo')}
+                className="text-gray-600 hover:text-blue-600"
+              >
+                Demo Hub
+              </Button>
               <Button 
                 variant="ghost"
                 leftIcon={<LogOut size={18} />}

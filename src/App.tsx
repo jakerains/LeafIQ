@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import LandingPage from './views/LandingPage';
+import DemoView from './views/DemoView';
 import AuthLayout from './views/auth/AuthLayout';
 import RegisterForm from './components/auth/RegisterForm';
 import LoginForm from './components/auth/LoginForm';
@@ -47,6 +48,7 @@ function App() {
       <div className="content-overlay min-h-screen">
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/demo" element={<DemoView />} />
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/auth" element={<AuthLayout />}>
             <Route path="signup" element={<RegisterForm />} />

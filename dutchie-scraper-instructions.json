@@ -1,0 +1,630 @@
+{
+  "scraper_config": {
+    "name": "Dutchie Dispensary Menu Scraper",
+    "version": "1.0",
+    "description": "Comprehensive instructions for scraping cannabis dispensary menus from Dutchie platform",
+    "target_platform": "dutchie.com",
+    "last_updated": "2025-01-11"
+  },
+  "site_structure": {
+    "base_url_pattern": "https://dutchie.com/embedded-menu/{dispensary-slug}",
+    "category_url_pattern": "https://dutchie.com/embedded-menu/{dispensary-slug}/products/{category}",
+    "product_url_pattern": "https://dutchie.com/embedded-menu/{dispensary-slug}/product/{product-slug}",
+    "main_sections": [
+      "dispensary_info",
+      "categories",
+      "products",
+      "pricing",
+      "promotions",
+      "inventory_status"
+    ]
+  },
+  "dispensary_metadata": {
+    "required_fields": {
+      "dispensary_name": {
+        "selector": "h1, .dispensary-name, [data-testid='dispensary-name']",
+        "description": "Official dispensary name",
+        "data_type": "string"
+      },
+      "location": {
+        "address": {
+          "selector": ".address, .location, [data-testid='address']",
+          "description": "Physical address of dispensary",
+          "data_type": "string"
+        },
+        "city": "string",
+        "state": "string",
+        "zip_code": "string",
+        "coordinates": {
+          "latitude": "float",
+          "longitude": "float"
+        }
+      },
+      "contact_info": {
+        "phone": "string",
+        "email": "string",
+        "website": "string"
+      },
+      "hours": {
+        "monday": "string",
+        "tuesday": "string",
+        "wednesday": "string",
+        "thursday": "string",
+        "friday": "string",
+        "saturday": "string",
+        "sunday": "string"
+      },
+      "licenses": {
+        "medical_license": "string",
+        "recreational_license": "string",
+        "state": "string"
+      }
+    }
+  },
+  "product_categories": {
+    "cannabis_products": {
+      "flower": {
+        "subcategories": [
+          "indica",
+          "sativa",
+          "hybrid",
+          "high_cbd",
+          "pre_ground",
+          "shake",
+          "trim"
+        ],
+        "weight_options": ["1g", "3.5g", "7g", "14g", "28g"],
+        "tier_levels": ["budget", "mid", "top_shelf", "premium"]
+      },
+      "pre_rolls": {
+        "subcategories": [
+          "single_joints",
+          "multi_packs",
+          "infused_joints",
+          "hash_joints",
+          "blunts",
+          "mini_joints"
+        ],
+        "pack_sizes": ["1pk", "2pk", "3pk", "5pk", "6pk", "10pk", "20pk"]
+      },
+      "concentrates": {
+        "extraction_types": [
+          "live_resin",
+          "live_rosin",
+          "cured_resin", 
+          "distillate",
+          "shatter",
+          "wax",
+          "budder",
+          "crumble",
+          "sauce",
+          "diamonds",
+          "hash",
+          "kief",
+          "rosin",
+          "rso",
+          "terp_sauce",
+          "sugar_wax",
+          "fresh_press",
+          "cold_cure"
+        ],
+        "consistency_types": [
+          "shatter",
+          "wax",
+          "budder",
+          "sauce",
+          "sugar",
+          "crumble",
+          "diamonds",
+          "batter",
+          "caviar",
+          "honeycomb"
+        ],
+        "sizes": ["0.5g", "1g", "2g", "3.5g", "7g"]
+      },
+      "vaporizers": {
+        "types": [
+          "cartridges",
+          "disposable_pens",
+          "pods",
+          "live_resin_carts",
+          "distillate_carts",
+          "co2_carts",
+          "full_spectrum_carts"
+        ],
+        "sizes": ["0.3g", "0.5g", "1g"],
+        "battery_types": ["510_thread", "pod_system", "proprietary"]
+      },
+      "edibles": {
+        "types": [
+          "gummies",
+          "chocolates",
+          "hard_candies",
+          "beverages",
+          "baked_goods",
+          "capsules",
+          "tinctures",
+          "mints",
+          "lollipops",
+          "honey",
+          "cooking_ingredients"
+        ],
+        "dosage_ranges": ["2.5mg", "5mg", "10mg", "25mg", "50mg", "100mg"],
+        "pack_sizes": ["1pk", "2pk", "4pk", "5pk", "10pk", "20pk"]
+      },
+      "tinctures": {
+        "types": [
+          "thc_tinctures",
+          "cbd_tinctures",
+          "balanced_ratio",
+          "nano_enhanced",
+          "fast_acting"
+        ],
+        "ratios": ["1:1", "2:1", "5:1", "10:1", "20:1"],
+        "sizes": ["15ml", "30ml", "60ml"]
+      },
+      "topicals": {
+        "types": [
+          "lotions",
+          "balms",
+          "salves",
+          "patches",
+          "bath_products",
+          "oils",
+          "creams",
+          "roll_ons"
+        ],
+        "application_areas": [
+          "pain_relief",
+          "anti_inflammatory",
+          "skin_care",
+          "muscle_recovery"
+        ]
+      },
+      "cbd_products": {
+        "types": [
+          "cbd_flower",
+          "cbd_edibles", 
+          "cbd_tinctures",
+          "cbd_topicals",
+          "cbd_capsules",
+          "cbd_isolate",
+          "hemp_products"
+        ],
+        "ratios": ["cbd_only", "1:1", "2:1", "5:1", "10:1", "20:1"]
+      }
+    },
+    "accessories_and_merchandise": {
+      "smoking_accessories": {
+        "pipes": [
+          "glass_pipes",
+          "wooden_pipes", 
+          "metal_pipes",
+          "silicone_pipes",
+          "one_hitters",
+          "chillums",
+          "spoon_pipes",
+          "sherlock_pipes",
+          "steamrollers"
+        ],
+        "bongs_water_pipes": [
+          "glass_bongs",
+          "acrylic_bongs",
+          "silicone_bongs",
+          "mini_bongs",
+          "beaker_bongs",
+          "straight_tube_bongs",
+          "recycler_bongs",
+          "percolator_bongs",
+          "bubblers"
+        ],
+        "rolling_accessories": [
+          "rolling_papers",
+          "blunt_wraps",
+          "rolling_trays",
+          "grinders",
+          "rolling_machines",
+          "filters_tips",
+          "hemp_wick",
+          "lighters",
+          "matches"
+        ]
+      },
+      "vaping_accessories": {
+        "vaporizers": [
+          "desktop_vaporizers",
+          "portable_vaporizers",
+          "pen_vaporizers",
+          "concentrate_vapes",
+          "dry_herb_vapes",
+          "dual_use_vapes"
+        ],
+        "vape_accessories": [
+          "batteries",
+          "chargers",
+          "cases",
+          "cleaning_kits",
+          "replacement_parts",
+          "coils",
+          "atomizers"
+        ]
+      },
+      "concentrate_accessories": {
+        "dab_rigs": [
+          "glass_rigs",
+          "electronic_rigs",
+          "mini_rigs",
+          "recycler_rigs",
+          "portable_rigs"
+        ],
+        "dab_tools": [
+          "dab_tools",
+          "carb_caps",
+          "bangers",
+          "nails",
+          "torches",
+          "temp_guns",
+          "dab_mats",
+          "containers"
+        ]
+      },
+      "storage_organization": [
+        "jars",
+        "containers",
+        "smell_proof_bags",
+        "humidor_packs",
+        "vacuum_sealed_containers",
+        "medicine_bottles",
+        "cases",
+        "stash_boxes"
+      ],
+      "cleaning_maintenance": [
+        "cleaning_solutions", 
+        "brushes",
+        "pipe_cleaners",
+        "alcohol",
+        "cotton_swabs",
+        "cleaning_kits"
+      ],
+      "lifestyle_apparel": {
+        "clothing": [
+          "t_shirts",
+          "hoodies",
+          "hats",
+          "beanies",
+          "socks",
+          "jackets"
+        ],
+        "accessories": [
+          "keychains",
+          "pins",
+          "stickers",
+          "patches",
+          "bags",
+          "wallets"
+        ]
+      }
+    }
+  },
+  "product_data_fields": {
+    "core_product_info": {
+      "product_id": {
+        "description": "Unique identifier for the product",
+        "data_type": "string",
+        "required": true
+      },
+      "product_name": {
+        "description": "Full product name including strain/flavor",
+        "data_type": "string", 
+        "required": true,
+        "selector": ".product-name, h1, [data-testid='product-name']"
+      },
+      "brand": {
+        "description": "Manufacturer or grower name",
+        "data_type": "string",
+        "required": true,
+        "selector": ".brand, .grower, .manufacturer"
+      },
+      "category": {
+        "description": "Primary product category",
+        "data_type": "string",
+        "required": true,
+        "enum": ["flower", "pre-rolls", "concentrates", "vaporizers", "edibles", "tinctures", "topicals", "cbd", "accessories", "apparel"]
+      },
+      "subcategory": {
+        "description": "Specific product subcategory",
+        "data_type": "string"
+      },
+      "strain_type": {
+        "description": "Cannabis strain classification",
+        "data_type": "string",
+        "enum": ["indica", "sativa", "hybrid", "indica-hybrid", "sativa-hybrid", "balanced", "cbd"]
+      },
+      "description": {
+        "description": "Product description and details",
+        "data_type": "text",
+        "selector": ".description, .product-details"
+      }
+    },
+    "cannabinoid_profile": {
+      "thc_percentage": {
+        "description": "THC content percentage",
+        "data_type": "float",
+        "selector": ".thc, [data-testid='thc-content']",
+        "unit": "%"
+      },
+      "cbd_percentage": {
+        "description": "CBD content percentage", 
+        "data_type": "float",
+        "selector": ".cbd, [data-testid='cbd-content']",
+        "unit": "%"
+      },
+      "total_cannabinoids": {
+        "description": "Total cannabinoid percentage",
+        "data_type": "float",
+        "unit": "%"
+      },
+      "other_cannabinoids": {
+        "cbn": "float",
+        "cbg": "float",
+        "cbc": "float",
+        "thca": "float",
+        "cbda": "float",
+        "delta8": "float",
+        "thcv": "float"
+      }
+    },
+    "terpene_profile": {
+      "dominant_terpenes": {
+        "description": "Primary terpenes present",
+        "data_type": "array",
+        "common_terpenes": [
+          "myrcene",
+          "limonene", 
+          "pinene",
+          "linalool",
+          "caryophyllene",
+          "humulene",
+          "ocimene",
+          "terpinolene",
+          "bisabolol",
+          "valencene"
+        ]
+      },
+      "terpene_percentages": {
+        "description": "Specific terpene content percentages",
+        "data_type": "object"
+      }
+    },
+    "strain_information": {
+      "genetics": {
+        "description": "Parent strains and lineage",
+        "data_type": "string"
+      },
+      "breeder": {
+        "description": "Original breeder information",
+        "data_type": "string"
+      },
+      "phenotype": {
+        "description": "Specific phenotype details",
+        "data_type": "string"
+      }
+    },
+    "pricing_inventory": {
+      "pricing_tiers": {
+        "description": "Different price points by weight/size",
+        "data_type": "array",
+        "structure": [
+          {
+            "weight": "string",
+            "price": "float", 
+            "unit": "string",
+            "discount_price": "float",
+            "bulk_pricing": "boolean"
+          }
+        ]
+      },
+      "inventory_status": {
+        "description": "Current availability",
+        "data_type": "string",
+        "enum": ["in_stock", "low_stock", "out_of_stock", "pre_order"],
+        "selector": ".stock-status, .availability"
+      },
+      "quantity_available": {
+        "description": "Specific quantity in stock",
+        "data_type": "integer"
+      }
+    },
+    "compliance_testing": {
+      "lab_testing": {
+        "tested": {
+          "description": "Whether product has been lab tested",
+          "data_type": "boolean"
+        },
+        "lab_name": {
+          "description": "Testing laboratory name",
+          "data_type": "string"
+        },
+        "test_date": {
+          "description": "Date of testing",
+          "data_type": "date"
+        },
+        "batch_number": {
+          "description": "Product batch identifier",
+          "data_type": "string"
+        },
+        "tests_performed": {
+          "description": "Types of tests conducted",
+          "data_type": "array",
+          "enum": ["potency", "pesticides", "heavy_metals", "residual_solvents", "microbials", "terpenes"]
+        }
+      },
+      "compliance_info": {
+        "track_and_trace_id": "string",
+        "harvest_date": "date",
+        "package_date": "date",
+        "expiration_date": "date"
+      }
+    },
+    "effects_experience": {
+      "reported_effects": {
+        "description": "User-reported effects",
+        "data_type": "array",
+        "common_effects": [
+          "relaxed",
+          "euphoric", 
+          "energetic",
+          "focused",
+          "creative",
+          "sleepy",
+          "happy",
+          "uplifted",
+          "hungry",
+          "talkative",
+          "giggly",
+          "calm"
+        ]
+      },
+      "medical_benefits": {
+        "description": "Potential therapeutic uses",
+        "data_type": "array",
+        "common_uses": [
+          "pain_relief",
+          "anxiety",
+          "depression",
+          "insomnia",
+          "nausea",
+          "appetite_stimulation",
+          "inflammation",
+          "muscle_spasms",
+          "seizures",
+          "ptsd"
+        ]
+      },
+      "flavor_profile": {
+        "description": "Taste and aroma characteristics",
+        "data_type": "array",
+        "common_flavors": [
+          "citrus",
+          "berry",
+          "sweet",
+          "earthy",
+          "pine",
+          "diesel",
+          "cheese",
+          "mint",
+          "vanilla",
+          "chocolate",
+          "grape",
+          "lemon",
+          "cherry"
+        ]
+      }
+    },
+    "customer_feedback": {
+      "reviews": {
+        "rating": {
+          "description": "Average customer rating",
+          "data_type": "float",
+          "range": "1-5"
+        },
+        "review_count": {
+          "description": "Total number of reviews",
+          "data_type": "integer"
+        },
+        "individual_reviews": {
+          "description": "Individual customer reviews",
+          "data_type": "array",
+          "structure": [
+            {
+              "rating": "integer",
+              "review_text": "string",
+              "date": "date",
+              "verified_purchase": "boolean"
+            }
+          ]
+        }
+      }
+    },
+    "media_content": {
+      "images": {
+        "product_photos": {
+          "description": "High-resolution product images",
+          "data_type": "array",
+          "selector": ".product-image, .gallery img, [data-testid='product-image']"
+        },
+        "strain_photos": {
+          "description": "Close-up bud photography",
+          "data_type": "array"
+        }
+      },
+      "videos": {
+        "product_videos": {
+          "description": "Product demonstration videos",
+          "data_type": "array"
+        }
+      }
+    }
+  },
+  "promotions_deals": {
+    "discount_types": [
+      "percentage_off",
+      "dollar_amount_off",
+      "buy_one_get_one",
+      "bulk_discount",
+      "first_time_customer",
+      "loyalty_discount",
+      "daily_deals",
+      "happy_hour"
+    ],
+    "promotion_selectors": {
+      "discount_badge": ".discount, .sale, .promo",
+      "original_price": ".original-price, .was-price",
+      "sale_price": ".sale-price, .now-price",
+      "promotion_text": ".promo-text, .deal-description"
+    }
+  },
+  "scraping_strategy": {
+    "pagination": {
+      "products_per_page": "variable",
+      "pagination_selector": ".pagination, .load-more, .next-page",
+      "infinite_scroll": "check for lazy loading"
+    },
+    "dynamic_content": {
+      "javascript_rendering": "required",
+      "wait_for_load": "2-5 seconds",
+      "ajax_requests": "monitor for additional data loading"
+    },
+    "rate_limiting": {
+      "requests_per_minute": "30-60",
+      "delay_between_requests": "1-2 seconds",
+      "respect_robots_txt": true
+    },
+    "error_handling": {
+      "retry_attempts": 3,
+      "timeout_seconds": 30,
+      "fallback_selectors": "provide alternatives for critical data"
+    }
+  },
+  "data_validation": {
+    "required_fields": [
+      "product_name",
+      "brand", 
+      "category",
+      "pricing_tiers",
+      "inventory_status"
+    ],
+    "data_quality_checks": {
+      "price_format": "validate currency format",
+      "percentage_range": "0-100% for cannabinoids",
+      "date_format": "ISO 8601 or standardized format",
+      "url_validation": "ensure working image/video links"
+    }
+  },
+  "output_format": {
+    "file_format": "JSON",
+    "structure": "nested objects with arrays for multi-value fields",
+    "encoding": "UTF-8",
+    "timestamp": "include scrape timestamp for each record"
+  }
+} 

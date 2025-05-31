@@ -1,6 +1,6 @@
 ---
-description:
-globs:
+description: # React & TypeScript Best Practices
+globs: 
 alwaysApply: false
 ---
 # React & TypeScript Best Practices
