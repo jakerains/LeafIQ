@@ -67,17 +67,17 @@ const KioskView = () => {
           
           <div className="flex items-center space-x-3 absolute top-8 right-8">
             <div className="relative">
-            <motion.button
+              <motion.button
                 onClick={() => setShowAdminMenu(!showAdminMenu)}
-              className="flex items-center gap-1 px-3 py-1.5 text-sm bg-white bg-opacity-70 backdrop-blur-sm rounded-xl text-gray-500 hover:bg-opacity-90 hover:text-gray-700 shadow-sm transition-all duration-200"
-              whileHover={{ y: -2 }}
-              whileTap={{ scale: 0.97 }}
+                className="flex items-center gap-1 px-3 py-1.5 text-sm bg-white bg-opacity-70 backdrop-blur-sm rounded-xl text-gray-500 hover:bg-opacity-90 hover:text-gray-700 shadow-sm transition-all duration-200"
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.97 }}
                 aria-label="Admin Menu"
-            >
-              <User size={16} />
+              >
+                <User size={16} />
                 <span>Menu</span>
                 <ChevronDown size={14} className={`transition-transform duration-200 ${showAdminMenu ? 'rotate-180' : ''}`} />
-            </motion.button>
+              </motion.button>
               
               {showAdminMenu && (
                 <motion.div
