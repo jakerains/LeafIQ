@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import { Product, Variant, ProductWithVariant } from '../types';
 import { demoProducts, demoVariants } from '../data/demoData';
 import { recommendProducts } from '../utils/recommendationEngine';
+import { useAuthStore } from './authStore';
 
 interface ProductsState {
   products: Product[];
@@ -72,9 +73,19 @@ export const useProductsStore = create<ProductsState>((set, get) => ({
       if (productsWithVariants.length === 0) {
         await get().fetchProducts();
       }
+
+      // Get the organization ID from the auth store
+      const profile = useAuthStore.getState().profile;
+      const organizationId = profile?.organization_id;
       
       // Use the enhanced recommendation engine with AI capabilities
-      const results = await recommendProducts(get().productsWithVariants, vibe, userType, 3);
+      const results = await recommendProducts(
+        get().productsWithVariants, 
+        vibe, 
+        userType, 
+        3,
+        organizationId // Pass the organization ID to the recommendation engine
+      );
       
       set({ isLoading: false });
       return results;

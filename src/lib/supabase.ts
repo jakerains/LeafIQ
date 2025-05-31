@@ -208,11 +208,13 @@ export const getAIRecommendations = async (vibe: string) => {
  * - user_type: text
  * - returned_product_ids: text[] (array of text)
  * - timestamp: timestamp with time zone (default value: now())
+ * - organization_id: uuid (foreign key to organizations table)
  */
 export const logSearchQuery = async (query: {
   search_phrase: string;
   user_type: 'kiosk' | 'staff';
   returned_product_ids: string[];
+  organization_id: string;
 }) => {
   console.log('Logging search query:', query);
   
@@ -223,7 +225,13 @@ export const logSearchQuery = async (query: {
       return;
     }
 
-    // Attempt to insert the search query
+    // Ensure organization_id is provided
+    if (!query.organization_id) {
+      console.warn('Skipping search query logging: organization_id is required');
+      return;
+    }
+
+    // Attempt to insert the search query with organization_id
     const { error } = await supabase
       .from('search_queries')
       .insert([
@@ -231,20 +239,13 @@ export const logSearchQuery = async (query: {
           search_phrase: query.search_phrase,
           user_type: query.user_type,
           returned_product_ids: query.returned_product_ids,
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
+          organization_id: query.organization_id
         }
       ]);
 
     if (error) {
-      // If error is 404 (Not Found), it means the table doesn't exist
-      if (error.code === '404' || error.message?.includes('404') || error.message?.includes('not found')) {
-        console.warn(
-          'The search_queries table does not exist in your Supabase database. ' +
-          'Please create it with the appropriate schema. See function comments for details.'
-        );
-      } else {
-        console.error('Error logging search query:', error);
-      }
+      console.error('Error logging search query:', error);
     }
   } catch (err) {
     console.error('Failed to log search query:', err);

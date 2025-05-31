@@ -123,7 +123,8 @@ export const recommendProducts = async (
   products: ProductWithVariant[],
   vibe: string,
   userType: 'kiosk' | 'staff' = 'kiosk',
-  maxResults = 3
+  maxResults = 3,
+  organizationId?: string // Add organizationId parameter
 ): Promise<{ 
   products: ProductWithVariant[];
   effects: string[];
@@ -144,12 +145,15 @@ export const recommendProducts = async (
       
       // If we have matched products, return them
       if (aiMatchedProducts.length > 0) {
-        // Log the search query to Supabase
-        logSearchQuery({
-          search_phrase: vibe,
-          user_type: userType,
-          returned_product_ids: aiMatchedProducts.map(p => p.id)
-        });
+        // Only log search query if organizationId is provided
+        if (organizationId) {
+          logSearchQuery({
+            search_phrase: vibe,
+            user_type: userType,
+            returned_product_ids: aiMatchedProducts.map(p => p.id),
+            organization_id: organizationId
+          });
+        }
         
         console.log(`Returning ${aiMatchedProducts.length} AI-powered recommendations`);
         
@@ -201,12 +205,15 @@ export const recommendProducts = async (
       .sort((a, b) => b.score - a.score)
       .map(item => item.product);
     
-    // Log the search query to Supabase
-    logSearchQuery({
-      search_phrase: vibe,
-      user_type: userType,
-      returned_product_ids: sortedProducts.slice(0, maxResults).map(p => p.id)
-    });
+    // Only log search query if organizationId is provided
+    if (organizationId) {
+      logSearchQuery({
+        search_phrase: vibe,
+        user_type: userType,
+        returned_product_ids: sortedProducts.slice(0, maxResults).map(p => p.id),
+        organization_id: organizationId
+      });
+    }
     
     console.log(`Returning ${Math.min(sortedProducts.length, maxResults)} locally processed recommendations`);
     
