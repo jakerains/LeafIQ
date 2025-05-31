@@ -36,51 +36,119 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
       <VercelV0Chat onSearch={onSearch} isLoading={isLoading} />
       
       <motion.div 
-        className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4"
+        className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6"
         variants={container}
         initial="hidden"
         animate="show"
         transition={{ delay: 0.3 }}
       >
-        <GlassCard className="text-center p-4">
-          <motion.div variants={item}>
-            <ShimmerButton
-              className="mb-3 mx-auto"
-              shimmerColor="#22c55e"
-              background="rgba(34, 197, 94, 0.1)"
-            >
-              <div className="w-12 h-12 rounded-full bg-primary-100 flex items-center justify-center">
-                <Target size={24} className="text-primary-600" />
-              </div>
-            </ShimmerButton>
-            <h3 className="text-lg font-semibold mb-1">Personalized Matches</h3>
-            <p className="text-gray-600 text-sm">Find products perfectly suited to your experience.</p>
-          </motion.div>
-        </GlassCard>
-        
-        <GlassCard className="text-center p-4">
-          <motion.div variants={item}>
-            <div className="flex justify-center mb-3">
-              <div className="w-12 h-12 rounded-full bg-secondary-100 flex items-center justify-center">
-                <Package size={24} className="text-secondary-600" />
+        {/* Personalized Matches Card */}
+        <motion.div 
+          className="relative overflow-hidden rounded-2xl shadow-xl"
+          variants={item}
+          whileHover={{ y: -8, transition: { duration: 0.3 } }}
+        >
+          {/* Card background image */}
+          <div className="absolute inset-0 z-0">
+            <img 
+              src="/3-yep.jpg" 
+              alt="" 
+              className="w-full h-full object-cover opacity-20 brightness-[0.8] saturate-[0.7]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary-900/90 to-primary-800/70 mix-blend-multiply" />
+          </div>
+          
+          {/* Card content */}
+          <div className="relative z-10 p-6 flex flex-col items-center text-white h-full">
+            <div className="bg-primary-400/30 backdrop-blur-md p-4 rounded-full mb-4">
+              <Target className="h-8 w-8 text-primary-50" />
+            </div>
+            
+            <h3 className="text-xl font-bold mb-2">Personalized Matches</h3>
+            
+            <p className="text-primary-100 mb-4">
+              Find products perfectly suited to your experience, based on your unique preferences and desired effects.
+            </p>
+            
+            <div className="mt-auto">
+              <div className="inline-flex items-center justify-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-xl text-sm font-medium text-white border border-white/20 hover:bg-white/20 transition-colors cursor-pointer">
+                Learn More
               </div>
             </div>
-            <h3 className="text-lg font-semibold mb-1">In-Stock Guarantee</h3>
-            <p className="text-gray-600 text-sm">All recommendations available right now in store.</p>
-          </motion.div>
-        </GlassCard>
+          </div>
+        </motion.div>
         
-        <GlassCard className="text-center p-4">
-          <motion.div variants={item}>
-            <div className="flex justify-center mb-3">
-              <div className="w-12 h-12 rounded-full bg-accent-100 flex items-center justify-center">
-                <Brain size={24} className="text-accent-600" />
+        {/* In-Stock Guarantee Card */}
+        <motion.div 
+          className="relative overflow-hidden rounded-2xl shadow-xl" 
+          variants={item}
+          whileHover={{ y: -8, transition: { duration: 0.3 } }}
+        >
+          {/* Card background image */}
+          <div className="absolute inset-0 z-0">
+            <img 
+              src="/3-yep.jpg" 
+              alt="" 
+              className="w-full h-full object-cover opacity-20 brightness-[0.8] saturate-[0.7]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-secondary-900/90 to-secondary-800/70 mix-blend-multiply" />
+          </div>
+          
+          {/* Card content */}
+          <div className="relative z-10 p-6 flex flex-col items-center text-white h-full">
+            <div className="bg-secondary-400/30 backdrop-blur-md p-4 rounded-full mb-4">
+              <Package className="h-8 w-8 text-secondary-50" />
+            </div>
+            
+            <h3 className="text-xl font-bold mb-2">In-Stock Guarantee</h3>
+            
+            <p className="text-secondary-100 mb-4">
+              All recommendations available right now in store, with real-time inventory tracking to ensure availability.
+            </p>
+            
+            <div className="mt-auto">
+              <div className="inline-flex items-center justify-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-xl text-sm font-medium text-white border border-white/20 hover:bg-white/20 transition-colors cursor-pointer">
+                Learn More
               </div>
             </div>
-            <h3 className="text-lg font-semibold mb-1">Expert Guidance</h3>
-            <p className="text-gray-600 text-sm">Our staff provides insights on any recommendation.</p>
-          </motion.div>
-        </GlassCard>
+          </div>
+        </motion.div>
+        
+        {/* Expert Guidance Card */}
+        <motion.div 
+          className="relative overflow-hidden rounded-2xl shadow-xl" 
+          variants={item}
+          whileHover={{ y: -8, transition: { duration: 0.3 } }}
+        >
+          {/* Card background image */}
+          <div className="absolute inset-0 z-0">
+            <img 
+              src="/3-yep.jpg" 
+              alt="" 
+              className="w-full h-full object-cover opacity-20 brightness-[0.8] saturate-[0.7]"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-accent-900/90 to-accent-800/70 mix-blend-multiply" />
+          </div>
+          
+          {/* Card content */}
+          <div className="relative z-10 p-6 flex flex-col items-center text-white h-full">
+            <div className="bg-accent-400/30 backdrop-blur-md p-4 rounded-full mb-4">
+              <Brain className="h-8 w-8 text-accent-50" />
+            </div>
+            
+            <h3 className="text-xl font-bold mb-2">Expert Guidance</h3>
+            
+            <p className="text-accent-100 mb-4">
+              Our knowledgeable staff provides personalized insights on any recommendation, helping you make informed choices.
+            </p>
+            
+            <div className="mt-auto">
+              <div className="inline-flex items-center justify-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-xl text-sm font-medium text-white border border-white/20 hover:bg-white/20 transition-colors cursor-pointer">
+                Learn More
+              </div>
+            </div>
+          </div>
+        </motion.div>
       </motion.div>
     </motion.div>
   );
