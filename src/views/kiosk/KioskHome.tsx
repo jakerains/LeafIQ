@@ -54,19 +54,19 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
               className="w-full h-full object-cover"
             />
             {/* Gradient overlay that gets stronger at bottom to support text */}
-            <div className="absolute inset-0 bg-gradient-to-t from-primary-900/90 via-primary-900/40 to-primary-900/10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary-900 via-primary-900/30 to-transparent" />
           </div>
           
-          {/* Card content - positioned at bottom third */}
-          <div className="relative z-10 p-6 flex flex-col justify-end h-full">
-            <div className="mt-auto"> {/* Pushes all content to bottom */}
-              <h3 className="text-xl font-bold text-white mb-2">Personalized Matches</h3>
+          {/* Card content - positioned at very bottom */}
+          <div className="relative z-10 p-4 flex flex-col justify-end h-full">
+            <div className="mt-auto pb-1"> {/* Reduced padding */}
+              <h3 className="text-lg font-bold text-white mb-1">Personalized Matches</h3> {/* Reduced text size and margin */}
               
-              <p className="text-white/90 mb-4">
-                Find products perfectly suited to your experience, based on your unique preferences and desired effects.
+              <p className="text-white/90 text-sm mb-3"> {/* Reduced text size */}
+                Find products perfectly suited to your experience.
               </p>
               
-              <div className="inline-flex items-center justify-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-xl text-sm font-medium text-white border border-white/20 hover:bg-white/20 transition-colors cursor-pointer">
+              <div className="inline-flex items-center justify-center px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-lg text-xs font-medium text-white border border-white/20 hover:bg-white/20 transition-colors cursor-pointer">
                 Learn More
               </div>
             </div>
@@ -87,19 +87,19 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
               className="w-full h-full object-cover"
             />
             {/* Gradient overlay that gets stronger at bottom to support text */}
-            <div className="absolute inset-0 bg-gradient-to-t from-secondary-900/90 via-secondary-900/40 to-secondary-900/10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-secondary-900 via-secondary-900/30 to-transparent" />
           </div>
           
-          {/* Card content - positioned at bottom third */}
-          <div className="relative z-10 p-6 flex flex-col justify-end h-full">
-            <div className="mt-auto"> {/* Pushes all content to bottom */}
-              <h3 className="text-xl font-bold text-white mb-2">In-Stock Guarantee</h3>
+          {/* Card content - positioned at very bottom */}
+          <div className="relative z-10 p-4 flex flex-col justify-end h-full">
+            <div className="mt-auto pb-1"> {/* Reduced padding */}
+              <h3 className="text-lg font-bold text-white mb-1">In-Stock Guarantee</h3> {/* Reduced text size and margin */}
               
-              <p className="text-white/90 mb-4">
-                All recommendations available right now in store, with real-time inventory tracking to ensure availability.
+              <p className="text-white/90 text-sm mb-3"> {/* Reduced text size */}
+                All recommendations available right now in store.
               </p>
               
-              <div className="inline-flex items-center justify-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-xl text-sm font-medium text-white border border-white/20 hover:bg-white/20 transition-colors cursor-pointer">
+              <div className="inline-flex items-center justify-center px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-lg text-xs font-medium text-white border border-white/20 hover:bg-white/20 transition-colors cursor-pointer">
                 Learn More
               </div>
             </div>
@@ -120,19 +120,19 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
               className="w-full h-full object-cover"
             />
             {/* Gradient overlay that gets stronger at bottom to support text */}
-            <div className="absolute inset-0 bg-gradient-to-t from-accent-900/90 via-accent-900/40 to-accent-900/10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-accent-900 via-accent-900/30 to-transparent" />
           </div>
           
-          {/* Card content - positioned at bottom third */}
-          <div className="relative z-10 p-6 flex flex-col justify-end h-full">
-            <div className="mt-auto"> {/* Pushes all content to bottom */}
-              <h3 className="text-xl font-bold text-white mb-2">Expert Guidance</h3>
+          {/* Card content - positioned at very bottom */}
+          <div className="relative z-10 p-4 flex flex-col justify-end h-full">
+            <div className="mt-auto pb-1"> {/* Reduced padding */}
+              <h3 className="text-lg font-bold text-white mb-1">Expert Guidance</h3> {/* Reduced text size and margin */}
               
-              <p className="text-white/90 mb-4">
-                Our knowledgeable staff provides personalized insights on any recommendation, helping you make informed choices.
+              <p className="text-white/90 text-sm mb-3"> {/* Reduced text size */}
+                Our staff provides insights on any recommendation.
               </p>
               
-              <div className="inline-flex items-center justify-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-xl text-sm font-medium text-white border border-white/20 hover:bg-white/20 transition-colors cursor-pointer">
+              <div className="inline-flex items-center justify-center px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-lg text-xs font-medium text-white border border-white/20 hover:bg-white/20 transition-colors cursor-pointer">
                 Learn More
               </div>
             </div>
