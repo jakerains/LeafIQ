@@ -7,7 +7,12 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "version:patch": "npm version patch",
+    "version:minor": "npm version minor",
+    "version:major": "npm version major",
+    "version:show": "echo \"Current version: $(npm pkg get version | tr -d '\\\"')\"",
+    "deploy": "bash scripts/deploy.sh"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.3",

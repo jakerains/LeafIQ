@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import LandingPage from './views/LandingPage';
 import DemoView from './views/DemoView';
@@ -14,9 +14,11 @@ import PricingPage from './views/pricing/PricingPage';
 import CheckoutSuccess from './views/checkout/CheckoutSuccess';
 import CheckoutCanceled from './views/checkout/CheckoutCanceled';
 import SubscriptionDetails from './views/account/SubscriptionDetails';
+import VersionDisplay from './components/ui/VersionDisplay';
 
 function App() {
   const { initializeAuth, isInitialized } = useAuthStore();
+  const location = useLocation();
   
   useEffect(() => {
     // Initialize auth state when app loads
@@ -34,6 +36,16 @@ function App() {
       </div>
     );
   }
+
+  // Determine version display position based on current route
+  const getVersionPosition = () => {
+    if (location.pathname.startsWith('/kiosk')) return 'top-right';
+    if (location.pathname.startsWith('/admin') || location.pathname.startsWith('/staff')) return 'bottom-left';
+    return 'bottom-right';
+  };
+
+  // Determine if we should show version display (hide on auth pages for cleaner look)
+  const shouldShowVersion = !location.pathname.startsWith('/auth');
 
   return (
     <div className="font-sans antialiased text-gray-900">
@@ -84,6 +96,14 @@ function App() {
             }
           />
         </Routes>
+
+        {/* Version Display - Positioned based on current route */}
+        {shouldShowVersion && (
+          <VersionDisplay 
+            position={getVersionPosition()} 
+            variant="minimal"
+          />
+        )}
       </div>
     </div>
   );
