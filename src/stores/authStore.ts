@@ -9,6 +9,13 @@ interface AuthUser {
   role: UserRole;
 }
 
+interface UserProfile {
+  id: string;
+  user_id: string;
+  organization_id: string;
+  role: UserRole;
+}
+
 // In a real app, this would validate against a server
 const validatePasscode = (role: UserRole, passcode: string): boolean => {
   console.log(`Validating ${role} with passcode: ${passcode}`);
@@ -23,6 +30,7 @@ const validatePasscode = (role: UserRole, passcode: string): boolean => {
 
 interface ExtendedAuthState extends AuthState {
   user: AuthUser | null;
+  profile: UserProfile | null;
   setUser: (user: AuthUser | null) => void;
 }
 
@@ -30,6 +38,7 @@ export const useAuthStore = create<ExtendedAuthState>((set, get) => ({
   role: null,
   isInitialized: false,
   user: null,
+  profile: null,
   
   initializeAuth: async () => {
     console.log('Initializing auth...');
@@ -57,6 +66,7 @@ export const useAuthStore = create<ExtendedAuthState>((set, get) => ({
         
         if (profile) {
           set({ 
+            profile,
             user: {
               id: session.user.id,
               email: session.user.email,
@@ -81,7 +91,18 @@ export const useAuthStore = create<ExtendedAuthState>((set, get) => ({
   },
   
   setUser: (user: AuthUser | null) => {
-    set({ user, role: user?.role || null });
+    // When setting the user, also update the profile with organization_id
+    if (user) {
+      const profile: UserProfile = {
+        id: 'profile-' + user.id, // Generate a profile ID
+        user_id: user.id,
+        organization_id: user.organizationId || 'd85af8c9-0d4a-451c-bc25-8c669c71142e', // Default org ID if none provided
+        role: user.role
+      };
+      set({ user, profile, role: user.role });
+    } else {
+      set({ user: null, profile: null, role: null });
+    }
   },
   
   login: (role: UserRole, passcode: string) => {
@@ -93,7 +114,23 @@ export const useAuthStore = create<ExtendedAuthState>((set, get) => ({
     
     console.log(`Login successful as ${role}`);
     localStorage.setItem('leafiqUserRole', role as string);
-    set({ role });
+    
+    // Create a demo profile with the default organization ID
+    const demoUser: AuthUser = {
+      id: 'demo-user-' + Date.now(),
+      email: 'demo@example.com',
+      organizationId: 'd85af8c9-0d4a-451c-bc25-8c669c71142e', // Default True North org ID
+      role
+    };
+    
+    const demoProfile: UserProfile = {
+      id: 'profile-' + demoUser.id,
+      user_id: demoUser.id,
+      organization_id: demoUser.organizationId,
+      role
+    };
+    
+    set({ role, user: demoUser, profile: demoProfile });
     return true;
   },
   
@@ -106,6 +143,6 @@ export const useAuthStore = create<ExtendedAuthState>((set, get) => ({
     await supabase.auth.signOut();
     
     // Reset auth state
-    set({ role: null, user: null });
+    set({ role: null, user: null, profile: null });
   },
 }));

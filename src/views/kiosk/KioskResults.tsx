@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Star, ArrowLeft, Share2, Heart, MessageCircle, Send, ChevronDown, ChevronUp, Sparkles } from 'lucide-react';
+import { Star, ArrowLeft, Share2, Heart, MessageCircle, Send, ChevronDown, ChevronUp, Sparkles, Loader2 } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import ProductCard from '../../components/ui/ProductCard';
 import { ProductWithVariant } from '../../types';
 import { vibesToTerpenes } from '../../data/demoData';
 import { Button } from '../../components/ui/button';
+import { useProductsStore } from '../../stores/productsStore';
 
 interface KioskResultsProps {
   searchQuery: string;
@@ -22,10 +23,21 @@ const KioskResults = ({
   isAIPowered = false,
   effects: providedEffects
 }: KioskResultsProps) => {
+  const { searchProductsByVibe, isLoading: isSearchLoading } = useProductsStore();
   const [showChatbot, setShowChatbot] = useState(false);
   const [chatMessage, setChatMessage] = useState('');
   const [chatHistory, setChatHistory] = useState<{role: 'user' | 'assistant', content: string}[]>([]);
   const [isChatLoading, setIsChatLoading] = useState(false);
+  const [updatedResults, setUpdatedResults] = useState<ProductWithVariant[]>(results);
+  const [updatedEffects, setUpdatedEffects] = useState<string[]>(providedEffects || []);
+  const [updatedIsAIPowered, setUpdatedIsAIPowered] = useState<boolean>(isAIPowered);
+  
+  // Update local state when props change
+  useEffect(() => {
+    setUpdatedResults(results);
+    setUpdatedEffects(providedEffects || []);
+    setUpdatedIsAIPowered(isAIPowered);
+  }, [results, providedEffects, isAIPowered]);
   
   // Generate a personalized recommendation blurb based on the search query
   const generateRecommendationBlurb = (query: string, effects: string[]): string => {
@@ -99,44 +111,95 @@ const KioskResults = ({
     return `I've found some great matches based on your preferences that should provide the experience you're looking for.`;
   };
 
-  // Function to handle chat submission
-  const handleChatSubmit = () => {
+  // Function to handle chat submission with context awareness
+  const handleChatSubmit = async () => {
     if (!chatMessage.trim()) return;
     
     // Add user message to chat history
     setChatHistory(prev => [...prev, { role: 'user', content: chatMessage }]);
     
-    // Simulate AI processing
+    // Start loading state
     setIsChatLoading(true);
     
-    // In a real implementation, this would call an API
-    setTimeout(() => {
-      // Generate a response based on the user's message
-      let response = '';
+    try {
+      // Generate a response based on the user's message and current context
       const lowerMessage = chatMessage.toLowerCase();
+      let response = '';
+      let newSearchQuery = '';
       
-      if (lowerMessage.includes('stronger') || lowerMessage.includes('potent')) {
-        response = "I understand you're looking for something more potent. Let me adjust my recommendations to focus on products with higher THC content and stronger effects.";
+      // Analyze the message to determine intent and context
+      if (lowerMessage.includes('concentrates')) {
+        response = "You're interested in concentrates! These offer a more potent experience with higher THC levels. Let me update my recommendations to focus on our best concentrate options.";
+        newSearchQuery = "concentrates " + searchQuery;
+      } else if (lowerMessage.includes('flower') || lowerMessage.includes('bud')) {
+        response = "Looking for flower products? Great choice for a traditional experience. I'll update my recommendations to show our best matching flower strains.";
+        newSearchQuery = "flower " + searchQuery;
+      } else if (lowerMessage.includes('edible')) {
+        response = "Edibles provide a longer-lasting experience with no inhalation. I'll show you our best edible options that match your desired effects.";
+        newSearchQuery = "edibles " + searchQuery;
+      } else if (lowerMessage.includes('vape') || lowerMessage.includes('cartridge')) {
+        response = "Vaporizers offer convenience and precise dosing. Here are some vape options that should provide the experience you're looking for.";
+        newSearchQuery = "vaporizers " + searchQuery;
+      } else if (lowerMessage.includes('stronger') || lowerMessage.includes('potent')) {
+        response = "I understand you're looking for something more potent. I've updated my recommendations to focus on products with higher THC content and stronger effects.";
+        newSearchQuery = "potent " + searchQuery;
       } else if (lowerMessage.includes('milder') || lowerMessage.includes('gentle')) {
-        response = "If you prefer a milder experience, I can suggest products with more balanced effects and lower THC levels that still provide the benefits you're seeking.";
+        response = "If you prefer a milder experience, here are some products with more balanced effects and lower THC levels that still provide the benefits you're seeking.";
+        newSearchQuery = "mild " + searchQuery;
       } else if (lowerMessage.includes('pain') || lowerMessage.includes('relief')) {
-        response = "For pain relief, I'd recommend products with higher levels of caryophyllene and myrcene terpenes, which are associated with anti-inflammatory properties.";
+        response = "For pain relief, I recommend products with higher levels of caryophyllene and myrcene terpenes, which are associated with anti-inflammatory properties. Here are some great options.";
+        newSearchQuery = "pain relief " + searchQuery;
       } else if (lowerMessage.includes('sleep') || lowerMessage.includes('insomnia')) {
-        response = "To help with sleep, look for indica strains with high myrcene and linalool content, which promote relaxation and can help with insomnia.";
+        response = "To help with sleep, I've selected indica strains with high myrcene and linalool content, which promote relaxation and can help with insomnia.";
+        newSearchQuery = "sleep " + searchQuery;
       } else if (lowerMessage.includes('anxiety') || lowerMessage.includes('stress')) {
-        response = "For anxiety and stress relief, products with balanced CBD:THC ratios and calming terpenes like linalool and limonene can be particularly effective.";
+        response = "For anxiety and stress relief, I've found products with balanced CBD:THC ratios and calming terpenes like linalool and limonene that can be particularly effective.";
+        newSearchQuery = "anxiety relief " + searchQuery;
       } else {
-        response = "Thanks for your feedback! I'll refine my recommendations based on your preferences. Is there anything specific about these products you'd like to know more about?";
+        // Generic response for other queries
+        response = "I've analyzed your preferences and updated my recommendations. These products should better match what you're looking for based on your feedback.";
+        newSearchQuery = chatMessage + " " + searchQuery;
       }
       
-      // Add AI response to chat history
-      setChatHistory(prev => [...prev, { role: 'assistant', content: response }]);
+      // Add initial AI response to chat history
+      setChatHistory(prev => [...prev, { 
+        role: 'assistant', 
+        content: "I'm finding products that match your request..." 
+      }]);
+      
+      // Get new recommendations based on the updated query
+      if (newSearchQuery) {
+        const newResults = await searchProductsByVibe(newSearchQuery, 'kiosk');
+        
+        // Update the results and effects
+        setUpdatedResults(newResults.products);
+        setUpdatedEffects(newResults.effects);
+        setUpdatedIsAIPowered(newResults.isAIPowered);
+        
+        // Update the last assistant message with the proper response
+        setChatHistory(prev => {
+          const newHistory = [...prev];
+          if (newHistory.length > 0 && newHistory[newHistory.length - 1].role === 'assistant') {
+            newHistory[newHistory.length - 1].content = response;
+          }
+          return newHistory;
+        });
+      }
+      
       setChatMessage('');
+    } catch (error) {
+      console.error('Error updating recommendations:', error);
+      // Add error message to chat history
+      setChatHistory(prev => [...prev, { 
+        role: 'assistant', 
+        content: "I'm sorry, I encountered an issue updating the recommendations. Please try again or ask something else." 
+      }]);
+    } finally {
       setIsChatLoading(false);
-    }, 1500);
+    }
   };
 
-  const recommendationBlurb = generateRecommendationBlurb(searchQuery, providedEffects || []);
+  const recommendationBlurb = generateRecommendationBlurb(searchQuery, updatedEffects);
 
   // Determine effects based on search query if not provided
   const getEffectsForQuery = (query: string): string[] => {
@@ -168,7 +231,7 @@ const KioskResults = ({
     show: { opacity: 1, y: 0 }
   };
 
-  const effects = providedEffects || getEffectsForQuery(searchQuery);
+  const effects = updatedEffects.length > 0 ? updatedEffects : getEffectsForQuery(searchQuery);
 
   return (
     <motion.div
@@ -216,7 +279,7 @@ const KioskResults = ({
         
         {/* Recommendation blurb with chatbot toggle */}
         <motion.div
-          className="mt-4 bg-white bg-opacity-60 backdrop-blur-sm rounded-xl border border-gray-100 shadow-sm overflow-hidden"
+          className="mt-4 bg-white bg-opacity-70 backdrop-blur-sm rounded-xl border border-gray-100 shadow-sm overflow-hidden"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
@@ -242,7 +305,7 @@ const KioskResults = ({
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="border-t border-gray-100"
+              className="border-t border-gray-100 bg-white bg-opacity-90"
             >
               {/* Chat history */}
               <div className="max-h-60 overflow-y-auto p-4 space-y-3">
@@ -265,7 +328,17 @@ const KioskResults = ({
                   ))
                 ) : (
                   <div className="text-center text-gray-500 py-2">
-                    Ask a question or provide feedback about these recommendations
+                    Ask about specific products, categories, or effects
+                  </div>
+                )}
+                
+                {/* Loading indicator for chat */}
+                {isChatLoading && (
+                  <div className="flex justify-center py-2">
+                    <div className="flex items-center space-x-2 text-primary-600">
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span className="text-sm">Updating recommendations...</span>
+                    </div>
                   </div>
                 )}
               </div>
@@ -276,7 +349,7 @@ const KioskResults = ({
                   type="text"
                   value={chatMessage}
                   onChange={(e) => setChatMessage(e.target.value)}
-                  placeholder="Ask about these recommendations..."
+                  placeholder="Ask about concentrates, flower, edibles, etc..."
                   className="flex-1 px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                   onKeyPress={(e) => {
                     if (e.key === 'Enter') {
@@ -308,12 +381,26 @@ const KioskResults = ({
       
       {/* Remove the standalone blurb since we've integrated it with the chatbot */}
       
-      {results.length > 0 ? (
+      {/* Loading indicator for product updates */}
+      {isSearchLoading && (
+        <motion.div 
+          className="flex justify-center items-center py-8"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          <div className="flex flex-col items-center space-y-2">
+            <Loader2 className="w-8 h-8 text-primary-600 animate-spin" />
+            <p className="text-primary-600">Updating recommendations...</p>
+          </div>
+        </motion.div>
+      )}
+      
+      {!isSearchLoading && updatedResults.length > 0 ? (
         <motion.div 
           variants={container}
           className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"
         >
-          {results.map((product) => (
+          {updatedResults.map((product) => (
             <motion.div key={product.id} variants={item}>
               <ProductCard 
                 product={product} 
@@ -323,7 +410,7 @@ const KioskResults = ({
           ))}
         </motion.div>
       ) : (
-        <motion.div variants={item}>
+        !isSearchLoading && <motion.div variants={item}>
           <div className="bg-white bg-opacity-60 backdrop-blur-sm rounded-3xl p-8 text-center">
             <h3 className="text-2xl font-semibold mb-4">No perfect matches right now</h3>
             <p className="text-gray-600 mb-6">
@@ -335,22 +422,20 @@ const KioskResults = ({
       )}
 
       {!showChatbot && (
-        <motion.div
+        <motion.button
+          onClick={() => setShowChatbot(true)}
           variants={item}
-          className="text-center mt-12 p-6 bg-primary-50 rounded-3xl"
+          className="w-full text-center mt-12 p-6 bg-primary-50 rounded-3xl hover:bg-primary-100 transition-colors"
         >
           <h3 className="text-2xl font-semibold mb-3">Need more guidance?</h3>
           <p className="text-gray-700 mb-4">
-            Our knowledgeable staff can provide additional details about these products and help you make the perfect choice.
+            Ask about specific products, categories, or effects to refine your recommendations.
           </p>
-          <button 
-            onClick={() => setShowChatbot(true)}
-            className="inline-flex items-center gap-2 p-3 bg-white rounded-xl shadow-sm text-primary-700 font-medium hover:bg-primary-50 transition-colors"
-          >
+          <div className="inline-flex items-center gap-2 p-3 bg-white rounded-xl shadow-sm text-primary-700 font-medium">
             <MessageCircle size={18} />
-            Ask for assistance
-          </button>
-        </motion.div>
+            Click to chat with LeafIQ
+          </div>
+        </motion.button>
       )}
     </motion.div>
   );
