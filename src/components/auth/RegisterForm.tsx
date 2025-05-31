@@ -556,7 +556,7 @@ const RegisterForm = () => {
           <div>
             <span className="font-medium">Terms of Service*</span>
             <p className="text-sm text-gray-600">
-              I agree to the <a href="/terms" className="text-primary-600 hover:underline">Terms of Service</a> and <a href="/privacy" className=\"text-primary-600 hover:underline">Privacy Policy</a>
+              I agree to the <a href="/terms" className="text-primary-600 hover:underline">Terms of Service</a> and <a href="/privacy" className="text-primary-600 hover:underline">Privacy Policy</a>
             </p>
           </div>
         </label>
