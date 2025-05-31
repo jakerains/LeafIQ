@@ -147,13 +147,7 @@ export function VercelV0Chat({ onSearch, isLoading = false }: VercelV0ChatProps)
         if (selectedSuggestions.includes(suggestion)) {
             setSelectedSuggestions(prev => prev.filter(s => s !== suggestion));
         } else {
-            // If it's a direct search, set the value and submit
-            setValue(suggestion);
-            setSelectedSuggestions([]);
-            // Submit the search immediately
-            setTimeout(() => {
-                onSearch(suggestion);
-            }, 100);
+            setSelectedSuggestions(prev => [...prev, suggestion]);
         }
     };
 
