@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../ui/button';
-import { Building2, Mail, Lock, AlertCircle, ArrowRight, ArrowLeft, Check, Monitor, Users, Database, Settings, MapPin, Gift, Phone, User, FileText, HelpCircle } from 'lucide-react';
+import { Building2, Mail, Lock, AlertCircle, ArrowRight, ArrowLeft, Check, Monitor, Users, Database, Settings, MapPin, Gift, Phone, User, HelpCircle, Download, FileJson } from 'lucide-react';
 import { signUp } from '../../lib/supabase';
 
 interface FormData {
@@ -149,6 +149,15 @@ const RegisterForm = () => {
     } finally {
       setIsLoading(false);
     }
+  };
+  
+  const handleDownloadTemplate = () => {
+    const link = document.createElement('a');
+    link.href = '/templates/inventory-upload-template.json';
+    link.download = 'leafiq-inventory-template.json';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const renderStep = () => {
@@ -365,6 +374,36 @@ const RegisterForm = () => {
               )}
             </div>
 
+            {/* Show template download button when manual upload is selected */}
+            {formData.menuSource === 'manual' && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                className="bg-gray-50 p-4 rounded-xl"
+              >
+                <div className="flex items-start space-x-3">
+                  <FileJson className="h-5 w-5 text-primary-600 mt-0.5" />
+                  <div>
+                    <h4 className="font-medium text-gray-800 mb-1">Inventory Template Available</h4>
+                    <p className="text-sm text-gray-600 mb-3">
+                      Download our JSON template to prepare your inventory for import. The template includes 
+                      examples for all product types with terpene profiles.
+                    </p>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex items-center gap-1.5 text-primary-600 border-primary-200 bg-primary-50"
+                      onClick={handleDownloadTemplate}
+                    >
+                      <Download size={14} />
+                      Download JSON Template
+                    </Button>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
             <div>
               <label className="flex items-center space-x-3 p-4 border border-gray-200 rounded-xl hover:border-gray-300 transition-colors cursor-pointer">
                 <input
@@ -466,7 +505,7 @@ const RegisterForm = () => {
                 />
                 <div className="flex-1">
                   <div className="font-medium text-gray-900 flex items-center">
-                    <FileText className="h-4 w-4 mr-2" />
+                    <FileJson className="h-4 w-4 mr-2" />
                     Accept Terms of Service *
                   </div>
                   <div className="text-sm text-gray-500 mt-1">
