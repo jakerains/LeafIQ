@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { BrainCircuit, Save, RefreshCw, Play, PlusCircle, Trash2 } from 'lucide-react';
+import { BrainCircuit, Save, RefreshCw, Play, PlusCircle, Trash2, Flask } from 'lucide-react';
 import { Button } from '../../components/ui/button';
 import { vibesToTerpenes } from '../../data/demoData';
+import TerpeneTabs from './components/TerpeneTabs';
+import TerpeneDatabase from './TerpeneDatabase';
 
 const AdminAIModel = () => {
   const [isTestingModel, setIsTestingModel] = useState(false);
@@ -25,6 +27,8 @@ const AdminAIModel = () => {
     },
     effects: ['Custom Effect']
   });
+
+  const [activeTab, setActiveTab] = useState<'mapping' | 'database'>('mapping');
 
   const handleTestModel = () => {
     if (!testQuery) return;
@@ -109,8 +113,19 @@ const AdminAIModel = () => {
     alert('Vibe mappings saved successfully');
   };
 
+  if (activeTab === 'database') {
+    return (
+      <div className="space-y-6">
+        <TerpeneTabs activeTab={activeTab} onChange={setActiveTab} />
+        <TerpeneDatabase />
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
+      <TerpeneTabs activeTab={activeTab} onChange={setActiveTab} />
+
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -214,12 +229,22 @@ const AdminAIModel = () => {
               <h2 className="text-xl font-semibold">Vibe to Terpene Mappings</h2>
             </div>
             
-            <Button
-              onClick={handleSaveMappings}
-              leftIcon={<Save size={16} />}
-            >
-              Save Mappings
-            </Button>
+            <div className="flex space-x-3">
+              <Button
+                variant="outline"
+                leftIcon={<Flask size={16} />}
+                onClick={() => setActiveTab('database')}
+              >
+                Terpene Database
+              </Button>
+              
+              <Button
+                onClick={handleSaveMappings}
+                leftIcon={<Save size={16} />}
+              >
+                Save Mappings
+              </Button>
+            </div>
           </div>
           
           <div className="space-y-6 mb-8">

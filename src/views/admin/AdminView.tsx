@@ -5,17 +5,18 @@ import SearchInput from '../../components/ui/SearchInput';
 import ProductCard from '../../components/ui/ProductCard';
 import Logo from '../../components/ui/Logo';
 import { Button } from '../../components/ui/button';
-import { LogOut, Search, LayoutDashboard, Sparkles, Home } from 'lucide-react';
+import { LogOut, Search, LayoutDashboard, Home } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { ProductWithVariant } from '../../types';
 import { Settings } from '../../types';
 import { Routes, Route, useNavigate, Link, useLocation } from 'react-router-dom';
-import { RefreshCw, Database, Settings as SettingsIcon, Activity, Package, BrainCircuit, CreditCard } from 'lucide-react';
+import { RefreshCw, Database, Settings as SettingsIcon, Activity, Package, BrainCircuit, CreditCard, Flask } from 'lucide-react';
 import AdminDashboard from './AdminDashboard';
 import AdminInventory from './AdminInventory';
 import AdminAIModel from './AdminAIModel';
 import AdminSettings from './AdminSettings';
 import SubscriptionDetails from '../account/SubscriptionDetails';
+import TerpeneDatabase from './TerpeneDatabase';
 import { getUserSubscription } from '../../lib/stripe';
 
 const AdminView = () => {
@@ -29,6 +30,7 @@ const AdminView = () => {
   const getActiveTab = () => {
     if (currentPath.includes('/inventory')) return 'inventory';
     if (currentPath.includes('/ai-model')) return 'ai-model';
+    if (currentPath.includes('/terpene-database')) return 'terpene-database';
     if (currentPath.includes('/settings')) return 'settings';
     if (currentPath.includes('/subscription')) return 'subscription';
     return 'dashboard'; // Default tab
@@ -143,6 +145,18 @@ const AdminView = () => {
             <BrainCircuit size={16} className="mr-2" />
             AI Model
           </button>
+
+          <button
+            onClick={() => handleTabClick('terpene-database')}
+            className={`flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all ${
+              activeTab === 'terpene-database'
+                ? 'bg-primary-500 text-white shadow-md'
+                : 'text-gray-600 hover:bg-gray-100'
+            }`}
+          >
+            <Flask size={16} className="mr-2" />
+            Terpene Database
+          </button>
           
           <button
             onClick={() => handleTabClick('settings')}
@@ -174,6 +188,7 @@ const AdminView = () => {
           <Route path="/" element={<AdminDashboard />} />
           <Route path="/inventory" element={<AdminInventory />} />
           <Route path="/ai-model" element={<AdminAIModel />} />
+          <Route path="/terpene-database" element={<TerpeneDatabase />} />
           <Route path="/settings" element={<AdminSettings />} />
           <Route path="/subscription" element={
             <div className="container mx-auto px-4">
