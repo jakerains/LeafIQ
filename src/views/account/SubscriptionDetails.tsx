@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { getUserSubscription, getProductByPriceId } from '../../lib/stripe';
 import { CreditCard, Calendar, AlertCircle, CheckCircle, XCircle, Loader2 } from 'lucide-react';
-import { ShimmerButton } from '../../components/ui/shimmer-button';
+import { ShimmerButton } from '../../components/ui/shimmer-button'; 
 
 export default function SubscriptionDetails() {
   const [subscription, setSubscription] = useState<any>(null);
@@ -74,7 +74,8 @@ export default function SubscriptionDetails() {
   const product = subscription?.price_id ? getProductByPriceId(subscription.price_id) : null;
 
   return (
-    <div className="bg-white bg-opacity-80 backdrop-blur-md rounded-3xl p-6 shadow-lg">
+    <div className="container mx-auto px-4 py-8">
+      <div className="bg-white bg-opacity-80 backdrop-blur-md rounded-3xl p-6 shadow-lg max-w-4xl mx-auto">
       <h2 className="text-2xl font-semibold mb-6">Subscription Details</h2>
 
       {isLoading ? (
@@ -87,7 +88,7 @@ export default function SubscriptionDetails() {
           {error}
         </div>
       ) : !subscription || subscription.subscription_status === 'not_started' ? (
-        <div className="text-center py-8">
+        <div className="text-center py-12">
           <div className="bg-gray-100 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
             <CreditCard className="w-8 h-8 text-gray-500" />
           </div>
@@ -180,6 +181,7 @@ export default function SubscriptionDetails() {
           </div>
         </motion.div>
       )}
+      </div>
     </div>
   );
 }
