@@ -5,7 +5,7 @@ import { useProductsStore } from '../../stores/productsStore';
 import SearchInput from '../../components/ui/SearchInput';
 import ProductCard from '../../components/ui/ProductCard';
 import Logo from '../../components/ui/Logo';
-import Button from '../../components/ui/button';
+import { Button } from '../../components/ui/button';
 import { LogOut, Search, LayoutDashboard, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { ProductWithVariant } from '../../types';

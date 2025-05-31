@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { BrainCircuit, Save, RefreshCw, Play, PlusCircle, Trash2 } from 'lucide-react';
-import Button from '../../components/ui/button';
+import { Button } from '../../components/ui/button';
 import { vibesToTerpenes } from '../../data/demoData';
 
 const AdminAIModel = () => {

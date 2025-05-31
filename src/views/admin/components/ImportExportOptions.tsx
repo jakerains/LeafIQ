@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { X, Download, Upload, FileJson, FileText, Database } from 'lucide-react';
-import Button from '../../../components/ui/button';
+import { Button } from '../../../components/ui/button';
 
 interface ImportExportOptionsProps {
   onClose: () => void;

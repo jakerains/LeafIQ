@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Activity, RefreshCw, Database } from 'lucide-react';
-import Button from '../../components/ui/button';
+import { Button } from '../../components/ui/button';
 import { useProductsStore } from '../../stores/productsStore';
 
 const AdminDashboard = () => {
@@ -108,153 +108,29 @@ const AdminDashboard = () => {
                 </select>
               </div>
               
-              <div className="flex items-end">
-                <Button 
-                  type="button" 
-                  variant="secondary"
-                  leftIcon={<Database size={16} />}
+              <div className="flex items-end space-x-4">
+                <Button
                   onClick={handleTestConnection}
+                  type="button"
+                  className="flex items-center space-x-2"
+                  variant="outline"
                 >
-                  Test Connection
+                  <Activity size={16} />
+                  <span>Test Connection</span>
                 </Button>
-                {isApiConnected && (
-                  <span className="ml-3 text-green-600 flex items-center">
-                    Connected
-                    <span className="ml-2 w-2 h-2 bg-green-500 rounded-full"></span>
-                  </span>
-                )}
+                
+                <Button
+                  onClick={handleSyncNow}
+                  type="button"
+                  className="flex items-center space-x-2"
+                  disabled={isSyncing}
+                >
+                  <RefreshCw size={16} className={isSyncing ? 'animate-spin' : ''} />
+                  <span>{isSyncing ? 'Syncing...' : 'Sync Now'}</span>
+                </Button>
               </div>
-            </div>
-            
-            <div className="flex justify-end">
-              <Button type="submit">Save Settings</Button>
             </div>
           </form>
-        </div>
-        
-        <div className="bg-white bg-opacity-80 backdrop-blur-md rounded-3xl p-6 shadow-lg">
-          <div className="flex items-center space-x-2 mb-4">
-            <RefreshCw size={20} className="text-primary-600" />
-            <h2 className="text-xl font-semibold">Sync Management</h2>
-          </div>
-          
-          <div className="mb-6">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-gray-700">Last Successful Sync</span>
-              <span className="text-sm text-gray-600">
-                {new Date(settings.last_sync_timestamp || '').toLocaleString()}
-              </span>
-            </div>
-            
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-gray-700">Sync Frequency</span>
-              <span className="text-sm text-gray-600">
-                {settings.sync_frequency === 'manual' ? 'Manual Only' :
-                 settings.sync_frequency === '15min' ? 'Every 15 Minutes' :
-                 settings.sync_frequency === 'hourly' ? 'Hourly' : 'Daily'}
-              </span>
-            </div>
-            
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-gray-700">Next Scheduled Sync</span>
-              <span className="text-sm text-gray-600">
-                {settings.sync_frequency === 'manual' 
-                  ? 'Manual Only' 
-                  : new Date(new Date().getTime() + 60 * 60 * 1000).toLocaleString()}
-              </span>
-            </div>
-          </div>
-          
-          <div className="flex justify-end">
-            <Button 
-              variant="accent"
-              leftIcon={<RefreshCw size={16} />}
-              onClick={handleSyncNow}
-              isLoading={isSyncing}
-            >
-              {isSyncing ? 'Syncing...' : 'Sync Now'}
-            </Button>
-          </div>
-        </div>
-      </motion.div>
-      
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3, delay: 0.1 }}
-      >
-        <div className="bg-white bg-opacity-80 backdrop-blur-md rounded-3xl p-6 shadow-lg mb-6">
-          <div className="flex items-center space-x-2 mb-4">
-            <Activity size={20} className="text-primary-600" />
-            <h2 className="text-xl font-semibold">System Status</h2>
-          </div>
-          
-          <div className="space-y-4">
-            <div>
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-sm font-medium text-gray-700">Products in Database</span>
-                <span className="text-sm text-gray-900 font-semibold">{products.length}</span>
-              </div>
-              <div className="w-full bg-gray-200 rounded-full h-2">
-                <div 
-                  className="bg-green-500 h-2 rounded-full" 
-                  style={{ width: `${Math.min(100, (products.length / 20) * 100)}%` }}
-                ></div>
-              </div>
-            </div>
-            
-            <div>
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-sm font-medium text-gray-700">API Health</span>
-                <span className="text-sm text-gray-900 font-semibold">Good</span>
-              </div>
-              <div className="w-full bg-gray-200 rounded-full h-2">
-                <div className="bg-green-500 h-2 rounded-full" style={{ width: '90%' }}></div>
-              </div>
-            </div>
-            
-            <div>
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-sm font-medium text-gray-700">Searches Today</span>
-                <span className="text-sm text-gray-900 font-semibold">12</span>
-              </div>
-              <div className="w-full bg-gray-200 rounded-full h-2">
-                <div className="bg-blue-500 h-2 rounded-full" style={{ width: '60%' }}></div>
-              </div>
-            </div>
-            
-            <div>
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-sm font-medium text-gray-700">Error Rate</span>
-                <span className="text-sm text-gray-900 font-semibold">0.2%</span>
-              </div>
-              <div className="w-full bg-gray-200 rounded-full h-2">
-                <div className="bg-green-500 h-2 rounded-full" style={{ width: '2%' }}></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div className="bg-white bg-opacity-80 backdrop-blur-md rounded-3xl p-6 shadow-lg">
-          <h3 className="text-lg font-semibold mb-3">Popular Searches</h3>
-          <ul className="space-y-2">
-            <li className="flex justify-between items-center p-2 bg-gray-50 rounded-lg">
-              <span>relaxed</span>
-              <span className="text-sm text-gray-600">5 searches</span>
-            </li>
-            <li className="flex justify-between items-center p-2 bg-gray-50 rounded-lg">
-              <span>pain relief</span>
-              <span className="text-sm text-gray-600">3 searches</span>
-            </li>
-            <li className="flex justify-between items-center p-2 bg-gray-50 rounded-lg">
-              <span>energized</span>
-              <span className="text-sm text-gray-600">2 searches</span>
-            </li>
-            <li className="flex justify-between items-center p-2 bg-gray-50 rounded-lg">
-              <span>creative</span>
-              <span className="text-sm text-gray-600">2 searches</span>
-            </li>
-          </ul>
         </div>
       </motion.div>
     </div>

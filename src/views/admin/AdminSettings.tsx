@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Settings, Save, Lock } from 'lucide-react';
-import Button from '../../components/ui/button';
+import { Button } from '../../components/ui/button';
 
 const AdminSettings = () => {
   const [settings, setSettings] = useState({
