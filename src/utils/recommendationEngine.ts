@@ -86,6 +86,52 @@ export const parseVibeToTerpeneProfile = (vibe: string): {
     }
   }
   
+  // Check if this is a cannabis education query
+  if (lowercaseVibe.startsWith('cannabis question:')) {
+    const question = lowercaseVibe.replace('cannabis question:', '').trim();
+    console.log('Processing cannabis education query:', question);
+    
+    // For educational queries that mention specific effects or experiences
+    if (question.includes('relax') || question.includes('sleep') || question.includes('anxiety')) {
+      return {
+        terpeneProfile: vibesToTerpenes['relaxed'].terpenes,
+        effects: ['Educational', 'Relaxation', 'Calm']
+      };
+    }
+    
+    if (question.includes('energy') || question.includes('focus') || question.includes('alert')) {
+      return {
+        terpeneProfile: vibesToTerpenes['energized'].terpenes,
+        effects: ['Educational', 'Energy', 'Focus']
+      };
+    }
+    
+    if (question.includes('pain') || question.includes('inflammation') || question.includes('relief')) {
+      return {
+        terpeneProfile: vibesToTerpenes['pain relief'].terpenes,
+        effects: ['Educational', 'Pain Relief']
+      };
+    }
+    
+    if (question.includes('creat') || question.includes('inspire') || question.includes('art')) {
+      return {
+        terpeneProfile: vibesToTerpenes['creative'].terpenes,
+        effects: ['Educational', 'Creativity']
+      };
+    }
+    
+    // Default profile for cannabis education - balanced
+    return {
+      terpeneProfile: {
+        myrcene: 0.4,
+        limonene: 0.4,
+        pinene: 0.4,
+        caryophyllene: 0.4
+      },
+      effects: ['Educational', 'Cannabis Information']
+    };
+  }
+  
   // Check if this is a category-specific query
   if (lowercaseVibe.includes('concentrate') || lowercaseVibe.includes('extract')) {
     return {

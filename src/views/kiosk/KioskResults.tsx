@@ -43,23 +43,6 @@ const KioskResults = ({
   const generateRecommendationBlurb = (query: string, effects: string[]): string => {
     const lowercaseQuery = query.toLowerCase();
     
-    // Check if this is an activity query
-    if (lowercaseQuery.startsWith('activity:')) {
-      const activity = lowercaseQuery.replace('activity:', '').trim();
-      
-      if (activity.includes('social') || activity.includes('party') || activity.includes('concert')) {
-        return `Based on your plans for a social gathering, I've selected products that enhance connection and conversation while maintaining a comfortable energy level.`;
-      } else if (activity.includes('creative') || activity.includes('art')) {
-        return `For your creative session, I've found products known to spark imagination and help ideas flow while maintaining mental clarity.`;
-      } else if (activity.includes('hike') || activity.includes('outdoor')) {
-        return `For your outdoor adventure, these products offer energizing effects with enhanced sensory awareness to help you connect with nature.`;
-      } else if (activity.includes('movie') || activity.includes('relax')) {
-        return `Perfect for your relaxing movie night, these selections help you unwind and enhance your viewing experience without overwhelming effects.`;
-      }
-      
-      return `I've selected products that complement your ${activity} plans with balanced effects for an enhanced experience.`;
-    }
-    
     // Check if this is a cannabis question
     if (lowercaseQuery.startsWith('cannabis question:')) {
       // For cannabis education questions, no product recommendation blurb needed
@@ -197,7 +180,7 @@ const KioskResults = ({
       // Add initial AI response to chat history
       setChatHistory(prev => [...prev, { 
         role: 'assistant', 
-        content: "I'm finding products that match your request..." 
+        content: response 
       }]);
       
       // Get new recommendations based on the updated query
@@ -224,15 +207,6 @@ const KioskResults = ({
         setUpdatedResults(filteredResults);
         setUpdatedEffects(newResults.effects);
         setUpdatedIsAIPowered(newResults.isAIPowered);
-        
-        // Update the last assistant message with the proper response
-        setChatHistory(prev => {
-          const newHistory = [...prev];
-          if (newHistory.length > 0 && newHistory[newHistory.length - 1].role === 'assistant') {
-            newHistory[newHistory.length - 1].content = response;
-          }
-          return newHistory;
-        });
       }
       
       setChatMessage('');
@@ -252,20 +226,29 @@ const KioskResults = ({
   const getEducationalResponse = (query: string): string => {
     // Check for common educational questions
     if (query.includes('thc')) {
-      return "THC (tetrahydrocannabinol) is the primary psychoactive compound in cannabis that creates the 'high' sensation. It works by binding to cannabinoid receptors in the brain, affecting things like thinking, memory, pleasure, coordination, and time perception.";
+      return "THC (tetrahydrocannabinol) is the primary psychoactive compound in cannabis that creates the 'high' sensation. It works by binding to cannabinoid receptors in the brain, affecting things like thinking, memory, pleasure, coordination, and time perception. Different cannabis strains contain varying levels of THC, which influences the intensity and character of effects you'll experience.";
     } else if (query.includes('cbd')) {
-      return "CBD (cannabidiol) is a non-psychoactive compound found in cannabis. Unlike THC, it doesn't produce a high. CBD is often used for anxiety, insomnia, and pain relief, and has anti-inflammatory properties. Many users prefer CBD for therapeutic benefits without intoxication.";
+      return "CBD (cannabidiol) is a non-psychoactive compound found in cannabis. Unlike THC, it doesn't produce a high. CBD is often used for anxiety, insomnia, and pain relief, and has anti-inflammatory properties. Many users prefer CBD for therapeutic benefits without intoxication. Research suggests CBD may help with epilepsy, inflammation, anxiety, and various other conditions, though studies are ongoing.";
     } else if (query.includes('terpene')) {
-      return "Terpenes are aromatic compounds found in cannabis and many other plants. They give cannabis its distinctive smell and taste but also play a key role in effects. Different terpenes like myrcene (relaxing), limonene (uplifting), and pinene (focusing) contribute to the unique experience of each strain.";
+      return "Terpenes are aromatic compounds found in cannabis and many other plants. They give cannabis its distinctive smell and taste but also play a key role in effects. Different terpenes like myrcene (relaxing), limonene (uplifting), and pinene (focusing) contribute to the unique experience of each strain. The 'entourage effect' describes how terpenes work together with cannabinoids to create specific effects beyond what any single compound would produce.";
     } else if (query.includes('indica') || query.includes('sativa') || (query.includes('difference') && query.includes('strain'))) {
-      return "Traditionally, Indica strains are associated with relaxing, sedative effects ('in-da-couch'), while Sativa strains are linked to energizing, cerebral effects. However, modern cannabis science looks beyond this simplistic divide to terpene profiles and cannabinoid ratios, which more accurately predict effects than strain type alone.";
+      return "Traditionally, Indica strains are associated with relaxing, sedative effects ('in-da-couch'), while Sativa strains are linked to energizing, cerebral effects. However, modern cannabis science looks beyond this simplistic divide to terpene profiles and cannabinoid ratios, which more accurately predict effects than strain type alone. Hybrids combine characteristics of both types. The specific effect of any strain depends on its unique chemical profile rather than just its classification.";
     } else if (query.includes('edible') && (query.includes('dosing') || query.includes('dose'))) {
-      return "When dosing edibles, start low (5-10mg THC) and go slow. Edibles can take 30-90 minutes to take effect and last 4-8 hours. Unlike smoking, edibles are processed by your liver, creating a stronger, longer-lasting effect. Wait at least 2 hours before considering more, as effects can intensify over time.";
+      return "When dosing edibles, start low (5-10mg THC) and go slow. Edibles can take 30-90 minutes to take effect and last 4-8 hours. Unlike smoking, edibles are processed by your liver, creating a stronger, longer-lasting effect. Wait at least 2 hours before considering more, as effects can intensify over time. New users should begin with 2-5mg THC. Everyone's metabolism processes cannabinoids differently, so personal experience may vary.";
     } else if (query.includes('medical') || query.includes('medicine')) {
-      return "Medical cannabis is used to treat various conditions including chronic pain, nausea, muscle spasms, anxiety, insomnia, and more. Different cannabinoids and terpenes target different symptoms - THC may help with pain and nausea, while CBD can address inflammation and anxiety. Always consult a healthcare provider about medical cannabis use.";
-    } else {
-      return "That's a great question about cannabis. Cannabis contains over 100 cannabinoids and numerous terpenes that work together to create different effects. The specific effects depend on the chemical profile of the strain, your individual endocannabinoid system, consumption method, and dosage.";
+      return "Medical cannabis is used to treat various conditions including chronic pain, nausea, muscle spasms, anxiety, insomnia, and more. Different cannabinoids and terpenes target different symptoms - THC may help with pain and nausea, while CBD can address inflammation and anxiety. Always consult a healthcare provider about medical cannabis use, especially regarding potential interactions with other medications and appropriate dosing protocols.";
+    } else if (query.includes('consume') || query.includes('method') || query.includes('use')) {
+      return "Cannabis can be consumed in several ways: (1) Inhalation through smoking or vaporizing provides quick effects (within minutes) that typically last 2-3 hours; (2) Edibles and ingestible oils offer longer-lasting effects (4-8 hours) but take 30-90 minutes to begin working; (3) Tinctures applied under the tongue act within 15-45 minutes; (4) Topicals applied to the skin provide localized relief without psychoactive effects. Each method has different onset times, durations, and intensity profiles.";
+    } else if (query.includes('store') || query.includes('storage')) {
+      return "For optimal cannabis storage: (1) Keep products in airtight containers to prevent air exposure that degrades cannabinoids and terpenes; (2) Store in a cool, dark place as light and heat accelerate degradation; (3) Maintain moderate humidity (59-63% for flower); (4) Keep away from electronics and appliances that generate heat; (5) Always store out of reach of children and pets. Properly stored flower can maintain potency for 6-12 months, while concentrates and edibles generally have longer shelf lives.";
+    } else if (query.includes('tolerance') && query.includes('break')) {
+      return "A tolerance break ('t-break') is a period of abstaining from cannabis to reset your body's cannabinoid receptors. Even 48 hours can begin to restore sensitivity, but 1-2 weeks is typically more effective. During this time, stay hydrated, exercise to release stored cannabinoids, and get plenty of sleep. Some users report improved effects, reduced consumption needs, and greater clarity after returning to cannabis. T-breaks can also be a good opportunity to reflect on your relationship with cannabis.";
+    } else if (query.includes('entourage') || query.includes('effect')) {
+      return "The entourage effect refers to how cannabis compounds work together synergistically to produce effects that differ from any single isolated compound. This interaction between cannabinoids (like THC and CBD), terpenes, and other plant compounds creates unique therapeutic profiles. For example, CBD can moderate THC's psychoactive effects, while terpenes like myrcene may enhance THC absorption. This concept explains why whole-plant or full-spectrum products often provide different experiences than isolated compounds.";
     }
+    
+    // Default educational response
+    return "That's a great question about cannabis. Cannabis contains over 100 cannabinoids and numerous terpenes that work together to create different effects. The specific effects depend on the chemical profile of the strain, your individual endocannabinoid system, consumption method, and dosage. I'm happy to provide more specific information if you have questions about particular aspects of cannabis.";
   };
 
   const recommendationBlurb = generateRecommendationBlurb(searchQuery, updatedEffects);
