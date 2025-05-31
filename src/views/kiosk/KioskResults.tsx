@@ -257,56 +257,46 @@ const KioskResults = ({
         </p>
         
         <motion.p
-          className="mt-4 text-lg text-gray-700 bg-white bg-opacity-60 backdrop-blur-sm p-4 rounded-xl border border-gray-100 shadow-sm"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
+          className="mt-2 inline-flex items-center gap-1 px-3 py-1 bg-primary-100 text-primary-800 rounded-full text-sm font-medium"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2 }}
         >
-          {recommendationBlurb}
+          <Sparkles size={14} className="text-primary-600" />
+          AI-Powered Recommendations
         </motion.p>
-        
-        {isAIPowered && (
-          <motion.div 
-            className="mt-2 inline-flex items-center gap-1 px-3 py-1 bg-primary-100 text-primary-800 rounded-full text-sm font-medium"
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-          >
-            <Sparkles size={14} className="text-primary-600" />
-            AI-Powered Recommendations
-          </motion.div>
-        )}
-        
-        {/* Recommendation blurb with chatbot toggle */}
-        <motion.div
-          className="mt-4 bg-white bg-opacity-70 backdrop-blur-sm rounded-xl border border-gray-100 shadow-sm overflow-hidden"
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-        >
-          <div className="p-4">
-            <div className="flex justify-between items-start">
-              <p className="text-lg text-gray-700 pr-4">
-                {recommendationBlurb}
-              </p>
-              <button 
-                onClick={() => setShowChatbot(!showChatbot)}
-                className="flex-shrink-0 p-2 text-primary-600 hover:text-primary-800 transition-colors rounded-full hover:bg-primary-50"
-                aria-label={showChatbot ? "Hide chat" : "Show chat"}
-              >
-                {showChatbot ? <ChevronUp size={20} /> : <MessageCircle size={20} />}
-              </button>
-            </div>
-          </div>
-          
-          {/* Chatbot interface */}
-          {showChatbot && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              className="border-t border-gray-100 bg-white bg-opacity-90"
+      )}
+      
+      {/* Recommendation blurb with chatbot toggle */}
+      <motion.div
+        className="mt-4 bg-white bg-opacity-70 backdrop-blur-sm rounded-xl border border-gray-100 shadow-sm overflow-hidden"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.3 }}
+      >
+        <div className="p-4">
+          <div className="flex justify-between items-start">
+            <p className="text-lg text-gray-700 pr-4">
+              {recommendationBlurb}
+            </p>
+            <button 
+              onClick={() => setShowChatbot(!showChatbot)}
+              className="flex-shrink-0 p-2 text-primary-600 hover:text-primary-800 transition-colors rounded-full hover:bg-primary-50"
+              aria-label={showChatbot ? "Hide chat" : "Show chat"}
             >
+              {showChatbot ? <ChevronUp size={20} /> : <MessageCircle size={20} />}
+            </button>
+          </div>
+        </div>
+        
+        {/* Chatbot interface */}
+        {showChatbot && (
+          <motion.div 
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="border-t border-gray-100 bg-white bg-opacity-90"
+          >
               {/* Chat history */}
               <div className="max-h-60 overflow-y-auto p-4 space-y-3">
                 {chatHistory.length > 0 ? (
