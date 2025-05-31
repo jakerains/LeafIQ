@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { X, Download, Upload, FileJson, FileText, Database } from 'lucide-react';
 import { Button } from '../../../components/ui/button';
+import ImportExportInstructions from './ImportExportInstructions';
 
 interface ImportExportOptionsProps {
   onClose: () => void;
@@ -13,6 +14,7 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
   const [exportFormat, setExportFormat] = useState('json');
   const [jsonInput, setJsonInput] = useState('');
   const [markdownInput, setMarkdownInput] = useState('');
+  const [showInstructions, setShowInstructions] = useState(false);
 
   const handleImport = () => {
     // In a real app, this would process the import
@@ -46,7 +48,7 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
     if (exportFormat === 'json') {
       const dataStr = JSON.stringify(dummyData, null, 2);
       const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-      const exportName = 'mary_inventory_export.json';
+      const exportName = 'leafiq_inventory_export.json';
       
       const linkElement = document.createElement('a');
       linkElement.setAttribute('href', dataUri);
@@ -60,7 +62,7 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
       });
       
       const dataUri = 'data:text/csv;charset=utf-8,'+ encodeURIComponent(csv);
-      const exportName = 'mary_inventory_export.csv';
+      const exportName = 'leafiq_inventory_export.csv';
       
       const linkElement = document.createElement('a');
       linkElement.setAttribute('href', dataUri);
@@ -70,6 +72,10 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
     
     alert('Data exported successfully');
   };
+
+  if (showInstructions) {
+    return <ImportExportInstructions onClose={() => setShowInstructions(false)} />;
+  }
 
   return (
     <motion.div
@@ -159,9 +165,17 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
 
           {importSource === 'json' && (
             <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Paste JSON data:
-              </label>
+              <div className="flex justify-between items-center mb-2">
+                <label className="block text-sm font-medium text-gray-700">
+                  Paste JSON data:
+                </label>
+                <button
+                  onClick={() => setShowInstructions(true)}
+                  className="text-primary-600 hover:text-primary-800 text-sm"
+                >
+                  View Template & Instructions
+                </button>
+              </div>
               <textarea
                 value={jsonInput}
                 onChange={(e) => setJsonInput(e.target.value)}
@@ -199,9 +213,17 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
 
           {importSource === 'markdown' && (
             <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Paste Markdown data:
-              </label>
+              <div className="flex justify-between items-center mb-2">
+                <label className="block text-sm font-medium text-gray-700">
+                  Paste Markdown data:
+                </label>
+                <button
+                  onClick={() => setShowInstructions(true)}
+                  className="text-primary-600 hover:text-primary-800 text-sm"
+                >
+                  View Template & Instructions
+                </button>
+              </div>
               <textarea
                 value={markdownInput}
                 onChange={(e) => setMarkdownInput(e.target.value)}

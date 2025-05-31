@@ -1,0 +1,257 @@
+{
+  "metadata": {
+    "format_version": "1.0",
+    "organization_id": "YOUR_ORGANIZATION_ID", 
+    "timestamp": "2025-05-30T12:00:00Z"
+  },
+  "products": [
+    /* FLOWER EXAMPLE */
+    {
+      "id": "flower-001", /* Unique identifier for this product */
+      "name": "Blue Dream", /* Product name */
+      "brand": "Your Brand", /* Cultivator/manufacturer */
+      "category": "flower", /* Main category: flower, concentrate, edible, vaporizer, pre-roll, tincture, topical, accessories */
+      "subcategory": null, /* Optional subcategory */
+      "description": "A sativa-dominant hybrid with sweet berry aroma and balanced effects",
+      "image_url": "https://example.com/images/blue-dream.jpg", /* URL to product image */
+      "strain_type": "hybrid", /* One of: sativa, indica, hybrid, cbd */
+      "variants": [
+        {
+          "id": "flower-001-var1", /* Unique identifier for this variant */
+          "size_weight": "1g", /* Weight or size of the product */
+          "price": 12.00, /* Current price in USD */
+          "original_price": 15.00, /* Original price if on sale, otherwise same as price */
+          "thc_percentage": 22.5, /* THC percentage */
+          "cbd_percentage": 0.1, /* CBD percentage */
+          "total_cannabinoids": 23.4, /* Optional: total cannabinoids percentage */
+          "inventory_level": 25, /* Current stock quantity */
+          "is_available": true, /* Whether product is available */
+          "terpene_profile": {
+            "myrcene": 0.83,
+            "limonene": 0.43,
+            "pinene": 0.31,
+            "caryophyllene": 0.22,
+            "linalool": 0.08,
+            "humulene": 0.15,
+            "terpinolene": 0.05,
+            "ocimene": 0.12
+            /* Include any other terpenes and their percentages */
+          }
+        },
+        {
+          "id": "flower-001-var2",
+          "size_weight": "3.5g",
+          "price": 35.00,
+          "original_price": 35.00,
+          "thc_percentage": 22.5,
+          "cbd_percentage": 0.1,
+          "inventory_level": 18,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.83,
+            "limonene": 0.43,
+            "pinene": 0.31,
+            "caryophyllene": 0.22
+          }
+        }
+      ]
+    },
+
+    /* CONCENTRATE EXAMPLE */
+    {
+      "id": "concentrate-001",
+      "name": "Super Lemon Haze Live Rosin",
+      "brand": "Your Extracts",
+      "category": "concentrate",
+      "subcategory": "live_rosin", /* Optional: concentrate type (live_rosin, badder, shatter, etc) */
+      "description": "Premium solventless concentrate with citrus terpene profile",
+      "image_url": "https://example.com/images/super-lemon-haze-rosin.jpg",
+      "strain_type": "sativa",
+      "variants": [
+        {
+          "id": "concentrate-001-var1",
+          "size_weight": "1g",
+          "price": 60.00,
+          "original_price": 60.00,
+          "thc_percentage": 76.8,
+          "cbd_percentage": 0.3,
+          "inventory_level": 12,
+          "is_available": true,
+          "terpene_profile": {
+            "limonene": 1.2,
+            "terpinolene": 0.8,
+            "myrcene": 0.4,
+            "pinene": 0.3
+          }
+        }
+      ]
+    },
+
+    /* EDIBLE EXAMPLE */
+    {
+      "id": "edible-001",
+      "name": "Mixed Berry Gummies",
+      "brand": "Your Edibles",
+      "category": "edible",
+      "subcategory": "gummies",
+      "description": "Delicious mixed berry-flavored gummies with precise dosing",
+      "image_url": "https://example.com/images/mixed-berry-gummies.jpg",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "edible-001-var1",
+          "size_weight": "10pk (100mg total)",
+          "price": 25.00,
+          "original_price": 25.00,
+          "thc_percentage": 100.0, /* For edibles, this is total mg in package */
+          "cbd_percentage": 0.0,
+          "inventory_level": 30,
+          "is_available": true,
+          "terpene_profile": {} /* Terpene profiles optional for edibles */
+        }
+      ]
+    },
+
+    /* VAPORIZER EXAMPLE */
+    {
+      "id": "vape-001",
+      "name": "Gelato Liquid Diamonds Cart",
+      "brand": "Your Vapes",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Premium 510-thread cartridge with liquid diamonds extract",
+      "image_url": "https://example.com/images/gelato-cart.jpg",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "vape-001-var1",
+          "size_weight": "0.5g",
+          "price": 45.00,
+          "original_price": 45.00,
+          "thc_percentage": 85.2,
+          "cbd_percentage": 0.1,
+          "inventory_level": 15,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.6,
+            "limonene": 0.8,
+            "caryophyllene": 0.4
+          }
+        }
+      ]
+    },
+
+    /* PRE-ROLL EXAMPLE */
+    {
+      "id": "preroll-001",
+      "name": "Wedding Cake Pre-Roll",
+      "brand": "Your Rolls",
+      "category": "pre_rolls",
+      "subcategory": null,
+      "description": "Premium indoor flower in a perfectly rolled joint",
+      "image_url": "https://example.com/images/wedding-cake-preroll.jpg",
+      "strain_type": "indica",
+      "variants": [
+        {
+          "id": "preroll-001-var1",
+          "size_weight": "1g",
+          "price": 8.00,
+          "original_price": 8.00,
+          "thc_percentage": 23.7,
+          "cbd_percentage": 0.1,
+          "inventory_level": 40,
+          "is_available": true,
+          "terpene_profile": {
+            "limonene": 0.3,
+            "myrcene": 0.9,
+            "caryophyllene": 0.5,
+            "linalool": 0.4
+          }
+        },
+        {
+          "id": "preroll-001-var2",
+          "size_weight": "5pk (2.5g total)",
+          "price": 35.00,
+          "original_price": 40.00,
+          "thc_percentage": 23.7,
+          "cbd_percentage": 0.1,
+          "inventory_level": 20,
+          "is_available": true,
+          "terpene_profile": {
+            "limonene": 0.3,
+            "myrcene": 0.9,
+            "caryophyllene": 0.5,
+            "linalool": 0.4
+          }
+        }
+      ]
+    },
+
+    /* TINCTURE EXAMPLE */
+    {
+      "id": "tincture-001",
+      "name": "Full Spectrum CBD/THC Tincture",
+      "brand": "Your Wellness",
+      "category": "tincture",
+      "subcategory": null,
+      "description": "1:1 ratio CBD/THC tincture with MCT oil base",
+      "image_url": "https://example.com/images/full-spectrum-tincture.jpg",
+      "strain_type": "balanced",
+      "variants": [
+        {
+          "id": "tincture-001-var1",
+          "size_weight": "30ml",
+          "price": 65.00,
+          "original_price": 65.00,
+          "thc_percentage": 300.0, /* Total mg in bottle */
+          "cbd_percentage": 300.0, /* Total mg in bottle */
+          "inventory_level": 10,
+          "is_available": true,
+          "terpene_profile": {}
+        }
+      ]
+    }
+  ],
+  
+  /* UPLOAD INSTRUCTIONS */
+  "instructions": {
+    "1": "Replace example products with your own inventory",
+    "2": "Ensure each product and variant has a unique ID",
+    "3": "Include at least name, brand, category, price, and THC% for all products",
+    "4": "Terpene profiles are optional but recommended for flower and concentrates",
+    "5": "Upload the completed JSON file during the onboarding process"
+  },
+
+  /* REFERENCE VALUES */
+  "reference": {
+    "valid_categories": [
+      "flower",
+      "concentrate",
+      "edible",
+      "vaporizer",
+      "pre_rolls",
+      "tincture",
+      "topical",
+      "accessories"
+    ],
+    "valid_strain_types": [
+      "sativa",
+      "indica",
+      "hybrid",
+      "balanced",
+      "cbd"
+    ],
+    "common_terpenes": [
+      "myrcene",
+      "limonene",
+      "pinene",
+      "caryophyllene",
+      "linalool",
+      "humulene",
+      "terpinolene",
+      "ocimene",
+      "bisabolol",
+      "valencene"
+    ]
+  }
+}
