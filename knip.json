@@ -1,0 +1,31 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": [
+    "index.html",
+    "src/main.tsx"
+  ],
+  "project": [
+    "src/**/*.{ts,tsx,js,jsx}"
+  ],
+  "ignore": [
+    "dist/**",
+    "node_modules/**",
+    "**/*.d.ts"
+  ],
+  "ignoreDependencies": [
+    "@types/*",
+    "typescript",
+    "vite",
+    "eslint",
+    "tailwindcss",
+    "autoprefixer",
+    "postcss",
+    "@vitejs/plugin-react",
+    "typescript-eslint",
+    "eslint-plugin-*",
+    "globals"
+  ],
+  "vite": {
+    "config": "vite.config.ts"
+  }
+} 

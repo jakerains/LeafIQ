@@ -8,8 +8,9 @@ import LoginForm from './components/auth/LoginForm';
 import KioskView from './views/kiosk/KioskView';
 import StaffView from './views/staff/StaffView';
 import AdminView from './views/admin/AdminView';
-import AuthGuard from './components/auth/AuthGuard';
-import { useAuthStore } from './stores/authStore';
+import { SimpleAuthProvider } from './components/auth/SimpleAuthProvider';
+import { SimpleRouteGuard } from './components/auth/SimpleRouteGuard';
+import { useSimpleAuthStore } from './stores/simpleAuthStore';
 import PricingPage from './views/pricing/PricingPage';
 import CheckoutSuccess from './views/checkout/CheckoutSuccess';
 import CheckoutCanceled from './views/checkout/CheckoutCanceled';
@@ -17,25 +18,7 @@ import SubscriptionDetails from './views/account/SubscriptionDetails';
 import VersionDisplay from './components/ui/VersionDisplay';
 
 function App() {
-  const { initializeAuth, isInitialized } = useAuthStore();
   const location = useLocation();
-  
-  useEffect(() => {
-    // Initialize auth state when app loads
-    initializeAuth();
-  }, [initializeAuth]);
-
-  // Show loading state while auth is initializing
-  if (!isInitialized) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading...</p>
-        </div>
-      </div>
-    );
-  }
 
   // Determine version display position based on current route
   const getVersionPosition = () => {
@@ -71,21 +54,63 @@ function App() {
             <Route path="success" element={<CheckoutSuccess />} />
             <Route path="canceled" element={<CheckoutCanceled />} />
           </Route>
-          <Route path="/kiosk/*" element={<KioskView />} />
+          
+          {/* New Simplified Auth Flow */}
+          <Route 
+            path="/kiosk/*" 
+            element={
+              <SimpleAuthProvider>
+                <SimpleRouteGuard allowedModes={['customer']}>
+                  <KioskView />
+                </SimpleRouteGuard>
+              </SimpleAuthProvider>
+            } 
+          />
           <Route 
             path="/staff/*" 
             element={
-              <AuthGuard requiredRole="staff">
-                <StaffView />
-              </AuthGuard>
+              <SimpleAuthProvider>
+                <SimpleRouteGuard allowedModes={['employee']}>
+                  <StaffView />
+                </SimpleRouteGuard>
+              </SimpleAuthProvider>
             } 
           />
           <Route 
             path="/admin/*" 
             element={
-              <AuthGuard requiredRole="admin">
-                <AdminView />
-              </AuthGuard>
+              <SimpleAuthProvider>
+                <SimpleRouteGuard allowedModes={['admin']}>
+                  <AdminView />
+                </SimpleRouteGuard>
+              </SimpleAuthProvider>
+            } 
+          />
+          
+          {/* Simple Auth Flow Entry Point */}
+          <Route 
+            path="/app/*" 
+            element={
+              <SimpleAuthProvider>
+                <Routes>
+                  <Route path="kiosk/*" element={
+                    <SimpleRouteGuard allowedModes={['customer']}>
+                      <KioskView />
+                    </SimpleRouteGuard>
+                  } />
+                  <Route path="staff/*" element={
+                    <SimpleRouteGuard allowedModes={['employee']}>
+                      <StaffView />
+                    </SimpleRouteGuard>
+                  } />
+                  <Route path="admin/*" element={
+                    <SimpleRouteGuard allowedModes={['admin']}>
+                      <AdminView />
+                    </SimpleRouteGuard>
+                  } />
+                  <Route path="" element={<Navigate to="/app/kiosk" replace />} />
+                </Routes>
+              </SimpleAuthProvider>
             } 
           />
         </Routes>

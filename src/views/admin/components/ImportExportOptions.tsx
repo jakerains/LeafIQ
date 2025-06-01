@@ -39,7 +39,7 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
     setImportResult(null);
 
     try {
-      if (importSource === 'json') {
+    if (importSource === 'json') {
         if (!jsonInput.trim()) {
           setImportResult({
             success: false,
@@ -49,7 +49,7 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
         }
 
         let parsedData;
-        try {
+      try {
           parsedData = JSON.parse(jsonInput);
         } catch (error) {
           setImportResult({
@@ -82,11 +82,11 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
         if (result.success) {
           await fetchProducts();
           setTimeout(() => {
-            onClose();
+        onClose();
           }, 3000);
-        }
+      }
 
-      } else if (importSource === 'markdown') {
+    } else if (importSource === 'markdown') {
         if (!markdownInput.trim()) {
           setImportResult({
             success: false,
@@ -123,7 +123,7 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
           if (result.success) {
             await fetchProducts();
             setTimeout(() => {
-              onClose();
+        onClose();
             }, 3000);
           }
 
@@ -164,36 +164,36 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
         alert('No inventory data found to export.');
         return;
       }
-
-      if (exportFormat === 'json') {
+    
+    if (exportFormat === 'json') {
         const dataStr = JSON.stringify(exportData, null, 2);
-        const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+      const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
         const exportName = `leafiq_inventory_export_${new Date().toISOString().split('T')[0]}.json`;
-        
-        const linkElement = document.createElement('a');
-        linkElement.setAttribute('href', dataUri);
-        linkElement.setAttribute('download', exportName);
-        linkElement.click();
+      
+      const linkElement = document.createElement('a');
+      linkElement.setAttribute('href', dataUri);
+      linkElement.setAttribute('download', exportName);
+      linkElement.click();
         
         alert(`Exported ${exportData.products.length} products successfully!`);
-      } else if (exportFormat === 'csv') {
-        // Generate CSV format
+    } else if (exportFormat === 'csv') {
+      // Generate CSV format
         let csv = 'product_id,product_name,brand,category,variant_id,size_weight,price,thc_percentage,cbd_percentage,inventory_level,is_available\n';
         
         exportData.products.forEach(product => {
           product.variants.forEach(variant => {
             csv += `"${product.id}","${product.name}","${product.brand}","${product.category}","${variant.id}","${variant.size_weight}",${variant.price},${variant.thc_percentage || ''},${variant.cbd_percentage || ''},${variant.inventory_level},${variant.is_available}\n`;
           });
-        });
-        
-        const dataUri = 'data:text/csv;charset=utf-8,'+ encodeURIComponent(csv);
+      });
+      
+      const dataUri = 'data:text/csv;charset=utf-8,'+ encodeURIComponent(csv);
         const exportName = `leafiq_inventory_export_${new Date().toISOString().split('T')[0]}.csv`;
-        
-        const linkElement = document.createElement('a');
-        linkElement.setAttribute('href', dataUri);
-        linkElement.setAttribute('download', exportName);
-        linkElement.click();
-        
+      
+      const linkElement = document.createElement('a');
+      linkElement.setAttribute('href', dataUri);
+      linkElement.setAttribute('download', exportName);
+      linkElement.click();
+    
         alert(`Exported ${exportData.products.length} products successfully!`);
       }
     } catch (error) {

@@ -134,7 +134,7 @@ const DemoView = () => {
                 </div>
               </div>
               
-              <Link to="/auth/login?role=staff" className="block">
+                              <Link to="/app" className="block">
                 <ShimmerButton
                   className="w-full py-4 text-lg"
                   shimmerColor="#f97316"
@@ -184,7 +184,7 @@ const DemoView = () => {
                 </div>
               </div>
               
-              <Link to="/auth/login?role=admin" className="block">
+                              <Link to="/app" className="block">
                 <ShimmerButton
                   className="w-full py-4 text-lg"
                   shimmerColor="#22c55e"

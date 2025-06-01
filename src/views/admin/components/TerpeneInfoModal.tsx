@@ -119,14 +119,15 @@ const TerpeneInfoModal: React.FC<TerpeneInfoModalProps> = ({ isOpen, onClose, te
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm overflow-y-auto"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={handleBackdropClick}
+          style={{ alignItems: 'safe center' }}
         >
           <motion.div
-            className="relative w-full max-w-3xl bg-white rounded-3xl shadow-2xl overflow-hidden"
+            className="relative w-full max-w-3xl max-h-[90vh] bg-white rounded-3xl shadow-2xl overflow-hidden my-auto mx-4 flex flex-col"
             initial={{ scale: 0.9, y: 20, opacity: 0 }}
             animate={{ scale: 1, y: 0, opacity: 1 }}
             exit={{ scale: 0.9, y: 20, opacity: 0 }}
@@ -162,7 +163,7 @@ const TerpeneInfoModal: React.FC<TerpeneInfoModalProps> = ({ isOpen, onClose, te
             </div>
 
             {/* Content */}
-            <div className="p-6 max-h-[70vh] overflow-y-auto">
+            <div className="p-6 flex-1 overflow-y-auto">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
                   <section className="mb-6">

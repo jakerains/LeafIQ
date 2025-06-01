@@ -9,3 +9,10 @@ Make interfaces that feel premium but approachable - this industry is evolving f
 By default, this template supports JSX syntax with Tailwind CSS classes, React hooks, and Lucide React for icons. Do not install other packages for UI themes, icons, etc unless absolutely necessary or I request them.
 
 Use icons from lucide-react for logos.
+
+**CRITICAL JSX SYNTAX RULES:**
+- NEVER escape quotes in JSX attributes. Use `className="text-primary-600"` NOT `className=\"text-primary-600\"`
+- In JSX attributes, use regular double quotes: `href="/terms"` NOT `href=\"/terms\"`
+- Only escape quotes when they're inside JavaScript string literals: `{title: "He said \"hello\""}`
+- JSX parsing will fail with "Expecting Unicode escape sequence" if you incorrectly escape quotes in attributes
+- When editing existing JSX code, preserve the existing quote style and don't add unnecessary escaping

@@ -1,0 +1,32 @@
+# Large data files that rarely change
+truenorthdemodata/
+products_chunk_*
+bulk-load-products.js
+efficient-load.js
+load-all-inventory.js
+load-remaining-products.js
+
+# Package and build files
+package-lock.json
+node_modules/
+dist/
+.vite/
+
+# Generated types (stable, rarely edited manually)
+src/types/supabase.ts
+
+# Large demo data file
+src/data/demoData.ts
+
+# Config files (stable)
+vite.config.ts
+tailwind.config.js
+postcss.config.js
+eslint.config.js
+tsconfig*.json
+
+# Documentation and misc
+README.md
+CLAUDE.md
+docs/
+knip.json 

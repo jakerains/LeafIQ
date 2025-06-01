@@ -9,6 +9,77 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      admin_credentials: {
+        Row: {
+          admin_name: string
+          created_at: string | null
+          id: string
+          is_active: boolean | null
+          passkey: string
+          permissions: Json | null
+          updated_at: string | null
+        }
+        Insert: {
+          admin_name: string
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          passkey: string
+          permissions?: Json | null
+          updated_at?: string | null
+        }
+        Update: {
+          admin_name?: string
+          created_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          passkey?: string
+          permissions?: Json | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      dispensary_credentials: {
+        Row: {
+          created_at: string | null
+          dispensary_name: string
+          id: string
+          is_active: boolean | null
+          organization_id: string | null
+          password_hash: string
+          updated_at: string | null
+          username: string
+        }
+        Insert: {
+          created_at?: string | null
+          dispensary_name: string
+          id?: string
+          is_active?: boolean | null
+          organization_id?: string | null
+          password_hash: string
+          updated_at?: string | null
+          username: string
+        }
+        Update: {
+          created_at?: string | null
+          dispensary_name?: string
+          id?: string
+          is_active?: boolean | null
+          organization_id?: string | null
+          password_hash?: string
+          updated_at?: string | null
+          username?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "dispensary_credentials_organization_id_fkey"
+            columns: ["organization_id"]
+            isOneToOne: false
+            referencedRelation: "organizations"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       organizations: {
         Row: {
           created_at: string | null
@@ -668,23 +739,4 @@ export type CompositeTypes<
   ? Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
   : PublicCompositeTypeNameOrOptions extends keyof DefaultSchema["CompositeTypes"]
     ? DefaultSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
-    : never
-
-export const Constants = {
-  public: {
-    Enums: {
-      stripe_order_status: ["pending", "completed", "canceled"],
-      stripe_subscription_status: [
-        "not_started",
-        "incomplete",
-        "incomplete_expired",
-        "trialing",
-        "active",
-        "past_due",
-        "canceled",
-        "unpaid",
-        "paused",
-      ],
-    },
-  },
-} as const
+    : never 

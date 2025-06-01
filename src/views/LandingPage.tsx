@@ -21,7 +21,7 @@ const LandingPage = () => {
             />
             <div className="flex gap-4">
               <Link 
-                to="/auth/login"
+                to="/app"
                 className="px-6 py-3 bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200 text-gray-900 font-medium hover:bg-white hover:shadow-md transition-all duration-300"
               >
                 Log In

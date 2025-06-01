@@ -1,1070 +1,609 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FlaskRound as Flask, Plus, Search, Edit, Trash2, Circle as InfoCircle, X, Save, ChevronDown, ChevronUp } from 'lucide-react';
+import { FlaskRound as Flask, Plus, Search, Edit, Trash2, Circle as InfoCircle, X, Save, ChevronDown, ChevronUp, Loader2, Upload, Download, Sparkles } from 'lucide-react';
 import { Button } from '../../components/ui/button';
 import { cn } from '../../lib/utils';
 import TerpeneInfoModal from './components/TerpeneInfoModal';
-
-// Enhanced Terpene interface with new fields
-interface Terpene {
-  id: string;
-  name: string;
-  aliases?: string[];
-  profile: {
-    aroma: string[];
-    flavor: string[];
-  };
-  commonSources: string[];
-  effects: string[];
-  therapeuticNotes: string;
-  research?: Array<{
-    title: string;
-    link: string;
-    source: string;
-  }>;
-  usageVibes: string[];
-  defaultIntensity: string;
-  // Legacy fields for backward compatibility
-  aroma?: string;
-  flavorNotes?: string;
-  effectTags?: string[];
-}
-
-// Updated comprehensive terpene data
-const initialTerpenes: Terpene[] = [
-  {
-    id: 'terpene-1',
-    name: 'Myrcene',
-    profile: { aroma: ["Earthy", "Musky", "Clove"], flavor: ["Ripe mango", "Herbal"] },
-    commonSources: ["Mango", "Lemongrass", "Bay leaves", "Hops", "Thyme"],
-    effects: ["Sedative", "Pain Relief", "Relaxation"],
-    therapeuticNotes: "Anxiolytic, muscle-relaxant, anti-inflammatory",
-    research: [
-      {
-        title: "Myrcene—What Are the Potential Health Benefits of This Flavouring Terpene?",
-        link: "https://pubmed.ncbi.nlm.nih.gov/34350208/",
-        source: "PubMed"
-      }
-    ],
-    usageVibes: ["relaxed", "sleepy", "calm"],
-    defaultIntensity: "moderate"
-  },
-  {
-    id: 'terpene-2',
-    name: 'Limonene',
-    profile: { aroma: ["Citrus", "Sweet lemon"], flavor: ["Orange zest", "Lemon"] },
-    commonSources: ["Lemon peel", "Orange peel", "Rosemary", "Juniper"],
-    effects: ["Uplift", "Mood-Boost", "Stress Relief"],
-    therapeuticNotes: "Anxiolytic, anti-depressant, anti-inflammatory",
-    research: [
-      {
-        title: "Limonene has anti-anxiety activity via adenosine A2A receptor modulation",
-        link: "https://pubmed.ncbi.nlm.nih.gov/33548867/",
-        source: "PubMed"
-      }
-    ],
-    usageVibes: ["happy", "focused", "energized"],
-    defaultIntensity: "moderate"
-  },
-  {
-    id: 'terpene-3',
-    name: 'Pinene',
-    aliases: ['α-Pinene', 'β-Pinene'],
-    profile: { aroma: ["Pine needles", "Crisp forest"], flavor: ["Pine", "Rosemary"] },
-    commonSources: ["Pine resin", "Dill", "Basil", "Parsley"],
-    effects: ["Focus", "Alert", "Memory Aid"],
-    therapeuticNotes: "Bronchodilator, neuroprotective, anti-inflammatory",
-    research: [
-      {
-        title: "Neuroprotective role of α- and β-pinene against Aβ-mediated neurotoxicity",
-        link: "https://pubmed.ncbi.nlm.nih.gov/38070653/",
-        source: "PubMed"
-      }
-    ],
-    usageVibes: ["clear-headed", "alert", "fresh"],
-    defaultIntensity: "moderate"
-  },
-  {
-    id: 'terpene-4',
-    name: 'Linalool',
-    profile: { aroma: ["Lavender", "Floral"], flavor: ["Lavender", "Citrus-spice"] },
-    commonSources: ["Lavender", "Coriander", "Mint", "Cinnamon"],
-    effects: ["Calm", "Sleep", "Anti-Anxiety"],
-    therapeuticNotes: "Anxiolytic, analgesic, anti-inflammatory",
-    research: [
-      {
-        title: "Linalool Odor-Induced Anxiolytic Effects in Mice",
-        link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6206409/",
-        source: "PMC"
-      }
-    ],
-    usageVibes: ["soothed", "dreamy", "chill"],
-    defaultIntensity: "moderate"
-  },
-  {
-    id: 'terpene-5',
-    name: 'Caryophyllene',
-    aliases: ['β-Caryophyllene'],
-    profile: { aroma: ["Peppercorn", "Spice", "Wood"], flavor: ["Black pepper", "Clove"] },
-    commonSources: ["Black pepper", "Clove", "Cinnamon", "Hops"],
-    effects: ["Relief", "Anti-Inflammatory", "Relax"],
-    therapeuticNotes: "CB2 agonist, immunomodulatory",
-    research: [
-      {
-        title: "β-Caryophyllene, a CB2 receptor agonist, produces anxiolytic-like effects",
-        link: "https://pubmed.ncbi.nlm.nih.gov/24930711/",
-        source: "PubMed"
-      }
-    ],
-    usageVibes: ["grounded", "relaxed", "comforted"],
-    defaultIntensity: "moderate"
-  },
-  {
-    id: 'terpene-6',
-    name: 'Humulene',
-    aliases: ['α-Humulene'],
-    profile: { aroma: ["Hops", "Woody", "Herbal"], flavor: ["Hops", "Earthy"] },
-    commonSources: ["Hops", "Sage", "Ginseng", "Black pepper"],
-    effects: ["Appetite Suppression", "Anti-Bacterial", "Relax"],
-    therapeuticNotes: "Anti-inflammatory activity",
-    research: [
-      {
-        title: "Anti-inflammatory effects of α-humulene",
-        link: "https://pubmed.ncbi.nlm.nih.gov/38388989/",
-        source: "PubMed"
-      }
-    ],
-    usageVibes: ["balanced", "calm", "light"],
-    defaultIntensity: "moderate"
-  },
-  {
-    id: 'terpene-7',
-    name: 'Terpinolene',
-    profile: { aroma: ["Pine-citrus", "Fresh herbs"], flavor: ["Pine", "Citrus", "Lilac"] },
-    commonSources: ["Nutmeg", "Cumin", "Tea tree", "Lilac"],
-    effects: ["Creative Spark", "Light Energy", "Clear Mind"],
-    therapeuticNotes: "Sedative, antioxidant",
-    research: [
-      {
-        title: "Sedative effect of inhaled terpinolene in mice",
-        link: "https://pubmed.ncbi.nlm.nih.gov/23339024/",
-        source: "PubMed"
-      }
-    ],
-    usageVibes: ["creative", "airy", "dreamy"],
-    defaultIntensity: "moderate"
-  },
-  {
-    id: 'terpene-8',
-    name: 'Ocimene',
-    profile: { aroma: ["Sweet herb-mint", "Fruity"], flavor: ["Sweet", "Herbal", "Citrus"] },
-    commonSources: ["Mint", "Parsley", "Orchids", "Mango"],
-    effects: ["Energize", "Social Ease", "Decongest"],
-    therapeuticNotes: "Antiviral, antifungal",
-    research: [
-      {
-        title: "Phytochemical analysis & in-vitro antiviral activities of Ocimene-rich oils",
-        link: "https://pubmed.ncbi.nlm.nih.gov/18357554/",
-        source: "PubMed"
-      }
-    ],
-    usageVibes: ["fresh", "talkative", "bright"],
-    defaultIntensity: "moderate"
-  },
-  {
-    id: 'terpene-9',
-    name: 'Bisabolol',
-    aliases: ['α-Bisabolol'],
-    profile: { aroma: ["Chamomile", "Sweet floral"], flavor: ["Floral", "Sweet"] },
-    commonSources: ["Chamomile", "Candeia tree", "Sage"],
-    effects: ["Soothing", "Skin Relief", "Relax"],
-    therapeuticNotes: "Anti-inflammatory & anti-irritant",
-    research: [
-      {
-        title: "α-Bisabolol reduces pro-inflammatory cytokine production",
-        link: "https://pubmed.ncbi.nlm.nih.gov/24894548/",
-        source: "PubMed"
-      }
-    ],
-    usageVibes: ["gentle", "calm", "soothed"],
-    defaultIntensity: "moderate"
-  },
-  {
-    id: 'terpene-10',
-    name: 'Valencene',
-    profile: { aroma: ["Tangy orange-grapefruit"], flavor: ["Orange", "Grapefruit"] },
-    commonSources: ["Valencia orange", "Grapefruit"],
-    effects: ["Focus", "Day-Bright", "Anti-Inflammatory"],
-    therapeuticNotes: "Antioxidant, anti-inflammatory",
-    research: [
-      {
-        title: "In vivo and in silico anti-inflammatory properties of Valencene",
-        link: "https://pubmed.ncbi.nlm.nih.gov/36076580/",
-        source: "PubMed"
-      }
-    ],
-    usageVibes: ["alert", "citrusy", "bright"],
-    defaultIntensity: "moderate"
-  },
-  {
-    id: 'terpene-11',
-    name: 'Eucalyptol (1,8-Cineole)',
-    profile: { aroma: ["Minty", "Cooling", "Eucalyptus"], flavor: ["Minty", "Cool"] },
-    commonSources: ["Eucalyptus leaves", "Bay leaves", "Sage", "Rosemary"],
-    effects: ["Respiratory Relief", "Alertness", "Anti-Inflammatory"],
-    therapeuticNotes: "Bronchodilator & mucolytic",
-    research: [
-      {
-        title: "Anti-inflammatory activity of 1,8-cineole in bronchial asthma",
-        link: "https://pubmed.ncbi.nlm.nih.gov/12645832/",
-        source: "PubMed"
-      }
-    ],
-    usageVibes: ["clear", "refreshed", "cool"],
-    defaultIntensity: "moderate"
-  },
-  {
-    id: 'terpene-12',
-    name: 'Nerolidol',
-    profile: { aroma: ["Fresh bark", "Woody", "Citrus"], flavor: ["Woody", "Floral"] },
-    commonSources: ["Neroli", "Jasmine", "Tea tree", "Lemongrass"],
-    effects: ["Sedative", "Antioxidant", "Relaxation"],
-    therapeuticNotes: "Sedative & neuroprotective",
-    research: [
-      {
-        title: "Nerolidol shows sedative effects & antioxidative activity",
-        link: "https://pubmed.ncbi.nlm.nih.gov/23765368/",
-        source: "PubMed"
-      }
-    ],
-    usageVibes: ["sleepy", "woody", "relaxed"],
-    defaultIntensity: "moderate"
-  },
-  {
-    id: 'terpene-13',
-    name: 'Guaiol',
-    profile: { aroma: ["Woody", "Pine", "Rose"], flavor: ["Woody", "Pine"] },
-    commonSources: ["Cypress pine", "Guaiacum", "Conifer woods"],
-    effects: ["Antibacterial", "Relax", "Anti-Inflammatory"],
-    therapeuticNotes: "Antimicrobial; emerging anti-cancer studies",
-    research: [
-      {
-        title: "Microbial transformation of (−)-Guaiol & antibacterial activity",
-        link: "https://pubmed.ncbi.nlm.nih.gov/17385913/",
-        source: "PubMed"
-      }
-    ],
-    usageVibes: ["grounded", "woody", "calm"],
-    defaultIntensity: "moderate"
-  },
-  {
-    id: 'terpene-14',
-    name: 'Phytol',
-    profile: { aroma: ["Green", "Balsamic", "Floral"], flavor: ["Mild floral", "Green"] },
-    commonSources: ["Green tea", "Chlorophyll", "Hemp"],
-    effects: ["Antinociceptive", "Relaxation", "Antioxidant"],
-    therapeuticNotes: "Pain-relief & antioxidant",
-    research: [
-      {
-        title: "Antinociceptive and antioxidant activities of Phytol in vivo",
-        link: "https://pubmed.ncbi.nlm.nih.gov/26317107/",
-        source: "PubMed"
-      }
-    ],
-    usageVibes: ["mellow", "herbal", "calm"],
-    defaultIntensity: "moderate"
-  },
-  {
-    id: 'terpene-15',
-    name: 'Camphene',
-    profile: { aroma: ["Fir", "Woody", "Herbal"], flavor: ["Camphor", "Pine"] },
-    commonSources: ["Fir needles", "Cypress", "Camphor tree"],
-    effects: ["Lipid Lowering", "Anti-Inflammatory", "Respiratory Relief"],
-    therapeuticNotes: "Hypolipidemic & antioxidant",
-    research: [
-      {
-        title: "Camphene reduces plasma cholesterol and triglycerides",
-        link: "https://pubmed.ncbi.nlm.nih.gov/22073134/",
-        source: "PubMed"
-      }
-    ],
-    usageVibes: ["clear", "balanced", "fresh"],
-    defaultIntensity: "moderate"
-  },
-  {
-    id: 'terpene-16',
-    name: 'Borneol',
-    profile: { aroma: ["Camphor", "Minty", "Earthy"], flavor: ["Camphor", "Menthol"] },
-    commonSources: ["Camphor tree", "Mint", "Ginger"],
-    effects: ["Analgesic", "Anti-Itch", "Relaxation"],
-    therapeuticNotes: "Topical analgesic via TRPM8 activation",
-    research: [
-      {
-        title: "Topical borneol-induced analgesia mediated by TRPM8",
-        link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC5452010/",
-        source: "PMC"
-      }
-    ],
-    usageVibes: ["cool", "soothing", "calm"],
-    defaultIntensity: "moderate"
-  },
-  {
-    id: 'terpene-17',
-    name: 'Sabinene',
-    profile: { aroma: ["Spicy", "Peppery", "Citrus"], flavor: ["Spicy", "Woody"] },
-    commonSources: ["Black pepper", "Nutmeg", "Spruce"],
-    effects: ["Antioxidant", "Uplifting", "Anti-Inflammatory"],
-    therapeuticNotes: "Antioxidant & anti-radical",
-    research: [
-      {
-        title: "Antioxidant effects of sabinene hydrate on lipid stability",
-        link: "https://pubmed.ncbi.nlm.nih.gov/24841286/",
-        source: "PubMed"
-      }
-    ],
-    usageVibes: ["lively", "spicy", "vibrant"],
-    defaultIntensity: "moderate"
-  },
-  {
-    id: 'terpene-18',
-    name: 'α-Phellandrene',
-    profile: { aroma: ["Minty", "Citrus", "Peppery"], flavor: ["Mint", "Citrus"] },
-    commonSources: ["Eucalyptus", "Tulsi", "Cinnamon"],
-    effects: ["Anti-Inflammatory", "Energetic", "Uplifting"],
-    therapeuticNotes: "Inflammation modulation",
-    research: [
-      {
-        title: "α-Phellandrene attenuates inflammatory responses",
-        link: "https://pubmed.ncbi.nlm.nih.gov/27449945/",
-        source: "PubMed"
-      }
-    ],
-    usageVibes: ["invigorated", "bright", "minty"],
-    defaultIntensity: "moderate"
-  },
-  {
-    id: 'terpene-19',
-    name: 'Geraniol',
-    profile: { aroma: ["Floral", "Rose", "Fruity"], flavor: ["Rose", "Fruity"] },
-    commonSources: ["Rose oil", "Citronella", "Geranium"],
-    effects: ["Neuroprotective", "Mood Elevation", "Antioxidant"],
-    therapeuticNotes: "Neuroprotective & antioxidant",
-    research: [
-      {
-        title: "Neuroprotective effect of Geraniol on neurological disorders",
-        link: "https://pubmed.ncbi.nlm.nih.gov/35900613/",
-        source: "PubMed"
-      }
-    ],
-    usageVibes: ["uplifted", "floral", "bright"],
-    defaultIntensity: "moderate"
-  },
-  {
-    id: 'terpene-20',
-    name: '3-Carene',
-    profile: { aroma: ["Sweet", "Pine", "Cedar"], flavor: ["Pine", "Citrus"] },
-    commonSources: ["Cedar", "Pine resin", "Rosemary"],
-    effects: ["Anti-Inflammatory", "Sleep", "Bone Support"],
-    therapeuticNotes: "Anti-inflammatory & bone-healing potential",
-    research: [
-      {
-        title: "Anti-inflammatory effects of 3-carene in essential oils",
-        link: "https://pubmed.ncbi.nlm.nih.gov/31034956/",
-        source: "PubMed"
-      }
-    ],
-    usageVibes: ["drowsy", "woodsy", "cozy"],
-    defaultIntensity: "moderate"
-  },
-  {
-    id: 'terpene-21',
-    name: 'Fenchol',
-    profile: { aroma: ["Mint", "Pine", "Camphor"], flavor: ["Pine", "Mint"] },
-    commonSources: ["Basil", "Fennel", "Fir needles"],
-    effects: ["Antimicrobial", "Fresh", "Anti-Inflammatory"],
-    therapeuticNotes: "Broad-spectrum antimicrobial",
-    research: [
-      {
-        title: "Screening of antibacterial activities of oxygenated monoterpenes (fenchol)",
-        link: "https://pubmed.ncbi.nlm.nih.gov/17913064/",
-        source: "PubMed"
-      }
-    ],
-    usageVibes: ["crisp", "clean", "fresh"],
-    defaultIntensity: "moderate"
-  },
-  {
-    id: 'terpene-22',
-    name: 'β-Farnesene',
-    profile: { aroma: ["Green apple", "Woody"], flavor: ["Green", "Woody"] },
-    commonSources: ["Apple skins", "Ginger", "Hop oil"],
-    effects: ["Insect Repellent", "Focus", "Calm"],
-    therapeuticNotes: "Natural aphid alarm pheromone; agricultural applications",
-    research: [
-      {
-        title: "Aphid-repellent pheromone (E)-β-Farnesene generated in plants",
-        link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4343287/",
-        source: "PMC"
-      }
-    ],
-    usageVibes: ["focused", "herbal", "alert"],
-    defaultIntensity: "low"
-  },
-  {
-    id: 'terpene-23',
-    name: 'α-Terpineol',
-    profile: { aroma: ["Lilac", "Pine", "Citrus"], flavor: ["Lilac", "Floral"] },
-    commonSources: ["Lilac", "Pine oil", "Cajuput"],
-    effects: ["Soothing", "Pain Relief", "Sedative"],
-    therapeuticNotes: "Analgesic & antidepressant-like via cannabinoid system",
-    research: [
-      {
-        title: "Antidepressant-like effect of Terpineol in inflammatory model",
-        link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC7280984/",
-        source: "PMC"
-      }
-    ],
-    usageVibes: ["soothed", "peaceful", "soft"],
-    defaultIntensity: "moderate"
-  },
-  {
-    id: 'terpene-24',
-    name: 'Isopulegol',
-    profile: { aroma: ["Minty", "Herbal"], flavor: ["Mint", "Herbal"] },
-    commonSources: ["Lemon balm", "Mint species"],
-    effects: ["Anticonvulsant", "Relaxation", "Gastro-protective"],
-    therapeuticNotes: "GABA-modulating anticonvulsant & antioxidant",
-    research: [
-      {
-        title: "Isopulegol protects against PTZ-induced convulsions",
-        link: "https://pubmed.ncbi.nlm.nih.gov/19559770/",
-        source: "PubMed"
-      }
-    ],
-    usageVibes: ["cool", "calm", "relaxed"],
-    defaultIntensity: "low"
-  },
-  {
-    id: 'terpene-25',
-    name: 'Isoborneol',
-    profile: { aroma: ["Camphoraceous", "Minty"], flavor: ["Camphor", "Cooling"] },
-    commonSources: ["Borneol resin", "Conifer woods"],
-    effects: ["Antiviral", "Cooling", "Relaxation"],
-    therapeuticNotes: "Potent HSV-1 inhibitor; glycosylation blockade",
-    research: [
-      {
-        title: "Isoborneol: a potent inhibitor of herpes simplex virus replication",
-        link: "https://pubmed.ncbi.nlm.nih.gov/10517310/",
-        source: "PubMed"
-      }
-    ],
-    usageVibes: ["cool", "clean", "calm"],
-    defaultIntensity: "low"
-  }
-];
+import { TerpeneService } from '../../lib/terpeneService';
+import type { Terpene, TerpeneInsert, TerpeneUpdate } from '../../types/terpene';
+import { useAuthStore } from '../../stores/authStore';
 
 const TerpeneDatabase: React.FC = () => {
-  // State variables
-  const [terpenes, setTerpenes] = useState<Terpene[]>(initialTerpenes);
+  // Auth state
+  const { user, role } = useAuthStore();
+  const isAuthenticated = !!user;
+  const isAdmin = role === 'admin';
+
+  // State management
+  const [terpenes, setTerpenes] = useState<Terpene[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [isAddingTerpene, setIsAddingTerpene] = useState(false);
-  const [editingTerpeneId, setEditingTerpeneId] = useState<string | null>(null);
+  const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [editForm, setEditForm] = useState<Partial<Terpene>>({});
   const [selectedTerpene, setSelectedTerpene] = useState<Terpene | null>(null);
-  const [showTerpeneInfo, setShowTerpeneInfo] = useState(false);
-  const [isExpanded, setIsExpanded] = useState<Record<string, boolean>>({});
-  
-  // New terpene form state
-  const [newTerpene, setNewTerpene] = useState<Omit<Terpene, 'id'>>({
+  const [showInfoModal, setShowInfoModal] = useState(false);
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [showBulkImport, setShowBulkImport] = useState(false);
+  const [bulkImportData, setBulkImportData] = useState('');
+  const [newTerpene, setNewTerpene] = useState<TerpeneInsert>({
     name: '',
-    aliases: [],
-    profile: { aroma: [], flavor: [] },
-    commonSources: [],
-    effects: [''],
-    therapeuticNotes: '',
+    aroma: [],
+    flavor: [],
+    common_sources: [],
+    effects: [],
+    usage_vibes: [],
+    therapeutic_notes: '',
     research: [],
-    usageVibes: [],
-    defaultIntensity: 'moderate'
+    default_intensity: 'moderate'
   });
 
-  // Filtered terpenes based on search term
-  const filteredTerpenes = terpenes.filter(terpene => 
-    terpene.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    (terpene.aroma && terpene.aroma.toLowerCase().includes(searchTerm.toLowerCase())) ||
-    (terpene.profile.aroma.some(aroma => aroma.toLowerCase().includes(searchTerm.toLowerCase()))) ||
-    (terpene.effectTags && terpene.effectTags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))) ||
-    terpene.effects.some(effect => effect.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
+  // Load terpenes from database
+  useEffect(() => {
+    loadTerpenes();
+  }, []);
 
-  // Handle new terpene form input change
-  const handleNewTerpeneChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    field: keyof Omit<Terpene, 'id' | 'aliases' | 'effectTags'>
-  ) => {
-    setNewTerpene(prev => ({
-      ...prev,
-      [field]: e.target.value
-    }));
-  };
-
-  // Handle aliases change
-  const handleAliasesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const aliases = e.target.value.split(',').map(alias => alias.trim()).filter(alias => alias);
-    setNewTerpene(prev => ({
-      ...prev,
-      aliases
-    }));
-  };
-
-  // Handle effect tags change
-  const handleEffectTagChange = (index: number, value: string) => {
-    setNewTerpene(prev => {
-      const updatedTags = [...prev.effects];
-      updatedTags[index] = value;
-      return { ...prev, effects: updatedTags };
-    });
-  };
-
-  // Add new effect tag field
-  const addEffectTagField = () => {
-    setNewTerpene(prev => ({
-      ...prev,
-      effects: [...prev.effects, '']
-    }));
-  };
-
-  // Remove effect tag field
-  const removeEffectTagField = (index: number) => {
-    setNewTerpene(prev => {
-      const updatedTags = [...prev.effects];
-      updatedTags.splice(index, 1);
-      return { ...prev, effects: updatedTags.length ? updatedTags : [''] }; // Ensure at least one empty field
-    });
-  };
-
-  // Add new terpene
-  const handleAddTerpene = () => {
-    if (!newTerpene.name.trim()) return;
-
-    const newTerpeneEntry: Terpene = {
-      ...newTerpene,
-      id: `terpene-${Date.now()}`,
-      effects: newTerpene.effects.filter(effect => effect.trim())
-    };
-
-    setTerpenes([...terpenes, newTerpeneEntry]);
-    
-    // Reset form
-    setNewTerpene({
-      name: '',
-      aliases: [],
-      profile: { aroma: [], flavor: [] },
-      commonSources: [],
-      effects: [''],
-      therapeuticNotes: '',
-      research: [],
-      usageVibes: [],
-      defaultIntensity: 'moderate'
-    });
-    
-    setIsAddingTerpene(false);
-  };
-
-  // Edit terpene
-  const handleEditTerpene = (id: string) => {
-    const terpeneToEdit = terpenes.find(t => t.id === id);
-    if (!terpeneToEdit) return;
-    
-    // Pre-fill form with terpene data
-    setNewTerpene({
-      name: terpeneToEdit.name,
-      aliases: terpeneToEdit.aliases || [],
-      profile: terpeneToEdit.profile,
-      commonSources: terpeneToEdit.commonSources,
-      effects: terpeneToEdit.effects.length ? terpeneToEdit.effects : [''],
-      therapeuticNotes: terpeneToEdit.therapeuticNotes,
-      research: terpeneToEdit.research || [],
-      usageVibes: terpeneToEdit.usageVibes,
-      defaultIntensity: terpeneToEdit.defaultIntensity
-    });
-    
-    setEditingTerpeneId(id);
-    setIsAddingTerpene(true);
-  };
-
-  // Update terpene
-  const handleUpdateTerpene = () => {
-    if (!editingTerpeneId) return;
-
-    setTerpenes(prev => 
-      prev.map(terpene => 
-        terpene.id === editingTerpeneId 
-          ? {
-              ...terpene, 
-              name: newTerpene.name,
-              aliases: newTerpene.aliases,
-              profile: newTerpene.profile,
-              commonSources: newTerpene.commonSources,
-              effects: newTerpene.effects.filter(effect => effect.trim()),
-              therapeuticNotes: newTerpene.therapeuticNotes,
-              research: newTerpene.research,
-              usageVibes: newTerpene.usageVibes,
-              defaultIntensity: newTerpene.defaultIntensity
-            }
-          : terpene
-      )
-    );
-    
-    // Reset form and editing state
-    setNewTerpene({
-      name: '',
-      aliases: [],
-      profile: { aroma: [], flavor: [] },
-      commonSources: [],
-      effects: [''],
-      therapeuticNotes: '',
-      research: [],
-      usageVibes: [],
-      defaultIntensity: 'moderate'
-    });
-    
-    setEditingTerpeneId(null);
-    setIsAddingTerpene(false);
-  };
-
-  // Delete terpene
-  const handleDeleteTerpene = (id: string) => {
-    if (window.confirm('Are you sure you want to delete this terpene?')) {
-      setTerpenes(terpenes.filter(terpene => terpene.id !== id));
+  const loadTerpenes = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const { data } = await TerpeneService.getTerpenes();
+      setTerpenes(data);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to load terpenes');
+      console.error('Error loading terpenes:', err);
+    } finally {
+      setLoading(false);
     }
   };
 
-  // View terpene info
+  const handleSearch = async () => {
+    if (!searchTerm.trim()) {
+      loadTerpenes();
+      return;
+    }
+    
+    try {
+      setLoading(true);
+      const results = await TerpeneService.searchTerpenes(searchTerm);
+      setTerpenes(results);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Search failed');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleAddTerpene = async () => {
+    if (!isAuthenticated) {
+      setError('You must be logged in to add terpenes');
+      return;
+    }
+
+    try {
+      const createdTerpene = await TerpeneService.createTerpene(newTerpene);
+      setTerpenes(prev => [...prev, createdTerpene]);
+      setShowAddForm(false);
+      setNewTerpene({
+        name: '',
+        aroma: [],
+        flavor: [],
+        common_sources: [],
+        effects: [],
+        usage_vibes: [],
+        therapeutic_notes: '',
+        research: [],
+        default_intensity: 'moderate'
+      });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to create terpene');
+    }
+  };
+
+  const handleEditTerpene = (terpene: Terpene) => {
+    if (!isAuthenticated) {
+      setError('You must be logged in to edit terpenes');
+      return;
+    }
+    setEditingId(terpene.id);
+    setEditForm({ ...terpene });
+  };
+
+  const handleUpdateTerpene = async () => {
+    if (!editingId || !editForm.name || !isAuthenticated) return;
+    
+    try {
+      const updatedTerpene = await TerpeneService.updateTerpene({
+        id: editingId,
+        ...editForm
+      });
+      setTerpenes(prev => prev.map(t => t.id === editingId ? updatedTerpene : t));
+      setEditingId(null);
+      setEditForm({});
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to update terpene');
+    }
+  };
+
+  const handleDeleteTerpene = async (id: string) => {
+    if (!isAuthenticated) {
+      setError('You must be logged in to delete terpenes');
+      return;
+    }
+
+    if (!confirm('Are you sure you want to delete this terpene?')) return;
+    
+    try {
+      await TerpeneService.deleteTerpene(id);
+      setTerpenes(prev => prev.filter(t => t.id !== id));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to delete terpene');
+    }
+  };
+
+  const handleBulkImport = async () => {
+    if (!isAuthenticated || !isAdmin) {
+      setError('Admin access required for bulk import');
+      return;
+    }
+
+    try {
+      const terpeneData = JSON.parse(bulkImportData) as TerpeneInsert[];
+      const results = await TerpeneService.bulkImportTerpenes(terpeneData);
+      
+      if (results.errors.length > 0) {
+        setError(`Import completed with ${results.errors.length} errors: ${results.errors.join(', ')}`);
+      } else {
+        setError(null);
+      }
+      
+      await loadTerpenes(); // Refresh the list
+      setShowBulkImport(false);
+      setBulkImportData('');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Bulk import failed');
+    }
+  };
+
+  const handleExport = async () => {
+    try {
+      const terpenes = await TerpeneService.exportTerpenes();
+      const dataStr = JSON.stringify(terpenes, null, 2);
+      const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+      
+      const exportFileDefaultName = 'terpenes-export.json';
+      
+      const linkElement = document.createElement('a');
+      linkElement.setAttribute('href', dataUri);
+      linkElement.setAttribute('download', exportFileDefaultName);
+      linkElement.click();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Export failed');
+    }
+  };
+
   const handleViewTerpeneInfo = (terpene: Terpene) => {
     setSelectedTerpene(terpene);
-    setShowTerpeneInfo(true);
+    setShowInfoModal(true);
   };
 
-  // Toggle expanded state for a terpene
   const toggleExpanded = (id: string) => {
-    setIsExpanded(prev => ({
-      ...prev,
-      [id]: !prev[id]
-    }));
+    const newExpanded = new Set(expandedItems);
+    if (newExpanded.has(id)) {
+      newExpanded.delete(id);
+    } else {
+      newExpanded.add(id);
+    }
+    setExpandedItems(newExpanded);
   };
 
-  // Save all terpenes
-  const handleSaveAll = () => {
-    // In a real app, this would save to the database
-    alert('All terpenes saved successfully!');
+  const handleArrayInputChange = (value: string, field: keyof Pick<TerpeneInsert, 'aroma' | 'flavor' | 'common_sources' | 'effects' | 'usage_vibes'>) => {
+    const arrayValue = value.split(',').map(item => item.trim()).filter(Boolean);
+    if (editingId) {
+      setEditForm(prev => ({ ...prev, [field]: arrayValue }));
+    } else {
+      setNewTerpene(prev => ({ ...prev, [field]: arrayValue }));
+    }
   };
+
+  // Loading state
+  if (loading && terpenes.length === 0) {
+    return (
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="flex items-center gap-2 text-gray-600">
+          <Loader2 className="w-5 h-5 animate-spin" />
+          <span>Loading terpenes...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="space-y-6">
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-        className="bg-white bg-opacity-80 backdrop-blur-md rounded-3xl p-6 shadow-lg"
-      >
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center space-x-2">
-            <Flask size={20} className="text-primary-600" />
-            <h2 className="text-xl font-semibold">Terpene Database</h2>
+    <div className="max-w-7xl mx-auto p-6 space-y-6">
+      {/* Header */}
+      <div className="flex items-center gap-3 mb-6">
+        <Flask className="w-8 h-8 text-emerald-600" />
+        <h1 className="text-3xl font-bold text-gray-900">Terpene Database</h1>
+        <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded">
+          {terpenes.length} compounds
+        </span>
+        {!isAuthenticated && (
+          <span className="text-sm text-amber-600 bg-amber-100 px-2 py-1 rounded">
+            Read-only mode (login to edit)
+          </span>
+        )}
           </div>
           
-          <div className="flex space-x-3">
+      {/* Error message */}
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-md">
+          {error}
             <Button
-              variant="outline"
-              onClick={handleSaveAll}
-              leftIcon={<Save size={16} />}
-            >
-              Save All Changes
+            variant="ghost"
+            size="sm"
+            onClick={() => setError(null)}
+            className="ml-2 text-red-600 hover:text-red-800"
+          >
+            <X className="w-4 h-4" />
+          </Button>
+        </div>
+      )}
+
+      {/* Search and Controls */}
+      <div className="bg-white rounded-lg border border-gray-200 p-4">
+        <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+          <div className="flex flex-1 gap-2">
+            <div className="relative flex-1 max-w-md">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+              <input
+                type="text"
+                placeholder="Search terpenes..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              />
+            </div>
+            <Button onClick={handleSearch} disabled={loading}>
+              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Search'}
             </Button>
-            <Button
-              onClick={() => setIsAddingTerpene(true)}
-              leftIcon={<Plus size={16} />}
-              disabled={isAddingTerpene}
-            >
-              Add Terpene
+            <Button variant="outline" onClick={loadTerpenes}>
+              Show All
             </Button>
           </div>
+          <div className="flex gap-2">
+            <Button variant="outline" onClick={handleExport}>
+              <Download className="w-4 h-4 mr-2" />
+              Export
+            </Button>
+            {isAdmin && (
+              <Button variant="outline" onClick={() => setShowBulkImport(true)}>
+                <Upload className="w-4 h-4 mr-2" />
+                Bulk Import
+              </Button>
+            )}
+            {isAuthenticated && (
+              <Button onClick={() => setShowAddForm(true)} className="bg-emerald-600 hover:bg-emerald-700">
+                <Plus className="w-4 h-4 mr-2" />
+                Add Terpene
+              </Button>
+            )}
+          </div>
         </div>
-        
-        {/* Search Bar */}
-        <div className="relative mb-6">
-          <Search size={18} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-          <input
-            type="text"
-            placeholder="Search terpenes by name, aroma or effect..."
-            className="pl-10 w-full px-4 py-2 bg-white rounded-xl border border-gray-300 focus:ring-primary-500 focus:border-primary-500"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          {searchTerm && (
-            <button
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
-              onClick={() => setSearchTerm('')}
-            >
-              <X size={16} />
-            </button>
-          )}
         </div>
 
-        {/* Add/Edit Terpene Form */}
-        {isAddingTerpene && (
-          <motion.div 
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="mb-6 bg-gray-50 rounded-xl p-5 border border-gray-200"
-          >
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-semibold">
-                {editingTerpeneId ? 'Edit Terpene' : 'Add New Terpene'}
-              </h3>
-              <button
-                onClick={() => {
-                  setIsAddingTerpene(false);
-                  setEditingTerpeneId(null);
-                }}
-                className="text-gray-400 hover:text-gray-600"
-              >
-                <X size={20} />
-              </button>
+      {/* Bulk Import Modal */}
+      {showBulkImport && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg p-6 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+            <h2 className="text-xl font-bold mb-4">Bulk Import Terpenes</h2>
+            <p className="text-sm text-gray-600 mb-4">
+              Import multiple terpenes from JSON data. Format should be an array of terpene objects.
+            </p>
+            <textarea
+              value={bulkImportData}
+              onChange={(e) => setBulkImportData(e.target.value)}
+              className="w-full h-64 p-3 border rounded-md font-mono text-sm"
+              placeholder={`[
+  {
+    "name": "Example Terpene",
+    "aroma": ["Citrus", "Fresh"],
+    "flavor": ["Lemon", "Sweet"],
+    "common_sources": ["Lemon", "Orange"],
+    "effects": ["Uplifting", "Energizing"],
+    "usage_vibes": ["Daytime", "Social"],
+    "therapeutic_notes": "May help with mood"
+  }
+]`}
+            />
+            <div className="flex gap-2 mt-4">
+              <Button onClick={handleBulkImport} className="bg-emerald-600 hover:bg-emerald-700">
+                Import Terpenes
+              </Button>
+              <Button variant="outline" onClick={() => setShowBulkImport(false)}>
+                Cancel
+              </Button>
             </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Basic Info */}
+          </div>
+        </div>
+      )}
+
+      {/* Add Form Modal */}
+      {showAddForm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg p-6 w-full max-w-2xl max-h-[90vh] overflow-y-auto">
+            <h2 className="text-xl font-bold mb-4">Add New Terpene</h2>
+            <div className="space-y-4">
               <div>
-                <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Terpene Name*
-                  </label>
+                <label className="block text-sm font-medium mb-1">Name</label>
                   <input
                     type="text"
                     value={newTerpene.name}
-                    onChange={(e) => handleNewTerpeneChange(e, 'name')}
-                    className="w-full px-3 py-2 bg-white rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500"
-                    placeholder="e.g., Myrcene"
-                    required
+                  onChange={(e) => setNewTerpene(prev => ({ ...prev, name: e.target.value }))}
+                  className="w-full p-2 border rounded-md"
                   />
                 </div>
-                
-                <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Aliases (comma separated)
-                  </label>
-                  <input
-                    type="text"
-                    value={(newTerpene.aliases || []).join(', ')}
-                    onChange={handleAliasesChange}
-                    className="w-full px-3 py-2 bg-white rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500"
-                    placeholder="e.g., β-Myrcene, Myrcia"
-                  />
-                </div>
-                
-                <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Aroma Description*
-                  </label>
-                  <input
-                    type="text"
-                    value={newTerpene.aroma}
-                    onChange={(e) => handleNewTerpeneChange(e, 'aroma')}
-                    className="w-full px-3 py-2 bg-white rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500"
-                    placeholder="e.g., Earthy, musky, cloves"
-                    required
-                  />
-                </div>
-                
-                <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Flavor Notes
-                  </label>
-                  <input
-                    type="text"
-                    value={newTerpene.flavorNotes}
-                    onChange={(e) => handleNewTerpeneChange(e, 'flavorNotes')}
-                    className="w-full px-3 py-2 bg-white rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500"
-                    placeholder="e.g., Ripe mango, herbal"
-                  />
-                </div>
-              </div>
-              
-              {/* Effects & Notes */}
               <div>
-                <div className="mb-4">
-                  <div className="flex items-center justify-between mb-1">
-                    <label className="block text-sm font-medium text-gray-700">
-                      Effect Tags*
-                    </label>
-                    <button
-                      type="button"
-                      onClick={addEffectTagField}
-                      className="text-xs text-primary-600 hover:text-primary-800"
-                    >
-                      + Add Tag
-                    </button>
-                  </div>
-                  
-                  {newTerpene.effects.map((tag, index) => (
-                    <div key={index} className="flex items-center mb-2">
+                <label className="block text-sm font-medium mb-1">Aroma (comma-separated)</label>
+                  <input
+                    type="text"
+                  value={newTerpene.aroma.join(', ')}
+                  onChange={(e) => handleArrayInputChange(e.target.value, 'aroma')}
+                  className="w-full p-2 border rounded-md"
+                  />
+                </div>
+              <div>
+                <label className="block text-sm font-medium mb-1">Flavor (comma-separated)</label>
+                  <input
+                    type="text"
+                  value={newTerpene.flavor.join(', ')}
+                  onChange={(e) => handleArrayInputChange(e.target.value, 'flavor')}
+                  className="w-full p-2 border rounded-md"
+                  />
+                </div>
+              <div>
+                <label className="block text-sm font-medium mb-1">Common Sources (comma-separated)</label>
+                  <input
+                    type="text"
+                  value={newTerpene.common_sources.join(', ')}
+                  onChange={(e) => handleArrayInputChange(e.target.value, 'common_sources')}
+                  className="w-full p-2 border rounded-md"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-1">Effects (comma-separated)</label>
                       <input
                         type="text"
-                        value={tag}
-                        onChange={(e) => handleEffectTagChange(index, e.target.value)}
-                        className="flex-1 px-3 py-2 bg-white rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500"
-                        placeholder={`e.g., Relaxation${index > 0 ? '' : ' (required)'}`}
-                        required={index === 0}
-                      />
-                      {newTerpene.effects.length > 1 && (
-                        <button
-                          type="button"
-                          onClick={() => removeEffectTagField(index)}
-                          className="ml-2 text-red-500 hover:text-red-700"
-                        >
-                          <X size={16} />
-                        </button>
-                      )}
-                    </div>
-                  ))}
-                </div>
-                
-                <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Therapeutic Notes
-                  </label>
-                  <textarea
-                    value={newTerpene.therapeuticNotes}
-                    onChange={(e) => handleNewTerpeneChange(e, 'therapeuticNotes')}
-                    className="w-full px-3 py-2 bg-white rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500"
-                    placeholder="e.g., Anxiolytic, muscle-relaxant, anti-inflammatory"
-                    rows={3}
+                  value={newTerpene.effects.join(', ')}
+                  onChange={(e) => handleArrayInputChange(e.target.value, 'effects')}
+                  className="w-full p-2 border rounded-md"
                   />
                 </div>
-                
-                <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Default Intensity: {newTerpene.defaultIntensity}
-                  </label>
+              <div>
+                <label className="block text-sm font-medium mb-1">Usage Vibes (comma-separated)</label>
                   <input
                     type="text"
-                    value={newTerpene.defaultIntensity}
-                    onChange={(e) => setNewTerpene(prev => ({
-                      ...prev,
-                      defaultIntensity: e.target.value
-                    }))}
-                    className="w-full"
+                  value={newTerpene.usage_vibes.join(', ')}
+                  onChange={(e) => handleArrayInputChange(e.target.value, 'usage_vibes')}
+                  className="w-full p-2 border rounded-md"
                   />
                 </div>
+              <div>
+                <label className="block text-sm font-medium mb-1">Therapeutic Notes</label>
+                <textarea
+                  value={newTerpene.therapeutic_notes || ''}
+                  onChange={(e) => setNewTerpene(prev => ({ ...prev, therapeutic_notes: e.target.value }))}
+                  className="w-full p-2 border rounded-md"
+                  rows={3}
+                />
               </div>
             </div>
-            
-            <div className="flex justify-end gap-3">
-              <Button
-                variant="outline"
-                onClick={() => {
-                  setIsAddingTerpene(false);
-                  setEditingTerpeneId(null);
-                }}
-              >
+            <div className="flex gap-2 mt-6">
+              <Button onClick={handleAddTerpene} className="bg-emerald-600 hover:bg-emerald-700">
+                Add Terpene
+              </Button>
+              <Button variant="outline" onClick={() => setShowAddForm(false)}>
                 Cancel
               </Button>
-              
-              <Button
-                onClick={editingTerpeneId ? handleUpdateTerpene : handleAddTerpene}
-                disabled={!newTerpene.name.trim() || !newTerpene.effects[0]?.trim()}
-              >
-                {editingTerpeneId ? 'Update Terpene' : 'Add Terpene'}
-              </Button>
             </div>
-          </motion.div>
+          </div>
+        </div>
         )}
 
         {/* Terpenes List */}
         <div className="space-y-4">
-          {filteredTerpenes.length === 0 ? (
-            <div className="text-center py-10 bg-gray-50 rounded-xl">
-              <Flask size={40} className="mx-auto text-gray-300 mb-3" />
-              <h3 className="text-lg font-medium text-gray-900 mb-1">No terpenes found</h3>
-              <p className="text-gray-500">
-                {searchTerm ? "Try adjusting your search" : "Add your first terpene to get started"}
-              </p>
-            </div>
-          ) : (
-            filteredTerpenes.map(terpene => (
-              <div 
+        {terpenes.map((terpene) => {
+          const isExpanded = expandedItems.has(terpene.id);
+          const isEditing = editingId === terpene.id;
+
+          return (
+            <motion.div
                 key={terpene.id} 
-                className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
-              >
-                <div 
-                  className="flex items-center justify-between px-5 py-4 cursor-pointer"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-white rounded-lg border border-gray-200 overflow-hidden"
+            >
+              {/* Header */}
+              <div className="p-4 flex items-center justify-between bg-gray-50">
+                <div className="flex items-center gap-3">
+                  <button
                   onClick={() => toggleExpanded(terpene.id)}
-                >
-                  <div className="flex items-center">
-                    <div className={cn(
-                      "w-10 h-10 rounded-full mr-4 flex items-center justify-center",
-                      terpene.name === "Myrcene" ? "bg-green-100 text-green-700" :
-                      terpene.name === "Limonene" ? "bg-yellow-100 text-yellow-700" :
-                      terpene.name === "Pinene" ? "bg-emerald-100 text-emerald-700" :
-                      terpene.name === "Linalool" ? "bg-purple-100 text-purple-700" :
-                      terpene.name === "Caryophyllene" ? "bg-red-100 text-red-700" :
-                      terpene.name === "Humulene" ? "bg-amber-100 text-amber-700" :
-                      terpene.name === "Terpinolene" ? "bg-blue-100 text-blue-700" :
-                      terpene.name === "Ocimene" ? "bg-teal-100 text-teal-700" :
-                      terpene.name === "Bisabolol" ? "bg-pink-100 text-pink-700" :
-                      terpene.name === "Valencene" ? "bg-orange-100 text-orange-700" :
-                      "bg-gray-100 text-gray-700"
-                    )}>
-                      <span className="font-semibold text-sm">{terpene.name.charAt(0)}</span>
-                    </div>
+                    className="p-1 hover:bg-gray-200 rounded"
+                  >
+                    {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                  </button>
+                  <Flask className="w-5 h-5 text-emerald-600" />
                     <div>
                       <h3 className="font-semibold text-gray-900">{terpene.name}</h3>
-                      <p className="text-sm text-gray-500">{terpene.aroma || terpene.profile.aroma.join(', ')}</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center space-x-1">
-                    <div className="flex -space-x-1 mr-4">
-                      {(terpene.effectTags || terpene.effects).slice(0, 3).map((tag, i) => (
-                        <span 
-                          key={`${terpene.id}-tag-${i}`}
-                          className={cn(
-                            "px-2.5 py-1 rounded-full text-xs font-medium border-2 border-white",
-                            i === 0 ? "bg-primary-100 text-primary-800" : 
-                            i === 1 ? "bg-secondary-100 text-secondary-800" : 
-                            "bg-accent-100 text-accent-800"
-                          )}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                      {(terpene.effectTags || terpene.effects).length > 3 && (
-                        <span className="px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800 border-2 border-white">
-                          +{(terpene.effectTags || terpene.effects).length - 3}
-                        </span>
-                      )}
-                    </div>
-                    
-                    {isExpanded[terpene.id] ? 
-                      <ChevronUp size={18} className="text-gray-400" /> : 
-                      <ChevronDown size={18} className="text-gray-400" />
-                    }
+                    {terpene.aliases && terpene.aliases.length > 0 && (
+                      <p className="text-sm text-gray-500">
+                        Also known as: {terpene.aliases.join(', ')}
+                      </p>
+                    )}
                   </div>
                 </div>
-                
-                {/* Expanded View */}
-                {isExpanded[terpene.id] && (
-                  <div className="px-5 pt-2 pb-4 border-t border-gray-100">
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => handleViewTerpeneInfo(terpene)}
+                  >
+                    <InfoCircle className="w-4 h-4" />
+                  </Button>
+                  {isAuthenticated && (
+                    <>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleEditTerpene(terpene)}
+                      >
+                        <Edit className="w-4 h-4" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => handleDeleteTerpene(terpene.id)}
+                        className="text-red-600 hover:text-red-800"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    </>
+                  )}
+                </div>
+                    </div>
+                    
+              {/* Expanded Content */}
+              {isExpanded && (
+                <div className="p-4 border-t border-gray-100">
+                  {isEditing ? (
+                    // Edit Form
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-1">Name</label>
+                        <input
+                          type="text"
+                          value={editForm.name || ''}
+                          onChange={(e) => setEditForm(prev => ({ ...prev, name: e.target.value }))}
+                          className="w-full p-2 border rounded-md"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium mb-1">Therapeutic Notes</label>
+                        <textarea
+                          value={editForm.therapeutic_notes || ''}
+                          onChange={(e) => setEditForm(prev => ({ ...prev, therapeutic_notes: e.target.value }))}
+                          className="w-full p-2 border rounded-md"
+                          rows={3}
+                        />
+                      </div>
+                      <div className="flex gap-2">
+                        <Button onClick={handleUpdateTerpene} className="bg-emerald-600 hover:bg-emerald-700">
+                          <Save className="w-4 h-4 mr-2" />
+                          Save
+                        </Button>
+                        <Button variant="outline" onClick={() => setEditingId(null)}>
+                          Cancel
+                        </Button>
+                  </div>
+                </div>
+                  ) : (
+                    // View Mode
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <h4 className="text-sm font-medium text-gray-700 mb-2">Aroma & Flavor</h4>
-                        <p className="text-sm text-gray-600 mb-1">
-                          <span className="font-medium">Aroma:</span> {terpene.aroma || terpene.profile.aroma.join(', ')}
-                        </p>
-                        {(terpene.flavorNotes || terpene.profile.flavor.length > 0) && (
-                          <p className="text-sm text-gray-600">
-                            <span className="font-medium">Flavor Notes:</span> {terpene.flavorNotes || terpene.profile.flavor.join(', ')}
-                          </p>
-                        )}
-                        
-                        {terpene.aliases && terpene.aliases.length > 0 && (
-                          <div className="mt-3">
-                            <p className="text-sm font-medium text-gray-700 mb-1">Also Known As:</p>
-                            <div className="flex flex-wrap gap-2">
-                              {terpene.aliases.map((alias, i) => (
-                                <span key={`alias-${i}`} className="px-2 py-0.5 bg-gray-100 rounded-md text-xs text-gray-700">
-                                  {alias}
+                        <h4 className="font-medium text-gray-900 mb-2">Profile</h4>
+                        <div className="space-y-2 text-sm">
+                          <div>
+                            <span className="font-medium">Aroma:</span> {terpene.aroma.join(', ')}
+                          </div>
+                          <div>
+                            <span className="font-medium">Flavor:</span> {terpene.flavor.join(', ')}
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-gray-900 mb-2">Effects</h4>
+                        <div className="flex flex-wrap gap-1">
+                          {terpene.effects.map((effect, idx) => (
+                            <span
+                              key={idx}
+                              className="px-2 py-1 bg-emerald-100 text-emerald-800 text-xs rounded"
+                            >
+                              {effect}
                                 </span>
                               ))}
                             </div>
                           </div>
-                        )}
-                      </div>
-                      
                       <div>
-                        <h4 className="text-sm font-medium text-gray-700 mb-2">Effects & Benefits</h4>
-                        <div className="mb-3">
-                          <p className="text-sm text-gray-700 mb-1">Effect Tags:</p>
-                          <div className="flex flex-wrap gap-2">
-                            {(terpene.effectTags || terpene.effects).map((tag, i) => (
+                        <h4 className="font-medium text-gray-900 mb-2">Common Sources</h4>
+                        <p className="text-sm text-gray-700">{terpene.common_sources.join(', ')}</p>
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-gray-900 mb-2">Usage Vibes</h4>
+                        <div className="flex flex-wrap gap-1">
+                          {terpene.usage_vibes.map((vibe, idx) => (
                               <span 
-                                key={`effect-${i}`}
-                                className={cn(
-                                  "px-2 py-1 rounded-full text-xs font-medium",
-                                  i % 3 === 0 ? "bg-primary-100 text-primary-800" : 
-                                  i % 3 === 1 ? "bg-secondary-100 text-secondary-800" : 
-                                  "bg-accent-100 text-accent-800"
-                                )}
-                              >
-                                {tag}
+                              key={idx}
+                              className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded"
+                            >
+                              {vibe}
                               </span>
                             ))}
                           </div>
                         </div>
-                        
-                        {terpene.therapeuticNotes && (
-                          <div>
-                            <p className="text-sm font-medium text-gray-700 mb-1">Therapeutic Notes:</p>
-                            <p className="text-sm text-gray-600">{terpene.therapeuticNotes}</p>
+                      {terpene.therapeutic_notes && (
+                        <div className="md:col-span-2">
+                          <h4 className="font-medium text-gray-900 mb-2">Therapeutic Notes</h4>
+                          <p className="text-sm text-gray-700">{terpene.therapeutic_notes}</p>
                           </div>
                         )}
-                      </div>
-                    </div>
-                    
-                    <div className="flex justify-end mt-4 space-x-2">
-                      <button
-                        onClick={() => handleViewTerpeneInfo(terpene)}
-                        className="flex items-center space-x-1 text-sm text-primary-600 hover:text-primary-800"
-                      >
-                        <InfoCircle size={16} />
-                        <span>Full Details</span>
-                      </button>
-                      
-                      <button
-                        onClick={() => handleEditTerpene(terpene.id)}
-                        className="flex items-center space-x-1 text-sm text-blue-600 hover:text-blue-800"
-                      >
-                        <Edit size={16} />
-                        <span>Edit</span>
-                      </button>
-                      
-                      <button
-                        onClick={() => handleDeleteTerpene(terpene.id)}
-                        className="flex items-center space-x-1 text-sm text-red-600 hover:text-red-800"
-                      >
-                        <Trash2 size={16} />
-                        <span>Delete</span>
-                      </button>
-                    </div>
                   </div>
                 )}
               </div>
-            ))
           )}
+            </motion.div>
+          );
+        })}
         </div>
         
-        {/* Quick Stats at Bottom */}
-        <div className="mt-6 flex justify-between text-sm text-gray-500 px-2">
-          <span>{filteredTerpenes.length} terpenes</span>
-          
-          {searchTerm && (
-            <button
-              className="text-primary-600 hover:text-primary-800 flex items-center"
-              onClick={() => setSearchTerm('')}
-            >
-              <X size={14} className="mr-1" /> Clear search
-            </button>
+      {/* Empty State */}
+      {terpenes.length === 0 && !loading && (
+        <div className="text-center py-12">
+          <Flask className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+          <h3 className="text-lg font-medium text-gray-900 mb-2">No terpenes found</h3>
+          <p className="text-gray-500 mb-4">
+            {searchTerm ? 'Try adjusting your search terms' : 'Get started by adding your first terpene'}
+          </p>
+          {isAuthenticated && (
+            <Button onClick={() => setShowAddForm(true)} className="bg-emerald-600 hover:bg-emerald-700">
+              <Plus className="w-4 h-4 mr-2" />
+              Add First Terpene
+            </Button>
           )}
         </div>
-      </motion.div>
+      )}
 
-      {/* Terpene Info Modal */}
+      {/* Info Modal */}
       {selectedTerpene && (
         <TerpeneInfoModal
-          isOpen={showTerpeneInfo}
-          onClose={() => setShowTerpeneInfo(false)}
-          terpene={selectedTerpene}
+          isOpen={showInfoModal}
+          onClose={() => setShowInfoModal(false)}
+          terpene={{
+            // Convert our new format to the legacy format expected by the modal
+            id: selectedTerpene.id,
+            name: selectedTerpene.name,
+            aliases: selectedTerpene.aliases || [],
+            profile: {
+              aroma: selectedTerpene.aroma,
+              flavor: selectedTerpene.flavor
+            },
+            commonSources: selectedTerpene.common_sources,
+            effects: selectedTerpene.effects,
+            therapeuticNotes: selectedTerpene.therapeutic_notes || '',
+            research: selectedTerpene.research || [],
+            usageVibes: selectedTerpene.usage_vibes,
+            defaultIntensity: selectedTerpene.default_intensity || 'moderate'
+          }}
         />
       )}
     </div>
