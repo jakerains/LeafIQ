@@ -102,7 +102,7 @@ export const SimpleLogin: React.FC = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                      placeholder="jakerains@gmail.com"
+                      placeholder="Enter your email"
                       autoComplete="email"
                       required
                     />
