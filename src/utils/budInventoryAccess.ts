@@ -574,4 +574,4 @@ export async function generateInventoryInsight(
     console.error('Error generating inventory insight:', error);
     return "I can help you learn about cannabis! Feel free to ask any questions.";
   }
-} 
+}

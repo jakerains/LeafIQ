@@ -23,6 +23,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { generateInventoryInsight, getInventoryRAGContext } from '../../utils/budInventoryAccess';
 import { useAuthStore } from '../../stores/authStore';
+import { useSimpleAuthStore } from '../../stores/simpleAuthStore';
 
 interface UseAutoResizeTextareaProps {
     minHeight: number;
@@ -104,6 +105,7 @@ export function VercelV0Chat({ onSearch, isLoading = false }: VercelV0ChatProps)
     const [chatHistory, setChatHistory] = useState<ChatMessage[]>([]);
     const [isChatLoading, setIsChatLoading] = useState(false);
     const chatContainerRef = useRef<HTMLDivElement>(null);
+    const { organizationId } = useSimpleAuthStore();
 
     // Dynamic suggestion pools
     const vibeSuggestions = [
@@ -165,12 +167,12 @@ export function VercelV0Chat({ onSearch, isLoading = false }: VercelV0ChatProps)
         
         // Get organization ID for inventory context
         const profile = useAuthStore.getState().profile;
-        const organizationId = profile?.organization_id;
+        const orgId = organizationId || profile?.organization_id;
         
         // Get inventory RAG context FIRST - this determines if we should include product info
         let inventoryContext = null;
-        if (organizationId) {
-            inventoryContext = await getInventoryRAGContext(query, organizationId);
+        if (orgId) {
+            inventoryContext = await getInventoryRAGContext(query, orgId);
         }
         
         // Cannabinoids

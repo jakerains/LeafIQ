@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useProductsStore } from '../../stores/productsStore';
 import { useSimpleAuthStore } from '../../stores/simpleAuthStore';
@@ -19,12 +19,12 @@ const KioskView = () => {
   const navigate = useNavigate();
   
   // Ensure products are loaded when component mounts
-  useState(() => {
+  useEffect(() => {
     if (organizationId && productsWithVariants.length === 0) {
       console.log('🔄 KioskView - Loading products for organization:', organizationId);
       fetchProducts();
     }
-  });
+  }, [organizationId, fetchProducts, productsWithVariants.length]);
   
   const handleSearch = async (query: string) => {
     console.log('🔍 KioskView.handleSearch called with query:', JSON.stringify(query));
