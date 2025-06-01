@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useRef, useCallback } from "react";
 import { useState } from "react";
 import { Textarea } from "./textarea";

@@ -225,6 +225,7 @@ export const recommendProducts = async (
 }> => {
   console.log(`Processing recommendation request for: "${vibe}"`);
   console.log(`Available products for recommendation: ${products.length}`);
+  console.log(`Organization ID for recommendations: ${organizationId || 'Not provided'}`);
   
   // Check if this is a category-specific query
   const lowercaseVibe = vibe.toLowerCase();
@@ -293,8 +294,8 @@ export const recommendProducts = async (
             search_phrase: vibe,
             user_type: userType,
             returned_product_ids: aiMatchedProducts.map(p => p.id),
-            organization_id: organizationId || 'd85af8c9-0d4a-451c-bc25-8c669c71142e' // Default org ID if none provided
-          });
+            organization_id: organizationId
+          }).catch(err => console.error('Error logging search query:', err));
         }
         
         console.log(`Returning ${aiMatchedProducts.length} AI-powered recommendations`);
@@ -315,7 +316,7 @@ export const recommendProducts = async (
     
     // Filter products by category if needed
     let availableProducts = products.filter(p => 
-      p.variant.is_available && p.variant.inventory_level > 0
+      p.variant && p.variant.is_available && p.variant.inventory_level > 0
     );
     
     if (categoryFilter) {
@@ -351,14 +352,14 @@ export const recommendProducts = async (
       .sort((a, b) => b.score - a.score)
       .map(item => item.product);
     
-    // Only log search query if organizationId is provided
+    // Log search query if organizationId is provided
     if (organizationId) {
       logSearchQuery({
         search_phrase: vibe,
         user_type: userType,
         returned_product_ids: sortedProducts.slice(0, maxResults).map(p => p.id),
-        organization_id: organizationId || 'd85af8c9-0d4a-451c-bc25-8c669c71142e' // Default org ID if none provided
-      });
+        organization_id: organizationId
+      }).catch(err => console.error('Error logging search query:', err));
     }
     
     console.log(`Returning ${Math.min(sortedProducts.length, maxResults)} locally processed recommendations`);
@@ -377,7 +378,7 @@ export const recommendProducts = async (
     
     // Filter products by category if needed
     let availableProducts = products.filter(p => 
-      p.variant.is_available && p.variant.inventory_level > 0
+      p.variant && p.variant.is_available && p.variant.inventory_level > 0
     );
     
     if (categoryFilter) {

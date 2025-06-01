@@ -26,8 +26,8 @@ const KioskResults = ({
   
   // Debug logging for props
   console.log('🎨 KioskResults props received:', {
-    searchQuery: JSON.stringify(searchQuery),
-    results: results.length,
+    searchQuery,
+    resultsLength: results.length,
     isAIPowered,
     effects: providedEffects,
     firstResult: results[0] ? {

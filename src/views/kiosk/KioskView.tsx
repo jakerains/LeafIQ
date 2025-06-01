@@ -27,7 +27,7 @@ const KioskView = () => {
   }, [organizationId, fetchProducts, productsWithVariants.length]);
   
   const handleSearch = async (query: string) => {
-    console.log('🔍 KioskView.handleSearch called with query:', JSON.stringify(query));
+    console.log('🔍 KioskView.handleSearch called with query:', query);
     setSearchQuery(query);
     
     try {
@@ -39,7 +39,10 @@ const KioskView = () => {
         await fetchProducts();
       }
       
+      // Now we're sure organizationId is available from the auth store
+      // and passed through the call chain
       const results = await searchProductsByVibe(query, 'kiosk');
+      
       console.log('📦 Search results received:', {
         products: results.products.length,
         isAIPowered: results.isAIPowered,

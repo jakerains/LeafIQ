@@ -125,6 +125,7 @@ export const useProductsStore = create<ProductsState>((set, get) => ({
 
       // Get the organization ID from the auth store
       const { organizationId } = useSimpleAuthStore.getState();
+      console.log(`🔍 Searching with vibe: "${vibe}" for organization: ${organizationId || 'unknown'}`);
       
       // Use the enhanced recommendation engine with AI capabilities
       const results = await recommendProducts(
@@ -135,9 +136,12 @@ export const useProductsStore = create<ProductsState>((set, get) => ({
         organizationId // Pass the organization ID to the recommendation engine
       );
       
+      console.log(`✅ Search complete - found ${results.products.length} products`);
+      
       set({ isLoading: false });
       return results;
     } catch (err) {
+      console.error('❌ Search error:', err);
       set({ 
         isLoading: false, 
         error: err instanceof Error ? err.message : 'Failed to search products' 
