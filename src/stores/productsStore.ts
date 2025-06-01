@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { Product, Variant, ProductWithVariant } from '../types';
 import { supabase } from '../lib/supabase';
 import { recommendProducts } from '../utils/recommendationEngine';
-import { useAuthStore } from './authStore';
+import { useSimpleAuthStore } from './simpleAuthStore';
 
 interface ProductsState {
   products: Product[];
@@ -38,8 +38,8 @@ export const useProductsStore = create<ProductsState>((set, get) => ({
     
     try {
       // Get the current user's organization
-      const profile = useAuthStore.getState().profile;
-      if (!profile?.organization_id) {
+      const { organizationId } = useSimpleAuthStore.getState();
+      if (!organizationId) {
         throw new Error('No organization found for user');
       }
 
@@ -47,7 +47,7 @@ export const useProductsStore = create<ProductsState>((set, get) => ({
       const { data: products, error: productsError } = await supabase
         .from('products')
         .select('*')
-        .eq('organization_id', profile.organization_id)
+        .eq('organization_id', organizationId)
         .order('name');
 
       if (productsError) throw productsError;
@@ -72,12 +72,12 @@ export const useProductsStore = create<ProductsState>((set, get) => ({
           ...product,
           variant: firstVariant
         };
-      }).filter(Boolean) as ProductWithVariant[];
+      }).filter(Boolean) as any;
       
       set({ 
-        products: products || [], 
-        variants: variants || [], 
-        productsWithVariants,
+        products: products as any || [], 
+        variants: variants as any || [], 
+        productsWithVariants: productsWithVariants as any,
         isLoading: false 
       });
     } catch (err) {
@@ -100,8 +100,7 @@ export const useProductsStore = create<ProductsState>((set, get) => ({
       }
 
       // Get the organization ID from the auth store
-      const profile = useAuthStore.getState().profile;
-      const organizationId = profile?.organization_id;
+      const { organizationId } = useSimpleAuthStore.getState();
       
       // Use the enhanced recommendation engine with AI capabilities
       const results = await recommendProducts(

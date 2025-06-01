@@ -89,10 +89,10 @@ const LandingPage = () => {
                   Get Started Now
                 </ShimmerButton>
                 <Link 
-                  to="/demo"
+                  to="/demo-login"
                   className="px-8 py-4 text-lg border border-gray-300 backdrop-blur-sm bg-gray-100/70 rounded-full hover:bg-gray-200/80 transition-all duration-300 text-gray-900 shadow-lg"
                 >
-                  View Live Demo
+                  Try Live Demo
                 </Link>
               </motion.div>
               

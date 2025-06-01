@@ -1,19 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Lock, Mail, Eye, EyeOff, ArrowLeft } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useSimpleAuthStore } from '../../stores/simpleAuthStore';
 
-export const SimpleLogin: React.FC = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+export const DemoLogin: React.FC = () => {
+  const [email, setEmail] = useState('demo@leafiq.online');
+  const [password, setPassword] = useState('demo1234');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
   const { loginDispensary } = useSimpleAuthStore();
+  const navigate = useNavigate();
 
-  const handleDispensaryLogin = async (e: React.FormEvent) => {
+  // Pre-fill the demo credentials when component mounts
+  useEffect(() => {
+    setEmail('demo@leafiq.online');
+    setPassword('demo1234');
+  }, []);
+
+  const handleDemoLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setError('');
@@ -22,16 +29,16 @@ export const SimpleLogin: React.FC = () => {
       const result = await loginDispensary(email, password);
       if (!result.success) {
         setError(result.error || 'Login failed');
+      } else {
+        // On successful login, navigate to the app which will show kiosk selection
+        navigate('/app');
       }
-      // On success, the auth store will update and trigger navigation
     } catch (error) {
       setError('An unexpected error occurred');
     } finally {
       setIsLoading(false);
     }
   };
-
-
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -63,14 +70,14 @@ export const SimpleLogin: React.FC = () => {
             </div>
             
             <div className="text-center mb-8 mt-8">
-              <div className="h-12 w-12 bg-primary-100 rounded-xl flex items-center justify-center mx-auto mb-4">
-                <Lock className="h-6 w-6 text-primary-600" />
+              <div className="h-12 w-12 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                <Lock className="h-6 w-6 text-green-600" />
               </div>
               <h2 className="text-3xl font-display font-semibold mb-2">
-                Sign In
+                Demo Access
               </h2>
               <p className="text-gray-600">
-                Enter your credentials to access your account
+                Experience LeafIQ with pre-loaded demo data
               </p>
             </div>
 
@@ -86,10 +93,10 @@ export const SimpleLogin: React.FC = () => {
                 </div>
               )}
 
-              <form onSubmit={handleDispensaryLogin} className="space-y-6">
+              <form onSubmit={handleDemoLogin} className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Email Address
+                    Demo Email Address
                   </label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -97,17 +104,18 @@ export const SimpleLogin: React.FC = () => {
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                      placeholder="Enter your email"
+                      className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent bg-gray-50"
+                      placeholder="demo@leafiq.online"
                       autoComplete="email"
                       required
+                      readOnly
                     />
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Password
+                    Demo Password
                   </label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -115,13 +123,14 @@ export const SimpleLogin: React.FC = () => {
                       type={showPassword ? 'text' : 'password'}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="w-full pl-10 pr-10 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                      className="w-full pl-10 pr-10 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent bg-gray-50"
                       placeholder="••••••••••"
                       autoComplete="current-password"
                       required
+                      readOnly
                       onKeyPress={(e) => {
                         if (e.key === 'Enter') {
-                          handleDispensaryLogin(e);
+                          handleDemoLogin(e);
                         }
                       }}
                     />
@@ -138,22 +147,31 @@ export const SimpleLogin: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-3 bg-primary-500 text-white rounded-xl font-medium hover:bg-primary-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                  className="w-full py-3 bg-green-500 text-white rounded-xl font-medium hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
                 >
-                  {isLoading ? 'Signing In...' : 'Sign In'}
+                  {isLoading ? 'Accessing Demo...' : 'Enter Demo'}
                 </button>
               </form>
 
-
-
               <div className="text-center">
-                <span className="text-sm text-gray-600">Don't have an account? </span>
+                <span className="text-sm text-gray-600">Ready to try the full experience? </span>
                 <Link
-                  to="/auth/signup"
-                  className="text-sm text-primary-600 hover:text-primary-700 font-medium"
+                  to="/app"
+                  className="text-sm text-green-600 hover:text-green-700 font-medium"
                 >
-                  Sign up here
+                  Sign in with your account
                 </Link>
+              </div>
+
+              {/* Demo info */}
+              <div className="mt-6 p-4 bg-green-50 rounded-lg text-center">
+                <h4 className="text-sm font-medium text-green-800 mb-2">🎯 What you'll see in the demo:</h4>
+                <ul className="text-xs text-green-700 space-y-1">
+                  <li>• Customer kiosk with AI recommendations</li>
+                  <li>• Employee dashboard with inventory tools</li>
+                  <li>• Admin panel with analytics</li>
+                  <li>• Real cannabis product data</li>
+                </ul>
               </div>
             </motion.div>
           </div>

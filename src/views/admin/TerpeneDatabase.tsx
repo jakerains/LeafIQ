@@ -85,17 +85,17 @@ const TerpeneDatabase: React.FC = () => {
       const createdTerpene = await TerpeneService.createTerpene(newTerpene);
       setTerpenes(prev => [...prev, createdTerpene]);
       setShowAddForm(false);
-      setNewTerpene({
-        name: '',
+    setNewTerpene({
+      name: '',
         aroma: [],
         flavor: [],
         common_sources: [],
         effects: [],
         usage_vibes: [],
         therapeutic_notes: '',
-        research: [],
+      research: [],
         default_intensity: 'moderate'
-      });
+    });
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to create terpene');
     }
@@ -369,7 +369,7 @@ const TerpeneDatabase: React.FC = () => {
                   value={newTerpene.common_sources.join(', ')}
                   onChange={(e) => handleArrayInputChange(e.target.value, 'common_sources')}
                   className="w-full p-2 border rounded-md"
-                />
+                  />
               </div>
               <div>
                 <label className="block text-sm font-medium mb-1">Effects (comma-separated)</label>
@@ -423,7 +423,7 @@ const TerpeneDatabase: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="bg-white rounded-lg border border-gray-200 overflow-hidden"
-            >
+              >
               {/* Header */}
               <div className="p-4 flex items-center justify-between bg-gray-50">
                 <div className="flex items-center gap-3">
@@ -457,7 +457,7 @@ const TerpeneDatabase: React.FC = () => {
                         variant="ghost"
                         size="sm"
                         onClick={() => handleEditTerpene(terpene)}
-                      >
+                        >
                         <Edit className="w-4 h-4" />
                       </Button>
                       <Button
@@ -545,7 +545,7 @@ const TerpeneDatabase: React.FC = () => {
                               <span 
                               key={idx}
                               className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded"
-                            >
+                              >
                               {vibe}
                               </span>
                             ))}

@@ -1,147 +1,83 @@
 import { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { useAuthStore } from '../../stores/authStore';
+import { useSimpleAuthStore } from '../../stores/simpleAuthStore';
 import { useProductsStore } from '../../stores/productsStore';
-import SearchInput from '../../components/ui/SearchInput';
-import ProductCard from '../../components/ui/ProductCard';
-import Logo from '../../components/ui/Logo';
+import { useStaffModeStore } from '../../stores/staffModeStore';
+import { StaffHeader } from '../../components/staff/StaffHeader';
+import { StaffModeSelector } from '../../components/staff/StaffModeSelector';
+import { ProductSearchMode } from '../../components/staff/modes/ProductSearchMode';
+import { TerpeneExplorerMode } from '../../components/staff/modes/TerpeneExplorerMode';
 import { Button } from '../../components/ui/button';
-import { LogOut, Search, LayoutDashboard, Sparkles } from 'lucide-react';
+import { Bot, Package, Users, BookOpen, BarChart3, Construction } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { ProductWithVariant } from '../../types';
 
+// Placeholder components for modes not yet implemented
+const PlaceholderMode = ({ mode }: { mode: string }) => (
+  <div className="bg-white bg-opacity-80 backdrop-blur-sm rounded-3xl p-8 text-center">
+    <Construction size={48} className="mx-auto text-gray-400 mb-4" />
+    <h3 className="text-2xl font-semibold mb-4">{mode} Mode</h3>
+    <p className="text-gray-600 mb-6">
+      This mode is coming soon! Check back later for powerful new features.
+    </p>
+    <Button variant="outline">
+      Request Early Access
+    </Button>
+  </div>
+);
+
 const StaffView = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [searchResults, setSearchResults] = useState<ProductWithVariant[]>([]);
-  const [isAIPowered, setIsAIPowered] = useState(false);
-  const [effects, setEffects] = useState<string[]>([]);
-  const { logout } = useAuthStore();
-  const { searchProductsByVibe, isLoading, fetchProducts } = useProductsStore();
-  const navigate = useNavigate();
+  const { activeMode, addNotification } = useStaffModeStore();
 
-  // Fetch products on component mount
+  // Add a welcome notification when component mounts
   useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
+    addNotification({
+      type: 'info',
+      message: 'Welcome to the enhanced staff workstation! Explore the new modes to boost your productivity.'
+    });
+  }, [addNotification]);
 
-  const handleSearch = async (query: string) => {
-    setSearchQuery(query);
-    try {
-      const results = await searchProductsByVibe(query, 'staff');
-      setSearchResults(results.products);
-      setIsAIPowered(results.isAIPowered);
-      setEffects(results.effects);
-    } catch (error) {
-      console.error('Search error:', error);
-      setSearchResults([]);
-      setIsAIPowered(false);
-      setEffects([]);
+  const renderActiveMode = () => {
+    switch (activeMode) {
+      case 'search':
+        return <ProductSearchMode />;
+      case 'terpenes':
+        return <TerpeneExplorerMode />;
+      case 'assistant':
+        return <PlaceholderMode mode="AI Assistant" />;
+      case 'inventory':
+        return <PlaceholderMode mode="Inventory Dashboard" />;
+      case 'consultation':
+        return <PlaceholderMode mode="Customer Consultation Hub" />;
+      case 'training':
+        return <PlaceholderMode mode="Training & Knowledge Hub" />;
+      case 'analytics':
+        return <PlaceholderMode mode="Performance Analytics" />;
+      default:
+        return <ProductSearchMode />;
     }
   };
 
   return (
-    <div className="min-h-screen">
-      <header className="bg-white bg-opacity-90 backdrop-blur-md shadow-sm">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
-            <img 
-              src="/leafiq-logo.png" 
-              alt="LeafIQ" 
-              className="h-16 drop-shadow-lg filter shadow-primary-500/50"
-            />
-            
-            <div className="flex items-center space-x-4">
-              <Button 
-                variant="ghost"
-                leftIcon={<LayoutDashboard size={18} />}
-                onClick={() => navigate('/staff')}
-              >
-                Dashboard
-              </Button>
-              
-              <Button 
-                variant="ghost"
-                leftIcon={<LogOut size={18} />}
-                onClick={logout}
-              >
-                Logout
-              </Button>
-            </div>
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+      {/* Enhanced Header */}
+      <StaffHeader />
       
-      <main className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-display font-semibold mb-2">Staff Dashboard</h1>
-          <p className="text-gray-600">
-            Search for products and view detailed information to assist customers.
-          </p>
+      <main className="container mx-auto px-4 py-6">
+        {/* Mode Selector */}
+        <div className="mb-6">
+          <StaffModeSelector />
         </div>
         
-        <div className="bg-white bg-opacity-80 backdrop-blur-md rounded-3xl p-6 shadow-lg mb-8">
-          <div className="flex items-center space-x-2 mb-4">
-            <Search size={20} className="text-primary-600" />
-            <h2 className="text-xl font-semibold">Product Search</h2>
-          </div>
-          <SearchInput 
-            onSearch={handleSearch}
-            placeholder="Search by desired effect, strain, or product name"
-            suggestions={['relaxed', 'energized', 'creative', 'sleepy', 'pain relief', 'focused']}
-            isLoading={isLoading}
-          />
-        </div>
-        
-        {searchResults.length > 0 && (
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-8"
-          >
-            <div className="flex items-center mb-4">
-              <h2 className="text-2xl font-display font-semibold">
-                {searchResults.length} matching products for "{searchQuery}"
-              </h2>
-              
-              {isAIPowered && (
-                <motion.div 
-                  className="ml-4 inline-flex items-center gap-1 px-3 py-1 bg-primary-100 text-primary-800 rounded-full text-sm font-medium"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  <Sparkles size={14} className="text-primary-600" />
-                  AI-Powered
-                </motion.div>
-              )}
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {searchResults.map((product) => (
-                <ProductCard 
-                  key={product.id}
-                  product={product} 
-                  effects={effects}
-                  showTerpenes={true}
-                  showInventory={true}
-                />
-              ))}
-            </div>
-          </motion.div>
-        )}
-        
-        {searchResults.length === 0 && searchQuery && !isLoading && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-white bg-opacity-80 backdrop-blur-sm rounded-3xl p-8 text-center"
-          >
-            <h3 className="text-2xl font-semibold mb-4">No products found</h3>
-            <p className="text-gray-600 mb-6">
-              Try another search term or check if we need to update our inventory.
-            </p>
-          </motion.div>
-        )}
+        {/* Active Mode Content */}
+        <motion.div
+          key={activeMode}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+        >
+          {renderActiveMode()}
+        </motion.div>
       </main>
     </div>
   );

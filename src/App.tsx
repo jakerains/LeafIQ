@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import LandingPage from './views/LandingPage';
-import DemoView from './views/DemoView';
+
 import AuthLayout from './views/auth/AuthLayout';
 import RegisterForm from './components/auth/RegisterForm';
 import LoginForm from './components/auth/LoginForm';
@@ -10,6 +10,7 @@ import StaffView from './views/staff/StaffView';
 import AdminView from './views/admin/AdminView';
 import { SimpleAuthProvider } from './components/auth/SimpleAuthProvider';
 import { SimpleRouteGuard } from './components/auth/SimpleRouteGuard';
+import { DemoLogin } from './components/auth/DemoLogin';
 import { useSimpleAuthStore } from './stores/simpleAuthStore';
 import PricingPage from './views/pricing/PricingPage';
 import CheckoutSuccess from './views/checkout/CheckoutSuccess';
@@ -43,7 +44,8 @@ function App() {
       <div className="content-overlay min-h-screen">
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/demo" element={<DemoView />} />
+
+          <Route path="/demo-login" element={<DemoLogin />} />
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/auth" element={<AuthLayout />}>
             <Route path="signup" element={<RegisterForm />} />
