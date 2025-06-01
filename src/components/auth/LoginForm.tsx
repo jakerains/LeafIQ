@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, useLocation, useSearchParams } from 'react-router-dom';
+import { useNavigate, useLocation, useSearchParams, Link } from 'react-router-dom';
 import { useAuthStore } from '../../stores/authStore';
 import { UserRole } from '../../types';
 import { Button } from '../ui/button';
 import { motion } from 'framer-motion';
-import { Lock, Mail, AlertCircle, Eye, EyeOff, UserPlus, Coffee } from 'lucide-react';
+import { Lock, Mail, AlertCircle, Eye, EyeOff, UserPlus, Coffee, ArrowLeft } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
 interface LoginFormProps {
@@ -88,6 +88,16 @@ const LoginForm = ({ role: requiredRole }: LoginFormProps) => {
 
   return (
     <div className="bg-white bg-opacity-90 backdrop-blur-md rounded-3xl p-8 shadow-xl max-w-md w-full">
+      <div className="absolute top-4 left-4">
+        <Link 
+          to="/" 
+          className="flex items-center text-gray-500 hover:text-gray-700 transition-colors"
+        >
+          <ArrowLeft size={18} className="mr-1" />
+          <span className="text-sm">Back to Home</span>
+        </Link>
+      </div>
+      
       <div className="text-center mb-8">
         <div className="h-12 w-12 bg-primary-100 rounded-xl flex items-center justify-center mx-auto mb-4">
           <Lock className="h-6 w-6 text-primary-600" />

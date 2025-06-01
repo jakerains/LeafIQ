@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../ui/button';
-import { Building2, Mail, Lock, AlertCircle, ArrowRight, ArrowLeft, Check, Monitor, Users, Database, Settings, MapPin, Gift, Phone, User, HelpCircle, Download, FileJson } from 'lucide-react';
+import { Building2, Mail, Lock, AlertCircle, ArrowRight, ArrowLeft, Check, Monitor, Users, Database, Settings, MapPin, Gift, Phone, User, HelpCircle, Download, FileJson, X } from 'lucide-react';
 import { signUp } from '../../lib/supabase';
 import { useAuthStore } from '../../stores/authStore';
 
@@ -576,6 +576,16 @@ const RegisterForm = () => {
 
   return (
     <div className="bg-white bg-opacity-90 backdrop-blur-md rounded-3xl p-8 shadow-xl max-w-lg w-full">
+      <div className="absolute top-4 left-4">
+        <Link 
+          to="/" 
+          className="flex items-center text-gray-500 hover:text-gray-700 transition-colors"
+        >
+          <ArrowLeft size={18} className="mr-1" />
+          <span className="text-sm">Back to Home</span>
+        </Link>
+      </div>
+      
       <div className="text-center mb-8">
         <h2 className="text-3xl font-display font-semibold mb-2">Join LeafIQ</h2>
         <p className="text-gray-600">Transform your dispensary experience in 3 simple steps</p>
