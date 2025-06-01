@@ -16,22 +16,12 @@ interface UserProfile {
   role: UserRole;
 }
 
-// In a real app, this would validate against a server
-const validatePasscode = (role: UserRole, passcode: string): boolean => {
-  console.log(`Validating ${role} with passcode: ${passcode}`);
-  if (role === 'staff' && passcode === '1234') {
-    return true;
-  }
-  if (role === 'admin' && passcode === 'admin1234') {
-    return true;
-  }
-  return false;
-};
-
 interface ExtendedAuthState extends AuthState {
   user: AuthUser | null;
   profile: UserProfile | null;
   setUser: (user: AuthUser | null) => void;
+  signInWithEmail: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
+  signUpWithEmail: (email: string, password: string, organizationName: string) => Promise<{ success: boolean; error?: string }>;
 }
 
 export const useAuthStore = create<ExtendedAuthState>((set, get) => ({
@@ -44,10 +34,7 @@ export const useAuthStore = create<ExtendedAuthState>((set, get) => ({
     console.log('Initializing auth...');
     
     try {
-      // First check for stored role for passcode login
-      const storedRole = localStorage.getItem('leafiqUserRole') as UserRole | null;
-      
-      // Then check for Supabase session
+      // Check for existing Supabase session
       const { data: { session } } = await supabase.auth.getSession();
       
       if (session?.user) {
@@ -58,6 +45,7 @@ export const useAuthStore = create<ExtendedAuthState>((set, get) => ({
           .from('profiles')
           .select(`
             id,
+            user_id,
             role,
             organization_id
           `)
@@ -80,23 +68,21 @@ export const useAuthStore = create<ExtendedAuthState>((set, get) => ({
         }
       }
       
-      // If no Supabase session, use stored role
-      console.log('Using stored role:', storedRole);
-      set({ role: storedRole, isInitialized: true });
+      // No session found
+      set({ role: null, user: null, profile: null, isInitialized: true });
       
     } catch (error) {
       console.error('Error initializing auth:', error);
-      set({ isInitialized: true }); // Still mark as initialized to prevent infinite loading
+      set({ role: null, user: null, profile: null, isInitialized: true });
     }
   },
   
   setUser: (user: AuthUser | null) => {
-    // When setting the user, also update the profile with organization_id
     if (user) {
       const profile: UserProfile = {
-        id: 'profile-' + user.id, // Generate a profile ID
+        id: 'profile-' + user.id,
         user_id: user.id,
-        organization_id: user.organizationId || 'd85af8c9-0d4a-451c-bc25-8c669c71142e', // Default org ID if none provided
+        organization_id: user.organizationId || '',
         role: user.role
       };
       set({ user, profile, role: user.role });
@@ -105,39 +91,140 @@ export const useAuthStore = create<ExtendedAuthState>((set, get) => ({
     }
   },
   
-  login: (role: UserRole, passcode: string) => {
-    console.log(`Login attempt as ${role}`);
-    if (!validatePasscode(role, passcode)) {
-      console.log('Login failed: invalid passcode');
-      return false;
+  signInWithEmail: async (email: string, password: string) => {
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
+      
+      if (error) {
+        return { success: false, error: error.message };
+      }
+      
+      if (data.user) {
+        // Fetch user profile
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select(`
+            id,
+            user_id,
+            role,
+            organization_id
+          `)
+          .eq('user_id', data.user.id)
+          .single();
+        
+        if (profile) {
+          set({
+            profile,
+            user: {
+              id: data.user.id,
+              email: data.user.email,
+              organizationId: profile.organization_id,
+              role: profile.role as UserRole
+            },
+            role: profile.role as UserRole
+          });
+          
+          return { success: true };
+        } else {
+          return { success: false, error: 'User profile not found' };
+        }
+      }
+      
+      return { success: false, error: 'Unknown error occurred' };
+      
+    } catch (error) {
+      return { 
+        success: false, 
+        error: error instanceof Error ? error.message : 'Unknown error' 
+      };
     }
-    
-    console.log(`Login successful as ${role}`);
-    localStorage.setItem('leafiqUserRole', role as string);
-    
-    // Create a demo profile with the default organization ID
-    const demoUser: AuthUser = {
-      id: 'demo-user-' + Date.now(),
-      email: 'demo@example.com',
-      organizationId: 'd85af8c9-0d4a-451c-bc25-8c669c71142e', // Default True North org ID
-      role
-    };
-    
-    const demoProfile: UserProfile = {
-      id: 'profile-' + demoUser.id,
-      user_id: demoUser.id,
-      organization_id: demoUser.organizationId,
-      role
-    };
-    
-    set({ role, user: demoUser, profile: demoProfile });
-    return true;
+  },
+  
+  signUpWithEmail: async (email: string, password: string, organizationName: string) => {
+    try {
+      // First create the user account
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password
+      });
+      
+      if (error) {
+        return { success: false, error: error.message };
+      }
+      
+      if (data.user) {
+        let orgId: string;
+        
+        // Check if this is the demo email - if so, assign to demo organization
+        if (email.toLowerCase() === 'demo@leafiq.com') {
+          orgId = 'd85af8c9-0d4a-451c-bc25-8c669c71142e'; // Demo organization ID
+        } else {
+          // Create new organization for regular users
+          const { data: orgData, error: orgError } = await supabase
+            .from('organizations')
+            .insert({
+              name: organizationName,
+              slug: organizationName.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+              plan: 'trial'
+            })
+            .select()
+            .single();
+          
+          if (orgError) {
+            return { success: false, error: `Failed to create organization: ${orgError.message}` };
+          }
+          
+          orgId = orgData.id;
+        }
+        
+        // Create user profile
+        const { error: profileError } = await supabase
+          .from('profiles')
+          .insert({
+            user_id: data.user.id,
+            organization_id: orgId,
+            role: 'admin'
+          });
+        
+        if (profileError) {
+          return { success: false, error: `Failed to create profile: ${profileError.message}` };
+        }
+        
+        // Set the user state
+        set({
+          user: {
+            id: data.user.id,
+            email: data.user.email,
+            organizationId: orgId,
+            role: 'admin'
+          },
+          profile: {
+            id: 'profile-' + data.user.id,
+            user_id: data.user.id,
+            organization_id: orgId,
+            role: 'admin'
+          },
+          role: 'admin'
+        });
+        
+        return { success: true };
+      }
+      
+      return { success: false, error: 'Failed to create user account' };
+      
+    } catch (error) {
+      return { 
+        success: false, 
+        error: error instanceof Error ? error.message : 'Unknown error' 
+      };
+    }
   },
   
   logout: async () => {
     console.log('Logging out');
-    // Clear local storage
-    localStorage.removeItem('leafiqUserRole');
     
     // Sign out from Supabase
     await supabase.auth.signOut();

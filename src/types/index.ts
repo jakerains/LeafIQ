@@ -83,6 +83,5 @@ export interface AuthState {
   role: UserRole;
   isInitialized: boolean;
   initializeAuth: () => void;
-  login: (role: UserRole, passcode: string) => boolean;
   logout: () => void;
 }

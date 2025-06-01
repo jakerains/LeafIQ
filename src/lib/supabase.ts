@@ -24,14 +24,48 @@ export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
 });
 
 // Authentication functions
-export const signUp = async (email: string, password: string, organizationName: string) => {
-  console.log(`Signing up with email: ${email}, org: ${organizationName}`);
+export const signUp = async (
+  email: string, 
+  password: string, 
+  organizationName: string,
+  additionalData?: {
+    useMode?: 'kiosk' | 'staff' | 'both';
+    menuSource?: 'dutchie' | 'jane' | 'weedmaps' | 'manual';
+    enableDemoInventory?: boolean;
+    locationZip?: string;
+    referralCode?: string;
+    fullName?: string;
+    phoneNumber?: string;
+    wantOnboardingHelp?: boolean;
+  }
+) => {
+  console.log(`Signing up with email: ${email}, org: ${organizationName}`, additionalData);
   
   try {
-    // First create the user
+    // Create organization slug from name
+    const slug = organizationName.toLowerCase()
+      .replace(/\s+/g, '-')           // Replace spaces with dashes
+      .replace(/[^\w\-]+/g, '')       // Remove non-word chars
+      .replace(/\-\-+/g, '-')         // Replace multiple dashes with single dash
+      .replace(/^-+/, '')             // Trim dashes from start
+      .replace(/-+$/, '');            // Trim dashes from end
+
+    // Pass organization data in metadata for the trigger
+    const userMetadata = {
+      organization: organizationName,
+      slug: slug,
+      role: 'admin',
+      ...additionalData
+    };
+
+    // Sign up with metadata for the trigger function
     const { data: authData, error: authError } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        data: userMetadata,
+        emailRedirectTo: `${window.location.origin}/auth/callback`
+      }
     });
 
     if (authError) {
@@ -45,60 +79,31 @@ export const signUp = async (email: string, password: string, organizationName: 
 
     console.log('User created successfully:', authData.user.id);
 
-    // Create organization with slug from name
-    const slug = organizationName.toLowerCase()
-      .replace(/\s+/g, '-')           // Replace spaces with dashes
-      .replace(/[^\w\-]+/g, '')       // Remove non-word chars
-      .replace(/\-\-+/g, '-')         // Replace multiple dashes with single dash
-      .replace(/^-+/, '')             // Trim dashes from start
-      .replace(/-+$/, '');            // Trim dashes from end
+    // Wait a moment for the trigger to create the profile
+    await new Promise(resolve => setTimeout(resolve, 1000));
 
-    const { data: orgData, error: orgError } = await supabase
-      .from('organizations')
-      .insert([
-        { 
-          name: organizationName,
-          slug: slug,
-          plan: 'free'
-        }
-      ])
-      .select()
-      .single();
-
-    if (orgError) {
-      console.error('Error creating organization:', orgError);
-      throw orgError;
-    }
-
-    console.log('Organization created successfully:', orgData.id);
-
-    // Create profile linking user to organization with admin role
-    const { data: profileData, error: profileError } = await supabase
+    // Try to fetch the created profile with organization data
+    const { data: profile, error: profileError } = await supabase
       .from('profiles')
-      .insert([
-        {
-          user_id: authData.user.id,
-          organization_id: orgData.id,
-          role: 'admin'
-        }
-      ])
-      .select()
+      .select(`
+        *,
+        organizations (*)
+      `)
+      .eq('user_id', authData.user.id)
       .single();
 
     if (profileError) {
-      console.error('Error creating profile:', profileError);
-      throw profileError;
+      console.error('Error fetching profile (non-fatal):', profileError);
+      // Don't throw here - the user was created successfully
+      // The profile fetch might fail due to RLS policies but the user can still login
+    } else {
+      console.log('Profile fetched successfully:', profile);
     }
-
-    console.log('Profile created successfully:', profileData.id);
 
     return { 
       data: {
         user: authData.user,
-        profile: {
-          ...profileData,
-          organization: orgData
-        }
+        profile: profile || null
       }, 
       error: null 
     };

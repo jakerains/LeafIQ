@@ -41,9 +41,9 @@ const ImportExportInstructions: React.FC<ImportExportInstructionsProps> = ({ onC
 }`;
 
   const handleDownloadTemplate = () => {
-    // Create a link to download the template
+    // Create a link to download the clean template
     const link = document.createElement('a');
-    link.href = '/templates/inventory-upload-template.json';
+    link.href = '/templates/inventory-upload-template-clean.json';
     link.download = 'leafiq-inventory-template.json';
     document.body.appendChild(link);
     link.click();

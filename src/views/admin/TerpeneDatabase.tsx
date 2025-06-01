@@ -5,119 +5,461 @@ import { Button } from '../../components/ui/button';
 import { cn } from '../../lib/utils';
 import TerpeneInfoModal from './components/TerpeneInfoModal';
 
-// Terpene interface
+// Enhanced Terpene interface with new fields
 interface Terpene {
   id: string;
   name: string;
-  aliases: string[];
-  aroma: string;
-  flavorNotes: string;
-  effectTags: string[];
+  aliases?: string[];
+  profile: {
+    aroma: string[];
+    flavor: string[];
+  };
+  commonSources: string[];
+  effects: string[];
   therapeuticNotes: string;
-  defaultIntensity: number;
+  research?: Array<{
+    title: string;
+    link: string;
+    source: string;
+  }>;
+  usageVibes: string[];
+  defaultIntensity: string;
+  // Legacy fields for backward compatibility
+  aroma?: string;
+  flavorNotes?: string;
+  effectTags?: string[];
 }
 
-// Initial terpene data based on the provided guide
+// Updated comprehensive terpene data
 const initialTerpenes: Terpene[] = [
   {
     id: 'terpene-1',
     name: 'Myrcene',
-    aliases: [],
-    aroma: 'Earthy, musky, cloves',
-    flavorNotes: 'Ripe mango, herbal',
-    effectTags: ['Sedative', 'Pain Relief', 'Relaxation'],
-    therapeuticNotes: 'Anxiolytic, muscle-relaxant, anti-inflammatory',
-    defaultIntensity: 0.7
+    profile: { aroma: ["Earthy", "Musky", "Clove"], flavor: ["Ripe mango", "Herbal"] },
+    commonSources: ["Mango", "Lemongrass", "Bay leaves", "Hops", "Thyme"],
+    effects: ["Sedative", "Pain Relief", "Relaxation"],
+    therapeuticNotes: "Anxiolytic, muscle-relaxant, anti-inflammatory",
+    research: [
+      {
+        title: "Myrcene—What Are the Potential Health Benefits of This Flavouring Terpene?",
+        link: "https://pubmed.ncbi.nlm.nih.gov/34350208/",
+        source: "PubMed"
+      }
+    ],
+    usageVibes: ["relaxed", "sleepy", "calm"],
+    defaultIntensity: "moderate"
   },
   {
     id: 'terpene-2',
     name: 'Limonene',
-    aliases: [],
-    aroma: 'Bright citrus zest',
-    flavorNotes: 'Lemon, orange',
-    effectTags: ['Uplift', 'Mood-Boost', 'Stress Relief'],
-    therapeuticNotes: 'Antidepressant & anti-anxiety via A2A receptor',
-    defaultIntensity: 0.6
+    profile: { aroma: ["Citrus", "Sweet lemon"], flavor: ["Orange zest", "Lemon"] },
+    commonSources: ["Lemon peel", "Orange peel", "Rosemary", "Juniper"],
+    effects: ["Uplift", "Mood-Boost", "Stress Relief"],
+    therapeuticNotes: "Anxiolytic, anti-depressant, anti-inflammatory",
+    research: [
+      {
+        title: "Limonene has anti-anxiety activity via adenosine A2A receptor modulation",
+        link: "https://pubmed.ncbi.nlm.nih.gov/33548867/",
+        source: "PubMed"
+      }
+    ],
+    usageVibes: ["happy", "focused", "energized"],
+    defaultIntensity: "moderate"
   },
   {
     id: 'terpene-3',
     name: 'Pinene',
     aliases: ['α-Pinene', 'β-Pinene'],
-    aroma: 'Pine needles, rosemary, crisp forest',
-    flavorNotes: 'Woody, sharp, pine',
-    effectTags: ['Focus', 'Alert', 'Memory Aid'],
-    therapeuticNotes: 'Bronchodilator; may counter THC memory fog; anti-inflammatory',
-    defaultIntensity: 0.5
+    profile: { aroma: ["Pine needles", "Crisp forest"], flavor: ["Pine", "Rosemary"] },
+    commonSources: ["Pine resin", "Dill", "Basil", "Parsley"],
+    effects: ["Focus", "Alert", "Memory Aid"],
+    therapeuticNotes: "Bronchodilator, neuroprotective, anti-inflammatory",
+    research: [
+      {
+        title: "Neuroprotective role of α- and β-pinene against Aβ-mediated neurotoxicity",
+        link: "https://pubmed.ncbi.nlm.nih.gov/38070653/",
+        source: "PubMed"
+      }
+    ],
+    usageVibes: ["clear-headed", "alert", "fresh"],
+    defaultIntensity: "moderate"
   },
   {
     id: 'terpene-4',
     name: 'Linalool',
-    aliases: [],
-    aroma: 'Lavender, floral, spicy undertone',
-    flavorNotes: 'Floral, sweet',
-    effectTags: ['Calm', 'Sleep', 'Anti-Anxiety'],
-    therapeuticNotes: 'Sedative, anticonvulsant, may reduce anxiety—great for "calm"',
-    defaultIntensity: 0.7
+    profile: { aroma: ["Lavender", "Floral"], flavor: ["Lavender", "Citrus-spice"] },
+    commonSources: ["Lavender", "Coriander", "Mint", "Cinnamon"],
+    effects: ["Calm", "Sleep", "Anti-Anxiety"],
+    therapeuticNotes: "Anxiolytic, analgesic, anti-inflammatory",
+    research: [
+      {
+        title: "Linalool Odor-Induced Anxiolytic Effects in Mice",
+        link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC6206409/",
+        source: "PMC"
+      }
+    ],
+    usageVibes: ["soothed", "dreamy", "chill"],
+    defaultIntensity: "moderate"
   },
   {
     id: 'terpene-5',
     name: 'Caryophyllene',
     aliases: ['β-Caryophyllene'],
-    aroma: 'Peppercorn, spice, wood',
-    flavorNotes: 'Peppery, spicy, warm',
-    effectTags: ['Relief', 'Anti-Inflammatory', 'Relax'],
-    therapeuticNotes: 'Selective CB₂ agonist; tissue-protective, analgesic',
-    defaultIntensity: 0.5
+    profile: { aroma: ["Peppercorn", "Spice", "Wood"], flavor: ["Black pepper", "Clove"] },
+    commonSources: ["Black pepper", "Clove", "Cinnamon", "Hops"],
+    effects: ["Relief", "Anti-Inflammatory", "Relax"],
+    therapeuticNotes: "CB2 agonist, immunomodulatory",
+    research: [
+      {
+        title: "β-Caryophyllene, a CB2 receptor agonist, produces anxiolytic-like effects",
+        link: "https://pubmed.ncbi.nlm.nih.gov/24930711/",
+        source: "PubMed"
+      }
+    ],
+    usageVibes: ["grounded", "relaxed", "comforted"],
+    defaultIntensity: "moderate"
   },
   {
     id: 'terpene-6',
     name: 'Humulene',
     aliases: ['α-Humulene'],
-    aroma: 'Hops, woody, herbal',
-    flavorNotes: 'Earthy, woody',
-    effectTags: ['Appetite Suppression', 'Anti-Bacterial'],
-    therapeuticNotes: 'Possible weight-management & GI support',
-    defaultIntensity: 0.4
+    profile: { aroma: ["Hops", "Woody", "Herbal"], flavor: ["Hops", "Earthy"] },
+    commonSources: ["Hops", "Sage", "Ginseng", "Black pepper"],
+    effects: ["Appetite Suppression", "Anti-Bacterial", "Relax"],
+    therapeuticNotes: "Anti-inflammatory activity",
+    research: [
+      {
+        title: "Anti-inflammatory effects of α-humulene",
+        link: "https://pubmed.ncbi.nlm.nih.gov/38388989/",
+        source: "PubMed"
+      }
+    ],
+    usageVibes: ["balanced", "calm", "light"],
+    defaultIntensity: "moderate"
   },
   {
     id: 'terpene-7',
     name: 'Terpinolene',
-    aliases: [],
-    aroma: 'Pine-citrus, fresh herbs, lilac',
-    flavorNotes: 'Fresh, herbal',
-    effectTags: ['Creative Spark', 'Light Energy', 'Clear Mind'],
-    therapeuticNotes: 'Synergistic antioxidant; can feel uplifting yet calm',
-    defaultIntensity: 0.5
+    profile: { aroma: ["Pine-citrus", "Fresh herbs"], flavor: ["Pine", "Citrus", "Lilac"] },
+    commonSources: ["Nutmeg", "Cumin", "Tea tree", "Lilac"],
+    effects: ["Creative Spark", "Light Energy", "Clear Mind"],
+    therapeuticNotes: "Sedative, antioxidant",
+    research: [
+      {
+        title: "Sedative effect of inhaled terpinolene in mice",
+        link: "https://pubmed.ncbi.nlm.nih.gov/23339024/",
+        source: "PubMed"
+      }
+    ],
+    usageVibes: ["creative", "airy", "dreamy"],
+    defaultIntensity: "moderate"
   },
   {
     id: 'terpene-8',
     name: 'Ocimene',
-    aliases: [],
-    aroma: 'Sweet herb-mint, fruity',
-    flavorNotes: 'Sweet, herbal',
-    effectTags: ['Energize', 'Social Ease', 'Decongest'],
-    therapeuticNotes: 'Decongestant & antioxidant; mild stimulant',
-    defaultIntensity: 0.4
+    profile: { aroma: ["Sweet herb-mint", "Fruity"], flavor: ["Sweet", "Herbal", "Citrus"] },
+    commonSources: ["Mint", "Parsley", "Orchids", "Mango"],
+    effects: ["Energize", "Social Ease", "Decongest"],
+    therapeuticNotes: "Antiviral, antifungal",
+    research: [
+      {
+        title: "Phytochemical analysis & in-vitro antiviral activities of Ocimene-rich oils",
+        link: "https://pubmed.ncbi.nlm.nih.gov/18357554/",
+        source: "PubMed"
+      }
+    ],
+    usageVibes: ["fresh", "talkative", "bright"],
+    defaultIntensity: "moderate"
   },
   {
     id: 'terpene-9',
     name: 'Bisabolol',
     aliases: ['α-Bisabolol'],
-    aroma: 'Chamomile, sweet floral',
-    flavorNotes: 'Floral, sweet',
-    effectTags: ['Soothing', 'Skin Relief', 'Relax'],
-    therapeuticNotes: 'Anti-inflammatory & skin-healing; gentle muscle relaxation',
-    defaultIntensity: 0.3
+    profile: { aroma: ["Chamomile", "Sweet floral"], flavor: ["Floral", "Sweet"] },
+    commonSources: ["Chamomile", "Candeia tree", "Sage"],
+    effects: ["Soothing", "Skin Relief", "Relax"],
+    therapeuticNotes: "Anti-inflammatory & anti-irritant",
+    research: [
+      {
+        title: "α-Bisabolol reduces pro-inflammatory cytokine production",
+        link: "https://pubmed.ncbi.nlm.nih.gov/24894548/",
+        source: "PubMed"
+      }
+    ],
+    usageVibes: ["gentle", "calm", "soothed"],
+    defaultIntensity: "moderate"
   },
   {
     id: 'terpene-10',
     name: 'Valencene',
-    aliases: [],
-    aroma: 'Tangy orange-grapefruit',
-    flavorNotes: 'Citrus, fresh',
-    effectTags: ['Focus', 'Day-Bright', 'Anti-Inflammatory'],
-    therapeuticNotes: 'Antioxidant & anti-inflammatory; citrus uplift',
-    defaultIntensity: 0.5
+    profile: { aroma: ["Tangy orange-grapefruit"], flavor: ["Orange", "Grapefruit"] },
+    commonSources: ["Valencia orange", "Grapefruit"],
+    effects: ["Focus", "Day-Bright", "Anti-Inflammatory"],
+    therapeuticNotes: "Antioxidant, anti-inflammatory",
+    research: [
+      {
+        title: "In vivo and in silico anti-inflammatory properties of Valencene",
+        link: "https://pubmed.ncbi.nlm.nih.gov/36076580/",
+        source: "PubMed"
+      }
+    ],
+    usageVibes: ["alert", "citrusy", "bright"],
+    defaultIntensity: "moderate"
+  },
+  {
+    id: 'terpene-11',
+    name: 'Eucalyptol (1,8-Cineole)',
+    profile: { aroma: ["Minty", "Cooling", "Eucalyptus"], flavor: ["Minty", "Cool"] },
+    commonSources: ["Eucalyptus leaves", "Bay leaves", "Sage", "Rosemary"],
+    effects: ["Respiratory Relief", "Alertness", "Anti-Inflammatory"],
+    therapeuticNotes: "Bronchodilator & mucolytic",
+    research: [
+      {
+        title: "Anti-inflammatory activity of 1,8-cineole in bronchial asthma",
+        link: "https://pubmed.ncbi.nlm.nih.gov/12645832/",
+        source: "PubMed"
+      }
+    ],
+    usageVibes: ["clear", "refreshed", "cool"],
+    defaultIntensity: "moderate"
+  },
+  {
+    id: 'terpene-12',
+    name: 'Nerolidol',
+    profile: { aroma: ["Fresh bark", "Woody", "Citrus"], flavor: ["Woody", "Floral"] },
+    commonSources: ["Neroli", "Jasmine", "Tea tree", "Lemongrass"],
+    effects: ["Sedative", "Antioxidant", "Relaxation"],
+    therapeuticNotes: "Sedative & neuroprotective",
+    research: [
+      {
+        title: "Nerolidol shows sedative effects & antioxidative activity",
+        link: "https://pubmed.ncbi.nlm.nih.gov/23765368/",
+        source: "PubMed"
+      }
+    ],
+    usageVibes: ["sleepy", "woody", "relaxed"],
+    defaultIntensity: "moderate"
+  },
+  {
+    id: 'terpene-13',
+    name: 'Guaiol',
+    profile: { aroma: ["Woody", "Pine", "Rose"], flavor: ["Woody", "Pine"] },
+    commonSources: ["Cypress pine", "Guaiacum", "Conifer woods"],
+    effects: ["Antibacterial", "Relax", "Anti-Inflammatory"],
+    therapeuticNotes: "Antimicrobial; emerging anti-cancer studies",
+    research: [
+      {
+        title: "Microbial transformation of (−)-Guaiol & antibacterial activity",
+        link: "https://pubmed.ncbi.nlm.nih.gov/17385913/",
+        source: "PubMed"
+      }
+    ],
+    usageVibes: ["grounded", "woody", "calm"],
+    defaultIntensity: "moderate"
+  },
+  {
+    id: 'terpene-14',
+    name: 'Phytol',
+    profile: { aroma: ["Green", "Balsamic", "Floral"], flavor: ["Mild floral", "Green"] },
+    commonSources: ["Green tea", "Chlorophyll", "Hemp"],
+    effects: ["Antinociceptive", "Relaxation", "Antioxidant"],
+    therapeuticNotes: "Pain-relief & antioxidant",
+    research: [
+      {
+        title: "Antinociceptive and antioxidant activities of Phytol in vivo",
+        link: "https://pubmed.ncbi.nlm.nih.gov/26317107/",
+        source: "PubMed"
+      }
+    ],
+    usageVibes: ["mellow", "herbal", "calm"],
+    defaultIntensity: "moderate"
+  },
+  {
+    id: 'terpene-15',
+    name: 'Camphene',
+    profile: { aroma: ["Fir", "Woody", "Herbal"], flavor: ["Camphor", "Pine"] },
+    commonSources: ["Fir needles", "Cypress", "Camphor tree"],
+    effects: ["Lipid Lowering", "Anti-Inflammatory", "Respiratory Relief"],
+    therapeuticNotes: "Hypolipidemic & antioxidant",
+    research: [
+      {
+        title: "Camphene reduces plasma cholesterol and triglycerides",
+        link: "https://pubmed.ncbi.nlm.nih.gov/22073134/",
+        source: "PubMed"
+      }
+    ],
+    usageVibes: ["clear", "balanced", "fresh"],
+    defaultIntensity: "moderate"
+  },
+  {
+    id: 'terpene-16',
+    name: 'Borneol',
+    profile: { aroma: ["Camphor", "Minty", "Earthy"], flavor: ["Camphor", "Menthol"] },
+    commonSources: ["Camphor tree", "Mint", "Ginger"],
+    effects: ["Analgesic", "Anti-Itch", "Relaxation"],
+    therapeuticNotes: "Topical analgesic via TRPM8 activation",
+    research: [
+      {
+        title: "Topical borneol-induced analgesia mediated by TRPM8",
+        link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC5452010/",
+        source: "PMC"
+      }
+    ],
+    usageVibes: ["cool", "soothing", "calm"],
+    defaultIntensity: "moderate"
+  },
+  {
+    id: 'terpene-17',
+    name: 'Sabinene',
+    profile: { aroma: ["Spicy", "Peppery", "Citrus"], flavor: ["Spicy", "Woody"] },
+    commonSources: ["Black pepper", "Nutmeg", "Spruce"],
+    effects: ["Antioxidant", "Uplifting", "Anti-Inflammatory"],
+    therapeuticNotes: "Antioxidant & anti-radical",
+    research: [
+      {
+        title: "Antioxidant effects of sabinene hydrate on lipid stability",
+        link: "https://pubmed.ncbi.nlm.nih.gov/24841286/",
+        source: "PubMed"
+      }
+    ],
+    usageVibes: ["lively", "spicy", "vibrant"],
+    defaultIntensity: "moderate"
+  },
+  {
+    id: 'terpene-18',
+    name: 'α-Phellandrene',
+    profile: { aroma: ["Minty", "Citrus", "Peppery"], flavor: ["Mint", "Citrus"] },
+    commonSources: ["Eucalyptus", "Tulsi", "Cinnamon"],
+    effects: ["Anti-Inflammatory", "Energetic", "Uplifting"],
+    therapeuticNotes: "Inflammation modulation",
+    research: [
+      {
+        title: "α-Phellandrene attenuates inflammatory responses",
+        link: "https://pubmed.ncbi.nlm.nih.gov/27449945/",
+        source: "PubMed"
+      }
+    ],
+    usageVibes: ["invigorated", "bright", "minty"],
+    defaultIntensity: "moderate"
+  },
+  {
+    id: 'terpene-19',
+    name: 'Geraniol',
+    profile: { aroma: ["Floral", "Rose", "Fruity"], flavor: ["Rose", "Fruity"] },
+    commonSources: ["Rose oil", "Citronella", "Geranium"],
+    effects: ["Neuroprotective", "Mood Elevation", "Antioxidant"],
+    therapeuticNotes: "Neuroprotective & antioxidant",
+    research: [
+      {
+        title: "Neuroprotective effect of Geraniol on neurological disorders",
+        link: "https://pubmed.ncbi.nlm.nih.gov/35900613/",
+        source: "PubMed"
+      }
+    ],
+    usageVibes: ["uplifted", "floral", "bright"],
+    defaultIntensity: "moderate"
+  },
+  {
+    id: 'terpene-20',
+    name: '3-Carene',
+    profile: { aroma: ["Sweet", "Pine", "Cedar"], flavor: ["Pine", "Citrus"] },
+    commonSources: ["Cedar", "Pine resin", "Rosemary"],
+    effects: ["Anti-Inflammatory", "Sleep", "Bone Support"],
+    therapeuticNotes: "Anti-inflammatory & bone-healing potential",
+    research: [
+      {
+        title: "Anti-inflammatory effects of 3-carene in essential oils",
+        link: "https://pubmed.ncbi.nlm.nih.gov/31034956/",
+        source: "PubMed"
+      }
+    ],
+    usageVibes: ["drowsy", "woodsy", "cozy"],
+    defaultIntensity: "moderate"
+  },
+  {
+    id: 'terpene-21',
+    name: 'Fenchol',
+    profile: { aroma: ["Mint", "Pine", "Camphor"], flavor: ["Pine", "Mint"] },
+    commonSources: ["Basil", "Fennel", "Fir needles"],
+    effects: ["Antimicrobial", "Fresh", "Anti-Inflammatory"],
+    therapeuticNotes: "Broad-spectrum antimicrobial",
+    research: [
+      {
+        title: "Screening of antibacterial activities of oxygenated monoterpenes (fenchol)",
+        link: "https://pubmed.ncbi.nlm.nih.gov/17913064/",
+        source: "PubMed"
+      }
+    ],
+    usageVibes: ["crisp", "clean", "fresh"],
+    defaultIntensity: "moderate"
+  },
+  {
+    id: 'terpene-22',
+    name: 'β-Farnesene',
+    profile: { aroma: ["Green apple", "Woody"], flavor: ["Green", "Woody"] },
+    commonSources: ["Apple skins", "Ginger", "Hop oil"],
+    effects: ["Insect Repellent", "Focus", "Calm"],
+    therapeuticNotes: "Natural aphid alarm pheromone; agricultural applications",
+    research: [
+      {
+        title: "Aphid-repellent pheromone (E)-β-Farnesene generated in plants",
+        link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC4343287/",
+        source: "PMC"
+      }
+    ],
+    usageVibes: ["focused", "herbal", "alert"],
+    defaultIntensity: "low"
+  },
+  {
+    id: 'terpene-23',
+    name: 'α-Terpineol',
+    profile: { aroma: ["Lilac", "Pine", "Citrus"], flavor: ["Lilac", "Floral"] },
+    commonSources: ["Lilac", "Pine oil", "Cajuput"],
+    effects: ["Soothing", "Pain Relief", "Sedative"],
+    therapeuticNotes: "Analgesic & antidepressant-like via cannabinoid system",
+    research: [
+      {
+        title: "Antidepressant-like effect of Terpineol in inflammatory model",
+        link: "https://pmc.ncbi.nlm.nih.gov/articles/PMC7280984/",
+        source: "PMC"
+      }
+    ],
+    usageVibes: ["soothed", "peaceful", "soft"],
+    defaultIntensity: "moderate"
+  },
+  {
+    id: 'terpene-24',
+    name: 'Isopulegol',
+    profile: { aroma: ["Minty", "Herbal"], flavor: ["Mint", "Herbal"] },
+    commonSources: ["Lemon balm", "Mint species"],
+    effects: ["Anticonvulsant", "Relaxation", "Gastro-protective"],
+    therapeuticNotes: "GABA-modulating anticonvulsant & antioxidant",
+    research: [
+      {
+        title: "Isopulegol protects against PTZ-induced convulsions",
+        link: "https://pubmed.ncbi.nlm.nih.gov/19559770/",
+        source: "PubMed"
+      }
+    ],
+    usageVibes: ["cool", "calm", "relaxed"],
+    defaultIntensity: "low"
+  },
+  {
+    id: 'terpene-25',
+    name: 'Isoborneol',
+    profile: { aroma: ["Camphoraceous", "Minty"], flavor: ["Camphor", "Cooling"] },
+    commonSources: ["Borneol resin", "Conifer woods"],
+    effects: ["Antiviral", "Cooling", "Relaxation"],
+    therapeuticNotes: "Potent HSV-1 inhibitor; glycosylation blockade",
+    research: [
+      {
+        title: "Isoborneol: a potent inhibitor of herpes simplex virus replication",
+        link: "https://pubmed.ncbi.nlm.nih.gov/10517310/",
+        source: "PubMed"
+      }
+    ],
+    usageVibes: ["cool", "clean", "calm"],
+    defaultIntensity: "low"
   }
 ];
 
@@ -135,18 +477,22 @@ const TerpeneDatabase: React.FC = () => {
   const [newTerpene, setNewTerpene] = useState<Omit<Terpene, 'id'>>({
     name: '',
     aliases: [],
-    aroma: '',
-    flavorNotes: '',
-    effectTags: [''],
+    profile: { aroma: [], flavor: [] },
+    commonSources: [],
+    effects: [''],
     therapeuticNotes: '',
-    defaultIntensity: 0.5
+    research: [],
+    usageVibes: [],
+    defaultIntensity: 'moderate'
   });
 
   // Filtered terpenes based on search term
   const filteredTerpenes = terpenes.filter(terpene => 
     terpene.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    terpene.aroma.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    terpene.effectTags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+    (terpene.aroma && terpene.aroma.toLowerCase().includes(searchTerm.toLowerCase())) ||
+    (terpene.profile.aroma.some(aroma => aroma.toLowerCase().includes(searchTerm.toLowerCase()))) ||
+    (terpene.effectTags && terpene.effectTags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))) ||
+    terpene.effects.some(effect => effect.toLowerCase().includes(searchTerm.toLowerCase()))
   );
 
   // Handle new terpene form input change
@@ -172,9 +518,9 @@ const TerpeneDatabase: React.FC = () => {
   // Handle effect tags change
   const handleEffectTagChange = (index: number, value: string) => {
     setNewTerpene(prev => {
-      const updatedTags = [...prev.effectTags];
+      const updatedTags = [...prev.effects];
       updatedTags[index] = value;
-      return { ...prev, effectTags: updatedTags };
+      return { ...prev, effects: updatedTags };
     });
   };
 
@@ -182,16 +528,16 @@ const TerpeneDatabase: React.FC = () => {
   const addEffectTagField = () => {
     setNewTerpene(prev => ({
       ...prev,
-      effectTags: [...prev.effectTags, '']
+      effects: [...prev.effects, '']
     }));
   };
 
   // Remove effect tag field
   const removeEffectTagField = (index: number) => {
     setNewTerpene(prev => {
-      const updatedTags = [...prev.effectTags];
+      const updatedTags = [...prev.effects];
       updatedTags.splice(index, 1);
-      return { ...prev, effectTags: updatedTags.length ? updatedTags : [''] }; // Ensure at least one empty field
+      return { ...prev, effects: updatedTags.length ? updatedTags : [''] }; // Ensure at least one empty field
     });
   };
 
@@ -202,7 +548,7 @@ const TerpeneDatabase: React.FC = () => {
     const newTerpeneEntry: Terpene = {
       ...newTerpene,
       id: `terpene-${Date.now()}`,
-      effectTags: newTerpene.effectTags.filter(tag => tag.trim())
+      effects: newTerpene.effects.filter(effect => effect.trim())
     };
 
     setTerpenes([...terpenes, newTerpeneEntry]);
@@ -211,11 +557,13 @@ const TerpeneDatabase: React.FC = () => {
     setNewTerpene({
       name: '',
       aliases: [],
-      aroma: '',
-      flavorNotes: '',
-      effectTags: [''],
+      profile: { aroma: [], flavor: [] },
+      commonSources: [],
+      effects: [''],
       therapeuticNotes: '',
-      defaultIntensity: 0.5
+      research: [],
+      usageVibes: [],
+      defaultIntensity: 'moderate'
     });
     
     setIsAddingTerpene(false);
@@ -229,11 +577,13 @@ const TerpeneDatabase: React.FC = () => {
     // Pre-fill form with terpene data
     setNewTerpene({
       name: terpeneToEdit.name,
-      aliases: terpeneToEdit.aliases,
-      aroma: terpeneToEdit.aroma,
-      flavorNotes: terpeneToEdit.flavorNotes,
-      effectTags: terpeneToEdit.effectTags.length ? terpeneToEdit.effectTags : [''],
+      aliases: terpeneToEdit.aliases || [],
+      profile: terpeneToEdit.profile,
+      commonSources: terpeneToEdit.commonSources,
+      effects: terpeneToEdit.effects.length ? terpeneToEdit.effects : [''],
       therapeuticNotes: terpeneToEdit.therapeuticNotes,
+      research: terpeneToEdit.research || [],
+      usageVibes: terpeneToEdit.usageVibes,
       defaultIntensity: terpeneToEdit.defaultIntensity
     });
     
@@ -252,10 +602,12 @@ const TerpeneDatabase: React.FC = () => {
               ...terpene, 
               name: newTerpene.name,
               aliases: newTerpene.aliases,
-              aroma: newTerpene.aroma,
-              flavorNotes: newTerpene.flavorNotes,
-              effectTags: newTerpene.effectTags.filter(tag => tag.trim()),
+              profile: newTerpene.profile,
+              commonSources: newTerpene.commonSources,
+              effects: newTerpene.effects.filter(effect => effect.trim()),
               therapeuticNotes: newTerpene.therapeuticNotes,
+              research: newTerpene.research,
+              usageVibes: newTerpene.usageVibes,
               defaultIntensity: newTerpene.defaultIntensity
             }
           : terpene
@@ -266,11 +618,13 @@ const TerpeneDatabase: React.FC = () => {
     setNewTerpene({
       name: '',
       aliases: [],
-      aroma: '',
-      flavorNotes: '',
-      effectTags: [''],
+      profile: { aroma: [], flavor: [] },
+      commonSources: [],
+      effects: [''],
       therapeuticNotes: '',
-      defaultIntensity: 0.5
+      research: [],
+      usageVibes: [],
+      defaultIntensity: 'moderate'
     });
     
     setEditingTerpeneId(null);
@@ -402,7 +756,7 @@ const TerpeneDatabase: React.FC = () => {
                   </label>
                   <input
                     type="text"
-                    value={newTerpene.aliases.join(', ')}
+                    value={(newTerpene.aliases || []).join(', ')}
                     onChange={handleAliasesChange}
                     className="w-full px-3 py-2 bg-white rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500"
                     placeholder="e.g., β-Myrcene, Myrcia"
@@ -453,7 +807,7 @@ const TerpeneDatabase: React.FC = () => {
                     </button>
                   </div>
                   
-                  {newTerpene.effectTags.map((tag, index) => (
+                  {newTerpene.effects.map((tag, index) => (
                     <div key={index} className="flex items-center mb-2">
                       <input
                         type="text"
@@ -463,7 +817,7 @@ const TerpeneDatabase: React.FC = () => {
                         placeholder={`e.g., Relaxation${index > 0 ? '' : ' (required)'}`}
                         required={index === 0}
                       />
-                      {newTerpene.effectTags.length > 1 && (
+                      {newTerpene.effects.length > 1 && (
                         <button
                           type="button"
                           onClick={() => removeEffectTagField(index)}
@@ -491,25 +845,17 @@ const TerpeneDatabase: React.FC = () => {
                 
                 <div className="mb-4">
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Default Intensity: {newTerpene.defaultIntensity.toFixed(1)}
+                    Default Intensity: {newTerpene.defaultIntensity}
                   </label>
                   <input
-                    type="range"
-                    min="0"
-                    max="1"
-                    step="0.1"
+                    type="text"
                     value={newTerpene.defaultIntensity}
                     onChange={(e) => setNewTerpene(prev => ({
                       ...prev,
-                      defaultIntensity: parseFloat(e.target.value)
+                      defaultIntensity: e.target.value
                     }))}
                     className="w-full"
                   />
-                  <div className="flex justify-between text-xs text-gray-500">
-                    <span>0.0</span>
-                    <span>0.5</span>
-                    <span>1.0</span>
-                  </div>
                 </div>
               </div>
             </div>
@@ -527,7 +873,7 @@ const TerpeneDatabase: React.FC = () => {
               
               <Button
                 onClick={editingTerpeneId ? handleUpdateTerpene : handleAddTerpene}
-                disabled={!newTerpene.name.trim() || !newTerpene.effectTags[0]?.trim()}
+                disabled={!newTerpene.name.trim() || !newTerpene.effects[0]?.trim()}
               >
                 {editingTerpeneId ? 'Update Terpene' : 'Add Terpene'}
               </Button>
@@ -574,13 +920,13 @@ const TerpeneDatabase: React.FC = () => {
                     </div>
                     <div>
                       <h3 className="font-semibold text-gray-900">{terpene.name}</h3>
-                      <p className="text-sm text-gray-500">{terpene.aroma}</p>
+                      <p className="text-sm text-gray-500">{terpene.aroma || terpene.profile.aroma.join(', ')}</p>
                     </div>
                   </div>
                   
                   <div className="flex items-center space-x-1">
                     <div className="flex -space-x-1 mr-4">
-                      {terpene.effectTags.slice(0, 3).map((tag, i) => (
+                      {(terpene.effectTags || terpene.effects).slice(0, 3).map((tag, i) => (
                         <span 
                           key={`${terpene.id}-tag-${i}`}
                           className={cn(
@@ -593,9 +939,9 @@ const TerpeneDatabase: React.FC = () => {
                           {tag}
                         </span>
                       ))}
-                      {terpene.effectTags.length > 3 && (
+                      {(terpene.effectTags || terpene.effects).length > 3 && (
                         <span className="px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-800 border-2 border-white">
-                          +{terpene.effectTags.length - 3}
+                          +{(terpene.effectTags || terpene.effects).length - 3}
                         </span>
                       )}
                     </div>
@@ -614,15 +960,15 @@ const TerpeneDatabase: React.FC = () => {
                       <div>
                         <h4 className="text-sm font-medium text-gray-700 mb-2">Aroma & Flavor</h4>
                         <p className="text-sm text-gray-600 mb-1">
-                          <span className="font-medium">Aroma:</span> {terpene.aroma}
+                          <span className="font-medium">Aroma:</span> {terpene.aroma || terpene.profile.aroma.join(', ')}
                         </p>
-                        {terpene.flavorNotes && (
+                        {(terpene.flavorNotes || terpene.profile.flavor.length > 0) && (
                           <p className="text-sm text-gray-600">
-                            <span className="font-medium">Flavor Notes:</span> {terpene.flavorNotes}
+                            <span className="font-medium">Flavor Notes:</span> {terpene.flavorNotes || terpene.profile.flavor.join(', ')}
                           </p>
                         )}
                         
-                        {terpene.aliases.length > 0 && (
+                        {terpene.aliases && terpene.aliases.length > 0 && (
                           <div className="mt-3">
                             <p className="text-sm font-medium text-gray-700 mb-1">Also Known As:</p>
                             <div className="flex flex-wrap gap-2">
@@ -641,7 +987,7 @@ const TerpeneDatabase: React.FC = () => {
                         <div className="mb-3">
                           <p className="text-sm text-gray-700 mb-1">Effect Tags:</p>
                           <div className="flex flex-wrap gap-2">
-                            {terpene.effectTags.map((tag, i) => (
+                            {(terpene.effectTags || terpene.effects).map((tag, i) => (
                               <span 
                                 key={`effect-${i}`}
                                 className={cn(

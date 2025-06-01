@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../ui/button';
 import { Building2, Mail, Lock, AlertCircle, ArrowRight, ArrowLeft, Check, Monitor, Users, Database, Settings, MapPin, Gift, Phone, User, HelpCircle, Download, FileJson } from 'lucide-react';
 import { signUp } from '../../lib/supabase';
+import { useAuthStore } from '../../stores/authStore';
 
 interface FormData {
   // Step 1: Account & Business Basics
@@ -106,11 +107,21 @@ const RegisterForm = () => {
     setIsLoading(true);
     
     try {
-      // Use Supabase signUp function
+      // Use Supabase signUp function with all form data
       const { data, error: signUpError } = await signUp(
         formData.email,
         formData.password,
-        formData.dispensaryName
+        formData.dispensaryName,
+        {
+          useMode: formData.useMode,
+          menuSource: formData.menuSource,
+          enableDemoInventory: formData.enableDemoInventory,
+          locationZip: formData.locationZip,
+          referralCode: formData.referralCode,
+          fullName: formData.fullName,
+          phoneNumber: formData.phoneNumber,
+          wantOnboardingHelp: formData.wantOnboardingHelp
+        }
       );
       
       if (signUpError) {
@@ -125,20 +136,39 @@ const RegisterForm = () => {
         // Registration successful
         console.log('Registration successful:', data);
         
-        // TODO: Store additional form data (useMode, menuSource, etc.) in user profile
-        console.log('Additional signup data:', {
-          useMode: formData.useMode,
-          menuSource: formData.menuSource,
-          enableDemoInventory: formData.enableDemoInventory,
-          locationZip: formData.locationZip,
-          referralCode: formData.referralCode,
-          fullName: formData.fullName,
-          phoneNumber: formData.phoneNumber,
-          wantOnboardingHelp: formData.wantOnboardingHelp
-        });
+        // Sign in the user automatically after registration
+        const { signInWithEmail } = useAuthStore.getState();
+        const signInResult = await signInWithEmail(formData.email, formData.password);
         
-        // Navigate to login with success message
-        navigate('/auth/login?registered=true');
+        if (!signInResult.success) {
+          console.error('Auto sign-in failed:', signInResult.error);
+          // If auto sign-in fails, redirect to login
+          navigate('/auth/login?registered=true');
+          return;
+        }
+        
+        // Check if user wants onboarding
+        if (formData.wantOnboardingHelp) {
+          // Navigate to onboarding flow
+          navigate('/admin/onboarding', { 
+            state: { 
+              fromRegistration: true,
+              enableDemoInventory: formData.enableDemoInventory,
+              menuSource: formData.menuSource
+            } 
+          });
+        } else if (formData.enableDemoInventory) {
+          // If they want demo inventory but no onboarding, go to import
+          navigate('/admin/inventory/import', { 
+            state: { 
+              fromRegistration: true,
+              loadDemoData: true 
+            } 
+          });
+        } else {
+          // Otherwise go to dashboard
+          navigate('/admin');
+        }
       } else {
         setErrors({ email: 'Registration failed. Please try again.' });
       }

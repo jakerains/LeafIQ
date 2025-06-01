@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { X, Download, Upload, FileJson, FileText, Database } from 'lucide-react';
+import { X, Download, Upload, FileJson, FileText, Database, CheckCircle, AlertCircle } from 'lucide-react';
 import { Button } from '../../../components/ui/button';
 import ImportExportInstructions from './ImportExportInstructions';
+import { importInventoryData, exportInventoryData, validateImportData, ImportResult, ImportMode } from '../../../utils/inventoryImporter';
+import { parseMarkdownToImportData, parseMultipleMarkdownFiles } from '../../../utils/markdownInventoryParser';
+import { useAuthStore } from '../../../stores/authStore';
+import { useProductsStore } from '../../../stores/productsStore';
 
 interface ImportExportOptionsProps {
   onClose: () => void;
@@ -15,62 +19,188 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
   const [jsonInput, setJsonInput] = useState('');
   const [markdownInput, setMarkdownInput] = useState('');
   const [showInstructions, setShowInstructions] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [importResult, setImportResult] = useState<ImportResult | null>(null);
+  const [importMode, setImportMode] = useState<ImportMode>('update');
+  
+  const { user } = useAuthStore();
+  const { fetchProducts } = useProductsStore();
 
-  const handleImport = () => {
-    // In a real app, this would process the import
-    if (importSource === 'json') {
-      try {
-        JSON.parse(jsonInput);
-        alert('JSON data imported successfully');
-        onClose();
-      } catch (error) {
-        alert('Invalid JSON format');
+  const handleImport = async () => {
+    if (!user?.organizationId) {
+      setImportResult({
+        success: false,
+        message: 'No organization found. Please contact support.',
+      });
+      return;
+    }
+
+    setIsProcessing(true);
+    setImportResult(null);
+
+    try {
+      if (importSource === 'json') {
+        if (!jsonInput.trim()) {
+          setImportResult({
+            success: false,
+            message: 'Please enter JSON data or upload a file',
+          });
+          return;
+        }
+
+        let parsedData;
+        try {
+          parsedData = JSON.parse(jsonInput);
+        } catch (error) {
+          setImportResult({
+            success: false,
+            message: 'Invalid JSON format. Please check your syntax.',
+          });
+          return;
+        }
+
+        // Validate the data structure
+        const validation = validateImportData(parsedData);
+        if (!validation.valid) {
+          setImportResult({
+            success: false,
+            message: `Validation failed: ${validation.errors.join(', ')}`,
+          });
+          return;
+        }
+
+        // Import the data
+        const result = await importInventoryData(
+          parsedData,
+          user.organizationId,
+          importMode
+        );
+
+        setImportResult(result);
+
+        // Refresh the products store if successful
+        if (result.success) {
+          await fetchProducts();
+          setTimeout(() => {
+            onClose();
+          }, 3000);
+        }
+
+      } else if (importSource === 'markdown') {
+        if (!markdownInput.trim()) {
+          setImportResult({
+            success: false,
+            message: 'Please enter markdown data or upload a file',
+          });
+          return;
+        }
+
+        try {
+          // Parse markdown to JSON format
+          const parsedData = parseMarkdownToImportData(
+            markdownInput,
+            user.organizationId
+          );
+
+          if (parsedData.products.length === 0) {
+            setImportResult({
+              success: false,
+              message: 'No products found in markdown. Please check the format.',
+            });
+            return;
+          }
+
+          // Import the parsed data
+          const result = await importInventoryData(
+            parsedData,
+            user.organizationId,
+            importMode
+          );
+
+          setImportResult(result);
+
+          // Refresh the products store if successful
+          if (result.success) {
+            await fetchProducts();
+            setTimeout(() => {
+              onClose();
+            }, 3000);
+          }
+
+        } catch (error) {
+          setImportResult({
+            success: false,
+            message: `Markdown parsing failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
+          });
+        }
+      } else if (importSource === 'api') {
+        setImportResult({
+          success: false,
+          message: 'Dutchie API import is not yet implemented. Please use JSON format.',
+        });
       }
-    } else if (importSource === 'markdown') {
-      if (markdownInput.trim()) {
-        alert('Markdown data imported successfully');
-        onClose();
-      } else {
-        alert('Please enter markdown data');
-      }
+    } catch (error) {
+      setImportResult({
+        success: false,
+        message: `Import failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
+      });
+    } finally {
+      setIsProcessing(false);
     }
   };
 
-  const handleExport = () => {
-    // In a real app, this would generate the export file
-    const dummyData = {
-      products: [
-        { id: 'p001', name: 'Blue Dream', category: 'flower' },
-        { id: 'p002', name: 'Cosmic Gummies', category: 'edible' }
-      ]
-    };
-    
-    if (exportFormat === 'json') {
-      const dataStr = JSON.stringify(dummyData, null, 2);
-      const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-      const exportName = 'leafiq_inventory_export.json';
-      
-      const linkElement = document.createElement('a');
-      linkElement.setAttribute('href', dataUri);
-      linkElement.setAttribute('download', exportName);
-      linkElement.click();
-    } else if (exportFormat === 'csv') {
-      // Generate CSV format
-      let csv = 'id,name,category\n';
-      dummyData.products.forEach(product => {
-        csv += `${product.id},${product.name},${product.category}\n`;
-      });
-      
-      const dataUri = 'data:text/csv;charset=utf-8,'+ encodeURIComponent(csv);
-      const exportName = 'leafiq_inventory_export.csv';
-      
-      const linkElement = document.createElement('a');
-      linkElement.setAttribute('href', dataUri);
-      linkElement.setAttribute('download', exportName);
-      linkElement.click();
+  const handleExport = async () => {
+    if (!user?.organizationId) {
+      alert('No organization found. Please contact support.');
+      return;
     }
-    
-    alert('Data exported successfully');
+
+    setIsProcessing(true);
+
+    try {
+      const exportData = await exportInventoryData(user.organizationId);
+      
+      if (!exportData) {
+        alert('No inventory data found to export.');
+        return;
+      }
+
+      if (exportFormat === 'json') {
+        const dataStr = JSON.stringify(exportData, null, 2);
+        const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+        const exportName = `leafiq_inventory_export_${new Date().toISOString().split('T')[0]}.json`;
+        
+        const linkElement = document.createElement('a');
+        linkElement.setAttribute('href', dataUri);
+        linkElement.setAttribute('download', exportName);
+        linkElement.click();
+        
+        alert(`Exported ${exportData.products.length} products successfully!`);
+      } else if (exportFormat === 'csv') {
+        // Generate CSV format
+        let csv = 'product_id,product_name,brand,category,variant_id,size_weight,price,thc_percentage,cbd_percentage,inventory_level,is_available\n';
+        
+        exportData.products.forEach(product => {
+          product.variants.forEach(variant => {
+            csv += `"${product.id}","${product.name}","${product.brand}","${product.category}","${variant.id}","${variant.size_weight}",${variant.price},${variant.thc_percentage || ''},${variant.cbd_percentage || ''},${variant.inventory_level},${variant.is_available}\n`;
+          });
+        });
+        
+        const dataUri = 'data:text/csv;charset=utf-8,'+ encodeURIComponent(csv);
+        const exportName = `leafiq_inventory_export_${new Date().toISOString().split('T')[0]}.csv`;
+        
+        const linkElement = document.createElement('a');
+        linkElement.setAttribute('href', dataUri);
+        linkElement.setAttribute('download', exportName);
+        linkElement.click();
+        
+        alert(`Exported ${exportData.products.length} products successfully!`);
+      }
+    } catch (error) {
+      alert(`Export failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   if (showInstructions) {
@@ -176,6 +306,40 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
                   View Template & Instructions
                 </button>
               </div>
+              
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Import Mode:
+                </label>
+                <div className="space-y-2">
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="importMode"
+                      value="update"
+                      checked={importMode === 'update'}
+                      onChange={(e) => setImportMode(e.target.value as ImportMode)}
+                      className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300"
+                    />
+                    <span className="ml-2 text-sm text-gray-700">
+                      <strong>Update Inventory</strong> - Add new products and update existing ones
+                    </span>
+                  </label>
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="importMode"
+                      value="replace"
+                      checked={importMode === 'replace'}
+                      onChange={(e) => setImportMode(e.target.value as ImportMode)}
+                      className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300"
+                    />
+                    <span className="ml-2 text-sm text-gray-700">
+                      <strong>Replace Inventory</strong> - ⚠️ Delete all current products and replace with imported data
+                    </span>
+                  </label>
+                </div>
+              </div>
               <textarea
                 value={jsonInput}
                 onChange={(e) => setJsonInput(e.target.value)}
@@ -224,6 +388,41 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
                   View Template & Instructions
                 </button>
               </div>
+              
+              <div className="mb-4">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Import Mode:
+                </label>
+                <div className="space-y-2">
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="importMode"
+                      value="update"
+                      checked={importMode === 'update'}
+                      onChange={(e) => setImportMode(e.target.value as ImportMode)}
+                      className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300"
+                    />
+                    <span className="ml-2 text-sm text-gray-700">
+                      <strong>Update Inventory</strong> - Add new products and update existing ones
+                    </span>
+                  </label>
+                  <label className="flex items-center">
+                    <input
+                      type="radio"
+                      name="importMode"
+                      value="replace"
+                      checked={importMode === 'replace'}
+                      onChange={(e) => setImportMode(e.target.value as ImportMode)}
+                      className="h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300"
+                    />
+                    <span className="ml-2 text-sm text-gray-700">
+                      <strong>Replace Inventory</strong> - ⚠️ Delete all current products and replace with imported data
+                    </span>
+                  </label>
+                </div>
+              </div>
+              
               <textarea
                 value={markdownInput}
                 onChange={(e) => setMarkdownInput(e.target.value)}
@@ -312,6 +511,62 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
             </div>
           )}
 
+          {/* Import Result Display */}
+          {importResult && (
+            <div className={`mb-6 p-4 rounded-lg border ${
+              importResult.success 
+                ? 'bg-green-50 border-green-200' 
+                : 'bg-red-50 border-red-200'
+            }`}>
+              <div className="flex items-start">
+                {importResult.success ? (
+                  <CheckCircle className="h-5 w-5 text-green-500 mr-2 mt-0.5" />
+                ) : (
+                  <AlertCircle className="h-5 w-5 text-red-500 mr-2 mt-0.5" />
+                )}
+                <div className="flex-1">
+                  <p className={`font-medium ${
+                    importResult.success ? 'text-green-800' : 'text-red-800'
+                  }`}>
+                    {importResult.success ? 'Import Successful!' : 'Import Failed'}
+                  </p>
+                  <p className={`text-sm mt-1 ${
+                    importResult.success ? 'text-green-700' : 'text-red-700'
+                  }`}>
+                    {importResult.message}
+                  </p>
+                  
+                  {importResult.stats && (
+                    <div className="mt-2 text-xs space-y-1">
+                      <div className="grid grid-cols-2 gap-2">
+                        <span>Products Created: {importResult.stats.productsCreated}</span>
+                        <span>Products Updated: {importResult.stats.productsUpdated}</span>
+                        <span>Variants Created: {importResult.stats.variantsCreated}</span>
+                        <span>Variants Updated: {importResult.stats.variantsUpdated}</span>
+                      </div>
+                      
+                      {importResult.stats.errors.length > 0 && (
+                        <div className="mt-2">
+                          <p className="font-medium">Errors:</p>
+                          <ul className="list-disc list-inside space-y-1">
+                            {importResult.stats.errors.slice(0, 5).map((error, index) => (
+                              <li key={index}>{error}</li>
+                            ))}
+                            {importResult.stats.errors.length > 5 && (
+                              <li>... and {importResult.stats.errors.length - 5} more errors</li>
+                            )}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
+
+
           <div className="flex justify-end space-x-3">
             <Button 
               type="button"
@@ -324,8 +579,9 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
               type="button"
               leftIcon={<Upload size={16} />}
               onClick={handleImport}
+              disabled={isProcessing}
             >
-              Import Data
+              {isProcessing ? 'Processing...' : 'Import Data'}
             </Button>
           </div>
         </div>
@@ -414,8 +670,9 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
               type="button"
               leftIcon={<Download size={16} />}
               onClick={handleExport}
+              disabled={isProcessing}
             >
-              Export Data
+              {isProcessing ? 'Processing...' : 'Export Data'}
             </Button>
           </div>
         </div>

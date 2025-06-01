@@ -64,6 +64,7 @@ function App() {
           <Route path="/pricing" element={<PricingPage />} />
           <Route path="/auth" element={<AuthLayout />}>
             <Route path="signup" element={<RegisterForm />} />
+            <Route path="register" element={<RegisterForm />} />
             <Route path="login" element={<LoginForm />} />
           </Route>
           <Route path="/checkout">

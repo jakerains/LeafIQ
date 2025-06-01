@@ -5,12 +5,25 @@ import { X, ExternalLink } from 'lucide-react';
 interface Terpene {
   id: string;
   name: string;
-  aliases: string[];
-  aroma: string;
-  flavorNotes: string;
-  effectTags: string[];
+  aliases?: string[];
+  profile: {
+    aroma: string[];
+    flavor: string[];
+  };
+  commonSources: string[];
+  effects: string[];
   therapeuticNotes: string;
-  defaultIntensity: number;
+  research?: Array<{
+    title: string;
+    link: string;
+    source: string;
+  }>;
+  usageVibes: string[];
+  defaultIntensity: string;
+  // Legacy fields for backward compatibility
+  aroma?: string;
+  flavorNotes?: string;
+  effectTags?: string[];
 }
 
 interface TerpeneInfoModalProps {
@@ -131,7 +144,7 @@ const TerpeneInfoModal: React.FC<TerpeneInfoModalProps> = ({ isOpen, onClose, te
                   <div>
                     <h2 className="text-2xl font-bold text-gray-900">{terpene.name}</h2>
                     
-                    {terpene.aliases.length > 0 && (
+                    {terpene.aliases && terpene.aliases.length > 0 && (
                       <p className="text-gray-500 text-sm">
                         Also known as: {terpene.aliases.join(', ')}
                       </p>
@@ -157,13 +170,13 @@ const TerpeneInfoModal: React.FC<TerpeneInfoModalProps> = ({ isOpen, onClose, te
                     <div className={`p-4 rounded-xl ${colors.light}`}>
                       <div className="mb-4">
                         <h4 className="font-medium text-gray-700 mb-1">Aroma Profile</h4>
-                        <p className="text-gray-800">{terpene.aroma}</p>
+                        <p className="text-gray-800">{terpene.aroma || terpene.profile.aroma.join(', ')}</p>
                       </div>
                       
-                      {terpene.flavorNotes && (
+                      {(terpene.flavorNotes || terpene.profile.flavor.length > 0) && (
                         <div>
                           <h4 className="font-medium text-gray-700 mb-1">Flavor Notes</h4>
-                          <p className="text-gray-800">{terpene.flavorNotes}</p>
+                          <p className="text-gray-800">{terpene.flavorNotes || terpene.profile.flavor.join(', ')}</p>
                         </div>
                       )}
                     </div>
@@ -173,7 +186,7 @@ const TerpeneInfoModal: React.FC<TerpeneInfoModalProps> = ({ isOpen, onClose, te
                     <h3 className="text-lg font-semibold mb-2 text-gray-900">Effects</h3>
                     <div className="space-y-3">
                       <div className="flex flex-wrap gap-2">
-                        {terpene.effectTags.map((tag, index) => (
+                        {(terpene.effectTags || terpene.effects).map((tag, index) => (
                           <span 
                             key={index} 
                             className={`px-3 py-1.5 rounded-full ${colors.mid} ${colors.dark} text-sm font-medium`}
@@ -239,7 +252,7 @@ const TerpeneInfoModal: React.FC<TerpeneInfoModalProps> = ({ isOpen, onClose, te
                       </p>
                       
                       <div className="flex flex-wrap gap-2">
-                        {getTerpeneVibes(terpene.name, terpene.effectTags).map((vibe, index) => (
+                        {getTerpeneVibes(terpene.name, terpene.effectTags || terpene.effects).map((vibe, index) => (
                           <span 
                             key={index} 
                             className="px-3 py-1 bg-white rounded-full text-sm font-medium border border-gray-200 shadow-sm"
@@ -258,7 +271,7 @@ const TerpeneInfoModal: React.FC<TerpeneInfoModalProps> = ({ isOpen, onClose, te
                 <div className="w-full h-4 bg-gray-200 rounded-full">
                   <div 
                     className={`h-full ${colors.mid} rounded-full`}
-                    style={{ width: `${terpene.defaultIntensity * 100}%` }}
+                    style={{ width: `${terpene.defaultIntensity === 'low' ? 33 : terpene.defaultIntensity === 'moderate' ? 66 : 100}%` }}
                   ></div>
                 </div>
                 <div className="flex justify-between text-xs text-gray-500 mt-1">

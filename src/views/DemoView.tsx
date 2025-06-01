@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Monitor, Users, ShoppingBag, Brain, Settings, User } from 'lucide-react';
+import { Monitor, Users, ShoppingBag, Brain, Settings, User, ClipboardList, BarChart3, Package } from 'lucide-react';
 import Logo from '../components/ui/Logo';
 import GlassCard from '../components/ui/GlassCard';
 import { ShimmerButton } from '../components/ui/shimmer-button';
@@ -44,19 +44,19 @@ const DemoView = () => {
               <span className="text-primary-600"> Live Demo</span>
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Explore both sides of our cannabis dispensary platform. Experience the customer journey 
-              or dive into the powerful admin tools that make it all possible.
+              Explore all aspects of our cannabis dispensary platform. From customer experience 
+              to staff operations and admin management.
             </p>
           </motion.div>
         </header>
 
         <motion.div 
-          className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto"
+          className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto"
           variants={container}
           initial="hidden"
           animate="show"
         >
-          {/* Customer Experience Card */}
+          {/* Customer Kiosk Card */}
           <motion.div variants={item}>
             <GlassCard className="p-8 h-full flex flex-col">
               <div className="flex items-center mb-6">
@@ -65,22 +65,22 @@ const DemoView = () => {
                 </div>
                 <div>
                   <h2 className="text-2xl font-bold text-gray-900 mb-2">Customer Kiosk</h2>
-                  <p className="text-gray-600">Experience shopping from the customer's perspective</p>
+                  <p className="text-gray-600 text-sm">Self-service shopping experience</p>
                 </div>
               </div>
               
               <div className="flex-1 space-y-4 mb-8">
                 <div className="flex items-center gap-3">
                   <Brain size={20} className="text-blue-500" />
-                  <span className="text-gray-700">AI-powered product recommendations</span>
+                  <span className="text-gray-700 text-sm">AI-powered recommendations</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Monitor size={20} className="text-blue-500" />
-                  <span className="text-gray-700">Interactive chat interface</span>
+                  <span className="text-gray-700 text-sm">Interactive chat interface</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <User size={20} className="text-blue-500" />
-                  <span className="text-gray-700">Personalized shopping experience</span>
+                  <span className="text-gray-700 text-sm">Personalized shopping</span>
                 </div>
               </div>
               
@@ -90,19 +90,73 @@ const DemoView = () => {
                   shimmerColor="#3b82f6"
                   background="linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%)"
                 >
-                  Try Customer Experience
+                  Try Customer Kiosk
                 </ShimmerButton>
               </Link>
               
               <div className="mt-4 text-center">
-                <p className="text-sm text-gray-500">
-                  No login required • Full functionality
-                </p>
+                <div className="bg-blue-50 rounded-lg p-3">
+                  <p className="text-xs font-medium text-blue-800 mb-1">Open Access:</p>
+                  <p className="text-xs text-blue-700">
+                    No login required<br />
+                    Full kiosk functionality
+                  </p>
+                </div>
               </div>
             </GlassCard>
           </motion.div>
 
-          {/* Admin/Staff Experience Card */}
+          {/* Staff Dashboard Card */}
+          <motion.div variants={item}>
+            <GlassCard className="p-8 h-full flex flex-col">
+              <div className="flex items-center mb-6">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center mb-4 mr-4">
+                  <ClipboardList size={32} className="text-white" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">Staff Dashboard</h2>
+                  <p className="text-gray-600 text-sm">Employee tools & operations</p>
+                </div>
+              </div>
+              
+              <div className="flex-1 space-y-4 mb-8">
+                <div className="flex items-center gap-3">
+                  <Package size={20} className="text-orange-500" />
+                  <span className="text-gray-700 text-sm">Inventory management</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Users size={20} className="text-orange-500" />
+                  <span className="text-gray-700 text-sm">Customer assistance tools</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <BarChart3 size={20} className="text-orange-500" />
+                  <span className="text-gray-700 text-sm">Sales tracking</span>
+                </div>
+              </div>
+              
+              <Link to="/auth/login?role=staff" className="block">
+                <ShimmerButton
+                  className="w-full py-4 text-lg"
+                  shimmerColor="#f97316"
+                  background="linear-gradient(135deg, #f97316 0%, #f59e0b 100%)"
+                >
+                  Login as Staff
+                </ShimmerButton>
+              </Link>
+              
+              <div className="mt-4 text-center">
+                <div className="bg-orange-50 rounded-lg p-3">
+                  <p className="text-xs font-medium text-orange-800 mb-1">Demo Credentials:</p>
+                  <p className="text-xs text-orange-700">
+                    Email: staff@leafiq.online<br />
+                    Password: staff1234
+                  </p>
+                </div>
+              </div>
+            </GlassCard>
+          </motion.div>
+
+          {/* Admin Dashboard Card */}
           <motion.div variants={item}>
             <GlassCard className="p-8 h-full flex flex-col">
               <div className="flex items-center mb-6">
@@ -111,39 +165,43 @@ const DemoView = () => {
                 </div>
                 <div>
                   <h2 className="text-2xl font-bold text-gray-900 mb-2">Admin Dashboard</h2>
-                  <p className="text-gray-600">Explore the management and analytics tools</p>
+                  <p className="text-gray-600 text-sm">Full management & analytics</p>
                 </div>
               </div>
               
               <div className="flex-1 space-y-4 mb-8">
                 <div className="flex items-center gap-3">
                   <Users size={20} className="text-green-500" />
-                  <span className="text-gray-700">Staff and inventory management</span>
+                  <span className="text-gray-700 text-sm">Complete staff management</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Brain size={20} className="text-green-500" />
-                  <span className="text-gray-700">AI model configuration</span>
+                  <span className="text-gray-700 text-sm">AI model configuration</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Monitor size={20} className="text-green-500" />
-                  <span className="text-gray-700">Real-time analytics dashboard</span>
+                  <span className="text-gray-700 text-sm">Analytics & reporting</span>
                 </div>
               </div>
               
-              <Link to="/auth/login" className="block">
+              <Link to="/auth/login?role=admin" className="block">
                 <ShimmerButton
                   className="w-full py-4 text-lg"
                   shimmerColor="#22c55e"
                   background="linear-gradient(135deg, #22c55e 0%, #10b981 100%)"
                 >
-                  Login to Admin Demo
+                  Login as Admin
                 </ShimmerButton>
               </Link>
               
               <div className="mt-4 text-center">
-                <p className="text-sm text-gray-500">
-                  Demo codes: Staff (1234) • Admin (admin1234)
-                </p>
+                <div className="bg-green-50 rounded-lg p-3">
+                  <p className="text-xs font-medium text-green-800 mb-1">Demo Credentials:</p>
+                  <p className="text-xs text-green-700">
+                    Email: demo@leafiq.online<br />
+                    Password: demo1234
+                  </p>
+                </div>
               </div>
             </GlassCard>
           </motion.div>
@@ -193,7 +251,7 @@ const DemoView = () => {
                   <Users size={24} className="text-primary-600" />
                 </div>
                 <h4 className="font-semibold text-gray-900 mb-2">User-Friendly</h4>
-                <p className="text-gray-600 text-sm">Intuitive interfaces for both customers and staff</p>
+                <p className="text-gray-600 text-sm">Intuitive interfaces for customers, staff, and admins</p>
               </motion.div>
             </div>
           </div>

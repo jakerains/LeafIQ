@@ -1,0 +1,203 @@
+{
+  "metadata": {
+    "format_version": "1.0",
+    "organization_id": "YOUR_ORGANIZATION_ID",
+    "timestamp": "2025-01-27T12:00:00Z"
+  },
+  "products": [
+    {
+      "id": "flower-001",
+      "name": "Blue Dream",
+      "brand": "Your Brand",
+      "category": "flower",
+      "subcategory": null,
+      "description": "A sativa-dominant hybrid with sweet berry aroma and balanced effects",
+      "image_url": "https://example.com/images/blue-dream.jpg",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "flower-001-var1",
+          "size_weight": "1g",
+          "price": 12.00,
+          "original_price": 15.00,
+          "thc_percentage": 22.5,
+          "cbd_percentage": 0.1,
+          "total_cannabinoids": 23.4,
+          "inventory_level": 25,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.83,
+            "limonene": 0.43,
+            "pinene": 0.31,
+            "caryophyllene": 0.22,
+            "linalool": 0.08,
+            "humulene": 0.15,
+            "terpinolene": 0.05,
+            "ocimene": 0.12
+          }
+        },
+        {
+          "id": "flower-001-var2",
+          "size_weight": "3.5g",
+          "price": 35.00,
+          "original_price": 35.00,
+          "thc_percentage": 22.5,
+          "cbd_percentage": 0.1,
+          "inventory_level": 18,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.83,
+            "limonene": 0.43,
+            "pinene": 0.31,
+            "caryophyllene": 0.22
+          }
+        }
+      ]
+    },
+    {
+      "id": "concentrate-001",
+      "name": "Super Lemon Haze Live Rosin",
+      "brand": "Your Extracts",
+      "category": "concentrate",
+      "subcategory": "live_rosin",
+      "description": "Premium solventless concentrate with citrus terpene profile",
+      "image_url": "https://example.com/images/super-lemon-haze-rosin.jpg",
+      "strain_type": "sativa",
+      "variants": [
+        {
+          "id": "concentrate-001-var1",
+          "size_weight": "1g",
+          "price": 60.00,
+          "original_price": 60.00,
+          "thc_percentage": 76.8,
+          "cbd_percentage": 0.3,
+          "inventory_level": 12,
+          "is_available": true,
+          "terpene_profile": {
+            "limonene": 1.2,
+            "terpinolene": 0.8,
+            "myrcene": 0.4,
+            "pinene": 0.3
+          }
+        }
+      ]
+    },
+    {
+      "id": "edible-001",
+      "name": "Mixed Berry Gummies",
+      "brand": "Your Edibles",
+      "category": "edible",
+      "subcategory": "gummies",
+      "description": "Delicious mixed berry-flavored gummies with precise dosing",
+      "image_url": "https://example.com/images/mixed-berry-gummies.jpg",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "edible-001-var1",
+          "size_weight": "10pk (100mg total)",
+          "price": 25.00,
+          "original_price": 25.00,
+          "thc_percentage": 100.0,
+          "cbd_percentage": 0.0,
+          "inventory_level": 30,
+          "is_available": true,
+          "terpene_profile": {}
+        }
+      ]
+    },
+    {
+      "id": "vape-001",
+      "name": "Gelato Liquid Diamonds Cart",
+      "brand": "Your Vapes",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Premium 510-thread cartridge with liquid diamonds extract",
+      "image_url": "https://example.com/images/gelato-cart.jpg",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "vape-001-var1",
+          "size_weight": "0.5g",
+          "price": 45.00,
+          "original_price": 45.00,
+          "thc_percentage": 85.2,
+          "cbd_percentage": 0.1,
+          "inventory_level": 15,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.6,
+            "limonene": 0.8,
+            "caryophyllene": 0.4
+          }
+        }
+      ]
+    },
+    {
+      "id": "preroll-001",
+      "name": "Wedding Cake Pre-Roll",
+      "brand": "Your Rolls",
+      "category": "pre_rolls",
+      "subcategory": null,
+      "description": "Premium indoor flower in a perfectly rolled joint",
+      "image_url": "https://example.com/images/wedding-cake-preroll.jpg",
+      "strain_type": "indica",
+      "variants": [
+        {
+          "id": "preroll-001-var1",
+          "size_weight": "1g",
+          "price": 8.00,
+          "original_price": 8.00,
+          "thc_percentage": 23.7,
+          "cbd_percentage": 0.1,
+          "inventory_level": 40,
+          "is_available": true,
+          "terpene_profile": {
+            "limonene": 0.3,
+            "myrcene": 0.9,
+            "caryophyllene": 0.5,
+            "linalool": 0.4
+          }
+        },
+        {
+          "id": "preroll-001-var2",
+          "size_weight": "5pk (2.5g total)",
+          "price": 35.00,
+          "original_price": 40.00,
+          "thc_percentage": 23.7,
+          "cbd_percentage": 0.1,
+          "inventory_level": 20,
+          "is_available": true,
+          "terpene_profile": {
+            "limonene": 0.3,
+            "myrcene": 0.9,
+            "caryophyllene": 0.5,
+            "linalool": 0.4
+          }
+        }
+      ]
+    },
+    {
+      "id": "tincture-001",
+      "name": "Full Spectrum CBD/THC Tincture",
+      "brand": "Your Wellness",
+      "category": "tincture",
+      "subcategory": null,
+      "description": "1:1 ratio CBD/THC tincture with MCT oil base",
+      "image_url": "https://example.com/images/full-spectrum-tincture.jpg",
+      "strain_type": "balanced",
+      "variants": [
+        {
+          "id": "tincture-001-var1",
+          "size_weight": "30ml",
+          "price": 40.00,
+          "original_price": 40.00,
+          "thc_percentage": 500.0,
+          "cbd_percentage": 500.0,
+          "inventory_level": 8,
+          "is_available": true,
+          "terpene_profile": {}
+        }
+      ]
+    }
+  ]
+} 

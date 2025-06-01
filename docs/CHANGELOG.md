@@ -11,28 +11,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changelog versioning system
 - Dynamic version display in UI
 - Version utility for reading package.json version
+- **Comprehensive Terpene Database Update**: Expanded terpene database from 10 to 25 terpenes with enhanced data structure
+  - Added 15 new terpenes: Eucalyptol, Nerolidol, Guaiol, Phytol, Camphene, Borneol, Sabinene, α-Phellandrene, Geraniol, 3-Carene, Fenchol, β-Farnesene, α-Terpineol, Isopulegol, Isoborneol
+  - Enhanced data structure with detailed profile information including:
+    - Structured aroma and flavor profiles (arrays instead of strings)
+    - Common natural sources for each terpene
+    - Scientific research references with PubMed/PMC links
+    - Usage vibes for better user experience matching
+    - Comprehensive therapeutic notes
+  - Updated existing terpenes with more detailed and accurate information
+  - Maintained backward compatibility with legacy field structure
+  - Enhanced TerpeneInfoModal to display new comprehensive data
 
-## [0.1.0] - 2024-01-08
-
-### Added
-- Initial LeafIQ release
-- AI-powered cannabis recommendation system
-- Terpene profile-based product matching
-- Demo mode with comprehensive product catalog
-- Customer kiosk interface
-- Staff/Admin management interface
-- User authentication and authorization
-- Supabase backend integration
-- Real-time product search and filtering
-- Responsive design with modern UI
-
-### Features
-- **Demo Mode**: Complete demo experience with navigation between admin and customer modes
-- **Product Catalog**: 28 products across all cannabis categories (flower, concentrates, edibles, vaporizers, pre-rolls, tinctures)
-- **AI Recommendations**: Intelligent product matching based on desired effects and terpene profiles
-- **Kiosk Interface**: Customer-facing touchscreen interface for product discovery
-- **Admin Dashboard**: Staff interface for product management and analytics
-- **Authentication**: Secure user authentication with role-based access control
+### Changed
+- Terpene interface now includes structured profile data with aroma/flavor arrays
+- Default intensity changed from numeric (0-1) to descriptive strings (low/moderate/high)
+- Enhanced search functionality to work with new structured data
 
 ### Technical
 - React 18 with TypeScript
@@ -42,6 +36,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Zustand for state management
 - React Router for navigation
 - Supabase for backend services
+- Updated TerpeneDatabase.tsx with new comprehensive data structure
+- Updated TerpeneInfoModal.tsx to handle both legacy and new data formats
+- All terpenes now include scientific research citations
+- Enhanced form handling for new data structure
 
 ---
 
