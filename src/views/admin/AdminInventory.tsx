@@ -3,12 +3,14 @@ import { motion } from 'framer-motion';
 import { Package, Search, Plus, Pencil, Trash2, Filter, ChevronDown, ChevronUp, X } from 'lucide-react';
 import { Button } from '../../components/ui/button';
 import { useProductsStore } from '../../stores/productsStore';
+import { useSimpleAuthStore } from '../../stores/simpleAuthStore';
 import { Product, Variant, ProductWithVariant } from '../../types';
 import ProductForm from './components/ProductForm';
 import ImportExportOptions from './components/ImportExportOptions';
 
 const AdminInventory = () => {
-  const { products, variants, fetchProducts } = useProductsStore();
+  const { products, variants, fetchProducts, isLoading, error } = useProductsStore();
+  const { organizationId, dispensaryName } = useSimpleAuthStore();
   const [searchTerm, setSearchTerm] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
   const [showForm, setShowForm] = useState(false);
@@ -17,10 +19,22 @@ const AdminInventory = () => {
   const [sortDirection, setSortDirection] = useState('asc');
   const [showImportExport, setShowImportExport] = useState(false);
   
-  // Fetch products on mount
+  // Debug auth state and fetch products on mount
   useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
+    console.log('📦 AdminInventory - Auth state:', { 
+      organizationId, 
+      dispensaryName,
+      productsCount: products.length,
+      isLoading,
+      error 
+    });
+    
+    if (organizationId) {
+      fetchProducts();
+    } else {
+      console.error('❌ AdminInventory - No organizationId found for admin user');
+    }
+  }, [fetchProducts, organizationId, dispensaryName, products.length, isLoading, error]);
   
   // Combine products with their variants for display
   const productsWithVariants: ProductWithVariant[] = products.map(product => {
@@ -114,8 +128,27 @@ const AdminInventory = () => {
     setEditingProduct(null);
   };
 
+  // Show loading state if no organization or while loading
+  if (!organizationId || (isLoading && products.length === 0)) {
+    return (
+      <div className="flex items-center justify-center min-h-64">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading inventory...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
+      {process.env.NODE_ENV === 'development' && (
+        <div className="mb-4 p-3 bg-yellow-100 border border-yellow-300 rounded-lg text-sm">
+          <strong>Debug:</strong> Org: {organizationId} | Products: {products.length} | Variants: {variants.length}
+          {error && <span className="text-red-600"> | Error: {error}</span>}
+        </div>
+      )}
+      
       {showForm ? (
         <ProductForm 
           product={editingProduct} 
@@ -279,23 +312,29 @@ const AdminInventory = () => {
                           </span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">{product.thc_percentage.toFixed(1)}%</div>
-                          {product.cbd_percentage > 0 && (
-                            <div className="text-xs text-gray-500">CBD: {product.cbd_percentage.toFixed(1)}%</div>
+                          <div className="text-sm text-gray-900">
+                            {product.thc_percentage ? product.thc_percentage.toFixed(1) : '0.0'}%
+                          </div>
+                          {product.cbd_percentage && product.cbd_percentage > 0 && (
+                            <div className="text-xs text-gray-500">
+                              CBD: {product.cbd_percentage.toFixed(1)}%
+                            </div>
                           )}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="text-sm text-gray-900">${product.price.toFixed(2)}</div>
+                          <div className="text-sm text-gray-900">
+                            ${product.price ? product.price.toFixed(2) : '0.00'}
+                          </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <span className={`px-2 py-1 text-xs rounded-full ${
-                            product.variant.inventory_level > 10 
+                            (product.variant?.inventory_level || 0) > 10 
                               ? 'bg-green-100 text-green-800' 
-                              : product.variant.inventory_level > 3 
+                              : (product.variant?.inventory_level || 0) > 3 
                                 ? 'bg-yellow-100 text-yellow-800' 
                                 : 'bg-red-100 text-red-800'
                           }`}>
-                            {product.variant.inventory_level} units
+                            {product.variant?.inventory_level || 0} units
                           </span>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">

@@ -25,8 +25,22 @@ export const ProductSearchMode: React.FC = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
   
-  const { searchProductsByVibe, isLoading, fetchProducts } = useProductsStore();
+  const { searchProductsByVibe, isLoading, fetchProducts, productsWithVariants, error } = useProductsStore();
   const { searchHistory, addSearchHistory, clearSearchHistory, addNotification } = useStaffModeStore();
+
+  // Debug products availability
+  useEffect(() => {
+    console.log('🛍️ ProductSearchMode - Products available:', {
+      total: productsWithVariants.length,
+      isLoading,
+      error,
+      sampleProduct: productsWithVariants[0] ? {
+        name: productsWithVariants[0].name,
+        category: productsWithVariants[0].category,
+        inventory: productsWithVariants[0].variant?.inventory_level
+      } : null
+    });
+  }, [productsWithVariants, isLoading, error]);
 
   // Advanced filters state
   const [filters, setFilters] = useState({
@@ -36,10 +50,10 @@ export const ProductSearchMode: React.FC = () => {
     category: '',
   });
 
-  // Fetch products on component mount
-  useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
+  // Products are now fetched by StaffView when auth is ready
+  // useEffect(() => {
+  //   fetchProducts();
+  // }, [fetchProducts]);
 
   const handleSearch = async (query: string) => {
     setSearchQuery(query);

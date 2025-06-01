@@ -1,27 +1,36 @@
 export interface Product {
   id: string;
+  organization_id: string;
   name: string;
   brand: string;
   category: string;
+  subcategory?: string;
   description: string;
   image_url: string;
-  thc_percentage: number;
-  cbd_percentage: number;
-  price: number;
-  created_at: string;
   strain_type: 'sativa' | 'indica' | 'hybrid';
+  genetics?: string;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface Variant {
   id: string;
   product_id: string;
-  strain_type: 'sativa' | 'indica' | 'hybrid';
+  size_weight?: string;
+  price: number;
+  original_price?: number;
+  thc_percentage: number;
+  cbd_percentage?: number;
+  total_cannabinoids?: number;
   terpene_profile: TerpeneProfile;
   inventory_level: number;
-  last_updated: string;
   is_available: boolean;
-  size?: string;
-  weight?: string;
+  batch_number?: string;
+  harvest_date?: string;
+  expiration_date?: string;
+  lab_tested?: boolean;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface TerpeneProfile {

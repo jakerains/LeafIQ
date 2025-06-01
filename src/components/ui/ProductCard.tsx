@@ -53,7 +53,7 @@ const ProductCard = ({
           <p className="text-gray-600 text-sm">{product.brand}</p>
         </div>
         <div className="bg-white rounded-full py-1 px-3 shadow-sm">
-          <p className="font-semibold text-accent-600">${product.price.toFixed(2)}</p>
+          <p className="font-semibold text-accent-600">${variant.price ? Number(variant.price).toFixed(2) : '0.00'}</p>
         </div>
       </div>
 
@@ -73,9 +73,9 @@ const ProductCard = ({
 
       <div className="flex items-center justify-between mt-1 text-sm">
         <div className="flex gap-2">
-          <span className="font-medium">THC: {product.thc_percentage}%</span>
-          {product.cbd_percentage > 0 && (
-            <span className="font-medium">CBD: {product.cbd_percentage}%</span>
+          <span className="font-medium">THC: {variant.thc_percentage ? Number(variant.thc_percentage).toFixed(1) : '0.0'}%</span>
+          {variant.cbd_percentage && variant.cbd_percentage > 0 && (
+            <span className="font-medium">CBD: {Number(variant.cbd_percentage).toFixed(1)}%</span>
           )}
         </div>
         {showInventory && (
@@ -90,7 +90,7 @@ const ProductCard = ({
           <p className="text-sm font-medium mb-1">Terpene Profile:</p>
           <div className="flex flex-wrap gap-x-3 gap-y-1">
             {Object.entries(variant.terpene_profile).map(([terpene, value]) => (
-              value > 0 ? (
+              value && value > 0 ? (
                 <span key={terpene} className="text-xs">
                   {terpene.charAt(0).toUpperCase() + terpene.slice(1)}: {value.toFixed(1)}%
                 </span>

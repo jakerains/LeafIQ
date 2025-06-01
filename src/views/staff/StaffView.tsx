@@ -28,6 +28,32 @@ const PlaceholderMode = ({ mode }: { mode: string }) => (
 
 const StaffView = () => {
   const { activeMode, addNotification } = useStaffModeStore();
+  const { organizationId, isAuthenticated, dispensaryName } = useSimpleAuthStore();
+  const { fetchProducts, isLoading, error, productsWithVariants } = useProductsStore();
+
+  // Debug authentication state
+  useEffect(() => {
+    console.log('🔍 StaffView - Auth state:', {
+      isAuthenticated,
+      organizationId,
+      dispensaryName,
+      productsCount: productsWithVariants.length
+    });
+  }, [isAuthenticated, organizationId, dispensaryName, productsWithVariants.length]);
+
+  // Ensure products are loaded when authentication is ready
+  useEffect(() => {
+    if (isAuthenticated && organizationId) {
+      console.log('✅ StaffView - Auth ready, fetching products for org:', organizationId);
+      fetchProducts();
+    } else if (isAuthenticated && !organizationId) {
+      console.error('❌ StaffView - Authenticated but no organizationId found');
+      addNotification({
+        type: 'error',
+        message: 'Organization not found. Please try logging in again.'
+      });
+    }
+  }, [isAuthenticated, organizationId, fetchProducts, addNotification]);
 
   // Add a welcome notification when component mounts
   useEffect(() => {
@@ -36,6 +62,18 @@ const StaffView = () => {
       message: 'Welcome to the enhanced staff workstation! Explore the new modes to boost your productivity.'
     });
   }, [addNotification]);
+
+  // Show loading state if authentication or products are loading
+  if (!isAuthenticated || !organizationId) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
+        <div className="bg-white bg-opacity-80 backdrop-blur-sm rounded-3xl p-8 text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Loading staff workspace...</p>
+        </div>
+      </div>
+    );
+  }
 
   const renderActiveMode = () => {
     switch (activeMode) {
@@ -64,6 +102,14 @@ const StaffView = () => {
       <StaffHeader />
       
       <main className="container mx-auto px-4 py-6">
+        {/* Debug Info */}
+        {process.env.NODE_ENV === 'development' && (
+          <div className="mb-4 p-3 bg-yellow-100 border border-yellow-300 rounded-lg text-sm">
+            <strong>Debug:</strong> Org: {organizationId} | Products: {productsWithVariants.length} | Loading: {isLoading ? 'Yes' : 'No'}
+            {error && <span className="text-red-600"> | Error: {error}</span>}
+          </div>
+        )}
+        
         {/* Mode Selector */}
         <div className="mb-6">
           <StaffModeSelector />

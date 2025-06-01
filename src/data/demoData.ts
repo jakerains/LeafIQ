@@ -839,6 +839,14 @@ export const vibesToTerpenes: VibesToTerpenes = {
     },
     effects: ['Mood Elevation', 'Euphoria']
   },
+  'euphoric': {
+    terpenes: {
+      limonene: 0.8,
+      pinene: 0.5,
+      caryophyllene: 0.4
+    },
+    effects: ['Euphoria', 'Mood Elevation']
+  },
   'focused': {
     terpenes: {
       pinene: 0.9,

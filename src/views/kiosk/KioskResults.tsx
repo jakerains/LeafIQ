@@ -23,6 +23,19 @@ const KioskResults = ({
   isAIPowered = false,
   effects: providedEffects
 }: KioskResultsProps) => {
+  
+  // Debug logging for props
+  console.log('🎨 KioskResults props received:', {
+    searchQuery: JSON.stringify(searchQuery),
+    results: results.length,
+    isAIPowered,
+    effects: providedEffects,
+    firstResult: results[0] ? {
+      name: results[0].name,
+      hasVariant: !!results[0].variant,
+      variantFields: results[0].variant ? Object.keys(results[0].variant) : null
+    } : null
+  });
   const { searchProductsByVibe, isLoading: isSearchLoading } = useProductsStore();
   const [showChatbot, setShowChatbot] = useState(false);
   const [chatMessage, setChatMessage] = useState('');
@@ -446,7 +459,7 @@ const KioskResults = ({
             <motion.div key={product.id} variants={item}>
               <ProductCard 
                 product={product} 
-                effects={effects}
+                effects={updatedEffects}
               />
             </motion.div>
           ))}

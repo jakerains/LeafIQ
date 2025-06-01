@@ -17,23 +17,40 @@ const KioskView = () => {
   const navigate = useNavigate();
   
   const handleSearch = async (query: string) => {
+    console.log('🔍 KioskView.handleSearch called with query:', JSON.stringify(query));
     setSearchQuery(query);
     
     try {
+      console.log('📞 Calling searchProductsByVibe...');
       const results = await searchProductsByVibe(query, 'kiosk');
+      console.log('📦 Search results received:', {
+        products: results.products.length,
+        isAIPowered: results.isAIPowered,
+        effects: results.effects,
+        firstProduct: results.products[0] ? {
+          name: results.products[0].name,
+          hasVariant: !!results.products[0].variant,
+          price: results.products[0].variant?.price
+        } : null
+      });
+      
       setSearchResults(results.products);
       setIsAIPowered(results.isAIPowered);
       setEffects(results.effects);
       
+      console.log(`🎯 Found ${results.products.length} products, navigating to results...`);
+      
       if (results.products.length > 0) {
         navigate('/kiosk/results');
+        console.log('✅ Navigation to /kiosk/results completed');
       } else {
         // No results handling
         setSearchResults([]);
         navigate('/kiosk/results'); // Still navigate to show the empty state
+        console.log('🚫 No results found, navigating to empty state');
       }
     } catch (error) {
-      console.error('Search error:', error);
+      console.error('❌ Search error in KioskView:', error);
       setSearchResults([]);
       navigate('/kiosk/results'); // Navigate to show error state
     }
@@ -53,7 +70,7 @@ const KioskView = () => {
   };
 
   const handleDemoHub = () => {
-    navigate('/demo');
+    navigate('/');
     setShowAdminMenu(false);
   };
 
