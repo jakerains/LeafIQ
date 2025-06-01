@@ -224,6 +224,7 @@ export const recommendProducts = async (
   isAIPowered: boolean;
 }> => {
   console.log(`Processing recommendation request for: "${vibe}"`);
+  console.log(`Available products for recommendation: ${products.length}`);
   
   // Check if this is a category-specific query
   const lowercaseVibe = vibe.toLowerCase();
@@ -255,6 +256,11 @@ export const recommendProducts = async (
   
   try {
     // Try to get AI-powered recommendations first
+    if (products.length === 0) {
+      console.log('⚠️ No products available for recommendations');
+      return { products: [], effects: [], isAIPowered: false };
+    }
+    
     const aiResults = await getAIRecommendations(vibe);
     
     if (aiResults && aiResults.recommendations && aiResults.recommendations.length > 0) {

@@ -36,13 +36,22 @@ export const useProductsStore = create<ProductsState>((set, get) => ({
   fetchProducts: async () => {
     set({ isLoading: true, error: null });
     
+    console.log('🔍 fetchProducts called');
+    
     try {
       // Get the current user's organization
       const { organizationId } = useSimpleAuthStore.getState();
       if (!organizationId) {
-        throw new Error('No organization found for user');
+        console.error('❌ No organization found for user');
+        set({ 
+          isLoading: false, 
+          error: 'No organization found for user' 
+        });
+        return;
       }
 
+      console.log(`📦 Fetching products for organization: ${organizationId}`);
+      
       // Fetch products from Supabase
       const { data: products, error: productsError } = await supabase
         .from('products')
@@ -50,7 +59,12 @@ export const useProductsStore = create<ProductsState>((set, get) => ({
         .eq('organization_id', organizationId)
         .order('name');
 
-      if (productsError) throw productsError;
+      if (productsError) {
+        console.error('❌ Error fetching products:', productsError);
+        throw productsError;
+      }
+      
+      console.log(`✅ Fetched ${products?.length || 0} products`);
 
       // Fetch variants from Supabase
       const { data: variants, error: variantsError } = await supabase
@@ -59,20 +73,30 @@ export const useProductsStore = create<ProductsState>((set, get) => ({
         .in('product_id', products?.map(p => p.id) || [])
         .order('price');
 
-      if (variantsError) throw variantsError;
+      if (variantsError) {
+        console.error('❌ Error fetching variants:', variantsError);
+        throw variantsError;
+      }
+      
+      console.log(`✅ Fetched ${variants?.length || 0} variants`);
 
       // Combine products with their variants
       const productsWithVariants: ProductWithVariant[] = (products || []).map(product => {
         const productVariants = (variants || []).filter(v => v.product_id === product.id);
         const firstVariant = productVariants[0];
         
-        if (!firstVariant) return null;
+        if (!firstVariant) {
+          console.log(`⚠️ No variant found for product ${product.id} (${product.name})`);
+          return null;
+        }
         
         return {
           ...product,
           variant: firstVariant
         };
       }).filter(Boolean) as any;
+      
+      console.log(`✅ Created ${productsWithVariants.length} products with variants`);
       
       set({ 
         products: products as any || [], 

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useProductsStore } from '../../stores/productsStore';
+import { useSimpleAuthStore } from '../../stores/simpleAuthStore';
 import KioskHome from './KioskHome';
 import KioskResults from './KioskResults';
 import Logo from '../../components/ui/Logo';
@@ -9,12 +10,21 @@ import { User, ChevronDown, Home, Settings } from 'lucide-react';
 
 const KioskView = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const { searchProductsByVibe, isLoading } = useProductsStore();
+  const { searchProductsByVibe, isLoading, fetchProducts, productsWithVariants } = useProductsStore();
+  const { organizationId } = useSimpleAuthStore();
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [isAIPowered, setIsAIPowered] = useState(false);
   const [effects, setEffects] = useState<string[]>([]);
   const [showAdminMenu, setShowAdminMenu] = useState(false);
   const navigate = useNavigate();
+  
+  // Ensure products are loaded when component mounts
+  useState(() => {
+    if (organizationId && productsWithVariants.length === 0) {
+      console.log('🔄 KioskView - Loading products for organization:', organizationId);
+      fetchProducts();
+    }
+  });
   
   const handleSearch = async (query: string) => {
     console.log('🔍 KioskView.handleSearch called with query:', JSON.stringify(query));
@@ -22,6 +32,13 @@ const KioskView = () => {
     
     try {
       console.log('📞 Calling searchProductsByVibe...');
+      
+      // Ensure products are loaded before searching
+      if (productsWithVariants.length === 0) {
+        console.log('⚠️ No products loaded yet, fetching products first...');
+        await fetchProducts();
+      }
+      
       const results = await searchProductsByVibe(query, 'kiosk');
       console.log('📦 Search results received:', {
         products: results.products.length,
