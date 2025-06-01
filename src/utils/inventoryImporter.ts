@@ -1,6 +1,7 @@
 import { supabase } from '../lib/supabase';
 import { Product, Variant } from '../types';
 
+// Define the import data structure
 export interface ImportMetadata {
   format_version: string;
   organization_id: string;
@@ -201,21 +202,19 @@ export async function importInventoryData(
         let productId = importProduct.id;
 
         if (existingProduct) {
-          // Update existing product
-          const { error: updateError } = await supabase
-            .from('products')
-            .update({
-              name: importProduct.name,
-              brand: importProduct.brand,
-              category: importProduct.category,
-              subcategory: importProduct.subcategory,
-              description: importProduct.description,
-              image_url: importProduct.image_url,
-              strain_type: importProduct.strain_type,
-              updated_at: new Date().toISOString()
-            })
-            .eq('id', importProduct.id)
-            .eq('organization_id', organizationId);
+          // Use the conflict handling function to update the product
+          const { data: updatedProduct, error: updateError } = await supabase
+            .rpc('import_product_with_conflict_handling', {
+              p_id: importProduct.id,
+              p_organization_id: organizationId,
+              p_name: importProduct.name,
+              p_brand: importProduct.brand,
+              p_category: importProduct.category,
+              p_subcategory: importProduct.subcategory || null,
+              p_description: importProduct.description || null,
+              p_image_url: importProduct.image_url || null,
+              p_strain_type: importProduct.strain_type || null
+            });
 
           if (updateError) {
             stats.errors.push(`Failed to update product ${importProduct.name}: ${updateError.message}`);
@@ -225,20 +224,17 @@ export async function importInventoryData(
           stats.productsUpdated++;
         } else {
           // Create new product
-          const { error: insertError } = await supabase
-            .from('products')
-            .insert({
-              id: importProduct.id,
-              organization_id: organizationId,
-              name: importProduct.name,
-              brand: importProduct.brand,
-              category: importProduct.category,
-              subcategory: importProduct.subcategory,
-              description: importProduct.description,
-              image_url: importProduct.image_url,
-              strain_type: importProduct.strain_type,
-              created_at: new Date().toISOString(),
-              updated_at: new Date().toISOString()
+          const { data: newProduct, error: insertError } = await supabase
+            .rpc('import_product_with_conflict_handling', {
+              p_id: importProduct.id,
+              p_organization_id: organizationId,
+              p_name: importProduct.name,
+              p_brand: importProduct.brand,
+              p_category: importProduct.category,
+              p_subcategory: importProduct.subcategory || null,
+              p_description: importProduct.description || null,
+              p_image_url: importProduct.image_url || null,
+              p_strain_type: importProduct.strain_type || null
             });
 
           if (insertError) {
@@ -259,27 +255,24 @@ export async function importInventoryData(
               .from('variants')
               .select('id')
               .eq('id', importVariant.id)
-              .eq('product_id', productId)
               .single();
 
             if (existingVariant) {
-              // Update existing variant
-              const { error: updateError } = await supabase
-                .from('variants')
-                .update({
-                  size_weight: importVariant.size_weight,
-                  price: importVariant.price,
-                  original_price: importVariant.original_price || importVariant.price,
-                  thc_percentage: importVariant.thc_percentage,
-                  cbd_percentage: importVariant.cbd_percentage,
-                  total_cannabinoids: importVariant.total_cannabinoids,
-                  terpene_profile: importVariant.terpene_profile || {},
-                  inventory_level: importVariant.inventory_level,
-                  is_available: importVariant.is_available,
-                  last_updated: new Date().toISOString()
-                })
-                .eq('id', importVariant.id)
-                .eq('product_id', productId);
+              // Use the conflict handling function to update the variant
+              const { data: updatedVariant, error: updateError } = await supabase
+                .rpc('import_variant_with_conflict_handling', {
+                  v_id: importVariant.id,
+                  v_product_id: productId,
+                  v_size_weight: importVariant.size_weight,
+                  v_price: importVariant.price,
+                  v_original_price: importVariant.original_price || importVariant.price,
+                  v_thc_percentage: importVariant.thc_percentage || null,
+                  v_cbd_percentage: importVariant.cbd_percentage || null,
+                  v_total_cannabinoids: importVariant.total_cannabinoids || null,
+                  v_inventory_level: importVariant.inventory_level,
+                  v_is_available: importVariant.is_available,
+                  v_terpene_profile: importVariant.terpene_profile || {}
+                });
 
               if (updateError) {
                 stats.errors.push(`Failed to update variant ${importVariant.id}: ${updateError.message}`);
@@ -289,22 +282,19 @@ export async function importInventoryData(
               stats.variantsUpdated++;
             } else {
               // Create new variant
-              const { error: insertError } = await supabase
-                .from('variants')
-                .insert({
-                  id: importVariant.id,
-                  product_id: productId,
-                  size_weight: importVariant.size_weight,
-                  price: importVariant.price,
-                  original_price: importVariant.original_price || importVariant.price,
-                  thc_percentage: importVariant.thc_percentage,
-                  cbd_percentage: importVariant.cbd_percentage,
-                  total_cannabinoids: importVariant.total_cannabinoids,
-                  terpene_profile: importVariant.terpene_profile || {},
-                  inventory_level: importVariant.inventory_level,
-                  is_available: importVariant.is_available,
-                  created_at: new Date().toISOString(),
-                  last_updated: new Date().toISOString()
+              const { data: newVariant, error: insertError } = await supabase
+                .rpc('import_variant_with_conflict_handling', {
+                  v_id: importVariant.id,
+                  v_product_id: productId,
+                  v_size_weight: importVariant.size_weight,
+                  v_price: importVariant.price,
+                  v_original_price: importVariant.original_price || importVariant.price,
+                  v_thc_percentage: importVariant.thc_percentage || null,
+                  v_cbd_percentage: importVariant.cbd_percentage || null,
+                  v_total_cannabinoids: importVariant.total_cannabinoids || null,
+                  v_inventory_level: importVariant.inventory_level,
+                  v_is_available: importVariant.is_available,
+                  v_terpene_profile: importVariant.terpene_profile || {}
                 });
 
               if (insertError) {
