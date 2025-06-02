@@ -91,7 +91,7 @@ export const StaffHeader: React.FC = () => {
                       {unreadNotifications > 0 && (
                         <button
                           onClick={clearNotifications}
-                          className="text-sm text-blue-600 hover:text-blue-700"
+                          className="text-sm text-primary-600 hover:text-primary-700"
                         >
                           Clear all
                         </button>
@@ -118,7 +118,7 @@ export const StaffHeader: React.FC = () => {
                                   ${notification.type === 'error' ? 'text-red-700' : ''}
                                   ${notification.type === 'warning' ? 'text-yellow-700' : ''}
                                   ${notification.type === 'success' ? 'text-green-700' : ''}
-                                  ${notification.type === 'info' ? 'text-blue-700' : ''}
+                                  ${notification.type === 'info' ? 'text-primary-700' : ''}
                                 `}>
                                   {notification.message}
                                 </div>
@@ -196,4 +196,4 @@ export const StaffHeader: React.FC = () => {
       </div>
     </header>
   );
-}; 
+};

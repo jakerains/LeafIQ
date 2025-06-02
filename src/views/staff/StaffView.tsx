@@ -66,9 +66,9 @@ const StaffView = () => {
   // Show loading state if authentication or products are loading
   if (!isAuthenticated || !organizationId) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="bg-white bg-opacity-80 backdrop-blur-sm rounded-3xl p-8 text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Loading staff workspace...</p>
         </div>
       </div>
@@ -97,11 +97,11 @@ const StaffView = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+    <div className="min-h-screen">
       {/* Enhanced Header */}
       <StaffHeader />
       
-      <main className="container mx-auto px-4 py-6">
+      <main className="container mx-auto px-4 py-16 flex-1 flex flex-col">
         {/* Debug Info */}
         {process.env.NODE_ENV === 'development' && (
           <div className="mb-4 p-3 bg-yellow-100 border border-yellow-300 rounded-lg text-sm">

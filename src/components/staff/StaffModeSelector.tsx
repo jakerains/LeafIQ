@@ -43,7 +43,7 @@ export const StaffModeSelector: React.FC<StaffModeSelectorProps> = ({
   return (
     <div className={`${className}`}>
       {/* Desktop: Horizontal tabs */}
-      <div className="hidden md:flex bg-white bg-opacity-90 backdrop-blur-md rounded-2xl p-2 shadow-lg border border-gray-200">
+      <div className="hidden md:flex bg-white bg-opacity-90 backdrop-blur-md rounded-2xl p-2 shadow-lg">
         <div className="flex space-x-1 w-full">
           {availableModes.map((modeConfig) => {
             const IconComponent = iconMap[modeConfig.icon as keyof typeof iconMap];
@@ -93,7 +93,7 @@ export const StaffModeSelector: React.FC<StaffModeSelectorProps> = ({
       </div>
 
       {/* Mobile: Horizontal scrollable tabs */}
-      <div className="md:hidden bg-white bg-opacity-90 backdrop-blur-md rounded-2xl p-2 shadow-lg border border-gray-200">
+      <div className="md:hidden bg-white bg-opacity-90 backdrop-blur-md rounded-2xl p-2 shadow-lg">
         <div className="flex space-x-2 overflow-x-auto scrollbar-hide pb-1">
           {availableModes.map((modeConfig) => {
             const IconComponent = iconMap[modeConfig.icon as keyof typeof iconMap];
@@ -147,4 +147,4 @@ export const StaffModeSelector: React.FC<StaffModeSelectorProps> = ({
       </div>
     </div>
   );
-}; 
+};
