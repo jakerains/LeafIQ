@@ -8,7 +8,7 @@ import {
   Clock,
   ChevronDown,
   X,
-  Package2 
+  Package 
 } from 'lucide-react';
 import { Button } from '../ui/button';
 import { useSimpleAuthStore } from '../../stores/simpleAuthStore';
@@ -66,7 +66,7 @@ export const StaffHeader: React.FC = () => {
           <div className="flex items-center space-x-3">
             {/* Quick action button */}
             <button className="hidden md:flex items-center gap-2 px-3 py-2 bg-primary-50 text-primary-700 rounded-lg border border-primary-100 hover:bg-primary-100 transition-colors">
-              <Package2 size={16} />
+              <Package size={16} />
               <span className="text-sm font-medium">Quick Lookup</span>
             </button>
             
