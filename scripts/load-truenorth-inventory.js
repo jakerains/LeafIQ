@@ -712,7 +712,12 @@ async function loadTrueNorthInventory() {
 async function verifySupabaseConnection() {
   try {
     console.log('🔌 Checking Supabase connection...');
-    const { data, error } = await supabase.from('products').select('count(*)').limit(1);
+    
+    // Use a simpler query that doesn't use count(*) - just fetch a single row
+    const { data, error } = await supabase
+      .from('organizations')
+      .select('id')
+      .limit(1);
     
     if (error) {
       console.error('❌ Supabase connection error:', error.message);
