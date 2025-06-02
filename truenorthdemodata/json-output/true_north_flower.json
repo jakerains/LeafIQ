@@ -1,0 +1,4187 @@
+{
+  "metadata": {
+    "format_version": "1.0",
+    "organization_id": "d85af8c9-0d4a-451c-bc25-8c669c71142e",
+    "timestamp": "2025-06-02T19:56:39.593Z",
+    "source_file": "true_north_flower.md",
+    "total_products": 26
+  },
+  "products": [
+    {
+      "id": "truenorth-flower-001",
+      "name": "818 Fire OG x Kosher Kitty",
+      "brand": "605 Cannabis",
+      "category": "flower",
+      "subcategory": "premium",
+      "description": "Indica with 21.36% THC",
+      "image_url": "https://images.dutchie.com/2bae20574b9a59e52b32e63b4684e57a?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "indica",
+      "variants": [
+        {
+          "id": "truenorth-flower-001-var1",
+          "size_weight": "3.5g",
+          "price": 25,
+          "original_price": 25,
+          "thc_percentage": 21.36,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 21.36,
+          "inventory_level": 20,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.69,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.14,
+            "linalool": 0.5,
+            "humulene": 0.01,
+            "terpinolene": 0,
+            "ocimene": 0.1
+          }
+        },
+        {
+          "id": "truenorth-flower-001-var2",
+          "size_weight": "4.2g",
+          "price": 30,
+          "original_price": 30,
+          "thc_percentage": 21.36,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 21.36,
+          "inventory_level": 6,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.35,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.68,
+            "linalool": 0.51,
+            "humulene": 0.19,
+            "terpinolene": 0,
+            "ocimene": 0.19
+          }
+        },
+        {
+          "id": "truenorth-flower-001-var3",
+          "size_weight": "7g",
+          "price": 45,
+          "original_price": 45,
+          "thc_percentage": 21.36,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 21.36,
+          "inventory_level": 7,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.02,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.26,
+            "linalool": 0.16,
+            "humulene": 0.09,
+            "terpinolene": 0,
+            "ocimene": 0.17
+          }
+        },
+        {
+          "id": "truenorth-flower-001-var4",
+          "size_weight": "8.4g",
+          "price": 54,
+          "original_price": 54,
+          "thc_percentage": 21.36,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 21.36,
+          "inventory_level": 22,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.02,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.27,
+            "linalool": 0.31,
+            "humulene": 0.29,
+            "terpinolene": 0,
+            "ocimene": 0.11
+          }
+        },
+        {
+          "id": "truenorth-flower-001-var5",
+          "size_weight": "14g",
+          "price": 80,
+          "original_price": 80,
+          "thc_percentage": 21.36,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 21.36,
+          "inventory_level": 16,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.96,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.27,
+            "linalool": 0.46,
+            "humulene": 0.11,
+            "terpinolene": 0,
+            "ocimene": 0.17
+          }
+        },
+        {
+          "id": "truenorth-flower-001-var6",
+          "size_weight": "16.5g",
+          "price": 96,
+          "original_price": 96,
+          "thc_percentage": 21.36,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 21.36,
+          "inventory_level": 16,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.43,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.42,
+            "linalool": 0.37,
+            "humulene": 0.25,
+            "terpinolene": 0,
+            "ocimene": 0.17
+          }
+        },
+        {
+          "id": "truenorth-flower-001-var7",
+          "size_weight": "28g",
+          "price": 150,
+          "original_price": 150,
+          "thc_percentage": 21.36,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 21.36,
+          "inventory_level": 23,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.31,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.13,
+            "linalool": 0.26,
+            "humulene": 0.21,
+            "terpinolene": 0,
+            "ocimene": 0.11
+          }
+        },
+        {
+          "id": "truenorth-flower-001-var8",
+          "size_weight": "33.5g",
+          "price": 180,
+          "original_price": 180,
+          "thc_percentage": 21.36,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 21.36,
+          "inventory_level": 21,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.67,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.22,
+            "linalool": 0.07,
+            "humulene": 0.23,
+            "terpinolene": 0,
+            "ocimene": 0.01
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-flower-002",
+      "name": "Bacio Humantashen Cookies",
+      "brand": "DNG",
+      "category": "flower",
+      "subcategory": "premium",
+      "description": "Hybrid with 17.39% THC",
+      "image_url": "https://images.dutchie.com/c46a846bec59b452ad62994d0c254bc5?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-flower-002-var1",
+          "size_weight": "3.5g",
+          "price": 25,
+          "original_price": 25,
+          "thc_percentage": 17.39,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 17.39,
+          "inventory_level": 19,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.09,
+            "limonene": 0.38,
+            "pinene": 0.52,
+            "caryophyllene": 0.25,
+            "linalool": 0,
+            "humulene": 0.01,
+            "terpinolene": 0,
+            "ocimene": 0.11
+          }
+        },
+        {
+          "id": "truenorth-flower-002-var2",
+          "size_weight": "4.2g",
+          "price": 30,
+          "original_price": 30,
+          "thc_percentage": 17.39,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 17.39,
+          "inventory_level": 12,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.06,
+            "limonene": 0.7,
+            "pinene": 0.52,
+            "caryophyllene": 0.35,
+            "linalool": 0,
+            "humulene": 0.02,
+            "terpinolene": 0,
+            "ocimene": 0.03
+          }
+        },
+        {
+          "id": "truenorth-flower-002-var3",
+          "size_weight": "7g",
+          "price": 45,
+          "original_price": 45,
+          "thc_percentage": 17.39,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 17.39,
+          "inventory_level": 7,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.23,
+            "limonene": 0.67,
+            "pinene": 0.51,
+            "caryophyllene": 0.27,
+            "linalool": 0,
+            "humulene": 0.04,
+            "terpinolene": 0,
+            "ocimene": 0.05
+          }
+        },
+        {
+          "id": "truenorth-flower-002-var4",
+          "size_weight": "8.4g",
+          "price": 54,
+          "original_price": 54,
+          "thc_percentage": 17.39,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 17.39,
+          "inventory_level": 10,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.91,
+            "limonene": 0.73,
+            "pinene": 0.47,
+            "caryophyllene": 0.3,
+            "linalool": 0,
+            "humulene": 0.23,
+            "terpinolene": 0,
+            "ocimene": 0.21
+          }
+        },
+        {
+          "id": "truenorth-flower-002-var5",
+          "size_weight": "14g",
+          "price": 80,
+          "original_price": 80,
+          "thc_percentage": 17.39,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 17.39,
+          "inventory_level": 20,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.49,
+            "limonene": 0.76,
+            "pinene": 0.48,
+            "caryophyllene": 0.32,
+            "linalool": 0,
+            "humulene": 0.25,
+            "terpinolene": 0,
+            "ocimene": 0.09
+          }
+        },
+        {
+          "id": "truenorth-flower-002-var6",
+          "size_weight": "16.5g",
+          "price": 96,
+          "original_price": 96,
+          "thc_percentage": 17.39,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 17.39,
+          "inventory_level": 23,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.31,
+            "limonene": 0.25,
+            "pinene": 0.61,
+            "caryophyllene": 0.47,
+            "linalool": 0,
+            "humulene": 0.18,
+            "terpinolene": 0,
+            "ocimene": 0.19
+          }
+        },
+        {
+          "id": "truenorth-flower-002-var7",
+          "size_weight": "28g",
+          "price": 150,
+          "original_price": 150,
+          "thc_percentage": 17.39,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 17.39,
+          "inventory_level": 8,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.97,
+            "limonene": 0.58,
+            "pinene": 0.68,
+            "caryophyllene": 0.19,
+            "linalool": 0,
+            "humulene": 0.08,
+            "terpinolene": 0,
+            "ocimene": 0.08
+          }
+        },
+        {
+          "id": "truenorth-flower-002-var8",
+          "size_weight": "33.5g",
+          "price": 180,
+          "original_price": 180,
+          "thc_percentage": 17.39,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 17.39,
+          "inventory_level": 6,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.61,
+            "limonene": 0.51,
+            "pinene": 0.4,
+            "caryophyllene": 0.22,
+            "linalool": 0,
+            "humulene": 0.19,
+            "terpinolene": 0,
+            "ocimene": 0.18
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-flower-003",
+      "name": "Black Maple",
+      "brand": "DNG",
+      "category": "flower",
+      "subcategory": "premium",
+      "description": "Hybrid with 20.49% THC",
+      "image_url": "https://images.dutchie.com/c9ab19daa3cd4184c8648367a00898af?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-flower-003-var1",
+          "size_weight": "3.5g",
+          "price": 25,
+          "original_price": 25,
+          "thc_percentage": 20.49,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 20.49,
+          "inventory_level": 24,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.75,
+            "limonene": 0.66,
+            "pinene": 0.19,
+            "caryophyllene": 0.24,
+            "linalool": 0,
+            "humulene": 0.05,
+            "terpinolene": 0,
+            "ocimene": 0.19
+          }
+        },
+        {
+          "id": "truenorth-flower-003-var2",
+          "size_weight": "4.2g",
+          "price": 30,
+          "original_price": 30,
+          "thc_percentage": 20.49,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 20.49,
+          "inventory_level": 9,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.57,
+            "limonene": 0.35,
+            "pinene": 0.59,
+            "caryophyllene": 0.41,
+            "linalool": 0,
+            "humulene": 0.01,
+            "terpinolene": 0,
+            "ocimene": 0.2
+          }
+        },
+        {
+          "id": "truenorth-flower-003-var3",
+          "size_weight": "7g",
+          "price": 45,
+          "original_price": 45,
+          "thc_percentage": 20.49,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 20.49,
+          "inventory_level": 18,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.49,
+            "limonene": 0.3,
+            "pinene": 0.49,
+            "caryophyllene": 0.42,
+            "linalool": 0,
+            "humulene": 0.31,
+            "terpinolene": 0,
+            "ocimene": 0.17
+          }
+        },
+        {
+          "id": "truenorth-flower-003-var4",
+          "size_weight": "8.4g",
+          "price": 54,
+          "original_price": 54,
+          "thc_percentage": 20.49,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 20.49,
+          "inventory_level": 9,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.27,
+            "limonene": 0.52,
+            "pinene": 0.2,
+            "caryophyllene": 0.45,
+            "linalool": 0,
+            "humulene": 0.26,
+            "terpinolene": 0,
+            "ocimene": 0.2
+          }
+        },
+        {
+          "id": "truenorth-flower-003-var5",
+          "size_weight": "14g",
+          "price": 80,
+          "original_price": 80,
+          "thc_percentage": 20.49,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 20.49,
+          "inventory_level": 9,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.73,
+            "limonene": 0.48,
+            "pinene": 0.11,
+            "caryophyllene": 0.43,
+            "linalool": 0,
+            "humulene": 0.19,
+            "terpinolene": 0,
+            "ocimene": 0.16
+          }
+        },
+        {
+          "id": "truenorth-flower-003-var6",
+          "size_weight": "16.5g",
+          "price": 96,
+          "original_price": 96,
+          "thc_percentage": 20.49,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 20.49,
+          "inventory_level": 12,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.58,
+            "limonene": 0.4,
+            "pinene": 0.68,
+            "caryophyllene": 0.33,
+            "linalool": 0,
+            "humulene": 0.15,
+            "terpinolene": 0,
+            "ocimene": 0.09
+          }
+        },
+        {
+          "id": "truenorth-flower-003-var7",
+          "size_weight": "28g",
+          "price": 150,
+          "original_price": 150,
+          "thc_percentage": 20.49,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 20.49,
+          "inventory_level": 11,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.65,
+            "limonene": 0.16,
+            "pinene": 0.56,
+            "caryophyllene": 0.28,
+            "linalool": 0,
+            "humulene": 0.09,
+            "terpinolene": 0,
+            "ocimene": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-flower-004",
+      "name": "Dantes Inferno",
+      "brand": "605 Cannabis",
+      "category": "flower",
+      "subcategory": "premium",
+      "description": "Hybrid with 21.83% THC and 0.06% CBD",
+      "image_url": "https://images.dutchie.com/46023702c2b7fe914607bbb7402b314a?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-flower-004-var1",
+          "size_weight": "3.5g",
+          "price": 25,
+          "original_price": 25,
+          "thc_percentage": 21.83,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 21.889999999999997,
+          "inventory_level": 12,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.64,
+            "limonene": 0.27,
+            "pinene": 0.54,
+            "caryophyllene": 0.31,
+            "linalool": 0,
+            "humulene": 0.21,
+            "terpinolene": 0,
+            "ocimene": 0.19
+          }
+        },
+        {
+          "id": "truenorth-flower-004-var2",
+          "size_weight": "4.2g",
+          "price": 30,
+          "original_price": 30,
+          "thc_percentage": 21.83,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 21.889999999999997,
+          "inventory_level": 6,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.51,
+            "limonene": 0.87,
+            "pinene": 0.16,
+            "caryophyllene": 0.5,
+            "linalool": 0,
+            "humulene": 0.01,
+            "terpinolene": 0,
+            "ocimene": 0.13
+          }
+        },
+        {
+          "id": "truenorth-flower-004-var3",
+          "size_weight": "7g",
+          "price": 45,
+          "original_price": 45,
+          "thc_percentage": 21.83,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 21.889999999999997,
+          "inventory_level": 11,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.54,
+            "limonene": 0.26,
+            "pinene": 0.57,
+            "caryophyllene": 0.17,
+            "linalool": 0,
+            "humulene": 0.15,
+            "terpinolene": 0,
+            "ocimene": 0.18
+          }
+        },
+        {
+          "id": "truenorth-flower-004-var4",
+          "size_weight": "8.4g",
+          "price": 54,
+          "original_price": 54,
+          "thc_percentage": 21.83,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 21.889999999999997,
+          "inventory_level": 10,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.05,
+            "limonene": 0.68,
+            "pinene": 0.56,
+            "caryophyllene": 0.2,
+            "linalool": 0,
+            "humulene": 0.3,
+            "terpinolene": 0,
+            "ocimene": 0.11
+          }
+        },
+        {
+          "id": "truenorth-flower-004-var5",
+          "size_weight": "14g",
+          "price": 80,
+          "original_price": 80,
+          "thc_percentage": 21.83,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 21.889999999999997,
+          "inventory_level": 8,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.76,
+            "limonene": 0.75,
+            "pinene": 0.53,
+            "caryophyllene": 0.15,
+            "linalool": 0,
+            "humulene": 0.02,
+            "terpinolene": 0,
+            "ocimene": 0.06
+          }
+        },
+        {
+          "id": "truenorth-flower-004-var6",
+          "size_weight": "16.5g",
+          "price": 96,
+          "original_price": 96,
+          "thc_percentage": 21.83,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 21.889999999999997,
+          "inventory_level": 7,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.06,
+            "limonene": 0.54,
+            "pinene": 0.46,
+            "caryophyllene": 0.48,
+            "linalool": 0,
+            "humulene": 0.05,
+            "terpinolene": 0,
+            "ocimene": 0.11
+          }
+        },
+        {
+          "id": "truenorth-flower-004-var7",
+          "size_weight": "28g",
+          "price": 150,
+          "original_price": 150,
+          "thc_percentage": 21.83,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 21.889999999999997,
+          "inventory_level": 23,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.73,
+            "limonene": 0.63,
+            "pinene": 0.45,
+            "caryophyllene": 0.56,
+            "linalool": 0,
+            "humulene": 0.08,
+            "terpinolene": 0,
+            "ocimene": 0.12
+          }
+        },
+        {
+          "id": "truenorth-flower-004-var8",
+          "size_weight": "33.5g",
+          "price": 180,
+          "original_price": 180,
+          "thc_percentage": 21.83,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 21.889999999999997,
+          "inventory_level": 19,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.81,
+            "limonene": 0.72,
+            "pinene": 0.64,
+            "caryophyllene": 0.4,
+            "linalool": 0,
+            "humulene": 0.15,
+            "terpinolene": 0,
+            "ocimene": 0.13
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-flower-005",
+      "name": "Mac Nut Barz",
+      "brand": "DNS",
+      "category": "flower",
+      "subcategory": "premium",
+      "description": "Hybrid with 20.3% THC and 0.04% CBD",
+      "image_url": "https://images.dutchie.com/7c59af1c6b507b12a2757ab8c944907d?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-flower-005-var1",
+          "size_weight": "3.5g",
+          "price": 25,
+          "original_price": 25,
+          "thc_percentage": 20.3,
+          "cbd_percentage": 0.04,
+          "total_cannabinoids": 20.34,
+          "inventory_level": 8,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.19,
+            "limonene": 0.35,
+            "pinene": 0.61,
+            "caryophyllene": 0.5,
+            "linalool": 0,
+            "humulene": 0.3,
+            "terpinolene": 0,
+            "ocimene": 0.19
+          }
+        },
+        {
+          "id": "truenorth-flower-005-var2",
+          "size_weight": "4.2g",
+          "price": 30,
+          "original_price": 30,
+          "thc_percentage": 20.3,
+          "cbd_percentage": 0.04,
+          "total_cannabinoids": 20.34,
+          "inventory_level": 10,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.65,
+            "limonene": 0.37,
+            "pinene": 0.3,
+            "caryophyllene": 0.17,
+            "linalool": 0,
+            "humulene": 0.3,
+            "terpinolene": 0,
+            "ocimene": 0.14
+          }
+        },
+        {
+          "id": "truenorth-flower-005-var3",
+          "size_weight": "7g",
+          "price": 45,
+          "original_price": 45,
+          "thc_percentage": 20.3,
+          "cbd_percentage": 0.04,
+          "total_cannabinoids": 20.34,
+          "inventory_level": 23,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.97,
+            "limonene": 0.11,
+            "pinene": 0.32,
+            "caryophyllene": 0.32,
+            "linalool": 0,
+            "humulene": 0.23,
+            "terpinolene": 0,
+            "ocimene": 0.04
+          }
+        },
+        {
+          "id": "truenorth-flower-005-var4",
+          "size_weight": "8.4g",
+          "price": 54,
+          "original_price": 54,
+          "thc_percentage": 20.3,
+          "cbd_percentage": 0.04,
+          "total_cannabinoids": 20.34,
+          "inventory_level": 19,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.63,
+            "limonene": 0.29,
+            "pinene": 0.29,
+            "caryophyllene": 0.28,
+            "linalool": 0,
+            "humulene": 0.12,
+            "terpinolene": 0,
+            "ocimene": 0.06
+          }
+        },
+        {
+          "id": "truenorth-flower-005-var5",
+          "size_weight": "14g",
+          "price": 80,
+          "original_price": 80,
+          "thc_percentage": 20.3,
+          "cbd_percentage": 0.04,
+          "total_cannabinoids": 20.34,
+          "inventory_level": 6,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.94,
+            "limonene": 0.78,
+            "pinene": 0.38,
+            "caryophyllene": 0.43,
+            "linalool": 0,
+            "humulene": 0.28,
+            "terpinolene": 0,
+            "ocimene": 0.07
+          }
+        },
+        {
+          "id": "truenorth-flower-005-var6",
+          "size_weight": "16.5g",
+          "price": 96,
+          "original_price": 96,
+          "thc_percentage": 20.3,
+          "cbd_percentage": 0.04,
+          "total_cannabinoids": 20.34,
+          "inventory_level": 12,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.98,
+            "limonene": 0.76,
+            "pinene": 0.1,
+            "caryophyllene": 0.5,
+            "linalool": 0,
+            "humulene": 0.21,
+            "terpinolene": 0,
+            "ocimene": 0.05
+          }
+        },
+        {
+          "id": "truenorth-flower-005-var7",
+          "size_weight": "28g",
+          "price": 150,
+          "original_price": 150,
+          "thc_percentage": 20.3,
+          "cbd_percentage": 0.04,
+          "total_cannabinoids": 20.34,
+          "inventory_level": 6,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.63,
+            "limonene": 0.6,
+            "pinene": 0.34,
+            "caryophyllene": 0.37,
+            "linalool": 0,
+            "humulene": 0.19,
+            "terpinolene": 0,
+            "ocimene": 0.15
+          }
+        },
+        {
+          "id": "truenorth-flower-005-var8",
+          "size_weight": "33.5g",
+          "price": 180,
+          "original_price": 180,
+          "thc_percentage": 20.3,
+          "cbd_percentage": 0.04,
+          "total_cannabinoids": 20.34,
+          "inventory_level": 14,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.07,
+            "limonene": 0.48,
+            "pinene": 0.66,
+            "caryophyllene": 0.36,
+            "linalool": 0,
+            "humulene": 0.09,
+            "terpinolene": 0,
+            "ocimene": 0.09
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-flower-006",
+      "name": "Mandarin Dreams",
+      "brand": "Garden Valley Ag",
+      "category": "flower",
+      "subcategory": "premium",
+      "description": "Hybrid with 20.05% THC and 0.02% CBD",
+      "image_url": "https://images.dutchie.com/cf3c73bf9184e5abd208690ddb651362?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-flower-006-var1",
+          "size_weight": "3.5g",
+          "price": 25,
+          "original_price": 25,
+          "thc_percentage": 20.05,
+          "cbd_percentage": 0.02,
+          "total_cannabinoids": 20.07,
+          "inventory_level": 11,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.97,
+            "limonene": 0.19,
+            "pinene": 0.5,
+            "caryophyllene": 0.46,
+            "linalool": 0,
+            "humulene": 0.2,
+            "terpinolene": 0,
+            "ocimene": 0.19
+          }
+        },
+        {
+          "id": "truenorth-flower-006-var2",
+          "size_weight": "4.2g",
+          "price": 30,
+          "original_price": 30,
+          "thc_percentage": 20.05,
+          "cbd_percentage": 0.02,
+          "total_cannabinoids": 20.07,
+          "inventory_level": 18,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.35,
+            "limonene": 0.33,
+            "pinene": 0.12,
+            "caryophyllene": 0.12,
+            "linalool": 0,
+            "humulene": 0.07,
+            "terpinolene": 0,
+            "ocimene": 0.02
+          }
+        },
+        {
+          "id": "truenorth-flower-006-var3",
+          "size_weight": "7g",
+          "price": 45,
+          "original_price": 45,
+          "thc_percentage": 20.05,
+          "cbd_percentage": 0.02,
+          "total_cannabinoids": 20.07,
+          "inventory_level": 9,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.59,
+            "limonene": 0.6,
+            "pinene": 0.46,
+            "caryophyllene": 0.1,
+            "linalool": 0,
+            "humulene": 0.04,
+            "terpinolene": 0,
+            "ocimene": 0.02
+          }
+        },
+        {
+          "id": "truenorth-flower-006-var4",
+          "size_weight": "8.4g",
+          "price": 54,
+          "original_price": 54,
+          "thc_percentage": 20.05,
+          "cbd_percentage": 0.02,
+          "total_cannabinoids": 20.07,
+          "inventory_level": 12,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.37,
+            "limonene": 0.64,
+            "pinene": 0.7,
+            "caryophyllene": 0.57,
+            "linalool": 0,
+            "humulene": 0.23,
+            "terpinolene": 0,
+            "ocimene": 0.05
+          }
+        },
+        {
+          "id": "truenorth-flower-006-var5",
+          "size_weight": "14g",
+          "price": 80,
+          "original_price": 80,
+          "thc_percentage": 20.05,
+          "cbd_percentage": 0.02,
+          "total_cannabinoids": 20.07,
+          "inventory_level": 15,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.8,
+            "limonene": 0.14,
+            "pinene": 0.36,
+            "caryophyllene": 0.25,
+            "linalool": 0,
+            "humulene": 0.11,
+            "terpinolene": 0,
+            "ocimene": 0.1
+          }
+        },
+        {
+          "id": "truenorth-flower-006-var6",
+          "size_weight": "16.5g",
+          "price": 96,
+          "original_price": 96,
+          "thc_percentage": 20.05,
+          "cbd_percentage": 0.02,
+          "total_cannabinoids": 20.07,
+          "inventory_level": 5,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.69,
+            "limonene": 0.74,
+            "pinene": 0.41,
+            "caryophyllene": 0.48,
+            "linalool": 0,
+            "humulene": 0.18,
+            "terpinolene": 0,
+            "ocimene": 0.01
+          }
+        },
+        {
+          "id": "truenorth-flower-006-var7",
+          "size_weight": "28g",
+          "price": 150,
+          "original_price": 150,
+          "thc_percentage": 20.05,
+          "cbd_percentage": 0.02,
+          "total_cannabinoids": 20.07,
+          "inventory_level": 5,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.67,
+            "limonene": 0.82,
+            "pinene": 0.34,
+            "caryophyllene": 0.59,
+            "linalool": 0,
+            "humulene": 0.06,
+            "terpinolene": 0,
+            "ocimene": 0.12
+          }
+        },
+        {
+          "id": "truenorth-flower-006-var8",
+          "size_weight": "33.5g",
+          "price": 180,
+          "original_price": 180,
+          "thc_percentage": 20.05,
+          "cbd_percentage": 0.02,
+          "total_cannabinoids": 20.07,
+          "inventory_level": 22,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.09,
+            "limonene": 0.56,
+            "pinene": 0.54,
+            "caryophyllene": 0.1,
+            "linalool": 0,
+            "humulene": 0.18,
+            "terpinolene": 0,
+            "ocimene": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-flower-007",
+      "name": "Permanent Marker",
+      "brand": "Big Sioux Bud",
+      "category": "flower",
+      "subcategory": "premium",
+      "description": "Hybrid with 18.39% THC",
+      "image_url": "https://images.dutchie.com/f0a44a2d28496ff225a9ab00d52730ae?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-flower-007-var1",
+          "size_weight": "3.5g",
+          "price": 25,
+          "original_price": 25,
+          "thc_percentage": 18.39,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 18.39,
+          "inventory_level": 5,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.75,
+            "limonene": 0.43,
+            "pinene": 0.49,
+            "caryophyllene": 0.14,
+            "linalool": 0,
+            "humulene": 0.11,
+            "terpinolene": 0,
+            "ocimene": 0.09
+          }
+        },
+        {
+          "id": "truenorth-flower-007-var2",
+          "size_weight": "4.2g",
+          "price": 30,
+          "original_price": 30,
+          "thc_percentage": 18.39,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 18.39,
+          "inventory_level": 13,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.51,
+            "limonene": 0.6,
+            "pinene": 0.67,
+            "caryophyllene": 0.56,
+            "linalool": 0,
+            "humulene": 0.19,
+            "terpinolene": 0,
+            "ocimene": 0.18
+          }
+        },
+        {
+          "id": "truenorth-flower-007-var3",
+          "size_weight": "7g",
+          "price": 45,
+          "original_price": 45,
+          "thc_percentage": 18.39,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 18.39,
+          "inventory_level": 5,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.82,
+            "limonene": 0.28,
+            "pinene": 0.15,
+            "caryophyllene": 0.48,
+            "linalool": 0,
+            "humulene": 0.16,
+            "terpinolene": 0,
+            "ocimene": 0.14
+          }
+        },
+        {
+          "id": "truenorth-flower-007-var4",
+          "size_weight": "8.4g",
+          "price": 54,
+          "original_price": 54,
+          "thc_percentage": 18.39,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 18.39,
+          "inventory_level": 7,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.9,
+            "limonene": 0.23,
+            "pinene": 0.23,
+            "caryophyllene": 0.34,
+            "linalool": 0,
+            "humulene": 0.06,
+            "terpinolene": 0,
+            "ocimene": 0.14
+          }
+        },
+        {
+          "id": "truenorth-flower-007-var5",
+          "size_weight": "14g",
+          "price": 80,
+          "original_price": 80,
+          "thc_percentage": 18.39,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 18.39,
+          "inventory_level": 8,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.95,
+            "limonene": 0.56,
+            "pinene": 0.3,
+            "caryophyllene": 0.45,
+            "linalool": 0,
+            "humulene": 0.13,
+            "terpinolene": 0,
+            "ocimene": 0.09
+          }
+        },
+        {
+          "id": "truenorth-flower-007-var6",
+          "size_weight": "16.5g",
+          "price": 96,
+          "original_price": 96,
+          "thc_percentage": 18.39,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 18.39,
+          "inventory_level": 6,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1,
+            "limonene": 0.78,
+            "pinene": 0.27,
+            "caryophyllene": 0.53,
+            "linalool": 0,
+            "humulene": 0.16,
+            "terpinolene": 0,
+            "ocimene": 0.04
+          }
+        },
+        {
+          "id": "truenorth-flower-007-var7",
+          "size_weight": "28g",
+          "price": 150,
+          "original_price": 150,
+          "thc_percentage": 18.39,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 18.39,
+          "inventory_level": 5,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.78,
+            "limonene": 0.65,
+            "pinene": 0.28,
+            "caryophyllene": 0.54,
+            "linalool": 0,
+            "humulene": 0.11,
+            "terpinolene": 0,
+            "ocimene": 0.14
+          }
+        },
+        {
+          "id": "truenorth-flower-007-var8",
+          "size_weight": "33.5g",
+          "price": 180,
+          "original_price": 180,
+          "thc_percentage": 18.39,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 18.39,
+          "inventory_level": 10,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.35,
+            "limonene": 0.39,
+            "pinene": 0.44,
+            "caryophyllene": 0.22,
+            "linalool": 0,
+            "humulene": 0.07,
+            "terpinolene": 0,
+            "ocimene": 0.08
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-flower-008",
+      "name": "White Fire 43 BX2",
+      "brand": "DNG",
+      "category": "flower",
+      "subcategory": "premium",
+      "description": "Hybrid with 21.87% THC and 0.05% CBD",
+      "image_url": "https://images.dutchie.com/d8421f5ebad25c1bf30ae57a24ae2d07?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-flower-008-var1",
+          "size_weight": "3.5g",
+          "price": 25,
+          "original_price": 25,
+          "thc_percentage": 21.87,
+          "cbd_percentage": 0.05,
+          "total_cannabinoids": 21.92,
+          "inventory_level": 22,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.67,
+            "limonene": 0.44,
+            "pinene": 0.38,
+            "caryophyllene": 0.3,
+            "linalool": 0,
+            "humulene": 0.14,
+            "terpinolene": 0,
+            "ocimene": 0.1
+          }
+        },
+        {
+          "id": "truenorth-flower-008-var2",
+          "size_weight": "4.2g",
+          "price": 30,
+          "original_price": 30,
+          "thc_percentage": 21.87,
+          "cbd_percentage": 0.05,
+          "total_cannabinoids": 21.92,
+          "inventory_level": 20,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.25,
+            "limonene": 0.12,
+            "pinene": 0.6,
+            "caryophyllene": 0.11,
+            "linalool": 0,
+            "humulene": 0.14,
+            "terpinolene": 0,
+            "ocimene": 0.06
+          }
+        },
+        {
+          "id": "truenorth-flower-008-var3",
+          "size_weight": "7g",
+          "price": 45,
+          "original_price": 45,
+          "thc_percentage": 21.87,
+          "cbd_percentage": 0.05,
+          "total_cannabinoids": 21.92,
+          "inventory_level": 23,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.67,
+            "limonene": 0.62,
+            "pinene": 0.22,
+            "caryophyllene": 0.57,
+            "linalool": 0,
+            "humulene": 0.09,
+            "terpinolene": 0,
+            "ocimene": 0.03
+          }
+        },
+        {
+          "id": "truenorth-flower-008-var4",
+          "size_weight": "8.4g",
+          "price": 54,
+          "original_price": 54,
+          "thc_percentage": 21.87,
+          "cbd_percentage": 0.05,
+          "total_cannabinoids": 21.92,
+          "inventory_level": 21,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.99,
+            "limonene": 0.64,
+            "pinene": 0.56,
+            "caryophyllene": 0.53,
+            "linalool": 0,
+            "humulene": 0.25,
+            "terpinolene": 0,
+            "ocimene": 0.04
+          }
+        },
+        {
+          "id": "truenorth-flower-008-var5",
+          "size_weight": "14g",
+          "price": 80,
+          "original_price": 80,
+          "thc_percentage": 21.87,
+          "cbd_percentage": 0.05,
+          "total_cannabinoids": 21.92,
+          "inventory_level": 16,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.5,
+            "limonene": 0.17,
+            "pinene": 0.13,
+            "caryophyllene": 0.1,
+            "linalool": 0,
+            "humulene": 0.23,
+            "terpinolene": 0,
+            "ocimene": 0.1
+          }
+        },
+        {
+          "id": "truenorth-flower-008-var6",
+          "size_weight": "16.5g",
+          "price": 96,
+          "original_price": 96,
+          "thc_percentage": 21.87,
+          "cbd_percentage": 0.05,
+          "total_cannabinoids": 21.92,
+          "inventory_level": 13,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.9,
+            "limonene": 0.79,
+            "pinene": 0.57,
+            "caryophyllene": 0.25,
+            "linalool": 0,
+            "humulene": 0.26,
+            "terpinolene": 0,
+            "ocimene": 0.06
+          }
+        },
+        {
+          "id": "truenorth-flower-008-var7",
+          "size_weight": "28g",
+          "price": 150,
+          "original_price": 150,
+          "thc_percentage": 21.87,
+          "cbd_percentage": 0.05,
+          "total_cannabinoids": 21.92,
+          "inventory_level": 16,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.16,
+            "limonene": 0.9,
+            "pinene": 0.2,
+            "caryophyllene": 0.5,
+            "linalool": 0,
+            "humulene": 0.21,
+            "terpinolene": 0,
+            "ocimene": 0.1
+          }
+        },
+        {
+          "id": "truenorth-flower-008-var8",
+          "size_weight": "33.5g",
+          "price": 180,
+          "original_price": 180,
+          "thc_percentage": 21.87,
+          "cbd_percentage": 0.05,
+          "total_cannabinoids": 21.92,
+          "inventory_level": 5,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.64,
+            "limonene": 0.21,
+            "pinene": 0.22,
+            "caryophyllene": 0.57,
+            "linalool": 0,
+            "humulene": 0.2,
+            "terpinolene": 0,
+            "ocimene": 0.17
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-flower-009",
+      "name": "Biker Kush",
+      "brand": "DNG",
+      "category": "flower",
+      "subcategory": "premium",
+      "description": "Hybrid with 17.82% THC",
+      "image_url": "https://images.dutchie.com/e453d64605bbc85a46b1fa6b0c8d9ab0?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-flower-009-var1",
+          "size_weight": "1g",
+          "price": 10,
+          "original_price": 10,
+          "thc_percentage": 17.82,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 17.82,
+          "inventory_level": 13,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.74,
+            "limonene": 0.76,
+            "pinene": 0.23,
+            "caryophyllene": 0.25,
+            "linalool": 0,
+            "humulene": 0.21,
+            "terpinolene": 0,
+            "ocimene": 0.08
+          }
+        },
+        {
+          "id": "truenorth-flower-009-var2",
+          "size_weight": "1.2g",
+          "price": 12,
+          "original_price": 12,
+          "thc_percentage": 17.82,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 17.82,
+          "inventory_level": 5,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.14,
+            "limonene": 0.52,
+            "pinene": 0.11,
+            "caryophyllene": 0.49,
+            "linalool": 0,
+            "humulene": 0.29,
+            "terpinolene": 0,
+            "ocimene": 0.05
+          }
+        },
+        {
+          "id": "truenorth-flower-009-var3",
+          "size_weight": "2g",
+          "price": 20,
+          "original_price": 20,
+          "thc_percentage": 17.82,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 17.82,
+          "inventory_level": 23,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.39,
+            "limonene": 0.27,
+            "pinene": 0.4,
+            "caryophyllene": 0.24,
+            "linalool": 0,
+            "humulene": 0.27,
+            "terpinolene": 0,
+            "ocimene": 0.08
+          }
+        },
+        {
+          "id": "truenorth-flower-009-var4",
+          "size_weight": "3.5g",
+          "price": 30,
+          "original_price": 30,
+          "thc_percentage": 17.82,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 17.82,
+          "inventory_level": 10,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.63,
+            "limonene": 0.71,
+            "pinene": 0.39,
+            "caryophyllene": 0.5,
+            "linalool": 0,
+            "humulene": 0.15,
+            "terpinolene": 0,
+            "ocimene": 0.18
+          }
+        },
+        {
+          "id": "truenorth-flower-009-var5",
+          "size_weight": "4.2g",
+          "price": 36,
+          "original_price": 36,
+          "thc_percentage": 17.82,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 17.82,
+          "inventory_level": 24,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.26,
+            "limonene": 0.12,
+            "pinene": 0.61,
+            "caryophyllene": 0.4,
+            "linalool": 0,
+            "humulene": 0.1,
+            "terpinolene": 0,
+            "ocimene": 0.17
+          }
+        },
+        {
+          "id": "truenorth-flower-009-var6",
+          "size_weight": "7g",
+          "price": 55,
+          "original_price": 55,
+          "thc_percentage": 17.82,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 17.82,
+          "inventory_level": 10,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.11,
+            "limonene": 0.58,
+            "pinene": 0.35,
+            "caryophyllene": 0.3,
+            "linalool": 0,
+            "humulene": 0.28,
+            "terpinolene": 0,
+            "ocimene": 0.1
+          }
+        },
+        {
+          "id": "truenorth-flower-009-var7",
+          "size_weight": "8.4g",
+          "price": 66,
+          "original_price": 66,
+          "thc_percentage": 17.82,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 17.82,
+          "inventory_level": 8,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.17,
+            "limonene": 0.17,
+            "pinene": 0.51,
+            "caryophyllene": 0.36,
+            "linalool": 0,
+            "humulene": 0.28,
+            "terpinolene": 0,
+            "ocimene": 0.02
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-flower-010",
+      "name": "Camp Comfort",
+      "brand": "Dakota Green",
+      "category": "flower",
+      "subcategory": "premium",
+      "description": "Sativa with 20.2% THC and 0.05% CBD",
+      "image_url": "https://images.dutchie.com/9b1d75060c38b2e02a8007d8e8f54d5a?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "sativa",
+      "variants": [
+        {
+          "id": "truenorth-flower-010-var1",
+          "size_weight": "1g",
+          "price": 10,
+          "original_price": 10,
+          "thc_percentage": 20.2,
+          "cbd_percentage": 0.05,
+          "total_cannabinoids": 20.25,
+          "inventory_level": 12,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.29,
+            "pinene": 0.69,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.27,
+            "terpinolene": 0.21,
+            "ocimene": 0.16
+          }
+        },
+        {
+          "id": "truenorth-flower-010-var2",
+          "size_weight": "1.2g",
+          "price": 12,
+          "original_price": 12,
+          "thc_percentage": 20.2,
+          "cbd_percentage": 0.05,
+          "total_cannabinoids": 20.25,
+          "inventory_level": 12,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.85,
+            "pinene": 0.67,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.03,
+            "terpinolene": 0.1,
+            "ocimene": 0.05
+          }
+        },
+        {
+          "id": "truenorth-flower-010-var3",
+          "size_weight": "2g",
+          "price": 20,
+          "original_price": 20,
+          "thc_percentage": 20.2,
+          "cbd_percentage": 0.05,
+          "total_cannabinoids": 20.25,
+          "inventory_level": 23,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 1.36,
+            "pinene": 0.42,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.2,
+            "terpinolene": 0.26,
+            "ocimene": 0.12
+          }
+        },
+        {
+          "id": "truenorth-flower-010-var4",
+          "size_weight": "3.5g",
+          "price": 30,
+          "original_price": 30,
+          "thc_percentage": 20.2,
+          "cbd_percentage": 0.05,
+          "total_cannabinoids": 20.25,
+          "inventory_level": 11,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 1.08,
+            "pinene": 0.99,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.06,
+            "terpinolene": 0.05,
+            "ocimene": 0.02
+          }
+        },
+        {
+          "id": "truenorth-flower-010-var5",
+          "size_weight": "4.2g",
+          "price": 36,
+          "original_price": 36,
+          "thc_percentage": 20.2,
+          "cbd_percentage": 0.05,
+          "total_cannabinoids": 20.25,
+          "inventory_level": 17,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 1.06,
+            "pinene": 0.5,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.2,
+            "terpinolene": 0.27,
+            "ocimene": 0.13
+          }
+        },
+        {
+          "id": "truenorth-flower-010-var6",
+          "size_weight": "7g",
+          "price": 55,
+          "original_price": 55,
+          "thc_percentage": 20.2,
+          "cbd_percentage": 0.05,
+          "total_cannabinoids": 20.25,
+          "inventory_level": 13,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 1.35,
+            "pinene": 0.87,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.25,
+            "terpinolene": 0.04,
+            "ocimene": 0.15
+          }
+        },
+        {
+          "id": "truenorth-flower-010-var7",
+          "size_weight": "8.4g",
+          "price": 66,
+          "original_price": 66,
+          "thc_percentage": 20.2,
+          "cbd_percentage": 0.05,
+          "total_cannabinoids": 20.25,
+          "inventory_level": 24,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.89,
+            "pinene": 0.22,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.29,
+            "terpinolene": 0.14,
+            "ocimene": 0.15
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-flower-011",
+      "name": "Lilac Diesel",
+      "brand": "DNS",
+      "category": "flower",
+      "subcategory": "premium",
+      "description": "Indica-Hybrid with 25.79% THC and 0.07% CBD",
+      "image_url": "https://images.dutchie.com/b2d5ed8170e5bc72b7c114774ea2be91?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "indica",
+      "variants": [
+        {
+          "id": "truenorth-flower-011-var1",
+          "size_weight": "1g",
+          "price": 10,
+          "original_price": 10,
+          "thc_percentage": 25.79,
+          "cbd_percentage": 0.07,
+          "total_cannabinoids": 25.86,
+          "inventory_level": 6,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.17,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.52,
+            "linalool": 0.5,
+            "humulene": 0.15,
+            "terpinolene": 0,
+            "ocimene": 0.09
+          }
+        },
+        {
+          "id": "truenorth-flower-011-var2",
+          "size_weight": "1.2g",
+          "price": 12,
+          "original_price": 12,
+          "thc_percentage": 25.79,
+          "cbd_percentage": 0.07,
+          "total_cannabinoids": 25.86,
+          "inventory_level": 9,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.47,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.33,
+            "linalool": 0.43,
+            "humulene": 0.12,
+            "terpinolene": 0,
+            "ocimene": 0.04
+          }
+        },
+        {
+          "id": "truenorth-flower-011-var3",
+          "size_weight": "2g",
+          "price": 20,
+          "original_price": 20,
+          "thc_percentage": 25.79,
+          "cbd_percentage": 0.07,
+          "total_cannabinoids": 25.86,
+          "inventory_level": 14,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.18,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.33,
+            "linalool": 0.32,
+            "humulene": 0.06,
+            "terpinolene": 0,
+            "ocimene": 0.16
+          }
+        },
+        {
+          "id": "truenorth-flower-011-var4",
+          "size_weight": "3.5g",
+          "price": 30,
+          "original_price": 30,
+          "thc_percentage": 25.79,
+          "cbd_percentage": 0.07,
+          "total_cannabinoids": 25.86,
+          "inventory_level": 24,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.61,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.69,
+            "linalool": 0.41,
+            "humulene": 0.25,
+            "terpinolene": 0,
+            "ocimene": 0.03
+          }
+        },
+        {
+          "id": "truenorth-flower-011-var5",
+          "size_weight": "4.2g",
+          "price": 36,
+          "original_price": 36,
+          "thc_percentage": 25.79,
+          "cbd_percentage": 0.07,
+          "total_cannabinoids": 25.86,
+          "inventory_level": 14,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.63,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.85,
+            "linalool": 0.2,
+            "humulene": 0.1,
+            "terpinolene": 0,
+            "ocimene": 0.04
+          }
+        },
+        {
+          "id": "truenorth-flower-011-var6",
+          "size_weight": "7g",
+          "price": 55,
+          "original_price": 55,
+          "thc_percentage": 25.79,
+          "cbd_percentage": 0.07,
+          "total_cannabinoids": 25.86,
+          "inventory_level": 8,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.28,
+            "linalool": 0.45,
+            "humulene": 0.09,
+            "terpinolene": 0,
+            "ocimene": 0.05
+          }
+        },
+        {
+          "id": "truenorth-flower-011-var7",
+          "size_weight": "8.4g",
+          "price": 66,
+          "original_price": 66,
+          "thc_percentage": 25.79,
+          "cbd_percentage": 0.07,
+          "total_cannabinoids": 25.86,
+          "inventory_level": 23,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.88,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.81,
+            "linalool": 0.1,
+            "humulene": 0.08,
+            "terpinolene": 0,
+            "ocimene": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-flower-012",
+      "name": "Limonada Rosa",
+      "brand": "DNG",
+      "category": "flower",
+      "subcategory": "premium",
+      "description": "Hybrid with 17.17% THC and 0.04% CBD",
+      "image_url": "https://images.dutchie.com/53a0128ccc2bd1d71474d1614ac9d138?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-flower-012-var1",
+          "size_weight": "1g",
+          "price": 10,
+          "original_price": 10,
+          "thc_percentage": 17.17,
+          "cbd_percentage": 0.04,
+          "total_cannabinoids": 17.21,
+          "inventory_level": 22,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.95,
+            "limonene": 0.57,
+            "pinene": 0.53,
+            "caryophyllene": 0.39,
+            "linalool": 0,
+            "humulene": 0.09,
+            "terpinolene": 0,
+            "ocimene": 0.19
+          }
+        },
+        {
+          "id": "truenorth-flower-012-var2",
+          "size_weight": "1.2g",
+          "price": 12,
+          "original_price": 12,
+          "thc_percentage": 17.17,
+          "cbd_percentage": 0.04,
+          "total_cannabinoids": 17.21,
+          "inventory_level": 14,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.6,
+            "limonene": 0.76,
+            "pinene": 0.22,
+            "caryophyllene": 0.57,
+            "linalool": 0,
+            "humulene": 0.26,
+            "terpinolene": 0,
+            "ocimene": 0.17
+          }
+        },
+        {
+          "id": "truenorth-flower-012-var3",
+          "size_weight": "2g",
+          "price": 20,
+          "original_price": 20,
+          "thc_percentage": 17.17,
+          "cbd_percentage": 0.04,
+          "total_cannabinoids": 17.21,
+          "inventory_level": 15,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.18,
+            "limonene": 0.16,
+            "pinene": 0.43,
+            "caryophyllene": 0.1,
+            "linalool": 0,
+            "humulene": 0.09,
+            "terpinolene": 0,
+            "ocimene": 0.14
+          }
+        },
+        {
+          "id": "truenorth-flower-012-var4",
+          "size_weight": "3.5g",
+          "price": 30,
+          "original_price": 30,
+          "thc_percentage": 17.17,
+          "cbd_percentage": 0.04,
+          "total_cannabinoids": 17.21,
+          "inventory_level": 12,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.66,
+            "limonene": 0.85,
+            "pinene": 0.62,
+            "caryophyllene": 0.52,
+            "linalool": 0,
+            "humulene": 0.3,
+            "terpinolene": 0,
+            "ocimene": 0.04
+          }
+        },
+        {
+          "id": "truenorth-flower-012-var5",
+          "size_weight": "4.2g",
+          "price": 36,
+          "original_price": 36,
+          "thc_percentage": 17.17,
+          "cbd_percentage": 0.04,
+          "total_cannabinoids": 17.21,
+          "inventory_level": 12,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.45,
+            "limonene": 0.67,
+            "pinene": 0.17,
+            "caryophyllene": 0.2,
+            "linalool": 0,
+            "humulene": 0.28,
+            "terpinolene": 0,
+            "ocimene": 0.08
+          }
+        },
+        {
+          "id": "truenorth-flower-012-var6",
+          "size_weight": "7g",
+          "price": 55,
+          "original_price": 55,
+          "thc_percentage": 17.17,
+          "cbd_percentage": 0.04,
+          "total_cannabinoids": 17.21,
+          "inventory_level": 20,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.87,
+            "limonene": 0.8,
+            "pinene": 0.21,
+            "caryophyllene": 0.17,
+            "linalool": 0,
+            "humulene": 0.09,
+            "terpinolene": 0,
+            "ocimene": 0.04
+          }
+        },
+        {
+          "id": "truenorth-flower-012-var7",
+          "size_weight": "8.4g",
+          "price": 66,
+          "original_price": 66,
+          "thc_percentage": 17.17,
+          "cbd_percentage": 0.04,
+          "total_cannabinoids": 17.21,
+          "inventory_level": 13,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.7,
+            "limonene": 0.28,
+            "pinene": 0.27,
+            "caryophyllene": 0.57,
+            "linalool": 0,
+            "humulene": 0.24,
+            "terpinolene": 0,
+            "ocimene": 0.12
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-flower-013",
+      "name": "Gorilla Glue #4",
+      "brand": "Pure Bliss",
+      "category": "flower",
+      "subcategory": "premium",
+      "description": "Hybrid with 22.77% THC",
+      "image_url": "https://images.dutchie.com/fd8e603b9c21fd0e27711cebae5438ba?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-flower-013-var1",
+          "size_weight": "1g",
+          "price": 11,
+          "original_price": 11,
+          "thc_percentage": 22.77,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 22.77,
+          "inventory_level": 17,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1,
+            "limonene": 0.7,
+            "pinene": 0.19,
+            "caryophyllene": 0.21,
+            "linalool": 0,
+            "humulene": 0.09,
+            "terpinolene": 0,
+            "ocimene": 0.1
+          }
+        },
+        {
+          "id": "truenorth-flower-013-var2",
+          "size_weight": "1.2g",
+          "price": 13.2,
+          "original_price": 13.2,
+          "thc_percentage": 22.77,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 22.77,
+          "inventory_level": 18,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.54,
+            "limonene": 0.65,
+            "pinene": 0.64,
+            "caryophyllene": 0.37,
+            "linalool": 0,
+            "humulene": 0.01,
+            "terpinolene": 0,
+            "ocimene": 0.19
+          }
+        },
+        {
+          "id": "truenorth-flower-013-var3",
+          "size_weight": "2g",
+          "price": 22,
+          "original_price": 22,
+          "thc_percentage": 22.77,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 22.77,
+          "inventory_level": 8,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.76,
+            "limonene": 0.43,
+            "pinene": 0.49,
+            "caryophyllene": 0.5,
+            "linalool": 0,
+            "humulene": 0.03,
+            "terpinolene": 0,
+            "ocimene": 0.1
+          }
+        },
+        {
+          "id": "truenorth-flower-013-var4",
+          "size_weight": "3.5g",
+          "price": 35,
+          "original_price": 35,
+          "thc_percentage": 22.77,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 22.77,
+          "inventory_level": 18,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.48,
+            "limonene": 0.86,
+            "pinene": 0.67,
+            "caryophyllene": 0.35,
+            "linalool": 0,
+            "humulene": 0.15,
+            "terpinolene": 0,
+            "ocimene": 0.02
+          }
+        },
+        {
+          "id": "truenorth-flower-013-var5",
+          "size_weight": "4.2g",
+          "price": 42,
+          "original_price": 42,
+          "thc_percentage": 22.77,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 22.77,
+          "inventory_level": 10,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.9,
+            "limonene": 0.65,
+            "pinene": 0.46,
+            "caryophyllene": 0.52,
+            "linalool": 0,
+            "humulene": 0.06,
+            "terpinolene": 0,
+            "ocimene": 0.08
+          }
+        },
+        {
+          "id": "truenorth-flower-013-var6",
+          "size_weight": "7g",
+          "price": 65,
+          "original_price": 65,
+          "thc_percentage": 22.77,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 22.77,
+          "inventory_level": 19,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.02,
+            "limonene": 0.8,
+            "pinene": 0.16,
+            "caryophyllene": 0.36,
+            "linalool": 0,
+            "humulene": 0.11,
+            "terpinolene": 0,
+            "ocimene": 0.12
+          }
+        },
+        {
+          "id": "truenorth-flower-013-var7",
+          "size_weight": "8.4g",
+          "price": 78,
+          "original_price": 78,
+          "thc_percentage": 22.77,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 22.77,
+          "inventory_level": 11,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.17,
+            "limonene": 0.74,
+            "pinene": 0.54,
+            "caryophyllene": 0.54,
+            "linalool": 0,
+            "humulene": 0.16,
+            "terpinolene": 0,
+            "ocimene": 0.15
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-flower-014",
+      "name": "Mad Honey",
+      "brand": "1889 Farms",
+      "category": "flower",
+      "subcategory": "premium",
+      "description": "Sativa with 22.41% THC and 0.03% CBD",
+      "image_url": "https://images.dutchie.com/bdadf97eea2dc34ffb131dc1d45c9dc4?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "sativa",
+      "variants": [
+        {
+          "id": "truenorth-flower-014-var1",
+          "size_weight": "1g",
+          "price": 11,
+          "original_price": 11,
+          "thc_percentage": 22.41,
+          "cbd_percentage": 0.03,
+          "total_cannabinoids": 22.44,
+          "inventory_level": 21,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.83,
+            "pinene": 0.96,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.29,
+            "terpinolene": 0.32,
+            "ocimene": 0.14
+          }
+        },
+        {
+          "id": "truenorth-flower-014-var2",
+          "size_weight": "1.2g",
+          "price": 13.2,
+          "original_price": 13.2,
+          "thc_percentage": 22.41,
+          "cbd_percentage": 0.03,
+          "total_cannabinoids": 22.44,
+          "inventory_level": 16,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.97,
+            "pinene": 0.85,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.07,
+            "terpinolene": 0.12,
+            "ocimene": 0.11
+          }
+        },
+        {
+          "id": "truenorth-flower-014-var3",
+          "size_weight": "2g",
+          "price": 22,
+          "original_price": 22,
+          "thc_percentage": 22.41,
+          "cbd_percentage": 0.03,
+          "total_cannabinoids": 22.44,
+          "inventory_level": 6,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 1.2,
+            "pinene": 0.57,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.13,
+            "terpinolene": 0.09,
+            "ocimene": 0.14
+          }
+        },
+        {
+          "id": "truenorth-flower-014-var4",
+          "size_weight": "3.5g",
+          "price": 35,
+          "original_price": 35,
+          "thc_percentage": 22.41,
+          "cbd_percentage": 0.03,
+          "total_cannabinoids": 22.44,
+          "inventory_level": 17,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 1.26,
+            "pinene": 0.58,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.03,
+            "terpinolene": 0.27,
+            "ocimene": 0.04
+          }
+        },
+        {
+          "id": "truenorth-flower-014-var5",
+          "size_weight": "4.2g",
+          "price": 42,
+          "original_price": 42,
+          "thc_percentage": 22.41,
+          "cbd_percentage": 0.03,
+          "total_cannabinoids": 22.44,
+          "inventory_level": 13,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 1.13,
+            "pinene": 0.85,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.18,
+            "terpinolene": 0.12,
+            "ocimene": 0.09
+          }
+        },
+        {
+          "id": "truenorth-flower-014-var6",
+          "size_weight": "7g",
+          "price": 65,
+          "original_price": 65,
+          "thc_percentage": 22.41,
+          "cbd_percentage": 0.03,
+          "total_cannabinoids": 22.44,
+          "inventory_level": 13,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.31,
+            "pinene": 0.76,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.25,
+            "terpinolene": 0.11,
+            "ocimene": 0.09
+          }
+        },
+        {
+          "id": "truenorth-flower-014-var7",
+          "size_weight": "8.4g",
+          "price": 78,
+          "original_price": 78,
+          "thc_percentage": 22.41,
+          "cbd_percentage": 0.03,
+          "total_cannabinoids": 22.44,
+          "inventory_level": 8,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 1.18,
+            "pinene": 0.78,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.12,
+            "terpinolene": 0.19,
+            "ocimene": 0.06
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-flower-015",
+      "name": "Mandarin Cookies",
+      "brand": "Dakota Green",
+      "category": "flower",
+      "subcategory": "premium",
+      "description": "Sativa with 21.7% THC and 0.06% CBD",
+      "image_url": "https://images.dutchie.com/a849f66d64fb1b82e81c2ed9ebbcdc9d?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "sativa",
+      "variants": [
+        {
+          "id": "truenorth-flower-015-var1",
+          "size_weight": "1g",
+          "price": 11,
+          "original_price": 11,
+          "thc_percentage": 21.7,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 21.759999999999998,
+          "inventory_level": 22,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.29,
+            "pinene": 0.66,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.03,
+            "terpinolene": 0.04,
+            "ocimene": 0.09
+          }
+        },
+        {
+          "id": "truenorth-flower-015-var2",
+          "size_weight": "1.2g",
+          "price": 13.2,
+          "original_price": 13.2,
+          "thc_percentage": 21.7,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 21.759999999999998,
+          "inventory_level": 13,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 1,
+            "pinene": 0.28,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.3,
+            "terpinolene": 0.27,
+            "ocimene": 0.11
+          }
+        },
+        {
+          "id": "truenorth-flower-015-var3",
+          "size_weight": "2g",
+          "price": 22,
+          "original_price": 22,
+          "thc_percentage": 21.7,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 21.759999999999998,
+          "inventory_level": 14,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.55,
+            "pinene": 0.9,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.15,
+            "terpinolene": 0.1,
+            "ocimene": 0.15
+          }
+        },
+        {
+          "id": "truenorth-flower-015-var4",
+          "size_weight": "3.5g",
+          "price": 35,
+          "original_price": 35,
+          "thc_percentage": 21.7,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 21.759999999999998,
+          "inventory_level": 17,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 1.31,
+            "pinene": 0.79,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.23,
+            "terpinolene": 0.27,
+            "ocimene": 0.01
+          }
+        },
+        {
+          "id": "truenorth-flower-015-var5",
+          "size_weight": "4.2g",
+          "price": 42,
+          "original_price": 42,
+          "thc_percentage": 21.7,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 21.759999999999998,
+          "inventory_level": 8,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.92,
+            "pinene": 0.81,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.15,
+            "terpinolene": 0.12,
+            "ocimene": 0.06
+          }
+        },
+        {
+          "id": "truenorth-flower-015-var6",
+          "size_weight": "7g",
+          "price": 65,
+          "original_price": 65,
+          "thc_percentage": 21.7,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 21.759999999999998,
+          "inventory_level": 5,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.76,
+            "pinene": 0.95,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.31,
+            "terpinolene": 0.28,
+            "ocimene": 0.11
+          }
+        },
+        {
+          "id": "truenorth-flower-015-var7",
+          "size_weight": "8.4g",
+          "price": 78,
+          "original_price": 78,
+          "thc_percentage": 21.7,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 21.759999999999998,
+          "inventory_level": 5,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.62,
+            "pinene": 0.37,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.18,
+            "terpinolene": 0.27,
+            "ocimene": 0.18
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-flower-016",
+      "name": "Rollupz",
+      "brand": "DNG",
+      "category": "flower",
+      "subcategory": "premium",
+      "description": "Hybrid with 25.85% THC and 0.03% CBD",
+      "image_url": "https://images.dutchie.com/43c3d64eb229ed7cf1a671ef5b3fa38a?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-flower-016-var1",
+          "size_weight": "1g",
+          "price": 11,
+          "original_price": 11,
+          "thc_percentage": 25.85,
+          "cbd_percentage": 0.03,
+          "total_cannabinoids": 25.880000000000003,
+          "inventory_level": 17,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.47,
+            "limonene": 0.55,
+            "pinene": 0.63,
+            "caryophyllene": 0.43,
+            "linalool": 0,
+            "humulene": 0.08,
+            "terpinolene": 0,
+            "ocimene": 0.06
+          }
+        },
+        {
+          "id": "truenorth-flower-016-var2",
+          "size_weight": "1.2g",
+          "price": 13.2,
+          "original_price": 13.2,
+          "thc_percentage": 25.85,
+          "cbd_percentage": 0.03,
+          "total_cannabinoids": 25.880000000000003,
+          "inventory_level": 8,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.33,
+            "limonene": 0.2,
+            "pinene": 0.18,
+            "caryophyllene": 0.24,
+            "linalool": 0,
+            "humulene": 0.13,
+            "terpinolene": 0,
+            "ocimene": 0.08
+          }
+        },
+        {
+          "id": "truenorth-flower-016-var3",
+          "size_weight": "2g",
+          "price": 22,
+          "original_price": 22,
+          "thc_percentage": 25.85,
+          "cbd_percentage": 0.03,
+          "total_cannabinoids": 25.880000000000003,
+          "inventory_level": 14,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.38,
+            "limonene": 0.74,
+            "pinene": 0.49,
+            "caryophyllene": 0.45,
+            "linalool": 0,
+            "humulene": 0.05,
+            "terpinolene": 0,
+            "ocimene": 0.04
+          }
+        },
+        {
+          "id": "truenorth-flower-016-var4",
+          "size_weight": "3.5g",
+          "price": 35,
+          "original_price": 35,
+          "thc_percentage": 25.85,
+          "cbd_percentage": 0.03,
+          "total_cannabinoids": 25.880000000000003,
+          "inventory_level": 18,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.17,
+            "limonene": 0.38,
+            "pinene": 0.31,
+            "caryophyllene": 0.17,
+            "linalool": 0,
+            "humulene": 0.03,
+            "terpinolene": 0,
+            "ocimene": 0.18
+          }
+        },
+        {
+          "id": "truenorth-flower-016-var5",
+          "size_weight": "4.2g",
+          "price": 42,
+          "original_price": 42,
+          "thc_percentage": 25.85,
+          "cbd_percentage": 0.03,
+          "total_cannabinoids": 25.880000000000003,
+          "inventory_level": 11,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.33,
+            "limonene": 0.27,
+            "pinene": 0.59,
+            "caryophyllene": 0.19,
+            "linalool": 0,
+            "humulene": 0.18,
+            "terpinolene": 0,
+            "ocimene": 0.09
+          }
+        },
+        {
+          "id": "truenorth-flower-016-var6",
+          "size_weight": "7g",
+          "price": 65,
+          "original_price": 65,
+          "thc_percentage": 25.85,
+          "cbd_percentage": 0.03,
+          "total_cannabinoids": 25.880000000000003,
+          "inventory_level": 7,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.13,
+            "limonene": 0.13,
+            "pinene": 0.62,
+            "caryophyllene": 0.39,
+            "linalool": 0,
+            "humulene": 0.22,
+            "terpinolene": 0,
+            "ocimene": 0.16
+          }
+        },
+        {
+          "id": "truenorth-flower-016-var7",
+          "size_weight": "8.4g",
+          "price": 78,
+          "original_price": 78,
+          "thc_percentage": 25.85,
+          "cbd_percentage": 0.03,
+          "total_cannabinoids": 25.880000000000003,
+          "inventory_level": 9,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.75,
+            "limonene": 0.52,
+            "pinene": 0.52,
+            "caryophyllene": 0.11,
+            "linalool": 0,
+            "humulene": 0.19,
+            "terpinolene": 0,
+            "ocimene": 0.2
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-flower-017",
+      "name": "Sherb Cream Pie",
+      "brand": "Pure Bliss",
+      "category": "flower",
+      "subcategory": "premium",
+      "description": "Indica with 24.69% THC",
+      "image_url": "https://images.dutchie.com/6b134b34fdf80e14d60c737c981f018d?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "indica",
+      "variants": [
+        {
+          "id": "truenorth-flower-017-var1",
+          "size_weight": "1g",
+          "price": 11,
+          "original_price": 11,
+          "thc_percentage": 24.69,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 24.69,
+          "inventory_level": 8,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.63,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.63,
+            "linalool": 0.43,
+            "humulene": 0.06,
+            "terpinolene": 0,
+            "ocimene": 0.13
+          }
+        },
+        {
+          "id": "truenorth-flower-017-var2",
+          "size_weight": "2g",
+          "price": 22,
+          "original_price": 22,
+          "thc_percentage": 24.69,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 24.69,
+          "inventory_level": 11,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.42,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.37,
+            "linalool": 0.54,
+            "humulene": 0.24,
+            "terpinolene": 0,
+            "ocimene": 0.19
+          }
+        },
+        {
+          "id": "truenorth-flower-017-var3",
+          "size_weight": "3.5g",
+          "price": 35,
+          "original_price": 35,
+          "thc_percentage": 24.69,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 24.69,
+          "inventory_level": 24,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.72,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.11,
+            "linalool": 0.36,
+            "humulene": 0.3,
+            "terpinolene": 0,
+            "ocimene": 0.19
+          }
+        },
+        {
+          "id": "truenorth-flower-017-var4",
+          "size_weight": "7g",
+          "price": 65,
+          "original_price": 65,
+          "thc_percentage": 24.69,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 24.69,
+          "inventory_level": 23,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.6,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.38,
+            "linalool": 0.53,
+            "humulene": 0.1,
+            "terpinolene": 0,
+            "ocimene": 0.09
+          }
+        },
+        {
+          "id": "truenorth-flower-017-var5",
+          "size_weight": "14g",
+          "price": 120,
+          "original_price": 120,
+          "thc_percentage": 24.69,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 24.69,
+          "inventory_level": 14,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.26,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.74,
+            "linalool": 0.18,
+            "humulene": 0.24,
+            "terpinolene": 0,
+            "ocimene": 0.17
+          }
+        },
+        {
+          "id": "truenorth-flower-017-var6",
+          "size_weight": "28g",
+          "price": 210,
+          "original_price": 210,
+          "thc_percentage": 24.69,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 24.69,
+          "inventory_level": 9,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.89,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.25,
+            "linalool": 0.18,
+            "humulene": 0.02,
+            "terpinolene": 0,
+            "ocimene": 0.07
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-flower-018",
+      "name": "Sour Diesel BX2",
+      "brand": "DNG",
+      "category": "flower",
+      "subcategory": "premium",
+      "description": "Hybrid with 22.1% THC and 0.07% CBD",
+      "image_url": "https://images.dutchie.com/62e9568c030e354ceef1e649de30a8a5?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-flower-018-var1",
+          "size_weight": "1g",
+          "price": 11,
+          "original_price": 11,
+          "thc_percentage": 22.1,
+          "cbd_percentage": 0.07,
+          "total_cannabinoids": 22.17,
+          "inventory_level": 11,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.12,
+            "limonene": 0.52,
+            "pinene": 0.24,
+            "caryophyllene": 0.22,
+            "linalool": 0,
+            "humulene": 0.22,
+            "terpinolene": 0,
+            "ocimene": 0.14
+          }
+        },
+        {
+          "id": "truenorth-flower-018-var2",
+          "size_weight": "1.2g",
+          "price": 13.2,
+          "original_price": 13.2,
+          "thc_percentage": 22.1,
+          "cbd_percentage": 0.07,
+          "total_cannabinoids": 22.17,
+          "inventory_level": 13,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.65,
+            "limonene": 0.63,
+            "pinene": 0.53,
+            "caryophyllene": 0.3,
+            "linalool": 0,
+            "humulene": 0.07,
+            "terpinolene": 0,
+            "ocimene": 0.2
+          }
+        },
+        {
+          "id": "truenorth-flower-018-var3",
+          "size_weight": "2g",
+          "price": 22,
+          "original_price": 22,
+          "thc_percentage": 22.1,
+          "cbd_percentage": 0.07,
+          "total_cannabinoids": 22.17,
+          "inventory_level": 11,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.63,
+            "limonene": 0.23,
+            "pinene": 0.43,
+            "caryophyllene": 0.48,
+            "linalool": 0,
+            "humulene": 0.04,
+            "terpinolene": 0,
+            "ocimene": 0.11
+          }
+        },
+        {
+          "id": "truenorth-flower-018-var4",
+          "size_weight": "3.5g",
+          "price": 35,
+          "original_price": 35,
+          "thc_percentage": 22.1,
+          "cbd_percentage": 0.07,
+          "total_cannabinoids": 22.17,
+          "inventory_level": 7,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.2,
+            "limonene": 0.21,
+            "pinene": 0.26,
+            "caryophyllene": 0.13,
+            "linalool": 0,
+            "humulene": 0.22,
+            "terpinolene": 0,
+            "ocimene": 0.13
+          }
+        },
+        {
+          "id": "truenorth-flower-018-var5",
+          "size_weight": "4.2g",
+          "price": 42,
+          "original_price": 42,
+          "thc_percentage": 22.1,
+          "cbd_percentage": 0.07,
+          "total_cannabinoids": 22.17,
+          "inventory_level": 7,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.79,
+            "limonene": 0.89,
+            "pinene": 0.65,
+            "caryophyllene": 0.35,
+            "linalool": 0,
+            "humulene": 0.24,
+            "terpinolene": 0,
+            "ocimene": 0.06
+          }
+        },
+        {
+          "id": "truenorth-flower-018-var6",
+          "size_weight": "7g",
+          "price": 65,
+          "original_price": 65,
+          "thc_percentage": 22.1,
+          "cbd_percentage": 0.07,
+          "total_cannabinoids": 22.17,
+          "inventory_level": 12,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.24,
+            "limonene": 0.67,
+            "pinene": 0.43,
+            "caryophyllene": 0.4,
+            "linalool": 0,
+            "humulene": 0.06,
+            "terpinolene": 0,
+            "ocimene": 0.02
+          }
+        },
+        {
+          "id": "truenorth-flower-018-var7",
+          "size_weight": "8.4g",
+          "price": 78,
+          "original_price": 78,
+          "thc_percentage": 22.1,
+          "cbd_percentage": 0.07,
+          "total_cannabinoids": 22.17,
+          "inventory_level": 8,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.86,
+            "limonene": 0.16,
+            "pinene": 0.53,
+            "caryophyllene": 0.31,
+            "linalool": 0,
+            "humulene": 0.28,
+            "terpinolene": 0,
+            "ocimene": 0.1
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-flower-019",
+      "name": "Black Roze",
+      "brand": "Garden Valley",
+      "category": "flower",
+      "subcategory": "premium",
+      "description": "Indica with 26.74% THC and 0.07% CBD",
+      "image_url": "https://images.dutchie.com/1c6d2c0fdd67f25aa399b72562234d98?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "indica",
+      "variants": [
+        {
+          "id": "truenorth-flower-019-var1",
+          "size_weight": "1g",
+          "price": 12,
+          "original_price": 12,
+          "thc_percentage": 26.74,
+          "cbd_percentage": 0.07,
+          "total_cannabinoids": 26.81,
+          "inventory_level": 5,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.71,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.82,
+            "linalool": 0.54,
+            "humulene": 0.25,
+            "terpinolene": 0,
+            "ocimene": 0.12
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-flower-020",
+      "name": "Friendly Fire",
+      "brand": "Big Sioux Bud",
+      "category": "flower",
+      "subcategory": "premium",
+      "description": "Sativa with 24.12% THC and 0.06% CBD",
+      "image_url": "https://images.dutchie.com/b92f52f56a25073328965086e785b681?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "sativa",
+      "variants": [
+        {
+          "id": "truenorth-flower-020-var1",
+          "size_weight": "1g",
+          "price": 12,
+          "original_price": 12,
+          "thc_percentage": 24.12,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 24.18,
+          "inventory_level": 19,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.65,
+            "pinene": 0.64,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.26,
+            "terpinolene": 0.28,
+            "ocimene": 0.18
+          }
+        },
+        {
+          "id": "truenorth-flower-020-var2",
+          "size_weight": "1.2g",
+          "price": 14.4,
+          "original_price": 14.4,
+          "thc_percentage": 24.12,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 24.18,
+          "inventory_level": 7,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.35,
+            "pinene": 0.77,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.11,
+            "terpinolene": 0.11,
+            "ocimene": 0.09
+          }
+        },
+        {
+          "id": "truenorth-flower-020-var3",
+          "size_weight": "2g",
+          "price": 24,
+          "original_price": 24,
+          "thc_percentage": 24.12,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 24.18,
+          "inventory_level": 19,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.78,
+            "pinene": 1,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.2,
+            "terpinolene": 0.09,
+            "ocimene": 0.11
+          }
+        },
+        {
+          "id": "truenorth-flower-020-var4",
+          "size_weight": "3.5g",
+          "price": 40,
+          "original_price": 40,
+          "thc_percentage": 24.12,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 24.18,
+          "inventory_level": 13,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 1.06,
+            "pinene": 0.32,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.23,
+            "terpinolene": 0.18,
+            "ocimene": 0.17
+          }
+        },
+        {
+          "id": "truenorth-flower-020-var5",
+          "size_weight": "4.2g",
+          "price": 48,
+          "original_price": 48,
+          "thc_percentage": 24.12,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 24.18,
+          "inventory_level": 12,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 1.39,
+            "pinene": 1,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.17,
+            "terpinolene": 0.28,
+            "ocimene": 0.05
+          }
+        },
+        {
+          "id": "truenorth-flower-020-var6",
+          "size_weight": "7g",
+          "price": 75,
+          "original_price": 75,
+          "thc_percentage": 24.12,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 24.18,
+          "inventory_level": 6,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 1.3,
+            "pinene": 0.25,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.29,
+            "terpinolene": 0.08,
+            "ocimene": 0.09
+          }
+        },
+        {
+          "id": "truenorth-flower-020-var7",
+          "size_weight": "8.4g",
+          "price": 90,
+          "original_price": 90,
+          "thc_percentage": 24.12,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 24.18,
+          "inventory_level": 7,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.97,
+            "pinene": 0.67,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.13,
+            "terpinolene": 0.24,
+            "ocimene": 0.18
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-flower-021",
+      "name": "Modified Bananas",
+      "brand": "DNG",
+      "category": "flower",
+      "subcategory": "premium",
+      "description": "Sativa with 27.14% THC and 0.08% CBD",
+      "image_url": "https://images.dutchie.com/ba82112dcafec987dbbda8a07761f962?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "sativa",
+      "variants": [
+        {
+          "id": "truenorth-flower-021-var1",
+          "size_weight": "1g",
+          "price": 12,
+          "original_price": 12,
+          "thc_percentage": 27.14,
+          "cbd_percentage": 0.08,
+          "total_cannabinoids": 27.22,
+          "inventory_level": 9,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 1.28,
+            "pinene": 0.71,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.3,
+            "terpinolene": 0.03,
+            "ocimene": 0.16
+          }
+        },
+        {
+          "id": "truenorth-flower-021-var2",
+          "size_weight": "1.2g",
+          "price": 14.4,
+          "original_price": 14.4,
+          "thc_percentage": 27.14,
+          "cbd_percentage": 0.08,
+          "total_cannabinoids": 27.22,
+          "inventory_level": 9,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.66,
+            "pinene": 0.79,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.05,
+            "terpinolene": 0.19,
+            "ocimene": 0.16
+          }
+        },
+        {
+          "id": "truenorth-flower-021-var3",
+          "size_weight": "2g",
+          "price": 24,
+          "original_price": 24,
+          "thc_percentage": 27.14,
+          "cbd_percentage": 0.08,
+          "total_cannabinoids": 27.22,
+          "inventory_level": 22,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 1.17,
+            "pinene": 0.98,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.05,
+            "terpinolene": 0.11,
+            "ocimene": 0.21
+          }
+        },
+        {
+          "id": "truenorth-flower-021-var4",
+          "size_weight": "3.5g",
+          "price": 40,
+          "original_price": 40,
+          "thc_percentage": 27.14,
+          "cbd_percentage": 0.08,
+          "total_cannabinoids": 27.22,
+          "inventory_level": 22,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 1.04,
+            "pinene": 0.9,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.11,
+            "terpinolene": 0.31,
+            "ocimene": 0.11
+          }
+        },
+        {
+          "id": "truenorth-flower-021-var5",
+          "size_weight": "4.2g",
+          "price": 48,
+          "original_price": 48,
+          "thc_percentage": 27.14,
+          "cbd_percentage": 0.08,
+          "total_cannabinoids": 27.22,
+          "inventory_level": 22,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.58,
+            "pinene": 0.97,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.05,
+            "terpinolene": 0.06,
+            "ocimene": 0.04
+          }
+        },
+        {
+          "id": "truenorth-flower-021-var6",
+          "size_weight": "7g",
+          "price": 75,
+          "original_price": 75,
+          "thc_percentage": 27.14,
+          "cbd_percentage": 0.08,
+          "total_cannabinoids": 27.22,
+          "inventory_level": 7,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.45,
+            "pinene": 0.58,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.17,
+            "terpinolene": 0.31,
+            "ocimene": 0.14
+          }
+        },
+        {
+          "id": "truenorth-flower-021-var7",
+          "size_weight": "8.4g",
+          "price": 90,
+          "original_price": 90,
+          "thc_percentage": 27.14,
+          "cbd_percentage": 0.08,
+          "total_cannabinoids": 27.22,
+          "inventory_level": 8,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.32,
+            "pinene": 0.61,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.04,
+            "terpinolene": 0.25,
+            "ocimene": 0.08
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-flower-022",
+      "name": "Super Sour Saunders x Sour Diesel BX2",
+      "brand": "DNG",
+      "category": "flower",
+      "subcategory": "premium",
+      "description": "Hybrid with 23.12% THC",
+      "image_url": "https://images.dutchie.com/301a97e00f78c7791fd862882dfa4bd0?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-flower-022-var1",
+          "size_weight": "1g",
+          "price": 12,
+          "original_price": 12,
+          "thc_percentage": 23.12,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 23.12,
+          "inventory_level": 13,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.8,
+            "limonene": 0.13,
+            "pinene": 0.12,
+            "caryophyllene": 0.3,
+            "linalool": 0,
+            "humulene": 0.09,
+            "terpinolene": 0,
+            "ocimene": 0.18
+          }
+        },
+        {
+          "id": "truenorth-flower-022-var2",
+          "size_weight": "1.2g",
+          "price": 14.4,
+          "original_price": 14.4,
+          "thc_percentage": 23.12,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 23.12,
+          "inventory_level": 6,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.62,
+            "limonene": 0.21,
+            "pinene": 0.32,
+            "caryophyllene": 0.42,
+            "linalool": 0,
+            "humulene": 0.1,
+            "terpinolene": 0,
+            "ocimene": 0.15
+          }
+        },
+        {
+          "id": "truenorth-flower-022-var3",
+          "size_weight": "2g",
+          "price": 24,
+          "original_price": 24,
+          "thc_percentage": 23.12,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 23.12,
+          "inventory_level": 23,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.05,
+            "limonene": 0.72,
+            "pinene": 0.13,
+            "caryophyllene": 0.19,
+            "linalool": 0,
+            "humulene": 0.3,
+            "terpinolene": 0,
+            "ocimene": 0.04
+          }
+        },
+        {
+          "id": "truenorth-flower-022-var4",
+          "size_weight": "3.5g",
+          "price": 40,
+          "original_price": 40,
+          "thc_percentage": 23.12,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 23.12,
+          "inventory_level": 22,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.51,
+            "limonene": 0.37,
+            "pinene": 0.48,
+            "caryophyllene": 0.58,
+            "linalool": 0,
+            "humulene": 0.14,
+            "terpinolene": 0,
+            "ocimene": 0.14
+          }
+        },
+        {
+          "id": "truenorth-flower-022-var5",
+          "size_weight": "4.2g",
+          "price": 48,
+          "original_price": 48,
+          "thc_percentage": 23.12,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 23.12,
+          "inventory_level": 14,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.73,
+            "limonene": 0.64,
+            "pinene": 0.41,
+            "caryophyllene": 0.53,
+            "linalool": 0,
+            "humulene": 0.22,
+            "terpinolene": 0,
+            "ocimene": 0.13
+          }
+        },
+        {
+          "id": "truenorth-flower-022-var6",
+          "size_weight": "7g",
+          "price": 75,
+          "original_price": 75,
+          "thc_percentage": 23.12,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 23.12,
+          "inventory_level": 21,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.52,
+            "limonene": 0.1,
+            "pinene": 0.13,
+            "caryophyllene": 0.48,
+            "linalool": 0,
+            "humulene": 0.04,
+            "terpinolene": 0,
+            "ocimene": 0.13
+          }
+        },
+        {
+          "id": "truenorth-flower-022-var7",
+          "size_weight": "8.4g",
+          "price": 90,
+          "original_price": 90,
+          "thc_percentage": 23.12,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 23.12,
+          "inventory_level": 15,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.71,
+            "limonene": 0.8,
+            "pinene": 0.52,
+            "caryophyllene": 0.5,
+            "linalool": 0,
+            "humulene": 0.03,
+            "terpinolene": 0,
+            "ocimene": 0.03
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-flower-023",
+      "name": "Redneck Wedding",
+      "brand": "1889 Farms",
+      "category": "flower",
+      "subcategory": "premium",
+      "description": "Indica with 24.81% THC and 0.06% CBD",
+      "image_url": "https://images.dutchie.com/afb576afc40470f7353bcfb35fed7f1c?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "indica",
+      "variants": [
+        {
+          "id": "truenorth-flower-023-var1",
+          "size_weight": "1g",
+          "price": 10.2,
+          "original_price": 10.2,
+          "thc_percentage": 24.81,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 24.869999999999997,
+          "inventory_level": 5,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.7,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.5,
+            "linalool": 0.18,
+            "humulene": 0.07,
+            "terpinolene": 0,
+            "ocimene": 0.07
+          }
+        },
+        {
+          "id": "truenorth-flower-023-var2",
+          "size_weight": "1.2g",
+          "price": 12.24,
+          "original_price": 12.24,
+          "thc_percentage": 24.81,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 24.869999999999997,
+          "inventory_level": 18,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.98,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.71,
+            "linalool": 0.46,
+            "humulene": 0.28,
+            "terpinolene": 0,
+            "ocimene": 0.09
+          }
+        },
+        {
+          "id": "truenorth-flower-023-var3",
+          "size_weight": "2g",
+          "price": 20.4,
+          "original_price": 20.4,
+          "thc_percentage": 24.81,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 24.869999999999997,
+          "inventory_level": 7,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.64,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.27,
+            "linalool": 0.51,
+            "humulene": 0.2,
+            "terpinolene": 0,
+            "ocimene": 0.03
+          }
+        },
+        {
+          "id": "truenorth-flower-023-var4",
+          "size_weight": "3.5g",
+          "price": 34,
+          "original_price": 34,
+          "thc_percentage": 24.81,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 24.869999999999997,
+          "inventory_level": 13,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.59,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.77,
+            "linalool": 0.43,
+            "humulene": 0.31,
+            "terpinolene": 0,
+            "ocimene": 0.05
+          }
+        },
+        {
+          "id": "truenorth-flower-023-var5",
+          "size_weight": "4.2g",
+          "price": 40.8,
+          "original_price": 40.8,
+          "thc_percentage": 24.81,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 24.869999999999997,
+          "inventory_level": 7,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.94,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.29,
+            "linalool": 0.2,
+            "humulene": 0.08,
+            "terpinolene": 0,
+            "ocimene": 0.03
+          }
+        },
+        {
+          "id": "truenorth-flower-023-var6",
+          "size_weight": "7g",
+          "price": 63.75,
+          "original_price": 63.75,
+          "thc_percentage": 24.81,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 24.869999999999997,
+          "inventory_level": 16,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.69,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.56,
+            "linalool": 0.2,
+            "humulene": 0.22,
+            "terpinolene": 0,
+            "ocimene": 0.12
+          }
+        },
+        {
+          "id": "truenorth-flower-023-var7",
+          "size_weight": "8.4g",
+          "price": 76.5,
+          "original_price": 76.5,
+          "thc_percentage": 24.81,
+          "cbd_percentage": 0.06,
+          "total_cannabinoids": 24.869999999999997,
+          "inventory_level": 8,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.88,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.37,
+            "linalool": 0.26,
+            "humulene": 0.18,
+            "terpinolene": 0,
+            "ocimene": 0.11
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-flower-024",
+      "name": "Wagyu",
+      "brand": "1889 Farms",
+      "category": "flower",
+      "subcategory": "premium",
+      "description": "Indica with 25.94% THC and 0.07% CBD",
+      "image_url": "https://images.dutchie.com/bc796652a76189d36e93f9c55e061ef4?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "indica",
+      "variants": [
+        {
+          "id": "truenorth-flower-024-var1",
+          "size_weight": "1g",
+          "price": 10.2,
+          "original_price": 10.2,
+          "thc_percentage": 25.94,
+          "cbd_percentage": 0.07,
+          "total_cannabinoids": 26.01,
+          "inventory_level": 13,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.84,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.19,
+            "linalool": 0.43,
+            "humulene": 0.14,
+            "terpinolene": 0,
+            "ocimene": 0.1
+          }
+        },
+        {
+          "id": "truenorth-flower-024-var2",
+          "size_weight": "1.2g",
+          "price": 12.24,
+          "original_price": 12.24,
+          "thc_percentage": 25.94,
+          "cbd_percentage": 0.07,
+          "total_cannabinoids": 26.01,
+          "inventory_level": 17,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.66,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.15,
+            "linalool": 0.46,
+            "humulene": 0.29,
+            "terpinolene": 0,
+            "ocimene": 0.17
+          }
+        },
+        {
+          "id": "truenorth-flower-024-var3",
+          "size_weight": "2g",
+          "price": 20.4,
+          "original_price": 20.4,
+          "thc_percentage": 25.94,
+          "cbd_percentage": 0.07,
+          "total_cannabinoids": 26.01,
+          "inventory_level": 8,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.96,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.53,
+            "linalool": 0.16,
+            "humulene": 0.09,
+            "terpinolene": 0,
+            "ocimene": 0.19
+          }
+        },
+        {
+          "id": "truenorth-flower-024-var4",
+          "size_weight": "3.5g",
+          "price": 34,
+          "original_price": 34,
+          "thc_percentage": 25.94,
+          "cbd_percentage": 0.07,
+          "total_cannabinoids": 26.01,
+          "inventory_level": 5,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.65,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.36,
+            "linalool": 0.38,
+            "humulene": 0.17,
+            "terpinolene": 0,
+            "ocimene": 0.18
+          }
+        },
+        {
+          "id": "truenorth-flower-024-var5",
+          "size_weight": "4.2g",
+          "price": 40.8,
+          "original_price": 40.8,
+          "thc_percentage": 25.94,
+          "cbd_percentage": 0.07,
+          "total_cannabinoids": 26.01,
+          "inventory_level": 14,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.18,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.38,
+            "linalool": 0.09,
+            "humulene": 0.23,
+            "terpinolene": 0,
+            "ocimene": 0.14
+          }
+        },
+        {
+          "id": "truenorth-flower-024-var6",
+          "size_weight": "7g",
+          "price": 63.75,
+          "original_price": 63.75,
+          "thc_percentage": 25.94,
+          "cbd_percentage": 0.07,
+          "total_cannabinoids": 26.01,
+          "inventory_level": 21,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.93,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.65,
+            "linalool": 0.09,
+            "humulene": 0.27,
+            "terpinolene": 0,
+            "ocimene": 0.05
+          }
+        },
+        {
+          "id": "truenorth-flower-024-var7",
+          "size_weight": "8.4g",
+          "price": 76.5,
+          "original_price": 76.5,
+          "thc_percentage": 25.94,
+          "cbd_percentage": 0.07,
+          "total_cannabinoids": 26.01,
+          "inventory_level": 19,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.7,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.46,
+            "linalool": 0.17,
+            "humulene": 0.05,
+            "terpinolene": 0,
+            "ocimene": 0.1
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-flower-025",
+      "name": "Jealousy",
+      "brand": "Big Sioux Bud",
+      "category": "flower",
+      "subcategory": "premium",
+      "description": "Hybrid with 16.67% THC and 0.04% CBD",
+      "image_url": "https://images.dutchie.com/d2704c0844892d3e88e768c26534eb6e?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-flower-025-var1",
+          "size_weight": "3.5g",
+          "price": 15,
+          "original_price": 15,
+          "thc_percentage": 16.67,
+          "cbd_percentage": 0.04,
+          "total_cannabinoids": 16.71,
+          "inventory_level": 15,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.08,
+            "limonene": 0.56,
+            "pinene": 0.68,
+            "caryophyllene": 0.27,
+            "linalool": 0,
+            "humulene": 0.15,
+            "terpinolene": 0,
+            "ocimene": 0.11
+          }
+        },
+        {
+          "id": "truenorth-flower-025-var2",
+          "size_weight": "4.2g",
+          "price": 18,
+          "original_price": 18,
+          "thc_percentage": 16.67,
+          "cbd_percentage": 0.04,
+          "total_cannabinoids": 16.71,
+          "inventory_level": 11,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.28,
+            "limonene": 0.34,
+            "pinene": 0.49,
+            "caryophyllene": 0.33,
+            "linalool": 0,
+            "humulene": 0.05,
+            "terpinolene": 0,
+            "ocimene": 0.19
+          }
+        },
+        {
+          "id": "truenorth-flower-025-var3",
+          "size_weight": "7g",
+          "price": 25,
+          "original_price": 25,
+          "thc_percentage": 16.67,
+          "cbd_percentage": 0.04,
+          "total_cannabinoids": 16.71,
+          "inventory_level": 7,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.39,
+            "limonene": 0.66,
+            "pinene": 0.4,
+            "caryophyllene": 0.27,
+            "linalool": 0,
+            "humulene": 0.1,
+            "terpinolene": 0,
+            "ocimene": 0.12
+          }
+        },
+        {
+          "id": "truenorth-flower-025-var4",
+          "size_weight": "8.4g",
+          "price": 30,
+          "original_price": 30,
+          "thc_percentage": 16.67,
+          "cbd_percentage": 0.04,
+          "total_cannabinoids": 16.71,
+          "inventory_level": 6,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.24,
+            "limonene": 0.5,
+            "pinene": 0.21,
+            "caryophyllene": 0.59,
+            "linalool": 0,
+            "humulene": 0.09,
+            "terpinolene": 0,
+            "ocimene": 0.04
+          }
+        },
+        {
+          "id": "truenorth-flower-025-var5",
+          "size_weight": "14g",
+          "price": 45,
+          "original_price": 45,
+          "thc_percentage": 16.67,
+          "cbd_percentage": 0.04,
+          "total_cannabinoids": 16.71,
+          "inventory_level": 21,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.69,
+            "limonene": 0.18,
+            "pinene": 0.44,
+            "caryophyllene": 0.19,
+            "linalool": 0,
+            "humulene": 0.2,
+            "terpinolene": 0,
+            "ocimene": 0.08
+          }
+        },
+        {
+          "id": "truenorth-flower-025-var6",
+          "size_weight": "16.5g",
+          "price": 54,
+          "original_price": 54,
+          "thc_percentage": 16.67,
+          "cbd_percentage": 0.04,
+          "total_cannabinoids": 16.71,
+          "inventory_level": 6,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.48,
+            "limonene": 0.73,
+            "pinene": 0.66,
+            "caryophyllene": 0.37,
+            "linalool": 0,
+            "humulene": 0.22,
+            "terpinolene": 0,
+            "ocimene": 0.06
+          }
+        },
+        {
+          "id": "truenorth-flower-025-var7",
+          "size_weight": "28g",
+          "price": 80,
+          "original_price": 80,
+          "thc_percentage": 16.67,
+          "cbd_percentage": 0.04,
+          "total_cannabinoids": 16.71,
+          "inventory_level": 22,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.09,
+            "limonene": 0.86,
+            "pinene": 0.48,
+            "caryophyllene": 0.56,
+            "linalool": 0,
+            "humulene": 0.07,
+            "terpinolene": 0,
+            "ocimene": 0.11
+          }
+        },
+        {
+          "id": "truenorth-flower-025-var8",
+          "size_weight": "33.5g",
+          "price": 96,
+          "original_price": 96,
+          "thc_percentage": 16.67,
+          "cbd_percentage": 0.04,
+          "total_cannabinoids": 16.71,
+          "inventory_level": 22,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.22,
+            "limonene": 0.68,
+            "pinene": 0.38,
+            "caryophyllene": 0.5,
+            "linalool": 0,
+            "humulene": 0.05,
+            "terpinolene": 0,
+            "ocimene": 0.07
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-flower-026",
+      "name": "Soul Doctor (High CBD)",
+      "brand": "Dakota Green",
+      "category": "flower",
+      "subcategory": "premium",
+      "description": "Hybrid with 9.58% THC and 14.91% CBD",
+      "image_url": "https://images.dutchie.com/e4b472ed26f962899437effe4876bf03?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-flower-026-var1",
+          "size_weight": "3.5g",
+          "price": 12,
+          "original_price": 12,
+          "thc_percentage": 9.58,
+          "cbd_percentage": 14.91,
+          "total_cannabinoids": 24.490000000000002,
+          "inventory_level": 6,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.97,
+            "limonene": 0.34,
+            "pinene": 0.65,
+            "caryophyllene": 0.14,
+            "linalool": 0,
+            "humulene": 0.04,
+            "terpinolene": 0,
+            "ocimene": 0.21
+          }
+        },
+        {
+          "id": "truenorth-flower-026-var2",
+          "size_weight": "4.2g",
+          "price": 14.4,
+          "original_price": 14.4,
+          "thc_percentage": 9.58,
+          "cbd_percentage": 14.91,
+          "total_cannabinoids": 24.490000000000002,
+          "inventory_level": 5,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.71,
+            "limonene": 0.44,
+            "pinene": 0.69,
+            "caryophyllene": 0.49,
+            "linalool": 0,
+            "humulene": 0.13,
+            "terpinolene": 0,
+            "ocimene": 0.09
+          }
+        },
+        {
+          "id": "truenorth-flower-026-var3",
+          "size_weight": "7g",
+          "price": 22,
+          "original_price": 22,
+          "thc_percentage": 9.58,
+          "cbd_percentage": 14.91,
+          "total_cannabinoids": 24.490000000000002,
+          "inventory_level": 24,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.11,
+            "limonene": 0.89,
+            "pinene": 0.6,
+            "caryophyllene": 0.51,
+            "linalool": 0,
+            "humulene": 0.06,
+            "terpinolene": 0,
+            "ocimene": 0.14
+          }
+        },
+        {
+          "id": "truenorth-flower-026-var4",
+          "size_weight": "8.4g",
+          "price": 26.4,
+          "original_price": 26.4,
+          "thc_percentage": 9.58,
+          "cbd_percentage": 14.91,
+          "total_cannabinoids": 24.490000000000002,
+          "inventory_level": 24,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.56,
+            "limonene": 0.5,
+            "pinene": 0.28,
+            "caryophyllene": 0.53,
+            "linalool": 0,
+            "humulene": 0.29,
+            "terpinolene": 0,
+            "ocimene": 0.04
+          }
+        },
+        {
+          "id": "truenorth-flower-026-var5",
+          "size_weight": "14g",
+          "price": 40,
+          "original_price": 40,
+          "thc_percentage": 9.58,
+          "cbd_percentage": 14.91,
+          "total_cannabinoids": 24.490000000000002,
+          "inventory_level": 5,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.62,
+            "limonene": 0.76,
+            "pinene": 0.1,
+            "caryophyllene": 0.3,
+            "linalool": 0,
+            "humulene": 0.08,
+            "terpinolene": 0,
+            "ocimene": 0.16
+          }
+        },
+        {
+          "id": "truenorth-flower-026-var6",
+          "size_weight": "16.5g",
+          "price": 48,
+          "original_price": 48,
+          "thc_percentage": 9.58,
+          "cbd_percentage": 14.91,
+          "total_cannabinoids": 24.490000000000002,
+          "inventory_level": 17,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.78,
+            "limonene": 0.59,
+            "pinene": 0.19,
+            "caryophyllene": 0.15,
+            "linalool": 0,
+            "humulene": 0.1,
+            "terpinolene": 0,
+            "ocimene": 0.14
+          }
+        },
+        {
+          "id": "truenorth-flower-026-var7",
+          "size_weight": "28g",
+          "price": 70,
+          "original_price": 70,
+          "thc_percentage": 9.58,
+          "cbd_percentage": 14.91,
+          "total_cannabinoids": 24.490000000000002,
+          "inventory_level": 21,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.82,
+            "limonene": 0.34,
+            "pinene": 0.57,
+            "caryophyllene": 0.2,
+            "linalool": 0,
+            "humulene": 0.22,
+            "terpinolene": 0,
+            "ocimene": 0.15
+          }
+        },
+        {
+          "id": "truenorth-flower-026-var8",
+          "size_weight": "33.5g",
+          "price": 84,
+          "original_price": 84,
+          "thc_percentage": 9.58,
+          "cbd_percentage": 14.91,
+          "total_cannabinoids": 24.490000000000002,
+          "inventory_level": 6,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.23,
+            "limonene": 0.89,
+            "pinene": 0.63,
+            "caryophyllene": 0.49,
+            "linalool": 0,
+            "humulene": 0.18,
+            "terpinolene": 0,
+            "ocimene": 0.05
+          }
+        }
+      ]
+    }
+  ]
+}

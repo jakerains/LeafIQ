@@ -1,0 +1,107 @@
+{
+  "metadata": {
+    "format_version": "1.0",
+    "organization_id": "d85af8c9-0d4a-451c-bc25-8c669c71142e",
+    "timestamp": "2025-06-02T19:56:39.595Z",
+    "source_file": "true_north_tinctures.md",
+    "total_products": 3
+  },
+  "products": [
+    {
+      "id": "truenorth-tincture-001",
+      "name": "Dosed 605 Tincture - Indica",
+      "brand": "605 Cannabis",
+      "category": "tincture",
+      "description": "Indica with 247.37% THC and 0.03% CBD",
+      "image_url": "https://images.dutchie.com/848427d5c67d8e0fbbfcac4385679ff4?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "indica",
+      "variants": [
+        {
+          "id": "truenorth-tincture-001-var1",
+          "size_weight": "28g",
+          "price": 40,
+          "original_price": 40,
+          "thc_percentage": 247.37,
+          "cbd_percentage": 0.03,
+          "total_cannabinoids": 247.4,
+          "inventory_level": 17,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.11,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.89,
+            "linalool": 0.26,
+            "humulene": 0.13,
+            "terpinolene": 0,
+            "ocimene": 0.01
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-tincture-002",
+      "name": "Dosed 605 Tincture - Sativa",
+      "brand": "605 Cannabis",
+      "category": "tincture",
+      "description": "Sativa with 245.14% THC and 0.03% CBD",
+      "image_url": "https://images.dutchie.com/2de9f5c940a444569e0183e028370cf9?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "sativa",
+      "variants": [
+        {
+          "id": "truenorth-tincture-002-var1",
+          "size_weight": "28g",
+          "price": 40,
+          "original_price": 40,
+          "thc_percentage": 245.14,
+          "cbd_percentage": 0.03,
+          "total_cannabinoids": 245.17,
+          "inventory_level": 10,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 1.21,
+            "pinene": 0.3,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.23,
+            "terpinolene": 0.17,
+            "ocimene": 0.02
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-tincture-003",
+      "name": "THC Tincture - Indica",
+      "brand": "DNS",
+      "category": "tincture",
+      "description": "Indica with 465% THC",
+      "image_url": "https://images.dutchie.com/d717fbd76149bc80f8d86c5cdd4220ef?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "indica",
+      "variants": [
+        {
+          "id": "truenorth-tincture-003-var1",
+          "size_weight": "16.47g",
+          "price": 50,
+          "original_price": 50,
+          "thc_percentage": 465,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 465,
+          "inventory_level": 10,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.29,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.6,
+            "linalool": 0.36,
+            "humulene": 0.28,
+            "terpinolene": 0,
+            "ocimene": 0.09
+          }
+        }
+      ]
+    }
+  ]
+}

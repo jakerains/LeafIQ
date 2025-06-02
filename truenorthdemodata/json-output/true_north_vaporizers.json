@@ -1,0 +1,1661 @@
+{
+  "metadata": {
+    "format_version": "1.0",
+    "organization_id": "d85af8c9-0d4a-451c-bc25-8c669c71142e",
+    "timestamp": "2025-06-02T19:56:39.597Z",
+    "source_file": "true_north_vaporizers.md",
+    "total_products": 50
+  },
+  "products": [
+    {
+      "id": "truenorth-vaporizer-001",
+      "name": "Acapulco Gold Distillate",
+      "brand": "Big Sioux Extracts",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Sativa with 82.43% THC and 0.03% CBD",
+      "image_url": "https://images.dutchie.com/c2cdcd05062e79cf02a27f406a50db81?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "sativa",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-001-var1",
+          "size_weight": "1g",
+          "price": 55,
+          "original_price": 55,
+          "thc_percentage": 82.43,
+          "cbd_percentage": 0.03,
+          "total_cannabinoids": 82.46000000000001,
+          "inventory_level": 18,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.23,
+            "pinene": 0.92,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.07,
+            "terpinolene": 0.05,
+            "ocimene": 0.04
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-002",
+      "name": "Animal Tsunami - Distillate",
+      "brand": "Big Sioux Extracts",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Hybrid with 76.2% THC and 0.05% CBD",
+      "image_url": "https://images.dutchie.com/61cb61c40a4de4884d6f9ae823b38616?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-002-var1",
+          "size_weight": "1g",
+          "price": 55,
+          "original_price": 55,
+          "thc_percentage": 76.2,
+          "cbd_percentage": 0.05,
+          "total_cannabinoids": 76.25,
+          "inventory_level": 22,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.61,
+            "limonene": 0.37,
+            "pinene": 0.49,
+            "caryophyllene": 0.23,
+            "linalool": 0,
+            "humulene": 0.31,
+            "terpinolene": 0,
+            "ocimene": 0.21
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-003",
+      "name": "Lemon Cake - Distillate",
+      "brand": "Big Sioux Extracts",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Sativa with 69.75% THC and 0.05% CBD",
+      "image_url": "https://images.dutchie.com/551fa46c770a8b85d38c1af574760bd6?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "sativa",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-003-var1",
+          "size_weight": "1g",
+          "price": 55,
+          "original_price": 55,
+          "thc_percentage": 69.75,
+          "cbd_percentage": 0.05,
+          "total_cannabinoids": 69.8,
+          "inventory_level": 16,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 1.4,
+            "pinene": 0.96,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.18,
+            "terpinolene": 0.08,
+            "ocimene": 0.01
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-004",
+      "name": "Rainbow Beltz Distillate",
+      "brand": "Big Sioux Extracts",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Hybrid with 83.1% THC and 0.08% CBD",
+      "image_url": "https://images.dutchie.com/c2cdcd05062e79cf02a27f406a50db81?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-004-var1",
+          "size_weight": "1g",
+          "price": 55,
+          "original_price": 55,
+          "thc_percentage": 83.1,
+          "cbd_percentage": 0.08,
+          "total_cannabinoids": 83.17999999999999,
+          "inventory_level": 17,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.78,
+            "limonene": 0.51,
+            "pinene": 0.66,
+            "caryophyllene": 0.46,
+            "linalool": 0,
+            "humulene": 0.21,
+            "terpinolene": 0,
+            "ocimene": 0.16
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-005",
+      "name": "Super Boof - Distillate",
+      "brand": "Big Sioux Extracts",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Sativa with 85.79% THC and 0.04% CBD",
+      "image_url": "https://images.dutchie.com/820f535d52fd27e3c4228c9b2ac92d41?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "sativa",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-005-var1",
+          "size_weight": "1g",
+          "price": 55,
+          "original_price": 55,
+          "thc_percentage": 85.79,
+          "cbd_percentage": 0.04,
+          "total_cannabinoids": 85.83000000000001,
+          "inventory_level": 14,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.87,
+            "pinene": 0.7,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.2,
+            "terpinolene": 0.07,
+            "ocimene": 0.21
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-006",
+      "name": "Acapulco Gold Distillate Disposable",
+      "brand": "Big Sioux Extracts",
+      "category": "vaporizer",
+      "subcategory": "disposable",
+      "description": "Sativa with 82.43% THC and 0.03% CBD",
+      "image_url": "https://images.dutchie.com/64e9dd451a50a0273f32b1bf77b6c4a4?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "sativa",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-006-var1",
+          "size_weight": "1g",
+          "price": 60,
+          "original_price": 60,
+          "thc_percentage": 82.43,
+          "cbd_percentage": 0.03,
+          "total_cannabinoids": 82.46000000000001,
+          "inventory_level": 12,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.92,
+            "pinene": 0.92,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.04,
+            "terpinolene": 0.1,
+            "ocimene": 0.15
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-007",
+      "name": "Animal Tsunami - Distillate Disposable",
+      "brand": "Big Sioux Extracts",
+      "category": "vaporizer",
+      "subcategory": "disposable",
+      "description": "Hybrid with 76.2% THC and 0.05% CBD",
+      "image_url": "https://images.dutchie.com/64e9dd451a50a0273f32b1bf77b6c4a4?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-007-var1",
+          "size_weight": "1g",
+          "price": 60,
+          "original_price": 60,
+          "thc_percentage": 76.2,
+          "cbd_percentage": 0.05,
+          "total_cannabinoids": 76.25,
+          "inventory_level": 18,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.06,
+            "limonene": 0.86,
+            "pinene": 0.4,
+            "caryophyllene": 0.45,
+            "linalool": 0,
+            "humulene": 0.08,
+            "terpinolene": 0,
+            "ocimene": 0.13
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-008",
+      "name": "Rainbow Beltz Distillate Disposable",
+      "brand": "Big Sioux Extracts",
+      "category": "vaporizer",
+      "subcategory": "disposable",
+      "description": "Hybrid with 83.1% THC and 0.08% CBD",
+      "image_url": "https://images.dutchie.com/64e9dd451a50a0273f32b1bf77b6c4a4?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-008-var1",
+          "size_weight": "1g",
+          "price": 60,
+          "original_price": 60,
+          "thc_percentage": 83.1,
+          "cbd_percentage": 0.08,
+          "total_cannabinoids": 83.17999999999999,
+          "inventory_level": 19,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.43,
+            "limonene": 0.42,
+            "pinene": 0.69,
+            "caryophyllene": 0.18,
+            "linalool": 0,
+            "humulene": 0.29,
+            "terpinolene": 0,
+            "ocimene": 0.21
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-009",
+      "name": "Super Boof - Distillate Disposable",
+      "brand": "Big Sioux Extracts",
+      "category": "vaporizer",
+      "subcategory": "disposable",
+      "description": "Sativa with 85.79% THC and 0.04% CBD",
+      "image_url": "https://images.dutchie.com/64e9dd451a50a0273f32b1bf77b6c4a4?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "sativa",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-009-var1",
+          "size_weight": "1g",
+          "price": 60,
+          "original_price": 60,
+          "thc_percentage": 85.79,
+          "cbd_percentage": 0.04,
+          "total_cannabinoids": 85.83000000000001,
+          "inventory_level": 23,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.74,
+            "pinene": 0.42,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.28,
+            "terpinolene": 0.09,
+            "ocimene": 0.12
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-010",
+      "name": "Banana Fuel - Live Rosin",
+      "brand": "Sodak Selects",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Hybrid with 66.36% THC",
+      "image_url": "https://images.dutchie.com/cc45e68a5ed51fb8e79b5885ad7f9623?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-010-var1",
+          "size_weight": "0.5g",
+          "price": 40,
+          "original_price": 40,
+          "thc_percentage": 66.36,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 66.36,
+          "inventory_level": 18,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.07,
+            "limonene": 0.42,
+            "pinene": 0.29,
+            "caryophyllene": 0.59,
+            "linalool": 0,
+            "humulene": 0.19,
+            "terpinolene": 0,
+            "ocimene": 0.08
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-011",
+      "name": "Boofana - Live Rosin",
+      "brand": "Sodak Selects",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Sativa with 75.78% THC",
+      "image_url": "https://images.dutchie.com/cc45e68a5ed51fb8e79b5885ad7f9623?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "sativa",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-011-var1",
+          "size_weight": "0.5g",
+          "price": 40,
+          "original_price": 40,
+          "thc_percentage": 75.78,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 75.78,
+          "inventory_level": 19,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.8,
+            "pinene": 0.27,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.16,
+            "terpinolene": 0.19,
+            "ocimene": 0.02
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-012",
+      "name": "Dulce De Limon - Live Rosin",
+      "brand": "Sodak Selects",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Sativa with 79.39% THC",
+      "image_url": "https://images.dutchie.com/cc45e68a5ed51fb8e79b5885ad7f9623?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "sativa",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-012-var1",
+          "size_weight": "0.5g",
+          "price": 40,
+          "original_price": 40,
+          "thc_percentage": 79.39,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 79.39,
+          "inventory_level": 5,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 1.04,
+            "pinene": 0.71,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.09,
+            "terpinolene": 0.02,
+            "ocimene": 0.11
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-013",
+      "name": "Grappleberry - Live Rosin",
+      "brand": "Sodak Selects",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Indica with 73.7% THC and 0.28% CBD",
+      "image_url": "https://images.dutchie.com/cc45e68a5ed51fb8e79b5885ad7f9623?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "indica",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-013-var1",
+          "size_weight": "0.5g",
+          "price": 40,
+          "original_price": 40,
+          "thc_percentage": 73.7,
+          "cbd_percentage": 0.28,
+          "total_cannabinoids": 73.98,
+          "inventory_level": 5,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.02,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.78,
+            "linalool": 0.41,
+            "humulene": 0.07,
+            "terpinolene": 0,
+            "ocimene": 0.01
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-014",
+      "name": "Island Cooler - Live Rosin",
+      "brand": "Sodak Selects",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Sativa with 79.59% THC",
+      "image_url": "https://images.dutchie.com/cc45e68a5ed51fb8e79b5885ad7f9623?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "sativa",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-014-var1",
+          "size_weight": "0.5g",
+          "price": 40,
+          "original_price": 40,
+          "thc_percentage": 79.59,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 79.59,
+          "inventory_level": 19,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.41,
+            "pinene": 0.68,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.23,
+            "terpinolene": 0.21,
+            "ocimene": 0.19
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-015",
+      "name": "Lemon Cap - Live Rosin",
+      "brand": "Sodak Selects",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Hybrid with 75.7% THC and 0.17% CBD",
+      "image_url": "https://images.dutchie.com/cc45e68a5ed51fb8e79b5885ad7f9623?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-015-var1",
+          "size_weight": "0.5g",
+          "price": 40,
+          "original_price": 40,
+          "thc_percentage": 75.7,
+          "cbd_percentage": 0.17,
+          "total_cannabinoids": 75.87,
+          "inventory_level": 14,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.82,
+            "limonene": 0.36,
+            "pinene": 0.25,
+            "caryophyllene": 0.32,
+            "linalool": 0,
+            "humulene": 0.05,
+            "terpinolene": 0,
+            "ocimene": 0.04
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-016",
+      "name": "Mimosa Mints - Live Rosin",
+      "brand": "Sodak Selects",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Sativa with 80.2% THC and 0.21% CBD",
+      "image_url": "https://images.dutchie.com/cc45e68a5ed51fb8e79b5885ad7f9623?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "sativa",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-016-var1",
+          "size_weight": "0.5g",
+          "price": 40,
+          "original_price": 40,
+          "thc_percentage": 80.2,
+          "cbd_percentage": 0.21,
+          "total_cannabinoids": 80.41,
+          "inventory_level": 14,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.42,
+            "pinene": 0.86,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.13,
+            "terpinolene": 0.25,
+            "ocimene": 0.18
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-017",
+      "name": "Orange Overload - Live Rosin",
+      "brand": "Sodak Selects",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Hybrid with 79.33% THC",
+      "image_url": "https://images.dutchie.com/cc45e68a5ed51fb8e79b5885ad7f9623?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-017-var1",
+          "size_weight": "0.5g",
+          "price": 40,
+          "original_price": 40,
+          "thc_percentage": 79.33,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 79.33,
+          "inventory_level": 16,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.59,
+            "limonene": 0.53,
+            "pinene": 0.48,
+            "caryophyllene": 0.59,
+            "linalool": 0,
+            "humulene": 0.05,
+            "terpinolene": 0,
+            "ocimene": 0.11
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-018",
+      "name": "Pixie - Live Rosin",
+      "brand": "Sodak Selects",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Hybrid with 64.45% THC and 2.7% CBD",
+      "image_url": "https://images.dutchie.com/cc45e68a5ed51fb8e79b5885ad7f9623?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-018-var1",
+          "size_weight": "0.5g",
+          "price": 40,
+          "original_price": 40,
+          "thc_percentage": 64.45,
+          "cbd_percentage": 2.7,
+          "total_cannabinoids": 67.15,
+          "inventory_level": 8,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1,
+            "limonene": 0.72,
+            "pinene": 0.66,
+            "caryophyllene": 0.59,
+            "linalool": 0,
+            "humulene": 0.3,
+            "terpinolene": 0,
+            "ocimene": 0.13
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-019",
+      "name": "Shipwreck - Live Rosin",
+      "brand": "High Hills",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Sativa with 73.39% THC and 0.17% CBD",
+      "image_url": "https://images.dutchie.com/d9430f999bdee300c714fe667ce40933?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "sativa",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-019-var1",
+          "size_weight": "0.5g",
+          "price": 40,
+          "original_price": 40,
+          "thc_percentage": 73.39,
+          "cbd_percentage": 0.17,
+          "total_cannabinoids": 73.56,
+          "inventory_level": 13,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.8,
+            "pinene": 0.33,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.23,
+            "terpinolene": 0.25,
+            "ocimene": 0.06
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-020",
+      "name": "Super Boof - Live Rosin (Sodak Selects)",
+      "brand": "Sodak Selects",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Sativa with 77.01% THC",
+      "image_url": "https://images.dutchie.com/cc45e68a5ed51fb8e79b5885ad7f9623?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "sativa",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-020-var1",
+          "size_weight": "0.5g",
+          "price": 40,
+          "original_price": 40,
+          "thc_percentage": 77.01,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 77.01,
+          "inventory_level": 23,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 1.17,
+            "pinene": 0.94,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.11,
+            "terpinolene": 0.28,
+            "ocimene": 0.16
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-021",
+      "name": "Super Boof - Live Rosin (High Hills)",
+      "brand": "High Hills",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Sativa with 78.81% THC and 0.28% CBD",
+      "image_url": "https://images.dutchie.com/d9430f999bdee300c714fe667ce40933?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "sativa",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-021-var1",
+          "size_weight": "0.5g",
+          "price": 40,
+          "original_price": 40,
+          "thc_percentage": 78.81,
+          "cbd_percentage": 0.28,
+          "total_cannabinoids": 79.09,
+          "inventory_level": 10,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 1.04,
+            "pinene": 0.62,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.3,
+            "terpinolene": 0.07,
+            "ocimene": 0.17
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-022",
+      "name": "The Fizz - Live Rosin",
+      "brand": "Sodak Selects",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Hybrid with 76.52% THC",
+      "image_url": "https://images.dutchie.com/cc45e68a5ed51fb8e79b5885ad7f9623?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-022-var1",
+          "size_weight": "0.5g",
+          "price": 40,
+          "original_price": 40,
+          "thc_percentage": 76.52,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 76.52,
+          "inventory_level": 14,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.13,
+            "limonene": 0.16,
+            "pinene": 0.29,
+            "caryophyllene": 0.31,
+            "linalool": 0,
+            "humulene": 0.06,
+            "terpinolene": 0,
+            "ocimene": 0.17
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-023",
+      "name": "Tres Petrol - Live Rosin",
+      "brand": "Sodak Selects",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Hybrid with 77.28% THC",
+      "image_url": "https://images.dutchie.com/cc45e68a5ed51fb8e79b5885ad7f9623?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-023-var1",
+          "size_weight": "0.5g",
+          "price": 40,
+          "original_price": 40,
+          "thc_percentage": 77.28,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 77.28,
+          "inventory_level": 11,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.82,
+            "limonene": 0.79,
+            "pinene": 0.34,
+            "caryophyllene": 0.15,
+            "linalool": 0,
+            "humulene": 0.19,
+            "terpinolene": 0,
+            "ocimene": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-024",
+      "name": "Banana Fuel - Live Rosin Disposable",
+      "brand": "Sodak Selects",
+      "category": "vaporizer",
+      "subcategory": "disposable",
+      "description": "Hybrid with 66.36% THC",
+      "image_url": "https://images.dutchie.com/a5b03f23e05724891f775d36715ee4d1?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-024-var1",
+          "size_weight": "0.5g",
+          "price": 45,
+          "original_price": 45,
+          "thc_percentage": 66.36,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 66.36,
+          "inventory_level": 22,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.8,
+            "limonene": 0.74,
+            "pinene": 0.45,
+            "caryophyllene": 0.27,
+            "linalool": 0,
+            "humulene": 0.07,
+            "terpinolene": 0,
+            "ocimene": 0.09
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-025",
+      "name": "Dulce De Limon - Disposable",
+      "brand": "Sodak Selects",
+      "category": "vaporizer",
+      "subcategory": "disposable",
+      "description": "Sativa with 79.39% THC",
+      "image_url": "https://images.dutchie.com/a5b03f23e05724891f775d36715ee4d1?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "sativa",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-025-var1",
+          "size_weight": "0.5g",
+          "price": 45,
+          "original_price": 45,
+          "thc_percentage": 79.39,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 79.39,
+          "inventory_level": 18,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.3,
+            "pinene": 0.27,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.09,
+            "terpinolene": 0.04,
+            "ocimene": 0.03
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-026",
+      "name": "Grapaya - Live Rosin Disposable",
+      "brand": "Sodak Selects",
+      "category": "vaporizer",
+      "subcategory": "disposable",
+      "description": "Indica with 66.6% THC",
+      "image_url": "https://images.dutchie.com/a5b03f23e05724891f775d36715ee4d1?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "indica",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-026-var1",
+          "size_weight": "0.5g",
+          "price": 45,
+          "original_price": 45,
+          "thc_percentage": 66.6,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 66.6,
+          "inventory_level": 20,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.55,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.44,
+            "linalool": 0.41,
+            "humulene": 0.23,
+            "terpinolene": 0,
+            "ocimene": 0.2
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-027",
+      "name": "Grappleberry - Live Rosin Disposable",
+      "brand": "Sodak Selects",
+      "category": "vaporizer",
+      "subcategory": "disposable",
+      "description": "Indica with 73.7% THC and 0.28% CBD",
+      "image_url": "https://images.dutchie.com/a5b03f23e05724891f775d36715ee4d1?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "indica",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-027-var1",
+          "size_weight": "0.5g",
+          "price": 45,
+          "original_price": 45,
+          "thc_percentage": 73.7,
+          "cbd_percentage": 0.28,
+          "total_cannabinoids": 73.98,
+          "inventory_level": 15,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.87,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.17,
+            "linalool": 0.23,
+            "humulene": 0.31,
+            "terpinolene": 0,
+            "ocimene": 0.21
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-028",
+      "name": "Island Cooler - Live Rosin Disposable",
+      "brand": "Sodak Selects",
+      "category": "vaporizer",
+      "subcategory": "disposable",
+      "description": "Sativa with 79.59% THC",
+      "image_url": "https://images.dutchie.com/a5b03f23e05724891f775d36715ee4d1?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "sativa",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-028-var1",
+          "size_weight": "0.5g",
+          "price": 45,
+          "original_price": 45,
+          "thc_percentage": 79.59,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 79.59,
+          "inventory_level": 19,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.73,
+            "pinene": 0.63,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.04,
+            "terpinolene": 0.25,
+            "ocimene": 0.14
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-029",
+      "name": "Lemon Cap - Live Rosin Disposable",
+      "brand": "Sodak Selects",
+      "category": "vaporizer",
+      "subcategory": "disposable",
+      "description": "Hybrid with 75.7% THC and 0.17% CBD",
+      "image_url": "https://images.dutchie.com/a5b03f23e05724891f775d36715ee4d1?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-029-var1",
+          "size_weight": "0.5g",
+          "price": 45,
+          "original_price": 45,
+          "thc_percentage": 75.7,
+          "cbd_percentage": 0.17,
+          "total_cannabinoids": 75.87,
+          "inventory_level": 8,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.61,
+            "limonene": 0.73,
+            "pinene": 0.13,
+            "caryophyllene": 0.29,
+            "linalool": 0,
+            "humulene": 0.25,
+            "terpinolene": 0,
+            "ocimene": 0.13
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-030",
+      "name": "Limon De Papaya - Disposable",
+      "brand": "Sodak Selects",
+      "category": "vaporizer",
+      "subcategory": "disposable",
+      "description": "Sativa with 80.91% THC",
+      "image_url": "https://images.dutchie.com/a5b03f23e05724891f775d36715ee4d1?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "sativa",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-030-var1",
+          "size_weight": "0.5g",
+          "price": 45,
+          "original_price": 45,
+          "thc_percentage": 80.91,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 80.91,
+          "inventory_level": 14,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.92,
+            "pinene": 0.15,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.11,
+            "terpinolene": 0.16,
+            "ocimene": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-031",
+      "name": "Mimosa Mints - Live Rosin Disposable",
+      "brand": "Sodak Selects",
+      "category": "vaporizer",
+      "subcategory": "disposable",
+      "description": "Sativa with 80.2% THC and 0.21% CBD",
+      "image_url": "https://images.dutchie.com/a5b03f23e05724891f775d36715ee4d1?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "sativa",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-031-var1",
+          "size_weight": "0.5g",
+          "price": 45,
+          "original_price": 45,
+          "thc_percentage": 80.2,
+          "cbd_percentage": 0.21,
+          "total_cannabinoids": 80.41,
+          "inventory_level": 7,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 1.28,
+            "pinene": 0.11,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.06,
+            "terpinolene": 0.24,
+            "ocimene": 0.1
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-032",
+      "name": "Planet of the Grapes - Live Rosin Disposable",
+      "brand": "Sodak Selects",
+      "category": "vaporizer",
+      "subcategory": "disposable",
+      "description": "Hybrid with 66.31% THC",
+      "image_url": "https://images.dutchie.com/a5b03f23e05724891f775d36715ee4d1?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-032-var1",
+          "size_weight": "0.5g",
+          "price": 45,
+          "original_price": 45,
+          "thc_percentage": 66.31,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 66.31,
+          "inventory_level": 18,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.29,
+            "limonene": 0.46,
+            "pinene": 0.66,
+            "caryophyllene": 0.52,
+            "linalool": 0,
+            "humulene": 0.26,
+            "terpinolene": 0,
+            "ocimene": 0.11
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-033",
+      "name": "Tres Petrol - Live Rosin Disposable",
+      "brand": "Sodak Selects",
+      "category": "vaporizer",
+      "subcategory": "disposable",
+      "description": "Hybrid with 77.28% THC",
+      "image_url": "https://images.dutchie.com/a5b03f23e05724891f775d36715ee4d1?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-033-var1",
+          "size_weight": "0.5g",
+          "price": 45,
+          "original_price": 45,
+          "thc_percentage": 77.28,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 77.28,
+          "inventory_level": 15,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.38,
+            "limonene": 0.46,
+            "pinene": 0.42,
+            "caryophyllene": 0.3,
+            "linalool": 0,
+            "humulene": 0.06,
+            "terpinolene": 0,
+            "ocimene": 0.09
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-034",
+      "name": "Blackberry OG - Live Resin",
+      "brand": "Crushmore",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Indica with 76.98% THC and 0.18% CBD",
+      "image_url": "https://images.dutchie.com/ba04b6cb281a76f0c87a9a2664302240?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "indica",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-034-var1",
+          "size_weight": "1g",
+          "price": 55,
+          "original_price": 55,
+          "thc_percentage": 76.98,
+          "cbd_percentage": 0.18,
+          "total_cannabinoids": 77.16000000000001,
+          "inventory_level": 15,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.45,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.43,
+            "linalool": 0.37,
+            "humulene": 0.14,
+            "terpinolene": 0,
+            "ocimene": 0.08
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-035",
+      "name": "Breadwinner - Live Resin",
+      "brand": "Crushmore",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Hybrid with 74.87% THC and 0.59% CBD",
+      "image_url": "https://images.dutchie.com/ba04b6cb281a76f0c87a9a2664302240?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-035-var1",
+          "size_weight": "1g",
+          "price": 55,
+          "original_price": 55,
+          "thc_percentage": 74.87,
+          "cbd_percentage": 0.59,
+          "total_cannabinoids": 75.46000000000001,
+          "inventory_level": 15,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.02,
+            "limonene": 0.67,
+            "pinene": 0.67,
+            "caryophyllene": 0.48,
+            "linalool": 0,
+            "humulene": 0.15,
+            "terpinolene": 0,
+            "ocimene": 0.19
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-036",
+      "name": "Midnight Mag - Live Resin",
+      "brand": "Dakota Green",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Indica with 79.58% THC and 0.24% CBD",
+      "image_url": "https://images.dutchie.com/ba04b6cb281a76f0c87a9a2664302240?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "indica",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-036-var1",
+          "size_weight": "1g",
+          "price": 55,
+          "original_price": 55,
+          "thc_percentage": 79.58,
+          "cbd_percentage": 0.24,
+          "total_cannabinoids": 79.82,
+          "inventory_level": 9,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.35,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.67,
+            "linalool": 0.45,
+            "humulene": 0.16,
+            "terpinolene": 0,
+            "ocimene": 0.11
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-037",
+      "name": "Raspberry Moon Cheese x Cheesehead OG - Live Resin",
+      "brand": "Crushmore",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Hybrid with 73.16% THC",
+      "image_url": "https://images.dutchie.com/ba04b6cb281a76f0c87a9a2664302240?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-037-var1",
+          "size_weight": "1g",
+          "price": 55,
+          "original_price": 55,
+          "thc_percentage": 73.16,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 73.16,
+          "inventory_level": 19,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.51,
+            "limonene": 0.4,
+            "pinene": 0.35,
+            "caryophyllene": 0.43,
+            "linalool": 0,
+            "humulene": 0.26,
+            "terpinolene": 0,
+            "ocimene": 0.06
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-038",
+      "name": "Senators Choice - Live Resin",
+      "brand": "High Hills",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Hybrid with 82.2% THC and 0.22% CBD",
+      "image_url": "https://images.dutchie.com/d9430f999bdee300c714fe667ce40933?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-038-var1",
+          "size_weight": "1g",
+          "price": 55,
+          "original_price": 55,
+          "thc_percentage": 82.2,
+          "cbd_percentage": 0.22,
+          "total_cannabinoids": 82.42,
+          "inventory_level": 21,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.83,
+            "limonene": 0.52,
+            "pinene": 0.11,
+            "caryophyllene": 0.43,
+            "linalool": 0,
+            "humulene": 0.2,
+            "terpinolene": 0,
+            "ocimene": 0.16
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-039",
+      "name": "Sierra Cherries x Clementine - Live Resin",
+      "brand": "Crushmore",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Hybrid with 80.47% THC and 0.11% CBD",
+      "image_url": "https://images.dutchie.com/ba04b6cb281a76f0c87a9a2664302240?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-039-var1",
+          "size_weight": "1g",
+          "price": 55,
+          "original_price": 55,
+          "thc_percentage": 80.47,
+          "cbd_percentage": 0.11,
+          "total_cannabinoids": 80.58,
+          "inventory_level": 9,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.32,
+            "limonene": 0.78,
+            "pinene": 0.12,
+            "caryophyllene": 0.43,
+            "linalool": 0,
+            "humulene": 0.04,
+            "terpinolene": 0,
+            "ocimene": 0.16
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-040",
+      "name": "Cherry Yogurt Liquid Diamond Disposable Pod",
+      "brand": "High Hills",
+      "category": "vaporizer",
+      "subcategory": "disposable",
+      "description": "Sativa with 80.44% THC and 0.16% CBD",
+      "image_url": "https://images.dutchie.com/c7b7ac28c428051063c497d57cd8bfc4?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "sativa",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-040-var1",
+          "size_weight": "2g",
+          "price": 80,
+          "original_price": 80,
+          "thc_percentage": 80.44,
+          "cbd_percentage": 0.16,
+          "total_cannabinoids": 80.6,
+          "inventory_level": 23,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 0.89,
+            "pinene": 0.92,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.13,
+            "terpinolene": 0.07,
+            "ocimene": 0.02
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-041",
+      "name": "Cowboy Butter Liquid Diamond Disposable Pod",
+      "brand": "High Hills",
+      "category": "vaporizer",
+      "subcategory": "disposable",
+      "description": "Hybrid with 77.52% THC and 0.11% CBD",
+      "image_url": "https://images.dutchie.com/c7b7ac28c428051063c497d57cd8bfc4?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-041-var1",
+          "size_weight": "2g",
+          "price": 80,
+          "original_price": 80,
+          "thc_percentage": 77.52,
+          "cbd_percentage": 0.11,
+          "total_cannabinoids": 77.63,
+          "inventory_level": 16,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.26,
+            "limonene": 0.42,
+            "pinene": 0.48,
+            "caryophyllene": 0.4,
+            "linalool": 0,
+            "humulene": 0.02,
+            "terpinolene": 0,
+            "ocimene": 0.15
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-042",
+      "name": "Derailed - Liquid Diamond",
+      "brand": "Garden Valley Ag",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Hybrid with 88.3% THC and 0.04% CBD",
+      "image_url": "https://images.dutchie.com/a58671180a9f6728499a3a6b4802e074?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-042-var1",
+          "size_weight": "1g",
+          "price": 55,
+          "original_price": 55,
+          "thc_percentage": 88.3,
+          "cbd_percentage": 0.04,
+          "total_cannabinoids": 88.34,
+          "inventory_level": 24,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.32,
+            "limonene": 0.62,
+            "pinene": 0.18,
+            "caryophyllene": 0.57,
+            "linalool": 0,
+            "humulene": 0.14,
+            "terpinolene": 0,
+            "ocimene": 0.19
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-043",
+      "name": "Emergen-C - Liquid Diamonds",
+      "brand": "605 Cannabis",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Hybrid with 63.26% THC and 0.3% CBD",
+      "image_url": "https://images.dutchie.com/7a6c2662caed8b0ee1f11155ff02583c?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-043-var1",
+          "size_weight": "1g",
+          "price": 55,
+          "original_price": 55,
+          "thc_percentage": 63.26,
+          "cbd_percentage": 0.3,
+          "total_cannabinoids": 63.559999999999995,
+          "inventory_level": 22,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.37,
+            "limonene": 0.23,
+            "pinene": 0.5,
+            "caryophyllene": 0.18,
+            "linalool": 0,
+            "humulene": 0.28,
+            "terpinolene": 0,
+            "ocimene": 0.03
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-044",
+      "name": "GMO Liquid Diamond Disposable Pod",
+      "brand": "High Hills",
+      "category": "vaporizer",
+      "subcategory": "disposable",
+      "description": "Indica with 79.66% THC and 0.05% CBD",
+      "image_url": "https://images.dutchie.com/c7b7ac28c428051063c497d57cd8bfc4?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "indica",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-044-var1",
+          "size_weight": "2g",
+          "price": 80,
+          "original_price": 80,
+          "thc_percentage": 79.66,
+          "cbd_percentage": 0.05,
+          "total_cannabinoids": 79.71,
+          "inventory_level": 21,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.06,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.12,
+            "linalool": 0.34,
+            "humulene": 0.24,
+            "terpinolene": 0,
+            "ocimene": 0.01
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-045",
+      "name": "Gas Face x Stealz Vape Cartridge",
+      "brand": "605 Cannabis",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Hybrid with 76.27% THC and 0.11% CBD",
+      "image_url": "https://images.dutchie.com/7a6c2662caed8b0ee1f11155ff02583c?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-045-var1",
+          "size_weight": "1g",
+          "price": 55,
+          "original_price": 55,
+          "thc_percentage": 76.27,
+          "cbd_percentage": 0.11,
+          "total_cannabinoids": 76.38,
+          "inventory_level": 19,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.03,
+            "limonene": 0.78,
+            "pinene": 0.61,
+            "caryophyllene": 0.27,
+            "linalool": 0,
+            "humulene": 0.1,
+            "terpinolene": 0,
+            "ocimene": 0.07
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-046",
+      "name": "Hype Train Liquid Diamond Disposable Pod",
+      "brand": "High Hills",
+      "category": "vaporizer",
+      "subcategory": "disposable",
+      "description": "Sativa with 85.54% THC",
+      "image_url": "https://images.dutchie.com/c7b7ac28c428051063c497d57cd8bfc4?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "sativa",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-046-var1",
+          "size_weight": "2g",
+          "price": 80,
+          "original_price": 80,
+          "thc_percentage": 85.54,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 85.54,
+          "inventory_level": 17,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 1.06,
+            "pinene": 0.45,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.03,
+            "terpinolene": 0.19,
+            "ocimene": 0.11
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-047",
+      "name": "Spectre 3 - Liquid Diamond",
+      "brand": "Garden Valley Ag",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Indica with 80.95% THC and 0.38% CBD",
+      "image_url": "https://images.dutchie.com/2e93da57a619393915dd5f11696741da?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "indica",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-047-var1",
+          "size_weight": "0.5g",
+          "price": 30,
+          "original_price": 30,
+          "thc_percentage": 80.95,
+          "cbd_percentage": 0.38,
+          "total_cannabinoids": 81.33,
+          "inventory_level": 15,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.58,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.62,
+            "linalool": 0.25,
+            "humulene": 0.2,
+            "terpinolene": 0,
+            "ocimene": 0.17
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-048",
+      "name": "Super Sour Saunders - 1g Liquid Diamond",
+      "brand": "DNG",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Hybrid with 71.58% THC",
+      "image_url": "https://images.dutchie.com/4137b61eaba6f72e3275e00a38a65e66?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-048-var1",
+          "size_weight": "1g",
+          "price": 55,
+          "original_price": 55,
+          "thc_percentage": 71.58,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 71.58,
+          "inventory_level": 7,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.26,
+            "limonene": 0.58,
+            "pinene": 0.23,
+            "caryophyllene": 0.26,
+            "linalool": 0,
+            "humulene": 0.24,
+            "terpinolene": 0,
+            "ocimene": 0.09
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-049",
+      "name": "Tropsonto Liquid Diamond Disposable Pod",
+      "brand": "High Hills",
+      "category": "vaporizer",
+      "subcategory": "disposable",
+      "description": "Hybrid with 77.9% THC and 0.24% CBD",
+      "image_url": "https://images.dutchie.com/c7b7ac28c428051063c497d57cd8bfc4?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-049-var1",
+          "size_weight": "2g",
+          "price": 80,
+          "original_price": 80,
+          "thc_percentage": 77.9,
+          "cbd_percentage": 0.24,
+          "total_cannabinoids": 78.14,
+          "inventory_level": 18,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.93,
+            "limonene": 0.85,
+            "pinene": 0.49,
+            "caryophyllene": 0.43,
+            "linalool": 0,
+            "humulene": 0.16,
+            "terpinolene": 0,
+            "ocimene": 0.11
+          }
+        }
+      ]
+    },
+    {
+      "id": "truenorth-vaporizer-050",
+      "name": "Mandarin Dreams - Cured Resin",
+      "brand": "Garden Valley Ag",
+      "category": "vaporizer",
+      "subcategory": "cartridge",
+      "description": "Hybrid with 72.95% THC and 0.19% CBD",
+      "image_url": "https://images.dutchie.com/a58671180a9f6728499a3a6b4802e074?auto=format%2Ccompress&cs=srgb&fit=max&fill=solid&fillColor=%23fff&ixlib=react-9.8.1&w=104&h=104&dpr=5&q=20",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "truenorth-vaporizer-050-var1",
+          "size_weight": "1g",
+          "price": 55,
+          "original_price": 55,
+          "thc_percentage": 72.95,
+          "cbd_percentage": 0.19,
+          "total_cannabinoids": 73.14,
+          "inventory_level": 24,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.33,
+            "limonene": 0.58,
+            "pinene": 0.25,
+            "caryophyllene": 0.52,
+            "linalool": 0,
+            "humulene": 0.29,
+            "terpinolene": 0,
+            "ocimene": 0.13
+          }
+        }
+      ]
+    }
+  ]
+}
