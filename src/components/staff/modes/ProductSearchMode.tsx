@@ -138,7 +138,6 @@ export const ProductSearchMode: React.FC = () => {
           <Button
             variant="outline"
             size="sm"
-            className="bg-white"
             onClick={() => setShowHistory(!showHistory)}
             className="flex items-center space-x-1"
           >
@@ -149,7 +148,6 @@ export const ProductSearchMode: React.FC = () => {
           <Button
             variant="outline"
             size="sm"
-            className="bg-white"
             onClick={() => setShowFilters(!showFilters)}
             className="flex items-center space-x-1"
           >
@@ -161,7 +159,6 @@ export const ProductSearchMode: React.FC = () => {
           <Button
             variant="outline"
             size="sm"
-            className="bg-white"
             className="flex items-center space-x-1"
           >
             <ScanLine size={16} />
