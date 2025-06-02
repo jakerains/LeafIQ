@@ -8,6 +8,15 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run build` - Build for production
 - `npm run lint` - Run ESLint
 - `npm run preview` - Preview production build
+- `npm run deploy` - Deploy using bash scripts/deploy.sh
+- `npm run version:show` - Show current version
+- `npm run version:patch` - Bump patch version
+
+## Code Quality
+
+- **Linting**: ESLint with TypeScript support
+- **Type Checking**: Run TypeScript compiler with `npx tsc --noEmit`
+- **Bundle Analysis**: Knip for unused code detection
 
 ## Architecture Overview
 
@@ -26,7 +35,9 @@ Dual authentication approach:
 1. **Passcode-based** for demo/kiosk access (staff: `1234`, admin: `admin1234`)
 2. **Supabase auth** for full user accounts with organization management
 
-The `authStore.ts` handles both methods, checking for Supabase sessions first, then falling back to localStorage for passcode auth.
+The `authStore.ts` handles both methods, checking for Supabase sessions first, then falling back to localStorage for passcode auth. Two separate auth stores exist:
+- `authStore.ts`: Primary Supabase-based authentication
+- `simpleAuthStore.ts`: Passcode-based demo authentication
 
 ### User Roles & Access
 
@@ -104,3 +115,11 @@ Centralized in `types/index.ts`:
 - `TerpeneProfile` for cannabis terpene data
 - `UserRole` for authentication roles
 - Supabase types in `types/supabase.ts`
+
+### Key File Locations
+
+- **Demo Credentials**: Staff (`1234`), Admin (`admin1234`) - hardcoded in auth components
+- **Product Data**: `src/data/demoData.ts` for demo products and terpene mappings
+- **Bulk Loading Scripts**: Root level `.js` files for data import/export
+- **Deployment**: `scripts/deploy.sh` for production deployment
+- **Supabase Functions**: `supabase/functions/` for edge functions
