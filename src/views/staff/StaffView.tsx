@@ -20,7 +20,7 @@ import { ProductWithVariant } from "../../types";
 
 // Placeholder components for modes not yet implemented
 const PlaceholderMode = ({ mode }: { mode: string }) => (
-  <div className="bg-white bg-opacity-80 backdrop-blur-sm rounded-3xl p-8 text-center">
+  <div className="bg-white bg-opacity-80 backdrop-blur-md rounded-3xl p-6 shadow-lg">
     <Construction size={48} className="mx-auto text-gray-400 mb-4" />
     <h3 className="text-2xl font-semibold mb-4">{mode} Mode</h3>
     <p className="text-gray-600 mb-6">
@@ -158,11 +158,11 @@ const StaffView = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
+    <div className="min-h-screen">
       {/* Enhanced Header */}
       <StaffHeader />
 
-      <main className="container mx-auto px-4 py-8 flex-1 flex flex-col">
+      <main className="container mx-auto px-4 py-6 flex-1 flex flex-col">
         {/* Debug Info */}
         {process.env.NODE_ENV === "development" && (
           <div className="mb-4 p-3 bg-yellow-100 border border-yellow-300 rounded-lg text-sm">
@@ -173,7 +173,7 @@ const StaffView = () => {
         )}
 
         {/* Mode Selector */}
-        <div className="mb-8">
+        <div className="mb-6">
           <StaffModeSelector />
         </div>
 
@@ -194,7 +194,7 @@ const StaffView = () => {
       </main>
       
       {/* Footer with version info */}
-      <footer className="py-4 px-6 text-center text-xs text-gray-500">
+      <footer className="py-3 px-6 text-center text-xs text-gray-500">
         <p>LeafIQ Staff Workstation • Version 2.5.0</p>
       </footer>
     </div>

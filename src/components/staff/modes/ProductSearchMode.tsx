@@ -101,20 +101,20 @@ export const ProductSearchMode: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-5">
       {/* Search Header */}
-      <div className="bg-white bg-opacity-90 backdrop-blur-md rounded-3xl p-6 shadow-xl border border-gray-100">
-        <div className="flex items-center space-x-3 mb-5">
+      <div className="bg-white bg-opacity-90 backdrop-blur-md rounded-3xl p-5 shadow-lg border border-gray-100">
+        <div className="flex items-center space-x-3 mb-4">
           <div className="p-2 bg-blue-100 rounded-lg">
-            <Search size={22} className="text-blue-600" />
+            <Search size={20} className="text-blue-600" />
           </div>
-          <h2 className="text-2xl font-display font-semibold">Enhanced Product Search</h2>
+          <h2 className="text-xl font-semibold">Enhanced Product Search</h2>
         </div>
         
         {/* Search Input with Controls */}
-        <div className="flex space-x-3">
+        <div className="flex space-x-2">
           <div className="flex-1 relative">
-                         <SearchInput 
+             <SearchInput 
                onSearch={handleSearch}
                placeholder="Search by effect, strain, product name, or describe what the customer wants..."
                suggestions={[
@@ -139,30 +139,27 @@ export const ProductSearchMode: React.FC = () => {
             variant="outline"
             size="sm"
             onClick={() => setShowHistory(!showHistory)}
-            className="flex items-center space-x-1"
           >
-            <History size={16} />
-            <span className="hidden sm:inline">History</span>
+            <History size={16} className="mr-1" />
+            <span className="hidden sm:inline text-xs">History</span>
           </Button>
           
           <Button
             variant="outline"
             size="sm"
             onClick={() => setShowFilters(!showFilters)}
-            className="flex items-center space-x-1"
           >
-            <Filter size={16} />
-            <span className="hidden sm:inline">Filters</span>
-            <ChevronDown size={14} className={`transition-transform ${showFilters ? 'rotate-180' : ''}`} />
+            <Filter size={16} className="mr-1" />
+            <span className="hidden sm:inline text-xs">Filters</span>
+            <ChevronDown size={14} className={`transition-transform ${showFilters ? 'rotate-180' : ''} ml-1`} />
           </Button>
           
           <Button
             variant="outline"
             size="sm"
-            className="flex items-center space-x-1"
           >
-            <ScanLine size={16} />
-            <span className="hidden sm:inline">Scan</span>
+            <ScanLine size={16} className="mr-1" />
+            <span className="hidden sm:inline text-xs">Scan</span>
           </Button>
         </div>
 
@@ -171,10 +168,10 @@ export const ProductSearchMode: React.FC = () => {
           <motion.div 
             initial={{ opacity: 0, y: -10, height: 0 }}
             animate={{ opacity: 1, y: 0, height: 'auto' }}
-            className="mt-3 bg-gray-50 rounded-xl p-4 border border-gray-100 shadow-inner"
+            className="mt-3 bg-gray-50 rounded-xl p-3 border border-gray-100 shadow-inner"
            >
             <div className="flex justify-between items-center mb-2">
-              <span className="text-sm font-medium text-gray-800">Recent Searches</span>
+              <span className="text-xs font-medium text-gray-800">Recent Searches</span>
               <button
                 onClick={clearSearchHistory}
                 className="text-xs text-red-600 hover:text-red-700"
@@ -187,7 +184,7 @@ export const ProductSearchMode: React.FC = () => {
                 <motion.button
                   key={index} 
                   onClick={() => handleQuickSearch(query)}
-                  className="px-3 py-1.5 bg-white rounded-lg text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors border border-gray-200 shadow-sm"
+                  className="px-3 py-1.5 bg-white rounded-lg text-xs text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors border border-gray-200 shadow-sm"
                   whileHover={{ scale: 1.05, y: -1 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -204,16 +201,16 @@ export const ProductSearchMode: React.FC = () => {
             initial={{ opacity: 0, y: -10, height: 0 }}
             animate={{ opacity: 1, y: 0, height: 'auto' }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            className="mt-3 bg-gray-50 rounded-xl p-5 border border-gray-100 shadow-inner"
+            className="mt-3 bg-gray-50 rounded-xl p-4 border border-gray-100 shadow-inner"
           >
-            <h3 className="text-sm font-medium text-gray-800 mb-3">Advanced Filters</h3>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <h3 className="text-xs font-medium text-gray-800 mb-3">Advanced Filters</h3>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Strain Type</label>
+                <label className="block text-xs font-medium text-gray-700 mb-1">Strain Type</label>
                 <select 
                   value={filters.strainType}
                   onChange={(e) => setFilters({...filters, strainType: e.target.value})}
-                  className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-2.5 py-1.5 bg-white border border-gray-200 rounded-lg text-xs focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
                   <option value="">All Types</option>
                   <option value="indica">Indica</option>
@@ -223,11 +220,11 @@ export const ProductSearchMode: React.FC = () => {
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Price Range</label>
+                <label className="block text-xs font-medium text-gray-700 mb-1">Price Range</label>
                 <select 
                   value={filters.priceRange}
                   onChange={(e) => setFilters({...filters, priceRange: e.target.value})}
-                  className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-2.5 py-1.5 bg-white border border-gray-200 rounded-lg text-xs focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
                   <option value="">All Prices</option>
                   <option value="0-25">$0 - $25</option>
@@ -238,11 +235,11 @@ export const ProductSearchMode: React.FC = () => {
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Stock Level</label>
+                <label className="block text-xs font-medium text-gray-700 mb-1">Stock Level</label>
                 <select 
                   value={filters.inventoryLevel}
                   onChange={(e) => setFilters({...filters, inventoryLevel: e.target.value})}
-                  className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-2.5 py-1.5 bg-white border border-gray-200 rounded-lg text-xs focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
                   <option value="">All Stock</option>
                   <option value="high">High Stock (10+)</option>
@@ -252,11 +249,11 @@ export const ProductSearchMode: React.FC = () => {
               </div>
               
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
+                <label className="block text-xs font-medium text-gray-700 mb-1">Category</label>
                 <select 
                   value={filters.category}
                   onChange={(e) => setFilters({...filters, category: e.target.value})}
-                  className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full px-2.5 py-1.5 bg-white border border-gray-200 rounded-lg text-xs focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
                   <option value="">All Categories</option>
                   <option value="flower">Flower</option>
@@ -276,36 +273,36 @@ export const ProductSearchMode: React.FC = () => {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="space-y-5"
+          className="space-y-4"
         >
           <div className="flex flex-col md:flex-row md:items-center justify-between bg-white bg-opacity-80 backdrop-blur-sm rounded-2xl p-4 shadow-md border border-gray-100">
             <div className="flex items-center space-x-3 mb-3 md:mb-0">
-              <h2 className="text-2xl font-display font-semibold text-gray-900">
+              <h2 className="text-xl font-semibold text-gray-900">
                 {searchResults.length} matching products for "{searchQuery}"
               </h2>
               
               {isAIPowered && (
                 <motion.div 
-                  className="inline-flex items-center gap-1 px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-medium"
+                  className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-purple-100 text-purple-800 rounded-full text-xs font-medium"
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{ delay: 0.2 }}
                 >
-                  <Sparkles size={14} className="text-purple-600" />
+                  <Sparkles size={12} className="text-purple-600" />
                   AI-Powered
                 </motion.div>
               )}
             </div>
             
             <div className="flex space-x-2">
-              <Button variant="outline" size="sm" className="bg-white shadow-sm hover:shadow">
-                <Bookmark size={16} className="mr-1" />
+              <Button variant="outline" size="sm" className="bg-white shadow-sm hover:shadow text-xs">
+                <Bookmark size={14} className="mr-1" />
                 Save Search
               </Button>
             </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 pb-6">
             {searchResults.map((product) => (
               <motion.div
                 key={product.id}
@@ -332,22 +329,22 @@ export const ProductSearchMode: React.FC = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-white bg-opacity-90 backdrop-blur-sm rounded-3xl p-8 text-center shadow-xl border border-gray-100"
+          className="bg-white bg-opacity-90 backdrop-blur-sm rounded-3xl p-7 text-center shadow-lg border border-gray-100"
         >
           <div className="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-5">
-            <Search size={36} className="text-gray-400" />
+            <Search size={32} className="text-gray-400" />
           </div>
-          <h3 className="text-2xl font-display font-semibold mb-4 text-gray-900">No products found</h3>
-          <p className="text-gray-600 mb-8 max-w-md mx-auto">
+          <h3 className="text-xl font-semibold mb-3 text-gray-900">No products found</h3>
+          <p className="text-gray-600 mb-6 max-w-md mx-auto">
             Try adjusting your search terms or filters. Consider searching for effects, strain types, or general product categories.
           </p>
-          <div className="flex flex-wrap justify-center gap-3 max-w-lg mx-auto">
+          <div className="flex flex-wrap justify-center gap-2 max-w-lg mx-auto">
             {['relaxing', 'energizing', 'pain relief', 'creative', 'sleep'].map((suggestion) => (
               <Button
                 key={suggestion}
                 variant="outline"
                 size="sm"
-                className="bg-white shadow-sm hover:bg-blue-50 hover:text-blue-700 transition-colors"
+                className="bg-white shadow-sm hover:bg-blue-50 hover:text-blue-700 transition-colors text-xs"
                 onClick={() => handleQuickSearch(suggestion)}
               >
                 Try "{suggestion}"
@@ -358,4 +355,4 @@ export const ProductSearchMode: React.FC = () => {
       )}
     </div>
   );
-}; 
+};
