@@ -31,50 +31,158 @@ const PlaceholderMode = ({ mode }: { mode: string }) => (
 );
 
 // Bud AI Budtender Component
-const BudAIBudtenderMode = () => (
-  <div className="bg-white bg-opacity-80 backdrop-blur-md rounded-3xl p-6 shadow-lg">
-    <div className="flex items-center space-x-3 mb-6">
-      <div className="h-10 w-10 bg-purple-100 rounded-full flex items-center justify-center overflow-hidden">
-        <img src="/budbuddy.png" alt="Bud" className="h-8 w-8 object-contain" />
+const BudAIBudtenderMode = () => {
+  const [question, setQuestion] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [response, setResponse] = useState('');
+
+  const handleAskBud = async () => {
+    if (!question.trim()) return;
+    
+    setIsSubmitting(true);
+    setResponse('');
+    
+    // Simulate AI response with timeout
+    setTimeout(() => {
+      // Generate appropriate response based on question content
+      let aiResponse = "I'm happy to help! ";
+      
+      if (question.toLowerCase().includes("terpene")) {
+        aiResponse += "Terpenes are aromatic compounds found in cannabis and many other plants. They give cannabis its distinctive smell and flavor, and also contribute to the effects you feel. The most common terpenes in cannabis include myrcene (relaxing), limonene (uplifting), pinene (focusing), and caryophyllene (pain relief).";
+      } else if (question.toLowerCase().includes("thc") && question.toLowerCase().includes("cbd")) {
+        aiResponse += "THC (tetrahydrocannabinol) is the primary psychoactive compound in cannabis that produces the 'high' sensation. CBD (cannabidiol) is non-intoxicating and often used for therapeutic benefits like anxiety and pain relief. THC binds directly to CB1 receptors in the brain, while CBD works more indirectly on the endocannabinoid system.";
+      } else if (question.toLowerCase().includes("anxiety")) {
+        aiResponse += "For customers seeking anxiety relief, consider recommending products with balanced THC:CBD ratios or higher CBD content. Strains rich in linalool and caryophyllene terpenes often have calming effects. Our most popular anxiety-relieving products currently in stock are Harlequin (balanced hybrid), ACDC (high-CBD), and Granddaddy Purple (relaxing indica).";
+      } else if (question.toLowerCase().includes("indica")) {
+        aiResponse += "Our most popular indica strains currently in stock are Northern Lights (22% THC), Granddaddy Purple (19% THC), and Blueberry Kush (24% THC). All three feature high myrcene content for deep relaxation and are consistently highly rated by our customers.";
+      } else {
+        aiResponse += "I can provide information about cannabis products, effects, consumption methods, and help you make recommendations to customers. Feel free to ask specific questions about strains, terpenes, or customer scenarios.";
+      }
+      
+      setResponse(aiResponse);
+      setIsSubmitting(false);
+    }, 1500);
+  };
+
+  // Handle suggestion click to automatically fill and submit the question
+  const handleSuggestionClick = (suggestion: string) => {
+    setQuestion(suggestion);
+    
+    // Submit the question after a short delay to allow state update
+    setTimeout(() => {
+      setResponse('');
+      setIsSubmitting(true);
+      
+      // Simulate AI response with timeout
+      setTimeout(() => {
+        // Generate appropriate response based on suggestion
+        let aiResponse = "I'm happy to help! ";
+        
+        if (suggestion.includes("terpenes")) {
+          aiResponse += "Terpenes are aromatic compounds found in cannabis and many other plants. They give cannabis its distinctive smell and flavor, and also contribute to the effects you feel. The most common terpenes in cannabis include myrcene (relaxing), limonene (uplifting), pinene (focusing), and caryophyllene (pain relief).";
+        } else if (suggestion.includes("THC") && suggestion.includes("CBD")) {
+          aiResponse += "THC (tetrahydrocannabinol) is the primary psychoactive compound in cannabis that produces the 'high' sensation. CBD (cannabidiol) is non-intoxicating and often used for therapeutic benefits like anxiety and pain relief. THC binds directly to CB1 receptors in the brain, while CBD works more indirectly on the endocannabinoid system.";
+        } else if (suggestion.includes("anxiety")) {
+          aiResponse += "For customers seeking anxiety relief, consider recommending products with balanced THC:CBD ratios or higher CBD content. Strains rich in linalool and caryophyllene terpenes often have calming effects. Our most popular anxiety-relieving products currently in stock are Harlequin (balanced hybrid), ACDC (high-CBD), and Granddaddy Purple (relaxing indica).";
+        } else if (suggestion.includes("indica")) {
+          aiResponse += "Our most popular indica strains currently in stock are Northern Lights (22% THC), Granddaddy Purple (19% THC), and Blueberry Kush (24% THC). All three feature high myrcene content for deep relaxation and are consistently highly rated by our customers.";
+        }
+        
+        setResponse(aiResponse);
+        setIsSubmitting(false);
+      }, 1500);
+    }, 100);
+  };
+
+  return (
+    <div className="bg-white bg-opacity-80 backdrop-blur-md rounded-3xl p-5 shadow-lg border border-gray-100">
+      <div className="flex items-center space-x-3 mb-5">
+        <div className="h-10 w-10 bg-purple-100 rounded-full flex items-center justify-center overflow-hidden">
+          <img src="/budbuddy.png" alt="Bud" className="h-8 w-8 object-contain" />
+        </div>
+        <h2 className="text-xl font-semibold">Bud AI Budtender</h2>
       </div>
-      <h2 className="text-xl font-semibold">Bud AI Budtender</h2>
-    </div>
 
-    <div className="bg-gray-50 rounded-xl p-4 mb-6">
-      <p className="text-gray-700">
-        Hello! I'm Bud, your AI budtender assistant. I can help answer cannabis
-        questions, provide product information, or assist with customer
-        consultations. What would you like help with today?
-      </p>
-    </div>
-
-    <div className="space-y-4">
-      <textarea
-        className="w-full p-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 h-32"
-        placeholder="Ask Bud a question about cannabis, products, or customer recommendations..."
-      ></textarea>
-
-      <div className="flex justify-end">
-        <Button>Ask Bud</Button>
+      <div className="bg-gray-50 rounded-xl p-4 mb-5">
+        {response ? (
+          <div className="text-sm text-gray-700 leading-relaxed">
+            {response}
+          </div>
+        ) : (
+          <p className="text-sm text-gray-700">
+            Hello! I'm Bud, your AI budtender assistant. I can help answer cannabis
+            questions, provide product information, or assist with customer
+            consultations. What would you like help with today?
+          </p>
+        )}
       </div>
 
-      <div className="flex flex-wrap gap-2 mt-4">
-        <Button variant="outline" size="sm">
-          How do terpenes work?
-        </Button>
-        <Button variant="outline" size="sm">
-          Explain THC vs CBD
-        </Button>
-        <Button variant="outline" size="sm">
-          Help me recommend for anxiety
-        </Button>
-        <Button variant="outline" size="sm">
-          What's our most popular indica?
-        </Button>
+      <div className="space-y-4">
+        <textarea
+          value={question}
+          onChange={(e) => setQuestion(e.target.value)}
+          className="w-full p-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 h-28 text-sm"
+          placeholder="Ask Bud a question about cannabis, products, or customer recommendations..."
+        ></textarea>
+
+        <div className="flex justify-end">
+          <Button 
+            onClick={handleAskBud} 
+            disabled={!question.trim() || isSubmitting}
+            className="bg-purple-600 hover:bg-purple-700 text-white"
+          >
+            {isSubmitting ? (
+              <span className="flex items-center">
+                <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Processing...
+              </span>
+            ) : (
+              'Ask Bud'
+            )}
+          </Button>
+        </div>
+
+        <div className="flex flex-wrap gap-2 mt-3">
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={() => handleSuggestionClick("How do terpenes work?")}
+            className="text-xs bg-white shadow-sm hover:bg-purple-50"
+          >
+            How do terpenes work?
+          </Button>
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={() => handleSuggestionClick("Explain THC vs CBD")}
+            className="text-xs bg-white shadow-sm hover:bg-purple-50"
+          >
+            Explain THC vs CBD
+          </Button>
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={() => handleSuggestionClick("Help me recommend for anxiety")}
+            className="text-xs bg-white shadow-sm hover:bg-purple-50"
+          >
+            Help me recommend for anxiety
+          </Button>
+          <Button 
+            variant="outline" 
+            size="sm" 
+            onClick={() => handleSuggestionClick("What's our most popular indica?")}
+            className="text-xs bg-white shadow-sm hover:bg-purple-50"
+          >
+            What's our most popular indica?
+          </Button>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const StaffView = () => {
   const { activeMode, addNotification } = useStaffModeStore();
