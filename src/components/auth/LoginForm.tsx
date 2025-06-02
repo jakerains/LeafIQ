@@ -4,7 +4,7 @@ import { useAuthStore } from '../../stores/authStore';
 import { UserRole } from '../../types';
 import { Button } from '../ui/button';
 import { motion } from 'framer-motion';
-import { Lock, Mail, AlertCircle, Eye, EyeOff, UserPlus, Coffee, ArrowLeft } from 'lucide-react';
+import { Lock, Mail, AlertCircle, Eye, EyeOff, UserPlus, ArrowLeft } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
 interface LoginFormProps {
@@ -70,12 +70,6 @@ const LoginForm = ({ role: requiredRole }: LoginFormProps) => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleDemoLogin = () => {
-    setEmail('demo@leafiq.online');
-    setPassword('demo1234');
-    setError('');
   };
 
   const getRoleDisplayName = (role: UserRole) => {
@@ -176,24 +170,6 @@ const LoginForm = ({ role: requiredRole }: LoginFormProps) => {
           {isLoading ? 'Signing In...' : 'Sign In'}
         </Button>
 
-        <div className="relative">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-200" />
-          </div>
-          <div className="relative flex justify-center text-sm">
-            <span className="px-2 bg-white text-gray-500">or</span>
-          </div>
-        </div>
-
-        <Button
-          onClick={handleDemoLogin}
-          variant="outline"
-          className="w-full py-3 border-primary-200 text-primary-700 hover:bg-primary-50"
-        >
-          <Coffee className="h-4 w-4 mr-2" />
-          Try Demo Account
-        </Button>
-
         <div className="text-center">
           <span className="text-sm text-gray-600">Don't have an account? </span>
           <button
@@ -213,9 +189,6 @@ const LoginForm = ({ role: requiredRole }: LoginFormProps) => {
             : 'bg-green-50 border-green-200'
         }`}>
           <div className="flex items-start">
-            <Coffee className={`h-4 w-4 mr-2 mt-0.5 ${
-              displayRole === 'staff' ? 'text-orange-500' : 'text-green-500'
-            }`} />
             <div>
               <p className={`text-sm font-medium ${
                 displayRole === 'staff' ? 'text-orange-800' : 'text-green-800'
