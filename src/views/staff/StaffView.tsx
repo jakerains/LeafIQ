@@ -6,7 +6,7 @@ import { StaffHeader } from "../../components/staff/StaffHeader";
 import { StaffModeSelector } from "../../components/staff/StaffModeSelector";
 import { ProductSearchMode } from "../../components/staff/modes/ProductSearchMode";
 import { TerpeneExplorerMode } from "../../components/staff/modes/TerpeneExplorerMode";
-import { Button } from "../../components/ui/button";
+import { Button } from "../../components/ui/button"; 
 import {
   Bot,
   Package,
@@ -158,11 +158,11 @@ const StaffView = () => {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
       {/* Enhanced Header */}
       <StaffHeader />
 
-      <main className="container mx-auto px-4 py-16 flex-1 flex flex-col">
+      <main className="container mx-auto px-4 py-8 flex-1 flex flex-col">
         {/* Debug Info */}
         {process.env.NODE_ENV === "development" && (
           <div className="mb-4 p-3 bg-yellow-100 border border-yellow-300 rounded-lg text-sm">
@@ -173,7 +173,7 @@ const StaffView = () => {
         )}
 
         {/* Mode Selector */}
-        <div className="mb-6">
+        <div className="mb-8">
           <StaffModeSelector />
         </div>
 
@@ -182,11 +182,21 @@ const StaffView = () => {
           key={activeMode}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.4, type: "spring", stiffness: 100 }}
+          className="relative"
         >
+          {/* Background decorative elements */}
+          <div className="absolute -top-4 -left-4 w-24 h-24 bg-primary-100 rounded-full opacity-50 blur-xl -z-10"></div>
+          <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-secondary-100 rounded-full opacity-40 blur-xl -z-10"></div>
+          
           {renderActiveMode()}
         </motion.div>
       </main>
+      
+      {/* Footer with version info */}
+      <footer className="py-4 px-6 text-center text-xs text-gray-500">
+        <p>LeafIQ Staff Workstation • Version 2.5.0</p>
+      </footer>
     </div>
   );
 };

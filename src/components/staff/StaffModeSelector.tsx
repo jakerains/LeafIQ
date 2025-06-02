@@ -52,7 +52,7 @@ export const StaffModeSelector: React.FC<StaffModeSelectorProps> = ({
   return (
     <div className={`${className}`}>
       {/* Desktop: Horizontal tabs */}
-      <div className="hidden md:flex bg-white bg-opacity-90 backdrop-blur-md rounded-2xl p-2 shadow-lg">
+      <div className="hidden md:flex bg-white bg-opacity-95 backdrop-blur-md rounded-2xl p-2 shadow-xl border border-gray-100">
         <div className="flex space-x-1 w-full">
           {availableModes.map((modeConfig) => {
             const IconComponent =
@@ -65,15 +65,15 @@ export const StaffModeSelector: React.FC<StaffModeSelectorProps> = ({
                 onClick={() => handleModeChange(modeConfig.id)}
                 className={`
                   relative flex flex-col items-center justify-center px-4 py-3 rounded-xl
-                  transition-all duration-200 flex-1 min-w-0
+                  transition-all duration-300 flex-1 min-w-0 hover:shadow-md
                   ${
                     isActive
-                      ? `${modeConfig.bgColor} ${modeConfig.color} shadow-sm border ${modeConfig.borderColor}`
-                      : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"
+                      ? `${modeConfig.bgColor} ${modeConfig.color} shadow-md border-2 ${modeConfig.borderColor}`
+                      : "text-gray-600 hover:text-gray-800 hover:bg-gray-50 border border-transparent"
                   }
                 `}
-                whileHover={{ y: -1 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={{ y: -2, scale: 1.02 }}
+                whileTap={{ scale: 0.97 }}
                 aria-label={`Switch to ${modeConfig.name}`}
               >
                 {/* Active indicator */}
@@ -81,8 +81,8 @@ export const StaffModeSelector: React.FC<StaffModeSelectorProps> = ({
                   <motion.div
                     layoutId="activeTab"
                     className={`absolute inset-0 ${modeConfig.bgColor} rounded-xl border ${modeConfig.borderColor}`}
-                    initial={false}
-                    transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    initial={{ borderRadius: 12 }}
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.5 }}
                   />
                 )}
 
@@ -104,8 +104,8 @@ export const StaffModeSelector: React.FC<StaffModeSelectorProps> = ({
       </div>
 
       {/* Mobile: Horizontal scrollable tabs */}
-      <div className="md:hidden bg-white bg-opacity-90 backdrop-blur-md rounded-2xl p-2 shadow-lg">
-        <div className="flex space-x-2 overflow-x-auto scrollbar-hide pb-1">
+      <div className="md:hidden bg-white bg-opacity-95 backdrop-blur-md rounded-2xl p-2 shadow-xl border border-gray-100">
+        <div className="flex space-x-2 overflow-x-auto pb-1 px-1">
           {availableModes.map((modeConfig) => {
             const IconComponent =
               iconMap[modeConfig.icon as keyof typeof iconMap];
@@ -117,15 +117,15 @@ export const StaffModeSelector: React.FC<StaffModeSelectorProps> = ({
                 onClick={() => handleModeChange(modeConfig.id)}
                 className={`
                   relative flex flex-col items-center justify-center px-3 py-2 rounded-xl
-                  transition-all duration-200 flex-shrink-0 min-w-[80px]
+                  transition-all duration-300 flex-shrink-0 min-w-[85px] shadow-sm
                   ${
                     isActive
-                      ? `${modeConfig.bgColor} ${modeConfig.color} shadow-sm border ${modeConfig.borderColor}`
-                      : "text-gray-600 hover:text-gray-800 hover:bg-gray-50"
+                      ? `${modeConfig.bgColor} ${modeConfig.color} shadow-md border-2 ${modeConfig.borderColor}`
+                      : "text-gray-600 hover:text-gray-800 hover:bg-gray-50 border border-transparent"
                   }
                 `}
-                whileHover={{ y: -1 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.95 }}
                 aria-label={`Switch to ${modeConfig.name}`}
               >
                 <div className="flex flex-col items-center space-y-1">
@@ -148,12 +148,12 @@ export const StaffModeSelector: React.FC<StaffModeSelectorProps> = ({
       </div>
 
       {/* Mode description tooltip */}
-      <div className="mt-2 text-center">
+      <div className="mt-3 text-center bg-white bg-opacity-70 backdrop-blur-sm py-2 px-4 rounded-xl shadow-sm border border-gray-100 max-w-2xl mx-auto">
         <motion.p
           key={activeMode}
           initial={{ opacity: 0, y: 5 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-sm text-gray-600"
+          className="text-sm text-gray-700 font-medium"
         >
           {STAFF_MODES.find((m) => m.id === activeMode)?.description}
         </motion.p>
