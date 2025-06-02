@@ -7,7 +7,8 @@ import {
   User, 
   Clock,
   ChevronDown,
-  X 
+  X,
+  Package 
 } from 'lucide-react';
 import { Button } from '../ui/button';
 import { useSimpleAuthStore } from '../../stores/simpleAuthStore';
