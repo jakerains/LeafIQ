@@ -200,21 +200,21 @@ function convertToImportProduct(
     return null;
   }
   
-  // Generate unique IDs
-  const productId = `truenorth-${category}-${counter.toString().padStart(3, '0')}`;
+  // Generate UUID for product
+  const productId = crypto.randomUUID();
   
   // Parse strain type
   const strainType = parseStrainType(parsed.type);
   
   // Parse variants from pricing
-  let variants = parsePricingToVariants(parsed.pricing, productId, parsed.thc, parsed.cbd);
+  let variants = parsePricingToVariants(parsed.pricing, parsed.thc, parsed.cbd);
   
   if (variants.length === 0) {
     // Create a single variant if no pricing found
     // Try to extract size from the parsed data
     let sizeWeight = '1g'; // Default
     
-    // Look for size in the parsed data (we need to add this field)
+    // Look for size in the parsed data
     if (parsed.size) {
       sizeWeight = parsed.size;
     } else if (category === 'edible') {
@@ -231,7 +231,7 @@ function convertToImportProduct(
     }
     
     variants.push({
-      id: `${productId}-var1`,
+      id: crypto.randomUUID(),
       size_weight: sizeWeight,
       price: price,
       original_price: price,
@@ -300,9 +300,8 @@ function parseSubcategory(name: string, category: string): string | null {
  * Parse pricing string into variants
  */
 function parsePricingToVariants(
-  pricing: string, 
-  productId: string, 
-  thc?: number, 
+  pricing: string,
+  thc?: number,
   cbd?: number
 ): ImportVariant[] {
   const variants: ImportVariant[] = [];
@@ -313,13 +312,13 @@ function parsePricingToVariants(
   const priceMatches = pricing.match(/\$([0-9.]+)\/([^,\s]+)/g);
   
   if (priceMatches) {
-    priceMatches.forEach((match, index) => {
+    priceMatches.forEach((match) => {
       const parts = match.split('/');
       const price = parseFloat(parts[0].replace('$', ''));
       const size = parts[1];
       
       variants.push({
-        id: `${productId}-var${index + 1}`,
+        id: crypto.randomUUID(),
         size_weight: size,
         price,
         original_price: price,
@@ -337,7 +336,7 @@ function parsePricingToVariants(
       const price = parseFloat(singlePriceMatch[1]);
       
       variants.push({
-        id: `${productId}-var1`,
+        id: crypto.randomUUID(),
         size_weight: detectSizeFromPrice(price),
         price,
         original_price: price,
@@ -403,4 +402,4 @@ function detectCategoryFromFilename(filename: string): string {
   if (lower.includes('tincture')) return 'tincture';
   
   return 'flower';
-} 
+}
