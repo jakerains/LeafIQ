@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { SendHorizonal, Bot, User, Lightbulb, Wand2, Activity, MoodHappy, Menu } from 'lucide-react';
+import { SendHorizonal, Bot, User, Lightbulb, Wand2, Activity, Moon as MoodHappy, Menu } from 'lucide-react';
 import { Button } from './button';
 
 interface ChatMessage {
