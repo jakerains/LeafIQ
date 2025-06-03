@@ -4,7 +4,7 @@
 
 **Dispensary Login:**
 - **Email:** `demo@leafiq.online`
-- **Password:** `demo1234`
+- **Password:** `demo123`
 
 **Admin Access:**
 - **Passkey:** `1234`
@@ -68,7 +68,7 @@ The system works on:
 ## 🎯 Quick Demo Flow
 
 1. **Visit:** `/app`
-2. **Login:** `demo@leafiq.online` / `demo1234`
+2. **Login:** `demo@leafiq.online` / `demo123`
 3. **Select:** Customer Kiosk
 4. **Explore:** Product catalog and features
 5. **Switch:** Logout → Login → Select Employee Kiosk
@@ -77,7 +77,7 @@ The system works on:
 ## 🆘 Troubleshooting
 
 **Login Issues:**
-- Verify credentials: `demo@leafiq.online` / `demo1234`
+- Verify credentials: `demo@leafiq.online` / `demo123`
 - Check network connection
 - Clear browser cache if needed
 

@@ -6,7 +6,7 @@ import { useSimpleAuthStore } from '../../stores/simpleAuthStore';
 
 export const DemoLogin: React.FC = () => {
   const [email, setEmail] = useState('demo@leafiq.online');
-  const [password, setPassword] = useState('demo1234');
+  const [password, setPassword] = useState('demo123');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
@@ -17,7 +17,7 @@ export const DemoLogin: React.FC = () => {
   // Pre-fill the demo credentials when component mounts
   useEffect(() => {
     setEmail('demo@leafiq.online');
-    setPassword('demo1234');
+    setPassword('demo123');
   }, []);
 
   const handleDemoLogin = async (e: React.FormEvent) => {

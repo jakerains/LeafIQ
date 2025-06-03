@@ -7,6 +7,7 @@ import { useSimpleAuthStore } from '../../stores/simpleAuthStore';
 import { Product, Variant, ProductWithVariant } from '../../types';
 import ProductForm from './components/ProductForm';
 import ImportExportOptions from './components/ImportExportOptions';
+import ProductDetailsModal from './components/ProductDetailsModal';
 
 const AdminInventory = () => {
   const { products, variants, fetchProducts, isLoading, error } = useProductsStore();
@@ -18,6 +19,7 @@ const AdminInventory = () => {
   const [sortField, setSortField] = useState('name');
   const [sortDirection, setSortDirection] = useState('asc');
   const [showImportExport, setShowImportExport] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<ProductWithVariant | null>(null);
   
   // Debug auth state and fetch products on mount
   useEffect(() => {
@@ -70,9 +72,9 @@ const AdminInventory = () => {
       if (sortField === 'name') {
         comparison = a.name.localeCompare(b.name);
       } else if (sortField === 'price') {
-        comparison = a.price - b.price;
+        comparison = (a.variant?.price || 0) - (b.variant?.price || 0);
       } else if (sortField === 'thc') {
-        comparison = a.thc_percentage - b.thc_percentage;
+        comparison = (a.variant?.thc_percentage || 0) - (b.variant?.thc_percentage || 0);
       } else if (sortField === 'inventory') {
         comparison = a.variant.inventory_level - b.variant.inventory_level;
       } else if (sortField === 'category') {
@@ -100,9 +102,14 @@ const AdminInventory = () => {
     setShowForm(true);
   };
   
+  const handleViewProduct = (product: ProductWithVariant) => {
+    setSelectedProduct(product);
+  };
+
   const handleEditProduct = (product: ProductWithVariant) => {
     setEditingProduct(product);
     setShowForm(true);
+    setSelectedProduct(null); // Close details modal if open
   };
   
   const handleDeleteProduct = (productId: string) => {
@@ -288,7 +295,11 @@ const AdminInventory = () => {
                   </thead>
                   <tbody className="bg-white bg-opacity-80 divide-y divide-gray-200">
                     {filteredProducts.map((product) => (
-                      <tr key={product.id} className="hover:bg-gray-50">
+                      <tr 
+                        key={product.id} 
+                        className="hover:bg-gray-50 cursor-pointer"
+                        onClick={() => handleViewProduct(product)}
+                      >
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
                             <div className="h-10 w-10 flex-shrink-0">
@@ -311,17 +322,17 @@ const AdminInventory = () => {
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="text-sm text-gray-900">
-                            {product.thc_percentage ? product.thc_percentage.toFixed(1) : '0.0'}%
+                            {product.variant?.thc_percentage ? product.variant.thc_percentage.toFixed(1) : '0.0'}%
                           </div>
-                          {product.cbd_percentage && product.cbd_percentage > 0 && (
+                          {product.variant?.cbd_percentage && product.variant.cbd_percentage > 0 && (
                             <div className="text-xs text-gray-500">
-                              CBD: {product.cbd_percentage.toFixed(1)}%
+                              CBD: {product.variant.cbd_percentage.toFixed(1)}%
                             </div>
                           )}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="text-sm text-gray-900">
-                            ${product.price ? product.price.toFixed(2) : '0.00'}
+                            ${product.variant?.price ? product.variant.price.toFixed(2) : '0.00'}
                           </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
@@ -337,13 +348,19 @@ const AdminInventory = () => {
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                           <button
-                            onClick={() => handleEditProduct(product)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleEditProduct(product);
+                            }}
                             className="text-primary-600 hover:text-primary-900 mr-3"
                           >
                             <Pencil size={16} />
                           </button>
                           <button
-                            onClick={() => handleDeleteProduct(product.id)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleDeleteProduct(product.id);
+                            }}
                             className="text-red-600 hover:text-red-900"
                           >
                             <Trash2 size={16} />
@@ -385,6 +402,18 @@ const AdminInventory = () => {
             </div>
           </motion.div>
         </>
+      )}
+      
+      {/* Product Details Modal */}
+      {selectedProduct && (
+        <ProductDetailsModal
+          product={selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+          onEdit={(product) => {
+            setSelectedProduct(null);
+            handleEditProduct(product);
+          }}
+        />
       )}
     </div>
   );

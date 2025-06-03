@@ -17,6 +17,7 @@ import {
     Book,
     Info,
     Leaf,
+    Sparkles,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { generateInventoryInsight, getInventoryRAGContext } from '../../utils/budInventoryAccess';
@@ -154,7 +155,7 @@ export function VercelV0Chat({ onSearch, isLoading = false }: VercelV0ChatProps)
         if (mode === 'cannabis' && chatHistory.length === 0) {
             setChatHistory([{
                 role: 'assistant',
-                content: "Hi there! I'm Bud, your friendly cannabis educator. Ask me anything about cannabis and I'll help you learn!\n\nTry asking things like \"What are terps?\" or \"How do edibles work?\" or \"What's the difference between indica and sativa?\" - I'm here to help you understand cannabis better."
+                content: "👋 Hey there! Welcome to your cannabis education center!\n\nI'm Bud, and I'm here to answer all your cannabis questions in a friendly, easy-to-understand way. No judgment, just helpful information!\n\n💡 **Quick tip:** Try clicking one of the suggestion cards below, or type your own question about cannabis. I can explain everything from basic terms to advanced topics!"
             }]);
         }
     }, [mode, chatHistory.length]);
@@ -183,7 +184,7 @@ export function VercelV0Chat({ onSearch, isLoading = false }: VercelV0ChatProps)
                 
                 if (inventoryContext.relevantProducts.length > 0) {
                     const examples = inventoryContext.relevantProducts.slice(0, 2).map(p => 
-                        `${p.name} by ${p.brand} (${p.thc_percentage?.toFixed(1)}% THC)`
+                        `${p.name} by ${p.brand} (${p.variant?.thc_percentage?.toFixed(1)}% THC)`
                     );
                     response += ` For example, we have ${examples.join(' and ')}.`;
                 }
@@ -341,7 +342,7 @@ export function VercelV0Chat({ onSearch, isLoading = false }: VercelV0ChatProps)
             if (newMode === 'cannabis') {
                 setChatHistory([{
                     role: 'assistant',
-                    content: "Hi there! I'm Bud, your friendly cannabis educator. Ask me anything about cannabis and I'll help you learn!\n\nTry asking things like \"What are terps?\" or \"How do edibles work?\" or \"What's the difference between indica and sativa?\" - I'm here to help you understand cannabis better."
+                    content: "👋 Hey there! Welcome to your cannabis education center!\n\nI'm Bud, and I'm here to answer all your cannabis questions in a friendly, easy-to-understand way. No judgment, just helpful information!\n\n💡 **Quick tip:** Try clicking one of the suggestion cards below, or type your own question about cannabis. I can explain everything from basic terms to advanced topics!"
                 }]);
             }
         }
@@ -403,162 +404,368 @@ export function VercelV0Chat({ onSearch, isLoading = false }: VercelV0ChatProps)
         <div className="flex flex-col items-center w-full max-w-4xl mx-auto space-y-8">
             <div className="w-full">
                 <AnimatePresence mode="wait">
-                    <motion.h1
-                        key={mode}
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 20 }}
-                        transition={{ duration: 0.3 }}
-                        className="text-4xl font-bold text-center text-black font-display mb-8"
-                    >
-                        {mode === 'vibe' 
-                            ? "How do you want to feel?" 
-                            : mode === 'activity' 
-                            ? "What are you up to?" 
-                            : "Have cannabis questions?"}
-                    </motion.h1>
+                    {mode === 'cannabis' ? (
+                        <motion.div
+                            key={mode}
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 20 }}
+                            transition={{ duration: 0.3 }}
+                            className="text-center mb-6"
+                        >
+                            <h1 className="text-4xl font-bold text-gray-900 font-display mb-2">
+                                Cannabis Education Center
+                            </h1>
+                            <p className="text-lg text-gray-600">
+                                Learn about cannabis in a friendly, judgment-free space
+                            </p>
+                        </motion.div>
+                    ) : (
+                        <motion.h1
+                            key={mode}
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 20 }}
+                            transition={{ duration: 0.3 }}
+                            className="text-4xl font-bold text-center text-black font-display mb-8"
+                        >
+                            {mode === 'vibe' 
+                                ? "How do you want to feel?" 
+                                : "What are you up to?"}
+                        </motion.h1>
+                    )}
                 </AnimatePresence>
 
-                <div className="relative bg-white rounded-xl border border-gray-200 shadow-md">
-                    {/* Chat history for cannabis mode */}
-                    {mode === 'cannabis' && chatHistory.length > 0 && (
-                        <div 
-                            ref={chatContainerRef}
-                            className="max-h-[300px] overflow-y-auto p-4 space-y-3 border-b border-gray-100"
-                        >
-                            {chatHistory.map((message, index) => (
-                                <div 
-                                    key={index} 
-                                    className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                {mode === 'cannabis' ? (
+                    // Beautiful Cannabis Questions Interface
+                    <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl shadow-xl border border-green-200 overflow-hidden max-w-5xl mx-auto">
+                        {/* Header */}
+                        <div className="p-6 border-b border-green-100 bg-white bg-opacity-50">
+                            <div className="flex items-center space-x-4">
+                                <motion.div 
+                                    initial={{ scale: 0 }}
+                                    animate={{ scale: 1 }}
+                                    transition={{ type: "spring", stiffness: 200 }}
+                                    className="h-16 w-16 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full flex items-center justify-center shadow-lg overflow-hidden"
                                 >
-                                    {message.role === 'assistant' && (
-                                        <div className="h-8 w-8 rounded-full bg-white border border-primary-200 flex-shrink-0 mr-2 flex items-center justify-center overflow-hidden">
-                                            <img 
-                                                src="/budbuddy.png" 
-                                                alt="Bud" 
-                                                className="h-7 w-7 object-contain"
-                                            />
-                                        </div>
-                                    )}
-                                    <div 
-                                        className={`max-w-[80%] p-3 rounded-xl ${
-                                            message.role === 'user' 
-                                                ? 'bg-primary-100 text-primary-800' 
-                                                : 'bg-gray-100 text-gray-800'
-                                        }`}
+                                    <img src="/budbuddy.png" alt="Bud" className="h-14 w-14 object-contain" />
+                                </motion.div>
+                                <div>
+                                    <h2 className="text-2xl font-bold text-gray-800">Cannabis Guide</h2>
+                                    <p className="text-gray-600">Your personal educator for all things cannabis</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Welcome state - Enhanced Customer-Friendly Design */}
+                        {chatHistory.length === 0 && (
+                            <div className="p-8 bg-white bg-opacity-90">
+                                <div className="flex items-start space-x-4">
+                                    <motion.div 
+                                        initial={{ scale: 0 }}
+                                        animate={{ scale: 1 }}
+                                        transition={{ type: "spring", stiffness: 200, delay: 0.2 }}
+                                        className="h-12 w-12 bg-gradient-to-br from-green-100 to-emerald-100 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-sm"
                                     >
-                                        {message.content.split('\n\n').map((paragraph, i) => (
-                                            <p key={i} className={i > 0 ? 'mt-2' : ''}>
-                                                {paragraph}
-                                            </p>
-                                        ))}
+                                        <Leaf className="h-6 w-6 text-green-600" />
+                                    </motion.div>
+                                    <div className="flex-1 text-left">
+                                        <motion.h3 
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ delay: 0.3 }}
+                                            className="text-xl font-bold text-gray-900 mb-3"
+                                        >
+                                            Hi there! I'm Bud, your friendly cannabis educator 🌿
+                                        </motion.h3>
+                                        <motion.p 
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ delay: 0.4 }}
+                                            className="text-gray-700 mb-4 leading-relaxed"
+                                        >
+                                            Ask me anything about cannabis and I'll help you learn! I can explain things like:
+                                        </motion.p>
+                                        
+                                        <motion.div 
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ delay: 0.5 }}
+                                            className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6"
+                                        >
+                                            <div className="flex items-center space-x-3 bg-gray-50 rounded-xl p-3">
+                                                <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                                                    <span className="text-sm">🧪</span>
+                                                </div>
+                                                <span className="text-sm text-gray-700 font-medium">What terpenes are</span>
+                                            </div>
+                                            <div className="flex items-center space-x-3 bg-gray-50 rounded-xl p-3">
+                                                <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                                                    <span className="text-sm">💊</span>
+                                                </div>
+                                                <span className="text-sm text-gray-700 font-medium">THC vs CBD differences</span>
+                                            </div>
+                                            <div className="flex items-center space-x-3 bg-gray-50 rounded-xl p-3">
+                                                <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+                                                    <span className="text-sm">🍪</span>
+                                                </div>
+                                                <span className="text-sm text-gray-700 font-medium">How edibles work</span>
+                                            </div>
+                                            <div className="flex items-center space-x-3 bg-gray-50 rounded-xl p-3">
+                                                <div className="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center">
+                                                    <span className="text-sm">🌿</span>
+                                                </div>
+                                                <span className="text-sm text-gray-700 font-medium">Indica vs Sativa</span>
+                                            </div>
+                                        </motion.div>
+                                        
+                                        <motion.div 
+                                            initial={{ opacity: 0, y: 10 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ delay: 0.6 }}
+                                            className="bg-gradient-to-r from-green-50 to-emerald-50 border border-green-200 rounded-2xl p-5 shadow-sm"
+                                        >
+                                            <div className="flex items-start space-x-3">
+                                                <Sparkles className="w-5 h-5 text-green-600 mt-0.5 flex-shrink-0" />
+                                                <div>
+                                                    <p className="text-sm font-semibold text-green-800 mb-1">
+                                                        Fun fact to get started:
+                                                    </p>
+                                                    <p className="text-sm text-green-700 leading-relaxed">
+                                                        Cannabis contains over 100 cannabinoids and numerous aromatic compounds called terpenes. 
+                                                        These work together to create unique effects - it's not just about THC levels!
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </motion.div>
+                                        
+                                        <motion.p 
+                                            initial={{ opacity: 0 }}
+                                            animate={{ opacity: 1 }}
+                                            transition={{ delay: 0.7 }}
+                                            className="text-sm text-gray-600 mt-4 italic"
+                                        >
+                                            Type a question below or click any suggestion to get started! 👇
+                                        </motion.p>
                                     </div>
                                 </div>
-                            ))}
-                            
-                            {isChatLoading && (
-                                <div className="flex justify-start">
-                                    <div className="h-8 w-8 rounded-full bg-white border border-primary-200 flex-shrink-0 mr-2 flex items-center justify-center overflow-hidden">
-                                        <img 
-                                            src="/budbuddy.png" 
-                                            alt="Bud" 
-                                            className="h-7 w-7 object-contain"
-                                        />
-                                    </div>
-                                    <div className="max-w-[80%] p-3 rounded-xl bg-gray-100 text-gray-800 flex items-center space-x-2">
-                                        <div className="w-2 h-2 rounded-full bg-gray-400 animate-pulse"></div>
-                                        <div className="w-2 h-2 rounded-full bg-gray-400 animate-pulse" style={{ animationDelay: "0.2s" }}></div>
-                                        <div className="w-2 h-2 rounded-full bg-gray-400 animate-pulse" style={{ animationDelay: "0.4s" }}></div>
-                                    </div>
-                                </div>
-                            )}
-                        </div>
-                    )}
+                            </div>
+                        )}
 
-                    <div className="overflow-y-auto">
-                        <Textarea
-                            ref={textareaRef}
-                            value={value}
-                            onChange={(e) => {
-                                setValue(e.target.value);
-                                adjustHeight();
-                            }}
-                            onKeyDown={handleKeyDown}
-                            placeholder={
-                                mode === 'activity'
-                                    ? "Describe the activities you're planning (concert, hike, movie night, etc.)..."
-                                    : mode === 'cannabis'
-                                    ? "Ask any question about cannabis, terpenes, consumption methods, etc..."
-                                    : "Ask about a specific feeling or effect..."
-                            }
-                            className={cn(
-                                "w-full px-4 py-3",
-                                "resize-none",
-                                "bg-transparent",
-                                "border-none",
-                                "text-gray-900 text-sm",
-                                "focus:outline-none",
-                                "focus-visible:ring-0 focus-visible:ring-offset-0",
-                                "placeholder:text-gray-500 placeholder:text-sm",
-                                "min-h-[60px]"
-                            )}
-                            style={{
-                                overflow: "hidden",
-                            }}
-                            disabled={isLoading || isChatLoading}
-                        />
-                    </div>
-
-                    <div className="flex items-center justify-between p-3 border-t border-gray-100">
-                        <div className="flex items-center gap-2">
-                            <button
-                                type="button"
-                                className="group p-2 hover:bg-gray-100 rounded-lg transition-colors flex items-center gap-1"
-                                disabled={isLoading || isChatLoading}
+                        {/* Resizable Chat history for cannabis mode */}
+                        {chatHistory.length > 0 && (
+                            <div 
+                                ref={chatContainerRef}
+                                className="overflow-y-auto p-6 space-y-4 bg-white bg-opacity-70"
+                                style={{ 
+                                    minHeight: '200px',
+                                    maxHeight: chatHistory.length > 4 ? '450px' : '300px',
+                                    height: 'auto'
+                                }}
                             >
-                                <Paperclip className="w-4 h-4 text-gray-600" />
-                                <span className="text-xs text-gray-600 hidden group-hover:inline transition-opacity">
-                                    Attach
-                                </span>
-                            </button>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <button
-                                type="button"
-                                className="px-2 py-1 rounded-lg text-sm text-gray-600 transition-colors border border-dashed border-gray-300 hover:border-gray-400 hover:bg-gray-50 flex items-center justify-between gap-1"
-                                disabled={isLoading || isChatLoading}
-                            >
-                                <PlusIcon className="w-4 h-4" />
-                                Product
-                            </button>
-                            <button
-                                type="button"
-                                onClick={handleSubmit}
-                                disabled={!value.trim() || isLoading || isChatLoading}
-                                className={cn(
-                                    "px-1.5 py-1.5 rounded-lg text-sm transition-colors border flex items-center justify-between gap-1",
-                                    value.trim() && !isLoading && !isChatLoading
-                                        ? "bg-primary-500 text-white border-primary-500 hover:bg-primary-600 cursor-pointer active:translate-y-0.5 active:shadow-inner"
-                                        : "text-gray-400 border-gray-300 cursor-not-allowed"
-                                )}
-                            >
-                                {isLoading || isChatLoading ? (
-                                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                                ) : (
-                                    <ArrowUpIcon
-                                        className={cn(
-                                            "w-4 h-4",
-                                            value.trim()
-                                                ? "text-white"
-                                                : "text-gray-400"
+                                {chatHistory.map((message, index) => (
+                                    <motion.div 
+                                        key={index}
+                                        initial={{ opacity: 0, y: 10 }}
+                                        animate={{ opacity: 1, y: 0 }}
+                                        transition={{ delay: index * 0.1 }}
+                                        className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                                    >
+                                        {message.role === 'assistant' && (
+                                            <div className="h-10 w-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mr-3 mt-1">
+                                                <Leaf className="h-5 w-5 text-green-600" />
+                                            </div>
                                         )}
-                                    />
+                                        <div className={`max-w-[85%] ${message.role === 'user' ? '' : 'flex-1'}`}>
+                                            {message.role === 'user' ? (
+                                                <div className="bg-green-100 text-green-800 px-4 py-3 rounded-2xl font-medium">
+                                                    {message.content}
+                                                </div>
+                                            ) : (
+                                                                                        <div className="bg-white rounded-2xl p-4 shadow-sm border border-green-100">
+                                            {message.content.split('\n\n').map((paragraph, i) => {
+                                                // Check if this is a special formatted line (starts with emoji or has **)
+                                                const hasEmoji = /^[👋💡🌿🧪💊🍪]/.test(paragraph);
+                                                const hasBold = paragraph.includes('**');
+                                                
+                                                // Process bold text
+                                                const processText = (text: string) => {
+                                                    if (!hasBold) return text;
+                                                    const parts = text.split(/\*\*(.*?)\*\*/g);
+                                                    return parts.map((part, index) => 
+                                                        index % 2 === 1 
+                                                            ? <span key={index} className="font-semibold text-gray-900">{part}</span>
+                                                            : part
+                                                    );
+                                                };
+                                                
+                                                return (
+                                                    <motion.p 
+                                                        key={i} 
+                                                        initial={{ opacity: 0 }}
+                                                        animate={{ opacity: 1 }}
+                                                        transition={{ delay: i * 0.05 }}
+                                                        className={`text-gray-700 leading-relaxed ${i > 0 ? 'mt-3' : ''} ${hasEmoji ? 'text-left' : ''}`}
+                                                    >
+                                                        {paragraph.split('\n').map((line, j) => (
+                                                            <span key={j}>
+                                                                {processText(line)}
+                                                                {j < paragraph.split('\n').length - 1 && <br />}
+                                                            </span>
+                                                        ))}
+                                                    </motion.p>
+                                                );
+                                            })}
+                                        </div>
+                                            )}
+                                        </div>
+                                    </motion.div>
+                                ))}
+                                
+                                {isChatLoading && (
+                                    <motion.div 
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        className="flex items-center space-x-3"
+                                    >
+                                        <div className="h-10 w-10 bg-green-100 rounded-full flex items-center justify-center">
+                                            <Leaf className="h-5 w-5 text-green-600" />
+                                        </div>
+                                        <div className="bg-white rounded-2xl p-4 shadow-sm border border-green-100 flex items-center space-x-2">
+                                            <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+                                            <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" style={{ animationDelay: "0.2s" }}></div>
+                                            <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" style={{ animationDelay: "0.4s" }}></div>
+                                            <span className="text-green-600 text-sm ml-2">Learning about cannabis...</span>
+                                        </div>
+                                    </motion.div>
                                 )}
-                                <span className="sr-only">Send</span>
-                            </button>
+                            </div>
+                        )}
+
+                        {/* Input area */}
+                        <div className="p-4 bg-gray-50 border-t border-green-100">
+                            <div className="flex items-start gap-3">
+                                <textarea
+                                    ref={textareaRef}
+                                    value={value}
+                                    onChange={(e) => {
+                                        setValue(e.target.value);
+                                        adjustHeight();
+                                    }}
+                                    onKeyDown={handleKeyDown}
+                                    placeholder="Ask me anything! Try 'What are terpenes?' or 'How do edibles work?'"
+                                    className="flex-1 px-4 py-3 border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-green-500 focus:border-green-500 resize-none text-gray-700 bg-white"
+                                    rows={1}
+                                    style={{ minHeight: '48px', maxHeight: '120px' }}
+                                    disabled={isLoading || isChatLoading}
+                                />
+                                <motion.button
+                                    type="button"
+                                    onClick={handleSubmit}
+                                    disabled={!value.trim() || isLoading || isChatLoading}
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className={`p-3 rounded-2xl flex items-center justify-center ${
+                                        value.trim() && !isLoading && !isChatLoading
+                                            ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg hover:shadow-xl'
+                                            : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                                    } transition-all`}
+                                >
+                                    {isLoading || isChatLoading ? (
+                                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                                    ) : (
+                                        <ArrowUpIcon className="w-5 h-5" />
+                                    )}
+                                </motion.button>
+                            </div>
                         </div>
                     </div>
-                </div>
+                ) : (
+                    // Original interface for vibe and activity modes
+                    <div className="relative bg-white rounded-xl border border-gray-200 shadow-md">
+                        <div className="overflow-y-auto">
+                            <Textarea
+                                ref={textareaRef}
+                                value={value}
+                                onChange={(e) => {
+                                    setValue(e.target.value);
+                                    adjustHeight();
+                                }}
+                                onKeyDown={handleKeyDown}
+                                placeholder={
+                                    mode === 'activity'
+                                        ? "Describe the activities you're planning (concert, hike, movie night, etc.)..."
+                                        : "Ask about a specific feeling or effect..."
+                                }
+                                className={cn(
+                                    "w-full px-4 py-3",
+                                    "resize-none",
+                                    "bg-transparent",
+                                    "border-none",
+                                    "text-gray-900 text-sm",
+                                    "focus:outline-none",
+                                    "focus-visible:ring-0 focus-visible:ring-offset-0",
+                                    "placeholder:text-gray-500 placeholder:text-sm",
+                                    "min-h-[60px]"
+                                )}
+                                style={{
+                                    overflow: "hidden",
+                                }}
+                                disabled={isLoading || isChatLoading}
+                            />
+                        </div>
+
+                        <div className="flex items-center justify-between p-3 border-t border-gray-100">
+                            <div className="flex items-center gap-2">
+                                <button
+                                    type="button"
+                                    className="group p-2 hover:bg-gray-100 rounded-lg transition-colors flex items-center gap-1"
+                                    disabled={isLoading || isChatLoading}
+                                >
+                                    <Paperclip className="w-4 h-4 text-gray-600" />
+                                    <span className="text-xs text-gray-600 hidden group-hover:inline transition-opacity">
+                                        Attach
+                                    </span>
+                                </button>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <button
+                                    type="button"
+                                    className="px-2 py-1 rounded-lg text-sm text-gray-600 transition-colors border border-dashed border-gray-300 hover:border-gray-400 hover:bg-gray-50 flex items-center justify-between gap-1"
+                                    disabled={isLoading || isChatLoading}
+                                >
+                                    <PlusIcon className="w-4 h-4" />
+                                    Product
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={handleSubmit}
+                                    disabled={!value.trim() || isLoading || isChatLoading}
+                                    className={cn(
+                                        "px-1.5 py-1.5 rounded-lg text-sm transition-colors border flex items-center justify-between gap-1",
+                                        value.trim() && !isLoading && !isChatLoading
+                                            ? "bg-primary-500 text-white border-primary-500 hover:bg-primary-600 cursor-pointer active:translate-y-0.5 active:shadow-inner"
+                                            : "text-gray-400 border-gray-300 cursor-not-allowed"
+                                    )}
+                                >
+                                    {isLoading || isChatLoading ? (
+                                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                                    ) : (
+                                        <ArrowUpIcon
+                                            className={cn(
+                                                "w-4 h-4",
+                                                value.trim()
+                                                    ? "text-white"
+                                                    : "text-gray-400"
+                                            )}
+                                        />
+                                    )}
+                                    <span className="sr-only">Send</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
 
                 <div className="flex justify-end mt-3">
                     <motion.div className="flex items-center gap-2">
@@ -612,12 +819,14 @@ export function VercelV0Chat({ onSearch, isLoading = false }: VercelV0ChatProps)
                             onClick={() => changeMode('cannabis')}
                             className={`flex items-center gap-2 px-4 py-2 rounded-full shadow-md transition-all duration-300 relative overflow-hidden ${
                                 mode === 'cannabis' 
-                                ? 'bg-gradient-to-r from-primary-500 to-primary-600 text-white' 
-                                : 'bg-gray-100 text-gray-700'
+                                ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg' 
+                                : 'bg-gray-100 text-gray-700 hover:bg-green-50 hover:text-green-700'
                             }`}
                             whileHover={{ 
                                 y: -2,
-                                boxShadow: "0 6px 10px rgba(0, 0, 0, 0.15)"
+                                boxShadow: mode === 'cannabis' 
+                                    ? "0 8px 25px rgba(34, 197, 94, 0.3)"
+                                    : "0 6px 10px rgba(0, 0, 0, 0.15)"
                             }}
                             whileTap={{ 
                                 y: 0,
@@ -627,7 +836,7 @@ export function VercelV0Chat({ onSearch, isLoading = false }: VercelV0ChatProps)
                             }}
                             disabled={isLoading || isChatLoading}
                         >
-                            <Book className="w-5 h-5" />
+                            <Leaf className="w-5 h-5" />
                             <span>Cannabis Questions</span>
                         </motion.button>
                     </motion.div>
@@ -650,29 +859,117 @@ export function VercelV0Chat({ onSearch, isLoading = false }: VercelV0ChatProps)
                     </div>
                 )}
 
-                <div className="flex items-center justify-center gap-3 mt-4 flex-wrap">
-                    {getCurrentSuggestions().map((suggestion) => (
-                        <ActionButton
-                            key={suggestion}
-                            icon={getIconForSuggestion(suggestion, mode)}
-                            label={suggestion}
-                            onClick={() => handleSuggestionClick(suggestion)}
-                            disabled={isLoading || isChatLoading} 
-                            isSelected={selectedSuggestions.includes(suggestion)}
-                        />
-                    ))}
-                </div>
-                
-                {mode === 'cannabis' && (
-                    <div className="mt-4 text-center">
+                {mode === 'cannabis' ? (
+                    // Beautiful Cannabis Questions Suggestions
+                    <div className="mt-6 space-y-4">
+                        <motion.p 
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="text-center text-gray-600 text-sm"
+                        >
+                            Popular cannabis questions to get you started
+                        </motion.p>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-w-5xl mx-auto">
+                            {getCurrentSuggestions().map((suggestion, index) => (
+                                <motion.button
+                                    key={suggestion}
+                                    type="button"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: index * 0.1 }}
+                                    whileHover={{ 
+                                        scale: 1.02,
+                                        y: -3,
+                                        boxShadow: "0 12px 30px rgba(34, 197, 94, 0.2)"
+                                    }}
+                                    whileTap={{ 
+                                        scale: 0.98,
+                                        y: 0
+                                    }}
+                                    className={`
+                                        group relative p-4 rounded-2xl border transition-all duration-300 overflow-hidden shadow-sm text-left
+                                        ${selectedSuggestions.includes(suggestion)
+                                            ? 'bg-gradient-to-br from-green-100 to-emerald-100 border-green-300 text-green-800 shadow-lg'
+                                            : 'bg-white hover:bg-gradient-to-br hover:from-green-50 hover:to-emerald-50 border-gray-200 hover:border-green-300 text-gray-700 hover:shadow-lg'
+                                        }
+                                    `}
+                                    onClick={() => handleSuggestionClick(suggestion)}
+                                    disabled={isLoading || isChatLoading}
+                                >
+                                    <div className="flex items-center space-x-4">
+                                        <div className={`
+                                            w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300
+                                            ${selectedSuggestions.includes(suggestion)
+                                                ? 'bg-green-200 text-green-700 shadow-sm'
+                                                : 'bg-gray-100 group-hover:bg-green-100 text-gray-600 group-hover:text-green-600 group-hover:shadow-sm'
+                                            }
+                                        `}>
+                                            {getIconForSuggestion(suggestion, mode)}
+                                        </div>
+                                        <div className="flex-1 min-w-0">
+                                            <p className="text-sm font-semibold leading-tight truncate">
+                                                {suggestion}
+                                            </p>
+                                            <p className="text-xs text-gray-500 mt-0.5 group-hover:text-green-600 transition-colors">
+                                                {suggestion === 'What is THC?' && 'Learn about psychoactive compounds'}
+                                                {suggestion === 'CBD benefits' && 'Therapeutic effects and uses'}
+                                                {suggestion === 'Terpenes explained' && 'Aromatic compounds in cannabis'}
+                                                {suggestion === 'Indica vs Sativa' && 'Understanding strain types'}
+                                                {suggestion === 'Edible dosing' && 'Safe consumption guidelines'}
+                                                {suggestion === 'Cannabis history' && 'Origins and cultural impact'}
+                                                {suggestion === 'Medical uses' && 'Therapeutic applications'}
+                                                {suggestion === 'Consumption methods' && 'Ways to use cannabis'}
+                                                {suggestion === 'Strain differences' && 'Varieties and effects'}
+                                                {suggestion === 'Endocannabinoid system' && 'How cannabis works in body'}
+                                                {suggestion === 'First-time tips' && 'Getting started safely'}
+                                                {suggestion === 'Product storage' && 'Keeping cannabis fresh'}
+                                                {suggestion === 'Legal questions' && 'Laws and regulations'}
+                                                {suggestion === 'Terpene effects' && 'How aromas affect you'}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    {selectedSuggestions.includes(suggestion) && (
+                                        <motion.div
+                                            initial={{ scale: 0, rotate: -180 }}
+                                            animate={{ scale: 1, rotate: 0 }}
+                                            transition={{ type: "spring", stiffness: 200 }}
+                                            className="absolute top-3 right-3 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center shadow-lg"
+                                        >
+                                            <X className="w-3 h-3 text-white" />
+                                        </motion.div>
+                                    )}
+                                    
+                                    {/* Subtle hover indicator */}
+                                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-green-400/0 via-emerald-400/0 to-green-400/0 group-hover:from-green-400/5 group-hover:via-emerald-400/5 group-hover:to-green-400/5 transition-all duration-300 pointer-events-none"></div>
+                                </motion.button>
+                            ))}
+                        </div>
+                        
                         <motion.div
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="inline-flex items-center text-xs text-gray-500 bg-gray-100 px-3 py-1 rounded-full"
+                            transition={{ delay: 0.5 }}
+                            className="text-center"
                         >
-                            <Leaf className="w-3 h-3 mr-1 text-primary-500" />
-                            <span>Ask anything about cannabis - from basic to advanced topics</span>
+                            <div className="inline-flex items-center text-xs text-green-600 bg-gradient-to-r from-green-100 to-emerald-100 px-4 py-2 rounded-full border border-green-200">
+                                <Leaf className="w-3 h-3 mr-2" />
+                                <span>Ask anything about cannabis - from basic to advanced topics</span>
+                            </div>
                         </motion.div>
+                    </div>
+                ) : (
+                    // Original suggestions for vibe and activity modes
+                    <div className="flex items-center justify-center gap-3 mt-4 flex-wrap">
+                        {getCurrentSuggestions().map((suggestion) => (
+                            <ActionButton
+                                key={suggestion}
+                                icon={getIconForSuggestion(suggestion, mode)}
+                                label={suggestion}
+                                onClick={() => handleSuggestionClick(suggestion)}
+                                disabled={isLoading || isChatLoading} 
+                                isSelected={selectedSuggestions.includes(suggestion)}
+                            />
+                        ))}
                     </div>
                 )}
             </div>
@@ -739,15 +1036,20 @@ function getIconForSuggestion(suggestion: string, mode: 'vibe' | 'activity' | 'c
     };
     
     const cannabisIconMap: Record<string, React.ReactNode> = {
-        'What is THC?': <Book className="w-4 h-4" />,
-        'CBD benefits': <CircleUserRound className="w-4 h-4" />,
-        'Terpenes explained': <FileUp className="w-4 h-4" />,
-        'Indica vs Sativa': <MonitorIcon className="w-4 h-4" />,
-        'Edible dosing': <Figma className="w-4 h-4" />,
-        'Endocannabinoid system': <Leaf className="w-4 h-4" />,
-        'Terpene effects': <Leaf className="w-4 h-4" />,
+        'What is THC?': <Leaf className="w-4 h-4" />,
+        'CBD benefits': <Leaf className="w-4 h-4" />,
+        'Terpenes explained': <Leaf className="w-4 h-4" />,
+        'Indica vs Sativa': <Leaf className="w-4 h-4" />,
+        'Edible dosing': <Info className="w-4 h-4" />,
+        'Cannabis history': <Book className="w-4 h-4" />,
+        'Medical uses': <Info className="w-4 h-4" />,
         'Consumption methods': <Info className="w-4 h-4" />,
+        'Strain differences': <Leaf className="w-4 h-4" />,
+        'Endocannabinoid system': <Leaf className="w-4 h-4" />,
         'First-time tips': <Info className="w-4 h-4" />,
+        'Product storage': <Info className="w-4 h-4" />,
+        'Legal questions': <Book className="w-4 h-4" />,
+        'Terpene effects': <Leaf className="w-4 h-4" />,
     };
     
     // Choose the appropriate map based on mode

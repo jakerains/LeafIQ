@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Star, ArrowLeft, Share2, Heart, MessageCircle, Send, ChevronDown, ChevronUp, Sparkles, Loader2 } from 'lucide-react';
+import { Star, ArrowLeft, Share2, Heart, MessageCircle, Send, ChevronDown, ChevronUp, Sparkles, Loader2, Bot, Leaf, Package, Zap, FlaskConical, Palette } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import ProductCard from '../../components/ui/ProductCard';
+import ProductDetailsModal from '../admin/components/ProductDetailsModal';
 import { ProductWithVariant } from '../../types';
 import { vibesToTerpenes } from '../../data/demoData';
 import { Button } from '../../components/ui/button';
@@ -44,6 +45,7 @@ const KioskResults = ({
   const [updatedResults, setUpdatedResults] = useState<ProductWithVariant[]>(results);
   const [updatedEffects, setUpdatedEffects] = useState<string[]>(providedEffects || []);
   const [updatedIsAIPowered, setUpdatedIsAIPowered] = useState<boolean>(isAIPowered);
+  const [selectedProduct, setSelectedProduct] = useState<ProductWithVariant | null>(null);
   
   // Update local state when props change
   useEffect(() => {
@@ -52,6 +54,113 @@ const KioskResults = ({
     setUpdatedIsAIPowered(isAIPowered);
   }, [results, providedEffects, isAIPowered]);
   
+  // Helper function to format chat responses with rich product cards
+  const formatChatResponse = (content: string) => {
+    // Split response into sections
+    const sections = content.split('\n\n');
+    
+    return sections.map((section, idx) => {
+      // Check if it's a product recommendation
+      if (section.includes('•')) {
+        const lines = section.split('\n').filter(line => line.trim());
+        const header = lines[0];
+        const recommendations = lines.slice(1);
+        
+        return (
+          <div key={idx} className="mb-4">
+            <p className="text-gray-700 font-medium mb-3">{header}</p>
+            <div className="space-y-2">
+              {recommendations.map((rec, recIdx) => {
+                // Parse recommendation details
+                const match = rec.match(/• (.+?) by (.+?) \((.+?)\) - (.+?) at (.+?)(?:\. (.+))?/);
+                if (match) {
+                  const [_, name, brand, cannabinoids, stock, price, terpenes] = match;
+                  const [thc, cbd] = cannabinoids.split(', ');
+                  const stockLevel = parseInt(stock);
+                  const stockColor = stockLevel > 15 ? 'text-green-600' : stockLevel > 5 ? 'text-yellow-600' : 'text-orange-600';
+                  
+                  // Find the actual product object
+                  const product = updatedResults.find(p => 
+                    p.name === name && p.brand === brand
+                  );
+                  
+                  return (
+                    <motion.div
+                      key={recIdx}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: recIdx * 0.1 }}
+                      className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl overflow-hidden border border-green-200 hover:shadow-md transition-shadow cursor-pointer"
+                      onClick={() => product && setSelectedProduct(product)}
+                    >
+                      <div className="flex">
+                        {product?.image_url && (
+                          <div className="w-28 h-28 flex-shrink-0">
+                            <img 
+                              src={product.image_url} 
+                              alt={name}
+                              className="w-full h-full object-cover"
+                            />
+                          </div>
+                        )}
+                        <div className="flex-1 p-4">
+                          <div className="flex justify-between items-start mb-2">
+                            <div>
+                              <h4 className="font-semibold text-gray-900">{name}</h4>
+                              <p className="text-sm text-gray-600">by {brand}</p>
+                            </div>
+                            <span className="text-lg font-bold text-green-600">{price}</span>
+                          </div>
+                          
+                          <div className="flex flex-wrap gap-2 mb-2">
+                            {thc && (
+                              <span className="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full font-medium">
+                                {thc}
+                              </span>
+                            )}
+                            {cbd && cbd !== '0.0% CBD' && (
+                              <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs rounded-full font-medium">
+                                {cbd}
+                              </span>
+                            )}
+                            <span className={`px-2 py-1 bg-gray-100 text-xs rounded-full font-medium ${stockColor}`}>
+                              {stock}
+                            </span>
+                          </div>
+                          
+                          {terpenes && (
+                            <p className="text-xs text-gray-600 italic">
+                              <Palette className="inline w-3 h-3 mr-1" />
+                              {terpenes}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    </motion.div>
+                  );
+                }
+                return <div key={recIdx} className="text-sm text-gray-700">{rec}</div>;
+              })}
+            </div>
+          </div>
+        );
+      }
+      
+      // Regular text paragraph
+      return (
+        <motion.p 
+          key={idx} 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: idx * 0.05 }}
+          className="text-gray-700 leading-relaxed mb-3"
+        >
+          {section}
+        </motion.p>
+      );
+    });
+  };
+
   // Generate a personalized recommendation blurb based on the search query
   const generateRecommendationBlurb = (query: string, effects: string[]): string => {
     const lowercaseQuery = query.toLowerCase();
@@ -321,117 +430,377 @@ const KioskResults = ({
           Based on your desire to feel <span className="font-semibold text-primary-600">"{searchQuery}"</span>
         </p>
         
-        {/* Recommendation blurb with chatbot toggle */}
+        {/* Enhanced AI Assistant Section */}
         <motion.div
-          className="mt-4 bg-white bg-opacity-70 backdrop-blur-sm rounded-xl border border-gray-100 shadow-sm overflow-hidden"
+          className="mt-6 bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl shadow-xl border border-green-200 overflow-hidden"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <div className="p-4">
-            <div className="flex justify-between items-start">
-              <p className="text-lg text-gray-700 pr-4">
-                {recommendationBlurb}
-              </p>
-              <button 
+          <div className="p-6">
+            <div className="flex items-start justify-between">
+              <div className="flex items-start space-x-4 flex-1">
+                <motion.div 
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: "spring", stiffness: 200 }}
+                  className="h-14 w-14 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full flex items-center justify-center shadow-lg overflow-hidden flex-shrink-0"
+                >
+                  <img src="/budbuddy.png" alt="Bud" className="h-12 w-12 object-contain" />
+                </motion.div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold text-gray-800 mb-1">Your Personal Cannabis Guide</h3>
+                  <p className="text-gray-700 pr-4">
+                    {recommendationBlurb}
+                  </p>
+                </div>
+              </div>
+              <motion.button 
                 onClick={() => setShowChatbot(!showChatbot)}
-                className="flex-shrink-0 p-2 text-primary-600 hover:text-primary-800 transition-colors rounded-full hover:bg-primary-50"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="flex-shrink-0 p-3 bg-white rounded-full shadow-md hover:shadow-lg transition-all"
                 aria-label={showChatbot ? "Hide chat" : "Show chat"}
               >
-                {showChatbot ? <ChevronUp size={20} /> : <MessageCircle size={20} />}
-              </button>
+                {showChatbot ? <ChevronUp size={24} className="text-green-600" /> : <MessageCircle size={24} className="text-green-600" />}
+              </motion.button>
             </div>
           </div>
           
-          {/* Chatbot interface */}
+          {/* Enhanced Chatbot Interface */}
           {showChatbot && (
             <motion.div 
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="border-t border-gray-100 bg-white bg-opacity-90"
+              className="bg-white bg-opacity-95"
             >
-              {/* Chat history */}
-              <div className="max-h-60 overflow-y-auto p-4 space-y-3">
-                {chatHistory.length > 0 ? (
-                  chatHistory.map((message, index) => (
-                    <div 
-                      key={index} 
-                      className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
-                    >
-                      <div 
-                        className={`max-w-[80%] p-3 rounded-xl ${
-                          message.role === 'user' 
-                            ? 'bg-primary-100 text-primary-800' 
-                            : 'bg-gray-100 text-gray-800'
-                        }`}
-                      >
-                        {message.content}
+              {/* Welcome Message for Empty State */}
+              {chatHistory.length === 0 && (
+                <div className="p-6 border-b border-gray-100">
+                  <div className="flex items-start space-x-3">
+                    <div className="h-10 w-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
+                      <Bot className="h-5 w-5 text-green-600" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-gray-700 mb-3">
+                        Hi! I'm Bud, your personal cannabis guide. 🌿
+                      </p>
+                      <p className="text-gray-600 text-sm mb-4">
+                        I can help you explore different options based on:
+                      </p>
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="flex items-center space-x-2 text-sm text-gray-600">
+                          <Package className="h-4 w-4 text-green-500" />
+                          <span>Product types</span>
+                        </div>
+                        <div className="flex items-center space-x-2 text-sm text-gray-600">
+                          <Zap className="h-4 w-4 text-yellow-500" />
+                          <span>Desired effects</span>
+                        </div>
+                        <div className="flex items-center space-x-2 text-sm text-gray-600">
+                          <FlaskConical className="h-4 w-4 text-blue-500" />
+                          <span>THC/CBD levels</span>
+                        </div>
+                        <div className="flex items-center space-x-2 text-sm text-gray-600">
+                          <Palette className="h-4 w-4 text-purple-500" />
+                          <span>Terpene profiles</span>
+                        </div>
                       </div>
                     </div>
-                  ))
-                ) : (
-                  <div className="text-center text-gray-500 py-2">
-                    Ask about specific products, categories, or effects
                   </div>
-                )}
+                </div>
+              )}
+              
+              {/* Enhanced Chat history with dynamic height */}
+              <div 
+                className="overflow-y-auto p-6 space-y-4"
+                style={{ 
+                  minHeight: '200px',
+                  maxHeight: chatHistory.length > 3 ? '450px' : '300px',
+                  height: 'auto'
+                }}
+              >
+                {chatHistory.map((message, index) => (
+                  <motion.div 
+                    key={index}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                  >
+                    {message.role === 'assistant' && (
+                      <div className="h-8 w-8 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0 mr-3 mt-1">
+                        <Bot className="h-4 w-4 text-green-600" />
+                      </div>
+                    )}
+                    <div className={`max-w-[85%] ${message.role === 'user' ? '' : 'flex-1'}`}>
+                      {message.role === 'user' ? (
+                        <div className="bg-green-100 text-green-800 px-4 py-3 rounded-2xl">
+                          {message.content}
+                        </div>
+                      ) : (
+                        <div className="space-y-3">
+                          {formatChatResponse(message.content)}
+                        </div>
+                      )}
+                    </div>
+                  </motion.div>
+                ))}
                 
                 {/* Loading indicator for chat */}
                 {isChatLoading && (
-                  <div className="flex justify-center py-2">
-                    <div className="flex items-center space-x-2 text-primary-600">
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      <span className="text-sm">Updating recommendations...</span>
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    className="flex items-center space-x-3"
+                  >
+                    <div className="h-8 w-8 bg-green-100 rounded-full flex items-center justify-center">
+                      <Bot className="h-4 w-4 text-green-600" />
                     </div>
-                  </div>
+                    <div className="flex items-center space-x-2 text-green-600">
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      <span className="text-sm">Finding perfect matches for you...</span>
+                    </div>
+                  </motion.div>
                 )}
               </div>
               
-              {/* Chat input */}
-              <div className="p-3 border-t border-gray-100 flex items-center gap-2">
-                <input
-                  type="text"
-                  value={chatMessage}
-                  onChange={(e) => setChatMessage(e.target.value)}
-                  placeholder="Ask about concentrates, flower, edibles, etc..."
-                  className="flex-1 px-3 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  onKeyPress={(e) => {
-                    if (e.key === 'Enter') {
-                      handleChatSubmit();
-                    }
-                  }}
-                  disabled={isChatLoading}
-                />
-                <button
-                  onClick={handleChatSubmit}
-                  disabled={!chatMessage.trim() || isChatLoading}
-                  className={`p-2 rounded-lg ${
-                    chatMessage.trim() && !isChatLoading
-                      ? 'bg-primary-500 text-white hover:bg-primary-600'
-                      : 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                  }`}
-                >
-                  {isChatLoading ? (
-                    <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                  ) : (
-                    <Send size={18} />
-                  )}
-                </button>
+              {/* Enhanced Chat Input */}
+              <div className="p-4 border-t border-gray-100 bg-gray-50">
+                <div className="flex items-start gap-3">
+                  <textarea
+                    value={chatMessage}
+                    onChange={(e) => setChatMessage(e.target.value)}
+                    placeholder="Ask me anything! Try 'Show me energizing sativas' or 'What's good for sleep?'"
+                    className="flex-1 px-4 py-3 border-2 border-gray-200 rounded-2xl focus:ring-2 focus:ring-green-500 focus:border-green-500 resize-none text-gray-700"
+                    rows={1}
+                    style={{ minHeight: '44px', maxHeight: '120px' }}
+                    onKeyPress={(e) => {
+                      if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        handleChatSubmit();
+                      }
+                    }}
+                    disabled={isChatLoading}
+                  />
+                  <motion.button
+                    onClick={handleChatSubmit}
+                    disabled={!chatMessage.trim() || isChatLoading}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className={`p-3 rounded-2xl flex items-center justify-center ${
+                      chatMessage.trim() && !isChatLoading
+                        ? 'bg-gradient-to-r from-green-500 to-emerald-600 text-white shadow-lg hover:shadow-xl'
+                        : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                    } transition-all`}
+                  >
+                    {isChatLoading ? (
+                      <Loader2 className="w-5 h-5 animate-spin" />
+                    ) : (
+                      <Send size={20} />
+                    )}
+                  </motion.button>
+                </div>
+                
+                {/* Enhanced Quick Suggestions */}
+                <div className="mt-4 space-y-3">
+                  <p className="text-center text-gray-600 text-sm font-medium">Popular questions to get you started</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <motion.button
+                      whileHover={{ 
+                        scale: 1.02,
+                        y: -2,
+                        boxShadow: "0 8px 25px rgba(34, 197, 94, 0.15)"
+                      }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => setChatMessage("Show me your strongest concentrates")}
+                      className="group p-4 bg-white rounded-2xl border border-gray-200 hover:border-green-300 hover:bg-gradient-to-br hover:from-green-50 hover:to-emerald-50 transition-all duration-300 text-left shadow-sm hover:shadow-md"
+                    >
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 rounded-xl bg-gray-100 group-hover:bg-green-100 flex items-center justify-center transition-colors">
+                          <span className="text-lg">💪</span>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-semibold text-gray-900 group-hover:text-green-800 transition-colors">
+                            Strongest options
+                          </p>
+                          <p className="text-xs text-gray-500 group-hover:text-green-600 transition-colors">
+                            High-potency products for experienced users
+                          </p>
+                        </div>
+                      </div>
+                    </motion.button>
+                    
+                    <motion.button
+                      whileHover={{ 
+                        scale: 1.02,
+                        y: -2,
+                        boxShadow: "0 8px 25px rgba(34, 197, 94, 0.15)"
+                      }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => setChatMessage("What's best for first-time users?")}
+                      className="group p-4 bg-white rounded-2xl border border-gray-200 hover:border-green-300 hover:bg-gradient-to-br hover:from-green-50 hover:to-emerald-50 transition-all duration-300 text-left shadow-sm hover:shadow-md"
+                    >
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 rounded-xl bg-gray-100 group-hover:bg-green-100 flex items-center justify-center transition-colors">
+                          <span className="text-lg">🌱</span>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-semibold text-gray-900 group-hover:text-green-800 transition-colors">
+                            First-timer friendly
+                          </p>
+                          <p className="text-xs text-gray-500 group-hover:text-green-600 transition-colors">
+                            Gentle options perfect for beginners
+                          </p>
+                        </div>
+                      </div>
+                    </motion.button>
+                    
+                    <motion.button
+                      whileHover={{ 
+                        scale: 1.02,
+                        y: -2,
+                        boxShadow: "0 8px 25px rgba(34, 197, 94, 0.15)"
+                      }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => setChatMessage("Tell me about terpenes")}
+                      className="group p-4 bg-white rounded-2xl border border-gray-200 hover:border-green-300 hover:bg-gradient-to-br hover:from-green-50 hover:to-emerald-50 transition-all duration-300 text-left shadow-sm hover:shadow-md"
+                    >
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 rounded-xl bg-gray-100 group-hover:bg-green-100 flex items-center justify-center transition-colors">
+                          <span className="text-lg">🧪</span>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-semibold text-gray-900 group-hover:text-green-800 transition-colors">
+                            Learn about terpenes
+                          </p>
+                          <p className="text-xs text-gray-500 group-hover:text-green-600 transition-colors">
+                            Understanding cannabis aromatics and effects
+                          </p>
+                        </div>
+                      </div>
+                    </motion.button>
+                    
+                    <motion.button
+                      whileHover={{ 
+                        scale: 1.02,
+                        y: -2,
+                        boxShadow: "0 8px 25px rgba(34, 197, 94, 0.15)"
+                      }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => setChatMessage("What is THC and CBD?")}
+                      className="group p-4 bg-white rounded-2xl border border-gray-200 hover:border-green-300 hover:bg-gradient-to-br hover:from-green-50 hover:to-emerald-50 transition-all duration-300 text-left shadow-sm hover:shadow-md"
+                    >
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 rounded-xl bg-gray-100 group-hover:bg-green-100 flex items-center justify-center transition-colors">
+                          <Leaf className="w-5 h-5" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-semibold text-gray-900 group-hover:text-green-800 transition-colors">
+                            THC vs CBD
+                          </p>
+                          <p className="text-xs text-gray-500 group-hover:text-green-600 transition-colors">
+                            Understanding cannabinoids and their effects
+                          </p>
+                        </div>
+                      </div>
+                    </motion.button>
+                    
+                    <motion.button
+                      whileHover={{ 
+                        scale: 1.02,
+                        y: -2,
+                        boxShadow: "0 8px 25px rgba(34, 197, 94, 0.15)"
+                      }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => setChatMessage("How do edibles work differently?")}
+                      className="group p-4 bg-white rounded-2xl border border-gray-200 hover:border-green-300 hover:bg-gradient-to-br hover:from-green-50 hover:to-emerald-50 transition-all duration-300 text-left shadow-sm hover:shadow-md"
+                    >
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 rounded-xl bg-gray-100 group-hover:bg-green-100 flex items-center justify-center transition-colors">
+                          <Package className="w-5 h-5" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-semibold text-gray-900 group-hover:text-green-800 transition-colors">
+                            How edibles work
+                          </p>
+                          <p className="text-xs text-gray-500 group-hover:text-green-600 transition-colors">
+                            Dosing, timing, and safety tips
+                          </p>
+                        </div>
+                      </div>
+                    </motion.button>
+                    
+                    <motion.button
+                      whileHover={{ 
+                        scale: 1.02,
+                        y: -2,
+                        boxShadow: "0 8px 25px rgba(34, 197, 94, 0.15)"
+                      }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => setChatMessage("Indica vs Sativa - what's the difference?")}
+                      className="group p-4 bg-white rounded-2xl border border-gray-200 hover:border-green-300 hover:bg-gradient-to-br hover:from-green-50 hover:to-emerald-50 transition-all duration-300 text-left shadow-sm hover:shadow-md"
+                    >
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 rounded-xl bg-gray-100 group-hover:bg-green-100 flex items-center justify-center transition-colors">
+                          <FlaskConical className="w-5 h-5" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-semibold text-gray-900 group-hover:text-green-800 transition-colors">
+                            Indica vs Sativa
+                          </p>
+                          <p className="text-xs text-gray-500 group-hover:text-green-600 transition-colors">
+                            Understanding strain classifications
+                          </p>
+                        </div>
+                      </div>
+                    </motion.button>
+                    
+                    <motion.button
+                      whileHover={{ 
+                        scale: 1.02,
+                        y: -2,
+                        boxShadow: "0 8px 25px rgba(34, 197, 94, 0.15)"
+                      }}
+                      whileTap={{ scale: 0.98 }}
+                      onClick={() => setChatMessage("What should I know about dosing?")}
+                      className="group p-4 bg-white rounded-2xl border border-gray-200 hover:border-green-300 hover:bg-gradient-to-br hover:from-green-50 hover:to-emerald-50 transition-all duration-300 text-left shadow-sm hover:shadow-md"
+                    >
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 rounded-xl bg-gray-100 group-hover:bg-green-100 flex items-center justify-center transition-colors">
+                          <Zap className="w-5 h-5" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-semibold text-gray-900 group-hover:text-green-800 transition-colors">
+                            Safe dosing tips
+                          </p>
+                          <p className="text-xs text-gray-500 group-hover:text-green-600 transition-colors">
+                            Start low, go slow, and more guidance
+                          </p>
+                        </div>
+                      </div>
+                    </motion.button>
+                  </div>
+                </div>
               </div>
             </motion.div>
           )}
           
-          {/* AI-Powered Recommendations badge moved below the chatbox */}
+          {/* AI-Powered Recommendations badge */}
           {updatedIsAIPowered && (
-            <motion.p
-              className="mt-2 inline-flex items-center gap-1 px-3 py-1 bg-primary-100 text-primary-800 rounded-full text-sm font-medium"
+            <motion.div
+              className="mt-3 flex justify-center"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.2 }}
             >
-              <Sparkles size={14} className="text-primary-600" />
-              AI-Powered Recommendations
-            </motion.p>
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 rounded-full text-sm font-medium border border-green-200">
+                <Sparkles size={16} className="text-green-600" />
+                <span>Personalized by AI • Powered by Real Inventory</span>
+                <Leaf size={16} className="text-green-600" />
+              </div>
+            </motion.div>
           )}
         </motion.div>
       </motion.div>
@@ -460,6 +829,7 @@ const KioskResults = ({
               <ProductCard 
                 product={product} 
                 effects={updatedEffects}
+                onProductSelect={setSelectedProduct}
               />
             </motion.div>
           ))}
@@ -476,21 +846,41 @@ const KioskResults = ({
         </motion.div>
       )}
 
-      {!showChatbot && (
+      {!showChatbot && updatedResults.length > 0 && (
         <motion.button
           onClick={() => setShowChatbot(true)}
           variants={item}
-          className="w-full text-center mt-12 p-6 bg-primary-50 rounded-3xl hover:bg-primary-100 transition-colors"
+          className="w-full text-center mt-12 p-8 bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl hover:from-green-100 hover:to-emerald-100 transition-all border border-green-200 shadow-lg hover:shadow-xl"
         >
-          <h3 className="text-2xl font-semibold mb-3">Need more guidance?</h3>
-          <p className="text-gray-700 mb-4">
-            Ask about specific products, categories, or effects to refine your recommendations.
-          </p>
-          <div className="inline-flex items-center gap-2 p-3 bg-white rounded-xl shadow-sm text-primary-700 font-medium">
-            <MessageCircle size={18} />
-            Click to chat with LeafIQ
+          <div className="flex justify-center mb-4">
+            <div className="h-16 w-16 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full flex items-center justify-center shadow-lg">
+              <img src="/budbuddy.png" alt="Bud" className="h-14 w-14 object-contain" />
+            </div>
           </div>
+          <h3 className="text-2xl font-bold mb-3 text-gray-800">Want personalized recommendations?</h3>
+          <p className="text-gray-700 mb-6 max-w-2xl mx-auto">
+            I'm here to help you find exactly what you're looking for. Ask me about specific effects, product types, or let me guide you to the perfect match!
+          </p>
+          <motion.div 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl shadow-lg text-white font-semibold"
+          >
+            <MessageCircle size={20} />
+            <span>Chat with your Cannabis Guide</span>
+            <Sparkles size={18} />
+          </motion.div>
         </motion.button>
+      )}
+      
+      {/* Product Details Modal */}
+      {selectedProduct && (
+        <ProductDetailsModal
+          product={selectedProduct}
+          onClose={() => setSelectedProduct(null)}
+          onEdit={() => {}} // No-op for customer kiosk
+          showEditButton={false}
+        />
       )}
     </motion.div>
   );

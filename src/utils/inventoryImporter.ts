@@ -26,10 +26,10 @@ export interface ImportProduct {
   name: string;
   brand: string;
   category: string;
-  subcategory?: string;
-  description?: string;
-  image_url?: string;
-  strain_type?: 'indica' | 'sativa' | 'hybrid' | 'cbd' | 'balanced';
+  subcategory?: string | null;
+  description?: string | null;
+  image_url?: string | null;
+  strain_type?: 'indica' | 'sativa' | 'hybrid' | 'cbd' | 'balanced' | null;
   variants: ImportVariant[];
 }
 
@@ -155,6 +155,23 @@ export async function importInventoryData(
   };
 
   try {
+    // Verify and refresh authentication first
+    const { data: { user }, error: authError } = await supabase.auth.getUser();
+    if (authError || !user) {
+      return {
+        success: false,
+        message: 'Authentication required. Please sign in again.',
+        stats
+      };
+    }
+
+    // Try to refresh the session to ensure we have a valid token
+    const { error: refreshError } = await supabase.auth.refreshSession();
+    if (refreshError) {
+      console.warn('🔄 Session refresh failed, but continuing with current session:', refreshError);
+    }
+
+    console.log('🔐 Import authentication verified for user:', user.email);
     // Validate the data first
     const validation = validateImportData(data);
     if (!validation.valid) {
@@ -191,119 +208,57 @@ export async function importInventoryData(
       stats.productsProcessed++;
 
       try {
-        // Check if product already exists
-        const { data: existingProduct } = await supabase
-          .from('products')
-          .select('id')
-          .eq('id', importProduct.id)
-          .eq('organization_id', organizationId)
-          .single();
+        // Use the conflict handling RPC function directly (it handles both insert and update)
+        const { data: productResult, error: productError } = await supabase
+          .rpc('import_product_with_conflict_handling', {
+            p_id: importProduct.id,
+            p_organization_id: organizationId,
+            p_name: importProduct.name,
+            p_brand: importProduct.brand,
+            p_category: importProduct.category,
+            p_subcategory: importProduct.subcategory || null,
+            p_description: importProduct.description || null,
+            p_image_url: importProduct.image_url || null,
+            p_strain_type: importProduct.strain_type || null
+          });
 
-        let productId = importProduct.id;
-
-        if (existingProduct) {
-          // Use the conflict handling function to update the product
-          const { data: updatedProduct, error: updateError } = await supabase
-            .rpc('import_product_with_conflict_handling', {
-              p_id: importProduct.id,
-              p_organization_id: organizationId,
-              p_name: importProduct.name,
-              p_brand: importProduct.brand,
-              p_category: importProduct.category,
-              p_subcategory: importProduct.subcategory || null,
-              p_description: importProduct.description || null,
-              p_image_url: importProduct.image_url || null,
-              p_strain_type: importProduct.strain_type || null
-            });
-
-          if (updateError) {
-            stats.errors.push(`Failed to update product ${importProduct.name}: ${updateError.message}`);
-            continue;
-          }
-
-          stats.productsUpdated++;
-        } else {
-          // Create new product
-          const { data: newProduct, error: insertError } = await supabase
-            .rpc('import_product_with_conflict_handling', {
-              p_id: importProduct.id,
-              p_organization_id: organizationId,
-              p_name: importProduct.name,
-              p_brand: importProduct.brand,
-              p_category: importProduct.category,
-              p_subcategory: importProduct.subcategory || null,
-              p_description: importProduct.description || null,
-              p_image_url: importProduct.image_url || null,
-              p_strain_type: importProduct.strain_type || null
-            });
-
-          if (insertError) {
-            stats.errors.push(`Failed to create product ${importProduct.name}: ${insertError.message}`);
-            continue;
-          }
-
-          stats.productsCreated++;
+        if (productError) {
+          stats.errors.push(`Failed to import product ${importProduct.name}: ${productError.message}`);
+          continue;
         }
+
+        // The RPC function handles conflict resolution, so we count as created
+        stats.productsCreated++;
+        let productId = importProduct.id;
 
         // Process variants for this product
         for (const importVariant of importProduct.variants) {
           stats.variantsProcessed++;
 
           try {
-            // Check if variant already exists
-            const { data: existingVariant } = await supabase
-              .from('variants')
-              .select('id')
-              .eq('id', importVariant.id)
-              .single();
+            // Use the conflict handling RPC function directly (it handles both insert and update)
+            const { data: variantResult, error: variantError } = await supabase
+              .rpc('import_variant_with_conflict_handling', {
+                v_id: importVariant.id,
+                v_product_id: productId,
+                v_size_weight: importVariant.size_weight,
+                v_price: importVariant.price,
+                v_original_price: importVariant.original_price || importVariant.price,
+                v_thc_percentage: importVariant.thc_percentage || null,
+                v_cbd_percentage: importVariant.cbd_percentage || null,
+                v_total_cannabinoids: importVariant.total_cannabinoids || null,
+                v_inventory_level: importVariant.inventory_level,
+                v_is_available: importVariant.is_available,
+                v_terpene_profile: importVariant.terpene_profile || {}
+              });
 
-            if (existingVariant) {
-              // Use the conflict handling function to update the variant
-              const { data: updatedVariant, error: updateError } = await supabase
-                .rpc('import_variant_with_conflict_handling', {
-                  v_id: importVariant.id,
-                  v_product_id: productId,
-                  v_size_weight: importVariant.size_weight,
-                  v_price: importVariant.price,
-                  v_original_price: importVariant.original_price || importVariant.price,
-                  v_thc_percentage: importVariant.thc_percentage || null,
-                  v_cbd_percentage: importVariant.cbd_percentage || null,
-                  v_total_cannabinoids: importVariant.total_cannabinoids || null,
-                  v_inventory_level: importVariant.inventory_level,
-                  v_is_available: importVariant.is_available,
-                  v_terpene_profile: importVariant.terpene_profile || {}
-                });
-
-              if (updateError) {
-                stats.errors.push(`Failed to update variant ${importVariant.id}: ${updateError.message}`);
-                continue;
-              }
-
-              stats.variantsUpdated++;
-            } else {
-              // Create new variant
-              const { data: newVariant, error: insertError } = await supabase
-                .rpc('import_variant_with_conflict_handling', {
-                  v_id: importVariant.id,
-                  v_product_id: productId,
-                  v_size_weight: importVariant.size_weight,
-                  v_price: importVariant.price,
-                  v_original_price: importVariant.original_price || importVariant.price,
-                  v_thc_percentage: importVariant.thc_percentage || null,
-                  v_cbd_percentage: importVariant.cbd_percentage || null,
-                  v_total_cannabinoids: importVariant.total_cannabinoids || null,
-                  v_inventory_level: importVariant.inventory_level,
-                  v_is_available: importVariant.is_available,
-                  v_terpene_profile: importVariant.terpene_profile || {}
-                });
-
-              if (insertError) {
-                stats.errors.push(`Failed to create variant ${importVariant.id}: ${insertError.message}`);
-                continue;
-              }
-
-              stats.variantsCreated++;
+            if (variantError) {
+              stats.errors.push(`Failed to import variant ${importVariant.id}: ${variantError.message}`);
+              continue;
             }
+
+            // The RPC function handles conflict resolution, so we count as created
+            stats.variantsCreated++;
           } catch (variantError) {
             stats.errors.push(`Error processing variant ${importVariant.id}: ${variantError}`);
           }
@@ -315,8 +270,8 @@ export async function importInventoryData(
 
     const hasErrors = stats.errors.length > 0;
     const message = hasErrors
-      ? `Import completed with ${stats.errors.length} errors. ${stats.productsCreated + stats.productsUpdated} products and ${stats.variantsCreated + stats.variantsUpdated} variants processed.`
-      : `Import successful! Created ${stats.productsCreated} products and ${stats.variantsCreated} variants. Updated ${stats.productsUpdated} products and ${stats.variantsUpdated} variants.`;
+      ? `Import completed with ${stats.errors.length} errors. ${stats.productsCreated} products and ${stats.variantsCreated} variants processed.`
+      : `Import successful! Processed ${stats.productsCreated} products and ${stats.variantsCreated} variants.`;
 
     return {
       success: !hasErrors || (stats.productsCreated + stats.productsUpdated > 0),
