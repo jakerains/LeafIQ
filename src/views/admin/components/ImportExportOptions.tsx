@@ -6,8 +6,8 @@ import ImportExportInstructions from './ImportExportInstructions';
 import { importInventoryData, exportInventoryData, validateImportData, ImportResult, ImportMode } from '../../../utils/inventoryImporter';
 import { parseMarkdownToImportData, parseMultipleMarkdownFiles } from '../../../utils/markdownInventoryParser';
 import { useAuthStore } from '../../../stores/authStore';
-import { useProductsStore } from '../../../stores/productsStore';
 import { useSimpleAuthStore } from '../../../stores/simpleAuthStore';
+import { useProductsStore } from '../../../stores/productsStore';
 
 interface ImportExportOptionsProps {
   onClose: () => void;
@@ -26,7 +26,6 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
   
   const { user } = useAuthStore();
   const { organizationId } = useSimpleAuthStore();
-  const { fetchProducts } = useProductsStore();
   
   // Log organization ID when component mounts
   useEffect(() => {
