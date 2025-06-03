@@ -39,14 +39,14 @@ const SearchInput = ({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={placeholder}
-            className="w-full px-5 py-4 pl-12 text-xl bg-white bg-opacity-70 backdrop-blur-sm rounded-2xl border border-gray-200 shadow-sm focus:ring-2 focus:ring-primary-300 focus:border-primary-300 transition-all duration-300"
+            className="w-full px-5 py-3 sm:py-4 pl-10 sm:pl-12 text-lg sm:text-xl bg-white bg-opacity-70 backdrop-blur-sm rounded-2xl border border-gray-200 shadow-sm focus:ring-2 focus:ring-primary-300 focus:border-primary-300 transition-all duration-300"
             disabled={isLoading}
           />
-          <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+          <Search className="absolute left-3 sm:left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
           
           <Button 
             type="submit" 
-            className="absolute right-2 top-1/2 transform -translate-y-1/2"
+            className="absolute right-2 top-1/2 transform -translate-y-1/2 sm:px-4 py-2 text-sm"
             variant="primary"
             isLoading={isLoading}
             disabled={!query.trim() || isLoading}
@@ -62,7 +62,7 @@ const SearchInput = ({
             <motion.button
               key={suggestion}
               onClick={() => handleSuggestionClick(suggestion)}
-              className="px-4 py-2 bg-white bg-opacity-60 backdrop-blur-sm rounded-full text-sm font-medium text-gray-700 border border-gray-200 hover:bg-opacity-80 transition-all duration-200"
+              className="px-3 sm:px-4 py-2 bg-white bg-opacity-60 backdrop-blur-sm rounded-full text-xs sm:text-sm font-medium text-gray-700 border border-gray-200 hover:bg-opacity-80 transition-all duration-200"
               whileHover={{ y: -2, boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}
               whileTap={{ scale: 0.97 }}
               disabled={isLoading}
@@ -71,12 +71,12 @@ const SearchInput = ({
             </motion.button>
           ))}
           <motion.button
-            className="px-4 py-2 bg-white bg-opacity-60 backdrop-blur-sm rounded-full text-sm font-medium text-gray-700 border border-gray-200 hover:bg-opacity-80 transition-all duration-200 flex items-center gap-1"
+            className="px-3 sm:px-4 py-2 bg-white bg-opacity-60 backdrop-blur-sm rounded-full text-xs sm:text-sm font-medium text-gray-700 border border-gray-200 hover:bg-opacity-80 transition-all duration-200 flex items-center gap-1"
             whileHover={{ y: -2, boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}
             whileTap={{ scale: 0.97 }}
             disabled={isLoading}
           >
-            <Mic size={16} /> Voice
+            <Mic size={14} sm={{ size: 16 }} /> Voice
           </motion.button>
         </div>
       )}

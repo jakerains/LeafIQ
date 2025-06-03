@@ -68,41 +68,42 @@ export function PricingCard({
 
   return (
     <motion.div 
-      className={`p-8 rounded-2xl h-full flex flex-col justify-between ${
+      className={`p-6 sm:p-8 rounded-2xl h-full flex flex-col justify-between ${
         highlighted 
-          ? 'bg-primary-500 text-white shadow-xl scale-105' 
+          ? 'bg-primary-500 text-white shadow-xl md:scale-105' 
           : 'bg-white bg-opacity-20 backdrop-blur-2xl text-gray-900 border border-white/20'
       }`}
       whileHover={{ y: -4 }}
       transition={{ duration: 0.2 }}
     >
       <div>
-        <h3 className="text-2xl font-semibold mb-2">{title}</h3>
+        <h3 className="text-xl sm:text-2xl font-semibold mb-2">{title}</h3>
         <div className="mb-4">
           {isYearly && monthlyPrice && highlighted ? (
             <div className="flex flex-col">
-              <span className="text-4xl font-bold">{price}</span>
+              <span className="text-3xl sm:text-4xl font-bold">{price}</span>
               <div className="flex items-center gap-2 mt-1">
-                <span className="text-lg line-through opacity-70">${parseInt(monthlyPrice.replace('$', '')) * 12}</span>
+                <span className="text-base sm:text-lg line-through opacity-70">${parseInt(monthlyPrice.replace('$', '')) * 12}</span>
+                <span className="text-xs sm:text-sm bg-primary-400 px-2 py-0.5 rounded-full">2 months free!</span>
               </div>
             </div>
           ) : (
             <div>
-              <span className="text-4xl font-bold">{price}</span>
-              {period && <span className="text-lg">{period}</span>}
+              <span className="text-3xl sm:text-4xl font-bold">{price}</span>
+              {period && <span className="text-base sm:text-lg">{period}</span>}
             </div>
           )}
         </div>
-        <p className={`mb-6 ${highlighted ? 'text-primary-100' : 'text-gray-600'}`}>
+        <p className={`mb-6 text-sm sm:text-base ${highlighted ? 'text-primary-100' : 'text-gray-600'}`}>
           {description}
         </p>
-        <ul className="space-y-3 mb-8">
+        <ul className="space-y-2 sm:space-y-3 mb-8">
           {features.map((feature, index) => (
-            <li key={index} className="flex items-center">
+            <li key={index} className="flex items-start">
               <Check 
-                className={`w-5 h-5 mr-2 ${highlighted ? 'text-primary-200' : 'text-primary-500'}`}
+                className={`w-5 h-5 mt-0.5 mr-2 flex-shrink-0 ${highlighted ? 'text-primary-200' : 'text-primary-500'}`}
               />
-              {feature}
+              <span className="text-sm sm:text-base">{feature}</span>
             </li>
           ))}
         </ul>

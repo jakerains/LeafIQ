@@ -68,13 +68,13 @@ export const KioskSelection: React.FC = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div className="bg-white bg-opacity-90 backdrop-blur-md rounded-3xl p-8 shadow-xl max-w-4xl w-full">
+          <div className="bg-white bg-opacity-90 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-xl max-w-4xl w-full">
           {/* Header */}
-          <div className="text-center mb-8">
+          <div className="text-center mb-6 sm:mb-8">
             <div className="h-12 w-12 bg-primary-100 rounded-xl flex items-center justify-center mx-auto mb-4">
               <Building2 className="h-6 w-6 text-primary-600" />
             </div>
-            <h2 className="text-3xl font-display font-semibold mb-2">Welcome to {dispensaryName}</h2>
+            <h2 className="text-2xl sm:text-3xl font-display font-semibold mb-2">Welcome to {dispensaryName}</h2>
             <p className="text-gray-600">Please select your kiosk mode</p>
             <div className="mt-2 text-sm text-gray-500">
               Logged in: {getDisplayName()}
@@ -82,19 +82,19 @@ export const KioskSelection: React.FC = () => {
           </div>
 
           {/* Kiosk Mode Selection */}
-          <div className="grid md:grid-cols-3 gap-4 mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 sm:mb-8">
             {/* Customer Kiosk */}
             <motion.div
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => handleModeSelection('customer')}
-              className="cursor-pointer p-6 border-2 border-gray-200 rounded-xl hover:border-green-300 hover:bg-green-50 transition-all duration-200 group text-center"
+              className="cursor-pointer p-4 sm:p-6 border-2 border-gray-200 rounded-xl hover:border-green-300 hover:bg-green-50 transition-all duration-200 group text-center h-full"
             >
-              <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors">
-                <Users className="w-10 h-10 text-green-600" />
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-green-200 transition-colors">
+                <Users className="w-8 h-8 sm:w-10 sm:h-10 text-green-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Customer Kiosk</h3>
-              <p className="text-sm text-gray-600 mb-4">
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">Customer Kiosk</h3>
+              <p className="text-xs sm:text-sm text-gray-600 mb-4">
                 Browse products, get recommendations, and learn about cannabis
               </p>
               <ul className="text-xs text-gray-500 space-y-1 text-left">
@@ -117,13 +117,13 @@ export const KioskSelection: React.FC = () => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={() => handleModeSelection('employee')}
-              className="cursor-pointer p-6 border-2 border-gray-200 rounded-xl hover:border-blue-300 hover:bg-blue-50 transition-all duration-200 group text-center"
+              className="cursor-pointer p-4 sm:p-6 border-2 border-gray-200 rounded-xl hover:border-blue-300 hover:bg-blue-50 transition-all duration-200 group text-center h-full"
             >
-              <div className="w-20 h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-200 transition-colors">
-                <UserCheck className="w-10 h-10 text-blue-600" />
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-200 transition-colors">
+                <UserCheck className="w-8 h-8 sm:w-10 sm:h-10 text-blue-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Employee Kiosk</h3>
-              <p className="text-sm text-gray-600 mb-4">
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">Employee Kiosk</h3>
+              <p className="text-xs sm:text-sm text-gray-600 mb-4">
                 Access staff tools, inventory management, and customer assistance
               </p>
               <ul className="text-xs text-gray-500 space-y-1 text-left">
@@ -146,13 +146,13 @@ export const KioskSelection: React.FC = () => {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               onClick={handleAdminClick}
-              className="cursor-pointer p-6 border-2 border-gray-200 rounded-xl hover:border-purple-300 hover:bg-purple-50 transition-all duration-200 group text-center"
+              className="cursor-pointer p-4 sm:p-6 border-2 border-gray-200 rounded-xl hover:border-purple-300 hover:bg-purple-50 transition-all duration-200 group text-center h-full"
             >
-              <div className="w-20 h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-200 transition-colors">
-                <Shield className="w-10 h-10 text-purple-600" />
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-200 transition-colors">
+                <Shield className="w-8 h-8 sm:w-10 sm:h-10 text-purple-600" />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Admin Panel</h3>
-              <p className="text-sm text-gray-600 mb-4">
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">Admin Panel</h3>
+              <p className="text-xs sm:text-sm text-gray-600 mb-4">
                 System administration and configuration access
               </p>
               <ul className="text-xs text-gray-500 space-y-1 text-left">
@@ -185,7 +185,7 @@ export const KioskSelection: React.FC = () => {
           </div>
 
           {/* Info Footer */}
-          <div className="mt-8 p-4 bg-gray-50 rounded-lg text-center">
+          <div className="mt-6 sm:mt-8 p-4 bg-gray-50 rounded-lg text-center">
             <p className="text-xs text-gray-600">
               Need to switch modes later? Look for the mode switcher in the top navigation bar.
             </p>
@@ -209,13 +209,13 @@ export const KioskSelection: React.FC = () => {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-white bg-opacity-90 backdrop-blur-md rounded-3xl p-8 w-full max-w-md"
+              className="bg-white bg-opacity-90 backdrop-blur-md rounded-3xl p-6 sm:p-8 w-full max-w-md"
             >
               <div className="text-center mb-6">
                 <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Shield className="w-8 h-8 text-purple-600" />
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Admin Access</h2>
+                <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Admin Access</h2>
                 <p className="text-gray-600">Enter the admin passkey to continue</p>
               </div>
 
@@ -230,7 +230,7 @@ export const KioskSelection: React.FC = () => {
                       type={showPasskey ? "text" : "password"}
                       value={adminPasskey}
                       onChange={(e) => setAdminPasskey(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-colors pr-10"
+                      className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-colors"
                       placeholder="Enter admin passkey"
                       required
                       autoFocus
@@ -255,7 +255,7 @@ export const KioskSelection: React.FC = () => {
                   </motion.div>
                 )}
 
-                <div className="flex space-x-3">
+                <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-3">
                   <motion.button
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -291,4 +291,4 @@ export const KioskSelection: React.FC = () => {
       </AnimatePresence>
     </div>
   );
-}; 
+};

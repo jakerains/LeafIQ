@@ -11,12 +11,12 @@ interface AuthLayoutProps {
 const AuthLayout = ({ children }: AuthLayoutProps) => {
   return (
     <div className="min-h-screen flex flex-col">
-      <header className="container mx-auto px-4 py-8 relative">
+      <header className="container mx-auto px-4 py-6 sm:py-8 relative">
         <Link to="/">
           <img 
             src="/leafiq-logo.png" 
             alt="LeafIQ" 
-            className="h-16 drop-shadow-lg filter shadow-primary-500/50"
+            className="h-12 sm:h-16 drop-shadow-lg filter shadow-primary-500/50"
           />
         </Link>
       </header>
@@ -26,6 +26,7 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
+          className="w-full max-w-md"
         >
           {children || <Outlet />}
         </motion.div>
