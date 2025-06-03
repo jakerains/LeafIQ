@@ -22,6 +22,7 @@ interface ExtendedAuthState extends AuthState {
   setUser: (user: AuthUser | null) => void;
   signInWithEmail: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
   signUpWithEmail: (email: string, password: string, organizationName: string) => Promise<{ success: boolean; error?: string }>;
+  isSuperAdmin: () => boolean;
 }
 
 export const useAuthStore = create<ExtendedAuthState>((set, get) => ({
@@ -232,4 +233,8 @@ export const useAuthStore = create<ExtendedAuthState>((set, get) => ({
     // Reset auth state
     set({ role: null, user: null, profile: null });
   },
+  
+  isSuperAdmin: () => {
+    return get().role === 'super_admin';
+  }
 }));

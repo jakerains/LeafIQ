@@ -86,11 +86,21 @@ export interface ErrorLog {
   details?: any;
 }
 
-export type UserRole = 'staff' | 'admin' | null;
+export type UserRole = 'staff' | 'admin' | 'super_admin' | null;
 
 export interface AuthState {
   role: UserRole;
   isInitialized: boolean;
   initializeAuth: () => void;
   logout: () => void;
+}
+
+export interface PineconeDocument {
+  id?: string;
+  title: string;
+  content: string;
+  source?: string;
+  category?: string;
+  created_at?: string;
+  status?: 'pending' | 'ingested' | 'failed' | 'deleted';
 }

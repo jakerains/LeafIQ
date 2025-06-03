@@ -10,21 +10,23 @@ import { motion } from 'framer-motion';
 import { ProductWithVariant } from '../../types';
 import { Settings } from '../../types';
 import { Routes, Route, useNavigate, Link, useLocation } from 'react-router-dom';
-import { RefreshCw, Database, Settings as SettingsIcon, Activity, Package, BrainCircuit, CreditCard, FlaskRound as Flask } from 'lucide-react';
+import { RefreshCw, Database, Settings as SettingsIcon, Activity, Package, BrainCircuit, CreditCard, FlaskRound as Flask, Shield } from 'lucide-react';
 import AdminDashboard from './AdminDashboard';
 import AdminInventory from './AdminInventory';
 import AdminAIModel from './AdminAIModel';
 import AdminSettings from './AdminSettings';
 import SubscriptionDetails from '../account/SubscriptionDetails';
 import TerpeneDatabase from './TerpeneDatabase';
+import SuperadminPanel from './SuperadminPanel';
 import { getUserSubscription } from '../../lib/stripe';
 
 const AdminView = () => {
-  const { logout } = useAuthStore();
+  const { logout, role } = useAuthStore();
   const navigate = useNavigate();
   const location = useLocation();
   const currentPath = location.pathname;
   const [subscription, setSubscription] = useState<any>(null);
+  const isSuperAdmin = role === 'super_admin';
   
   // Extract the active tab from the URL
   const getActiveTab = () => {
@@ -33,6 +35,7 @@ const AdminView = () => {
     if (currentPath.includes('/terpene-database')) return 'terpene-database';
     if (currentPath.includes('/settings')) return 'settings';
     if (currentPath.includes('/subscription')) return 'subscription';
+    if (currentPath.includes('/superadmin')) return 'superadmin';
     return 'dashboard'; // Default tab
   };
 
@@ -181,6 +184,21 @@ const AdminView = () => {
             <CreditCard size={16} className="mr-2" />
             Subscription
           </button>
+
+          {/* Super Admin Panel tab - only visible to super_admin users */}
+          {isSuperAdmin && (
+            <button
+              onClick={() => handleTabClick('superadmin')}
+              className={`flex items-center px-4 py-2 text-sm font-medium rounded-lg transition-all ${
+                activeTab === 'superadmin'
+                  ? 'bg-purple-600 text-white shadow-md'
+                  : 'text-purple-600 hover:bg-purple-50'
+              }`}
+            >
+              <Shield size={16} className="mr-2" />
+              Superadmin Panel
+            </button>
+          )}
         </div>
         
         {/* Routes for different admin sections */}
@@ -190,6 +208,7 @@ const AdminView = () => {
           <Route path="/ai-model" element={<AdminAIModel />} />
           <Route path="/terpene-database" element={<TerpeneDatabase />} />
           <Route path="/settings" element={<AdminSettings />} />
+          <Route path="/superadmin" element={<SuperadminPanel />} />
           <Route path="/subscription" element={
             <div className="container mx-auto px-4">
               <SubscriptionDetails />
