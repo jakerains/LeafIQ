@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { SendHorizonal, Bot, User, Lightbulb, Wand2 } from 'lucide-react';
+import { SendHorizonal, Bot, User, Lightbulb, Wand2, Activity, MoodHappy, Menu } from 'lucide-react';
 import { Button } from './button';
 
 interface ChatMessage {
@@ -33,6 +33,19 @@ const VercelV0Chat = ({ onSearch, isLoading }: V0ChatProps) => {
     "What's the endocannabinoid system?",
     "Tell me about cannabis edibles"
   ]);
+  
+  const [showVibeOptions, setShowVibeOptions] = useState(false);
+  const [showActivityOptions, setShowActivityOptions] = useState(false);
+  
+  const vibeOptions = [
+    "relaxed", "energized", "creative", "sleepy", 
+    "focused", "happy", "pain relief", "stress relief"
+  ];
+  
+  const activityOptions = [
+    "activity:hiking", "activity:movie night", "activity:social gathering", 
+    "activity:creative work", "activity:exercise", "activity:meditation"
+  ];
   
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -70,6 +83,41 @@ const VercelV0Chat = ({ onSearch, isLoading }: V0ChatProps) => {
     // Pass to search
     onSearch(suggestion);
   };
+  
+  const handleVibeOptionClick = (vibe: string) => {
+    // Close the options panel
+    setShowVibeOptions(false);
+    
+    // Add vibe as user message
+    setMessages(prev => [...prev, { role: 'user', content: `I want to feel ${vibe}` }]);
+    
+    // Pass to search
+    onSearch(vibe);
+  };
+  
+  const handleActivityOptionClick = (activity: string) => {
+    // Close the options panel
+    setShowActivityOptions(false);
+    
+    // Format the activity for display (remove the prefix)
+    const displayActivity = activity.replace('activity:', '');
+    
+    // Add activity as user message
+    setMessages(prev => [...prev, { role: 'user', content: `I'm planning to go ${displayActivity}` }]);
+    
+    // Pass to search
+    onSearch(activity);
+  };
+  
+  const toggleVibeOptions = () => {
+    setShowVibeOptions(!showVibeOptions);
+    setShowActivityOptions(false);
+  };
+  
+  const toggleActivityOptions = () => {
+    setShowActivityOptions(!showActivityOptions);
+    setShowVibeOptions(false);
+  };
 
   return (
     <div className="flex flex-col items-center w-full max-w-4xl mx-auto space-y-8">
@@ -90,11 +138,11 @@ const VercelV0Chat = ({ onSearch, isLoading }: V0ChatProps) => {
                     <div className="h-8 w-8 rounded-full bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-white mr-2 mt-2 shadow-md">
                       <Bot size={16} />
                     </div>
-                    <div className="max-w-[85%] flex-1">
+                    <div className="max-w-[85%] sm:max-w-[90%] flex-1">
                       <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl shadow-xl border border-green-200 overflow-hidden max-w-5xl mx-auto">
-                        <div className="overflow-y-auto p-6 space-y-4 bg-black bg-opacity-95 text-green-500">
+                        <div className="overflow-y-auto p-4 sm:p-6 space-y-4 bg-black bg-opacity-95 text-green-500">
                           {message.content.split('\n\n').map((paragraph, j) => (
-                            <p key={j} className="leading-relaxed text-lg">
+                            <p key={j} className="leading-relaxed text-sm sm:text-lg">
                               {paragraph}
                             </p>
                           ))}
@@ -104,9 +152,9 @@ const VercelV0Chat = ({ onSearch, isLoading }: V0ChatProps) => {
                   </>
                 ) : (
                   <>
-                    <div className="max-w-[85%] flex-1 ml-auto">
+                    <div className="max-w-[85%] sm:max-w-[90%] flex-1 ml-auto">
                       <div className="bg-white rounded-2xl p-4 shadow-sm border border-gray-200 ml-auto mr-2">
-                        <p className="text-gray-800">{message.content}</p>
+                        <p className="text-gray-800 text-sm sm:text-base">{message.content}</p>
                       </div>
                     </div>
                     <div className="h-8 w-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 ml-2 mt-2">
@@ -152,6 +200,103 @@ const VercelV0Chat = ({ onSearch, isLoading }: V0ChatProps) => {
           </Button>
         </div>
       </form>
+      
+      {/* Option toggles */}
+      <div className="flex justify-center space-x-4 mb-2 w-full">
+        <motion.button
+          onClick={toggleVibeOptions}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className={`flex items-center px-4 py-2 rounded-full text-sm font-medium shadow-sm border transition-all ${
+            showVibeOptions 
+              ? 'bg-primary-100 border-primary-300 text-primary-800' 
+              : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50'
+          }`}
+        >
+          <MoodHappy className="w-4 h-4 mr-2" />
+          Vibes
+        </motion.button>
+        
+        <motion.button
+          onClick={toggleActivityOptions}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className={`flex items-center px-4 py-2 rounded-full text-sm font-medium shadow-sm border transition-all ${
+            showActivityOptions 
+              ? 'bg-blue-100 border-blue-300 text-blue-800' 
+              : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50'
+          }`}
+        >
+          <Activity className="w-4 h-4 mr-2" />
+          Activities
+        </motion.button>
+      </div>
+      
+      {/* Vibe options */}
+      <AnimatePresence>
+        {showVibeOptions && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="w-full bg-white bg-opacity-90 backdrop-blur-md rounded-xl p-4 shadow-md border border-primary-100"
+          >
+            <div className="flex items-center mb-3">
+              <MoodHappy className="text-primary-600 mr-2" size={18} />
+              <h3 className="text-base font-medium text-primary-800">How do you want to feel?</h3>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              {vibeOptions.map((vibe) => (
+                <motion.button
+                  key={vibe}
+                  onClick={() => handleVibeOptionClick(vibe)}
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex items-center justify-center px-4 py-3 rounded-lg bg-primary-50 hover:bg-primary-100 text-primary-700 border border-primary-100 transition-all"
+                >
+                  {vibe}
+                </motion.button>
+              ))}
+            </div>
+            <p className="text-xs text-gray-500 mt-3 text-center">
+              Select a vibe to find products that match your desired feeling
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      
+      {/* Activity options */}
+      <AnimatePresence>
+        {showActivityOptions && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="w-full bg-white bg-opacity-90 backdrop-blur-md rounded-xl p-4 shadow-md border border-blue-100"
+          >
+            <div className="flex items-center mb-3">
+              <Activity className="text-blue-600 mr-2" size={18} />
+              <h3 className="text-base font-medium text-blue-800">What are you planning to do?</h3>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {activityOptions.map((activity) => (
+                <motion.button
+                  key={activity}
+                  onClick={() => handleActivityOptionClick(activity)}
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="flex items-center justify-center px-3 py-3 rounded-lg bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-100 transition-all text-sm"
+                >
+                  {activity.replace('activity:', '')}
+                </motion.button>
+              ))}
+            </div>
+            <p className="text-xs text-gray-500 mt-3 text-center">
+              Select an activity to find products optimized for that experience
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Suggestion cards */}
       <div className="flex flex-wrap justify-center gap-2">
@@ -164,12 +309,12 @@ const VercelV0Chat = ({ onSearch, isLoading }: V0ChatProps) => {
             whileHover={{ y: -3, scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             onClick={() => handleSuggestionClick(suggestion)}
-            className="cursor-pointer px-4 py-3 bg-white bg-opacity-70 backdrop-blur-sm rounded-xl border border-primary-200 shadow-sm hover:shadow-md transition-all flex items-start max-w-xs"
+            className="cursor-pointer px-3 sm:px-4 py-2 sm:py-3 bg-white bg-opacity-70 backdrop-blur-sm rounded-xl border border-primary-200 shadow-sm hover:shadow-md transition-all flex items-start max-w-xs"
           >
             <div className="mr-2 mt-0.5 text-primary-600">
               {i % 2 === 0 ? <Lightbulb size={16} /> : <Wand2 size={16} />}
             </div>
-            <span className="text-gray-800 text-sm">{suggestion}</span>
+            <span className="text-gray-800 text-xs sm:text-sm">{suggestion}</span>
           </motion.div>
         ))}
       </div>
