@@ -41,6 +41,7 @@ export const useSimpleAuthStore = create<SimpleAuthState>()(
       loginDispensary: async (email: string, password: string) => {
         try {
           console.log('Attempting dispensary login for:', email);
+          console.log('🔍 DEBUG: Starting loginDispensary function');
           
           // Use Supabase Auth for proper authentication
           const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
@@ -72,6 +73,12 @@ export const useSimpleAuthStore = create<SimpleAuthState>()(
           if (profileError || !profile) {
             return { success: false, error: 'User profile not found' };
           }
+          
+          console.log('🔍 DEBUG: Profile fetched successfully:', {
+            profileId: profile.id,
+            organizationId: profile.organization_id,
+            orgName: profile.organizations?.name
+          });
 
           // Set authenticated state
           set({
@@ -83,6 +90,7 @@ export const useSimpleAuthStore = create<SimpleAuthState>()(
             isAdmin: false
           });
 
+          console.log('🔍 DEBUG: Auth state set with organizationId:', profile.organization_id);
           return { success: true };
           
         } catch (error) {
@@ -98,6 +106,13 @@ export const useSimpleAuthStore = create<SimpleAuthState>()(
 
       selectUserMode: (mode: UserMode) => {
         const state = get();
+        console.log('🔍 DEBUG: selectUserMode called with mode:', mode);
+        console.log('🔍 DEBUG: Current state:', {
+          isAuthenticated: state.isAuthenticated,
+          organizationId: state.organizationId,
+          dispensaryName: state.dispensaryName
+        });
+        
         if (!state.isAuthenticated) {
           console.warn('Cannot select user mode when not authenticated');
           return;
@@ -108,11 +123,21 @@ export const useSimpleAuthStore = create<SimpleAuthState>()(
           set({ 
             userMode: mode, 
             isAdmin: true 
+          }, false, { type: 'selectUserMode/admin' });
+          console.log('🔍 DEBUG: Set admin mode, new state:', {
+            userMode: mode,
+            isAdmin: true,
+            organizationId: get().organizationId
           });
         } else {
           set({ 
             userMode: mode, 
             isAdmin: false 
+          }, false, { type: 'selectUserMode/regular' });
+          console.log('🔍 DEBUG: Set regular mode, new state:', {
+            userMode: mode,
+            isAdmin: false,
+            organizationId: get().organizationId
           });
         }
       },

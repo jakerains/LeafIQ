@@ -24,10 +24,29 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
   const [importMode, setImportMode] = useState<ImportMode>('update');
   
   const { user } = useAuthStore();
+  const { organizationId } = useSimpleAuthStore();
   const { fetchProducts } = useProductsStore();
+  
+  // Log organization ID when component mounts
+  useEffect(() => {
+    console.log('🔍 DEBUG ImportExportOptions - Component mounted with:', {
+      organizationId,
+      authStoreUserId: user?.id
+    });
+  }, [organizationId, user?.id]);
 
   const handleImport = async () => {
-    if (!user?.organizationId) {
+    console.log('🔍 DEBUG ImportExportOptions - handleImport called with:', {
+      organizationId,
+      authStoreUserId: user?.id,
+      authStoreOrgId: user?.organizationId
+    });
+    
+    // Try to use organizationId from simpleAuthStore first, then fall back to user.organizationId
+    const effectiveOrgId = organizationId || user?.organizationId;
+    
+    if (!effectiveOrgId) {
+      console.error('🔍 DEBUG ImportExportOptions - No organization ID found in either store');
       setImportResult({
         success: false,
         message: 'No organization found. Please contact support.',
@@ -41,6 +60,7 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
     try {
     if (importSource === 'json') {
         if (!jsonInput.trim()) {
+          console.log('🔍 DEBUG ImportExportOptions - Empty JSON input');
           setImportResult({
             success: false,
             message: 'Please enter JSON data or upload a file',
@@ -51,7 +71,9 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
         let parsedData;
       try {
           parsedData = JSON.parse(jsonInput);
+          console.log('🔍 DEBUG ImportExportOptions - Successfully parsed JSON data');
         } catch (error) {
+          console.error('🔍 DEBUG ImportExportOptions - JSON parse error:', error);
           setImportResult({
             success: false,
             message: 'Invalid JSON format. Please check your syntax.',
@@ -62,6 +84,7 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
         // Validate the data structure
         const validation = validateImportData(parsedData);
         if (!validation.valid) {
+          console.log('🔍 DEBUG ImportExportOptions - JSON validation failed:', validation.errors);
           setImportResult({
             success: false,
             message: `Validation failed: ${validation.errors.join(', ')}`,
@@ -72,10 +95,11 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
         // Import the data
         const result = await importInventoryData(
           parsedData,
-          user.organizationId,
+          effectiveOrgId,
           importMode
         );
 
+        console.log('🔍 DEBUG ImportExportOptions - Import result:', result);
         setImportResult(result);
 
         // Refresh the products store if successful
@@ -99,10 +123,11 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
           // Parse markdown to JSON format
           const parsedData = parseMarkdownToImportData(
             markdownInput,
-            user.organizationId
+            effectiveOrgId
           );
 
           if (parsedData.products.length === 0) {
+            console.log('🔍 DEBUG ImportExportOptions - No products found in markdown');
             setImportResult({
               success: false,
               message: 'No products found in markdown. Please check the format.',
@@ -113,10 +138,11 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
           // Import the parsed data
           const result = await importInventoryData(
             parsedData,
-            user.organizationId,
+            effectiveOrgId,
             importMode
           );
 
+          console.log('🔍 DEBUG ImportExportOptions - Markdown import result:', result);
           setImportResult(result);
 
           // Refresh the products store if successful
@@ -128,18 +154,21 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
           }
 
         } catch (error) {
+          console.error('🔍 DEBUG ImportExportOptions - Markdown parsing failed:', error);
           setImportResult({
             success: false,
             message: `Markdown parsing failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
           });
         }
       } else if (importSource === 'api') {
+        console.log('🔍 DEBUG ImportExportOptions - Dutchie API import not implemented');
         setImportResult({
           success: false,
           message: 'Dutchie API import is not yet implemented. Please use JSON format.',
         });
       }
     } catch (error) {
+      console.error('🔍 DEBUG ImportExportOptions - Import failed:', error);
       setImportResult({
         success: false,
         message: `Import failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
@@ -150,7 +179,10 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
   };
 
   const handleExport = async () => {
-    if (!user?.organizationId) {
+    const effectiveOrgId = organizationId || user?.organizationId;
+    
+    if (!effectiveOrgId) {
+      console.error('🔍 DEBUG ImportExportOptions - No organization ID found for export');
       alert('No organization found. Please contact support.');
       return;
     }
@@ -158,9 +190,11 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
     setIsProcessing(true);
 
     try {
-      const exportData = await exportInventoryData(user.organizationId);
+      console.log('🔍 DEBUG ImportExportOptions - Starting export with organizationId:', effectiveOrgId);
+      const exportData = await exportInventoryData(effectiveOrgId);
       
       if (!exportData) {
+        console.log('🔍 DEBUG ImportExportOptions - No inventory data found to export');
         alert('No inventory data found to export.');
         return;
       }
