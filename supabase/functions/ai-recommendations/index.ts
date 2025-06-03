@@ -102,7 +102,7 @@ async function callGptApi(vibe: string): Promise<AIResponse> {
         'Authorization': `Bearer ${OPENAI_API_KEY}`,
       },
       body: JSON.stringify({
-        model: 'gpt-4o-mini',
+        model: 'gpt-4.1-mini', // Changed from 'gpt-4o-mini' to 'gpt-4.1-mini'
         messages: [
           { role: 'system', content: systemPrompt },
           { role: 'user', content: userPrompt },

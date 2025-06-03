@@ -71,7 +71,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // 4. Call LLM to generate response
     const chatCompletion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini', // Using OpenAI's LLM
+      model: 'gpt-4.1-mini', // Changed from 'gpt-4o-mini' to 'gpt-4.1-mini'
       messages: [
         { role: 'system', content: systemPrompt },
         { role: 'user', content: userPrompt },
