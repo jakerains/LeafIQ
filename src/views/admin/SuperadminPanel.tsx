@@ -288,7 +288,7 @@ const SuperadminPanel: React.FC = () => {
             >
               <div className="flex items-start">
                 {result.success ? (
-                  <CheckCircle className="text-green-500 mt-0.5 mr-2 flex-shrink-0" size={18} />
+                  <CheckCircle className="text-green-500 mt-0.5 mr-2 flex-shrink-0\" size={18} />
                 ) : (
                   <AlertCircle className="text-amber-500 mt-0.5 mr-2 flex-shrink-0" size={18} />
                 )}
