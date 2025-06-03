@@ -8,7 +8,8 @@ import {
   Clock,
   ChevronDown,
   X,
-  Package 
+  Package,
+  Home 
 } from 'lucide-react';
 import { Button } from '../ui/button';
 import { useSimpleAuthStore } from '../../stores/simpleAuthStore';
@@ -30,6 +31,11 @@ export const StaffHeader: React.FC = () => {
     } else if (passkey !== null) {
       alert('Invalid passkey');
     }
+  };
+
+  const handleCustomerKioskAccess = () => {
+    selectUserMode('customer');
+    navigate('/kiosk');
   };
 
   const unreadNotifications = notifications.length;
@@ -65,9 +71,12 @@ export const StaffHeader: React.FC = () => {
           {/* Right side - Actions */}
           <div className="flex items-center space-x-2">
             {/* Quick action button */}
-            <button className="hidden md:flex items-center gap-1 px-2.5 py-1.5 bg-primary-50 text-primary-700 rounded-lg border border-primary-100 hover:bg-primary-100 transition-colors text-xs">
-              <Package size={14} />
-              <span className="font-medium">Quick Lookup</span>
+            <button
+              onClick={handleCustomerKioskAccess}
+              className="hidden md:flex items-center gap-1 px-2.5 py-1.5 bg-green-50 text-green-700 rounded-lg border border-green-100 hover:bg-green-100 transition-colors text-xs"
+            >
+              <Home size={14} />
+              <span className="font-medium">Go to Customer Kiosk</span>
             </button>
             
             {/* Notifications */}

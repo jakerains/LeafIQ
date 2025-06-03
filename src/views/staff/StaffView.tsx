@@ -536,7 +536,7 @@ const BudAIBudtenderMode = ({ productsWithVariants }: { productsWithVariants: Pr
               <p className="text-gray-600 mt-2">
                 I have access to our <span className="font-semibold text-purple-600">entire inventory database</span> and can help you find the perfect products for your customers based on:
               </p>
-              <div className="grid grid-cols-2 gap-2 mt-3">
+              <div className="grid grid-cols-2 gap-x-4 gap-y-2 mt-3">
                 <div className="flex items-center space-x-2 text-sm text-gray-600">
                   <Zap className="h-4 w-4 text-yellow-500" />
                   <span>Desired effects</span>

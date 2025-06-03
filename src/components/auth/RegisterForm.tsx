@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../ui/button';
-import { Building2, Mail, Lock, AlertCircle, ArrowRight, ArrowLeft, Check, Monitor, Users, Database, Settings, MapPin, Gift, Phone, User, HelpCircle, Download, FileJson, X } from 'lucide-react';
+import { Building2, Mail, Lock, AlertCircle, ArrowRight, ArrowLeft, Check, Monitor, Users, Database, MapPin, Gift, Phone, User, HelpCircle, Download, FileJson, X } from 'lucide-react';
 import { signUp } from '../../lib/supabase';
 import { useAuthStore } from '../../stores/authStore';
 
