@@ -7,6 +7,7 @@ import { importInventoryData, exportInventoryData, validateImportData, ImportRes
 import { parseMarkdownToImportData, parseMultipleMarkdownFiles } from '../../../utils/markdownInventoryParser';
 import { useAuthStore } from '../../../stores/authStore';
 import { useProductsStore } from '../../../stores/productsStore';
+import { useSimpleAuthStore } from '../../../stores/simpleAuthStore';
 
 interface ImportExportOptionsProps {
   onClose: () => void;
