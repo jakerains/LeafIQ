@@ -3,8 +3,8 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { randomUUID } from 'crypto';
 
-// Get __dirname equivalent for ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -180,7 +180,7 @@ function convertToImportProduct(parsed, counter, category) {
   }
   
   // Generate unique IDs
-  const productId = `truenorth-${category}-${counter.toString().padStart(3, '0')}`;
+  const productId = randomUUID(); // Use proper UUID instead of string-based ID
   
   // Parse strain type
   const strainType = parseStrainType(parsed.type);
@@ -211,7 +211,7 @@ function convertToImportProduct(parsed, counter, category) {
     }
     
     variants.push({
-      id: `${productId}-var1`,
+      id: randomUUID(), // Use proper UUID instead of string-based ID
       size_weight: sizeWeight,
       price: price,
       original_price: price,
@@ -343,7 +343,7 @@ function parsePricingToVariants(pricing, productId, thc, cbd) {
       const size = parts[1];
       
       variants.push({
-        id: `${productId}-var${variantCounter++}`,
+        id: randomUUID(), // Use proper UUID instead of string-based ID
         size_weight: size,
         price: price,
         original_price: price,
@@ -513,4 +513,4 @@ console.log(`   Current value: "${ORGANIZATION_ID}"`);
 console.log('   Replace with your actual organization ID from LeafIQ\n');
 
 // Run the conversion
-convertAllMarkdownFiles().catch(console.error); 
+convertAllMarkdownFiles().catch(console.error);

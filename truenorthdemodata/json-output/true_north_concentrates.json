@@ -2,13 +2,13 @@
   "metadata": {
     "format_version": "1.0",
     "organization_id": "d85af8c9-0d4a-451c-bc25-8c669c71142e",
-    "timestamp": "2025-06-02T19:56:39.588Z",
+    "timestamp": "2025-06-03T04:32:21.542Z",
     "source_file": "true_north_concentrates.md",
     "total_products": 37
   },
   "products": [
     {
-      "id": "truenorth-concentrate-001",
+      "id": "2548c1b6-e52b-49d3-8330-a87520babfea",
       "name": "Black Ice - Live Rosin",
       "brand": "High Hills",
       "category": "concentrate",
@@ -17,21 +17,21 @@
       "strain_type": "indica",
       "variants": [
         {
-          "id": "truenorth-concentrate-001-var1",
+          "id": "26d77914-9718-45db-9b3c-aa9108439985",
           "size_weight": "2g",
           "price": 70,
           "original_price": 70,
           "thc_percentage": 75.29,
           "cbd_percentage": 0,
           "total_cannabinoids": 75.29,
-          "inventory_level": 24,
+          "inventory_level": 6,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 1.31,
+            "myrcene": 0.75,
             "limonene": 0,
             "pinene": 0,
-            "caryophyllene": 0.32,
-            "linalool": 0.19,
+            "caryophyllene": 0.7,
+            "linalool": 0.24,
             "humulene": 0.13,
             "terpinolene": 0,
             "ocimene": 0.15
@@ -40,7 +40,7 @@
       ]
     },
     {
-      "id": "truenorth-concentrate-002",
+      "id": "90f6005f-875f-40fd-a1a8-37e53899aad5",
       "name": "Triangle Kush - Live Rosin",
       "brand": "High Hills",
       "category": "concentrate",
@@ -49,30 +49,30 @@
       "strain_type": "indica",
       "variants": [
         {
-          "id": "truenorth-concentrate-002-var1",
+          "id": "12e36d4e-0b70-4f78-bb94-a3df1381e4c4",
           "size_weight": "1g",
           "price": 50,
           "original_price": 50,
           "thc_percentage": 76.12,
           "cbd_percentage": 0,
           "total_cannabinoids": 76.12,
-          "inventory_level": 8,
+          "inventory_level": 5,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 1.07,
+            "myrcene": 1.17,
             "limonene": 0,
             "pinene": 0,
-            "caryophyllene": 0.38,
-            "linalool": 0.37,
-            "humulene": 0.21,
+            "caryophyllene": 0.5,
+            "linalool": 0.46,
+            "humulene": 0.27,
             "terpinolene": 0,
-            "ocimene": 0.2
+            "ocimene": 0.12
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-003",
+      "id": "016c2312-c598-4438-865c-f6904d16bcfb",
       "name": "Wagyu - Live Rosin",
       "brand": "High Hills",
       "category": "concentrate",
@@ -81,30 +81,30 @@
       "strain_type": "indica",
       "variants": [
         {
-          "id": "truenorth-concentrate-003-var1",
+          "id": "364106da-b083-47fc-83fe-67877dda1e2b",
           "size_weight": "1g",
           "price": 50,
           "original_price": 50,
           "thc_percentage": 84.27,
           "cbd_percentage": 0,
           "total_cannabinoids": 84.27,
-          "inventory_level": 24,
+          "inventory_level": 21,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.56,
+            "myrcene": 1.3,
             "limonene": 0,
             "pinene": 0,
-            "caryophyllene": 0.29,
-            "linalool": 0.37,
-            "humulene": 0.08,
+            "caryophyllene": 0.86,
+            "linalool": 0.53,
+            "humulene": 0.28,
             "terpinolene": 0,
-            "ocimene": 0.21
+            "ocimene": 0.14
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-004",
+      "id": "8aca50f3-20e8-45cd-a9d7-b4ced4eb23df",
       "name": "Yogurt Dip - Live Rosin",
       "brand": "High Hills",
       "category": "concentrate",
@@ -113,30 +113,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-concentrate-004-var1",
+          "id": "ec0ca132-cda5-448d-9a8c-e88531ab0677",
           "size_weight": "1g",
           "price": 50,
           "original_price": 50,
           "thc_percentage": 86.47,
           "cbd_percentage": 0.18,
           "total_cannabinoids": 86.65,
-          "inventory_level": 15,
+          "inventory_level": 19,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.4,
-            "limonene": 0.33,
-            "pinene": 0.62,
+            "myrcene": 0.79,
+            "limonene": 0.89,
+            "pinene": 0.19,
             "caryophyllene": 0.4,
             "linalool": 0,
-            "humulene": 0.09,
+            "humulene": 0.24,
             "terpinolene": 0,
-            "ocimene": 0.2
+            "ocimene": 0.02
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-005",
+      "id": "440654f6-182f-46a9-8361-896b8b280bf3",
       "name": "Cherry Waves - Fresh Press",
       "brand": "Sodak Selects",
       "category": "concentrate",
@@ -145,30 +145,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-concentrate-005-var1",
+          "id": "b3df7c36-3016-4ee7-af20-8d1b2a259f7e",
           "size_weight": "1g",
           "price": 50,
           "original_price": 50,
           "thc_percentage": 73.97,
           "cbd_percentage": 0,
           "total_cannabinoids": 73.97,
-          "inventory_level": 18,
+          "inventory_level": 19,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.58,
-            "limonene": 0.67,
-            "pinene": 0.27,
-            "caryophyllene": 0.58,
+            "myrcene": 0.79,
+            "limonene": 0.46,
+            "pinene": 0.17,
+            "caryophyllene": 0.4,
             "linalool": 0,
-            "humulene": 0.21,
+            "humulene": 0.13,
             "terpinolene": 0,
-            "ocimene": 0.11
+            "ocimene": 0.15
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-006",
+      "id": "1f4fc23e-a505-4081-814b-0c35df2ce72f",
       "name": "Cherry Waves - Fresh Press Bucket",
       "brand": "Sodak Selects",
       "category": "concentrate",
@@ -177,30 +177,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-concentrate-006-var1",
+          "id": "a5771170-ddcb-4e02-9b59-ac86292d1e00",
           "size_weight": "2g",
           "price": 85,
           "original_price": 85,
           "thc_percentage": 73.97,
           "cbd_percentage": 0,
           "total_cannabinoids": 73.97,
-          "inventory_level": 24,
+          "inventory_level": 12,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.32,
-            "limonene": 0.54,
-            "pinene": 0.11,
-            "caryophyllene": 0.12,
+            "myrcene": 0.23,
+            "limonene": 0.49,
+            "pinene": 0.18,
+            "caryophyllene": 0.23,
             "linalool": 0,
-            "humulene": 0.16,
+            "humulene": 0.09,
             "terpinolene": 0,
-            "ocimene": 0.14
+            "ocimene": 0.18
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-007",
+      "id": "77aa61fb-9a69-4d0d-930b-32eb2b9fe8be",
       "name": "Citrus Delights - Fresh Press",
       "brand": "Sodak Selects",
       "category": "concentrate",
@@ -209,30 +209,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-concentrate-007-var1",
+          "id": "963c97f8-7ac5-439e-90c8-0edf1da2f6b8",
           "size_weight": "1g",
           "price": 50,
           "original_price": 50,
           "thc_percentage": 69.93,
           "cbd_percentage": 0,
           "total_cannabinoids": 69.93,
-          "inventory_level": 22,
+          "inventory_level": 9,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.21,
-            "limonene": 0.46,
-            "pinene": 0.35,
-            "caryophyllene": 0.32,
+            "myrcene": 1.15,
+            "limonene": 0.23,
+            "pinene": 0.18,
+            "caryophyllene": 0.19,
             "linalool": 0,
-            "humulene": 0.14,
+            "humulene": 0.31,
             "terpinolene": 0,
-            "ocimene": 0.16
+            "ocimene": 0.18
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-008",
+      "id": "efb0a717-3769-454e-85d5-0f6696622596",
       "name": "Creme de la Runtz - Fresh Press",
       "brand": "Sodak Selects",
       "category": "concentrate",
@@ -241,30 +241,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-concentrate-008-var1",
+          "id": "557971aa-b912-4dd1-b8af-5046ea258de2",
           "size_weight": "1g",
           "price": 50,
           "original_price": 50,
           "thc_percentage": 68.58,
           "cbd_percentage": 0.22,
           "total_cannabinoids": 68.8,
-          "inventory_level": 12,
+          "inventory_level": 16,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.78,
-            "limonene": 0.4,
-            "pinene": 0.32,
+            "myrcene": 0.62,
+            "limonene": 0.32,
+            "pinene": 0.14,
             "caryophyllene": 0.52,
             "linalool": 0,
-            "humulene": 0.06,
+            "humulene": 0.25,
             "terpinolene": 0,
-            "ocimene": 0.05
+            "ocimene": 0.02
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-009",
+      "id": "71ef2818-a9e0-4da7-a620-a08b2c0e518b",
       "name": "Dirty 30 - Fresh Press",
       "brand": "Sodak Selects",
       "category": "concentrate",
@@ -273,30 +273,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-concentrate-009-var1",
+          "id": "45463b23-86cb-4976-aa71-d64b05543fb5",
           "size_weight": "1g",
           "price": 50,
           "original_price": 50,
           "thc_percentage": 76.6,
           "cbd_percentage": 0,
           "total_cannabinoids": 76.6,
-          "inventory_level": 5,
+          "inventory_level": 24,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.92,
-            "limonene": 0.64,
-            "pinene": 0.62,
-            "caryophyllene": 0.21,
+            "myrcene": 0.24,
+            "limonene": 0.8,
+            "pinene": 0.37,
+            "caryophyllene": 0.22,
             "linalool": 0,
-            "humulene": 0.29,
+            "humulene": 0.18,
             "terpinolene": 0,
-            "ocimene": 0.04
+            "ocimene": 0.02
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-010",
+      "id": "f38e0073-edc1-47e5-bc87-9b1102ec746f",
       "name": "GMO - Fresh Press",
       "brand": "Sodak Selects",
       "category": "concentrate",
@@ -305,30 +305,30 @@
       "strain_type": "indica",
       "variants": [
         {
-          "id": "truenorth-concentrate-010-var1",
+          "id": "f6f85e8a-b9c6-4e9e-a84b-01658a745f35",
           "size_weight": "1g",
           "price": 50,
           "original_price": 50,
           "thc_percentage": 75.51,
           "cbd_percentage": 0.11,
           "total_cannabinoids": 75.62,
-          "inventory_level": 23,
+          "inventory_level": 22,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 1.35,
+            "myrcene": 1.37,
             "limonene": 0,
             "pinene": 0,
-            "caryophyllene": 0.38,
-            "linalool": 0.54,
-            "humulene": 0.17,
+            "caryophyllene": 0.84,
+            "linalool": 0.1,
+            "humulene": 0.06,
             "terpinolene": 0,
-            "ocimene": 0.19
+            "ocimene": 0.1
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-011",
+      "id": "503bc924-ec89-46ff-bb30-e3669f60aad3",
       "name": "Orange Mints - Fresh Press",
       "brand": "Sodak Selects",
       "category": "concentrate",
@@ -337,30 +337,30 @@
       "strain_type": "indica",
       "variants": [
         {
-          "id": "truenorth-concentrate-011-var1",
+          "id": "ca74075a-2a88-4239-92d7-56fced2c08b4",
           "size_weight": "1g",
           "price": 50,
           "original_price": 50,
           "thc_percentage": 74.86,
           "cbd_percentage": 0,
           "total_cannabinoids": 74.86,
-          "inventory_level": 15,
+          "inventory_level": 18,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 1.53,
+            "myrcene": 1.11,
             "limonene": 0,
             "pinene": 0,
-            "caryophyllene": 0.34,
-            "linalool": 0.47,
+            "caryophyllene": 0.25,
+            "linalool": 0.25,
             "humulene": 0.12,
             "terpinolene": 0,
-            "ocimene": 0.14
+            "ocimene": 0.13
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-012",
+      "id": "20e57be1-8ab9-4dc5-a411-d0e11eebb94f",
       "name": "Planet of the Grapes - Fresh Press",
       "brand": "Sodak Selects",
       "category": "concentrate",
@@ -369,30 +369,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-concentrate-012-var1",
+          "id": "c47d7d8b-8680-4a7d-b224-250aaf11f841",
           "size_weight": "1g",
           "price": 50,
           "original_price": 50,
           "thc_percentage": 74.25,
           "cbd_percentage": 0.19,
           "total_cannabinoids": 74.44,
-          "inventory_level": 12,
+          "inventory_level": 11,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 1.09,
-            "limonene": 0.79,
-            "pinene": 0.64,
-            "caryophyllene": 0.23,
+            "myrcene": 0.81,
+            "limonene": 0.58,
+            "pinene": 0.2,
+            "caryophyllene": 0.12,
             "linalool": 0,
-            "humulene": 0.09,
+            "humulene": 0.29,
             "terpinolene": 0,
-            "ocimene": 0.2
+            "ocimene": 0.15
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-013",
+      "id": "7758be41-3d20-4a31-910c-1be3ba9afedd",
       "name": "Super Boof - Fresh Press",
       "brand": "Sodak Selects",
       "category": "concentrate",
@@ -401,30 +401,30 @@
       "strain_type": "sativa",
       "variants": [
         {
-          "id": "truenorth-concentrate-013-var1",
+          "id": "4061bf98-c991-4ae5-8d62-ddbb85fceb81",
           "size_weight": "1g",
           "price": 50,
           "original_price": 50,
           "thc_percentage": 77.7,
           "cbd_percentage": 0.17,
           "total_cannabinoids": 77.87,
-          "inventory_level": 15,
+          "inventory_level": 13,
           "is_available": true,
           "terpene_profile": {
             "myrcene": 0,
-            "limonene": 0.64,
-            "pinene": 1,
+            "limonene": 1.17,
+            "pinene": 0.93,
             "caryophyllene": 0,
             "linalool": 0,
-            "humulene": 0.1,
-            "terpinolene": 0.23,
-            "ocimene": 0.01
+            "humulene": 0.31,
+            "terpinolene": 0.27,
+            "ocimene": 0.04
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-014",
+      "id": "ac0754e3-d02c-4dab-972a-2dc8980ed328",
       "name": "Super Boof - Fresh Press Bucket",
       "brand": "Sodak Selects",
       "category": "concentrate",
@@ -433,30 +433,30 @@
       "strain_type": "sativa",
       "variants": [
         {
-          "id": "truenorth-concentrate-014-var1",
+          "id": "590c0ebd-8865-4773-9fa0-c793e7b50a4b",
           "size_weight": "2g",
           "price": 85,
           "original_price": 85,
           "thc_percentage": 77.7,
           "cbd_percentage": 0.17,
           "total_cannabinoids": 77.87,
-          "inventory_level": 22,
+          "inventory_level": 20,
           "is_available": true,
           "terpene_profile": {
             "myrcene": 0,
-            "limonene": 0.6,
-            "pinene": 0.15,
+            "limonene": 0.64,
+            "pinene": 0.96,
             "caryophyllene": 0,
             "linalool": 0,
             "humulene": 0.23,
-            "terpinolene": 0.11,
-            "ocimene": 0.13
+            "terpinolene": 0.28,
+            "ocimene": 0.12
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-015",
+      "id": "06416e79-2799-4349-a41c-4397d018f5ec",
       "name": "Sweet Leaf - Fresh Press",
       "brand": "Sodak Selects",
       "category": "concentrate",
@@ -465,30 +465,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-concentrate-015-var1",
+          "id": "dc26936f-0193-4933-ae9b-aec363aac587",
           "size_weight": "1g",
           "price": 50,
           "original_price": 50,
           "thc_percentage": 75.09,
           "cbd_percentage": 0.11,
           "total_cannabinoids": 75.2,
-          "inventory_level": 23,
+          "inventory_level": 8,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.35,
-            "limonene": 0.23,
-            "pinene": 0.62,
-            "caryophyllene": 0.48,
+            "myrcene": 1.02,
+            "limonene": 0.83,
+            "pinene": 0.39,
+            "caryophyllene": 0.19,
             "linalool": 0,
-            "humulene": 0.17,
+            "humulene": 0.22,
             "terpinolene": 0,
-            "ocimene": 0.14
+            "ocimene": 0.16
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-016",
+      "id": "c7568f81-89c6-4283-8f0d-762e1c125449",
       "name": "Sweet Leaf - Fresh Press Bucket",
       "brand": "Sodak Selects",
       "category": "concentrate",
@@ -497,30 +497,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-concentrate-016-var1",
+          "id": "63b11007-0844-45f0-8746-0fe44a0ad85f",
           "size_weight": "2g",
           "price": 85,
           "original_price": 85,
           "thc_percentage": 75.09,
           "cbd_percentage": 0.11,
           "total_cannabinoids": 75.2,
-          "inventory_level": 8,
+          "inventory_level": 14,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.78,
-            "limonene": 0.43,
+            "myrcene": 0.92,
+            "limonene": 0.26,
             "pinene": 0.21,
-            "caryophyllene": 0.36,
+            "caryophyllene": 0.57,
             "linalool": 0,
-            "humulene": 0.2,
+            "humulene": 0.09,
             "terpinolene": 0,
-            "ocimene": 0.16
+            "ocimene": 0.13
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-017",
+      "id": "e3665fa1-0b6b-4f79-a25a-7ee2ac84991b",
       "name": "Citrus Delights - Bucket",
       "brand": "Sodak Selects",
       "category": "concentrate",
@@ -529,30 +529,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-concentrate-017-var1",
+          "id": "baf1676a-b3f4-4e60-9e2f-383c84a76daf",
           "size_weight": "2g",
           "price": 85,
           "original_price": 85,
           "thc_percentage": 69.93,
           "cbd_percentage": 0,
           "total_cannabinoids": 69.93,
-          "inventory_level": 24,
+          "inventory_level": 21,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.65,
-            "limonene": 0.58,
-            "pinene": 0.59,
-            "caryophyllene": 0.46,
+            "myrcene": 0.9,
+            "limonene": 0.12,
+            "pinene": 0.48,
+            "caryophyllene": 0.53,
             "linalool": 0,
-            "humulene": 0.26,
+            "humulene": 0.09,
             "terpinolene": 0,
-            "ocimene": 0.14
+            "ocimene": 0.2
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-018",
+      "id": "af43dd41-5df0-420d-b8f5-fb40fabe672d",
       "name": "Dirty 30 - Bucket",
       "brand": "Sodak Selects",
       "category": "concentrate",
@@ -561,30 +561,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-concentrate-018-var1",
+          "id": "91fa26e1-0b6a-4456-bdbb-f6a565c9946b",
           "size_weight": "2g",
           "price": 85,
           "original_price": 85,
           "thc_percentage": 76.6,
           "cbd_percentage": 0,
           "total_cannabinoids": 76.6,
-          "inventory_level": 17,
+          "inventory_level": 11,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.85,
-            "limonene": 0.64,
-            "pinene": 0.66,
-            "caryophyllene": 0.55,
+            "myrcene": 0.99,
+            "limonene": 0.3,
+            "pinene": 0.39,
+            "caryophyllene": 0.5,
             "linalool": 0,
-            "humulene": 0.06,
+            "humulene": 0.01,
             "terpinolene": 0,
-            "ocimene": 0.11
+            "ocimene": 0.16
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-019",
+      "id": "8c742909-355b-452a-8a1c-e18da597d829",
       "name": "Orange Mints - Bucket",
       "brand": "Sodak Selects",
       "category": "concentrate",
@@ -593,30 +593,30 @@
       "strain_type": "indica",
       "variants": [
         {
-          "id": "truenorth-concentrate-019-var1",
+          "id": "1e7ee7ad-0418-4d22-bc29-16c9bb0800a4",
           "size_weight": "2g",
           "price": 85,
           "original_price": 85,
           "thc_percentage": 74.86,
           "cbd_percentage": 0,
           "total_cannabinoids": 74.86,
-          "inventory_level": 11,
+          "inventory_level": 8,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 1.31,
+            "myrcene": 0.49,
             "limonene": 0,
             "pinene": 0,
-            "caryophyllene": 0.79,
-            "linalool": 0.3,
-            "humulene": 0.14,
+            "caryophyllene": 0.36,
+            "linalool": 0.22,
+            "humulene": 0.08,
             "terpinolene": 0,
-            "ocimene": 0.07
+            "ocimene": 0.05
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-020",
+      "id": "ef4b0591-e39e-43ea-8cb4-667244396542",
       "name": "Chocolate Covered Bananas - Badder",
       "brand": "High Hills",
       "category": "concentrate",
@@ -625,30 +625,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-concentrate-020-var1",
+          "id": "8fb005a5-1cbf-4725-8f23-843f72fd34a2",
           "size_weight": "2g",
           "price": 70,
           "original_price": 70,
           "thc_percentage": 75.02,
           "cbd_percentage": 0.18,
           "total_cannabinoids": 75.2,
-          "inventory_level": 14,
+          "inventory_level": 22,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.25,
-            "limonene": 0.22,
-            "pinene": 0.17,
-            "caryophyllene": 0.22,
+            "myrcene": 0.37,
+            "limonene": 0.66,
+            "pinene": 0.13,
+            "caryophyllene": 0.49,
             "linalool": 0,
-            "humulene": 0.06,
+            "humulene": 0.04,
             "terpinolene": 0,
-            "ocimene": 0.15
+            "ocimene": 0.16
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-021",
+      "id": "d4d30eae-5452-4903-881b-0a3b289693a4",
       "name": "Chuckle Berry - Badder",
       "brand": "High Hills",
       "category": "concentrate",
@@ -657,30 +657,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-concentrate-021-var1",
+          "id": "60dbce5e-c2dd-476a-b5ba-c1b6e7df03ca",
           "size_weight": "1g",
           "price": 45,
           "original_price": 45,
           "thc_percentage": 73.2,
           "cbd_percentage": 4.01,
           "total_cannabinoids": 77.21000000000001,
-          "inventory_level": 20,
+          "inventory_level": 14,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.44,
-            "limonene": 0.62,
-            "pinene": 0.19,
-            "caryophyllene": 0.36,
+            "myrcene": 0.68,
+            "limonene": 0.7,
+            "pinene": 0.18,
+            "caryophyllene": 0.59,
             "linalool": 0,
-            "humulene": 0.28,
+            "humulene": 0.15,
             "terpinolene": 0,
-            "ocimene": 0.13
+            "ocimene": 0.17
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-022",
+      "id": "c46a7bf6-c656-4567-bc78-249179b79b5e",
       "name": "DNG Hybrid Blend Badder",
       "brand": "DNG",
       "category": "concentrate",
@@ -689,30 +689,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-concentrate-022-var1",
+          "id": "c043e302-1799-4b2c-a282-d57ddbba5364",
           "size_weight": "1g",
           "price": 35,
           "original_price": 35,
           "thc_percentage": 81.55,
           "cbd_percentage": 0.07,
           "total_cannabinoids": 81.61999999999999,
-          "inventory_level": 21,
+          "inventory_level": 24,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.78,
-            "limonene": 0.65,
-            "pinene": 0.67,
-            "caryophyllene": 0.26,
+            "myrcene": 0.25,
+            "limonene": 0.87,
+            "pinene": 0.16,
+            "caryophyllene": 0.21,
             "linalool": 0,
-            "humulene": 0.02,
+            "humulene": 0.09,
             "terpinolene": 0,
-            "ocimene": 0.15
+            "ocimene": 0.14
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-023",
+      "id": "3b97b728-3695-45cb-aad6-516dfef1bfde",
       "name": "Lotto 95 - Batter Bucket",
       "brand": "High Hills",
       "category": "concentrate",
@@ -721,30 +721,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-concentrate-023-var1",
+          "id": "10d2f1b8-3b02-44f6-9ba6-c480e7afc74d",
           "size_weight": "2g",
           "price": 70,
           "original_price": 70,
           "thc_percentage": 87.54,
           "cbd_percentage": 0.22,
           "total_cannabinoids": 87.76,
-          "inventory_level": 24,
+          "inventory_level": 7,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.83,
-            "limonene": 0.52,
-            "pinene": 0.65,
-            "caryophyllene": 0.43,
+            "myrcene": 0.48,
+            "limonene": 0.28,
+            "pinene": 0.69,
+            "caryophyllene": 0.22,
             "linalool": 0,
-            "humulene": 0.09,
+            "humulene": 0.27,
             "terpinolene": 0,
-            "ocimene": 0.06
+            "ocimene": 0.12
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-024",
+      "id": "9e607ddd-fc96-48d7-a139-29d89ae2a31a",
       "name": "Boofmosa - Terp Sugar",
       "brand": "High Hills",
       "category": "concentrate",
@@ -753,30 +753,30 @@
       "strain_type": "sativa",
       "variants": [
         {
-          "id": "truenorth-concentrate-024-var1",
+          "id": "f0536a99-9bf6-4734-8d94-3c4e2c112a89",
           "size_weight": "1g",
           "price": 45,
           "original_price": 45,
           "thc_percentage": 82.36,
           "cbd_percentage": 0.21,
           "total_cannabinoids": 82.57,
-          "inventory_level": 23,
+          "inventory_level": 22,
           "is_available": true,
           "terpene_profile": {
             "myrcene": 0,
-            "limonene": 0.96,
-            "pinene": 0.31,
+            "limonene": 1.23,
+            "pinene": 0.12,
             "caryophyllene": 0,
             "linalool": 0,
-            "humulene": 0.04,
-            "terpinolene": 0.26,
-            "ocimene": 0.02
+            "humulene": 0.23,
+            "terpinolene": 0.2,
+            "ocimene": 0.15
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-025",
+      "id": "45b9aab2-d892-4faa-ba2f-7007497e967f",
       "name": "DNG Hybrid Blend Terp Sauce",
       "brand": "DNG",
       "category": "concentrate",
@@ -785,30 +785,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-concentrate-025-var1",
+          "id": "d690e982-6ec9-4695-8585-39080b20a3bf",
           "size_weight": "1g",
           "price": 35,
           "original_price": 35,
           "thc_percentage": 77.95,
           "cbd_percentage": 0.05,
           "total_cannabinoids": 78,
-          "inventory_level": 13,
+          "inventory_level": 12,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.93,
-            "limonene": 0.11,
-            "pinene": 0.47,
-            "caryophyllene": 0.18,
+            "myrcene": 0.34,
+            "limonene": 0.28,
+            "pinene": 0.28,
+            "caryophyllene": 0.21,
             "linalool": 0,
-            "humulene": 0.07,
+            "humulene": 0.3,
             "terpinolene": 0,
-            "ocimene": 0.2
+            "ocimene": 0.14
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-026",
+      "id": "a16b222d-f16f-4a0a-b554-7823bf0dcf83",
       "name": "Grape Punch - Sugar Batter",
       "brand": "Pure Bliss",
       "category": "concentrate",
@@ -817,30 +817,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-concentrate-026-var1",
+          "id": "361d6a0a-7d53-4ea4-b13d-ba2130c2702d",
           "size_weight": "1g",
           "price": 35,
           "original_price": 35,
           "thc_percentage": 89.83,
           "cbd_percentage": 0.19,
           "total_cannabinoids": 90.02,
-          "inventory_level": 18,
+          "inventory_level": 16,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.39,
-            "limonene": 0.51,
-            "pinene": 0.46,
-            "caryophyllene": 0.21,
+            "myrcene": 0.76,
+            "limonene": 0.35,
+            "pinene": 0.21,
+            "caryophyllene": 0.45,
             "linalool": 0,
-            "humulene": 0.12,
+            "humulene": 0.16,
             "terpinolene": 0,
-            "ocimene": 0.16
+            "ocimene": 0.03
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-027",
+      "id": "135dcb5c-7c8c-413b-82e3-70bb162d0157",
       "name": "Trop Cookies - Terp Sugar",
       "brand": "High Hills",
       "category": "concentrate",
@@ -849,30 +849,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-concentrate-027-var1",
+          "id": "e4bf6e3b-5c84-4d3d-9437-be54b28b187e",
           "size_weight": "2g",
           "price": 70,
           "original_price": 70,
           "thc_percentage": 75.39,
           "cbd_percentage": 0.13,
           "total_cannabinoids": 75.52,
-          "inventory_level": 22,
+          "inventory_level": 14,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.32,
-            "limonene": 0.23,
-            "pinene": 0.37,
-            "caryophyllene": 0.18,
+            "myrcene": 0.41,
+            "limonene": 0.63,
+            "pinene": 0.39,
+            "caryophyllene": 0.32,
             "linalool": 0,
-            "humulene": 0.27,
+            "humulene": 0.18,
             "terpinolene": 0,
-            "ocimene": 0.05
+            "ocimene": 0.14
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-028",
+      "id": "92c9d4b5-59e7-4a2a-9259-7313582bc4cc",
       "name": "Viper Cookies - Sugar",
       "brand": "Garden Valley Ag",
       "category": "concentrate",
@@ -881,30 +881,30 @@
       "strain_type": "sativa",
       "variants": [
         {
-          "id": "truenorth-concentrate-028-var1",
+          "id": "2d9436fb-45ba-4b55-be3d-97d93e89bda2",
           "size_weight": "1g",
           "price": 35,
           "original_price": 35,
           "thc_percentage": 68.1,
           "cbd_percentage": 0.02,
           "total_cannabinoids": 68.11999999999999,
-          "inventory_level": 15,
+          "inventory_level": 5,
           "is_available": true,
           "terpene_profile": {
             "myrcene": 0,
-            "limonene": 0.68,
-            "pinene": 0.94,
+            "limonene": 0.29,
+            "pinene": 0.12,
             "caryophyllene": 0,
             "linalool": 0,
-            "humulene": 0.03,
-            "terpinolene": 0.18,
-            "ocimene": 0.03
+            "humulene": 0.28,
+            "terpinolene": 0.19,
+            "ocimene": 0.15
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-029",
+      "id": "b25258fc-7e05-4b55-9623-be1543ac1bb2",
       "name": "Deep Space - Cured Resin",
       "brand": "Big Sioux Extracts",
       "category": "concentrate",
@@ -913,22 +913,22 @@
       "strain_type": "indica",
       "variants": [
         {
-          "id": "truenorth-concentrate-029-var1",
+          "id": "51185b29-e1a2-40bd-bd45-0235fed0f46d",
           "size_weight": "1g",
           "price": 30,
           "original_price": 30,
           "thc_percentage": 60.39,
           "cbd_percentage": 0.15,
           "total_cannabinoids": 60.54,
-          "inventory_level": 15,
+          "inventory_level": 5,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 1.42,
+            "myrcene": 0.32,
             "limonene": 0,
             "pinene": 0,
-            "caryophyllene": 0.65,
-            "linalool": 0.24,
-            "humulene": 0.3,
+            "caryophyllene": 0.14,
+            "linalool": 0.26,
+            "humulene": 0.03,
             "terpinolene": 0,
             "ocimene": 0.16
           }
@@ -936,7 +936,7 @@
       ]
     },
     {
-      "id": "truenorth-concentrate-030",
+      "id": "44b44a98-ffd5-4f88-ab75-c646ba897283",
       "name": "Memory Loss - Live Resin Caviar",
       "brand": "High Hills",
       "category": "concentrate",
@@ -945,30 +945,30 @@
       "strain_type": "sativa",
       "variants": [
         {
-          "id": "truenorth-concentrate-030-var1",
+          "id": "7a18c387-8a6c-4a62-9407-8a2fde4c161c",
           "size_weight": "1g",
           "price": 50,
           "original_price": 50,
           "thc_percentage": 71.42,
           "cbd_percentage": 0.15,
           "total_cannabinoids": 71.57000000000001,
-          "inventory_level": 9,
+          "inventory_level": 15,
           "is_available": true,
           "terpene_profile": {
             "myrcene": 0,
-            "limonene": 0.63,
-            "pinene": 0.39,
+            "limonene": 0.32,
+            "pinene": 0.77,
             "caryophyllene": 0,
             "linalool": 0,
-            "humulene": 0.24,
-            "terpinolene": 0.05,
-            "ocimene": 0.19
+            "humulene": 0.12,
+            "terpinolene": 0.21,
+            "ocimene": 0.05
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-031",
+      "id": "a863dc49-ec82-4db4-8b67-f3d76b2c5fdd",
       "name": "Pablo Driver - Cured Resin",
       "brand": "Big Sioux Extracts",
       "category": "concentrate",
@@ -977,30 +977,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-concentrate-031-var1",
+          "id": "9a1e1eb8-8599-4348-aedf-cdc1a986808e",
           "size_weight": "1g",
           "price": 30,
           "original_price": 30,
           "thc_percentage": 78.34,
           "cbd_percentage": 0.17,
           "total_cannabinoids": 78.51,
-          "inventory_level": 6,
+          "inventory_level": 17,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.52,
-            "limonene": 0.85,
-            "pinene": 0.68,
-            "caryophyllene": 0.39,
+            "myrcene": 0.27,
+            "limonene": 0.75,
+            "pinene": 0.25,
+            "caryophyllene": 0.29,
             "linalool": 0,
-            "humulene": 0.04,
+            "humulene": 0.16,
             "terpinolene": 0,
-            "ocimene": 0.18
+            "ocimene": 0.2
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-032",
+      "id": "fac6412f-0b84-477c-9303-592c8db31fe5",
       "name": "Umbra OG - Live Resin",
       "brand": "Crushmore",
       "category": "concentrate",
@@ -1009,30 +1009,30 @@
       "strain_type": "indica",
       "variants": [
         {
-          "id": "truenorth-concentrate-032-var1",
+          "id": "2ccb40dc-8887-4747-b2fb-6fb3482bdca0",
           "size_weight": "1g",
           "price": 50,
           "original_price": 50,
           "thc_percentage": 73.95,
           "cbd_percentage": 0.18,
           "total_cannabinoids": 74.13000000000001,
-          "inventory_level": 19,
+          "inventory_level": 17,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.96,
+            "myrcene": 1.32,
             "limonene": 0,
             "pinene": 0,
-            "caryophyllene": 0.1,
+            "caryophyllene": 0.13,
             "linalool": 0.34,
-            "humulene": 0.13,
+            "humulene": 0.29,
             "terpinolene": 0,
-            "ocimene": 0.09
+            "ocimene": 0.08
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-033",
+      "id": "b18de537-c39b-4218-b702-e7db480c5fad",
       "name": "Glazed Grapes - Thumbprint",
       "brand": "Sodak Selects",
       "category": "concentrate",
@@ -1041,30 +1041,30 @@
       "strain_type": "indica",
       "variants": [
         {
-          "id": "truenorth-concentrate-033-var1",
+          "id": "740afb58-c46e-4e37-98dd-5ef2732ab3e1",
           "size_weight": "2g",
           "price": 90,
           "original_price": 90,
           "thc_percentage": 66.84,
           "cbd_percentage": 0,
           "total_cannabinoids": 66.84,
-          "inventory_level": 15,
+          "inventory_level": 14,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.48,
+            "myrcene": 1.02,
             "limonene": 0,
             "pinene": 0,
-            "caryophyllene": 0.73,
-            "linalool": 0.18,
-            "humulene": 0.19,
+            "caryophyllene": 0.5,
+            "linalool": 0.43,
+            "humulene": 0.3,
             "terpinolene": 0,
-            "ocimene": 0.05
+            "ocimene": 0.08
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-034",
+      "id": "e3cedf0d-69b2-45b2-8363-fe726857a80b",
       "name": "Purple Take-Off Disposable Dab",
       "brand": "Dakota Health & Wellness",
       "category": "concentrate",
@@ -1073,30 +1073,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-concentrate-034-var1",
+          "id": "45afe35f-8de6-4649-939f-f0e8a140a166",
           "size_weight": "0.5g",
           "price": 30,
           "original_price": 30,
           "thc_percentage": 78.29,
           "cbd_percentage": 0.13,
           "total_cannabinoids": 78.42,
-          "inventory_level": 11,
+          "inventory_level": 22,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.46,
-            "limonene": 0.88,
-            "pinene": 0.52,
-            "caryophyllene": 0.1,
+            "myrcene": 0.58,
+            "limonene": 0.37,
+            "pinene": 0.47,
+            "caryophyllene": 0.12,
             "linalool": 0,
-            "humulene": 0.04,
+            "humulene": 0.19,
             "terpinolene": 0,
-            "ocimene": 0.19
+            "ocimene": 0.16
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-035",
+      "id": "f1b165b0-b7db-42e6-99f3-85462d7c6f0e",
       "name": "Big Sioux Extracts Distillate Syringe",
       "brand": "Big Sioux Extracts",
       "category": "concentrate",
@@ -1105,7 +1105,7 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-concentrate-035-var1",
+          "id": "2a157259-8377-45a7-9f3a-35acdf25a261",
           "size_weight": "1.86g",
           "price": 30,
           "original_price": 30,
@@ -1115,20 +1115,20 @@
           "inventory_level": 14,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.92,
-            "limonene": 0.35,
-            "pinene": 0.6,
+            "myrcene": 0.98,
+            "limonene": 0.61,
+            "pinene": 0.4,
             "caryophyllene": 0.17,
             "linalool": 0,
-            "humulene": 0.15,
+            "humulene": 0.02,
             "terpinolene": 0,
-            "ocimene": 0.07
+            "ocimene": 0.13
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-036",
+      "id": "47b7011a-840e-4c0d-a245-a66606c587b6",
       "name": "RSO Concentrate Syringe",
       "brand": "Big Sioux Extracts",
       "category": "concentrate",
@@ -1137,7 +1137,7 @@
       "strain_type": "indica",
       "variants": [
         {
-          "id": "truenorth-concentrate-036-var1",
+          "id": "60dd2ce1-005c-411c-a3c0-e38de4234f7c",
           "size_weight": "1.86g",
           "price": 30,
           "original_price": 30,
@@ -1147,20 +1147,20 @@
           "inventory_level": 8,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.97,
+            "myrcene": 0.7,
             "limonene": 0,
             "pinene": 0,
-            "caryophyllene": 0.55,
-            "linalool": 0.19,
-            "humulene": 0.18,
+            "caryophyllene": 0.77,
+            "linalool": 0.41,
+            "humulene": 0.22,
             "terpinolene": 0,
-            "ocimene": 0.13
+            "ocimene": 0.1
           }
         }
       ]
     },
     {
-      "id": "truenorth-concentrate-037",
+      "id": "e94d55d3-79d0-4794-be21-560cea3ba366",
       "name": "RSO Capsules 10pk",
       "brand": "605 Cannabis",
       "category": "concentrate",
@@ -1169,24 +1169,24 @@
       "strain_type": "indica",
       "variants": [
         {
-          "id": "truenorth-concentrate-037-var1",
+          "id": "9de1fc1a-1ee0-431c-8f3e-9266a37f42fa",
           "size_weight": "18.9g",
           "price": 50,
           "original_price": 50,
           "thc_percentage": 3.08,
           "cbd_percentage": 0,
           "total_cannabinoids": 3.08,
-          "inventory_level": 11,
+          "inventory_level": 17,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.32,
+            "myrcene": 0.5,
             "limonene": 0,
             "pinene": 0,
-            "caryophyllene": 0.77,
-            "linalool": 0.29,
-            "humulene": 0.05,
+            "caryophyllene": 0.84,
+            "linalool": 0.34,
+            "humulene": 0.06,
             "terpinolene": 0,
-            "ocimene": 0.21
+            "ocimene": 0.1
           }
         }
       ]

@@ -2,13 +2,13 @@
   "metadata": {
     "format_version": "1.0",
     "organization_id": "d85af8c9-0d4a-451c-bc25-8c669c71142e",
-    "timestamp": "2025-06-02T19:56:39.591Z",
+    "timestamp": "2025-06-03T04:32:21.543Z",
     "source_file": "true_north_edibles.md",
     "total_products": 39
   },
   "products": [
     {
-      "id": "truenorth-edible-001",
+      "id": "a982afb4-e36c-4551-9d23-bbb88efd7595",
       "name": "Animal Mintz - Peach Gummies 10pk",
       "brand": "High Hills",
       "category": "edible",
@@ -18,30 +18,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-edible-001-var1",
+          "id": "c1bbcc8e-ddc0-4f2d-a1af-1d9ae2472546",
           "size_weight": "1pk",
           "price": 25,
           "original_price": 25,
           "thc_percentage": 98,
           "cbd_percentage": 0,
           "total_cannabinoids": 98,
-          "inventory_level": 5,
+          "inventory_level": 20,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 1.02,
-            "limonene": 0.69,
-            "pinene": 0.62,
-            "caryophyllene": 0.33,
+            "myrcene": 1.09,
+            "limonene": 0.61,
+            "pinene": 0.47,
+            "caryophyllene": 0.48,
             "linalool": 0,
-            "humulene": 0.11,
+            "humulene": 0.22,
             "terpinolene": 0,
-            "ocimene": 0.13
+            "ocimene": 0.2
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-002",
+      "id": "96383475-fcd7-4f2a-8a7f-f910ea874832",
       "name": "Blueberry Indica 10pk Gummies (54mg per pc)",
       "brand": "605 Cannabis",
       "category": "edible",
@@ -50,30 +50,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-edible-002-var1",
+          "id": "9423c79d-3890-4e99-a5b7-49eadb796df7",
           "size_weight": "1pk",
           "price": 80,
           "original_price": 80,
           "thc_percentage": 542.86,
           "cbd_percentage": 0,
           "total_cannabinoids": 542.86,
-          "inventory_level": 11,
+          "inventory_level": 7,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 1,
-            "limonene": 0.55,
-            "pinene": 0.25,
-            "caryophyllene": 0.57,
+            "myrcene": 0.34,
+            "limonene": 0.63,
+            "pinene": 0.48,
+            "caryophyllene": 0.46,
             "linalool": 0,
-            "humulene": 0.15,
+            "humulene": 0.14,
             "terpinolene": 0,
-            "ocimene": 0.17
+            "ocimene": 0.1
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-003",
+      "id": "cc1aed44-5b47-4c36-8295-ebef1216648c",
       "name": "Blueberry Indica 2pk Gummies (54mg per pc)",
       "brand": "605 Cannabis",
       "category": "edible",
@@ -82,7 +82,7 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-edible-003-var1",
+          "id": "2cad7a14-8414-4aba-917d-d2500c3a0b69",
           "size_weight": "1pk",
           "price": 20,
           "original_price": 20,
@@ -92,20 +92,20 @@
           "inventory_level": 21,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 1.11,
-            "limonene": 0.66,
-            "pinene": 0.2,
-            "caryophyllene": 0.16,
+            "myrcene": 0.35,
+            "limonene": 0.77,
+            "pinene": 0.5,
+            "caryophyllene": 0.14,
             "linalool": 0,
-            "humulene": 0.18,
+            "humulene": 0.09,
             "terpinolene": 0,
-            "ocimene": 0.14
+            "ocimene": 0.03
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-004",
+      "id": "85435596-140d-44ed-b9cd-bbc7052f3ff7",
       "name": "Ghost Magic OG Grape Gummies",
       "brand": "DNS",
       "category": "edible",
@@ -114,30 +114,30 @@
       "strain_type": "indica",
       "variants": [
         {
-          "id": "truenorth-edible-004-var1",
+          "id": "879cb83d-091c-4637-bf17-976d055dc24a",
           "size_weight": "1pk",
           "price": 25,
           "original_price": 25,
           "thc_percentage": 91.85,
           "cbd_percentage": 0,
           "total_cannabinoids": 91.85,
-          "inventory_level": 13,
+          "inventory_level": 8,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.72,
+            "myrcene": 0.79,
             "limonene": 0,
             "pinene": 0,
-            "caryophyllene": 0.42,
-            "linalool": 0.36,
-            "humulene": 0.04,
+            "caryophyllene": 0.36,
+            "linalool": 0.2,
+            "humulene": 0.03,
             "terpinolene": 0,
-            "ocimene": 0.19
+            "ocimene": 0.14
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-005",
+      "id": "199d5234-aed8-45d5-a847-7d068ff6db6f",
       "name": "Ghost Magic OG Razzleberry Gummies",
       "brand": "DNS",
       "category": "edible",
@@ -146,30 +146,30 @@
       "strain_type": "indica",
       "variants": [
         {
-          "id": "truenorth-edible-005-var1",
+          "id": "9a51b629-6248-4180-a0de-67398358bb91",
           "size_weight": "1pk",
           "price": 25,
           "original_price": 25,
           "thc_percentage": 104,
           "cbd_percentage": 0,
           "total_cannabinoids": 104,
-          "inventory_level": 8,
+          "inventory_level": 14,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.67,
+            "myrcene": 0.87,
             "limonene": 0,
             "pinene": 0,
-            "caryophyllene": 0.89,
-            "linalool": 0.51,
-            "humulene": 0.1,
+            "caryophyllene": 0.85,
+            "linalool": 0.54,
+            "humulene": 0.01,
             "terpinolene": 0,
-            "ocimene": 0.19
+            "ocimene": 0.04
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-006",
+      "id": "418fdc73-6294-4b9e-89ba-7352a7c50552",
       "name": "Grape Live Rosin Gummies - 2pk (54.28mg per pc)",
       "brand": "605 Cannabis",
       "category": "edible",
@@ -178,30 +178,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-edible-006-var1",
+          "id": "e2d3d4c8-0aed-429e-92a8-0166c81f5949",
           "size_weight": "1pk",
           "price": 20,
           "original_price": 20,
           "thc_percentage": 104.6,
           "cbd_percentage": 0,
           "total_cannabinoids": 104.6,
-          "inventory_level": 11,
+          "inventory_level": 17,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.81,
-            "limonene": 0.27,
-            "pinene": 0.47,
-            "caryophyllene": 0.46,
+            "myrcene": 0.85,
+            "limonene": 0.53,
+            "pinene": 0.11,
+            "caryophyllene": 0.44,
             "linalool": 0,
-            "humulene": 0.29,
+            "humulene": 0.26,
             "terpinolene": 0,
-            "ocimene": 0.1
+            "ocimene": 0.13
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-007",
+      "id": "690bfb80-36df-4936-b6eb-ea1e689b8fa6",
       "name": "Grape Razz Indica Gummies 5pk (19.52mg ea.)",
       "brand": "High Hills",
       "category": "edible",
@@ -210,30 +210,30 @@
       "strain_type": "indica",
       "variants": [
         {
-          "id": "truenorth-edible-007-var1",
+          "id": "2f382486-c2f1-4040-81a2-bfadc67188f4",
           "size_weight": "1pk",
           "price": 25,
           "original_price": 25,
           "thc_percentage": 97.6,
           "cbd_percentage": 0,
           "total_cannabinoids": 97.6,
-          "inventory_level": 8,
+          "inventory_level": 21,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 1.79,
+            "myrcene": 0.36,
             "limonene": 0,
             "pinene": 0,
-            "caryophyllene": 0.44,
-            "linalool": 0.37,
-            "humulene": 0.06,
+            "caryophyllene": 0.59,
+            "linalool": 0.47,
+            "humulene": 0.19,
             "terpinolene": 0,
-            "ocimene": 0.03
+            "ocimene": 0.18
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-008",
+      "id": "9ca630f8-e405-4ee8-98d9-6b136268e749",
       "name": "Green Apple Energy Gummies 10pk",
       "brand": "605 Cannabis",
       "category": "edible",
@@ -242,30 +242,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-edible-008-var1",
+          "id": "904123ef-daf6-4262-a031-a1fdc51219f5",
           "size_weight": "1pk",
           "price": 25,
           "original_price": 25,
           "thc_percentage": 100,
           "cbd_percentage": 0,
           "total_cannabinoids": 100,
-          "inventory_level": 11,
+          "inventory_level": 8,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.65,
-            "limonene": 0.49,
-            "pinene": 0.29,
-            "caryophyllene": 0.42,
+            "myrcene": 0.93,
+            "limonene": 0.69,
+            "pinene": 0.33,
+            "caryophyllene": 0.35,
             "linalool": 0,
-            "humulene": 0.02,
+            "humulene": 0.16,
             "terpinolene": 0,
-            "ocimene": 0.03
+            "ocimene": 0.17
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-009",
+      "id": "c8ac05a5-68ee-4140-bf80-29dd0c776c8f",
       "name": "Passion Fruit Sativa Gummies - 25mg / 4pk",
       "brand": "Crushmore",
       "category": "edible",
@@ -274,7 +274,7 @@
       "strain_type": "sativa",
       "variants": [
         {
-          "id": "truenorth-edible-009-var1",
+          "id": "2a5ed2ef-8319-4954-8700-8c2708a5741b",
           "size_weight": "1pk",
           "price": 25,
           "original_price": 25,
@@ -285,19 +285,19 @@
           "is_available": true,
           "terpene_profile": {
             "myrcene": 0,
-            "limonene": 0.99,
-            "pinene": 0.42,
+            "limonene": 1.16,
+            "pinene": 0.33,
             "caryophyllene": 0,
             "linalool": 0,
-            "humulene": 0.07,
-            "terpinolene": 0.15,
-            "ocimene": 0.2
+            "humulene": 0.1,
+            "terpinolene": 0.17,
+            "ocimene": 0.1
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-010",
+      "id": "382aaa79-9690-4409-bd85-e24e2f8852fb",
       "name": "Quatro Kush Live Rosin Gummies",
       "brand": "Garden Valley Ag",
       "category": "edible",
@@ -306,30 +306,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-edible-010-var1",
+          "id": "32c3139f-9753-410d-9130-c242195bddf9",
           "size_weight": "1pk",
           "price": 25,
           "original_price": 25,
           "thc_percentage": 90,
           "cbd_percentage": 0,
           "total_cannabinoids": 90,
-          "inventory_level": 6,
+          "inventory_level": 12,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.93,
-            "limonene": 0.52,
-            "pinene": 0.55,
-            "caryophyllene": 0.16,
+            "myrcene": 0.78,
+            "limonene": 0.43,
+            "pinene": 0.54,
+            "caryophyllene": 0.47,
             "linalool": 0,
-            "humulene": 0.19,
+            "humulene": 0.23,
             "terpinolene": 0,
-            "ocimene": 0.12
+            "ocimene": 0.19
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-011",
+      "id": "5cd60384-8018-4a53-82ca-053c0ce92ac1",
       "name": "Rainbow Beltz - Grape Gummies 12pk",
       "brand": "High Hills",
       "category": "edible",
@@ -338,149 +338,21 @@
       "strain_type": "indica",
       "variants": [
         {
-          "id": "truenorth-edible-011-var1",
+          "id": "35fd3e7f-7f0a-4072-9d02-557fff528561",
           "size_weight": "1pk",
           "price": 25,
           "original_price": 25,
           "thc_percentage": 99.24,
           "cbd_percentage": 0,
           "total_cannabinoids": 99.24,
-          "inventory_level": 8,
+          "inventory_level": 7,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.69,
+            "myrcene": 1.19,
             "limonene": 0,
             "pinene": 0,
-            "caryophyllene": 0.35,
-            "linalool": 0.26,
-            "humulene": 0.05,
-            "terpinolene": 0,
-            "ocimene": 0.21
-          }
-        }
-      ]
-    },
-    {
-      "id": "truenorth-edible-012",
-      "name": "Razzleberry Live Rosin Gummies - Sativa",
-      "brand": "Dakota Natural Solutions",
-      "category": "edible",
-      "subcategory": "gummies",
-      "description": "Sativa with 89% THC",
-      "strain_type": "sativa",
-      "variants": [
-        {
-          "id": "truenorth-edible-012-var1",
-          "size_weight": "1pk",
-          "price": 25,
-          "original_price": 25,
-          "thc_percentage": 89,
-          "cbd_percentage": 0,
-          "total_cannabinoids": 89,
-          "inventory_level": 11,
-          "is_available": true,
-          "terpene_profile": {
-            "myrcene": 0,
-            "limonene": 1.01,
-            "pinene": 0.97,
-            "caryophyllene": 0,
-            "linalool": 0,
-            "humulene": 0.18,
-            "terpinolene": 0.08,
-            "ocimene": 0.17
-          }
-        }
-      ]
-    },
-    {
-      "id": "truenorth-edible-013",
-      "name": "Sour Grape Sleep Indica Gummies (25mg per pc. 4pk)",
-      "brand": "Crushmore",
-      "category": "edible",
-      "subcategory": "gummies",
-      "description": "Indica with 100% THC",
-      "strain_type": "indica",
-      "variants": [
-        {
-          "id": "truenorth-edible-013-var1",
-          "size_weight": "1pk",
-          "price": 25,
-          "original_price": 25,
-          "thc_percentage": 100,
-          "cbd_percentage": 0,
-          "total_cannabinoids": 100,
-          "inventory_level": 16,
-          "is_available": true,
-          "terpene_profile": {
-            "myrcene": 1.02,
-            "limonene": 0,
-            "pinene": 0,
-            "caryophyllene": 0.54,
-            "linalool": 0.34,
-            "humulene": 0.26,
-            "terpinolene": 0,
-            "ocimene": 0.16
-          }
-        }
-      ]
-    },
-    {
-      "id": "truenorth-edible-014",
-      "name": "Sour Green Apple Gummies - 25mg / 4pk",
-      "brand": "Crushmore",
-      "category": "edible",
-      "subcategory": "gummies",
-      "description": "Hybrid with 100% THC",
-      "strain_type": "hybrid",
-      "variants": [
-        {
-          "id": "truenorth-edible-014-var1",
-          "size_weight": "1pk",
-          "price": 25,
-          "original_price": 25,
-          "thc_percentage": 100,
-          "cbd_percentage": 0,
-          "total_cannabinoids": 100,
-          "inventory_level": 9,
-          "is_available": true,
-          "terpene_profile": {
-            "myrcene": 0.34,
-            "limonene": 0.85,
-            "pinene": 0.44,
-            "caryophyllene": 0.34,
-            "linalool": 0,
-            "humulene": 0.09,
-            "terpinolene": 0,
-            "ocimene": 0.04
-          }
-        }
-      ]
-    },
-    {
-      "id": "truenorth-edible-015",
-      "name": "Sour Lemon Berry Gummies - 25mg (30mg CBD) 4pk",
-      "brand": "Crushmore",
-      "category": "edible",
-      "subcategory": "gummies",
-      "description": "Hybrid with 100% THC and 30% CBD",
-      "strain_type": "hybrid",
-      "variants": [
-        {
-          "id": "truenorth-edible-015-var1",
-          "size_weight": "1pk",
-          "price": 25,
-          "original_price": 25,
-          "thc_percentage": 100,
-          "cbd_percentage": 30,
-          "total_cannabinoids": 130,
-          "inventory_level": 8,
-          "is_available": true,
-          "terpene_profile": {
-            "myrcene": 0.83,
-            "limonene": 0.81,
-            "pinene": 0.51,
-            "caryophyllene": 0.49,
-            "linalool": 0,
+            "caryophyllene": 0.61,
+            "linalool": 0.13,
             "humulene": 0.21,
             "terpinolene": 0,
             "ocimene": 0.02
@@ -489,7 +361,135 @@
       ]
     },
     {
-      "id": "truenorth-edible-016",
+      "id": "6ee8d3ac-949c-4928-98c9-fb3d61a689ff",
+      "name": "Razzleberry Live Rosin Gummies - Sativa",
+      "brand": "Dakota Natural Solutions",
+      "category": "edible",
+      "subcategory": "gummies",
+      "description": "Sativa with 89% THC",
+      "strain_type": "sativa",
+      "variants": [
+        {
+          "id": "0417673a-6cf3-441f-a792-e0f2b56e74c7",
+          "size_weight": "1pk",
+          "price": 25,
+          "original_price": 25,
+          "thc_percentage": 89,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 89,
+          "inventory_level": 14,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0,
+            "limonene": 1.03,
+            "pinene": 0.36,
+            "caryophyllene": 0,
+            "linalool": 0,
+            "humulene": 0.23,
+            "terpinolene": 0.19,
+            "ocimene": 0.15
+          }
+        }
+      ]
+    },
+    {
+      "id": "12033366-2041-4570-bff4-89df26508b29",
+      "name": "Sour Grape Sleep Indica Gummies (25mg per pc. 4pk)",
+      "brand": "Crushmore",
+      "category": "edible",
+      "subcategory": "gummies",
+      "description": "Indica with 100% THC",
+      "strain_type": "indica",
+      "variants": [
+        {
+          "id": "b376efa1-be81-42b2-8818-e6601c515397",
+          "size_weight": "1pk",
+          "price": 25,
+          "original_price": 25,
+          "thc_percentage": 100,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 100,
+          "inventory_level": 6,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 1.72,
+            "limonene": 0,
+            "pinene": 0,
+            "caryophyllene": 0.47,
+            "linalool": 0.28,
+            "humulene": 0.05,
+            "terpinolene": 0,
+            "ocimene": 0.03
+          }
+        }
+      ]
+    },
+    {
+      "id": "a1ff3e83-99d6-4d67-b609-ebc03eb56d73",
+      "name": "Sour Green Apple Gummies - 25mg / 4pk",
+      "brand": "Crushmore",
+      "category": "edible",
+      "subcategory": "gummies",
+      "description": "Hybrid with 100% THC",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "90cc53b4-85ef-41ed-b125-0d8bffa045bf",
+          "size_weight": "1pk",
+          "price": 25,
+          "original_price": 25,
+          "thc_percentage": 100,
+          "cbd_percentage": 0,
+          "total_cannabinoids": 100,
+          "inventory_level": 9,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.23,
+            "limonene": 0.47,
+            "pinene": 0.69,
+            "caryophyllene": 0.59,
+            "linalool": 0,
+            "humulene": 0.24,
+            "terpinolene": 0,
+            "ocimene": 0.12
+          }
+        }
+      ]
+    },
+    {
+      "id": "dcd8e544-5226-46c6-9175-0b2e37130a08",
+      "name": "Sour Lemon Berry Gummies - 25mg (30mg CBD) 4pk",
+      "brand": "Crushmore",
+      "category": "edible",
+      "subcategory": "gummies",
+      "description": "Hybrid with 100% THC and 30% CBD",
+      "strain_type": "hybrid",
+      "variants": [
+        {
+          "id": "8f5f0248-c1f7-4b62-8f6d-e39a34099f07",
+          "size_weight": "1pk",
+          "price": 25,
+          "original_price": 25,
+          "thc_percentage": 100,
+          "cbd_percentage": 30,
+          "total_cannabinoids": 130,
+          "inventory_level": 14,
+          "is_available": true,
+          "terpene_profile": {
+            "myrcene": 0.65,
+            "limonene": 0.31,
+            "pinene": 0.67,
+            "caryophyllene": 0.56,
+            "linalool": 0,
+            "humulene": 0.14,
+            "terpinolene": 0,
+            "ocimene": 0.05
+          }
+        }
+      ]
+    },
+    {
+      "id": "59e4ba10-00ff-461b-9313-7b297acac0e2",
       "name": "Sour Pink Lemonade 10pk (10mg per pc.)",
       "brand": "605 Cannabis",
       "category": "edible",
@@ -498,30 +498,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-edible-016-var1",
+          "id": "5e6c94b1-e803-4b29-bc87-2ef4ab0a4867",
           "size_weight": "1pk",
           "price": 25,
           "original_price": 25,
           "thc_percentage": 100,
           "cbd_percentage": 0,
           "total_cannabinoids": 100,
-          "inventory_level": 15,
+          "inventory_level": 11,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.38,
-            "limonene": 0.86,
-            "pinene": 0.3,
-            "caryophyllene": 0.15,
+            "myrcene": 0.31,
+            "limonene": 0.8,
+            "pinene": 0.43,
+            "caryophyllene": 0.57,
             "linalool": 0,
-            "humulene": 0.16,
+            "humulene": 0.24,
             "terpinolene": 0,
-            "ocimene": 0.15
+            "ocimene": 0.02
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-017",
+      "id": "b70f6e87-556c-4e96-86d5-376a5fbce65b",
       "name": "Sour Pink Lemonade Gummies - 4pk (24.83mg per pc)",
       "brand": "605 Cannabis",
       "category": "edible",
@@ -530,30 +530,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-edible-017-var1",
+          "id": "3b1f879d-c431-4d54-b1a3-b3ed2a7cfef2",
           "size_weight": "1pk",
           "price": 20,
           "original_price": 20,
           "thc_percentage": 99.3,
           "cbd_percentage": 0,
           "total_cannabinoids": 99.3,
-          "inventory_level": 10,
+          "inventory_level": 23,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 1.08,
-            "limonene": 0.33,
-            "pinene": 0.21,
-            "caryophyllene": 0.39,
+            "myrcene": 0.74,
+            "limonene": 0.46,
+            "pinene": 0.3,
+            "caryophyllene": 0.43,
             "linalool": 0,
-            "humulene": 0.13,
+            "humulene": 0.06,
             "terpinolene": 0,
-            "ocimene": 0.17
+            "ocimene": 0.2
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-018",
+      "id": "524a3ab7-791e-444b-82ca-bbde3271540f",
       "name": "Sour Watermelon 10pk (10.6mg per piece)",
       "brand": "605 Cannabis",
       "category": "edible",
@@ -562,30 +562,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-edible-018-var1",
+          "id": "4e656ff7-acef-4ea0-9a53-4bdb2f21f918",
           "size_weight": "1pk",
           "price": 25,
           "original_price": 25,
           "thc_percentage": 100,
           "cbd_percentage": 0,
           "total_cannabinoids": 100,
-          "inventory_level": 17,
+          "inventory_level": 20,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.94,
-            "limonene": 0.74,
-            "pinene": 0.31,
-            "caryophyllene": 0.41,
+            "myrcene": 0.39,
+            "limonene": 0.3,
+            "pinene": 0.3,
+            "caryophyllene": 0.12,
             "linalool": 0,
-            "humulene": 0.07,
+            "humulene": 0.26,
             "terpinolene": 0,
-            "ocimene": 0.14
+            "ocimene": 0.12
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-019",
+      "id": "90a1f8c3-bbe1-4e90-9cc9-8dc022ccdc26",
       "name": "Spicy Mango Gummies 21.28mg/10pk",
       "brand": "605 Cannabis",
       "category": "edible",
@@ -594,30 +594,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-edible-019-var1",
+          "id": "45ff3874-fac9-4eb5-bea3-43420a384237",
           "size_weight": "1pk",
           "price": 40,
           "original_price": 40,
           "thc_percentage": 212.8,
           "cbd_percentage": 0,
           "total_cannabinoids": 212.8,
-          "inventory_level": 19,
+          "inventory_level": 10,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.92,
-            "limonene": 0.4,
-            "pinene": 0.7,
-            "caryophyllene": 0.55,
+            "myrcene": 0.84,
+            "limonene": 0.34,
+            "pinene": 0.12,
+            "caryophyllene": 0.23,
             "linalool": 0,
-            "humulene": 0.17,
+            "humulene": 0.29,
             "terpinolene": 0,
-            "ocimene": 0.04
+            "ocimene": 0.07
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-020",
+      "id": "7cbe352c-6c08-40bb-9edd-18331c189331",
       "name": "Spicy Mango Live Rosin Gummies- 5pk - 605",
       "brand": "605 Cannabis",
       "category": "edible",
@@ -626,30 +626,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-edible-020-var1",
+          "id": "89a78e2d-980d-4d26-829a-534ede72e165",
           "size_weight": "1pk",
           "price": 20,
           "original_price": 20,
           "thc_percentage": 109.65,
           "cbd_percentage": 0,
           "total_cannabinoids": 109.65,
-          "inventory_level": 8,
+          "inventory_level": 17,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.91,
-            "limonene": 0.9,
-            "pinene": 0.23,
-            "caryophyllene": 0.16,
+            "myrcene": 0.74,
+            "limonene": 0.58,
+            "pinene": 0.11,
+            "caryophyllene": 0.45,
             "linalool": 0,
-            "humulene": 0.28,
+            "humulene": 0.3,
             "terpinolene": 0,
-            "ocimene": 0.16
+            "ocimene": 0.08
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-021",
+      "id": "6b0105e1-30dd-44cf-b42b-e4b2e4a5fcad",
       "name": "Strawberry Live Rosin Gummies - Sativa",
       "brand": "Dakota Natural Solutions",
       "category": "edible",
@@ -658,30 +658,30 @@
       "strain_type": "sativa",
       "variants": [
         {
-          "id": "truenorth-edible-021-var1",
+          "id": "9be20de5-fe74-4021-ad37-91cc71865938",
           "size_weight": "1pk",
           "price": 25,
           "original_price": 25,
           "thc_percentage": 99,
           "cbd_percentage": 0,
           "total_cannabinoids": 99,
-          "inventory_level": 10,
+          "inventory_level": 19,
           "is_available": true,
           "terpene_profile": {
             "myrcene": 0,
-            "limonene": 0.51,
-            "pinene": 0.12,
+            "limonene": 1.17,
+            "pinene": 0.46,
             "caryophyllene": 0,
             "linalool": 0,
-            "humulene": 0.18,
-            "terpinolene": 0.08,
-            "ocimene": 0.19
+            "humulene": 0.25,
+            "terpinolene": 0.2,
+            "ocimene": 0.14
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-022",
+      "id": "b518f204-eb15-4e45-9d73-f5e2c7229492",
       "name": "Strawberry Mango Sativa Gummies 5pk (20.49mg per pc.)",
       "brand": "High Hills",
       "category": "edible",
@@ -690,30 +690,30 @@
       "strain_type": "sativa",
       "variants": [
         {
-          "id": "truenorth-edible-022-var1",
+          "id": "9a9e8440-b06e-425f-a396-47ec9846cffb",
           "size_weight": "1pk",
           "price": 25,
           "original_price": 25,
           "thc_percentage": 102.45,
           "cbd_percentage": 0,
           "total_cannabinoids": 102.45,
-          "inventory_level": 9,
+          "inventory_level": 23,
           "is_available": true,
           "terpene_profile": {
             "myrcene": 0,
-            "limonene": 0.68,
-            "pinene": 0.42,
+            "limonene": 0.47,
+            "pinene": 0.73,
             "caryophyllene": 0,
             "linalool": 0,
-            "humulene": 0.1,
-            "terpinolene": 0.24,
-            "ocimene": 0.19
+            "humulene": 0.08,
+            "terpinolene": 0.21,
+            "ocimene": 0.02
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-023",
+      "id": "af3c9da3-f437-4796-89c9-77e16aa63b33",
       "name": "Strawberry Sativa Gummies - 4pk / 26.5mg per pc.",
       "brand": "605 Cannabis",
       "category": "edible",
@@ -722,30 +722,30 @@
       "strain_type": "sativa",
       "variants": [
         {
-          "id": "truenorth-edible-023-var1",
+          "id": "f3d49107-c7df-4ca7-88c3-729f55d009af",
           "size_weight": "1pk",
           "price": 20,
           "original_price": 20,
           "thc_percentage": 106,
           "cbd_percentage": 0,
           "total_cannabinoids": 106,
-          "inventory_level": 11,
+          "inventory_level": 19,
           "is_available": true,
           "terpene_profile": {
             "myrcene": 0,
-            "limonene": 1.27,
-            "pinene": 0.45,
+            "limonene": 1.11,
+            "pinene": 0.86,
             "caryophyllene": 0,
             "linalool": 0,
-            "humulene": 0.09,
-            "terpinolene": 0.05,
-            "ocimene": 0.15
+            "humulene": 0.26,
+            "terpinolene": 0.07,
+            "ocimene": 0.18
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-024",
+      "id": "e57994f7-1571-42ee-823f-1970e3a1491c",
       "name": "Strawberry Sativa Gummies 20pk (26.5mg per pc.)",
       "brand": "605 Cannabis",
       "category": "edible",
@@ -754,30 +754,30 @@
       "strain_type": "sativa",
       "variants": [
         {
-          "id": "truenorth-edible-024-var1",
+          "id": "833c9c8e-8018-461c-8d00-21f48250ff6e",
           "size_weight": "1pk",
           "price": 80,
           "original_price": 80,
           "thc_percentage": 530.04,
           "cbd_percentage": 0,
           "total_cannabinoids": 530.04,
-          "inventory_level": 22,
+          "inventory_level": 8,
           "is_available": true,
           "terpene_profile": {
             "myrcene": 0,
-            "limonene": 1.27,
-            "pinene": 0.67,
+            "limonene": 1.2,
+            "pinene": 0.22,
             "caryophyllene": 0,
             "linalool": 0,
-            "humulene": 0.22,
-            "terpinolene": 0.18,
-            "ocimene": 0.1
+            "humulene": 0.26,
+            "terpinolene": 0.19,
+            "ocimene": 0.02
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-025",
+      "id": "cc53fb5c-8337-4960-8e86-93578e9b710b",
       "name": "Sun Drop Live Rosin Gummies - 5pk (21.54 per piece)",
       "brand": "605 Cannabis",
       "category": "edible",
@@ -786,22 +786,22 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-edible-025-var1",
+          "id": "b3448e47-8735-4166-b298-f08cc557d6dc",
           "size_weight": "1pk",
           "price": 20,
           "original_price": 20,
           "thc_percentage": 107.7,
           "cbd_percentage": 0,
           "total_cannabinoids": 107.7,
-          "inventory_level": 23,
+          "inventory_level": 6,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.41,
-            "limonene": 0.55,
-            "pinene": 0.18,
-            "caryophyllene": 0.26,
+            "myrcene": 0.78,
+            "limonene": 0.68,
+            "pinene": 0.55,
+            "caryophyllene": 0.3,
             "linalool": 0,
-            "humulene": 0.27,
+            "humulene": 0.26,
             "terpinolene": 0,
             "ocimene": 0.13
           }
@@ -809,7 +809,7 @@
       ]
     },
     {
-      "id": "truenorth-edible-026",
+      "id": "09f0ce7b-310a-4349-b388-4de4b12538d9",
       "name": "Super Boof - Strawberry Gummies",
       "brand": "High Hills",
       "category": "edible",
@@ -818,30 +818,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-edible-026-var1",
+          "id": "fbb68873-1aaf-4da1-9957-d4a53c3f0c81",
           "size_weight": "1pk",
           "price": 25,
           "original_price": 25,
           "thc_percentage": 97.24,
           "cbd_percentage": 0,
           "total_cannabinoids": 97.24,
-          "inventory_level": 8,
+          "inventory_level": 17,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 1.13,
-            "limonene": 0.85,
-            "pinene": 0.45,
-            "caryophyllene": 0.29,
+            "myrcene": 0.59,
+            "limonene": 0.68,
+            "pinene": 0.38,
+            "caryophyllene": 0.24,
             "linalool": 0,
-            "humulene": 0.28,
+            "humulene": 0.23,
             "terpinolene": 0,
-            "ocimene": 0.02
+            "ocimene": 0.07
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-027",
+      "id": "0dd645ea-3c83-4c89-a59a-44d138b24504",
       "name": "Tangerine Dream Sleep Gummies 10pk",
       "brand": "605 Cannabis",
       "category": "edible",
@@ -850,30 +850,30 @@
       "strain_type": "indica",
       "variants": [
         {
-          "id": "truenorth-edible-027-var1",
+          "id": "ab581543-5de5-464a-b555-f38ad8e20450",
           "size_weight": "1pk",
           "price": 25,
           "original_price": 25,
           "thc_percentage": 97.92,
           "cbd_percentage": 0,
           "total_cannabinoids": 97.92,
-          "inventory_level": 5,
+          "inventory_level": 17,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.79,
+            "myrcene": 1.48,
             "limonene": 0,
             "pinene": 0,
-            "caryophyllene": 0.74,
-            "linalool": 0.06,
-            "humulene": 0.2,
+            "caryophyllene": 0.15,
+            "linalool": 0.44,
+            "humulene": 0.16,
             "terpinolene": 0,
-            "ocimene": 0.03
+            "ocimene": 0.02
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-028",
+      "id": "b0f45ef1-cfe0-41a3-a0b8-11fd5d21e4b0",
       "name": "Two Moons Elderberry Gummies",
       "brand": "605 Cannabis",
       "category": "edible",
@@ -882,7 +882,7 @@
       "strain_type": "indica",
       "variants": [
         {
-          "id": "truenorth-edible-028-var1",
+          "id": "98ef1791-d288-4411-9a2e-77d90e058930",
           "size_weight": "1pk",
           "price": 25,
           "original_price": 25,
@@ -892,20 +892,20 @@
           "inventory_level": 7,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 1.41,
+            "myrcene": 0.83,
             "limonene": 0,
             "pinene": 0,
-            "caryophyllene": 0.14,
-            "linalool": 0.31,
-            "humulene": 0.16,
+            "caryophyllene": 0.27,
+            "linalool": 0.34,
+            "humulene": 0.21,
             "terpinolene": 0,
-            "ocimene": 0.06
+            "ocimene": 0.05
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-029",
+      "id": "bd863783-0c29-4f0d-8e89-0336a216beaf",
       "name": "Watermelon Gummies - 22.6mg / 10pk",
       "brand": "605 Cannabis",
       "category": "edible",
@@ -914,30 +914,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-edible-029-var1",
+          "id": "cb512624-71d2-464e-83a0-fd96529d204f",
           "size_weight": "1pk",
           "price": 40,
           "original_price": 40,
           "thc_percentage": 226,
           "cbd_percentage": 0,
           "total_cannabinoids": 226,
-          "inventory_level": 16,
+          "inventory_level": 9,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 1.05,
-            "limonene": 0.55,
-            "pinene": 0.12,
-            "caryophyllene": 0.12,
+            "myrcene": 0.8,
+            "limonene": 0.75,
+            "pinene": 0.63,
+            "caryophyllene": 0.51,
             "linalool": 0,
-            "humulene": 0.12,
+            "humulene": 0.15,
             "terpinolene": 0,
-            "ocimene": 0.19
+            "ocimene": 0.15
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-030",
+      "id": "2378d418-ee7f-436d-b04a-ae875c07aee7",
       "name": "Watermelon Rush - Pink Lemonade Gummies 11pk",
       "brand": "High Hills",
       "category": "edible",
@@ -946,30 +946,30 @@
       "strain_type": "sativa",
       "variants": [
         {
-          "id": "truenorth-edible-030-var1",
+          "id": "ecad0b26-4a87-45b3-b522-a1caa689a312",
           "size_weight": "1pk",
           "price": 25,
           "original_price": 25,
           "thc_percentage": 92.18,
           "cbd_percentage": 0,
           "total_cannabinoids": 92.18,
-          "inventory_level": 9,
+          "inventory_level": 13,
           "is_available": true,
           "terpene_profile": {
             "myrcene": 0,
-            "limonene": 0.44,
-            "pinene": 0.19,
+            "limonene": 0.67,
+            "pinene": 0.24,
             "caryophyllene": 0,
             "linalool": 0,
-            "humulene": 0.23,
-            "terpinolene": 0.2,
-            "ocimene": 0.16
+            "humulene": 0.02,
+            "terpinolene": 0.26,
+            "ocimene": 0.18
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-031",
+      "id": "5700f9f4-ba55-4897-848a-bb879e4d2560",
       "name": "Blood Orange/Mango Lolli",
       "brand": "605 Cannabis",
       "category": "edible",
@@ -978,30 +978,30 @@
       "strain_type": "sativa",
       "variants": [
         {
-          "id": "truenorth-edible-031-var1",
+          "id": "7a0b53b3-4530-472e-aa7f-eef0a16a3bb4",
           "size_weight": "1pk",
           "price": 7,
           "original_price": 7,
           "thc_percentage": 8.39,
           "cbd_percentage": 0,
           "total_cannabinoids": 8.39,
-          "inventory_level": 15,
+          "inventory_level": 13,
           "is_available": true,
           "terpene_profile": {
             "myrcene": 0,
-            "limonene": 0.69,
-            "pinene": 0.23,
+            "limonene": 0.82,
+            "pinene": 0.11,
             "caryophyllene": 0,
             "linalool": 0,
-            "humulene": 0.26,
-            "terpinolene": 0.05,
-            "ocimene": 0.13
+            "humulene": 0.07,
+            "terpinolene": 0.07,
+            "ocimene": 0.11
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-032",
+      "id": "ca693c51-7423-4913-a125-65844206aae7",
       "name": "Mixed Berry Lolli",
       "brand": "605 Cannabis",
       "category": "edible",
@@ -1010,30 +1010,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-edible-032-var1",
+          "id": "14f52913-c858-4fa4-a620-c357d244ee5a",
           "size_weight": "1pk",
           "price": 10,
           "original_price": 10,
           "thc_percentage": 24.9,
           "cbd_percentage": 0,
           "total_cannabinoids": 24.9,
-          "inventory_level": 24,
+          "inventory_level": 16,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.72,
-            "limonene": 0.53,
-            "pinene": 0.15,
-            "caryophyllene": 0.49,
+            "myrcene": 0.51,
+            "limonene": 0.78,
+            "pinene": 0.29,
+            "caryophyllene": 0.6,
             "linalool": 0,
-            "humulene": 0.24,
+            "humulene": 0.16,
             "terpinolene": 0,
-            "ocimene": 0.09
+            "ocimene": 0.14
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-033",
+      "id": "7f930990-23ac-40ed-adac-ccf7078defa3",
       "name": "Raspberry Lolli",
       "brand": "605 Cannabis",
       "category": "edible",
@@ -1042,30 +1042,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-edible-033-var1",
+          "id": "11d2c992-042c-4241-8f05-493506130092",
           "size_weight": "1pk",
           "price": 7,
           "original_price": 7,
           "thc_percentage": 8.94,
           "cbd_percentage": 0,
           "total_cannabinoids": 8.94,
-          "inventory_level": 18,
+          "inventory_level": 22,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.64,
-            "limonene": 0.64,
-            "pinene": 0.63,
-            "caryophyllene": 0.14,
+            "myrcene": 0.41,
+            "limonene": 0.38,
+            "pinene": 0.52,
+            "caryophyllene": 0.53,
             "linalool": 0,
-            "humulene": 0.1,
+            "humulene": 0.25,
             "terpinolene": 0,
-            "ocimene": 0.19
+            "ocimene": 0.06
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-034",
+      "id": "1ee02613-fff8-41e1-bb1f-9b8e178040e5",
       "name": "Strawberry Lime Lolli",
       "brand": "605 Cannabis",
       "category": "edible",
@@ -1074,30 +1074,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-edible-034-var1",
+          "id": "e6fd2826-7acc-4fb0-9674-a6248ff19ae4",
           "size_weight": "1pk",
           "price": 7,
           "original_price": 7,
           "thc_percentage": 9.69,
           "cbd_percentage": 0,
           "total_cannabinoids": 9.69,
-          "inventory_level": 11,
+          "inventory_level": 13,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 1.05,
-            "limonene": 0.85,
-            "pinene": 0.4,
-            "caryophyllene": 0.11,
+            "myrcene": 0.4,
+            "limonene": 0.41,
+            "pinene": 0.18,
+            "caryophyllene": 0.44,
             "linalool": 0,
-            "humulene": 0.18,
+            "humulene": 0.24,
             "terpinolene": 0,
-            "ocimene": 0.07
+            "ocimene": 0.19
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-035",
+      "id": "cb0dd5c2-a072-4ba6-86e6-cc566e647594",
       "name": "Strawberry Lolli",
       "brand": "605 Cannabis",
       "category": "edible",
@@ -1106,30 +1106,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-edible-035-var1",
+          "id": "c8b25102-2c50-4755-8aa4-dc8505ec7e6f",
           "size_weight": "1pk",
           "price": 10,
           "original_price": 10,
           "thc_percentage": 26.21,
           "cbd_percentage": 0,
           "total_cannabinoids": 26.21,
-          "inventory_level": 21,
+          "inventory_level": 19,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.97,
-            "limonene": 0.12,
-            "pinene": 0.52,
-            "caryophyllene": 0.2,
+            "myrcene": 0.36,
+            "limonene": 0.31,
+            "pinene": 0.32,
+            "caryophyllene": 0.22,
             "linalool": 0,
-            "humulene": 0.23,
+            "humulene": 0.22,
             "terpinolene": 0,
-            "ocimene": 0.21
+            "ocimene": 0.2
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-036",
+      "id": "e78f90a9-36ab-407c-9ef7-c45a4d0b07cb",
       "name": "Caramels - 107.89mg 10pk",
       "brand": "605 Cannabis",
       "category": "edible",
@@ -1138,30 +1138,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-edible-036-var1",
+          "id": "acbece49-9baa-41cd-a46f-10407003f50e",
           "size_weight": "1pk",
           "price": 25,
           "original_price": 25,
           "thc_percentage": 107.89,
           "cbd_percentage": 0,
           "total_cannabinoids": 107.89,
-          "inventory_level": 17,
+          "inventory_level": 12,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 1.1,
-            "limonene": 0.67,
-            "pinene": 0.5,
-            "caryophyllene": 0.45,
+            "myrcene": 0.84,
+            "limonene": 0.62,
+            "pinene": 0.54,
+            "caryophyllene": 0.12,
             "linalool": 0,
-            "humulene": 0.04,
+            "humulene": 0.27,
             "terpinolene": 0,
-            "ocimene": 0.06
+            "ocimene": 0.12
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-037",
+      "id": "05d7219c-a2a5-4b76-acb1-137af05de1bb",
       "name": "Honey Live Rosin - Indica",
       "brand": "DNS",
       "category": "edible",
@@ -1170,30 +1170,30 @@
       "strain_type": "indica",
       "variants": [
         {
-          "id": "truenorth-edible-037-var1",
+          "id": "65452935-c6b4-460c-82ca-fddb1b4e39f5",
           "size_weight": "1pk",
           "price": 20,
           "original_price": 20,
           "thc_percentage": 104.3,
           "cbd_percentage": 0,
           "total_cannabinoids": 104.3,
-          "inventory_level": 20,
+          "inventory_level": 17,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.61,
+            "myrcene": 0.31,
             "limonene": 0,
             "pinene": 0,
-            "caryophyllene": 0.79,
-            "linalool": 0.24,
-            "humulene": 0.18,
+            "caryophyllene": 0.62,
+            "linalool": 0.52,
+            "humulene": 0.04,
             "terpinolene": 0,
-            "ocimene": 0.07
+            "ocimene": 0.12
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-038",
+      "id": "dd7a40ae-be5c-420d-85a3-26c90f78dec8",
       "name": "Honey Live Rosin - Sativa",
       "brand": "DNS",
       "category": "edible",
@@ -1202,30 +1202,30 @@
       "strain_type": "sativa",
       "variants": [
         {
-          "id": "truenorth-edible-038-var1",
+          "id": "3424e218-333a-4f9f-9e07-ec85791ee906",
           "size_weight": "1pk",
           "price": 20,
           "original_price": 20,
           "thc_percentage": 108,
           "cbd_percentage": 0,
           "total_cannabinoids": 108,
-          "inventory_level": 18,
+          "inventory_level": 10,
           "is_available": true,
           "terpene_profile": {
             "myrcene": 0,
-            "limonene": 0.26,
-            "pinene": 0.11,
+            "limonene": 1,
+            "pinene": 0.37,
             "caryophyllene": 0,
             "linalool": 0,
-            "humulene": 0.16,
-            "terpinolene": 0.23,
-            "ocimene": 0.04
+            "humulene": 0.1,
+            "terpinolene": 0.11,
+            "ocimene": 0.19
           }
         }
       ]
     },
     {
-      "id": "truenorth-edible-039",
+      "id": "f455ad73-d4d4-4b16-8293-213bdfe2250f",
       "name": "Blue Hydrate THC Drink Mix 10mg",
       "brand": "605 Cannabis",
       "category": "edible",
@@ -1234,24 +1234,24 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-edible-039-var1",
+          "id": "bd4551af-491d-4f2e-a3d5-6dfc0c6e5729",
           "size_weight": "1pk",
           "price": 7,
           "original_price": 7,
           "thc_percentage": 10.79,
           "cbd_percentage": 0,
           "total_cannabinoids": 10.79,
-          "inventory_level": 13,
+          "inventory_level": 21,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.37,
-            "limonene": 0.66,
-            "pinene": 0.35,
-            "caryophyllene": 0.32,
+            "myrcene": 0.34,
+            "limonene": 0.42,
+            "pinene": 0.36,
+            "caryophyllene": 0.28,
             "linalool": 0,
-            "humulene": 0.22,
+            "humulene": 0.08,
             "terpinolene": 0,
-            "ocimene": 0.04
+            "ocimene": 0.16
           }
         }
       ]

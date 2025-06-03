@@ -2,13 +2,13 @@
   "metadata": {
     "format_version": "1.0",
     "organization_id": "d85af8c9-0d4a-451c-bc25-8c669c71142e",
-    "timestamp": "2025-06-02T19:56:39.594Z",
+    "timestamp": "2025-06-03T04:32:21.545Z",
     "source_file": "true_north_prerolls.md",
     "total_products": 22
   },
   "products": [
     {
-      "id": "truenorth-pre_rolls-001",
+      "id": "65de82e5-c1b8-4f86-941c-4032626891a6",
       "name": "Bacio Humantashen Cookies Blunt",
       "brand": "DNG",
       "category": "pre_rolls",
@@ -17,30 +17,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-pre_rolls-001-var1",
+          "id": "a2ddd45f-4d0b-4f37-a3d7-a116769dd5ce",
           "size_weight": "1g",
           "price": 8,
           "original_price": 8,
           "thc_percentage": 17.39,
           "cbd_percentage": 0,
           "total_cannabinoids": 17.39,
-          "inventory_level": 9,
+          "inventory_level": 23,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.78,
-            "limonene": 0.48,
-            "pinene": 0.24,
-            "caryophyllene": 0.18,
+            "myrcene": 0.36,
+            "limonene": 0.54,
+            "pinene": 0.45,
+            "caryophyllene": 0.29,
             "linalool": 0,
-            "humulene": 0.15,
+            "humulene": 0.1,
             "terpinolene": 0,
-            "ocimene": 0.1
+            "ocimene": 0.04
           }
         }
       ]
     },
     {
-      "id": "truenorth-pre_rolls-002",
+      "id": "2f268237-8b92-43cc-af4b-24d90b45b74f",
       "name": "Black Rose Blunt",
       "brand": "Garden Valley Ag",
       "category": "pre_rolls",
@@ -49,30 +49,30 @@
       "strain_type": "indica",
       "variants": [
         {
-          "id": "truenorth-pre_rolls-002-var1",
+          "id": "222a4034-51d0-4d59-ba76-7b1e775f7b51",
           "size_weight": "1g",
           "price": 8,
           "original_price": 8,
           "thc_percentage": 26.74,
           "cbd_percentage": 0.07,
           "total_cannabinoids": 26.81,
-          "inventory_level": 19,
+          "inventory_level": 24,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.33,
+            "myrcene": 1.53,
             "limonene": 0,
             "pinene": 0,
-            "caryophyllene": 0.48,
-            "linalool": 0.15,
-            "humulene": 0.15,
+            "caryophyllene": 0.24,
+            "linalool": 0.37,
+            "humulene": 0.04,
             "terpinolene": 0,
-            "ocimene": 0.21
+            "ocimene": 0.1
           }
         }
       ]
     },
     {
-      "id": "truenorth-pre_rolls-003",
+      "id": "0236fe80-4c4e-4302-aa2d-9d97b57ba9ec",
       "name": "Blackberry OG Pre-Roll",
       "brand": "Dakota Green",
       "category": "pre_rolls",
@@ -81,30 +81,30 @@
       "strain_type": "indica",
       "variants": [
         {
-          "id": "truenorth-pre_rolls-003-var1",
+          "id": "a960e2dd-983d-41c8-9775-d0d584bb042f",
           "size_weight": "1g",
           "price": 8,
           "original_price": 8,
           "thc_percentage": 17.64,
           "cbd_percentage": 0.06,
           "total_cannabinoids": 17.7,
-          "inventory_level": 18,
+          "inventory_level": 13,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.47,
+            "myrcene": 1.48,
             "limonene": 0,
             "pinene": 0,
-            "caryophyllene": 0.71,
-            "linalool": 0.2,
-            "humulene": 0.28,
+            "caryophyllene": 0.56,
+            "linalool": 0.51,
+            "humulene": 0.06,
             "terpinolene": 0,
-            "ocimene": 0.17
+            "ocimene": 0.07
           }
         }
       ]
     },
     {
-      "id": "truenorth-pre_rolls-004",
+      "id": "e1f61760-e171-4f4e-8fd7-e91c45c14613",
       "name": "Booty Clapper - Pre-Roll",
       "brand": "Dakota Green",
       "category": "pre_rolls",
@@ -113,30 +113,30 @@
       "strain_type": "sativa",
       "variants": [
         {
-          "id": "truenorth-pre_rolls-004-var1",
+          "id": "8a5625fa-df1c-4903-9af5-c68ab1155204",
           "size_weight": "1g",
           "price": 8,
           "original_price": 8,
           "thc_percentage": 21.91,
           "cbd_percentage": 0.09,
           "total_cannabinoids": 22,
-          "inventory_level": 7,
+          "inventory_level": 6,
           "is_available": true,
           "terpene_profile": {
             "myrcene": 0,
-            "limonene": 1.02,
-            "pinene": 0.34,
+            "limonene": 0.61,
+            "pinene": 0.35,
             "caryophyllene": 0,
             "linalool": 0,
-            "humulene": 0.05,
-            "terpinolene": 0.08,
-            "ocimene": 0.08
+            "humulene": 0.02,
+            "terpinolene": 0.05,
+            "ocimene": 0.02
           }
         }
       ]
     },
     {
-      "id": "truenorth-pre_rolls-005",
+      "id": "84386b88-91b3-4abd-8a2a-5d4bb366caa8",
       "name": "Booty Clapper Blunt",
       "brand": "Dakota Green",
       "category": "pre_rolls",
@@ -145,30 +145,30 @@
       "strain_type": "sativa",
       "variants": [
         {
-          "id": "truenorth-pre_rolls-005-var1",
+          "id": "5dffde87-279b-452b-a465-51f7a103f22e",
           "size_weight": "1g",
           "price": 8,
           "original_price": 8,
           "thc_percentage": 21.91,
           "cbd_percentage": 0.09,
           "total_cannabinoids": 22,
-          "inventory_level": 21,
+          "inventory_level": 7,
           "is_available": true,
           "terpene_profile": {
             "myrcene": 0,
-            "limonene": 0.73,
-            "pinene": 0.84,
+            "limonene": 0.94,
+            "pinene": 0.56,
             "caryophyllene": 0,
             "linalool": 0,
-            "humulene": 0.14,
-            "terpinolene": 0.17,
-            "ocimene": 0.19
+            "humulene": 0.18,
+            "terpinolene": 0.18,
+            "ocimene": 0.13
           }
         }
       ]
     },
     {
-      "id": "truenorth-pre_rolls-006",
+      "id": "a0ff470b-dbe3-4634-ad73-86d61e327286",
       "name": "Camp Comfort - Pre-Roll",
       "brand": "Dakota Green",
       "category": "pre_rolls",
@@ -177,30 +177,30 @@
       "strain_type": "sativa",
       "variants": [
         {
-          "id": "truenorth-pre_rolls-006-var1",
+          "id": "d068c3e1-13be-4e6c-8e04-604c6706b179",
           "size_weight": "1g",
           "price": 8,
           "original_price": 8,
           "thc_percentage": 20.2,
           "cbd_percentage": 0.05,
           "total_cannabinoids": 20.25,
-          "inventory_level": 7,
+          "inventory_level": 22,
           "is_available": true,
           "terpene_profile": {
             "myrcene": 0,
-            "limonene": 1.29,
-            "pinene": 0.65,
+            "limonene": 1.12,
+            "pinene": 0.55,
             "caryophyllene": 0,
             "linalool": 0,
-            "humulene": 0.1,
-            "terpinolene": 0.27,
-            "ocimene": 0.18
+            "humulene": 0.07,
+            "terpinolene": 0.13,
+            "ocimene": 0.01
           }
         }
       ]
     },
     {
-      "id": "truenorth-pre_rolls-007",
+      "id": "105c3b37-f459-4d9a-a900-cb45c254e1cc",
       "name": "Cookie Crumble Pre-Roll",
       "brand": "Dakota Green",
       "category": "pre_rolls",
@@ -209,30 +209,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-pre_rolls-007-var1",
+          "id": "012f2aa1-ae78-4651-87bd-c858e388aed3",
           "size_weight": "1g",
           "price": 9,
           "original_price": 9,
           "thc_percentage": 21.3,
           "cbd_percentage": 0.04,
           "total_cannabinoids": 21.34,
-          "inventory_level": 14,
+          "inventory_level": 20,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.97,
-            "limonene": 0.21,
-            "pinene": 0.16,
-            "caryophyllene": 0.32,
+            "myrcene": 0.68,
+            "limonene": 0.71,
+            "pinene": 0.22,
+            "caryophyllene": 0.11,
             "linalool": 0,
             "humulene": 0.16,
             "terpinolene": 0,
-            "ocimene": 0.12
+            "ocimene": 0.1
           }
         }
       ]
     },
     {
-      "id": "truenorth-pre_rolls-008",
+      "id": "9087f7c2-bbca-475e-95e7-04e1118c2885",
       "name": "Deep Space Blunt",
       "brand": "Big Sioux Bud",
       "category": "pre_rolls",
@@ -241,30 +241,30 @@
       "strain_type": "indica",
       "variants": [
         {
-          "id": "truenorth-pre_rolls-008-var1",
+          "id": "eb02ff8e-7d6b-4479-8949-f125c53aac9a",
           "size_weight": "1g",
           "price": 7,
           "original_price": 7,
           "thc_percentage": 17.64,
           "cbd_percentage": 0.04,
           "total_cannabinoids": 17.68,
-          "inventory_level": 18,
+          "inventory_level": 8,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.34,
+            "myrcene": 0.57,
             "limonene": 0,
             "pinene": 0,
-            "caryophyllene": 0.85,
-            "linalool": 0.22,
-            "humulene": 0.06,
+            "caryophyllene": 0.72,
+            "linalool": 0.54,
+            "humulene": 0.17,
             "terpinolene": 0,
-            "ocimene": 0.12
+            "ocimene": 0.09
           }
         }
       ]
     },
     {
-      "id": "truenorth-pre_rolls-009",
+      "id": "e50f690e-04a0-4f40-aba2-2fed8969912c",
       "name": "Mandarin Dreams Blunt",
       "brand": "Garden Valley Ag",
       "category": "pre_rolls",
@@ -273,30 +273,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-pre_rolls-009-var1",
+          "id": "f1d13d1a-0365-479b-94a5-f7af1cd95836",
           "size_weight": "1g",
           "price": 8,
           "original_price": 8,
           "thc_percentage": 20.05,
           "cbd_percentage": 0.02,
           "total_cannabinoids": 20.07,
-          "inventory_level": 22,
+          "inventory_level": 21,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.5,
-            "limonene": 0.37,
-            "pinene": 0.42,
-            "caryophyllene": 0.3,
+            "myrcene": 0.98,
+            "limonene": 0.67,
+            "pinene": 0.37,
+            "caryophyllene": 0.36,
             "linalool": 0,
-            "humulene": 0.16,
+            "humulene": 0.25,
             "terpinolene": 0,
-            "ocimene": 0.17
+            "ocimene": 0.09
           }
         }
       ]
     },
     {
-      "id": "truenorth-pre_rolls-010",
+      "id": "e186d7b6-392e-4610-b501-e2250ebb7698",
       "name": "Soul Doctor Pre-Roll",
       "brand": "Dakota Green",
       "category": "pre_rolls",
@@ -305,30 +305,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-pre_rolls-010-var1",
+          "id": "2cc4cf3e-976e-4dd8-83a2-dcaeb5dd9401",
           "size_weight": "1g",
           "price": 6,
           "original_price": 6,
           "thc_percentage": 9.58,
           "cbd_percentage": 14.91,
           "total_cannabinoids": 24.490000000000002,
-          "inventory_level": 24,
+          "inventory_level": 9,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.75,
-            "limonene": 0.59,
-            "pinene": 0.4,
-            "caryophyllene": 0.17,
+            "myrcene": 0.96,
+            "limonene": 0.54,
+            "pinene": 0.32,
+            "caryophyllene": 0.32,
             "linalool": 0,
-            "humulene": 0.12,
+            "humulene": 0.02,
             "terpinolene": 0,
-            "ocimene": 0.11
+            "ocimene": 0.17
           }
         }
       ]
     },
     {
-      "id": "truenorth-pre_rolls-011",
+      "id": "46f289ec-79c0-46f4-b861-4ce0cadc12d4",
       "name": "Sugarcane Pre-Roll",
       "brand": "Dakota Green",
       "category": "pre_rolls",
@@ -337,30 +337,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-pre_rolls-011-var1",
+          "id": "e310d374-327f-4584-9a12-2cf13509b792",
           "size_weight": "1g",
           "price": 9,
           "original_price": 9,
           "thc_percentage": 21.25,
           "cbd_percentage": 0.05,
           "total_cannabinoids": 21.3,
-          "inventory_level": 20,
+          "inventory_level": 22,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.43,
-            "limonene": 0.64,
-            "pinene": 0.6,
-            "caryophyllene": 0.51,
+            "myrcene": 0.79,
+            "limonene": 0.71,
+            "pinene": 0.21,
+            "caryophyllene": 0.56,
             "linalool": 0,
-            "humulene": 0.06,
+            "humulene": 0.3,
             "terpinolene": 0,
-            "ocimene": 0.06
+            "ocimene": 0.17
           }
         }
       ]
     },
     {
-      "id": "truenorth-pre_rolls-012",
+      "id": "fbc0310c-1238-403c-bf00-bdb8766a35e6",
       "name": "Banana Pancakes Pre-Roll 2pk",
       "brand": "Pure Bliss",
       "category": "pre_rolls",
@@ -369,30 +369,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-pre_rolls-012-var1",
+          "id": "4c937188-0831-4dd9-a0c3-c9e5bf589e6e",
           "size_weight": "1g total (2x 0.5g)",
           "price": 8,
           "original_price": 8,
           "thc_percentage": 23.65,
           "cbd_percentage": 0,
           "total_cannabinoids": 23.65,
-          "inventory_level": 18,
+          "inventory_level": 6,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.82,
-            "limonene": 0.17,
-            "pinene": 0.15,
-            "caryophyllene": 0.32,
+            "myrcene": 0.91,
+            "limonene": 0.71,
+            "pinene": 0.1,
+            "caryophyllene": 0.2,
             "linalool": 0,
-            "humulene": 0.15,
+            "humulene": 0.1,
             "terpinolene": 0,
-            "ocimene": 0.07
+            "ocimene": 0.01
           }
         }
       ]
     },
     {
-      "id": "truenorth-pre_rolls-013",
+      "id": "547e55de-8cc3-4ba7-b50c-259548f632d3",
       "name": "Biker Kush Pre-Roll 2pk",
       "brand": "DNG",
       "category": "pre_rolls",
@@ -401,7 +401,7 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-pre_rolls-013-var1",
+          "id": "4ae717a4-1ba3-4ed4-8ff5-196d4298b042",
           "size_weight": "1g total (2x 0.5g)",
           "price": 8,
           "original_price": 8,
@@ -411,20 +411,20 @@
           "inventory_level": 23,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.89,
-            "limonene": 0.64,
-            "pinene": 0.18,
-            "caryophyllene": 0.32,
+            "myrcene": 0.83,
+            "limonene": 0.88,
+            "pinene": 0.53,
+            "caryophyllene": 0.22,
             "linalool": 0,
-            "humulene": 0.08,
+            "humulene": 0.02,
             "terpinolene": 0,
-            "ocimene": 0.08
+            "ocimene": 0.16
           }
         }
       ]
     },
     {
-      "id": "truenorth-pre_rolls-014",
+      "id": "56204e45-e110-4190-9a67-78b6e099de7e",
       "name": "Lilac Diesel Pre-Roll 2pk",
       "brand": "DNS",
       "category": "pre_rolls",
@@ -433,30 +433,30 @@
       "strain_type": "indica",
       "variants": [
         {
-          "id": "truenorth-pre_rolls-014-var1",
+          "id": "505f599a-3a84-4e05-8f0d-32875a449628",
           "size_weight": "1g total (2x 0.5g)",
           "price": 8,
           "original_price": 8,
           "thc_percentage": 25.79,
           "cbd_percentage": 0.07,
           "total_cannabinoids": 25.86,
-          "inventory_level": 19,
+          "inventory_level": 16,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 1.3,
+            "myrcene": 0.51,
             "limonene": 0,
             "pinene": 0,
-            "caryophyllene": 0.82,
-            "linalool": 0.2,
-            "humulene": 0.29,
+            "caryophyllene": 0.52,
+            "linalool": 0.28,
+            "humulene": 0.26,
             "terpinolene": 0,
-            "ocimene": 0.05
+            "ocimene": 0.08
           }
         }
       ]
     },
     {
-      "id": "truenorth-pre_rolls-015",
+      "id": "40fd6d69-90f4-4d00-b540-f06843a7be49",
       "name": "Orange Push Pop x Sunset Sherbert .5 Pre-Roll 2pk",
       "brand": "605 Cannabis",
       "category": "pre_rolls",
@@ -465,30 +465,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-pre_rolls-015-var1",
+          "id": "5227bee7-28e1-45f7-9e1e-0ee927c04f35",
           "size_weight": "1g total (2x 0.5g)",
           "price": 8,
           "original_price": 8,
           "thc_percentage": 27.45,
           "cbd_percentage": 0,
           "total_cannabinoids": 27.45,
-          "inventory_level": 5,
+          "inventory_level": 17,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 1.01,
-            "limonene": 0.87,
-            "pinene": 0.53,
-            "caryophyllene": 0.2,
+            "myrcene": 0.22,
+            "limonene": 0.72,
+            "pinene": 0.39,
+            "caryophyllene": 0.31,
             "linalool": 0,
-            "humulene": 0.26,
+            "humulene": 0.08,
             "terpinolene": 0,
-            "ocimene": 0.06
+            "ocimene": 0.05
           }
         }
       ]
     },
     {
-      "id": "truenorth-pre_rolls-016",
+      "id": "4fbd703b-b482-4524-a5b3-d65c924283ba",
       "name": "Sherb Cream Pie Pre-Roll 2pk",
       "brand": "Pure Bliss",
       "category": "pre_rolls",
@@ -497,30 +497,30 @@
       "strain_type": "indica",
       "variants": [
         {
-          "id": "truenorth-pre_rolls-016-var1",
+          "id": "c7d5d362-7c77-4b34-a14e-4d6868932daa",
           "size_weight": "1g total (2x 0.5g)",
           "price": 8,
           "original_price": 8,
           "thc_percentage": 24.69,
           "cbd_percentage": 0,
           "total_cannabinoids": 24.69,
-          "inventory_level": 16,
+          "inventory_level": 22,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.31,
+            "myrcene": 1.79,
             "limonene": 0,
             "pinene": 0,
-            "caryophyllene": 0.21,
-            "linalool": 0.47,
-            "humulene": 0.1,
+            "caryophyllene": 0.5,
+            "linalool": 0.18,
+            "humulene": 0.05,
             "terpinolene": 0,
-            "ocimene": 0.09
+            "ocimene": 0.15
           }
         }
       ]
     },
     {
-      "id": "truenorth-pre_rolls-017",
+      "id": "53796dc5-fa5b-44e6-8488-65e4d523a65e",
       "name": "Sour 91 3.0 Pre-Roll 2pk",
       "brand": "DNG",
       "category": "pre_rolls",
@@ -529,30 +529,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-pre_rolls-017-var1",
+          "id": "13e6540a-84e6-4c04-923d-e8aa51930d60",
           "size_weight": "1g total (2x 0.5g)",
           "price": 8,
           "original_price": 8,
           "thc_percentage": 19.98,
           "cbd_percentage": 0.05,
           "total_cannabinoids": 20.03,
-          "inventory_level": 24,
+          "inventory_level": 9,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.69,
-            "limonene": 0.21,
-            "pinene": 0.47,
-            "caryophyllene": 0.26,
+            "myrcene": 1.16,
+            "limonene": 0.52,
+            "pinene": 0.32,
+            "caryophyllene": 0.24,
             "linalool": 0,
-            "humulene": 0.18,
+            "humulene": 0.29,
             "terpinolene": 0,
-            "ocimene": 0.08
+            "ocimene": 0.1
           }
         }
       ]
     },
     {
-      "id": "truenorth-pre_rolls-018",
+      "id": "d51f93c2-1ac8-4eb8-93a4-4e3272775cab",
       "name": "Hawaiian Style Pre-Roll 6pk",
       "brand": "1889 Farms",
       "category": "pre_rolls",
@@ -561,30 +561,30 @@
       "strain_type": "sativa",
       "variants": [
         {
-          "id": "truenorth-pre_rolls-018-var1",
+          "id": "58b0b17d-7578-4a37-80fd-efc33806453e",
           "size_weight": "3g total (6x 0.5g)",
           "price": 25,
           "original_price": 25,
           "thc_percentage": 23.99,
           "cbd_percentage": 0.05,
           "total_cannabinoids": 24.04,
-          "inventory_level": 7,
+          "inventory_level": 8,
           "is_available": true,
           "terpene_profile": {
             "myrcene": 0,
-            "limonene": 0.49,
-            "pinene": 0.1,
+            "limonene": 1.35,
+            "pinene": 0.32,
             "caryophyllene": 0,
             "linalool": 0,
-            "humulene": 0.03,
-            "terpinolene": 0.18,
-            "ocimene": 0.03
+            "humulene": 0.06,
+            "terpinolene": 0.16,
+            "ocimene": 0.09
           }
         }
       ]
     },
     {
-      "id": "truenorth-pre_rolls-019",
+      "id": "9ea1c91a-8d94-45cc-9285-e0deb8382cff",
       "name": "Topanga Canyon Pure Kush Pre-Roll 6pk",
       "brand": "DNG",
       "category": "pre_rolls",
@@ -593,30 +593,30 @@
       "strain_type": "indica",
       "variants": [
         {
-          "id": "truenorth-pre_rolls-019-var1",
+          "id": "a126c62a-5a50-4c09-a84d-f1c36acbe2e8",
           "size_weight": "3g total (6x 0.5g)",
           "price": 25,
           "original_price": 25,
           "thc_percentage": 23.43,
           "cbd_percentage": 0,
           "total_cannabinoids": 23.43,
-          "inventory_level": 23,
+          "inventory_level": 13,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.8,
+            "myrcene": 1.1,
             "limonene": 0,
             "pinene": 0,
-            "caryophyllene": 0.48,
-            "linalool": 0.37,
-            "humulene": 0.08,
+            "caryophyllene": 0.66,
+            "linalool": 0.08,
+            "humulene": 0.11,
             "terpinolene": 0,
-            "ocimene": 0.08
+            "ocimene": 0.11
           }
         }
       ]
     },
     {
-      "id": "truenorth-pre_rolls-020",
+      "id": "31eae6b6-31b0-4fa0-9f39-e1925f259317",
       "name": "G-Chem Pre-Roll 10pk",
       "brand": "DNG",
       "category": "pre_rolls",
@@ -625,30 +625,30 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-pre_rolls-020-var1",
+          "id": "356668a2-3e21-4ce0-a72d-c90d07f105db",
           "size_weight": "5g total (10x 0.5g)",
           "price": 36,
           "original_price": 36,
           "thc_percentage": 17.07,
           "cbd_percentage": 0.06,
           "total_cannabinoids": 17.13,
-          "inventory_level": 7,
+          "inventory_level": 14,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.69,
-            "limonene": 0.67,
-            "pinene": 0.67,
-            "caryophyllene": 0.14,
+            "myrcene": 0.75,
+            "limonene": 0.35,
+            "pinene": 0.26,
+            "caryophyllene": 0.58,
             "linalool": 0,
-            "humulene": 0.08,
+            "humulene": 0.18,
             "terpinolene": 0,
-            "ocimene": 0.02
+            "ocimene": 0.03
           }
         }
       ]
     },
     {
-      "id": "truenorth-pre_rolls-021",
+      "id": "e09ff10c-7c8f-463b-8126-3841313a1fe7",
       "name": "Ice Cream Cake Pre-Roll 10pk",
       "brand": "Big Sioux Bud",
       "category": "pre_rolls",
@@ -657,30 +657,30 @@
       "strain_type": "indica",
       "variants": [
         {
-          "id": "truenorth-pre_rolls-021-var1",
+          "id": "e5eb4f25-3ed1-4226-8f51-cf84d50218ec",
           "size_weight": "5g total (10x 0.5g)",
           "price": 36,
           "original_price": 36,
           "thc_percentage": 21.92,
           "cbd_percentage": 0,
           "total_cannabinoids": 21.92,
-          "inventory_level": 16,
+          "inventory_level": 7,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 1.78,
+            "myrcene": 1.01,
             "limonene": 0,
             "pinene": 0,
-            "caryophyllene": 0.64,
-            "linalool": 0.13,
-            "humulene": 0.05,
+            "caryophyllene": 0.74,
+            "linalool": 0.25,
+            "humulene": 0.22,
             "terpinolene": 0,
-            "ocimene": 0.02
+            "ocimene": 0.18
           }
         }
       ]
     },
     {
-      "id": "truenorth-pre_rolls-022",
+      "id": "d4db1c18-8b37-4988-b7b7-919456f92efb",
       "name": "Skyfire OG Pre-Roll 10pk",
       "brand": "DNG",
       "category": "pre_rolls",
@@ -689,24 +689,24 @@
       "strain_type": "hybrid",
       "variants": [
         {
-          "id": "truenorth-pre_rolls-022-var1",
+          "id": "903c5c1c-70da-4acf-bceb-c90a64206e0c",
           "size_weight": "5g total (10x 0.5g)",
           "price": 36,
           "original_price": 36,
           "thc_percentage": 20.82,
           "cbd_percentage": 0.06,
           "total_cannabinoids": 20.88,
-          "inventory_level": 5,
+          "inventory_level": 22,
           "is_available": true,
           "terpene_profile": {
-            "myrcene": 0.35,
-            "limonene": 0.54,
-            "pinene": 0.2,
-            "caryophyllene": 0.15,
+            "myrcene": 0.76,
+            "limonene": 0.18,
+            "pinene": 0.7,
+            "caryophyllene": 0.4,
             "linalool": 0,
-            "humulene": 0.22,
+            "humulene": 0.21,
             "terpinolene": 0,
-            "ocimene": 0.11
+            "ocimene": 0.17
           }
         }
       ]
