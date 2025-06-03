@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Users, UserCheck, LogOut, Building2, Shield, Eye, EyeOff } from 'lucide-react';
+import { Users, UserCheck, LogOut, Building2, Shield } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useSimpleAuthStore } from '../../stores/simpleAuthStore';
+import AdminPasskeyModal from './AdminPasskeyModal';
 
 export const KioskSelection: React.FC = () => {
   const { selectUserMode, logout, dispensaryName, getDisplayName } = useSimpleAuthStore();
   const navigate = useNavigate();
-  const [showAdminModal, setShowAdminModal] = useState(false);
-  const [adminPasskey, setAdminPasskey] = useState('');
-  const [showPasskey, setShowPasskey] = useState(false);
-  const [adminError, setAdminError] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [showAdminPasskeyModal, setShowAdminPasskeyModal] = useState(false);
 
   const handleModeSelection = (mode: 'customer' | 'employee') => {
     selectUserMode(mode);
@@ -25,31 +22,12 @@ export const KioskSelection: React.FC = () => {
   };
 
   const handleAdminClick = () => {
-    setShowAdminModal(true);
-    setAdminPasskey('');
-    setAdminError('');
+    setShowAdminPasskeyModal(true);
   };
 
-  const handleAdminLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setAdminError('');
-
-    // Simple passkey validation
-    if (adminPasskey === '1234') {
-      selectUserMode('admin');
-      setShowAdminModal(false);
-      navigate('/app/admin'); // Navigate to admin panel
-    } else {
-      setAdminError('Invalid admin passkey');
-    }
-    setIsLoading(false);
-  };
-
-  const closeAdminModal = () => {
-    setShowAdminModal(false);
-    setAdminPasskey('');
-    setAdminError('');
+  const handleAdminSuccess = () => {
+    selectUserMode('admin');
+    navigate('/app/admin');
   };
 
   return (
@@ -195,100 +173,11 @@ export const KioskSelection: React.FC = () => {
       </main>
 
       {/* Admin Passkey Modal */}
-      <AnimatePresence>
-        {showAdminModal && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50"
-            onClick={closeAdminModal}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              onClick={(e) => e.stopPropagation()}
-              className="bg-white bg-opacity-90 backdrop-blur-md rounded-3xl p-8 w-full max-w-md"
-            >
-              <div className="text-center mb-6">
-                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Shield className="w-8 h-8 text-purple-600" />
-                </div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-2">Admin Access</h2>
-                <p className="text-gray-600">Enter the admin passkey to continue</p>
-              </div>
-
-              <form onSubmit={handleAdminLogin} className="space-y-4">
-                <div>
-                  <label htmlFor="adminPasskey" className="block text-sm font-medium text-gray-700 mb-1">
-                    Admin Passkey
-                  </label>
-                  <div className="relative">
-                    <input
-                      id="adminPasskey"
-                      type={showPasskey ? "text" : "password"}
-                      value={adminPasskey}
-                      onChange={(e) => setAdminPasskey(e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-colors pr-10"
-                      placeholder="Enter admin passkey"
-                      required
-                      autoFocus
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPasskey(!showPasskey)}
-                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
-                    >
-                      {showPasskey ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                    </button>
-                  </div>
-                </div>
-
-                {adminError && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="p-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm"
-                  >
-                    {adminError}
-                  </motion.div>
-                )}
-
-                <div className="flex space-x-3">
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    type="button"
-                    onClick={closeAdminModal}
-                    className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-colors"
-                  >
-                    Cancel
-                  </motion.button>
-                  <motion.button
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    type="submit"
-                    disabled={isLoading}
-                    className="flex-1 bg-gradient-to-r from-purple-500 to-purple-600 text-white py-2 px-4 rounded-xl font-medium hover:from-purple-600 hover:to-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center"
-                  >
-                    {isLoading ? (
-                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    ) : (
-                      'Access Admin'
-                    )}
-                  </motion.button>
-                </div>
-              </form>
-
-              {/* Demo passkey hint */}
-              <div className="mt-4 p-3 bg-gray-50 rounded-lg text-xs text-gray-600 text-center">
-                <strong>Demo passkey:</strong> 1234
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <AdminPasskeyModal
+        isOpen={showAdminPasskeyModal}
+        onClose={() => setShowAdminPasskeyModal(false)}
+        onSuccess={handleAdminSuccess}
+      />
     </div>
   );
-}; 
+};

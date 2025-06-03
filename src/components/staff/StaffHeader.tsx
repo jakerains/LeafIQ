@@ -15,22 +15,20 @@ import { Button } from '../ui/button';
 import { useSimpleAuthStore } from '../../stores/simpleAuthStore';
 import { useStaffModeStore } from '../../stores/staffModeStore';
 import { useNavigate } from 'react-router-dom';
+import AdminPasskeyModal from '../auth/AdminPasskeyModal';
 
 export const StaffHeader: React.FC = () => {
   const { logout, selectUserMode, dispensaryName, username, isAdmin } = useSimpleAuthStore();
   const { notifications, removeNotification, clearNotifications } = useStaffModeStore();
   const [showNotifications, setShowNotifications] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
+  const [showAdminPasskeyModal, setShowAdminPasskeyModal] = useState(false);
   const navigate = useNavigate();
 
-  const handleAdminAccess = () => {
-    const passkey = prompt('Enter admin passkey:');
-    if (passkey === '1234') {
-      selectUserMode('admin');
-      navigate('/admin');
-    } else if (passkey !== null) {
-      alert('Invalid passkey');
-    }
+  const handleAdminAccessSuccess = () => {
+    selectUserMode('admin');
+    navigate('/admin');
+    setShowUserMenu(false);
   };
 
   const handleCustomerKioskAccess = () => {
@@ -195,7 +193,10 @@ export const StaffHeader: React.FC = () => {
                     
                     {!isAdmin && (
                       <button
-                        onClick={handleAdminAccess}
+                        onClick={() => {
+                          setShowAdminPasskeyModal(true);
+                          setShowUserMenu(false);
+                        }}
                         className="w-full px-3 py-2 text-left text-xs text-purple-600 hover:bg-purple-50 flex items-center space-x-2"
                       >
                         <Shield size={14} />
@@ -217,6 +218,13 @@ export const StaffHeader: React.FC = () => {
           </div>
         </div>
       </div>
+      
+      {/* Admin Passkey Modal */}
+      <AdminPasskeyModal
+        isOpen={showAdminPasskeyModal}
+        onClose={() => setShowAdminPasskeyModal(false)}
+        onSuccess={handleAdminAccessSuccess}
+      />
     </header>
   );
 };
