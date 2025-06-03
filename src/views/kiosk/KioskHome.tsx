@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import VercelV0Chat from '../../components/ui/v0-ai-chat';
-import CannabisQuestionsChat from '../../components/kiosk/CannabisQuestionsChat';
 import InfoModal from '../../components/ui/InfoModal';
 
 interface KioskHomeProps {
@@ -11,13 +10,10 @@ interface KioskHomeProps {
 
 // Define the types of modals we can show
 type ModalType = 'personalized' | 'inStock' | 'expert' | null;
-type ChatMode = 'vibe' | 'activity' | 'cannabis';
 
 const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
   // State to track which modal is open (if any)
   const [activeModal, setActiveModal] = useState<ModalType>(null);
-  // New state to track the active chat mode
-  const [activeChatMode, setActiveChatMode] = useState<ChatMode>('vibe');
 
   const container = {
     hidden: { opacity: 0 },
@@ -51,48 +47,8 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
       initial="hidden"
       animate="show"
     >
-      {/* Chat Mode Selection */}
-      <div className="mb-6 flex justify-center space-x-4">
-        <button
-          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-            activeChatMode === 'vibe'
-              ? 'bg-primary-500 text-white' 
-              : 'bg-white bg-opacity-70 text-gray-700 hover:bg-primary-100'
-          }`}
-          onClick={() => setActiveChatMode('vibe')}
-        >
-          🌈 Vibe Planner
-        </button>
-        
-        <button
-          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-            activeChatMode === 'activity'
-              ? 'bg-primary-500 text-white' 
-              : 'bg-white bg-opacity-70 text-gray-700 hover:bg-primary-100'
-          }`}
-          onClick={() => setActiveChatMode('activity')}
-        >
-          🏄‍♂️ Activity Planner
-        </button>
-        
-        <button
-          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-            activeChatMode === 'cannabis'
-              ? 'bg-primary-500 text-white' 
-              : 'bg-white bg-opacity-70 text-gray-700 hover:bg-primary-100'
-          }`}
-          onClick={() => setActiveChatMode('cannabis')}
-        >
-          🍃 Cannabis Questions
-        </button>
-      </div>
-      
-      {/* Render different chat interface based on active mode */}
-      {activeChatMode === 'cannabis' ? (
-        <CannabisQuestionsChat onSearch={onSearch} isLoading={isLoading} />
-      ) : (
-        <VercelV0Chat onSearch={onSearch} isLoading={isLoading} />
-      )}
+      {/* V0 Chat Component */}
+      <VercelV0Chat onSearch={onSearch} isLoading={isLoading} />
       
       <motion.div 
         className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6"
