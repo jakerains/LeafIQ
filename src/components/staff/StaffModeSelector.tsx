@@ -105,7 +105,7 @@ export const StaffModeSelector: React.FC<StaffModeSelectorProps> = ({
 
       {/* Mobile: Horizontal scrollable tabs */}
       <div className="md:hidden bg-white bg-opacity-95 backdrop-blur-md rounded-xl p-1.5 shadow-lg border border-gray-100">
-        <div className="flex space-x-1 overflow-x-auto scrollbar-hide pb-1 px-1">
+        <div className="flex space-x-1 overflow-x-auto pb-1 px-1">
           {availableModes.map((modeConfig) => {
             const IconComponent =
               iconMap[modeConfig.icon as keyof typeof iconMap];

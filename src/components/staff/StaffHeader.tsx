@@ -9,8 +9,7 @@ import {
   ChevronDown,
   X,
   Package,
-  Home,
-  Menu
+  Home 
 } from 'lucide-react';
 import { Button } from '../ui/button';
 import { useSimpleAuthStore } from '../../stores/simpleAuthStore';
@@ -22,7 +21,6 @@ export const StaffHeader: React.FC = () => {
   const { notifications, removeNotification, clearNotifications } = useStaffModeStore();
   const [showNotifications, setShowNotifications] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const navigate = useNavigate();
 
   const handleAdminAccess = () => {
@@ -51,7 +49,7 @@ export const StaffHeader: React.FC = () => {
             <img 
               src="/leafiq-logo.png" 
               alt="LeafIQ" 
-              className="h-10 sm:h-12 drop-shadow-lg filter shadow-primary-500/50"
+              className="h-12 drop-shadow-lg filter shadow-primary-500/50"
             />
             <div className="ml-2 pl-2 border-l border-gray-200 hidden md:block">
               <div className="text-xs font-medium text-primary-600">Staff Workstation</div>
@@ -59,7 +57,7 @@ export const StaffHeader: React.FC = () => {
             </div>
           </div>
           
-          {/* Center - Employee Info - Desktop only */}
+          {/* Center - Employee Info */}
           <div className="hidden md:flex flex-col items-center">
             <div className="flex items-center space-x-2 text-xs">
               <User size={14} className="text-gray-500" />
@@ -70,17 +68,8 @@ export const StaffHeader: React.FC = () => {
             </div>
           </div>
           
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setShowMobileMenu(!showMobileMenu)}
-            className="md:hidden text-gray-600 hover:text-gray-800"
-            aria-label="Toggle mobile menu"
-          >
-            <Menu size={24} />
-          </button>
-          
-          {/* Right side - Actions - Desktop */}
-          <div className="hidden md:flex items-center space-x-2">
+          {/* Right side - Actions */}
+          <div className="flex items-center space-x-2">
             {/* Quick action button */}
             <button
               onClick={handleCustomerKioskAccess}
@@ -227,60 +216,6 @@ export const StaffHeader: React.FC = () => {
             </div>
           </div>
         </div>
-        
-        {/* Mobile menu */}
-        <AnimatePresence>
-          {showMobileMenu && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              className="md:hidden overflow-hidden mt-2 border-t border-gray-100 pt-2"
-            >
-              <div className="flex flex-col space-y-2 py-2">
-                {/* Mobile menu items */}
-                <button
-                  onClick={handleCustomerKioskAccess}
-                  className="flex items-center gap-2 px-3 py-2 bg-green-50 text-green-700 rounded-lg hover:bg-green-100 transition-colors"
-                >
-                  <Home size={18} />
-                  <span className="font-medium">Go to Customer Kiosk</span>
-                </button>
-                
-                {!isAdmin && (
-                  <button
-                    onClick={handleAdminAccess}
-                    className="flex items-center gap-2 px-3 py-2 bg-purple-50 text-purple-700 rounded-lg hover:bg-purple-100 transition-colors"
-                  >
-                    <Shield size={18} />
-                    <span className="font-medium">Switch to Admin</span>
-                  </button>
-                )}
-                
-                <button
-                  onClick={logout}
-                  className="flex items-center gap-2 px-3 py-2 bg-red-50 text-red-700 rounded-lg hover:bg-red-100 transition-colors"
-                >
-                  <LogOut size={18} />
-                  <span className="font-medium">Logout</span>
-                </button>
-              </div>
-              
-              {/* User info in mobile menu */}
-              <div className="mt-2 pt-2 border-t border-gray-100">
-                <div className="px-3 py-2 bg-gray-50 rounded-lg">
-                  <div className="flex items-center">
-                    <User size={16} className="text-gray-500 mr-2" />
-                    <div>
-                      <div className="text-sm font-medium">{username}</div>
-                      <div className="text-xs text-gray-500">{dispensaryName}</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
     </header>
   );

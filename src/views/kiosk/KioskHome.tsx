@@ -42,7 +42,7 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
 
   return (
     <motion.div 
-      className="max-w-4xl mx-auto text-center flex flex-col justify-center min-h-[calc(100vh-8rem)] px-4"
+      className="max-w-4xl mx-auto text-center flex flex-col justify-center min-h-[calc(100vh-8rem)]"
       variants={container}
       initial="hidden"
       animate="show"
@@ -51,7 +51,7 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
       <VercelV0Chat onSearch={onSearch} isLoading={isLoading} />
       
       <motion.div 
-        className="mt-8 sm:mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
+        className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6"
         variants={container}
         initial="hidden"
         animate="show"
@@ -59,7 +59,7 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
       >
         {/* Personalized Matches Card */}
         <motion.div 
-          className="relative overflow-hidden rounded-2xl shadow-xl h-64 sm:h-[320px]"
+          className="relative overflow-hidden rounded-2xl shadow-xl h-[320px]"
           variants={item}
           whileHover={{ y: -8, transition: { duration: 0.3 } }}
         >
@@ -77,9 +77,9 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
           {/* Card content - positioned at very bottom */}
           <div className="relative z-10 p-4 flex flex-col justify-end h-full">
             <div className="mt-auto pb-1">
-              <h3 className="text-base sm:text-lg font-bold text-white mb-1">Personalized Matches</h3>
+              <h3 className="text-lg font-bold text-white mb-1">Personalized Matches</h3>
               
-              <p className="text-white/90 text-xs sm:text-sm mb-3">
+              <p className="text-white/90 text-sm mb-3">
                 Find products perfectly suited to your experience.
               </p>
               
@@ -95,7 +95,7 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
         
         {/* In-Stock Guarantee Card */}
         <motion.div 
-          className="relative overflow-hidden rounded-2xl shadow-xl h-64 sm:h-[320px]" 
+          className="relative overflow-hidden rounded-2xl shadow-xl h-[320px]" 
           variants={item}
           whileHover={{ y: -8, transition: { duration: 0.3 } }}
         >
@@ -113,9 +113,9 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
           {/* Card content - positioned at very bottom */}
           <div className="relative z-10 p-4 flex flex-col justify-end h-full">
             <div className="mt-auto pb-1">
-              <h3 className="text-base sm:text-lg font-bold text-white mb-1">In-Stock Guarantee</h3>
+              <h3 className="text-lg font-bold text-white mb-1">In-Stock Guarantee</h3>
               
-              <p className="text-white/90 text-xs sm:text-sm mb-3">
+              <p className="text-white/90 text-sm mb-3">
                 All recommendations available right now in store.
               </p>
               
@@ -131,7 +131,7 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
         
         {/* Expert Guidance Card */}
         <motion.div 
-          className="relative overflow-hidden rounded-2xl shadow-xl h-64 sm:h-[320px]" 
+          className="relative overflow-hidden rounded-2xl shadow-xl h-[320px]" 
           variants={item}
           whileHover={{ y: -8, transition: { duration: 0.3 } }}
         >
@@ -149,9 +149,9 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
           {/* Card content - positioned at very bottom */}
           <div className="relative z-10 p-4 flex flex-col justify-end h-full">
             <div className="mt-auto pb-1">
-              <h3 className="text-base sm:text-lg font-bold text-white mb-1">Expert Guidance</h3>
+              <h3 className="text-lg font-bold text-white mb-1">Expert Guidance</h3>
               
-              <p className="text-white/90 text-xs sm:text-sm mb-3">
+              <p className="text-white/90 text-sm mb-3">
                 Our staff provides insights on any recommendation.
               </p>
               
@@ -173,11 +173,11 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
         title="Personalized Product Matching"
       >
         <div className="space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+          <div className="flex items-start gap-4">
             <img 
               src="/1.jpg" 
               alt="Budtender explaining product" 
-              className="w-full sm:w-40 h-40 object-cover rounded-lg"
+              className="w-40 h-40 object-cover rounded-lg"
             />
             <div>
               <h3 className="text-lg font-semibold mb-2">How It Works</h3>
@@ -197,7 +197,7 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
             
             <div className="bg-gray-50 p-4 rounded-xl">
               <h4 className="font-medium mb-2">Common Terpenes & Effects</h4>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2">
+              <ul className="grid grid-cols-2 gap-x-4 gap-y-2">
                 <li className="flex items-center gap-2">
                   <span className="w-3 h-3 rounded-full bg-primary-300"></span>
                   <span className="text-sm"><strong>Myrcene:</strong> Relaxation, sedation</span>
@@ -235,11 +235,11 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
         title="In-Stock Guarantee"
       >
         <div className="space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+          <div className="flex items-start gap-4">
             <img 
               src="/2.jpg" 
               alt="Inventory display" 
-              className="w-full sm:w-40 h-40 object-cover rounded-lg"
+              className="w-40 h-40 object-cover rounded-lg"
             />
             <div>
               <h3 className="text-lg font-semibold mb-2">Real-Time Inventory</h3>
@@ -294,11 +294,11 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
         title="Expert Budtender Guidance"
       >
         <div className="space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-start gap-4">
+          <div className="flex items-start gap-4">
             <img 
               src="/3-yep.jpg" 
               alt="Budtender helping customer" 
-              className="w-full sm:w-40 h-40 object-cover rounded-lg"
+              className="w-40 h-40 object-cover rounded-lg"
             />
             <div>
               <h3 className="text-lg font-semibold mb-2">Knowledgeable Staff</h3>

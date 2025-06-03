@@ -31,6 +31,8 @@ export const SimpleLogin: React.FC = () => {
     }
   };
 
+
+
   return (
     <div className="min-h-screen flex flex-col">
       <header className="container mx-auto px-4 py-8 relative">
@@ -38,7 +40,7 @@ export const SimpleLogin: React.FC = () => {
           <img 
             src="/leafiq-logo.png" 
             alt="LeafIQ" 
-            className="h-12 md:h-16 drop-shadow-lg filter shadow-primary-500/50"
+            className="h-16 drop-shadow-lg filter shadow-primary-500/50"
           />
         </Link>
       </header>
@@ -49,7 +51,7 @@ export const SimpleLogin: React.FC = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.3 }}
         >
-          <div className="bg-white bg-opacity-90 backdrop-blur-md rounded-3xl p-6 sm:p-8 shadow-xl max-w-md w-full relative">
+          <div className="bg-white bg-opacity-90 backdrop-blur-md rounded-3xl p-8 shadow-xl max-w-md w-full relative">
             <div className="absolute top-4 left-4">
               <Link 
                 to="/" 
@@ -64,7 +66,7 @@ export const SimpleLogin: React.FC = () => {
               <div className="h-12 w-12 bg-primary-100 rounded-xl flex items-center justify-center mx-auto mb-4">
                 <Lock className="h-6 w-6 text-primary-600" />
               </div>
-              <h2 className="text-2xl sm:text-3xl font-display font-semibold mb-2">
+              <h2 className="text-3xl font-display font-semibold mb-2">
                 Sign In
               </h2>
               <p className="text-gray-600">
@@ -142,6 +144,8 @@ export const SimpleLogin: React.FC = () => {
                 </button>
               </form>
 
+
+
               <div className="text-center">
                 <span className="text-sm text-gray-600">Don't have an account? </span>
                 <Link
@@ -157,4 +161,4 @@ export const SimpleLogin: React.FC = () => {
       </main>
     </div>
   );
-};
+}; 

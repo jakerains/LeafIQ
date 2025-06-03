@@ -52,19 +52,18 @@ const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ product, onCl
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 backdrop-blur-sm overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 backdrop-blur-sm"
       onClick={onClose}
-      style={{ alignItems: 'safe center' }}
     >
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         exit={{ scale: 0.9, opacity: 0 }}
-        className="bg-white rounded-3xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden my-auto mx-4"
+        className="bg-white rounded-3xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="relative bg-gradient-to-r from-primary-500 to-primary-600 text-white p-4 sm:p-6">
+        <div className="relative bg-gradient-to-r from-primary-500 to-primary-600 text-white p-6">
           <button
             onClick={onClose}
             className="absolute top-4 right-4 p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all"
@@ -72,8 +71,8 @@ const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ product, onCl
             <X size={20} />
           </button>
           
-          <div className="flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-6">
-            <div className="w-24 h-24 sm:w-32 sm:h-32 rounded-2xl overflow-hidden shadow-lg bg-white bg-opacity-20 mx-auto sm:mx-0">
+          <div className="flex items-start space-x-6">
+            <div className="w-32 h-32 rounded-2xl overflow-hidden shadow-lg bg-white bg-opacity-20">
               <img 
                 src={product.image_url} 
                 alt={product.name}
@@ -81,11 +80,11 @@ const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ product, onCl
               />
             </div>
             
-            <div className="flex-1 text-center sm:text-left">
-              <h2 className="text-2xl sm:text-3xl font-bold mb-2">{product.name}</h2>
-              <p className="text-primary-100 text-base sm:text-lg mb-3">{product.brand}</p>
+            <div className="flex-1">
+              <h2 className="text-3xl font-bold mb-2">{product.name}</h2>
+              <p className="text-primary-100 text-lg mb-3">{product.brand}</p>
               
-              <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
+              <div className="flex flex-wrap gap-2">
                 <span className={`px-3 py-1 rounded-full text-sm font-medium border ${strainTypeColor}`}>
                   {(product.strain_type || 'hybrid').charAt(0).toUpperCase() + (product.strain_type || 'hybrid').slice(1)}
                 </span>
@@ -103,17 +102,17 @@ const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ product, onCl
         </div>
 
         {/* Content */}
-        <div className="p-4 sm:p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="p-6 overflow-y-auto max-h-[calc(90vh-200px)]">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
             
             {/* Main Info */}
-            <div className="lg:col-span-2 space-y-4 sm:space-y-6">
+            <div className="lg:col-span-2 space-y-6">
               
               {/* Description */}
               {product.description && (
-                <div className="bg-gray-50 rounded-2xl p-4 sm:p-5">
+                <div className="bg-gray-50 rounded-2xl p-5">
                   <div className="flex items-center mb-3">
-                    <Info className="text-primary-600 mr-2\" size={20} />
+                    <Info className="text-primary-600 mr-2" size={20} />
                     <h3 className="text-lg font-semibold">Description</h3>
                   </div>
                   <p className="text-gray-700 leading-relaxed">{product.description}</p>
@@ -121,43 +120,43 @@ const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ product, onCl
               )}
 
               {/* Cannabinoid Profile */}
-              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-4 sm:p-5">
+              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-5">
                 <div className="flex items-center mb-4">
                   <Leaf className="text-green-600 mr-2" size={20} />
                   <h3 className="text-lg font-semibold">Cannabinoid Profile</h3>
                 </div>
                 
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  <div className="text-center">
-                    <div className="text-xl sm:text-2xl font-bold text-green-600">
-                      {product.variant.thc_percentage ? product.variant.thc_percentage.toFixed(1) : '0.0'}%
-                    </div>
-                    <div className="text-xs sm:text-sm text-gray-600">THC</div>
-                  </div>
+                                 <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                   <div className="text-center">
+                     <div className="text-2xl font-bold text-green-600">
+                       {product.variant.thc_percentage ? product.variant.thc_percentage.toFixed(1) : '0.0'}%
+                     </div>
+                     <div className="text-sm text-gray-600">THC</div>
+                   </div>
                    
-                  {product.variant.cbd_percentage !== null && product.variant.cbd_percentage !== undefined && product.variant.cbd_percentage > 0 && (
-                    <div className="text-center">
-                      <div className="text-xl sm:text-2xl font-bold text-blue-600">
-                        {product.variant.cbd_percentage?.toFixed(1)}%
-                      </div>
-                      <div className="text-xs sm:text-sm text-gray-600">CBD</div>
-                    </div>
-                  )}
+                   {product.variant.cbd_percentage !== null && product.variant.cbd_percentage !== undefined && product.variant.cbd_percentage > 0 && (
+                     <div className="text-center">
+                       <div className="text-2xl font-bold text-blue-600">
+                         {product.variant.cbd_percentage?.toFixed(1)}%
+                       </div>
+                       <div className="text-sm text-gray-600">CBD</div>
+                     </div>
+                   )}
                    
-                  {product.variant.total_cannabinoids !== null && product.variant.total_cannabinoids !== undefined && product.variant.total_cannabinoids > 0 && (
-                    <div className="text-center">
-                      <div className="text-xl sm:text-2xl font-bold text-purple-600">
-                        {product.variant.total_cannabinoids?.toFixed(1)}%
-                      </div>
-                      <div className="text-xs sm:text-sm text-gray-600">Total</div>
-                    </div>
-                  )}
+                   {product.variant.total_cannabinoids !== null && product.variant.total_cannabinoids !== undefined && product.variant.total_cannabinoids > 0 && (
+                     <div className="text-center">
+                       <div className="text-2xl font-bold text-purple-600">
+                         {product.variant.total_cannabinoids?.toFixed(1)}%
+                       </div>
+                       <div className="text-sm text-gray-600">Total</div>
+                     </div>
+                   )}
                 </div>
               </div>
 
               {/* Terpene Profile */}
               {topTerpenes.length > 0 && (
-                <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl p-4 sm:p-5">
+                <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl p-5">
                   <div className="flex items-center mb-4">
                     <Palette className="text-purple-600 mr-2" size={20} />
                     <h3 className="text-lg font-semibold">Terpene Profile</h3>
@@ -166,19 +165,19 @@ const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ product, onCl
                   <div className="space-y-3">
                     {topTerpenes.map(([terpene, percentage]) => (
                       <div key={terpene} className="flex items-center justify-between">
-                        <span className="text-xs sm:text-sm font-medium capitalize">
+                        <span className="text-sm font-medium capitalize">
                           {terpene.replace(/_/g, ' ')}
                         </span>
                         <div className="flex items-center space-x-2">
-                          <div className="w-16 sm:w-24 bg-gray-200 rounded-full h-2">
-                            <div 
-                              className="bg-gradient-to-r from-purple-400 to-purple-600 h-2 rounded-full"
-                              style={{ width: `${Math.min(((percentage || 0) / Math.max(...Object.values(terpeneProfile).filter(v => typeof v === 'number'))) * 100, 100)}%` }}
-                            />
-                          </div>
-                          <span className="text-xs sm:text-sm text-gray-600 min-w-[3rem] text-right">
-                            {(percentage || 0).toFixed(2)}%
-                          </span>
+                                                     <div className="w-24 bg-gray-200 rounded-full h-2">
+                             <div 
+                               className="bg-gradient-to-r from-purple-400 to-purple-600 h-2 rounded-full"
+                               style={{ width: `${Math.min(((percentage || 0) / Math.max(...Object.values(terpeneProfile).filter(v => typeof v === 'number'))) * 100, 100)}%` }}
+                             />
+                           </div>
+                           <span className="text-sm text-gray-600 min-w-[3rem]">
+                             {(percentage || 0).toFixed(2)}%
+                           </span>
                         </div>
                       </div>
                     ))}
@@ -188,24 +187,24 @@ const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ product, onCl
 
               {/* Variants */}
               {productVariants.length > 1 && (
-                <div className="bg-gray-50 rounded-2xl p-4 sm:p-5">
+                <div className="bg-gray-50 rounded-2xl p-5">
                   <div className="flex items-center mb-4">
                     <Package className="text-gray-600 mr-2" size={20} />
                     <h3 className="text-lg font-semibold">Available Sizes</h3>
                   </div>
                   
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {productVariants.map((variant) => (
-                      <div key={variant.id} className="bg-white rounded-xl p-3 sm:p-4 border border-gray-200">
+                      <div key={variant.id} className="bg-white rounded-xl p-4 border border-gray-200">
                         <div className="flex justify-between items-center">
                           <div>
                             <div className="font-medium">{variant.size_weight}</div>
-                            <div className="text-xs sm:text-sm text-gray-600">
+                            <div className="text-sm text-gray-600">
                               Stock: {variant.inventory_level} units
                             </div>
                           </div>
                           <div className="text-right">
-                            <div className="text-base sm:text-lg font-bold text-primary-600">
+                            <div className="text-lg font-bold text-primary-600">
                               ${variant.price ? variant.price.toFixed(2) : '0.00'}
                             </div>
                             <div className={`text-xs px-2 py-1 rounded-full ${
@@ -226,7 +225,7 @@ const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ product, onCl
             <div className="space-y-4">
               
               {/* Inventory Status */}
-              <div className="bg-white rounded-2xl p-4 sm:p-5 border border-gray-200">
+              <div className="bg-white rounded-2xl p-5 border border-gray-200">
                 <div className="flex items-center mb-3">
                   <TrendingUp className="text-gray-600 mr-2" size={20} />
                   <h3 className="font-semibold">Inventory Status</h3>
@@ -234,32 +233,32 @@ const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ product, onCl
                 
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
-                    <span className="text-xs sm:text-sm text-gray-600">Total Stock</span>
-                    <span className={`px-2 py-1 rounded-full text-xs sm:text-sm font-medium ${inventoryColor}`}>
+                    <span className="text-sm text-gray-600">Total Stock</span>
+                    <span className={`px-2 py-1 rounded-full text-sm font-medium ${inventoryColor}`}>
                       {totalInventory} units
                     </span>
                   </div>
                   
                   <div className="flex justify-between items-center">
-                    <span className="text-xs sm:text-sm text-gray-600">Variants</span>
-                    <span className="font-medium text-xs sm:text-sm">{productVariants.length}</span>
+                    <span className="text-sm text-gray-600">Variants</span>
+                    <span className="font-medium">{productVariants.length}</span>
                   </div>
                   
                   <div className="flex justify-between items-center">
-                    <span className="text-xs sm:text-sm text-gray-600">Avg. Price</span>
-                    <span className="font-medium text-xs sm:text-sm">${averagePrice.toFixed(2)}</span>
+                    <span className="text-sm text-gray-600">Avg. Price</span>
+                    <span className="font-medium">${averagePrice.toFixed(2)}</span>
                   </div>
                 </div>
               </div>
 
               {/* Quick Stats */}
-              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-4 sm:p-5">
+              <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-5">
                 <div className="flex items-center mb-3">
                   <Zap className="text-blue-600 mr-2" size={20} />
                   <h3 className="font-semibold">Quick Stats</h3>
                 </div>
                 
-                <div className="space-y-2 text-xs sm:text-sm">
+                <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
                     <span className="text-gray-600">Category</span>
                     <span className="font-medium capitalize">{product.category}</span>
@@ -291,7 +290,7 @@ const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ product, onCl
                 {showEditButton && (
                   <button
                     onClick={() => onEdit(product)}
-                    className="w-full bg-primary-600 text-white py-2 sm:py-3 px-4 rounded-xl font-medium hover:bg-primary-700 transition-colors"
+                    className="w-full bg-primary-600 text-white py-3 px-4 rounded-xl font-medium hover:bg-primary-700 transition-colors"
                   >
                     Edit Product
                   </button>
@@ -299,7 +298,7 @@ const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ product, onCl
                 
                 <button
                   onClick={onClose}
-                  className="w-full bg-gray-100 text-gray-700 py-2 sm:py-3 px-4 rounded-xl font-medium hover:bg-gray-200 transition-colors"
+                  className="w-full bg-gray-100 text-gray-700 py-3 px-4 rounded-xl font-medium hover:bg-gray-200 transition-colors"
                 >
                   Close
                 </button>
@@ -313,4 +312,4 @@ const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ product, onCl
   );
 };
 
-export default ProductDetailsModal;
+export default ProductDetailsModal; 

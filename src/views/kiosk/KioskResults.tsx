@@ -35,19 +35,19 @@ const KioskResults = ({ searchQuery, results, onReset, isAIPowered, effects }: K
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="flex flex-col items-center max-w-3xl mx-auto text-center px-4 py-8"
+        className="flex flex-col items-center max-w-3xl mx-auto text-center"
       >
         <div className="p-4 bg-white bg-opacity-70 backdrop-blur-sm rounded-full mb-6">
           <Search size={40} className="text-gray-400" />
         </div>
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">No matches found for "{searchQuery}"</h2>
-        <p className="text-base md:text-lg text-gray-600 mb-8">
+        <h2 className="text-3xl font-bold text-gray-900 mb-4">No matches found for "{searchQuery}"</h2>
+        <p className="text-lg text-gray-600 mb-8">
           We couldn't find any products that match your search. Try different terms or browse our recommendations.
         </p>
         <Button
           onClick={handleBackToSearch}
           leftIcon={<ArrowLeft size={16} />}
-          className="px-4 py-2 md:px-6 md:py-3 text-base md:text-lg shadow-lg"
+          className="px-6 py-3 text-lg shadow-lg"
         >
           Try a new search
         </Button>
@@ -56,19 +56,19 @@ const KioskResults = ({ searchQuery, results, onReset, isAIPowered, effects }: K
   }
 
   return (
-    <div className="flex flex-col px-4">
+    <div className="flex flex-col">
       {/* Header with search info */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white bg-opacity-80 backdrop-blur-md rounded-3xl p-4 md:p-6 shadow-lg mb-6 md:mb-8 flex flex-col md:flex-row justify-between items-center"
+        className="bg-white bg-opacity-80 backdrop-blur-md rounded-3xl p-6 shadow-lg mb-8 flex flex-col md:flex-row justify-between items-center"
       >
-        <div className="mb-4 md:mb-0 flex flex-col md:flex-row md:items-center text-center md:text-left">
-          <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2 md:mb-0 md:mr-4">
+        <div className="mb-4 md:mb-0 flex flex-col md:flex-row md:items-center">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2 md:mb-0 md:mr-4">
             Results for "{searchQuery}"
           </h2>
           {isAIPowered && (
-            <div className="flex items-center space-x-2 justify-center md:justify-start">
+            <div className="flex items-center space-x-2">
               <motion.div
                 className="px-3 py-1.5 bg-purple-100 text-purple-800 rounded-full text-sm font-medium flex items-center"
                 initial={{ scale: 0.8 }}
@@ -112,7 +112,7 @@ const KioskResults = ({ searchQuery, results, onReset, isAIPowered, effects }: K
           {effects.map((effect, index) => (
             <motion.div
               key={effect}
-              className="px-3 py-1.5 md:px-4 md:py-2 bg-primary-100 text-primary-800 rounded-full text-xs md:text-sm font-medium shadow-sm border border-primary-200"
+              className="px-4 py-2 bg-primary-100 text-primary-800 rounded-full font-medium text-sm shadow-sm border border-primary-200"
               initial={{ scale: 0.8, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ delay: 0.2 + index * 0.05 }}
@@ -124,7 +124,7 @@ const KioskResults = ({ searchQuery, results, onReset, isAIPowered, effects }: K
       )}
 
       {/* Results grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {results.map((product, index) => (
           <motion.div
             key={product.id}
@@ -138,7 +138,6 @@ const KioskResults = ({ searchQuery, results, onReset, isAIPowered, effects }: K
               effects={effects.slice(0, 2)}
               showTerpenes={true}
               onProductSelect={handleProductSelect}
-              className="h-full"
             />
           </motion.div>
         ))}

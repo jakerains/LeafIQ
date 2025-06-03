@@ -48,11 +48,11 @@ const ProductCard = ({
       </div>
 
       <div className="flex justify-between items-start">
-        <div className="flex-1 min-w-0">
-          <h3 className="text-lg sm:text-xl font-semibold truncate">{product.name}</h3>
-          <p className="text-gray-600 text-sm truncate">{product.brand}</p>
+        <div>
+          <h3 className="text-xl font-semibold truncate">{product.name}</h3>
+          <p className="text-gray-600 text-sm">{product.brand}</p>
         </div>
-        <div className="bg-white rounded-full py-1.5 px-3.5 shadow-md border border-gray-100 flex-shrink-0 ml-2">
+        <div className="bg-white rounded-full py-1.5 px-3.5 shadow-md border border-gray-100">
           <p className="font-semibold text-accent-600 text-lg">${variant.price ? Number(variant.price).toFixed(2) : '0.00'}</p>
         </div>
       </div>
@@ -78,14 +78,14 @@ const ProductCard = ({
       </div>
 
       <div className="flex items-center justify-between mt-1 text-sm">
-        <div className="flex gap-2 text-xs sm:text-sm">
+        <div className="flex gap-2">
           <span className="font-medium">THC: {variant.thc_percentage ? Number(variant.thc_percentage).toFixed(1) : '0.0'}%</span>
           {variant.cbd_percentage && variant.cbd_percentage > 0 && (
             <span className="font-medium">CBD: {Number(variant.cbd_percentage).toFixed(1)}%</span>
           )}
         </div>
         {showInventory && (
-          <span className={`text-xs sm:text-sm ${inventoryColorClass}`}>
+          <span className={inventoryColorClass}>
             Stock: {variant.inventory_level} units
           </span>
         )}
@@ -93,7 +93,7 @@ const ProductCard = ({
 
       {showTerpenes && variant.terpene_profile && Object.keys(variant.terpene_profile).length > 0 && (
         <div className="mt-3 pt-3 border-t border-gray-100">
-          <p className="text-xs sm:text-sm font-medium mb-1">Terpene Profile:</p>
+          <p className="text-sm font-medium mb-1">Terpene Profile:</p>
           <div className="flex flex-wrap gap-x-3 gap-y-1.5">
             {Object.entries(variant.terpene_profile).map(([terpene, value]) => (
               value && value > 0 ? (
@@ -108,7 +108,7 @@ const ProductCard = ({
 
       <div className="flex mt-4 gap-2">
         <motion.button 
-          className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-primary-500 text-white rounded-xl hover:bg-primary-600 transition-colors shadow-md hover:shadow-lg text-sm sm:text-base"
+          className="flex-1 flex items-center justify-center gap-1.5 py-2.5 bg-primary-500 text-white rounded-xl hover:bg-primary-600 transition-colors shadow-md hover:shadow-lg"
           whileHover={{ y: -3 }}
           whileTap={{ scale: 0.95 }}
         >
