@@ -113,7 +113,7 @@ const ProductDetailsModal: React.FC<ProductDetailsModalProps> = ({ product, onCl
               {product.description && (
                 <div className="bg-gray-50 rounded-2xl p-4 sm:p-5">
                   <div className="flex items-center mb-3">
-                    <Info className="text-primary-600 mr-2" size={20} />
+                    <Info className="text-primary-600 mr-2\" size={20} />
                     <h3 className="text-lg font-semibold">Description</h3>
                   </div>
                   <p className="text-gray-700 leading-relaxed">{product.description}</p>
