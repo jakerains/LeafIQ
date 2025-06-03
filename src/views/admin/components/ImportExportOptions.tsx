@@ -26,7 +26,6 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
   const { user } = useAuthStore();
   const { organizationId } = useSimpleAuthStore();
   const { fetchProducts } = useProductsStore();
-  const { fetchProducts } = useProductsStore();
   
   // Log organization ID when component mounts
   useEffect(() => {
@@ -599,8 +598,6 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
               </div>
             </div>
           )}
-
-
 
           <div className="flex justify-end space-x-3">
             <Button 
