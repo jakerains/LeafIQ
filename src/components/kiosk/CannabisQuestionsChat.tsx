@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Send, Bot, User, Loader } from 'lucide-react';
+import { Send, User, Loader } from 'lucide-react';
 import { Button } from '../ui/button';
 
 interface CannabisQuestionsChatProps {
@@ -76,23 +76,27 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
           <div className="overflow-y-auto p-6 space-y-4 bg-white bg-opacity-70" style={{ maxHeight: '400px', minHeight: '300px' }}>
             {chatHistory.map((message, index) => (
               <div key={index} className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`flex items-start ${message.type === 'user' ? 'ml-auto max-w-[85%]' : 'max-w-[85%]'}`}>
+                <div className={`flex items-start ${message.type === 'user' ? 'flex-row-reverse max-w-[85%]' : 'max-w-[85%]'}`}>
                   {message.type === 'bot' && (
-                    <div className="bg-emerald-100 p-2 rounded-full mr-3 mt-1">
-                      <Bot size={20} className="text-emerald-600" />
+                    <div className="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden mr-3">
+                      <img
+                        src="/budbuddy.png" 
+                        alt="Bud" 
+                        className="h-full w-full object-cover"
+                      />
                     </div>
                   )}
                   <div className={`${
                     message.type === 'user' 
-                      ? 'bg-emerald-500 text-white rounded-2xl p-4 shadow-sm' 
-                      : 'bg-white rounded-2xl p-4 shadow-sm border border-green-100'
+                      ? 'bg-emerald-500 text-white rounded-2xl rounded-tr-sm p-4 shadow-sm mr-3' 
+                      : 'bg-white rounded-2xl rounded-tl-sm p-4 shadow-sm border border-green-100'
                   }`}>
                     <p className={`${message.type === 'user' ? 'text-white' : 'text-gray-700'} leading-relaxed`}>
                       {message.text}
                     </p>
                   </div>
                   {message.type === 'user' && (
-                    <div className="bg-emerald-600 p-2 rounded-full ml-3 mt-1">
+                    <div className="bg-emerald-600 p-2 rounded-full">
                       <User size={20} className="text-white" />
                     </div>
                   )}
