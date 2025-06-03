@@ -3,6 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import { createClient } from '@supabase/supabase-js';
+import { randomUUID } from 'crypto'; // Add import for UUID generation
 
 // Load environment variables
 dotenv.config();
@@ -221,8 +222,11 @@ function convertToImportProduct(parsed, counter, category) {
     return null;
   }
   
-  // Generate unique IDs
-  const productId = `truenorth-${category}-${counter.toString().padStart(3, '0')}`;
+  // Generate proper UUID for product instead of string ID
+  const productId = randomUUID();
+  
+  // Store a reference code for display/tracking purposes
+  const productRefCode = `truenorth-${category}-${counter.toString().padStart(3, '0')}`;
   
   // Parse strain type
   const strainType = parseStrainType(parsed.type);
@@ -252,7 +256,7 @@ function convertToImportProduct(parsed, counter, category) {
     }
     
     variants.push({
-      id: `${productId}-var1`,
+      id: randomUUID(), // Generate proper UUID for variant
       size_weight: sizeWeight,
       price: price,
       original_price: price,
@@ -272,6 +276,7 @@ function convertToImportProduct(parsed, counter, category) {
   
   return {
     id: productId,
+    ref_code: productRefCode, // Store the original reference code for display purposes
     name: parsed.name,
     brand: parsed.brand,
     category,
@@ -343,7 +348,7 @@ function parsePricingToVariants(pricing, productId, thc, cbd) {
       const size = parts[1];
       
       variants.push({
-        id: `${productId}-var${index + 1}`,
+        id: randomUUID(), // Generate proper UUID for variant
         size_weight: size,
         price,
         original_price: price,
@@ -361,7 +366,7 @@ function parsePricingToVariants(pricing, productId, thc, cbd) {
       const price = parseFloat(singlePriceMatch[1]);
       
       variants.push({
-        id: `${productId}-var1`,
+        id: randomUUID(), // Generate proper UUID for variant
         size_weight: detectSizeFromPrice(price),
         price,
         original_price: price,
@@ -672,6 +677,7 @@ async function loadTrueNorthInventory() {
     const importData = parseMultipleMarkdownFiles(files, DEMO_ORGANIZATION_ID);
     
     console.log(`✅ Parsed ${importData.products.length} products from markdown`);
+    console.log('📊 Using proper UUIDs for product and variant IDs');
     
     // Import the data into Supabase
     console.log('📦 Importing products into Supabase...');
