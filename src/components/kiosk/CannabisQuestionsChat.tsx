@@ -16,11 +16,19 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
   const [chatHistory, setChatHistory] = useState<Array<{type: 'user' | 'bot', text: string}>>([
     {type: 'bot', text: "I'm Bud, and I'm here to answer all your cannabis questions in a friendly, easy-to-understand way. No judgment, just helpful information!"}
   ]);
+  const chatContainerRef = useRef<HTMLDivElement>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
   
-  // Auto-scroll to bottom of chat when messages are added
+  // Auto-scroll to bottom of chat container when messages are added
   useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // Only scroll the chat container, not the entire page
+    if (chatEndRef.current && chatContainerRef.current) {
+      chatEndRef.current.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'nearest', 
+        inline: 'start' 
+      });
+    }
   }, [chatHistory]);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -73,12 +81,19 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
       >
         <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl shadow-xl border border-green-200 overflow-hidden max-w-5xl mx-auto">
           {/* Chat messages */}
-          <div className="overflow-y-auto p-6 space-y-4 bg-white bg-opacity-70" style={{ maxHeight: '400px', minHeight: '300px' }}>
+          <div 
+            ref={chatContainerRef}
+            className="overflow-y-auto p-6 space-y-4 bg-white bg-opacity-70" 
+            style={{ maxHeight: '400px', minHeight: '300px' }}
+          >
             {chatHistory.map((message, index) => (
-              <div key={index} className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`flex items-start ${message.type === 'user' ? 'flex-row-reverse max-w-[85%]' : 'max-w-[85%]'}`}>
+              <div 
+                key={index} 
+                className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
+                <div className={`flex items-start space-x-3 ${message.type === 'user' ? 'flex-row-reverse space-x-reverse' : ''} max-w-[85%]`}>
                   {message.type === 'bot' && (
-                    <div className="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden mr-3">
+                    <div className="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden">
                       <img
                         src="/budbuddy.png" 
                         alt="Bud" 
@@ -88,7 +103,7 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
                   )}
                   <div className={`${
                     message.type === 'user' 
-                      ? 'bg-emerald-500 text-white rounded-2xl rounded-tr-sm p-4 shadow-sm mr-3' 
+                      ? 'bg-emerald-500 text-white rounded-2xl rounded-tr-sm p-4 shadow-sm' 
                       : 'bg-white rounded-2xl rounded-tl-sm p-4 shadow-sm border border-green-100'
                   }`}>
                     <p className={`${message.type === 'user' ? 'text-white' : 'text-gray-700'} leading-relaxed`}>
@@ -96,7 +111,7 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
                     </p>
                   </div>
                   {message.type === 'user' && (
-                    <div className="bg-emerald-600 p-2 rounded-full">
+                    <div className="flex-shrink-0 h-10 w-10 bg-emerald-600 rounded-full flex items-center justify-center">
                       <User size={20} className="text-white" />
                     </div>
                   )}
