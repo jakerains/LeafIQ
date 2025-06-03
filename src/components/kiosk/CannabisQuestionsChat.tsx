@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Send, User, Loader } from 'lucide-react';
 import { Button } from '../ui/button';
+import { getCannabisKnowledgeResponse } from '../../lib/supabase'; // Import the RAG function
 
 interface CannabisQuestionsChatProps {
   onSearch?: (query: string, mode?: 'vibe' | 'activity' | 'cannabis_questions') => void;
@@ -18,6 +19,7 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
   ]);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
+  const [isBotTyping, setIsBotTyping] = useState(false); // State for typing indicator
   
   // Auto-scroll to bottom of chat container when messages are added
   useEffect(() => {
@@ -29,33 +31,58 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
         inline: 'start' 
       });
     }
-  }, [chatHistory]);
+  }, [chatHistory, isBotTyping]); // Include isBotTyping to scroll when indicator appears
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!query.trim() || isLoading) return;
+    if (!query.trim() || isLoading || isBotTyping) return; // Prevent multiple submissions
     
+    const userQuery = query.trim();
     // Add user message to chat history
-    setChatHistory([...chatHistory, {type: 'user', text: query}]);
+    setChatHistory(prev => [...prev, {type: 'user', text: userQuery}]);
+    setQuery(''); // Clear input immediately
+    setIsBotTyping(true); // Show typing indicator
     
-    // Forward the search query if onSearch is provided
+    // Forward the search query if onSearch is provided (for logging/analytics)
     if (onSearch) {
-      onSearch(query, 'cannabis_questions');
+      onSearch(userQuery, 'cannabis_questions');
     }
     
-    // Simulate a bot response (in a real app, this would come from the API)
-    setTimeout(() => {
+    try {
+      // Get bot response from the RAG function
+      const botResponse = await getCannabisKnowledgeResponse(userQuery);
+      
       setChatHistory(prev => [
         ...prev, 
         {
           type: 'bot', 
-          text: `Thanks for asking about "${query}". Cannabis contains compounds called cannabinoids like THC and CBD, along with aromatic compounds called terpenes. These work together to create various effects. What else would you like to know?`
+          text: botResponse || "I'm sorry, I couldn't find an answer to that question."
         }
       ]);
-    }, 1500);
+    } catch (error) {
+      console.error("Error getting bot response:", error);
+      setChatHistory(prev => [
+        ...prev, 
+        {
+          type: 'bot', 
+          text: "I'm sorry, I encountered an error while trying to answer. Please try again."
+        }
+      ]);
+    } finally {
+      setIsBotTyping(false); // Hide typing indicator
+    }
+  };
+
+  // Handle suggestion click
+  const handleSuggestionClick = (suggestion: string) => {
+    if (isLoading || isBotTyping) return; // Prevent if already loading or typing
     
-    // Clear input
-    setQuery('');
+    setQuery(suggestion); // Set query in input field
+    
+    // Auto submit after a brief delay to allow user to see what was selected
+    setTimeout(() => {
+      handleSubmit(new Event('submit') as unknown as React.FormEvent);
+    }, 300);
   };
 
   return (
@@ -118,6 +145,30 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
                 </div>
               </div>
             ))}
+            
+            {/* Bot typing indicator */}
+            {isBotTyping && (
+              <div className="flex justify-start">
+                <div className="flex items-start space-x-3 max-w-[85%]">
+                  <div className="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden">
+                    <img
+                      src="/budbuddy.png" 
+                      alt="Bud" 
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                  <div className="bg-white rounded-2xl rounded-tl-sm p-4 shadow-sm border border-green-100">
+                    <div className="flex space-x-2">
+                      <div className="h-2 w-2 bg-emerald-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></div>
+                      <div className="h-2 w-2 bg-emerald-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></div>
+                      <div className="h-2 w-2 bg-emerald-500 rounded-full animate-bounce" style={{ animationDelay: '600ms' }}></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+            
+            {/* This div is used for scrolling to bottom */}
             <div ref={chatEndRef} />
           </div>
 
@@ -130,14 +181,14 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
                 onChange={(e) => setQuery(e.target.value)}
                 className="flex-grow px-4 py-3 border border-green-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 placeholder="Ask about cannabis effects, strains, or consumption methods..."
-                disabled={isLoading}
+                disabled={isLoading || isBotTyping}
               />
               <Button 
                 type="submit"
-                disabled={!query.trim() || isLoading}
+                disabled={!query.trim() || isLoading || isBotTyping}
                 className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-medium flex items-center"
               >
-                {isLoading ? (
+                {isLoading || isBotTyping ? (
                   <Loader size={20} className="animate-spin" />
                 ) : (
                   <>
@@ -163,34 +214,16 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
           "Indica vs. Sativa",
           "How to dose edibles",
           "CBD benefits",
-          "What is the entourage effect?"
+          "What is the entourage effect?",
+          "Cannabis for beginners",
+          "Microdosing tips"
         ].map((suggestion, i) => (
           <button
             key={i}
-            onClick={() => {
-              setQuery(suggestion);
-              // Auto submit after a brief delay
-              setTimeout(() => {
-                if (!isLoading) {
-                  setChatHistory([...chatHistory, {type: 'user', text: suggestion}]);
-                  if (onSearch) {
-                    onSearch(suggestion, 'cannabis_questions');
-                  }
-                  // Simulate bot response
-                  setTimeout(() => {
-                    setChatHistory(prev => [
-                      ...prev, 
-                      {
-                        type: 'bot', 
-                        text: `Thanks for asking about "${suggestion}". I'd be happy to explain this topic in detail. What specific aspect are you most interested in learning about?`
-                      }
-                    ]);
-                  }, 1500);
-                  setQuery('');
-                }
-              }, 300);
-            }}
-            className="bg-white px-4 py-2 rounded-full text-sm font-medium text-emerald-800 border border-emerald-200 hover:bg-emerald-50 transition-colors"
+            onClick={() => handleSuggestionClick(suggestion)}
+            disabled={isLoading || isBotTyping}
+            className={`bg-white px-4 py-2 rounded-full text-sm font-medium text-emerald-800 border border-emerald-200 
+              hover:bg-emerald-50 transition-colors ${(isLoading || isBotTyping) ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
             {suggestion}
           </button>

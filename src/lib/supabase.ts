@@ -204,6 +204,31 @@ export const getAIRecommendations = async (vibe: string) => {
 };
 
 /**
+ * Function to call the cannabis knowledge RAG edge function
+ * Uses Pinecone to retrieve relevant context and respond to cannabis questions
+ */
+export const getCannabisKnowledgeResponse = async (query: string) => {
+  console.log('Calling cannabis-knowledge-rag function with query:', query);
+  
+  try {
+    const { data, error } = await supabase.functions.invoke('cannabis-knowledge-rag', {
+      body: { query }
+    });
+
+    if (error) {
+      console.error('Error calling cannabis-knowledge-rag function:', error);
+      throw new Error(error.message);
+    }
+
+    console.log('Cannabis knowledge response received:', data);
+    return data.answer;
+  } catch (err) {
+    console.error('Failed to get cannabis knowledge response:', err);
+    return "I'm sorry, I couldn't retrieve that information at the moment. Please try again later.";
+  }
+};
+
+/**
  * Function to log search queries to Supabase
  * 
  * NOTE: This function requires a 'search_queries' table to be created in your Supabase database
