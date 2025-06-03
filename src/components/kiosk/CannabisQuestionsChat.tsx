@@ -4,7 +4,7 @@ import { Send, Bot, User, Loader } from 'lucide-react';
 import { Button } from '../ui/button';
 
 interface CannabisQuestionsChatProps {
-  onSearch?: (query: string) => void;
+  onSearch?: (query: string, mode?: 'vibe' | 'activity' | 'cannabis_questions') => void;
   isLoading?: boolean;
 }
 
@@ -32,7 +32,7 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
     
     // Forward the search query if onSearch is provided
     if (onSearch) {
-      onSearch(query);
+      onSearch(query, 'cannabis_questions');
     }
     
     // Simulate a bot response (in a real app, this would come from the API)
@@ -76,26 +76,26 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
           <div className="overflow-y-auto p-6 space-y-4 bg-white bg-opacity-70" style={{ maxHeight: '400px', minHeight: '300px' }}>
             {chatHistory.map((message, index) => (
               <div key={index} className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-[85%] flex-1 ${message.type === 'user' ? 'ml-auto max-w-[85%]' : 'max-w-[85%]'}`}>
+                <div className={`flex items-start ${message.type === 'user' ? 'ml-auto max-w-[85%]' : 'max-w-[85%]'}`}>
+                  {message.type === 'bot' && (
+                    <div className="bg-emerald-100 p-2 rounded-full mr-3 mt-1">
+                      <Bot size={20} className="text-emerald-600" />
+                    </div>
+                  )}
                   <div className={`${
                     message.type === 'user' 
                       ? 'bg-emerald-500 text-white rounded-2xl p-4 shadow-sm' 
                       : 'bg-white rounded-2xl p-4 shadow-sm border border-green-100'
                   }`}>
-                    <div className="flex items-center mb-2">
-                      {message.type === 'bot' ? (
-                        <Bot size={20} className="mr-2 text-emerald-600" />
-                      ) : (
-                        <User size={20} className="mr-2 text-white" />
-                      )}
-                      <span className="font-medium">
-                        {message.type === 'bot' ? 'Bud' : 'You'}
-                      </span>
-                    </div>
-                    <p className="text-gray-700 leading-relaxed mt-1">
+                    <p className={`${message.type === 'user' ? 'text-white' : 'text-gray-700'} leading-relaxed`}>
                       {message.text}
                     </p>
                   </div>
+                  {message.type === 'user' && (
+                    <div className="bg-emerald-600 p-2 rounded-full ml-3 mt-1">
+                      <User size={20} className="text-white" />
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
@@ -155,7 +155,7 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
                 if (!isLoading) {
                   setChatHistory([...chatHistory, {type: 'user', text: suggestion}]);
                   if (onSearch) {
-                    onSearch(suggestion);
+                    onSearch(suggestion, 'cannabis_questions');
                   }
                   // Simulate bot response
                   setTimeout(() => {

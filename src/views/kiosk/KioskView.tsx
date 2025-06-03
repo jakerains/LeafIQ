@@ -10,6 +10,7 @@ import { User, ChevronDown, Home, Settings } from 'lucide-react';
 
 const KioskView = () => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [searchMode, setSearchMode] = useState<'vibe' | 'activity' | 'cannabis_questions'>('vibe');
   const { searchProductsByVibe, isLoading, fetchProducts, productsWithVariants } = useProductsStore();
   const { organizationId } = useSimpleAuthStore();
   const [searchResults, setSearchResults] = useState<any[]>([]);
@@ -26,9 +27,16 @@ const KioskView = () => {
     }
   }, [organizationId, fetchProducts, productsWithVariants.length]);
   
-  const handleSearch = async (query: string) => {
-    console.log('🔍 KioskView.handleSearch called with query:', query);
+  const handleSearch = async (query: string, mode: 'vibe' | 'activity' | 'cannabis_questions' = 'vibe') => {
+    console.log('🔍 KioskView.handleSearch called with query:', query, 'mode:', mode);
     setSearchQuery(query);
+    setSearchMode(mode);
+    
+    // If it's cannabis questions, we don't need to search products
+    if (mode === 'cannabis_questions') {
+      console.log('🧠 Cannabis Questions mode - no product search needed');
+      return;
+    }
     
     try {
       console.log('📞 Calling searchProductsByVibe...');
@@ -39,9 +47,15 @@ const KioskView = () => {
         await fetchProducts();
       }
       
+      // Modify the query based on mode to help the recommendation system
+      let enhancedQuery = query;
+      if (mode === 'activity') {
+        enhancedQuery = `activity: ${query}`;
+      }
+      
       // Now we're sure organizationId is available from the auth store
       // and passed through the call chain
-      const results = await searchProductsByVibe(query, 'kiosk');
+      const results = await searchProductsByVibe(enhancedQuery, 'kiosk');
       
       console.log('📦 Search results received:', {
         products: results.products.length,
@@ -165,7 +179,10 @@ const KioskView = () => {
             <Route 
               path="/" 
               element={
-                <KioskHome onSearch={handleSearch} isLoading={isLoading} />
+                <KioskHome 
+                  onSearch={handleSearch} 
+                  isLoading={isLoading} 
+                />
               } 
             />
             <Route 

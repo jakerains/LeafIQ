@@ -4,7 +4,7 @@ import { Search, Mic } from 'lucide-react';
 import { Button } from './button';
 
 interface VercelV0ChatProps {
-  onSearch: (query: string) => void;
+  onSearch: (query: string, mode?: 'vibe' | 'activity' | 'cannabis_questions') => void;
   isLoading?: boolean;
   mode?: 'vibe' | 'activity';
 }
@@ -40,14 +40,16 @@ const VercelV0Chat: React.FC<VercelV0ChatProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (query.trim()) {
-      onSearch(query);
+    if (query.trim() && !isLoading) {
+      // Pass the mode along with the query
+      onSearch(query, mode);
     }
   };
 
   const handleSuggestionClick = (suggestion: string) => {
     setQuery(suggestion);
-    onSearch(suggestion);
+    // Pass the mode along with the suggestion
+    onSearch(suggestion, mode);
   };
 
   return (

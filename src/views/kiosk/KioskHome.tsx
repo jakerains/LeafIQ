@@ -5,7 +5,7 @@ import InfoModal from '../../components/ui/InfoModal';
 import CannabisQuestionsChat from '../../components/kiosk/CannabisQuestionsChat';
 
 interface KioskHomeProps {
-  onSearch: (query: string) => void;
+  onSearch: (query: string, mode?: 'vibe' | 'activity' | 'cannabis_questions') => void;
   isLoading: boolean;
 }
 
