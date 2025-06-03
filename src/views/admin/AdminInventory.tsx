@@ -5,6 +5,7 @@ import { Button } from '../../components/ui/button';
 import { useProductsStore } from '../../stores/productsStore';
 import { useSimpleAuthStore } from '../../stores/simpleAuthStore';
 import { Product, Variant, ProductWithVariant } from '../../types';
+import { useEffect } from 'react';
 import ProductForm from './components/ProductForm';
 import ImportExportOptions from './components/ImportExportOptions';
 
@@ -24,9 +25,7 @@ const AdminInventory = () => {
     console.log('📦 AdminInventory - Auth state:', { 
       organizationId, 
       dispensaryName,
-      productsCount: products.length,
-      isLoading,
-      error 
+      productsCount: products.length
     });
     
     if (organizationId) {
@@ -34,7 +33,7 @@ const AdminInventory = () => {
     } else {
       console.error('❌ AdminInventory - No organizationId found for admin user');
     }
-  }, [fetchProducts, organizationId, dispensaryName, products.length, isLoading, error]);
+  }, [fetchProducts, organizationId, dispensaryName]);
   
   // Combine products with their variants for display
   const productsWithVariants: ProductWithVariant[] = products.map(product => {
