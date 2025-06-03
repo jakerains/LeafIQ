@@ -12,7 +12,7 @@ const KioskView = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchMode, setSearchMode] = useState<'vibe' | 'activity' | 'cannabis_questions'>('vibe');
   const { searchProductsByVibe, isLoading, fetchProducts, productsWithVariants } = useProductsStore();
-  const { organizationId } = useSimpleAuthStore();
+  const { organizationId, selectUserMode } = useSimpleAuthStore();
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [isAIPowered, setIsAIPowered] = useState(false);
   const [effects, setEffects] = useState<string[]>([]);
@@ -99,7 +99,9 @@ const KioskView = () => {
   };
 
   const handleStaffLogin = () => {
-    navigate('/admin');
+    // Switch to admin mode before navigating
+    selectUserMode('admin');
+    navigate('/app/admin');
     setShowAdminMenu(false);
   };
 
