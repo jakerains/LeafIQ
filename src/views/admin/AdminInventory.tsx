@@ -5,7 +5,6 @@ import { Button } from '../../components/ui/button';
 import { useProductsStore } from '../../stores/productsStore';
 import { useSimpleAuthStore } from '../../stores/simpleAuthStore';
 import { Product, Variant, ProductWithVariant } from '../../types';
-import { useEffect } from 'react';
 import ProductForm from './components/ProductForm';
 import ImportExportOptions from './components/ImportExportOptions';
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { X, Download, Upload, FileJson, FileText, Database, CheckCircle, AlertCircle } from 'lucide-react';
 import { Button } from '../../../components/ui/button';
@@ -25,6 +25,7 @@ const ImportExportOptions = ({ onClose }: ImportExportOptionsProps) => {
   
   const { user } = useAuthStore();
   const { organizationId } = useSimpleAuthStore();
+  const { fetchProducts } = useProductsStore();
   const { fetchProducts } = useProductsStore();
   
   // Log organization ID when component mounts
