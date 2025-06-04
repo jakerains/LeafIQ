@@ -1,6 +1,6 @@
 import { ProductWithVariant, TerpeneProfile, VibesToTerpenes } from '../types';
 import { vibesToTerpenes } from '../data/demoData';
-import { getAIRecommendations, logSearchQuery } from '../lib/supabase';
+import { getTerpeneRecommendations, logSearchQuery } from '../lib/supabase';
 
 // Calculate similarity score between two terpene profiles
 export const calculateTerpeneSimilarity = (
@@ -262,7 +262,7 @@ export const recommendProducts = async (
       return { products: [], effects: [], isAIPowered: false };
     }
     
-    const aiResults = await getAIRecommendations(vibe);
+    const aiResults = await getTerpeneRecommendations(vibe);
     
     if (aiResults && aiResults.recommendations && aiResults.recommendations.length > 0) {
       console.log('AI recommendations received:', aiResults);
