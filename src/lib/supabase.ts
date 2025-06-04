@@ -1,37 +1,22 @@
 import { createClient } from '@supabase/supabase-js';
-import { Database } from '../types/supabase';
+import { Database } from '../types/database';
 
-// Initialize Supabase client with environment variables
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+// Initialize the Supabase client with environment variables
+export const supabase = createClient<Database>(
+  import.meta.env.VITE_SUPABASE_URL || '',
+  import.meta.env.VITE_SUPABASE_ANON_KEY || ''
+);
 
-if (!supabaseUrl || !supabaseAnonKey) {
-  throw new Error('Missing Supabase environment variables. Please check your .env file.');
-}
+// Auth functions
 
-// Create a single supabase client for the entire app with custom fetch options
-export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
-  auth: {
-    persistSession: true,
-    autoRefreshToken: true,
-    detectSessionInUrl: true
-  },
-  global: {
-    headers: {
-      'X-Client-Info': 'leafiq-web'
-    }
-  }
-});
-
-// Authentication functions
 export const signUp = async (
-  email: string, 
-  password: string, 
-  organizationName: string,
-  additionalData?: {
-    useMode?: 'kiosk' | 'staff' | 'both';
-    menuSource?: 'dutchie' | 'jane' | 'weedmaps' | 'manual';
-    enableDemoInventory?: boolean;
+  email: string,
+  password: string,
+  dispensaryName: string,
+  metadata: {
+    useMode: string;
+    menuSource: string;
+    enableDemoInventory: boolean;
     locationZip?: string;
     referralCode?: string;
     fullName?: string;
@@ -39,262 +24,188 @@ export const signUp = async (
     wantOnboardingHelp?: boolean;
   }
 ) => {
-  console.log(`Signing up with email: ${email}, org: ${organizationName}`, additionalData);
-  
-  try {
-    // Create organization slug from name
-    const slug = organizationName.toLowerCase()
-      .replace(/\s+/g, '-')           // Replace spaces with dashes
-      .replace(/[^\w\-]+/g, '')       // Remove non-word chars
-      .replace(/\-\-+/g, '-')         // Replace multiple dashes with single dash
-      .replace(/^-+/, '')             // Trim dashes from start
-      .replace(/-+$/, '');            // Trim dashes from end
-
-    // Pass organization data in metadata for the trigger
-    const userMetadata = {
-      organization: organizationName,
-      slug: slug,
-      role: 'admin',
-      ...additionalData
-    };
-
-    // Sign up with metadata for the trigger function
-    const { data: authData, error: authError } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        data: userMetadata,
-        emailRedirectTo: `${window.location.origin}/auth/callback`
-      }
-    });
-
-    if (authError) {
-      console.error('Auth error during signup:', authError);
-      throw authError;
-    }
-
-    if (!authData.user) {
-      throw new Error('No user returned from signup');
-    }
-
-    console.log('User created successfully:', authData.user.id);
-
-    // Wait a moment for the trigger to create the profile
-    await new Promise(resolve => setTimeout(resolve, 1000));
-
-    // Try to fetch the created profile with organization data
-    const { data: profile, error: profileError } = await supabase
-      .from('profiles')
-      .select(`
-        *,
-        organizations (*)
-      `)
-      .eq('user_id', authData.user.id)
-      .single();
-
-    if (profileError) {
-      console.error('Error fetching profile (non-fatal):', profileError);
-      // Don't throw here - the user was created successfully
-      // The profile fetch might fail due to RLS policies but the user can still login
-    } else {
-      console.log('Profile fetched successfully:', profile);
-    }
-
-    return { 
+  // Register user with Supabase Auth
+  const signUpResult = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
       data: {
-        user: authData.user,
-        profile: profile || null
-      }, 
-      error: null 
-    };
+        dispensary_name: dispensaryName,
+        ...metadata,
+      },
+    },
+  });
+
+  return signUpResult;
+};
+
+export const getCurrentUser = async () => {
+  const { data, error } = await supabase.auth.getUser();
+  
+  if (error) {
+    throw new Error(error.message);
+  }
+  
+  return data.user;
+};
+
+export const getCurrentSession = async () => {
+  const { data, error } = await supabase.auth.getSession();
+  
+  if (error) {
+    throw new Error(error.message);
+  }
+  
+  return data.session;
+};
+
+// Product and inventory functions
+
+export const fetchProducts = async (organizationId: string) => {
+  console.log('📊 fetchProducts called with organizationId:', organizationId);
+  
+  if (!organizationId) {
+    console.error('No organizationId provided to fetchProducts');
+    return { products: [], variants: [] };
+  }
+
+  try {
+    // First, get all products for the organization
+    const { data: products, error: productsError } = await supabase
+      .from('products')
+      .select('*')
+      .eq('organization_id', organizationId);
+
+    if (productsError) {
+      console.error('Error fetching products:', productsError);
+      throw new Error(`Error fetching products: ${productsError.message}`);
+    }
+
+    console.log(`Found ${products?.length || 0} products`);
+
+    if (!products || products.length === 0) {
+      return { products: [], variants: [] };
+    }
+
+    // Get all product IDs to fetch variants
+    const productIds = products.map(p => p.id);
+
+    // Fetch variants for these products
+    const { data: variants, error: variantsError } = await supabase
+      .from('variants')
+      .select('*')
+      .in('product_id', productIds);
+
+    if (variantsError) {
+      console.error('Error fetching variants:', variantsError);
+      throw new Error(`Error fetching variants: ${variantsError.message}`);
+    }
+
+    console.log(`Found ${variants?.length || 0} variants`);
+
+    return { products: products || [], variants: variants || [] };
   } catch (error) {
-    console.error('Error in signUp:', error);
-    return { data: null, error };
+    console.error('Error in fetchProducts:', error);
+    throw error;
   }
 };
 
-export const signIn = async (email: string, password: string) => {
-  console.log(`Signing in with email: ${email}`);
-  
+// Terpene AI recommendation functions
+
+export const getTerpeneRecommendations = async (query: string) => {
   try {
-    // Add error handling for empty credentials
-    if (!email || !password) {
-      throw new Error('Email and password are required');
-    }
-
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-
-    if (error) {
-      console.error('Sign in error:', error);
-      throw error;
-    }
-
-    // Fetch user's profile and organization data
-    if (data.user) {
-      console.log('User authenticated successfully:', data.user.id);
-      
-      const { data: profile, error: profileError } = await supabase
-        .from('profiles')
-        .select(`
-          *,
-          organizations (*)
-        `)
-        .eq('user_id', data.user.id)
-        .single();
-
-      if (profileError) {
-        console.error('Error fetching profile:', profileError);
-      } else {
-        console.log('Profile fetched successfully:', profile);
-      }
-
-      return { data: { ...data, profile }, error: null };
-    }
-
-    return { data, error: null };
-  } catch (error: any) {
-    console.error('Error in signIn:', error);
-    // Improve error message for network issues
-    if (error.message === 'Failed to fetch') {
-      return { 
-        data: null, 
-        error: new Error('Unable to connect to authentication service. Please check your internet connection and try again.') 
-      };
-    }
-    return { data: null, error };
-  }
-};
-
-export const signOut = async () => {
-  try {
-    const { error } = await supabase.auth.signOut();
-    if (error) throw error;
-    return { error: null };
-  } catch (error) {
-    console.error('Error in signOut:', error);
-    return { error };
-  }
-};
-
-// Function to call the AI recommendation edge function
-export const getAIRecommendations = async (vibe: string) => {
-  console.log('Calling AI recommendations for vibe:', vibe);
-  
-  try {
-    // Make the actual API call to Supabase Edge Function
-    const { data, error } = await supabase.functions.invoke('ai-recommendations', {
-      body: { vibe }
-    });
-
-    if (error) {
-      console.error('Error calling AI recommendation function:', error);
-      throw new Error(error.message);
-    }
-
-    console.log('AI recommendations received:', data);
-    return data;
-  } catch (err) {
-    console.error('Failed to get AI recommendations:', err);
-    // Return null to allow fallback to local recommendation engine
-    return null;
-  }
-};
-
-/**
- * Function to call the cannabis knowledge RAG edge function
- * Uses Pinecone to retrieve relevant context and respond to cannabis questions
- */
-export const getCannabisKnowledgeResponse = async (query: string) => {
-  console.log('Calling cannabis-knowledge-rag function with query:', query);
-  
-  try {
-    const { data, error } = await supabase.functions.invoke('cannabis-knowledge-rag', {
+    const response = await supabase.functions.invoke('ai-recommendations', {
       body: { query }
     });
 
-    if (error) {
-      console.error('Error calling cannabis-knowledge-rag function:', error);
-      throw new Error(error.message);
+    if (response.error) {
+      throw new Error(`Error getting recommendations: ${response.error.message}`);
     }
 
-    console.log('Cannabis knowledge response received:', data);
-    return data.answer;
-  } catch (err) {
-    console.error('Failed to get cannabis knowledge response:', err);
-    return "I'm sorry, I couldn't retrieve that information at the moment. Please try again later.";
+    return response.data;
+  } catch (error) {
+    console.error('Error getting terpene recommendations:', error);
+    throw error;
   }
 };
 
-/**
- * Function to log search queries to Supabase
- * 
- * NOTE: This function requires a 'search_queries' table to be created in your Supabase database
- * with the following structure:
- * - id: uuid (Primary Key, default value: gen_random_uuid())
- * - search_phrase: text
- * - user_type: text
- * - returned_product_ids: text[] (array of text)
- * - timestamp: timestamp with time zone (default value: now())
- * - organization_id: uuid (foreign key to organizations table)
- */
-export const logSearchQuery = async (query: {
-  search_phrase: string;
-  user_type: 'kiosk' | 'staff';
-  returned_product_ids: string[];
-  organization_id?: string;
-}) => {
-  console.log('Logging search query:', query);
+// Cannabis knowledge functions
+
+// Fallback responses for when the edge function cannot be reached
+const FALLBACK_RESPONSES: Record<string, string> = {
+  'terpene': 'Terpenes are aromatic compounds found in cannabis and many other plants. They contribute to the aroma, flavor, and effects of cannabis. Common terpenes include myrcene (relaxing), limonene (uplifting), pinene (focusing), and caryophyllene (pain relief).',
+  'thc': 'THC (tetrahydrocannabinol) is the primary psychoactive compound in cannabis that produces the "high" sensation. It works by binding to cannabinoid receptors in the brain.',
+  'cbd': 'CBD (cannabidiol) is a non-intoxicating compound found in cannabis. It's often used for its potential therapeutic effects, including relief from pain, anxiety, and inflammation, without producing a "high."',
+  'indica': 'Indica strains are typically associated with relaxing, sedating effects that are great for evening use and sleep. They often have higher levels of myrcene and linalool terpenes.',
+  'sativa': 'Sativa strains are typically associated with energizing, uplifting effects that are good for daytime use. They often have higher levels of limonene and pinene terpenes.',
+  'hybrid': 'Hybrid strains are a mix of indica and sativa genetics, offering balanced effects. The specific effects depend on the parent strains and their terpene profiles.',
+  'entourage': 'The entourage effect is the theory that all compounds in cannabis work together synergistically to produce effects that isolated compounds cannot. This includes cannabinoids, terpenes, and flavonoids working together.',
+  'edible': 'Edibles are cannabis-infused food products. They take longer to take effect (30-90 minutes) but provide longer-lasting effects (4-8 hours). Start with a low dose (2.5-5mg THC) and wait before consuming more.',
+  'microdosing': 'Microdosing cannabis involves taking very small amounts (1-2.5mg THC) to achieve subtle effects without feeling "high." It's popular for those seeking therapeutic benefits while remaining functional.',
+};
+
+export const getCannabisKnowledgeResponse = async (query: string): Promise<string> => {
+  if (!query.trim()) {
+    return "Please ask a question about cannabis.";
+  }
   
   try {
-    // Check if we have valid Supabase credentials before proceeding
-    if (!supabaseUrl || !supabaseAnonKey) {
-      console.warn('Skipping search query logging: Supabase credentials not configured');
-      return;
+    console.log('Calling cannabis-knowledge-rag function with query:', query);
+    
+    // Try to invoke the Edge Function
+    const response = await supabase.functions.invoke('cannabis-knowledge-rag', {
+      body: { query }
+    });
+    
+    if (response.error) {
+      throw new Error(`Error calling cannabis-knowledge-rag function: ${response.error.message}`);
     }
+    
+    return response.data?.answer || "I couldn't find information about that topic.";
+    
+  } catch (error) {
+    console.error('Failed to get cannabis knowledge response:', error);
+    
+    // Check if any fallback keywords match the query
+    const lowerQuery = query.toLowerCase();
+    let fallbackResponse = "I'm sorry, I couldn't connect to the knowledge base at the moment. ";
+    
+    // Find matching fallback responses
+    const matchingKeywords = Object.keys(FALLBACK_RESPONSES).filter(keyword => 
+      lowerQuery.includes(keyword.toLowerCase())
+    );
+    
+    if (matchingKeywords.length > 0) {
+      // Use the longest matching keyword for the most specific response
+      const bestMatch = matchingKeywords.sort((a, b) => b.length - a.length)[0];
+      fallbackResponse += FALLBACK_RESPONSES[bestMatch];
+    } else {
+      fallbackResponse += "Please try again later or ask about terpenes, THC, CBD, indica, sativa, hybrids, edibles, or the entourage effect.";
+    }
+    
+    return fallbackResponse;
+  }
+};
 
-    // Use default organization ID if none provided
-    const organization_id = query.organization_id || 'd85af8c9-0d4a-451c-bc25-8c669c71142e';
-
-    // Attempt to insert the search query
-    const { error } = await supabase
-      .from('search_queries')
-      .insert([
-        {
-          search_phrase: query.search_phrase,
-          user_type: query.user_type,
-          returned_product_ids: query.returned_product_ids,
-          timestamp: new Date().toISOString(),
-          organization_id: organization_id
-        }
-      ]);
+// Function to log search queries
+export const logSearchQuery = async (
+  searchPhrase: string,
+  userType: 'customer' | 'staff' | 'admin',
+  returnedProductIds: string[] = [],
+  organizationId?: string
+) => {
+  try {
+    const { error } = await supabase.from('search_queries').insert({
+      search_phrase: searchPhrase,
+      user_type: userType,
+      returned_product_ids: returnedProductIds,
+      organization_id: organizationId
+    });
 
     if (error) {
-      // Log the error but don't throw it to prevent breaking the app flow
-      console.error('Error logging search query:', error.message);
+      console.error('Error logging search query:', error);
     }
   } catch (err) {
     console.error('Failed to log search query:', err);
-    // Gracefully continue execution even if logging fails
   }
-};
-
-// Get the current authenticated user
-export const getCurrentUser = async () => {
-  try {
-    const { data: { user }, error } = await supabase.auth.getUser();
-    if (error) throw error;
-    return { user, error: null };
-  } catch (error) {
-    console.error('Error getting current user:', error);
-    return { user: null, error };
-  }
-};
-
-// Check if user is authenticated
-export const isAuthenticated = async () => {
-  const { user, error } = await getCurrentUser();
-  return { isAuthenticated: !!user, user, error };
 };
