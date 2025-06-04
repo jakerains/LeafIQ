@@ -12,7 +12,8 @@
     "version:minor": "npm version minor",
     "version:major": "npm version major",
     "version:show": "echo \"Current version: $(npm pkg get version | tr -d '\\\"')\"",
-    "deploy": "bash scripts/deploy.sh"
+    "deploy": "bash scripts/deploy.sh",
+    "create-superadmin": "node create-superadmin.js"
   },
   "dependencies": {
     "@pinecone-database/pinecone": "^2.2.0",
