@@ -46,10 +46,16 @@ const VercelV0Chat: React.FC<VercelV0ChatProps> = ({
     }
   };
 
+  // Modified to just add the suggestion to the query instead of triggering search
   const handleSuggestionClick = (suggestion: string) => {
-    setQuery(suggestion);
-    // Pass the mode along with the suggestion
-    onSearch(suggestion, mode);
+    // Check if the query is empty or already ends with a comma
+    if (query.trim() === '' || query.trim().endsWith(',')) {
+      // If empty or ends with comma, just add the suggestion
+      setQuery((prev) => prev.trim() + (prev.trim() ? ' ' : '') + suggestion);
+    } else {
+      // Otherwise add a comma and the suggestion
+      setQuery((prev) => prev.trim() + ', ' + suggestion);
+    }
   };
 
   return (

@@ -108,16 +108,18 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
     }
   };
 
-  // Handle suggestion click
+  // Modified to just add the suggestion to the query instead of triggering search
   const handleSuggestionClick = (suggestion: string) => {
     if (isLoading || isBotTyping) return; // Prevent if already loading or typing
     
-    setQuery(suggestion); // Set query in input field
-    
-    // Auto submit after a brief delay to allow user to see what was selected
-    setTimeout(() => {
-      handleSubmit(new Event('submit') as unknown as React.FormEvent);
-    }, 300);
+    // Check if the query is empty or already ends with a comma
+    if (query.trim() === '' || query.trim().endsWith(',')) {
+      // If empty or ends with comma, just add the suggestion
+      setQuery((prev) => prev.trim() + (prev.trim() ? ' ' : '') + suggestion);
+    } else {
+      // Otherwise add a comma and the suggestion
+      setQuery((prev) => prev.trim() + ', ' + suggestion);
+    }
   };
 
   // Format product card for display in the chat
@@ -245,7 +247,7 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
                 <div className="grid grid-cols-2 gap-2">
                   {Object.entries(selectedProduct.variant.terpene_profile)
                     .filter(([_, value]) => (value as number) > 0)
-                    .sort(([_a, a], [_b, b]) => (b as number) - (a as number))
+                    .sort(([, a], [, b]) => (b as number) - (a as number))
                     .slice(0, 6)
                     .map(([terpene, value]) => (
                       <div key={terpene} className="flex justify-between items-center">
