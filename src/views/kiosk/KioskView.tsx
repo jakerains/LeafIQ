@@ -12,14 +12,24 @@ import AdminPasskeyModal from '../../components/auth/AdminPasskeyModal';
 const KioskView = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchMode, setSearchMode] = useState<'vibe' | 'activity' | 'cannabis_questions'>('vibe');
-  const { searchProductsByVibe, isLoading, fetchProducts, productsWithVariants } = useProductsStore();
+  const { searchProductsByVibe, getMoreRecommendations, isLoading, fetchProducts, productsWithVariants } = useProductsStore();
   const { organizationId, selectUserMode } = useSimpleAuthStore();
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [isAIPowered, setIsAIPowered] = useState(false);
   const [effects, setEffects] = useState<string[]>([]);
+  const [personalizedMessage, setPersonalizedMessage] = useState<string | undefined>();
+  const [contextFactors, setContextFactors] = useState<string[] | undefined>();
+  const [totalAvailable, setTotalAvailable] = useState<number>(0);
+  const [currentOffset, setCurrentOffset] = useState<number>(0);
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [showAdminMenu, setShowAdminMenu] = useState(false);
   const [showAdminPasskeyModal, setShowAdminPasskeyModal] = useState(false);
   const navigate = useNavigate();
+  
+  // Debug effect to track searchQuery changes
+  useEffect(() => {
+    console.log('🔍 KioskView - searchQuery state changed:', searchQuery);
+  }, [searchQuery]);
   
   // Ensure products are loaded when component mounts
   useEffect(() => {
@@ -31,12 +41,14 @@ const KioskView = () => {
   
   const handleSearch = async (query: string, mode: 'vibe' | 'activity' | 'cannabis_questions' = 'vibe') => {
     console.log('🔍 KioskView.handleSearch called with query:', query, 'mode:', mode);
+    console.log('🔍 Setting searchQuery state to:', query);
     setSearchQuery(query);
     setSearchMode(mode);
     
-    // If it's cannabis questions, we don't need to search products
+    // For cannabis questions, let the Edge Function determine if products should be shown
     if (mode === 'cannabis_questions') {
-      console.log('🧠 Cannabis Questions mode - no product search needed');
+      console.log('🧠 Cannabis Questions mode - Edge Function will determine product recommendations');
+      // The CannabisQuestionsChat component will handle this via supabase.ts
       return;
     }
     
@@ -63,6 +75,8 @@ const KioskView = () => {
         products: results.products.length,
         isAIPowered: results.isAIPowered,
         effects: results.effects,
+        originalQuery: query,
+        enhancedQuery: enhancedQuery,
         firstProduct: results.products[0] ? {
           name: results.products[0].name,
           hasVariant: !!results.products[0].variant,
@@ -73,8 +87,15 @@ const KioskView = () => {
       setSearchResults(results.products);
       setIsAIPowered(results.isAIPowered);
       setEffects(results.effects);
+      setPersonalizedMessage(results.personalizedMessage);
+      setContextFactors(results.contextFactors);
+      setTotalAvailable(results.totalAvailable || 0);
+      setCurrentOffset(3); // Set offset to 3 for next batch
       
       console.log(`🎯 Found ${results.products.length} products, navigating to results...`);
+      console.log(`🎯 Current searchQuery state before navigation: "${query}"`);
+      console.log(`🎯 AI Message: "${results.personalizedMessage}"`);
+      console.log(`🎯 Total available: ${results.totalAvailable}`);
       
       if (results.products.length > 0) {
         navigate('/kiosk/results');
@@ -92,11 +113,49 @@ const KioskView = () => {
     }
   };
   
+  const handleLoadMore = async () => {
+    if (!searchQuery || isLoadingMore) return;
+    
+    setIsLoadingMore(true);
+    
+    try {
+      console.log(`🔍 Loading more recommendations (offset: ${currentOffset})`);
+      
+      // Modify the query based on mode to help the recommendation system
+      let enhancedQuery = searchQuery;
+      if (searchMode === 'activity') {
+        enhancedQuery = `activity: ${searchQuery}`;
+      }
+      
+      const results = await getMoreRecommendations(enhancedQuery, currentOffset, 'kiosk');
+      
+      console.log(`📦 More results received:`, {
+        products: results.products.length,
+        isAIPowered: results.isAIPowered,
+        totalAvailable: results.totalAvailable
+      });
+      
+      // Append new products to existing results
+      setSearchResults(prev => [...prev, ...results.products]);
+      setCurrentOffset(prev => prev + 3);
+      
+    } catch (error) {
+      console.error('❌ Load more error in KioskView:', error);
+    } finally {
+      setIsLoadingMore(false);
+    }
+  };
+  
   const handleReset = () => {
     setSearchQuery('');
     setSearchResults([]);
     setIsAIPowered(false);
     setEffects([]);
+    setPersonalizedMessage(undefined);
+    setContextFactors(undefined);
+    setTotalAvailable(0);
+    setCurrentOffset(0);
+    setIsLoadingMore(false);
     navigate('/kiosk');
   };
 
@@ -218,6 +277,12 @@ const KioskView = () => {
                   onReset={handleReset}
                   isAIPowered={isAIPowered}
                   effects={effects}
+                  personalizedMessage={personalizedMessage}
+                  contextFactors={contextFactors}
+                  totalAvailable={totalAvailable}
+                  currentOffset={currentOffset}
+                  onLoadMore={handleLoadMore}
+                  isLoadingMore={isLoadingMore}
                 />
               } 
             />

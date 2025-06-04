@@ -115,8 +115,18 @@ export const fetchProducts = async (organizationId: string) => {
 
 export const getTerpeneRecommendations = async (query: string) => {
   try {
+    // Determine if this is a vibe or activity query
+    let requestBody: { query: string; vibe?: string; activity?: string } = { query };
+    
+    if (query.toLowerCase().startsWith('activity:')) {
+      const activity = query.replace(/^activity:\s*/i, '').trim();
+      requestBody = { query, activity };
+    } else {
+      requestBody = { query, vibe: query };
+    }
+    
     const response = await supabase.functions.invoke('ai-recommendations', {
-      body: { query }
+      body: requestBody
     });
 
     if (response.error) {
@@ -145,9 +155,9 @@ const FALLBACK_RESPONSES: Record<string, string> = {
   'microdosing': 'Microdosing cannabis involves taking very small amounts (1-2.5mg THC) to achieve subtle effects without feeling "high." It\'s popular for those seeking therapeutic benefits while remaining functional.',
 };
 
-export const getCannabisKnowledgeResponse = async (query: string): Promise<string> => {
+export const getCannabisKnowledgeResponse = async (query: string): Promise<{ answer: string; shouldRecommendProducts?: boolean }> => {
   if (!query.trim()) {
-    return "Please ask a question about cannabis.";
+    return { answer: "Please ask a question about cannabis." };
   }
   
   try {
@@ -162,7 +172,10 @@ export const getCannabisKnowledgeResponse = async (query: string): Promise<strin
       throw new Error(`Error calling cannabis-knowledge-rag function: ${response.error.message}`);
     }
     
-    return response.data?.answer || "I couldn't find information about that topic.";
+    return {
+      answer: response.data?.answer || "I couldn't find information about that topic.",
+      shouldRecommendProducts: response.data?.should_recommend_products || false
+    };
     
   } catch (error) {
     console.error('Failed to get cannabis knowledge response:', error);
@@ -184,7 +197,7 @@ export const getCannabisKnowledgeResponse = async (query: string): Promise<strin
       fallbackResponse += "Please try again later or ask about terpenes, THC, CBD, indica, sativa, hybrids, edibles, or the entourage effect.";
     }
     
-    return fallbackResponse;
+    return { answer: fallbackResponse };
   }
 };
 

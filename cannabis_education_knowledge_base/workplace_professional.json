@@ -1,0 +1,69 @@
+{
+  "metadata": {
+    "document_type": "Cannabis Education Knowledge Base",
+    "version": "1.0",
+    "created": "2025-06-03T21:47:40.633861",
+    "total_categories": 14,
+    "total_entries": 42,
+    "target_audience": "Cannabis users (all experience levels)",
+    "deployment": "Dispensary AI chatbots",
+    "language": "English",
+    "update_frequency": "Quarterly",
+    "usage_instructions": {
+      "vector_storage": "Each entry should be embedded separately with metadata filters",
+      "chunk_size": "Individual prompt-response pairs",
+      "overlap": "None required (self-contained entries)",
+      "embedding_strategy": "Include both prompt and response text with metadata",
+      "retrieval_filters": "Use category, difficulty, and topic metadata for filtered searches"
+    }
+  },
+  "category_info": {
+    "category_id": "workplace_professional",
+    "category_name": "Workplace and Professional Considerations",
+    "priority_level": "High",
+    "target_users": "Working professionals",
+    "retrieval_tags": [
+      "workplace",
+      "drug_testing",
+      "professional",
+      "career",
+      "disclosure"
+    ]
+  },
+  "entries": [
+    {
+      "prompt_id": "workplace_001",
+      "query_type": "Professional Guidance",
+      "complexity": "Intermediate",
+      "prompt": "How does cannabis use affect my job and career?",
+      "response": "Cannabis use can significantly impact your career depending on your industry, employer policies, and local laws. Many employers still test for cannabis and may terminate employees who test positive, even in states where cannabis is legal. Federal employees, transportation workers, healthcare professionals, and those in safety-sensitive positions often face strict drug testing requirements. Some progressive companies are removing cannabis from their drug testing panels for non-safety positions, but this varies widely. Medical cannabis patients may have some legal protections in certain states, but these protections are limited and don't override federal requirements or safety concerns. If you use cannabis, understand your company's drug policy thoroughly. Some employers test only at hiring, while others conduct random or post-incident testing. Consider the timing of drug tests – cannabis can be detectable in urine for days to weeks depending on usage frequency. If you're job searching, research potential employers' policies.",
+      "metadata": {
+        "category": "workplace_professional",
+        "subcategory": "policies",
+        "difficulty": "intermediate",
+        "topics": [
+          "workplace",
+          "drug_testing",
+          "employment",
+          "federal",
+          "safety",
+          "detection"
+        ]
+      }
+    }
+  ],
+  "category_summary": {
+    "total_entries": 1,
+    "difficulty_breakdown": {
+      "Intermediate": 1
+    },
+    "topic_coverage": [
+      "safety",
+      "detection",
+      "employment",
+      "federal",
+      "workplace",
+      "drug_testing"
+    ]
+  }
+}

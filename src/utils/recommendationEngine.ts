@@ -22,7 +22,7 @@ export const calculateTerpeneSimilarity = (
   
   // Compare terpenes present in both profiles
   for (const [terpene, targetValue] of Object.entries(targetProfile)) {
-    if (productProfile[terpene]) {
+    if (targetValue !== undefined && productProfile[terpene] !== undefined) {
       // Calculate how similar the values are (1 - the normalized difference)
       const similarity = 1 - Math.abs((targetValue - productProfile[terpene]!) / Math.max(targetValue, productProfile[terpene]!));
       totalSimilarity += similarity;
@@ -217,13 +217,17 @@ export const recommendProducts = async (
   vibe: string,
   userType: 'kiosk' | 'staff' = 'kiosk',
   maxResults = 3,
-  organizationId?: string // Add organizationId parameter
+  organizationId?: string,
+  offset = 0 // Add offset parameter for pagination
 ): Promise<{ 
   products: ProductWithVariant[];
   effects: string[];
   isAIPowered: boolean;
+  personalizedMessage?: string;
+  contextFactors?: string[];
+  totalAvailable?: number; // Add total count for pagination
 }> => {
-  console.log(`Processing recommendation request for: "${vibe}"`);
+  console.log(`Processing recommendation request for: "${vibe}" (offset: ${offset})`);
   console.log(`Available products for recommendation: ${products.length}`);
   console.log(`Organization ID for recommendations: ${organizationId || 'Not provided'}`);
   
@@ -259,7 +263,7 @@ export const recommendProducts = async (
     // Try to get AI-powered recommendations first
     if (products.length === 0) {
       console.log('⚠️ No products available for recommendations');
-      return { products: [], effects: [], isAIPowered: false };
+      return { products: [], effects: [], isAIPowered: false, totalAvailable: 0 };
     }
     
     const aiResults = await getTerpeneRecommendations(vibe);
@@ -267,43 +271,111 @@ export const recommendProducts = async (
     if (aiResults && aiResults.recommendations && aiResults.recommendations.length > 0) {
       console.log('AI recommendations received:', aiResults);
       
-      // Map AI results to product objects
-      const aiProductIds = aiResults.recommendations.map((rec: any) => rec.productId);
-      let aiMatchedProducts = products.filter(p => aiProductIds.includes(p.id));
+      // Since AI returns fake product IDs (p001, p002, etc.), we need to map recommendations
+      // to actual products based on the AI's confidence and reasoning
+      let availableProducts = products.filter(p => 
+        p.variant && p.variant.is_available && p.variant.inventory_level > 0
+      );
       
       // Apply category filter if specified
       if (categoryFilter) {
-        aiMatchedProducts = aiMatchedProducts.filter(p => p.category === categoryFilter);
-        
-        // If we don't have enough products after filtering, add more from the same category
-        if (aiMatchedProducts.length < maxResults) {
-          const additionalProducts = products
-            .filter(p => p.category === categoryFilter && !aiMatchedProducts.includes(p))
-            .sort((a, b) => b.thc_percentage - a.thc_percentage)
-            .slice(0, maxResults - aiMatchedProducts.length);
-          
-          aiMatchedProducts = [...aiMatchedProducts, ...additionalProducts];
-        }
+        availableProducts = availableProducts.filter(p => p.category === categoryFilter);
       }
       
-      // If we have matched products, return them
-      if (aiMatchedProducts.length > 0) {
-        // Only log search query if organizationId is provided
-        if (organizationId) {
-          logSearchQuery({
-            search_phrase: vibe,
-            user_type: userType,
-            returned_product_ids: aiMatchedProducts.map(p => p.id),
-            organization_id: organizationId
-          }).catch(err => console.error('Error logging search query:', err));
+      if (availableProducts.length === 0) {
+        console.log('No available products found for AI recommendations');
+        // Fall through to local engine
+      } else {
+        // Use AI analysis to enhance local recommendations
+        const { terpeneProfile: targetProfile, effects: localEffects } = parseVibeToTerpeneProfile(vibe);
+        
+        // Score products based on terpene similarity + AI insights
+        const scoredProducts = availableProducts.map(product => {
+          const terpeneSimilarity = calculateTerpeneSimilarity(
+            targetProfile,
+            product.variant.terpene_profile
+          );
+          
+          const inventoryScore = calculateInventoryScore(product.variant.inventory_level);
+          
+          // Boost score for products that match AI-recommended characteristics
+          let aiBoost = 0;
+          const productName = product.name.toLowerCase();
+          const productEffects = [product.strain_type, product.category].join(' ').toLowerCase();
+          
+          // Check if product aligns with AI-recommended effects
+          if (aiResults.effects) {
+            for (const effect of aiResults.effects) {
+              if (productName.includes(effect.toLowerCase()) || 
+                  productEffects.includes(effect.toLowerCase())) {
+                aiBoost += 0.05;
+              }
+            }
+          }
+          
+          // Check if product matches AI-recommended characteristics from idealProfile
+          if (aiResults.recommendations && aiResults.recommendations.length > 0) {
+            for (const rec of aiResults.recommendations) {
+              if (rec.idealProfile) {
+                // Match strain type
+                if (rec.idealProfile.strainType && 
+                    product.strain_type?.toLowerCase() === rec.idealProfile.strainType.toLowerCase()) {
+                  aiBoost += 0.1;
+                }
+                
+                // Match category
+                if (rec.idealProfile.preferredCategory && 
+                    product.category?.toLowerCase() === rec.idealProfile.preferredCategory.toLowerCase()) {
+                  aiBoost += 0.05;
+                }
+                
+                // Match dominant terpenes
+                if (rec.idealProfile.dominantTerpenes && Array.isArray(rec.idealProfile.dominantTerpenes)) {
+                  for (const terpene of rec.idealProfile.dominantTerpenes) {
+                    if (productName.includes(terpene.toLowerCase())) {
+                      aiBoost += 0.05;
+                    }
+                  }
+                }
+              }
+            }
+          }
+          
+          // Combined score with AI enhancement
+          const totalScore = (terpeneSimilarity * 0.6) + (inventoryScore * 0.2) + (Math.min(aiBoost, 0.2) * 1.0);
+          
+          return {
+            product,
+            score: totalScore
+          };
+        });
+        
+        // Sort by score and apply pagination
+        const sortedProducts = scoredProducts
+          .sort((a, b) => b.score - a.score)
+          .map(item => item.product);
+        
+        const paginatedProducts = sortedProducts.slice(offset, offset + maxResults);
+        
+        // Only log search query for the first page if organizationId is provided
+        if (organizationId && offset === 0) {
+          logSearchQuery(
+            vibe,
+            userType === 'kiosk' ? 'customer' : 'staff',
+            paginatedProducts.map(p => p.id),
+            organizationId
+          ).catch(err => console.error('Error logging search query:', err));
         }
         
-        console.log(`Returning ${aiMatchedProducts.length} AI-powered recommendations`);
+        console.log(`Returning ${paginatedProducts.length} AI-enhanced recommendations (${offset + 1}-${offset + paginatedProducts.length} of ${sortedProducts.length})`);
         
         return {
-          products: aiMatchedProducts.slice(0, maxResults),
-          effects: aiResults.effects || ['AI Recommended'],
-          isAIPowered: true
+          products: paginatedProducts,
+          effects: aiResults.effects || localEffects,
+          isAIPowered: true,
+          personalizedMessage: offset === 0 ? aiResults.personalizedMessage : undefined, // Only show message on first page
+          contextFactors: offset === 0 ? aiResults.contextFactors : undefined,
+          totalAvailable: sortedProducts.length
         };
       }
     }
@@ -326,7 +398,7 @@ export const recommendProducts = async (
     // If no products are available, return empty array
     if (availableProducts.length === 0) {
       console.log('No available products found');
-      return { products: [], effects, isAIPowered: false };
+      return { products: [], effects, isAIPowered: false, totalAvailable: 0 };
     }
     
     // Score each product
@@ -347,28 +419,31 @@ export const recommendProducts = async (
       };
     });
     
-    // Sort by score (descending)
+    // Sort by score (descending) and apply pagination
     const sortedProducts = scoredProducts
       .sort((a, b) => b.score - a.score)
       .map(item => item.product);
+      
+    const paginatedProducts = sortedProducts.slice(offset, offset + maxResults);
     
-    // Log search query if organizationId is provided
-    if (organizationId) {
-      logSearchQuery({
-        search_phrase: vibe,
-        user_type: userType,
-        returned_product_ids: sortedProducts.slice(0, maxResults).map(p => p.id),
-        organization_id: organizationId
-      }).catch(err => console.error('Error logging search query:', err));
+    // Log search query for first page if organizationId is provided
+    if (organizationId && offset === 0) {
+      logSearchQuery(
+        vibe,
+        userType === 'kiosk' ? 'customer' : 'staff',
+        paginatedProducts.map(p => p.id),
+        organizationId
+      ).catch(err => console.error('Error logging search query:', err));
     }
     
-    console.log(`Returning ${Math.min(sortedProducts.length, maxResults)} locally processed recommendations`);
+    console.log(`Returning ${paginatedProducts.length} locally processed recommendations (${offset + 1}-${offset + paginatedProducts.length} of ${sortedProducts.length})`);
     
     // Return top N results
     return { 
-      products: sortedProducts.slice(0, maxResults),
+      products: paginatedProducts,
       effects,
-      isAIPowered: false
+      isAIPowered: false,
+      totalAvailable: sortedProducts.length
     };
   } catch (error) {
     console.error('Recommendation engine error:', error);
@@ -386,7 +461,7 @@ export const recommendProducts = async (
     }
     
     if (availableProducts.length === 0) {
-      return { products: [], effects, isAIPowered: false };
+      return { products: [], effects, isAIPowered: false, totalAvailable: 0 };
     }
     
     const scoredProducts = availableProducts.map(product => {
@@ -406,13 +481,16 @@ export const recommendProducts = async (
     const sortedProducts = scoredProducts
       .sort((a, b) => b.score - a.score)
       .map(item => item.product);
+      
+    const paginatedProducts = sortedProducts.slice(offset, offset + maxResults);
     
-    console.log(`Returning ${Math.min(sortedProducts.length, maxResults)} fallback recommendations`);
+    console.log(`Returning ${paginatedProducts.length} fallback recommendations (${offset + 1}-${offset + paginatedProducts.length} of ${sortedProducts.length})`);
     
     return { 
-      products: sortedProducts.slice(0, maxResults),
+      products: paginatedProducts,
       effects,
-      isAIPowered: false
+      isAIPowered: false,
+      totalAvailable: sortedProducts.length
     };
   }
 };

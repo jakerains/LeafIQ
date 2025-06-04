@@ -1,0 +1,92 @@
+{
+  "metadata": {
+    "document_type": "Cannabis Education Knowledge Base",
+    "version": "1.0",
+    "created": "2025-06-03T21:47:40.633861",
+    "total_categories": 14,
+    "total_entries": 42,
+    "target_audience": "Cannabis users (all experience levels)",
+    "deployment": "Dispensary AI chatbots",
+    "language": "English",
+    "update_frequency": "Quarterly",
+    "usage_instructions": {
+      "vector_storage": "Each entry should be embedded separately with metadata filters",
+      "chunk_size": "Individual prompt-response pairs",
+      "overlap": "None required (self-contained entries)",
+      "embedding_strategy": "Include both prompt and response text with metadata",
+      "retrieval_filters": "Use category, difficulty, and topic metadata for filtered searches"
+    }
+  },
+  "category_info": {
+    "category_id": "industry_business",
+    "category_name": "Industry and Business",
+    "priority_level": "Low",
+    "target_users": "Industry professionals, entrepreneurs",
+    "retrieval_tags": [
+      "dispensary",
+      "cultivation",
+      "trends",
+      "careers",
+      "regulations"
+    ]
+  },
+  "entries": [
+    {
+      "prompt_id": "industry_001",
+      "query_type": "Consumer Guidance",
+      "complexity": "Beginner",
+      "prompt": "How do I find a reputable dispensary?",
+      "response": "Finding a good dispensary makes a huge difference in your cannabis experience! Start by checking that they're properly licensed – legitimate dispensaries will prominently display their licenses and comply with all local regulations. Look for knowledgeable staff who ask questions about your experience level and goals rather than just trying to sell the most expensive products. Good dispensaries have detailed product information, lab testing results readily available, and can explain their quality standards. Check online reviews, but look for patterns rather than isolated complaints. Visit the dispensary and see if it feels professional, clean, and well-organized. Ask about their return policy, educational resources, and whether they offer consultations for new users. Good dispensaries often host educational events or have partnerships with healthcare providers. Pay attention to product selection – reputable dispensaries carry multiple brands and price points rather than pushing house products exclusively. Finally, trust your instincts – you should feel comfortable asking questions and not pressured to buy anything.",
+      "metadata": {
+        "category": "industry_business",
+        "subcategory": "dispensary_selection",
+        "difficulty": "beginner",
+        "topics": [
+          "dispensary",
+          "licensing",
+          "staff",
+          "reviews",
+          "education"
+        ]
+      }
+    },
+    {
+      "prompt_id": "industry_002",
+      "query_type": "Trends/Future",
+      "complexity": "Advanced",
+      "prompt": "What's the future of cannabis looking like?",
+      "response": "The cannabis industry is evolving rapidly with exciting developments in research, products, and accessibility! We're seeing more sophisticated products with precise cannabinoid and terpene formulations designed for specific effects. Research is expanding into new therapeutic applications, dosing protocols, and understanding of how different compounds work together. New consumption methods are emerging, from nanotechnology for faster-acting edibles to innovative vaporization systems. Legalization continues to spread, with more states considering both medical and recreational programs. We're also seeing increased focus on social equity, sustainability, and quality standards in the industry. Federal policy changes could dramatically impact research, banking, and interstate commerce. Personalized cannabis medicine based on genetic testing and individual cannabinoid receptor profiles might become reality. As stigma decreases and research increases, we'll likely see cannabis integrated more into mainstream healthcare and wellness. The key is that all these advances should make cannabis safer, more effective, and more accessible for people who can benefit from it.",
+      "metadata": {
+        "category": "industry_business",
+        "subcategory": "future_trends",
+        "difficulty": "advanced",
+        "topics": [
+          "trends",
+          "research",
+          "legalization",
+          "technology",
+          "personalized_medicine"
+        ]
+      }
+    }
+  ],
+  "category_summary": {
+    "total_entries": 2,
+    "difficulty_breakdown": {
+      "Advanced": 1,
+      "Beginner": 1
+    },
+    "topic_coverage": [
+      "licensing",
+      "reviews",
+      "research",
+      "legalization",
+      "personalized_medicine",
+      "education",
+      "staff",
+      "technology",
+      "trends",
+      "dispensary"
+    ]
+  }
+}

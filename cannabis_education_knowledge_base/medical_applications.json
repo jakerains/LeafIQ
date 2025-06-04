@@ -1,0 +1,144 @@
+{
+  "metadata": {
+    "document_type": "Cannabis Education Knowledge Base",
+    "version": "1.0",
+    "created": "2025-06-03T21:47:40.633861",
+    "total_categories": 14,
+    "total_entries": 42,
+    "target_audience": "Cannabis users (all experience levels)",
+    "deployment": "Dispensary AI chatbots",
+    "language": "English",
+    "update_frequency": "Quarterly",
+    "usage_instructions": {
+      "vector_storage": "Each entry should be embedded separately with metadata filters",
+      "chunk_size": "Individual prompt-response pairs",
+      "overlap": "None required (self-contained entries)",
+      "embedding_strategy": "Include both prompt and response text with metadata",
+      "retrieval_filters": "Use category, difficulty, and topic metadata for filtered searches"
+    }
+  },
+  "category_info": {
+    "category_id": "medical_applications",
+    "category_name": "Medical Applications",
+    "priority_level": "High",
+    "target_users": "Medical patients, healthcare seekers",
+    "retrieval_tags": [
+      "medical",
+      "conditions",
+      "interactions",
+      "healthcare",
+      "prescriptions"
+    ]
+  },
+  "entries": [
+    {
+      "prompt_id": "medical_001",
+      "query_type": "Distinction/Legal",
+      "complexity": "Intermediate",
+      "prompt": "What's the difference between medical and recreational cannabis?",
+      "response": "The main differences come down to purpose, product focus, and sometimes legal access. Medical cannabis is used specifically to address health conditions like chronic pain, anxiety, epilepsy, or nausea from chemotherapy. Medical products often emphasize CBD content and specific cannabinoid ratios designed for therapeutic effects rather than just getting high. Recreational cannabis is used for enjoyment, relaxation, creativity, or social experiences. From a legal standpoint, medical cannabis is available with a doctor's recommendation in many states where recreational use isn't legal yet. Medical users also often get benefits like lower taxes, higher possession limits, and access to specialized products. That said, the same plant can serve both purposes – someone might use the exact same product medically for pain relief and recreationally for relaxation. It's really about your intention and approach.",
+      "metadata": {
+        "category": "medical_applications",
+        "subcategory": "medical_vs_recreational",
+        "difficulty": "intermediate",
+        "topics": [
+          "medical",
+          "recreational",
+          "legal",
+          "taxes",
+          "access",
+          "purpose"
+        ]
+      }
+    },
+    {
+      "prompt_id": "medical_002",
+      "query_type": "Safety/Medical",
+      "complexity": "Advanced",
+      "prompt": "Will cannabis interact with my medications?",
+      "response": "This is a really important question! Cannabis can potentially interact with many medications, and some of these interactions can be significant. THC interacts with nearly 400 prescription medications, and CBD interacts with more than 540. Cannabis can affect how your body processes other drugs, potentially making them stronger, weaker, or changing their side effects. Common types of medications that can have interactions include blood thinners, seizure medications, anxiety medications, antidepressants, and pain medications. This is exactly why it's crucial to talk with your doctor or pharmacist about cannabis use, especially if you take any prescription medications regularly. Don't stop taking prescribed medications without medical supervision, and be honest with your healthcare providers about your cannabis use so they can help you stay safe.",
+      "metadata": {
+        "category": "medical_applications",
+        "subcategory": "drug_interactions",
+        "difficulty": "advanced",
+        "topics": [
+          "interactions",
+          "medications",
+          "THC",
+          "CBD",
+          "blood_thinners",
+          "doctor"
+        ]
+      }
+    },
+    {
+      "prompt_id": "medical_003",
+      "query_type": "Medical Application",
+      "complexity": "Intermediate",
+      "prompt": "Can cannabis help with my medical condition?",
+      "response": "Cannabis has shown promise for various conditions, but I can't give medical advice – that's something to discuss with a healthcare provider familiar with cannabis medicine. That said, research and patient reports suggest cannabis may help with chronic pain, nausea, epilepsy, anxiety, muscle spasms, and sleep issues. Some conditions like certain types of epilepsy have FDA-approved cannabis medications. The key is working with a knowledgeable doctor who can help you understand if cannabis might be appropriate for your specific situation and how it might interact with other medications you're taking. Many states have qualifying condition lists for medical cannabis programs, and there are doctors who specialize in cannabis medicine. If you're considering cannabis for health reasons, approach it as you would any other medical decision – with professional guidance and careful consideration.",
+      "metadata": {
+        "category": "medical_applications",
+        "subcategory": "conditions",
+        "difficulty": "intermediate",
+        "topics": [
+          "medical_conditions",
+          "research",
+          "doctor_consultation",
+          "FDA",
+          "qualifying_conditions"
+        ]
+      }
+    },
+    {
+      "prompt_id": "medical_004",
+      "query_type": "Medical Application",
+      "complexity": "Intermediate",
+      "prompt": "How does cannabis help with chronic pain?",
+      "response": "Cannabis can potentially help with chronic pain through several mechanisms. THC binds to CB1 receptors in your brain and spinal cord, which can alter pain perception and provide relief. CBD works differently – it doesn't bind directly to cannabinoid receptors but influences the endocannabinoid system and other pain pathways, potentially reducing inflammation and neuropathic pain. Many people find that balanced THC:CBD ratios work best for pain management, as CBD can help reduce some of THC's psychoactive effects while maintaining pain relief. Different types of pain may respond to different approaches – neuropathic pain might respond better to CBD-dominant products, while inflammatory pain might benefit from THC. Topical applications can provide localized relief without systemic effects. It's important to work with a healthcare provider experienced in cannabis medicine to find the right approach for your specific pain condition, especially if you're taking other pain medications.",
+      "metadata": {
+        "category": "medical_applications",
+        "subcategory": "chronic_pain",
+        "difficulty": "intermediate",
+        "topics": [
+          "pain",
+          "THC",
+          "CBD",
+          "neuropathic",
+          "inflammation",
+          "topicals"
+        ]
+      }
+    }
+  ],
+  "category_summary": {
+    "total_entries": 4,
+    "difficulty_breakdown": {
+      "Advanced": 1,
+      "Intermediate": 3
+    },
+    "topic_coverage": [
+      "FDA",
+      "CBD",
+      "topicals",
+      "medications",
+      "blood_thinners",
+      "recreational",
+      "THC",
+      "neuropathic",
+      "inflammation",
+      "qualifying_conditions",
+      "legal",
+      "purpose",
+      "doctor",
+      "pain",
+      "research",
+      "access",
+      "medical",
+      "doctor_consultation",
+      "taxes",
+      "medical_conditions",
+      "interactions"
+    ]
+  }
+}

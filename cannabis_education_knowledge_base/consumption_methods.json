@@ -1,0 +1,161 @@
+{
+  "metadata": {
+    "document_type": "Cannabis Education Knowledge Base",
+    "version": "1.0",
+    "created": "2025-06-03T21:47:40.633861",
+    "total_categories": 14,
+    "total_entries": 42,
+    "target_audience": "Cannabis users (all experience levels)",
+    "deployment": "Dispensary AI chatbots",
+    "language": "English",
+    "update_frequency": "Quarterly",
+    "usage_instructions": {
+      "vector_storage": "Each entry should be embedded separately with metadata filters",
+      "chunk_size": "Individual prompt-response pairs",
+      "overlap": "None required (self-contained entries)",
+      "embedding_strategy": "Include both prompt and response text with metadata",
+      "retrieval_filters": "Use category, difficulty, and topic metadata for filtered searches"
+    }
+  },
+  "category_info": {
+    "category_id": "consumption_methods",
+    "category_name": "Consumption Methods and Timing",
+    "priority_level": "High",
+    "target_users": "All experience levels",
+    "retrieval_tags": [
+      "smoking",
+      "vaping",
+      "edibles",
+      "topicals",
+      "onset",
+      "duration"
+    ]
+  },
+  "entries": [
+    {
+      "prompt_id": "consumption_001",
+      "query_type": "Timing/Duration",
+      "complexity": "Beginner",
+      "prompt": "How long do the effects of cannabis last?",
+      "response": "The duration really depends on how you consume it! If you smoke or vape, effects typically start within minutes and can last 1-3 hours. Edibles are a completely different story – they can take 30 minutes to 2 hours to kick in, but then the effects can last 4-8 hours or even longer. This is because when you eat cannabis, your liver processes it differently, creating a longer-lasting experience. Sublingual products (under the tongue) fall somewhere in between. Always plan accordingly, especially with edibles, since the longer duration means you're committed to the experience once it starts.",
+      "metadata": {
+        "category": "consumption_methods",
+        "subcategory": "timing",
+        "difficulty": "beginner",
+        "topics": [
+          "duration",
+          "onset",
+          "edibles",
+          "smoking",
+          "vaping",
+          "sublingual"
+        ]
+      }
+    },
+    {
+      "prompt_id": "consumption_002",
+      "query_type": "Method Comparison",
+      "complexity": "Beginner",
+      "prompt": "What's the difference between smoking and vaping?",
+      "response": "Both smoking and vaping give you quick onset effects, but they work quite differently! Smoking involves burning the cannabis flower, which creates smoke that contains the cannabinoids but also combustion byproducts. Vaping heats the cannabis to a temperature that releases the good stuff (cannabinoids and terpenes) as vapor without burning the plant material. Many people find vaping to be smoother on the lungs and throat, plus you can often taste the flavors more clearly. Vaping also tends to be more efficient – you get more out of your cannabis because you're not burning it away. Both methods work quickly, usually within minutes, making them good options when you want more control over your dosing.",
+      "metadata": {
+        "category": "consumption_methods",
+        "subcategory": "inhalation",
+        "difficulty": "beginner",
+        "topics": [
+          "smoking",
+          "vaping",
+          "efficiency",
+          "health",
+          "onset"
+        ]
+      }
+    },
+    {
+      "prompt_id": "consumption_003",
+      "query_type": "Method Explanation",
+      "complexity": "Intermediate",
+      "prompt": "How are edibles different from smoking?",
+      "response": "Edibles and smoking are like two completely different experiences! When you smoke, the effects hit quickly and wear off in a few hours. Edibles take much longer to kick in – anywhere from 30 minutes to 2 hours – but then they last much longer, often 4-8 hours. This happens because when you eat cannabis, it goes through your digestive system and liver, which changes how your body processes it. The effects can also feel different – many people describe edibles as more of a \"full body\" experience. The most important thing with edibles is patience! It's easy to think \"this isn't working\" and take more, only to have everything hit at once later. Start with a low dose and wait at least 2 hours before considering more.",
+      "metadata": {
+        "category": "consumption_methods",
+        "subcategory": "edibles",
+        "difficulty": "intermediate",
+        "topics": [
+          "edibles",
+          "metabolism",
+          "liver",
+          "patience",
+          "dosing"
+        ]
+      }
+    },
+    {
+      "prompt_id": "consumption_004",
+      "query_type": "Product Explanation",
+      "complexity": "Intermediate",
+      "prompt": "What are topicals and do they get you high?",
+      "response": "Cannabis topicals are products like lotions, creams, balms, and patches that you apply to your skin. The great news is that most topicals won't get you high because they're designed to work locally where you apply them rather than entering your bloodstream in significant amounts. People often use topicals for targeted relief from things like sore muscles, joint discomfort, or skin conditions. They're perfect for people who want to try cannabis for wellness benefits without any psychoactive effects. Transdermal patches are a bit different – some of these are designed to deliver cannabinoids into your bloodstream through your skin, so those might have psychoactive effects. Always check the label and ask your budtender to clarify!",
+      "metadata": {
+        "category": "consumption_methods",
+        "subcategory": "topicals",
+        "difficulty": "intermediate",
+        "topics": [
+          "topicals",
+          "localized",
+          "non_psychoactive",
+          "transdermal",
+          "wellness"
+        ]
+      }
+    },
+    {
+      "prompt_id": "consumption_005",
+      "query_type": "Product Explanation",
+      "complexity": "Intermediate",
+      "prompt": "What are tinctures and how do I use them?",
+      "response": "Tinctures are liquid cannabis extracts that usually come in small bottles with droppers. They're super versatile because you can use them in different ways! You can place drops under your tongue (sublingual) for faster onset – usually 15-30 minutes – or you can add them to food or drinks, which makes them work more like edibles. The under-the-tongue method is great because it gives you more control over timing and dosing. Start with just a few drops, especially if you're new. Many tinctures come with measured droppers that help you track exactly how much you're taking. They're also discreet and easy to travel with, making them popular for people with busy lifestyles.",
+      "metadata": {
+        "category": "consumption_methods",
+        "subcategory": "tinctures",
+        "difficulty": "intermediate",
+        "topics": [
+          "tinctures",
+          "sublingual",
+          "droppers",
+          "dosing",
+          "discrete"
+        ]
+      }
+    }
+  ],
+  "category_summary": {
+    "total_entries": 5,
+    "difficulty_breakdown": {
+      "Beginner": 2,
+      "Intermediate": 3
+    },
+    "topic_coverage": [
+      "metabolism",
+      "topicals",
+      "non_psychoactive",
+      "sublingual",
+      "onset",
+      "vaping",
+      "localized",
+      "efficiency",
+      "tinctures",
+      "patience",
+      "dosing",
+      "wellness",
+      "health",
+      "transdermal",
+      "edibles",
+      "duration",
+      "smoking",
+      "discrete",
+      "droppers",
+      "liver"
+    ]
+  }
+}

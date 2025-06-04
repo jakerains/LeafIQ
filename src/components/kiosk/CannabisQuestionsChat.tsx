@@ -64,25 +64,25 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
     }
     
     try {
-      // First, check if this is a question that should use inventory information
-      const useInventory = shouldUseInventoryRAG(userQuery);
+      // Get the knowledge response from the Edge Function
+      const knowledgeResponse = await getCannabisKnowledgeResponse(userQuery);
       
-      let botResponse: string;
+      let botResponse: string = knowledgeResponse.answer;
       let productRecommendations: ProductWithVariant[] = [];
       let introText = '';
       
-      // Get the standard knowledge response
-      botResponse = await getCannabisKnowledgeResponse(userQuery);
-      
-      // If this is a question that should use inventory, add product examples
-      if (useInventory) {
+      // Only get product recommendations if the Edge Function indicates we should
+      if (knowledgeResponse.shouldRecommendProducts) {
         try {
+          console.log('🛒 Edge Function indicates products should be recommended');
           const inventoryExamples = await getInventoryExamplesForQuery(userQuery);
           productRecommendations = inventoryExamples.products;
           introText = inventoryExamples.introText;
         } catch (inventoryError) {
           console.error("Error getting inventory examples:", inventoryError);
         }
+      } else {
+        console.log('🎓 Educational question - no products needed');
       }
       
       setChatHistory(prev => [
@@ -291,17 +291,29 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
   };
 
   return (
-    <div className="flex flex-col items-center w-full max-w-4xl mx-auto space-y-8">
-      {/* Chat header */}
+    <div className="flex flex-col items-center w-full max-w-5xl mx-auto space-y-6">
+      {/* Chat header with glassmorphism */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-center"
+        className="relative w-full max-w-3xl"
       >
-        <h2 className="text-3xl font-bold text-emerald-700">Cannabis Knowledge Center</h2>
-        <p className="text-gray-600 mt-2">
-          Ask me anything about cannabis - effects, strains, consumption methods, or terminology.
-        </p>
+        <div className="relative backdrop-blur-md bg-white/20 border border-white/30 rounded-2xl shadow-lg shadow-emerald-500/10 p-6 text-center">
+          {/* Subtle gradient overlay */}
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/40 to-green-100/30 rounded-2xl"></div>
+          
+          {/* Content */}
+          <div className="relative z-10">
+            <h2 className="text-2xl font-bold text-emerald-800 drop-shadow-sm">Cannabis Knowledge Center</h2>
+            <p className="text-emerald-700/80 mt-1 font-medium">
+              Ask me anything about cannabis - effects, strains, consumption methods, or terminology.
+            </p>
+          </div>
+          
+          {/* Decorative elements */}
+          <div className="absolute top-3 right-3 w-2 h-2 bg-emerald-400/30 rounded-full"></div>
+          <div className="absolute bottom-3 left-3 w-1 h-1 bg-green-400/40 rounded-full"></div>
+        </div>
       </motion.div>
 
       {/* Chat container */}
@@ -311,12 +323,15 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
         transition={{ delay: 0.2 }}
         className="w-full"
       >
-        <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-3xl shadow-xl border border-green-200 overflow-hidden max-w-5xl mx-auto">
+        <div className="relative backdrop-blur-sm bg-gradient-to-br from-white/60 to-emerald-50/40 rounded-3xl shadow-2xl border border-white/40 overflow-hidden max-w-5xl mx-auto">
+          {/* Subtle inner glow */}
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-100/20 to-green-50/30 rounded-3xl"></div>
+          
           {/* Chat messages */}
           <div 
             ref={chatContainerRef}
-            className="overflow-y-auto p-6 space-y-4 bg-white bg-opacity-70" 
-            style={{ maxHeight: '400px', minHeight: '300px' }}
+            className="relative z-10 overflow-y-auto p-5 space-y-4" 
+            style={{ maxHeight: '450px', minHeight: '350px' }}
           >
             {chatHistory.map((message, index) => (
               <div 
@@ -392,20 +407,20 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
           </div>
 
           {/* Input area */}
-          <form onSubmit={handleSubmit} className="p-4 bg-white bg-opacity-90 border-t border-green-100">
+          <form onSubmit={handleSubmit} className="relative z-10 p-4 backdrop-blur-md bg-white/80 border-t border-white/50">
             <div className="flex space-x-2">
               <input
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                className="flex-grow px-4 py-3 border border-green-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                className="flex-grow px-4 py-3 border border-emerald-200/60 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-transparent bg-white/90 backdrop-blur-sm"
                 placeholder="Ask about cannabis effects, strains, or consumption methods..."
                 disabled={isLoading || isBotTyping}
               />
               <Button 
                 type="submit"
                 disabled={!query.trim() || isLoading || isBotTyping}
-                className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-medium flex items-center"
+                className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-medium flex items-center shadow-lg"
               >
                 {isLoading || isBotTyping ? (
                   <Loader size={20} className="animate-spin" />
@@ -426,7 +441,7 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4 }}
-        className="flex flex-wrap justify-center gap-2 max-w-3xl"
+        className="flex flex-wrap justify-center gap-2 max-w-4xl"
       >
         {[
           "What are terpenes?",
@@ -441,8 +456,8 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
             key={i}
             onClick={() => handleSuggestionClick(suggestion)}
             disabled={isLoading || isBotTyping}
-            className={`bg-white px-4 py-2 rounded-full text-sm font-medium text-emerald-800 border border-emerald-200 
-              hover:bg-emerald-50 transition-colors ${(isLoading || isBotTyping) ? 'opacity-50 cursor-not-allowed' : ''}`}
+            className={`backdrop-blur-sm bg-white/60 border border-white/50 px-3 py-2 rounded-full text-sm font-medium text-emerald-800 
+              hover:bg-emerald-50/70 hover:border-emerald-200/60 transition-all duration-200 shadow-sm hover:shadow-md ${(isLoading || isBotTyping) ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
             {suggestion}
           </button>

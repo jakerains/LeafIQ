@@ -1,0 +1,140 @@
+{
+  "metadata": {
+    "document_type": "Cannabis Education Knowledge Base",
+    "version": "1.0",
+    "created": "2025-06-03T21:47:40.633861",
+    "total_categories": 14,
+    "total_entries": 42,
+    "target_audience": "Cannabis users (all experience levels)",
+    "deployment": "Dispensary AI chatbots",
+    "language": "English",
+    "update_frequency": "Quarterly",
+    "usage_instructions": {
+      "vector_storage": "Each entry should be embedded separately with metadata filters",
+      "chunk_size": "Individual prompt-response pairs",
+      "overlap": "None required (self-contained entries)",
+      "embedding_strategy": "Include both prompt and response text with metadata",
+      "retrieval_filters": "Use category, difficulty, and topic metadata for filtered searches"
+    }
+  },
+  "category_info": {
+    "category_id": "myth_busting",
+    "category_name": "Myths and Misconceptions",
+    "priority_level": "Medium",
+    "target_users": "All users",
+    "retrieval_tags": [
+      "myths",
+      "misconceptions",
+      "natural",
+      "gateway",
+      "lazy",
+      "overdose"
+    ]
+  },
+  "entries": [
+    {
+      "prompt_id": "myth_001",
+      "query_type": "Myth Correction",
+      "complexity": "Intermediate",
+      "prompt": "I heard cannabis is completely natural and therefore safe. Is that true?",
+      "response": "While cannabis is indeed a natural plant, \"natural\" doesn't automatically mean \"safe\" or \"harmless\". Poison ivy is natural too, but that doesn't make it safe to touch! Today's cannabis is much stronger than what existed decades ago – THC concentrations have increased dramatically due to selective breeding and cultivation techniques. Some cannabis products are highly processed concentrates with THC levels of 80-90%. Like any substance that affects your brain and body, cannabis can have side effects and risks, including addiction potential, impaired driving, and negative effects on developing brains. The \"natural\" argument also ignores that people can have different sensitivities and reactions to natural substances. The key is using cannabis mindfully and being informed about both its potential benefits and risks, just like you would with any other substance you put in your body.",
+      "metadata": {
+        "category": "myth_busting",
+        "subcategory": "natural_fallacy",
+        "difficulty": "intermediate",
+        "topics": [
+          "natural",
+          "safety",
+          "potency",
+          "risks",
+          "mindful_use"
+        ]
+      }
+    },
+    {
+      "prompt_id": "myth_002",
+      "query_type": "Myth Correction",
+      "complexity": "Advanced",
+      "prompt": "Is cannabis a gateway drug?",
+      "response": "The \"gateway drug\" theory is more complicated than it appears on the surface. While it's true that many people who use other drugs have also used cannabis, this doesn't mean cannabis caused them to use other substances. It's more likely that people who are inclined to experiment with substances try the most available and socially acceptable ones first, which often includes cannabis and alcohol. Many factors contribute to substance use patterns, including genetics, environment, social influences, and underlying mental health issues. The vast majority of cannabis users never progress to harder drugs. However, early and heavy cannabis use, especially in teenagers, might increase vulnerability to addiction in general due to effects on the developing brain. The real issue isn't cannabis itself, but rather early substance use of any kind and addressing underlying risk factors. Most experts now view addiction risk as multifaceted rather than caused by any single \"gateway\" substance.",
+      "metadata": {
+        "category": "myth_busting",
+        "subcategory": "gateway_drug",
+        "difficulty": "advanced",
+        "topics": [
+          "gateway",
+          "correlation",
+          "causation",
+          "risk_factors",
+          "addiction"
+        ]
+      }
+    },
+    {
+      "prompt_id": "myth_003",
+      "query_type": "Myth Correction",
+      "complexity": "Intermediate",
+      "prompt": "Can you overdose on cannabis?",
+      "response": "You cannot fatally overdose on cannabis in the way you can with substances like alcohol or opioids. However, you absolutely can take too much and have a very uncomfortable experience. Taking too much cannabis can cause anxiety, paranoia, nausea, vomiting, rapid heart rate, and disorientation. With edibles especially, people sometimes take more because they don't feel effects quickly enough, leading to an overwhelming experience hours later. Some people develop cannabis hyperemesis syndrome from regular heavy use, which causes severe nausea and vomiting. While these experiences aren't life-threatening, they can be frightening and unpleasant. The good news is that cannabis \"overdoses\" are temporary – the effects will wear off, though it might take several hours, especially with edibles. This is why starting with low doses and being patient is so important, especially for beginners.",
+      "metadata": {
+        "category": "myth_busting",
+        "subcategory": "overdose_myth",
+        "difficulty": "intermediate",
+        "topics": [
+          "overdose",
+          "fatal",
+          "uncomfortable",
+          "hyperemesis",
+          "temporary"
+        ]
+      }
+    },
+    {
+      "prompt_id": "myth_004",
+      "query_type": "Myth Correction",
+      "complexity": "Intermediate",
+      "prompt": "Does cannabis make you lazy and unmotivated?",
+      "response": "This stereotype doesn't tell the whole story! While some cannabis strains and high doses can make you feel relaxed or sleepy, many people use cannabis to enhance creativity, focus, or motivation. The effects depend heavily on the specific strain, dose, individual tolerance, and what you're trying to accomplish. Some people find that small doses help them focus on tasks, while others use cannabis before exercise or creative projects. The \"lazy stoner\" stereotype often comes from people using high doses of sedating strains, or from the fact that relaxation is sometimes the goal! If you're concerned about motivation, pay attention to how different products and doses affect you personally. Consider using strains higher in CBD or with energizing terpene profiles, and avoid using cannabis as an escape from responsibilities. Like anything, the key is mindful use that aligns with your goals and values.",
+      "metadata": {
+        "category": "myth_busting",
+        "subcategory": "lazy_stereotype",
+        "difficulty": "intermediate",
+        "topics": [
+          "lazy",
+          "motivation",
+          "creativity",
+          "stereotypes",
+          "mindful_use"
+        ]
+      }
+    }
+  ],
+  "category_summary": {
+    "total_entries": 4,
+    "difficulty_breakdown": {
+      "Advanced": 1,
+      "Intermediate": 3
+    },
+    "topic_coverage": [
+      "mindful_use",
+      "lazy",
+      "fatal",
+      "stereotypes",
+      "potency",
+      "safety",
+      "causation",
+      "motivation",
+      "overdose",
+      "risk_factors",
+      "natural",
+      "correlation",
+      "uncomfortable",
+      "creativity",
+      "temporary",
+      "risks",
+      "gateway",
+      "addiction",
+      "hyperemesis"
+    ]
+  }
+}

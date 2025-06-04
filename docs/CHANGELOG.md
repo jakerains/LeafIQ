@@ -163,7 +163,61 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `Fixed` for any bug fixes
 - `Security` for vulnerability fixes 
 
-## [Latest] - 2025-01-06
+## [Latest] - 2025-01-24
+
+### 🔧 Cannabis Questions Chatbot Fix
+- **Fixed CORS Error**: Updated AI model from `gpt-4.1-mini` to `gpt-4.1-nano-2025-04-14` 
+- **Enhanced Personality**: Implemented Bud Buddy's warm, educational personality
+- **Improved Fallback Responses**: Rich, conversational fallback responses when offline
+- **Pinecone RAG Integration**: Ready for knowledge base queries with context-aware responses
+- **Educational Focus**: Safety-conscious messaging with "start low and go slow" emphasis
+- **Product Recommendations**: System ready to show relevant products for cannabis education
+- **Suggestion Buttons**: Working buttons including "How to dose edibles" for quick access
+
+### ✨ "Suggest More" Pagination Feature
+- Added "Suggest More" button below initial 3 recommendations
+- Shows pagination counter (e.g., "Showing 3 of 12 recommendations")
+- Loads 3 more products at a time while maintaining AI consistency
+- Beautiful loading state with animated spinner
+- Smart button that disappears when all products are shown
+- Maintains same sorting and AI enhancement across pages
+- Personalized message only shows on first page for clean UX
+
+### ✨ AI Personalized Recommendations with Bud Buddy
+- Added personalized AI messages that explain WHY products were recommended
+- Integrated Bud Buddy mascot avatar in recommendation results
+- AI now considers practical context (convenience, discretion, duration) for activities
+- Examples:
+  - For "relax and get creative": "Since you're looking to relax and get creative, I suggest these because..."
+  - For "outdoor concert": "Let's make sure you have an awesome time at that concert. For convenience..."
+- Added context factor tags showing practical considerations (portable, discreet, long-lasting)
+- Enhanced Edge Function to return personalizedMessage and contextFactors
+- Beautiful UI with purple gradient background and animated Bud Buddy avatar
+
+### 🎨 Customer Modal Header Optimization  
+- Moved product description to header area for better space utilization
+- Removed redundant collapsible description section
+- Description now always visible in header alongside product info
+- Responsive two-column layout in header for better information hierarchy
+
+### ✨ New Features
+- **Superadmin Dashboard**: Added dedicated `/superadmin` route with comprehensive platform oversight
+  - Direct Supabase Auth integration (bypasses dispensary authentication flow)
+  - Platform-wide statistics overview (organizations, users, products, searches)
+  - Organizations management interface
+  - Pinecone knowledge base document management with upload functionality
+  - Settings panel for future platform configuration
+  - Created `jakerains@gmail.com` superadmin account with password `superadmin123!`
+
+### 🔧 Technical Changes
+- New `SuperadminAuth` component with role-based access control
+- New `SuperadminDashboard` with modular component architecture
+- Integration with existing Pinecone Edge Functions for document ingestion
+- Clean separation from dispensary-specific authentication flows
+
+### 📍 Access
+- Superadmin dashboard: `http://localhost:5173/superadmin`
+- Credentials: `jakerains@gmail.com` / `superadmin123!`
 
 ### ✅ DUAL LOGIN SYSTEM COMPLETE
 

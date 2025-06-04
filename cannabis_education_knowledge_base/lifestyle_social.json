@@ -1,0 +1,96 @@
+{
+  "metadata": {
+    "document_type": "Cannabis Education Knowledge Base",
+    "version": "1.0",
+    "created": "2025-06-03T21:47:40.633861",
+    "total_categories": 14,
+    "total_entries": 42,
+    "target_audience": "Cannabis users (all experience levels)",
+    "deployment": "Dispensary AI chatbots",
+    "language": "English",
+    "update_frequency": "Quarterly",
+    "usage_instructions": {
+      "vector_storage": "Each entry should be embedded separately with metadata filters",
+      "chunk_size": "Individual prompt-response pairs",
+      "overlap": "None required (self-contained entries)",
+      "embedding_strategy": "Include both prompt and response text with metadata",
+      "retrieval_filters": "Use category, difficulty, and topic metadata for filtered searches"
+    }
+  },
+  "category_info": {
+    "category_id": "lifestyle_social",
+    "category_name": "Lifestyle and Social Use",
+    "priority_level": "Medium",
+    "target_users": "Social users, lifestyle integrators",
+    "retrieval_tags": [
+      "social",
+      "timing",
+      "workplace",
+      "family",
+      "microdosing"
+    ]
+  },
+  "entries": [
+    {
+      "prompt_id": "lifestyle_001",
+      "query_type": "Lifestyle Integration",
+      "complexity": "Intermediate",
+      "prompt": "What's the best time of day to use cannabis?",
+      "response": "The best time really depends on your goals, lifestyle, and the type of cannabis you're using! Many people prefer energizing sativa-dominant strains or low-dose THC in the morning or afternoon for creativity and focus, while saving indica-dominant or higher-dose products for evening relaxation. If you're using cannabis medicinally, timing might depend on when you experience symptoms – for example, using it before bed for sleep issues or during the day for chronic pain. Consider your responsibilities too – you don't want to be impaired during work, driving, or important activities. Some people microdose throughout the day for consistent wellness benefits, while others prefer using cannabis only on weekends or evenings. Pay attention to how different products affect your energy, focus, and sleep patterns. Keep in mind that cannabis can affect sleep quality if used too close to bedtime, even if it helps you fall asleep initially.",
+      "metadata": {
+        "category": "lifestyle_social",
+        "subcategory": "timing",
+        "difficulty": "intermediate",
+        "topics": [
+          "timing",
+          "sativa",
+          "indica",
+          "microdosing",
+          "sleep",
+          "work"
+        ]
+      }
+    },
+    {
+      "prompt_id": "lifestyle_002",
+      "query_type": "Social Guidance",
+      "complexity": "Beginner",
+      "prompt": "What's proper etiquette when using cannabis socially?",
+      "response": "Cannabis social etiquette helps ensure everyone has a positive experience! Always ask before consuming in someone's space and respect their boundaries if they prefer you don't. When sharing, it's polite to bring your own supply rather than always relying on others. The traditional \"puff, puff, pass\" rule applies to joints and blunts – take two reasonable puffs and pass it along promptly. Don't \"camp\" on a joint by holding it while talking. Light the joint or bowl for the next person if you're able, and try to light just a corner of the bowl so everyone gets fresh greens. Be mindful of different tolerance levels – don't pressure anyone to consume more than they're comfortable with. Offer water and snacks, as cannabis can cause dry mouth and increased appetite. If someone seems too high, help them find a quiet space and offer reassurance. Always consume responsibly and never drive or let others drive impaired.",
+      "metadata": {
+        "category": "lifestyle_social",
+        "subcategory": "etiquette",
+        "difficulty": "beginner",
+        "topics": [
+          "etiquette",
+          "sharing",
+          "puff_pass",
+          "respect",
+          "tolerance",
+          "safety"
+        ]
+      }
+    }
+  ],
+  "category_summary": {
+    "total_entries": 2,
+    "difficulty_breakdown": {
+      "Beginner": 1,
+      "Intermediate": 1
+    },
+    "topic_coverage": [
+      "respect",
+      "sleep",
+      "safety",
+      "timing",
+      "indica",
+      "puff_pass",
+      "etiquette",
+      "sativa",
+      "sharing",
+      "microdosing",
+      "work",
+      "tolerance"
+    ]
+  }
+}

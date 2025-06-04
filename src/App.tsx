@@ -17,6 +17,8 @@ import CheckoutSuccess from './views/checkout/CheckoutSuccess';
 import CheckoutCanceled from './views/checkout/CheckoutCanceled';
 import SubscriptionDetails from './views/account/SubscriptionDetails';
 import VersionDisplay from './components/ui/VersionDisplay';
+import SuperadminAuth from './components/auth/SuperadminAuth';
+import SuperadminDashboard from './views/superadmin/SuperadminDashboard';
 
 function App() {
   const location = useLocation();
@@ -29,7 +31,7 @@ function App() {
   };
 
   // Determine if we should show version display (hide on auth pages for cleaner look)
-  const shouldShowVersion = !location.pathname.startsWith('/auth');
+  const shouldShowVersion = !location.pathname.startsWith('/auth') && !location.pathname.startsWith('/superadmin');
 
   return (
     <div className="font-sans antialiased text-gray-900">
@@ -44,6 +46,9 @@ function App() {
       <div className="content-overlay min-h-screen">
         <Routes>
           <Route path="/" element={<LandingPage />} />
+
+          {/* Superadmin Route - Direct access, no dispensary authentication */}
+          <Route path="/superadmin/*" element={<SuperadminAuth />} />
 
           <Route path="/demo-login" element={<DemoLogin />} />
           <Route path="/pricing" element={<PricingPage />} />

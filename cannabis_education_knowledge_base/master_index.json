@@ -1,0 +1,134 @@
+{
+  "metadata": {
+    "document_type": "Cannabis Education Knowledge Base",
+    "version": "1.0",
+    "created": "2025-06-03T21:47:40.633861",
+    "total_categories": 14,
+    "total_entries": 42,
+    "target_audience": "Cannabis users (all experience levels)",
+    "deployment": "Dispensary AI chatbots",
+    "language": "English",
+    "update_frequency": "Quarterly",
+    "usage_instructions": {
+      "vector_storage": "Each entry should be embedded separately with metadata filters",
+      "chunk_size": "Individual prompt-response pairs",
+      "overlap": "None required (self-contained entries)",
+      "embedding_strategy": "Include both prompt and response text with metadata",
+      "retrieval_filters": "Use category, difficulty, and topic metadata for filtered searches"
+    }
+  },
+  "categories": [
+    {
+      "category_id": "basic_education",
+      "category_name": "Basic Cannabis Education",
+      "priority_level": "High",
+      "target_users": "Beginners, curious non-users",
+      "entry_count": 4,
+      "file_name": "basic_education.json"
+    },
+    {
+      "category_id": "consumption_methods",
+      "category_name": "Consumption Methods and Timing",
+      "priority_level": "High",
+      "target_users": "All experience levels",
+      "entry_count": 5,
+      "file_name": "consumption_methods.json"
+    },
+    {
+      "category_id": "dosing_safety",
+      "category_name": "Dosing and Safety",
+      "priority_level": "Critical",
+      "target_users": "All experience levels",
+      "entry_count": 5,
+      "file_name": "dosing_safety.json"
+    },
+    {
+      "category_id": "product_selection",
+      "category_name": "Product Selection and Quality",
+      "priority_level": "High",
+      "target_users": "All experience levels",
+      "entry_count": 4,
+      "file_name": "product_selection.json"
+    },
+    {
+      "category_id": "medical_applications",
+      "category_name": "Medical Applications",
+      "priority_level": "High",
+      "target_users": "Medical patients, healthcare seekers",
+      "entry_count": 4,
+      "file_name": "medical_applications.json"
+    },
+    {
+      "category_id": "safety_legal",
+      "category_name": "Safety and Legal Considerations",
+      "priority_level": "Critical",
+      "target_users": "All users",
+      "entry_count": 4,
+      "file_name": "safety_legal.json"
+    },
+    {
+      "category_id": "myth_busting",
+      "category_name": "Myths and Misconceptions",
+      "priority_level": "Medium",
+      "target_users": "All users",
+      "entry_count": 4,
+      "file_name": "myth_busting.json"
+    },
+    {
+      "category_id": "advanced_topics",
+      "category_name": "Advanced Topics",
+      "priority_level": "Medium",
+      "target_users": "Experienced users",
+      "entry_count": 3,
+      "file_name": "advanced_topics.json"
+    },
+    {
+      "category_id": "lifestyle_social",
+      "category_name": "Lifestyle and Social Use",
+      "priority_level": "Medium",
+      "target_users": "Social users, lifestyle integrators",
+      "entry_count": 2,
+      "file_name": "lifestyle_social.json"
+    },
+    {
+      "category_id": "industry_business",
+      "category_name": "Industry and Business",
+      "priority_level": "Low",
+      "target_users": "Industry professionals, entrepreneurs",
+      "entry_count": 2,
+      "file_name": "industry_business.json"
+    },
+    {
+      "category_id": "chemistry_science",
+      "category_name": "Cannabis Chemistry and Science",
+      "priority_level": "Medium",
+      "target_users": "Advanced users, researchers",
+      "entry_count": 2,
+      "file_name": "chemistry_science.json"
+    },
+    {
+      "category_id": "workplace_professional",
+      "category_name": "Workplace and Professional Considerations",
+      "priority_level": "High",
+      "target_users": "Working professionals",
+      "entry_count": 1,
+      "file_name": "workplace_professional.json"
+    },
+    {
+      "category_id": "family_relationships",
+      "category_name": "Family and Relationship Considerations",
+      "priority_level": "Medium",
+      "target_users": "Parents, partners",
+      "entry_count": 1,
+      "file_name": "family_relationships.json"
+    },
+    {
+      "category_id": "technology_innovation",
+      "category_name": "Cannabis Technology and Innovation",
+      "priority_level": "Low",
+      "target_users": "Tech-interested users",
+      "entry_count": 1,
+      "file_name": "technology_innovation.json"
+    }
+  ]
+}

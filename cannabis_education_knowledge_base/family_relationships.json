@@ -1,0 +1,69 @@
+{
+  "metadata": {
+    "document_type": "Cannabis Education Knowledge Base",
+    "version": "1.0",
+    "created": "2025-06-03T21:47:40.633861",
+    "total_categories": 14,
+    "total_entries": 42,
+    "target_audience": "Cannabis users (all experience levels)",
+    "deployment": "Dispensary AI chatbots",
+    "language": "English",
+    "update_frequency": "Quarterly",
+    "usage_instructions": {
+      "vector_storage": "Each entry should be embedded separately with metadata filters",
+      "chunk_size": "Individual prompt-response pairs",
+      "overlap": "None required (self-contained entries)",
+      "embedding_strategy": "Include both prompt and response text with metadata",
+      "retrieval_filters": "Use category, difficulty, and topic metadata for filtered searches"
+    }
+  },
+  "category_info": {
+    "category_id": "family_relationships",
+    "category_name": "Family and Relationship Considerations",
+    "priority_level": "Medium",
+    "target_users": "Parents, partners",
+    "retrieval_tags": [
+      "family",
+      "children",
+      "parenting",
+      "relationships",
+      "disclosure"
+    ]
+  },
+  "entries": [
+    {
+      "prompt_id": "family_001",
+      "query_type": "Parenting Guidance",
+      "complexity": "Advanced",
+      "prompt": "How do I handle cannabis use as a parent?",
+      "response": "Cannabis use as a parent requires extra responsibility and consideration for your children's safety and well-being. Most importantly, never use cannabis while solely responsible for children's care, just as you wouldn't with alcohol. Children can be seriously harmed by accidental cannabis ingestion, so storage security is critical – use locked containers and keep everything completely inaccessible to children. Be aware that child protective services may get involved if cannabis use is reported and perceived as endangering children. Consider the timing of your use – many parents prefer using cannabis only after children are asleep and other adults are present. Be mindful of secondhand smoke and odors that children might be exposed to. Think about the example you're setting and how to discuss cannabis honestly and age-appropriately as your children grow. Some parents find that medical cannabis use actually makes them better parents by managing anxiety, chronic pain, or other conditions.",
+      "metadata": {
+        "category": "family_relationships",
+        "subcategory": "parenting",
+        "difficulty": "advanced",
+        "topics": [
+          "parenting",
+          "child_safety",
+          "storage",
+          "CPS",
+          "example",
+          "medical"
+        ]
+      }
+    }
+  ],
+  "category_summary": {
+    "total_entries": 1,
+    "difficulty_breakdown": {
+      "Advanced": 1
+    },
+    "topic_coverage": [
+      "child_safety",
+      "parenting",
+      "example",
+      "storage",
+      "medical",
+      "CPS"
+    ]
+  }
+}

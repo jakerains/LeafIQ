@@ -1,0 +1,166 @@
+{
+  "metadata": {
+    "document_type": "Cannabis Education Knowledge Base",
+    "version": "1.0",
+    "created": "2025-06-03T21:47:40.633861",
+    "total_categories": 14,
+    "total_entries": 42,
+    "target_audience": "Cannabis users (all experience levels)",
+    "deployment": "Dispensary AI chatbots",
+    "language": "English",
+    "update_frequency": "Quarterly",
+    "usage_instructions": {
+      "vector_storage": "Each entry should be embedded separately with metadata filters",
+      "chunk_size": "Individual prompt-response pairs",
+      "overlap": "None required (self-contained entries)",
+      "embedding_strategy": "Include both prompt and response text with metadata",
+      "retrieval_filters": "Use category, difficulty, and topic metadata for filtered searches"
+    }
+  },
+  "category_info": {
+    "category_id": "dosing_safety",
+    "category_name": "Dosing and Safety",
+    "priority_level": "Critical",
+    "target_users": "All experience levels",
+    "retrieval_tags": [
+      "dosing",
+      "first_time",
+      "tolerance",
+      "safety",
+      "overconsumption"
+    ]
+  },
+  "entries": [
+    {
+      "prompt_id": "dosing_001",
+      "query_type": "Dosing Guidance",
+      "complexity": "Beginner",
+      "prompt": "How much should I take for my first time?",
+      "response": "Starting your first cannabis experience with the right dose is so important for having a positive experience! For edibles, begin with 2.5mg of THC or even less. Some people even cut a 5mg gummy in half to start. For smoking or vaping, take just one small puff and wait 15-20 minutes to see how you feel before taking more. Your body weight, metabolism, and individual sensitivity all play a role in how cannabis affects you. There's an old saying in the cannabis world: \"You can always take more, but you can't take less.\" Your first time should be about learning how your body responds, not about getting as high as possible. Plan to have nothing important to do for the rest of the day, stay hydrated, and be in a comfortable place with people you trust.",
+      "metadata": {
+        "category": "dosing_safety",
+        "subcategory": "first_time",
+        "difficulty": "beginner",
+        "topics": [
+          "first_dose",
+          "2.5mg",
+          "safety",
+          "preparation",
+          "environment"
+        ]
+      }
+    },
+    {
+      "prompt_id": "dosing_002",
+      "query_type": "Emergency/Crisis",
+      "complexity": "Intermediate",
+      "prompt": "I took too much. What should I do?",
+      "response": "First, take a deep breath – you're going to be okay! While it's uncomfortable, cannabis has never caused a fatal overdose. Find a quiet, comfortable place to sit or lie down. Drink water and try to stay calm. Some people find that black pepper (smelling it or chewing a few peppercorns) can help reduce anxiety from too much THC – it sounds weird, but there's some science behind it! CBD can also help counteract THC's effects if you have some available. The most important thing is to remember that this feeling is temporary and will pass. Depending on how you consumed it, effects from smoking/vaping will fade in a few hours, while edibles can take longer. If you're really concerned, don't hesitate to call a trusted friend or even seek medical attention if you feel it's necessary.",
+      "metadata": {
+        "category": "dosing_safety",
+        "subcategory": "overconsumption",
+        "difficulty": "intermediate",
+        "topics": [
+          "overdose",
+          "anxiety",
+          "black_pepper",
+          "CBD",
+          "temporary",
+          "emergency"
+        ]
+      }
+    },
+    {
+      "prompt_id": "dosing_003",
+      "query_type": "Dosing Strategy",
+      "complexity": "Intermediate",
+      "prompt": "How do I figure out my ideal dose?",
+      "response": "Finding your perfect dose is like finding the right pair of jeans – it takes some trial and error, but when you find it, you'll know! Start with the lowest possible dose and keep a cannabis journal. Write down what you took, how much, what time, what you ate that day, and how you felt. Increase your dose slowly over time – maybe add 1-2.5mg for edibles or take an extra small puff for inhalation methods. Pay attention not just to how high you get, but to how the experience affects your mood, creativity, pain levels, or whatever you're hoping to address. Your ideal dose might be different for different situations too – you might want a microdose (1-2mg) for daytime productivity but a higher dose for evening relaxation. Remember, tolerance can build over time, so what works today might need adjustment later.",
+      "metadata": {
+        "category": "dosing_safety",
+        "subcategory": "dose_finding",
+        "difficulty": "intermediate",
+        "topics": [
+          "ideal_dose",
+          "journal",
+          "titration",
+          "microdose",
+          "tolerance"
+        ]
+      }
+    },
+    {
+      "prompt_id": "dosing_004",
+      "query_type": "Individual Factors",
+      "complexity": "Intermediate",
+      "prompt": "Does my body weight affect how much I should take?",
+      "response": "Body weight does play a role, especially with edibles, but it's not the only factor! Generally, people who weigh more might need slightly higher doses, but your metabolism, experience level, and individual body chemistry matter just as much. For edibles, some general guidelines suggest people under 100 pounds start with 1-2.5mg THC, while people over 250 pounds might start with 10-15mg. However, I've seen petite people who need high doses and large people who are very sensitive to small amounts. Your individual endocannabinoid system is unique to you! The best approach is always to start low regardless of your weight and adjust based on your actual experience. Don't feel pressured to take more just because someone your size \"usually\" takes a certain amount.",
+      "metadata": {
+        "category": "dosing_safety",
+        "subcategory": "individual_factors",
+        "difficulty": "intermediate",
+        "topics": [
+          "body_weight",
+          "metabolism",
+          "individual_variation",
+          "endocannabinoid_system"
+        ]
+      }
+    },
+    {
+      "prompt_id": "dosing_005",
+      "query_type": "Advanced Technique",
+      "complexity": "Advanced",
+      "prompt": "What's microdosing and is it effective?",
+      "response": "Microdosing is taking very small amounts of cannabis – typically 1-2.5mg of THC – to get potential benefits without feeling notably high. Think of it like having a cup of coffee instead of a strong espresso. Many people microdose for things like creativity, focus, mild anxiety relief, or just general wellness without wanting to feel impaired. Some people microdose daily as part of their wellness routine, while others use it occasionally for specific situations like social events or creative projects. The effects are subtle – you might feel a little more relaxed, creative, or positive, but you shouldn't feel \"stoned.\" Research on microdosing specifically is still developing, but many people report positive experiences. It's a great way to explore cannabis benefits while maintaining full functionality in your daily life.",
+      "metadata": {
+        "category": "dosing_safety",
+        "subcategory": "microdosing",
+        "difficulty": "advanced",
+        "topics": [
+          "microdosing",
+          "1mg",
+          "2.5mg",
+          "wellness",
+          "creativity",
+          "functionality"
+        ]
+      }
+    }
+  ],
+  "category_summary": {
+    "total_entries": 5,
+    "difficulty_breakdown": {
+      "Advanced": 1,
+      "Beginner": 1,
+      "Intermediate": 3
+    },
+    "topic_coverage": [
+      "metabolism",
+      "emergency",
+      "environment",
+      "CBD",
+      "1mg",
+      "preparation",
+      "safety",
+      "overdose",
+      "2.5mg",
+      "tolerance",
+      "ideal_dose",
+      "individual_variation",
+      "body_weight",
+      "first_dose",
+      "wellness",
+      "microdosing",
+      "black_pepper",
+      "creativity",
+      "temporary",
+      "journal",
+      "anxiety",
+      "microdose",
+      "functionality",
+      "titration",
+      "endocannabinoid_system"
+    ]
+  }
+}

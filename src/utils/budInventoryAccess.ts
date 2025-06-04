@@ -31,57 +31,92 @@ export interface InventoryRAGContext {
 /**
  * Determine if a question should trigger inventory RAG lookup
  * This analyzes the user's question to see if product information would be helpful
+ * Updated to be more selective - only show products for direct requests or application questions
  */
 export function shouldUseInventoryRAG(query: string): boolean {
   const lowerQuery = query.toLowerCase();
   
-  // Cannabis product-related keywords
-  const productKeywords = [
+  // Educational questions that should NOT show products
+  const educationalPhrases = [
+    'what is', 'what are', 'explain', 'definition of', 'define', 'tell me about',
+    'how does', 'why does', 'difference between', 'help me understand',
+    'what\'s the', 'whats the', 'learn about', 'educate me'
+  ];
+  
+  // Check if it's a pure educational question
+  const isEducational = educationalPhrases.some(phrase => lowerQuery.includes(phrase));
+  
+  // If it's educational AND doesn't have application context, don't show products
+  if (isEducational) {
+    const hasApplicationContext = lowerQuery.includes('help with') || 
+                                 lowerQuery.includes('good for') || 
+                                 lowerQuery.includes('recommend') ||
+                                 lowerQuery.includes('which') ||
+                                 lowerQuery.includes('best for') ||
+                                 lowerQuery.includes('products') ||
+                                 lowerQuery.includes('strains') ||
+                                 lowerQuery.includes('options');
+    
+    if (!hasApplicationContext) {
+      return false; // Pure educational - no products
+    }
+  }
+  
+  // Direct product/inventory requests (always show products)
+  const directProductKeywords = [
     'strain', 'strains', 'product', 'products', 'flower', 'bud', 'buds',
     'edible', 'edibles', 'gummies', 'chocolate', 'vape', 'vapes', 'cartridge',
     'concentrate', 'concentrates', 'wax', 'shatter', 'rosin', 'hash',
     'tincture', 'tinctures', 'topical', 'topicals', 'pre-roll', 'preroll',
-    'joint', 'joints', 'brand', 'brands'
+    'joint', 'joints', 'brand', 'brands', 'inventory', 'stock', 'available',
+    'carry', 'have', 'sell', 'offer'
   ];
   
-  // Effect-related keywords that might benefit from product examples
-  const effectKeywords = [
+  // Recommendation/application keywords (show products when combined with effects)
+  const applicationKeywords = [
+    'recommend', 'suggestion', 'suggest', 'best', 'good for', 'help with',
+    'which', 'what should', 'show me', 'find me', 'looking for',
+    'need something', 'want something', 'options for', 'choices for'
+  ];
+  
+  // Effect keywords that make sense with product recommendations
+  const effectApplicationKeywords = [
     'anxiety', 'stress', 'pain', 'sleep', 'insomnia', 'energy', 'focus',
     'creative', 'creativity', 'relaxing', 'uplifting', 'euphoric', 'calm',
     'appetite', 'nausea', 'inflammation', 'depression', 'mood'
   ];
   
-  // Cannabis science keywords that benefit from real examples
-  const scienceKeywords = [
-    'terpene', 'terpenes', 'terps', 'myrcene', 'limonene', 'pinene', 'linalool',
-    'caryophyllene', 'humulene', 'terpinolene', 'ocimene', 'bisabolol',
-    'thc', 'cbd', 'cbg', 'cbn', 'cannabinoid', 'cannabinoids',
-    'indica', 'sativa', 'hybrid', 'potency', 'percentage'
+  // Strain type questions that imply wanting product examples
+  const strainTypeApplications = [
+    'indica do', 'sativa do', 'hybrid do', 'indica for', 'sativa for', 'hybrid for',
+    'indica help', 'sativa help', 'hybrid help', 'indica good', 'sativa good',
+    'indica options', 'sativa options', 'hybrid options'
   ];
   
-  // Consumption method keywords
-  const consumptionKeywords = [
-    'smoke', 'smoking', 'vaping', 'vaporize', 'dab', 'dabbing', 'eat', 'eating',
-    'sublingual', 'topical', 'dose', 'dosing', 'dosage', 'microdose'
-  ];
+  // Check for direct product requests
+  if (directProductKeywords.some(keyword => lowerQuery.includes(keyword))) {
+    return true;
+  }
   
-  // Questions that ask for recommendations or comparisons
-  const recommendationKeywords = [
-    'recommend', 'suggestion', 'suggest', 'best', 'good for', 'help with',
-    'which', 'what should', 'compare', 'difference between', 'better',
-    'stronger', 'milder', 'similar to'
-  ];
+  // Check for recommendation requests
+  if (applicationKeywords.some(keyword => lowerQuery.includes(keyword))) {
+    return true;
+  }
   
-  // Check if query contains any relevant keywords
-  const allKeywords = [
-    ...productKeywords,
-    ...effectKeywords, 
-    ...scienceKeywords,
-    ...consumptionKeywords,
-    ...recommendationKeywords
-  ];
+  // Check for strain type application questions
+  if (strainTypeApplications.some(phrase => lowerQuery.includes(phrase))) {
+    return true;
+  }
   
-  return allKeywords.some(keyword => lowerQuery.includes(keyword));
+  // Check for effect-based questions that imply wanting product help
+  const hasEffectKeyword = effectApplicationKeywords.some(keyword => lowerQuery.includes(keyword));
+  const hasApplicationPhrase = ['help with', 'good for', 'best for', 'treat', 'relief'].some(phrase => lowerQuery.includes(phrase));
+  
+  if (hasEffectKeyword && hasApplicationPhrase) {
+    return true;
+  }
+  
+  return false; // Default to no products for general questions
 }
 
 /**
@@ -561,11 +596,85 @@ export async function getInventoryExamplesForQuery(query: string): Promise<{
     let introText = '';
     let products: ProductWithVariant[] = [];
     
-    // Step 1: Analyze the query to determine what kind of inventory to show
-    if (lowerQuery.includes('terpene') || lowerQuery.includes('terp')) {
+    // Get fresh inventory data
+    const { fetchProducts } = useProductsStore.getState();
+    await fetchProducts();
+    const allProducts = useProductsStore.getState().productsWithVariants;
+    const availableProducts = allProducts.filter(p => 
+      p.variant.is_available && p.variant.inventory_level > 0
+    );
+    
+    // Step 1: Check for specific product category requests
+    if (lowerQuery.includes('gummies') || lowerQuery.includes('gummy')) {
+      const gummyProducts = availableProducts.filter(p => 
+        p.category === 'edible' && p.name.toLowerCase().includes('gumm')
+      );
+      
+      if (gummyProducts.length > 0) {
+        introText = "Here are the gummies we currently have in stock:";
+        products = gummyProducts.slice(0, 5);
+      } else {
+        // Fallback to any edibles if no gummies found
+        const edibleProducts = availableProducts.filter(p => p.category === 'edible');
+        if (edibleProducts.length > 0) {
+          introText = "We don't have gummies specifically in stock right now, but here are other edibles available:";
+          products = edibleProducts.slice(0, 3);
+        } else {
+          introText = "Unfortunately, we don't have any gummies or edibles in stock at the moment.";
+          products = [];
+        }
+      }
+    }
+    else if (lowerQuery.includes('edible') || lowerQuery.includes('chocolate') || lowerQuery.includes('candy')) {
+      const edibleProducts = availableProducts.filter(p => p.category === 'edible');
+      if (edibleProducts.length > 0) {
+        introText = "Here are our edibles currently in stock:";
+        products = edibleProducts.slice(0, 5);
+      } else {
+        introText = "We don't have any edibles in stock at the moment.";
+        products = [];
+      }
+    }
+    else if (lowerQuery.includes('flower') || lowerQuery.includes('bud') || lowerQuery.includes('pre-roll')) {
+      const flowerProducts = availableProducts.filter(p => 
+        p.category === 'flower' || p.category === 'pre-roll'
+      );
+      if (flowerProducts.length > 0) {
+        introText = "Here are our flower products currently in stock:";
+        products = flowerProducts.slice(0, 5);
+      } else {
+        introText = "We don't have any flower products in stock at the moment.";
+        products = [];
+      }
+    }
+    else if (lowerQuery.includes('vape') || lowerQuery.includes('cartridge') || lowerQuery.includes('cart') || lowerQuery.includes('pen')) {
+      const vapeProducts = availableProducts.filter(p => 
+        p.category === 'vaporizer' || p.category === 'cartridge'
+      );
+      if (vapeProducts.length > 0) {
+        introText = "Here are our vape products currently in stock:";
+        products = vapeProducts.slice(0, 5);
+      } else {
+        introText = "We don't have any vape products in stock at the moment.";
+        products = [];
+      }
+    }
+    else if (lowerQuery.includes('concentrate') || lowerQuery.includes('wax') || lowerQuery.includes('shatter') || lowerQuery.includes('resin')) {
+      const concentrateProducts = availableProducts.filter(p => p.category === 'concentrate');
+      if (concentrateProducts.length > 0) {
+        introText = "Here are our concentrates currently in stock:";
+        products = concentrateProducts.slice(0, 5);
+      } else {
+        introText = "We don't have any concentrates in stock at the moment.";
+        products = [];
+      }
+    }
+    // Step 2: Check for terpene-related queries
+    else if (lowerQuery.includes('terpene') || lowerQuery.includes('terp')) {
       introText = "Here are some products from our inventory with notable terpene profiles:";
       products = await analyzeInventoryForNeed('terpenes');
     } 
+    // Step 3: Check for strain type queries
     else if (lowerQuery.includes('indica')) {
       introText = "Here are some indica strains currently in our inventory:";
       products = await analyzeInventoryForNeed('indica');
@@ -574,6 +683,14 @@ export async function getInventoryExamplesForQuery(query: string): Promise<{
       introText = "Here are some sativa strains currently in our inventory:";
       products = await analyzeInventoryForNeed('sativa');
     }
+    else if (lowerQuery.includes('hybrid')) {
+      introText = "Here are some balanced hybrid strains we currently carry:";
+      products = availableProducts
+        .filter(p => p.strain_type === 'hybrid')
+        .sort((a, b) => (b.variant.inventory_level || 0) - (a.variant.inventory_level || 0))
+        .slice(0, 3);
+    }
+    // Step 4: Check for effect/need queries
     else if (lowerQuery.includes('sleep') || lowerQuery.includes('insomnia')) {
       introText = "Here are some products that may help with sleep:";
       products = await analyzeInventoryForNeed('sleep');
@@ -590,28 +707,18 @@ export async function getInventoryExamplesForQuery(query: string): Promise<{
       introText = "Here are some energizing products from our inventory:";
       products = await analyzeInventoryForNeed('energy');
     }
-    else if (lowerQuery.includes('hybrid')) {
-      introText = "Here are some balanced hybrid strains we currently carry:";
-      const { fetchProducts } = useProductsStore.getState();
-      await fetchProducts();
-      
-      const allProducts = useProductsStore.getState().productsWithVariants;
-      products = allProducts
-        .filter(p => p.strain_type === 'hybrid' && p.variant.is_available && p.variant.inventory_level > 0)
-        .sort((a, b) => (b.variant.inventory_level || 0) - (a.variant.inventory_level || 0))
-        .slice(0, 3);
-    }
+    // Step 5: Default case - use findRelevantProductsForQuery
     else if (shouldUseInventoryRAG(query)) {
-      // For other relevant questions, show a sample of products
-      introText = "Here are some products from our current inventory that might be relevant:";
-      const { fetchProducts } = useProductsStore.getState();
-      await fetchProducts();
-      
-      const allProducts = useProductsStore.getState().productsWithVariants;
-      products = allProducts
-        .filter(p => p.variant.is_available && p.variant.inventory_level > 0)
-        .sort((a, b) => (b.variant.inventory_level || 0) - (a.variant.inventory_level || 0))
-        .slice(0, 3);
+      products = await findRelevantProductsForQuery(query, availableProducts);
+      if (products.length > 0) {
+        introText = "Here are some products from our current inventory that might be relevant:";
+      } else {
+        // If no specific matches, show a sample of popular products
+        introText = "Here's a sample of what we have in stock:";
+        products = availableProducts
+          .sort((a, b) => (b.variant.inventory_level || 0) - (a.variant.inventory_level || 0))
+          .slice(0, 3);
+      }
     }
     
     return {

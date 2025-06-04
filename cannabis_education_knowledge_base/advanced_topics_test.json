@@ -1,0 +1,115 @@
+{
+  "metadata": {
+    "document_type": "Cannabis Education Knowledge Base",
+    "version": "1.0",
+    "created": "2025-06-03T21:47:40.633861",
+    "total_categories": 14,
+    "total_entries": 42,
+    "target_audience": "Cannabis users (all experience levels)",
+    "deployment": "Dispensary AI chatbots",
+    "language": "English",
+    "update_frequency": "Quarterly",
+    "usage_instructions": {
+      "vector_storage": "Each entry should be embedded separately with metadata filters",
+      "chunk_size": "Individual prompt-response pairs",
+      "overlap": "None required (self-contained entries)",
+      "embedding_strategy": "Include both prompt and response text with metadata",
+      "retrieval_filters": "Use category, difficulty, and topic metadata for filtered searches"
+    }
+  },
+  "category_info": {
+    "category_id": "advanced_topics",
+    "category_name": "Advanced Topics",
+    "priority_level": "Medium",
+    "target_users": "Experienced users",
+    "retrieval_tags": [
+      "tolerance",
+      "concentrates",
+      "cultivation",
+      "chemistry",
+      "full_spectrum"
+    ]
+  },
+  "entries": [
+    {
+      "prompt_id": "advanced_001",
+      "query_type": "Management Strategy",
+      "complexity": "Advanced",
+      "prompt": "How do I take a tolerance break and why would I want to?",
+      "response": "A tolerance break (or \"T-break\") means temporarily stopping cannabis use to reset your body's sensitivity to cannabinoids. Over time, regular use can lead to tolerance, meaning you need more cannabis to achieve the same effects. Taking a break allows your cannabinoid receptors to return to baseline sensitivity. Most people notice significant tolerance reduction after just a few days to a week, though some prefer longer breaks of 2-4 weeks. During a T-break, you might experience mild withdrawal symptoms like irritability, sleep changes, or decreased appetite, but these typically resolve within a week. Benefits include reduced consumption, lower costs, renewed appreciation for cannabis effects, and often clearer thinking. To make a T-break easier, stay busy with activities you enjoy, exercise regularly, practice good sleep hygiene, and consider CBD-only products if you need help with sleep or anxiety.",
+      "metadata": {
+        "category": "advanced_topics",
+        "subcategory": "tolerance_management",
+        "difficulty": "advanced",
+        "topics": [
+          "tolerance",
+          "t_break",
+          "withdrawal",
+          "receptors",
+          "CBD"
+        ]
+      }
+    },
+    {
+      "prompt_id": "advanced_002",
+      "query_type": "Product Chemistry",
+      "complexity": "Advanced",
+      "prompt": "What's the difference between full-spectrum, broad-spectrum, and isolate products?",
+      "response": "These terms describe how much of the cannabis plant's compounds are included in the final product! Full-spectrum products contain all the naturally occurring cannabinoids, terpenes, and other compounds found in the cannabis plant, including trace amounts of THC (up to 0.3% in hemp-derived products). Broad-spectrum products include multiple cannabinoids and terpenes but have the THC completely removed. Isolate products contain only one specific cannabinoid, usually CBD, with everything else stripped away. Many people prefer full-spectrum products because of the \"entourage effect\" – the theory that all these compounds work better together than alone. However, broad-spectrum might be better if you want multiple compounds but need to avoid THC entirely for work or personal reasons. Isolates are good for people who want predictable effects from a single compound or who are sensitive to other cannabis components.",
+      "metadata": {
+        "category": "advanced_topics",
+        "subcategory": "product_chemistry",
+        "difficulty": "advanced",
+        "topics": [
+          "full_spectrum",
+          "broad_spectrum",
+          "isolate",
+          "entourage_effect",
+          "THC"
+        ]
+      }
+    },
+    {
+      "prompt_id": "advanced_003",
+      "query_type": "Advanced Technique",
+      "complexity": "Advanced",
+      "prompt": "How do I know if a strain will help with my specific needs?",
+      "response": "Finding the right strain for your needs involves looking beyond just indica/sativa labels to consider the full cannabinoid and terpene profile. Start by clearly defining what you're hoping to achieve – pain relief, better sleep, anxiety reduction, creative focus, etc. Then look at the specific compounds: higher CBD ratios often help with anxiety and pain without much psychoactivity, while specific terpenes like myrcene (relaxing), limonene (mood-lifting), or pinene (alertness) can influence effects. Talk with knowledgeable budtenders about your goals – they often have great insights about how different products affect customers. Consider keeping a cannabis journal to track what works and what doesn't. Read reviews from other users, but remember that individual responses can vary significantly. Start with small amounts of any new strain and pay attention to both immediate and longer-term effects. Don't be afraid to try different options – finding your perfect strains often takes some experimentation.",
+      "metadata": {
+        "category": "advanced_topics",
+        "subcategory": "strain_selection",
+        "difficulty": "advanced",
+        "topics": [
+          "strain_selection",
+          "cannabinoid_profile",
+          "terpenes",
+          "journal",
+          "experimentation"
+        ]
+      }
+    }
+  ],
+  "category_summary": {
+    "total_entries": 3,
+    "difficulty_breakdown": {
+      "Advanced": 3
+    },
+    "topic_coverage": [
+      "broad_spectrum",
+      "journal",
+      "terpenes",
+      "THC",
+      "full_spectrum",
+      "entourage_effect",
+      "isolate",
+      "experimentation",
+      "cannabinoid_profile",
+      "t_break",
+      "CBD",
+      "withdrawal",
+      "receptors",
+      "strain_selection",
+      "tolerance"
+    ]
+  }
+}

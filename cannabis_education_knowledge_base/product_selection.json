@@ -1,0 +1,143 @@
+{
+  "metadata": {
+    "document_type": "Cannabis Education Knowledge Base",
+    "version": "1.0",
+    "created": "2025-06-03T21:47:40.633861",
+    "total_categories": 14,
+    "total_entries": 42,
+    "target_audience": "Cannabis users (all experience levels)",
+    "deployment": "Dispensary AI chatbots",
+    "language": "English",
+    "update_frequency": "Quarterly",
+    "usage_instructions": {
+      "vector_storage": "Each entry should be embedded separately with metadata filters",
+      "chunk_size": "Individual prompt-response pairs",
+      "overlap": "None required (self-contained entries)",
+      "embedding_strategy": "Include both prompt and response text with metadata",
+      "retrieval_filters": "Use category, difficulty, and topic metadata for filtered searches"
+    }
+  },
+  "category_info": {
+    "category_id": "product_selection",
+    "category_name": "Product Selection and Quality",
+    "priority_level": "High",
+    "target_users": "All experience levels",
+    "retrieval_tags": [
+      "quality",
+      "testing",
+      "labels",
+      "terpenes",
+      "storage",
+      "brands"
+    ]
+  },
+  "entries": [
+    {
+      "prompt_id": "product_001",
+      "query_type": "Education/Skills",
+      "complexity": "Intermediate",
+      "prompt": "How do I read a cannabis label?",
+      "response": "Cannabis labels are packed with helpful information once you know what to look for! The most important numbers are the cannabinoid percentages or milligrams – you'll see THC and CBD listed prominently. For flower, these are usually percentages (like 20% THC), while edibles show milligrams per piece and per package (like 5mg THC per gummy, 100mg total). Look for testing information that shows the product has been tested for potency, pesticides, heavy metals, and microbials – this ensures safety and quality. Many labels also list terpenes, which contribute to effects and flavor. Batch numbers help with tracking, and harvest or manufacture dates tell you how fresh the product is. If you see terms like \"indica,\" \"sativa,\" or \"hybrid,\" remember these are general guidelines, but the specific cannabinoid and terpene profile gives you better information about likely effects.",
+      "metadata": {
+        "category": "product_selection",
+        "subcategory": "label_reading",
+        "difficulty": "intermediate",
+        "topics": [
+          "labels",
+          "percentages",
+          "testing",
+          "terpenes",
+          "batch_numbers"
+        ]
+      }
+    },
+    {
+      "prompt_id": "product_002",
+      "query_type": "Chemistry/Effects",
+      "complexity": "Intermediate",
+      "prompt": "What are terpenes and why do they matter?",
+      "response": "Terpenes are the aromatic compounds that give cannabis (and all plants) their distinctive smells and flavors. But they do much more than just smell good! Research suggests terpenes work together with cannabinoids to influence the effects you experience – this is part of what's called the \"entourage effect\". For example, myrcene is associated with relaxing effects, while limonene might be more uplifting, and pinene could help with alertness. Different strains have different terpene profiles, which is why two strains with similar THC percentages can feel quite different. Some people choose their cannabis based on specific terpenes to target desired effects. While the science is still developing, many users find that paying attention to terpenes helps them predict how a product might make them feel. Your budtender can help explain the terpene profile of different products.",
+      "metadata": {
+        "category": "product_selection",
+        "subcategory": "terpenes",
+        "difficulty": "intermediate",
+        "topics": [
+          "terpenes",
+          "entourage_effect",
+          "myrcene",
+          "limonene",
+          "pinene",
+          "effects"
+        ]
+      }
+    },
+    {
+      "prompt_id": "product_003",
+      "query_type": "Quality Assessment",
+      "complexity": "Intermediate",
+      "prompt": "What should I look for in a quality product?",
+      "response": "Quality cannabis products start with proper testing and compliance. Look for products that have been tested by third-party laboratories for potency, pesticides, heavy metals, residual solvents, and biological contaminants. The packaging should be professional, child-resistant, and include all required labeling information. For flower, look for proper cure (not too dry or too moist), good color, visible trichomes, and a fresh, pleasant smell. Avoid products with seeds, mold, or harsh chemical odors. Reputable brands will have consistent products batch to batch and transparent information about their growing and processing methods. Don't be afraid to ask your budtender about the brand's reputation and quality standards. Remember, the cheapest option isn't always the best value if the quality is poor or the testing is inadequate.",
+      "metadata": {
+        "category": "product_selection",
+        "subcategory": "quality_indicators",
+        "difficulty": "intermediate",
+        "topics": [
+          "testing",
+          "compliance",
+          "packaging",
+          "trichomes",
+          "consistency"
+        ]
+      }
+    },
+    {
+      "prompt_id": "product_004",
+      "query_type": "Storage Guidance",
+      "complexity": "Beginner",
+      "prompt": "How do I store my cannabis properly?",
+      "response": "Proper storage keeps your cannabis fresh, potent, and safe to use! For flower, store it in an airtight container in a cool, dark place – think pantry, not refrigerator. Glass jars work great, and some people use special cannabis storage containers with humidity control. Avoid plastic bags for long-term storage as they can create static and damage trichomes. Keep everything away from heat, light, and moisture, which can degrade cannabinoids and promote mold growth. Edibles should be stored according to their package instructions, often in the refrigerator, and always in child-resistant packaging. Concentrates usually need cool, dark storage too. Most importantly, always keep cannabis products locked away from children and pets – even small amounts can be dangerous for them. Label everything clearly and check expiration dates regularly. Properly stored flower can stay good for 6 months to a year, while edibles typically have shorter shelf lives.",
+      "metadata": {
+        "category": "product_selection",
+        "subcategory": "storage",
+        "difficulty": "beginner",
+        "topics": [
+          "storage",
+          "glass_jars",
+          "humidity",
+          "temperature",
+          "safety",
+          "freshness"
+        ]
+      }
+    }
+  ],
+  "category_summary": {
+    "total_entries": 4,
+    "difficulty_breakdown": {
+      "Beginner": 1,
+      "Intermediate": 3
+    },
+    "topic_coverage": [
+      "terpenes",
+      "myrcene",
+      "testing",
+      "humidity",
+      "limonene",
+      "safety",
+      "packaging",
+      "pinene",
+      "percentages",
+      "compliance",
+      "consistency",
+      "labels",
+      "effects",
+      "temperature",
+      "freshness",
+      "trichomes",
+      "glass_jars",
+      "entourage_effect",
+      "storage",
+      "batch_numbers"
+    ]
+  }
+}

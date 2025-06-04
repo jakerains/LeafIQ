@@ -1,0 +1,12 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+your internal knowledge isn't up to date about certain things. 
+
+PROJECT MODEL:
+You may think the model choice is not valid, but it is. the model for this project should be 'gpt-4.1-nano-2025-04-14'.
+
+MCP:
+You have several MCP servers available. When connecting to supabase, always see if you have an MCP available to complete the task before using the supabase CLI.

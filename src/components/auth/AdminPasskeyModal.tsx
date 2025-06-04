@@ -73,6 +73,40 @@ const AdminPasskeyModal: React.FC<AdminPasskeyModalProps> = ({
     setPasskey(current => current.slice(0, -1));
   };
 
+  // Enhanced input change handler - filter to only allow numbers
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    // Only allow numeric characters and limit length
+    const numericValue = value.replace(/[^0-9]/g, '').slice(0, 10);
+    setPasskey(numericValue);
+    
+    // Clear any existing error when user starts typing
+    if (error) {
+      setError('');
+    }
+  };
+
+  // Enhanced keyboard event handler for the input field
+  const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    // Allow navigation keys, backspace, delete, etc.
+    const allowedKeys = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Home', 'End', 'Tab'];
+    
+    // Allow Enter to submit
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleSubmit(e as any);
+      return;
+    }
+    
+    // Allow allowed keys and numeric keys
+    if (allowedKeys.includes(e.key) || (e.key >= '0' && e.key <= '9')) {
+      return; // Let the event through
+    }
+    
+    // Block all other keys
+    e.preventDefault();
+  };
+
   // Handle backdrop click to close
   const handleBackdropClick = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget) {
@@ -80,11 +114,21 @@ const AdminPasskeyModal: React.FC<AdminPasskeyModalProps> = ({
     }
   };
   
-  // Handle escape key press
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  // Handle escape key press on modal
+  const handleModalKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Escape') {
       onClose();
     }
+  };
+
+  // Re-focus input if it loses focus (unless user is interacting with buttons)
+  const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    // Only refocus if the focus is moving to something outside the modal
+    setTimeout(() => {
+      if (isOpen && inputRef.current && !document.activeElement?.closest('.modal-content')) {
+        inputRef.current.focus();
+      }
+    }, 10);
   };
 
   return (
@@ -93,13 +137,13 @@ const AdminPasskeyModal: React.FC<AdminPasskeyModalProps> = ({
         <div 
           className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
           onClick={handleBackdropClick}
-          onKeyDown={handleKeyDown}
+          onKeyDown={handleModalKeyDown}
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
-            className={`bg-white rounded-2xl p-6 w-full max-w-md relative ${isShaking ? 'animate-shake' : ''}`}
+            className={`bg-white rounded-2xl p-6 w-full max-w-md relative modal-content ${isShaking ? 'animate-shake' : ''}`}
             onClick={e => e.stopPropagation()} // Prevent clicks from propagating
           >
             <button
@@ -130,15 +174,20 @@ const AdminPasskeyModal: React.FC<AdminPasskeyModalProps> = ({
                     id="passkey"
                     type={showPasskey ? "text" : "password"}
                     value={passkey}
-                    onChange={(e) => setPasskey(e.target.value)}
+                    onChange={handleInputChange}
+                    onKeyDown={handleInputKeyDown}
+                    onBlur={handleInputBlur}
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl text-center text-2xl tracking-widest focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                     placeholder="••••"
                     maxLength={10}
+                    autoComplete="off"
+                    inputMode="numeric"
                   />
                   <button
                     type="button"
                     onClick={() => setShowPasskey(!showPasskey)}
                     className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                    tabIndex={-1}
                   >
                     {showPasskey ? <EyeOff size={20} /> : <Eye size={20} />}
                   </button>
@@ -163,9 +212,10 @@ const AdminPasskeyModal: React.FC<AdminPasskeyModalProps> = ({
                     key={num}
                     type="button"
                     onClick={() => handleKeyPress(num.toString())}
+                    tabIndex={-1}
                     className={`${
                       num === 0 ? 'col-start-2' : ''
-                    } p-4 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 font-semibold text-xl`}
+                    } p-4 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 focus:ring-2 focus:ring-purple-500 font-semibold text-xl transition-colors`}
                   >
                     {num}
                   </button>
@@ -173,7 +223,8 @@ const AdminPasskeyModal: React.FC<AdminPasskeyModalProps> = ({
                 <button
                   type="button"
                   onClick={handleBackspace}
-                  className="p-4 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 font-semibold text-xl"
+                  tabIndex={-1}
+                  className="p-4 bg-white border border-gray-200 rounded-lg hover:bg-gray-50 focus:ring-2 focus:ring-purple-500 font-semibold text-xl transition-colors"
                 >
                   ⌫
                 </button>
@@ -186,6 +237,7 @@ const AdminPasskeyModal: React.FC<AdminPasskeyModalProps> = ({
                   variant="outline"
                   onClick={onClose}
                   className="flex-1"
+                  tabIndex={1}
                 >
                   Cancel
                 </Button>
@@ -194,6 +246,7 @@ const AdminPasskeyModal: React.FC<AdminPasskeyModalProps> = ({
                   disabled={!passkey || isLoading}
                   isLoading={isLoading}
                   className="flex-1 bg-purple-600 hover:bg-purple-700"
+                  tabIndex={2}
                 >
                   {isLoading ? 'Verifying...' : 'Access Admin'}
                 </Button>

@@ -1,0 +1,138 @@
+{
+  "metadata": {
+    "document_type": "Cannabis Education Knowledge Base",
+    "version": "1.0",
+    "created": "2025-06-03T21:47:40.633861",
+    "total_categories": 14,
+    "total_entries": 42,
+    "target_audience": "Cannabis users (all experience levels)",
+    "deployment": "Dispensary AI chatbots",
+    "language": "English",
+    "update_frequency": "Quarterly",
+    "usage_instructions": {
+      "vector_storage": "Each entry should be embedded separately with metadata filters",
+      "chunk_size": "Individual prompt-response pairs",
+      "overlap": "None required (self-contained entries)",
+      "embedding_strategy": "Include both prompt and response text with metadata",
+      "retrieval_filters": "Use category, difficulty, and topic metadata for filtered searches"
+    }
+  },
+  "category_info": {
+    "category_id": "basic_education",
+    "category_name": "Basic Cannabis Education",
+    "priority_level": "High",
+    "target_users": "Beginners, curious non-users",
+    "retrieval_tags": [
+      "fundamentals",
+      "cannabinoids",
+      "basics",
+      "THC",
+      "CBD",
+      "endocannabinoid"
+    ]
+  },
+  "entries": [
+    {
+      "prompt_id": "basic_001",
+      "query_type": "Definition/Comparison",
+      "complexity": "Beginner",
+      "prompt": "What's the difference between THC and CBD?",
+      "response": "Great question! Think of THC and CBD as the two main characters in the cannabis story, each with their own personality. THC (tetrahydrocannabinol) is the compound that creates the \"high\" feeling – it's psychoactive and can make you feel euphoric, relaxed, or sometimes anxious depending on the amount and your tolerance. CBD (cannabidiol), on the other hand, won't get you high at all. Instead, it's known for potentially helping with things like anxiety, inflammation, and pain without the mental effects. Many people find that products with both THC and CBD together create a more balanced experience – this is sometimes called the \"entourage effect\".",
+      "metadata": {
+        "category": "basic_education",
+        "subcategory": "cannabinoids",
+        "difficulty": "beginner",
+        "topics": [
+          "THC",
+          "CBD",
+          "psychoactive",
+          "entourage_effect"
+        ]
+      }
+    },
+    {
+      "prompt_id": "basic_002",
+      "query_type": "Getting Started",
+      "complexity": "Beginner",
+      "prompt": "I'm completely new to cannabis. Where should I start?",
+      "response": "Welcome to your cannabis journey! Starting new can feel overwhelming, but you're in the right place to learn. The golden rule for beginners is \"start low and go slow\". If you're considering edibles, try starting with 2.5mg or less of THC. For flower or vaping, ask your budtender about products with lower THC percentages or balanced THC:CBD ratios. Always consume in a comfortable, familiar setting where you feel safe. Remember, you can always take more, but you can't take less once it's in your system. Give yourself plenty of time between doses – especially with edibles, which can take 30 minutes to 2 hours to kick in.",
+      "metadata": {
+        "category": "basic_education",
+        "subcategory": "getting_started",
+        "difficulty": "beginner",
+        "topics": [
+          "first_time",
+          "dosing",
+          "safety",
+          "edibles",
+          "flower"
+        ]
+      }
+    },
+    {
+      "prompt_id": "basic_003",
+      "query_type": "Classification",
+      "complexity": "Beginner",
+      "prompt": "What are indica, sativa, and hybrid strains?",
+      "response": "This is one of the most common questions! Traditionally, people describe indica strains as more relaxing and potentially sleepy – think \"in-da-couch\". Sativa strains are often described as more energizing and uplifting. Hybrid strains combine characteristics of both and can be indica-dominant, sativa-dominant, or balanced. However, here's the thing: modern research shows that the effects you experience depend more on the specific chemical profile (cannabinoids and terpenes) than just whether it's labeled indica or sativa. The best approach is to talk with your budtender about the specific effects you're looking for, and they can guide you to strains that match those goals.",
+      "metadata": {
+        "category": "basic_education",
+        "subcategory": "strain_types",
+        "difficulty": "beginner",
+        "topics": [
+          "indica",
+          "sativa",
+          "hybrid",
+          "terpenes",
+          "effects"
+        ]
+      }
+    },
+    {
+      "prompt_id": "basic_004",
+      "query_type": "Scientific Explanation",
+      "complexity": "Beginner",
+      "prompt": "What's the endocannabinoid system?",
+      "response": "Think of the endocannabinoid system as your body's own cannabis network! It's a complex system of receptors found throughout your body – in your brain, immune system, nervous system, and organs. Your body naturally produces compounds called endocannabinoids that interact with these receptors to help maintain balance in functions like sleep, mood, appetite, and pain sensation. When you consume cannabis, the cannabinoids like THC and CBD interact with this same system, which is why cannabis can affect so many different aspects of how you feel. It's fascinating that our bodies have this built-in system that cannabis compounds can work with!",
+      "metadata": {
+        "category": "basic_education",
+        "subcategory": "endocannabinoid_system",
+        "difficulty": "beginner",
+        "topics": [
+          "ECS",
+          "receptors",
+          "endocannabinoids",
+          "balance",
+          "THC",
+          "CBD"
+        ]
+      }
+    }
+  ],
+  "category_summary": {
+    "total_entries": 4,
+    "difficulty_breakdown": {
+      "Beginner": 4
+    },
+    "topic_coverage": [
+      "edibles",
+      "safety",
+      "terpenes",
+      "THC",
+      "entourage_effect",
+      "ECS",
+      "first_time",
+      "balance",
+      "dosing",
+      "indica",
+      "effects",
+      "CBD",
+      "psychoactive",
+      "sativa",
+      "hybrid",
+      "flower",
+      "receptors",
+      "endocannabinoids"
+    ]
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "metadata": {
+    "document_type": "Cannabis Education Knowledge Base",
+    "version": "1.0",
+    "created": "2025-06-03T21:47:40.633861",
+    "total_categories": 14,
+    "total_entries": 42,
+    "target_audience": "Cannabis users (all experience levels)",
+    "deployment": "Dispensary AI chatbots",
+    "language": "English",
+    "update_frequency": "Quarterly",
+    "usage_instructions": {
+      "vector_storage": "Each entry should be embedded separately with metadata filters",
+      "chunk_size": "Individual prompt-response pairs",
+      "overlap": "None required (self-contained entries)",
+      "embedding_strategy": "Include both prompt and response text with metadata",
+      "retrieval_filters": "Use category, difficulty, and topic metadata for filtered searches"
+    }
+  },
+  "category_info": {
+    "category_id": "safety_legal",
+    "category_name": "Safety and Legal Considerations",
+    "priority_level": "Critical",
+    "target_users": "All users",
+    "retrieval_tags": [
+      "driving",
+      "pregnancy",
+      "legal",
+      "workplace",
+      "travel"
+    ]
+  },
+  "entries": [
+    {
+      "prompt_id": "safety_001",
+      "query_type": "Legal/Safety",
+      "complexity": "Beginner",
+      "prompt": "Is it safe to drive after using cannabis?",
+      "response": "No, you should never drive under the influence of cannabis. Cannabis impairs your reaction time, coordination, and judgment, which significantly increases your risk of accidents. Studies show that driving after cannabis use can double or more than double your crash risk. Here's the tricky part: you can still be impaired hours after you stop feeling high, especially with edibles. Cannabis can stay in your system much longer than the effects last, and there's no reliable way to measure your exact impairment level like there is with alcohol. The safest approach is to plan alternative transportation before you consume – designate a driver, use rideshare services, or stay where you are. If you use cannabis regularly, you might have detectable levels in your system even when you feel sober, which could still result in legal consequences. Always err on the side of caution when it comes to driving and cannabis.",
+      "metadata": {
+        "category": "safety_legal",
+        "subcategory": "driving",
+        "difficulty": "beginner",
+        "topics": [
+          "driving",
+          "impairment",
+          "legal",
+          "safety",
+          "alternatives"
+        ]
+      }
+    },
+    {
+      "prompt_id": "safety_002",
+      "query_type": "Medical Safety",
+      "complexity": "Intermediate",
+      "prompt": "Can I use cannabis while pregnant or breastfeeding?",
+      "response": "Medical experts strongly recommend avoiding cannabis during pregnancy and breastfeeding. Research suggests that cannabis use during pregnancy may be linked to low birth weight, premature birth, and potential developmental issues. THC can cross the placenta and reach your developing baby, and it can also be passed through breast milk. The developing brain is particularly vulnerable, and exposure during pregnancy might affect your child's attention, memory, and behavior later in life. While some people use cannabis for pregnancy-related nausea, there are safer alternatives available. If you're pregnant or trying to conceive and currently use cannabis for medical reasons, talk with your healthcare provider about safer treatment options. Your doctor can help you weigh any potential benefits against the risks and find alternatives that won't put your baby at risk.",
+      "metadata": {
+        "category": "safety_legal",
+        "subcategory": "pregnancy",
+        "difficulty": "intermediate",
+        "topics": [
+          "pregnancy",
+          "breastfeeding",
+          "development",
+          "THC",
+          "alternatives"
+        ]
+      }
+    },
+    {
+      "prompt_id": "safety_003",
+      "query_type": "Safety/Addiction",
+      "complexity": "Intermediate",
+      "prompt": "Is cannabis addictive?",
+      "response": "Yes, cannabis can be addictive, though it's less addictive than substances like alcohol, nicotine, or opioids. Research shows that about 9-10% of people who use cannabis will develop dependence, but this number increases to about 17% for people who start using as teenagers and 25-50% for daily users. Cannabis addiction is real and can include withdrawal symptoms like irritability, sleep problems, decreased appetite, and cravings when stopping. Risk factors include starting young, using frequently, using high-potency products, and having personal or family history of addiction. The good news is that most people can use cannabis without developing problems, and treatment is available for those who do. Being honest about your relationship with cannabis and paying attention to how it affects your life, work, and relationships is important for healthy use.",
+      "metadata": {
+        "category": "safety_legal",
+        "subcategory": "addiction",
+        "difficulty": "intermediate",
+        "topics": [
+          "addiction",
+          "dependence",
+          "withdrawal",
+          "risk_factors",
+          "treatment"
+        ]
+      }
+    },
+    {
+      "prompt_id": "safety_004",
+      "query_type": "Travel/Legal",
+      "complexity": "Advanced",
+      "prompt": "How do I travel with cannabis?",
+      "response": "Cannabis travel is tricky because laws vary dramatically between states and countries, and federal law still prohibits cannabis. Even if both your origin and destination allow cannabis, crossing state lines with it remains federally illegal. Within states where it's legal, you can usually transport cannabis in sealed, labeled containers in accordance with local laws – but check specific regulations as they vary. Flying with cannabis is particularly complicated since airports and airlines operate under federal jurisdiction, even in legal states. Some states have reciprocity agreements that honor other states' medical cannabis cards, but this is limited. International travel with cannabis is almost always illegal and can result in serious legal consequences. If you're traveling somewhere cannabis is legal, your safest bet is usually to purchase locally rather than transport across jurisdictions. Always research current laws for your specific route and destinations, and remember that laws can change quickly. When in doubt, it's better to be safe than sorry.",
+      "metadata": {
+        "category": "safety_legal",
+        "subcategory": "travel",
+        "difficulty": "advanced",
+        "topics": [
+          "travel",
+          "state_lines",
+          "federal_law",
+          "flying",
+          "international",
+          "reciprocity"
+        ]
+      }
+    }
+  ],
+  "category_summary": {
+    "total_entries": 4,
+    "difficulty_breakdown": {
+      "Advanced": 1,
+      "Beginner": 1,
+      "Intermediate": 2
+    },
+    "topic_coverage": [
+      "treatment",
+      "development",
+      "federal_law",
+      "safety",
+      "THC",
+      "impairment",
+      "driving",
+      "withdrawal",
+      "risk_factors",
+      "state_lines",
+      "dependence",
+      "international",
+      "legal",
+      "travel",
+      "reciprocity",
+      "breastfeeding",
+      "addiction",
+      "alternatives",
+      "flying",
+      "pregnancy"
+    ]
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "metadata": {
+    "document_type": "Cannabis Education Knowledge Base",
+    "version": "1.0",
+    "created": "2025-06-03T21:47:40.633861",
+    "total_categories": 14,
+    "total_entries": 42,
+    "target_audience": "Cannabis users (all experience levels)",
+    "deployment": "Dispensary AI chatbots",
+    "language": "English",
+    "update_frequency": "Quarterly",
+    "usage_instructions": {
+      "vector_storage": "Each entry should be embedded separately with metadata filters",
+      "chunk_size": "Individual prompt-response pairs",
+      "overlap": "None required (self-contained entries)",
+      "embedding_strategy": "Include both prompt and response text with metadata",
+      "retrieval_filters": "Use category, difficulty, and topic metadata for filtered searches"
+    }
+  },
+  "category_info": {
+    "category_id": "chemistry_science",
+    "category_name": "Cannabis Chemistry and Science",
+    "priority_level": "Medium",
+    "target_users": "Advanced users, researchers",
+    "retrieval_tags": [
+      "endocannabinoid",
+      "receptors",
+      "cannabinoids",
+      "chemistry"
+    ]
+  },
+  "entries": [
+    {
+      "prompt_id": "chemistry_001",
+      "query_type": "Scientific Explanation",
+      "complexity": "Advanced",
+      "prompt": "Can you explain the endocannabinoid system in more detail?",
+      "response": "The endocannabinoid system (ECS) is like your body's internal regulatory network that helps maintain homeostasis – essentially keeping everything in balance. It consists of three main components: endocannabinoids (naturally produced by your body), cannabinoid receptors (CB1 and CB2), and enzymes that break down endocannabinoids when they're no longer needed. CB1 receptors are primarily found in your brain and central nervous system, affecting things like mood, memory, and pain perception. CB2 receptors are mainly in your immune system and peripheral tissues, influencing inflammation and immune responses. Your body produces endocannabinoids like anandamide and 2-AG on demand to help regulate functions like sleep, appetite, stress response, and immune function. When you consume cannabis, compounds like THC and CBD interact with this same system, which explains why cannabis can affect so many different aspects of how you feel and function.",
+      "metadata": {
+        "category": "chemistry_science",
+        "subcategory": "endocannabinoid_system",
+        "difficulty": "advanced",
+        "topics": [
+          "ECS",
+          "CB1",
+          "CB2",
+          "anandamide",
+          "homeostasis"
+        ]
+      }
+    },
+    {
+      "prompt_id": "chemistry_002",
+      "query_type": "Scientific Education",
+      "complexity": "Advanced",
+      "prompt": "What are minor cannabinoids like CBG, CBN, and CBC?",
+      "response": "Minor cannabinoids are the supporting cast in the cannabis story, each with unique potential benefits! CBG (cannabigerol) is often called the \"mother cannabinoid\" because it's the precursor to THC and CBD. It's non-psychoactive and research suggests it might help with focus, energy, and antibacterial properties. CBN (cannabinol) is what THC breaks down into over time, especially when exposed to heat and light. It's mildly psychoactive and is being studied for its potential sedating effects – many people use CBN products for sleep. CBC (cannabichromene) is non-psychoactive and might work synergistically with other cannabinoids for anti-inflammatory and mood-supporting effects. Other minor cannabinoids include THCV (potentially appetite-suppressing and energizing), CBDV (being studied for neurological conditions), and Delta-8 THC (milder psychoactive effects than regular Delta-9 THC). The exciting part is that different ratios of these compounds create the unique effects profile of each strain.",
+      "metadata": {
+        "category": "chemistry_science",
+        "subcategory": "minor_cannabinoids",
+        "difficulty": "advanced",
+        "topics": [
+          "CBG",
+          "CBN",
+          "CBC",
+          "THCV",
+          "CBDV",
+          "delta8"
+        ]
+      }
+    }
+  ],
+  "category_summary": {
+    "total_entries": 2,
+    "difficulty_breakdown": {
+      "Advanced": 2
+    },
+    "topic_coverage": [
+      "delta8",
+      "ECS",
+      "CBDV",
+      "anandamide",
+      "CBN",
+      "CB2",
+      "THCV",
+      "CB1",
+      "homeostasis",
+      "CBG",
+      "CBC"
+    ]
+  }
+}
