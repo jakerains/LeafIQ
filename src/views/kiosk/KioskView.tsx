@@ -7,7 +7,7 @@ import KioskResults from './KioskResults';
 import Logo from '../../components/ui/Logo';
 import { motion } from 'framer-motion';
 import { User, ChevronDown, Home, Settings } from 'lucide-react';
-import AdminPasskeyModal from '../components/auth/AdminPasskeyModal';
+import AdminPasskeyModal from '../../components/auth/AdminPasskeyModal';
 
 const KioskView = () => {
   const [searchQuery, setSearchQuery] = useState('');

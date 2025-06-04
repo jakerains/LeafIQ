@@ -245,7 +245,7 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
                 <div className="grid grid-cols-2 gap-2">
                   {Object.entries(selectedProduct.variant.terpene_profile)
                     .filter(([_, value]) => (value as number) > 0)
-                    .sort(([_, a], [_, b]) => (b as number) - (a as number))
+                    .sort(([_a, a], [_b, b]) => (b as number) - (a as number))
                     .slice(0, 6)
                     .map(([terpene, value]) => (
                       <div key={terpene} className="flex justify-between items-center">
