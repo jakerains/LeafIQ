@@ -135,13 +135,13 @@ export const getTerpeneRecommendations = async (query: string) => {
 const FALLBACK_RESPONSES: Record<string, string> = {
   'terpene': 'Terpenes are aromatic compounds found in cannabis and many other plants. They contribute to the aroma, flavor, and effects of cannabis. Common terpenes include myrcene (relaxing), limonene (uplifting), pinene (focusing), and caryophyllene (pain relief).',
   'thc': 'THC (tetrahydrocannabinol) is the primary psychoactive compound in cannabis that produces the "high" sensation. It works by binding to cannabinoid receptors in the brain.',
-  'cbd': 'CBD (cannabidiol) is a non-intoxicating compound found in cannabis. It's often used for its potential therapeutic effects, including relief from pain, anxiety, and inflammation, without producing a "high."',
+  'cbd': 'CBD (cannabidiol) is a non-intoxicating compound found in cannabis. It\'s often used for its potential therapeutic effects, including relief from pain, anxiety, and inflammation, without producing a "high."',
   'indica': 'Indica strains are typically associated with relaxing, sedating effects that are great for evening use and sleep. They often have higher levels of myrcene and linalool terpenes.',
   'sativa': 'Sativa strains are typically associated with energizing, uplifting effects that are good for daytime use. They often have higher levels of limonene and pinene terpenes.',
   'hybrid': 'Hybrid strains are a mix of indica and sativa genetics, offering balanced effects. The specific effects depend on the parent strains and their terpene profiles.',
   'entourage': 'The entourage effect is the theory that all compounds in cannabis work together synergistically to produce effects that isolated compounds cannot. This includes cannabinoids, terpenes, and flavonoids working together.',
   'edible': 'Edibles are cannabis-infused food products. They take longer to take effect (30-90 minutes) but provide longer-lasting effects (4-8 hours). Start with a low dose (2.5-5mg THC) and wait before consuming more.',
-  'microdosing': 'Microdosing cannabis involves taking very small amounts (1-2.5mg THC) to achieve subtle effects without feeling "high." It's popular for those seeking therapeutic benefits while remaining functional.',
+  'microdosing': 'Microdosing cannabis involves taking very small amounts (1-2.5mg THC) to achieve subtle effects without feeling "high." It\'s popular for those seeking therapeutic benefits while remaining functional.',
 };
 
 export const getCannabisKnowledgeResponse = async (query: string): Promise<string> => {
