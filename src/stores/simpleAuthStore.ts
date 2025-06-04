@@ -17,7 +17,7 @@ interface SimpleAuthState extends AuthSession {
   // Auth actions
   loginDispensary: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
   selectUserMode: (mode: UserMode) => void;
-  logout: () => void;
+  logout: () => Promise<void>;
   
   // Helper getters
   isCustomerMode: () => boolean;
@@ -142,7 +142,11 @@ export const useSimpleAuthStore = create<SimpleAuthState>()(
         }
       },
 
-      logout: () => {
+      logout: async () => {
+        // Sign out from Supabase to clear server-side session
+        await supabase.auth.signOut();
+        
+        // Then clear local state
         set({
           isAuthenticated: false,
           dispensaryName: '',
@@ -184,4 +188,4 @@ export const useSimpleAuthStore = create<SimpleAuthState>()(
       }),
     }
   )
-); 
+);
