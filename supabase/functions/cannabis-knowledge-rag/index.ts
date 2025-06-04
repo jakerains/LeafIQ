@@ -3,15 +3,20 @@ import { Pinecone } from 'npm:@pinecone-database/pinecone@2.2.0';
 import OpenAI from 'npm:openai@4.47.1';
 
 // Initialize OpenAI client
-const openai = new OpenAI({
-  apiKey: Deno.env.get('OPENAI_API_KEY')!,
-});
+const openaiKey = Deno.env.get('OPENAI_API_KEY');
+const pineconeKey = Deno.env.get('PINECONE_API_KEY');
+const pineconeEnv = Deno.env.get('PINECONE_ENVIRONMENT') || 'us-east-1';
 
-// Initialize Pinecone client
-const pinecone = new Pinecone({
-  apiKey: Deno.env.get('PINECONE_API_KEY')!,
-  environment: Deno.env.get('PINECONE_ENVIRONMENT') || 'us-east-1',
-});
+// Only initialize clients if keys are available
+const openai = openaiKey ? new OpenAI({
+  apiKey: openaiKey,
+}) : null;
+
+// Initialize Pinecone client only if API key is available
+const pinecone = pineconeKey ? new Pinecone({
+  apiKey: pineconeKey,
+  environment: pineconeEnv,
+}) : null;
 
 const PINECONE_INDEX_NAME = Deno.env.get('PINECONE_INDEX_NAME') || 'leafiq-prompts';
 
@@ -30,53 +35,71 @@ const FALLBACK_RESPONSES: Record<string, string> = {
   'microdosing': 'Microdosing cannabis involves taking very small amounts (1-2.5mg THC) to achieve subtle effects without feeling "high." It\'s popular for those seeking therapeutic benefits while remaining functional.',
 };
 
+// CORS headers to be used consistently throughout the function
+const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  'Content-Type': 'application/json'
+};
+
+// Helper function to get fallback response
+const getFallbackResponse = (query: string): string => {
+  const lowerQuery = query.toLowerCase();
+  
+  // Find matching fallback responses
+  const matchingKeywords = Object.keys(FALLBACK_RESPONSES).filter(keyword => 
+    lowerQuery.includes(keyword.toLowerCase())
+  );
+  
+  if (matchingKeywords.length > 0) {
+    // Use the longest matching keyword for the most specific response
+    const bestMatch = matchingKeywords.sort((a, b) => b.length - a.length)[0];
+    return "I'm providing this answer from my basic knowledge. " + FALLBACK_RESPONSES[bestMatch];
+  } 
+  
+  return "I'm sorry, I don't have specific information about that in my knowledge base. Cannabis has many cannabinoids and terpenes that work together to create different effects. If you have questions about specific strains, consumption methods, or effects, feel free to ask more specifically.";
+};
+
 const handler = async (req: Request): Promise<Response> => {
   try {
-    // CORS headers
-    const headers = {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-      'Content-Type': 'application/json',
-    };
-
     // Handle OPTIONS request for CORS preflight
     if (req.method === 'OPTIONS') {
-      return new Response(null, { headers, status: 204 });
+      return new Response(null, { headers: corsHeaders, status: 204 });
     }
 
     // Parse request data
-    const { query }: { query: string } = await req.json();
+    let query: string;
+    try {
+      const data = await req.json();
+      query = data.query;
+    } catch (error) {
+      console.error('Error parsing request JSON:', error);
+      return new Response(
+        JSON.stringify({ 
+          error: 'Invalid request format',
+          answer: "I couldn't understand your question. Please try again."
+        }),
+        { headers: corsHeaders, status: 400 }
+      );
+    }
 
     if (!query) {
       return new Response(
-        JSON.stringify({ error: 'Missing query parameter' }),
-        { headers, status: 400 }
+        JSON.stringify({ 
+          error: 'Missing query parameter',
+          answer: "I need a question to answer. Please try again with a specific question."
+        }),
+        { headers: corsHeaders, status: 400 }
       );
     }
     
     // Check if required API keys are available
-    const openaiKey = Deno.env.get('OPENAI_API_KEY');
-    const pineconeKey = Deno.env.get('PINECONE_API_KEY');
-    
-    if (!openaiKey || !pineconeKey) {
+    if (!openaiKey || !pineconeKey || !openai || !pinecone) {
       console.log('API keys missing, using fallback responses');
       
       // Use fallback responses when API keys are missing
-      const lowerQuery = query.toLowerCase();
-      let fallbackResponse = "I'm using my basic knowledge to answer this question. ";
-      
-      // Find matching fallback responses
-      const matchingKeywords = Object.keys(FALLBACK_RESPONSES).filter(keyword => 
-        lowerQuery.includes(keyword.toLowerCase())
-      );
-      
-      if (matchingKeywords.length > 0) {
-        // Use the longest matching keyword for the most specific response
-        const bestMatch = matchingKeywords.sort((a, b) => b.length - a.length)[0];
-        fallbackResponse += FALLBACK_RESPONSES[bestMatch];
-      } else {
-        fallbackResponse += "I don't have specific information about that in my knowledge base. Cannabis has many cannabinoids and terpenes that work together to create different effects. If you have questions about specific strains, consumption methods, or effects, feel free to ask.";
-      }
+      const fallbackResponse = getFallbackResponse(query);
       
       return new Response(
         JSON.stringify({ 
@@ -84,7 +107,7 @@ const handler = async (req: Request): Promise<Response> => {
           context_used: false,
           fallback: true
         }),
-        { headers, status: 200 }
+        { headers: corsHeaders, status: 200 }
       );
     }
 
@@ -135,35 +158,22 @@ const handler = async (req: Request): Promise<Response> => {
           answer: botResponse, 
           context_used: context ? true : false 
         }),
-        { headers, status: 200 }
+        { headers: corsHeaders, status: 200 }
       );
     } catch (serviceError) {
       console.error('Error calling AI services:', serviceError);
       
       // Fallback to predefined responses
-      const lowerQuery = query.toLowerCase();
-      let fallbackResponse = "I'm having trouble connecting to my knowledge base. ";
-      
-      // Find matching fallback responses
-      const matchingKeywords = Object.keys(FALLBACK_RESPONSES).filter(keyword => 
-        lowerQuery.includes(keyword.toLowerCase())
-      );
-      
-      if (matchingKeywords.length > 0) {
-        // Use the longest matching keyword for the most specific response
-        const bestMatch = matchingKeywords.sort((a, b) => b.length - a.length)[0];
-        fallbackResponse += FALLBACK_RESPONSES[bestMatch];
-      } else {
-        fallbackResponse += "I can provide basic information about cannabis compounds, consumption methods, and effects. For specific detailed questions, please try again later when my connection is restored.";
-      }
+      const fallbackResponse = getFallbackResponse(query);
       
       return new Response(
         JSON.stringify({ 
           answer: fallbackResponse, 
           context_used: false,
-          fallback: true
+          fallback: true,
+          error: serviceError.message
         }),
-        { headers, status: 200 }
+        { headers: corsHeaders, status: 200 }
       );
     }
   } catch (error) {
@@ -174,7 +184,7 @@ const handler = async (req: Request): Promise<Response> => {
         details: error.message,
         answer: "I'm sorry, I encountered an error while processing your question. Please try again later."
       }),
-      { headers: { 'Content-Type': 'application/json' }, status: 500 }
+      { headers: corsHeaders, status: 500 }
     );
   }
 };
