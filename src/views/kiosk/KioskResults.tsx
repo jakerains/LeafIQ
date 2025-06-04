@@ -4,7 +4,7 @@ import { Button } from '../../components/ui/button';
 import { ArrowLeft, Search, Sparkles, BrainCircuit, Plus, Loader } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { ProductWithVariant } from '../../types';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import CustomerProductModal from '../../components/kiosk/CustomerProductModal';
 
 interface KioskResultsProps {
@@ -36,6 +36,17 @@ const KioskResults = ({
 }: KioskResultsProps) => {
   const [selectedProduct, setSelectedProduct] = useState<ProductWithVariant | null>(null);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Use location state as fallback if props are empty/default
+  const effectiveSearchQuery = searchQuery || location.state?.searchQuery || '';
+  const effectiveResults = results.length > 0 ? results : (location.state?.searchResults || []);
+  const effectiveIsAIPowered = isAIPowered || (location.state?.isAIPowered || false);
+  const effectiveEffects = effects.length > 0 ? effects : (location.state?.effects || []);
+  const effectivePersonalizedMessage = personalizedMessage || location.state?.personalizedMessage;
+  const effectiveContextFactors = contextFactors || location.state?.contextFactors;
+  const effectiveTotalAvailable = totalAvailable || location.state?.totalAvailable || 0;
+  const effectiveCurrentOffset = currentOffset || location.state?.currentOffset || 0;
 
   // Debug effect to see what searchQuery we receive
   useEffect(() => {
@@ -43,11 +54,16 @@ const KioskResults = ({
       searchQuery: searchQuery,
       searchQueryLength: searchQuery?.length,
       searchQueryType: typeof searchQuery,
+      locationSearchQuery: location.state?.searchQuery,
+      effectiveSearchQuery: effectiveSearchQuery,
+      effectiveSearchQueryLength: effectiveSearchQuery?.length,
       resultsCount: results.length,
+      effectiveResultsCount: effectiveResults.length,
       isAIPowered,
+      effectiveIsAIPowered,
       effects
     });
-  }, [searchQuery, results, isAIPowered, effects]);
+  }, [searchQuery, location.state, effectiveSearchQuery, effectiveResults, results, isAIPowered, effectiveIsAIPowered, effects]);
 
   const handleProductSelect = (product: ProductWithVariant) => {
     setSelectedProduct(product);
@@ -63,7 +79,7 @@ const KioskResults = ({
   };
 
   // Empty state when no results found
-  if (results.length === 0) {
+  if (effectiveResults.length === 0) {
     return (
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -74,7 +90,7 @@ const KioskResults = ({
         <div className="p-4 bg-white bg-opacity-70 backdrop-blur-sm rounded-full mb-6">
           <Search size={40} className="text-gray-400" />
         </div>
-        <h2 className="text-3xl font-bold text-gray-900 mb-4">No matches found for "{searchQuery}"</h2>
+        <h2 className="text-3xl font-bold text-gray-900 mb-4">No matches found for "{effectiveSearchQuery}"</h2>
         <p className="text-lg text-gray-600 mb-8">
           We couldn't find any products that match your search. Try different terms or browse our recommendations.
         </p>
@@ -99,9 +115,9 @@ const KioskResults = ({
       >
         <div className="mb-4 md:mb-0 flex flex-col md:flex-row md:items-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-2 md:mb-0 md:mr-4">
-            Results for "{searchQuery}"
+            Results for "{effectiveSearchQuery}"
           </h2>
-          {isAIPowered && (
+          {effectiveIsAIPowered && (
             <div className="flex items-center space-x-2">
               <motion.div
                 className="px-3 py-1.5 bg-purple-100 text-purple-800 rounded-full text-sm font-medium flex items-center"
@@ -119,7 +135,7 @@ const KioskResults = ({
                 className="text-purple-700 text-sm"
               >
                 <BrainCircuit size={14} className="inline mr-1" />
-                <span>{results.length} match{results.length !== 1 ? 'es' : ''}</span>
+                <span>{effectiveResults.length} match{effectiveResults.length !== 1 ? 'es' : ''}</span>
               </motion.div>
             </div>
           )}
@@ -136,7 +152,7 @@ const KioskResults = ({
       </motion.div>
 
       {/* AI Personalized Message */}
-      {isAIPowered && personalizedMessage && (
+      {effectiveIsAIPowered && effectivePersonalizedMessage && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -184,18 +200,18 @@ const KioskResults = ({
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6 }}
               >
-                {personalizedMessage}
+                {effectivePersonalizedMessage}
               </motion.p>
 
               {/* Context Factors Tags */}
-              {contextFactors && contextFactors.length > 0 && (
+              {effectiveContextFactors && effectiveContextFactors.length > 0 && (
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.7 }}
                   className="mt-3 flex flex-wrap gap-2"
                 >
-                  {contextFactors.map((factor, index) => (
+                  {effectiveContextFactors.map((factor, index) => (
                     <motion.span
                       key={factor}
                       className="px-3 py-1 bg-white bg-opacity-70 text-purple-700 rounded-full text-xs font-medium"
@@ -214,14 +230,14 @@ const KioskResults = ({
       )}
 
       {/* Effects tags */}
-      {effects.length > 0 && (
+      {effectiveEffects.length > 0 && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.2 }}
           className="mb-6 flex flex-wrap gap-2 justify-center"
         >
-          {effects.map((effect, index) => (
+          {effectiveEffects.map((effect, index) => (
             <motion.div
               key={effect}
               className="px-4 py-2 bg-primary-100 text-primary-800 rounded-full font-medium text-sm shadow-sm border border-primary-200"
@@ -237,7 +253,7 @@ const KioskResults = ({
 
       {/* Results grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {results.map((product, index) => (
+        {effectiveResults.map((product, index) => (
           <motion.div
             key={product.id}
             initial={{ opacity: 0, y: 20 }}
@@ -247,7 +263,7 @@ const KioskResults = ({
           >
             <ProductCard
               product={product}
-              effects={effects.slice(0, 2)}
+              effects={effectiveEffects.slice(0, 2)}
               showTerpenes={true}
               onProductSelect={handleProductSelect}
             />
@@ -256,7 +272,7 @@ const KioskResults = ({
       </div>
 
       {/* Suggest More Button */}
-      {onLoadMore && totalAvailable > currentOffset && (
+      {onLoadMore && effectiveTotalAvailable > effectiveCurrentOffset && (
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -264,9 +280,9 @@ const KioskResults = ({
           className="flex flex-col items-center mt-8 space-y-4"
         >
           <div className="text-center">
-            <p className="text-gray-600 mb-4">
-              Showing {results.length} of {totalAvailable} recommendations
-            </p>
+                          <p className="text-gray-600 mb-4">
+                Showing {effectiveResults.length} of {effectiveTotalAvailable} recommendations
+              </p>
             <Button
               onClick={onLoadMore}
               disabled={isLoadingMore}
@@ -281,7 +297,7 @@ const KioskResults = ({
             </Button>
           </div>
           
-          {isAIPowered && (
+          {effectiveIsAIPowered && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -300,7 +316,7 @@ const KioskResults = ({
         <CustomerProductModal
           product={selectedProduct}
           onClose={handleCloseModal}
-          effects={effects}
+          effects={effectiveEffects}
         />
       )}
     </div>

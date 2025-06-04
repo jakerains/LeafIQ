@@ -13,7 +13,7 @@ LeafIQ is a premium AI-powered cannabis dispensary management platform that tran
 
 ### Customer Experience
 - **Interactive Kiosk**: Intuitive search interface for customers to find products based on desired effects and experiences
-- **AI-Powered Recommendations**: GPT-4 integration for intelligent product matching based on terpene profiles and effects
+- **AI-Powered Recommendations**: gpt-4.1-nano-2025-04-14 integration for intelligent product matching based on terpene profiles and effects
 - **Vibe-Based Search**: Customers can search by mood, activity, or desired feeling
 
 ### Staff Tools
@@ -35,7 +35,7 @@ LeafIQ is a premium AI-powered cannabis dispensary management platform that tran
 - **State Management**: Zustand 4.5, TanStack React Query 5.28
 - **Backend**: Supabase (Database, Auth, Edge Functions)
 - **UI Components**: Radix UI, Lucide React
-- **AI Integration**: OpenAI GPT-4 via Supabase Edge Functions
+- **AI Integration**: OpenAI gpt-4.1-nano-2025-04-14 via Supabase Edge Functions
 - **Payments**: Stripe integration for subscriptions
 
 ## 💼 Getting Access
@@ -84,7 +84,7 @@ LeafIQ Platform/
 ├── Customer Kiosk Interface     # Touch-friendly customer experience
 ├── Staff Dashboard             # Employee tools and insights
 ├── Admin Control Panel         # Management and configuration
-├── AI Recommendation Engine    # GPT-4 powered matching
+├── AI Recommendation Engine    # gpt-4.1-nano-2025-04-14 powered matching
 ├── Real-time Inventory Sync    # POS system integration
 ├── Analytics & Reporting       # Business intelligence
 └── Subscription Management     # Billing and user access

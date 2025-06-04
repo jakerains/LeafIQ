@@ -4,7 +4,7 @@
 
 The LeafIQ recommendation engine has two modes:
 
-1. **AI-Powered Mode**: Uses GPT-4o-mini to understand complex natural language and provide sophisticated recommendations
+1. **AI-Powered Mode**: Uses gpt-4.1-nano-2025-04-14 to understand complex natural language and provide sophisticated recommendations
 2. **Fallback Mode**: Uses local terpene profile matching and keyword detection
 
 Currently, the system is running in **Fallback Mode** because no OpenAI API key is configured.

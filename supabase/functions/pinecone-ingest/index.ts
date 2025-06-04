@@ -228,7 +228,7 @@ const handler = async (req: Request): Promise<Response> => {
               values: embedding, // OpenAI generated embedding vector
               metadata: {
                 // All fields become metadata
-                title: doc.title,
+              title: doc.title,
                 text: doc.content, // Store original text in metadata for reference
                 source: doc.source || 'superadmin-upload',
                 category: doc.category || 'general',
@@ -535,7 +535,7 @@ async function generateEmbedding(text: string): Promise<number[]> {
       input: text,
       model: EMBEDDING_MODEL,
     }),
-  });
+    });
 
   if (!response.ok) {
     const error = await response.text();

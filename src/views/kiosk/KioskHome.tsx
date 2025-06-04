@@ -101,7 +101,7 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
       {/* Render the appropriate chat interface based on active mode */}
       {activeChatMode === 'cannabis_questions' ? (
         <div className="flex-1 flex flex-col justify-center">
-          <CannabisQuestionsChat onSearch={onSearch} isLoading={isLoading} />
+        <CannabisQuestionsChat onSearch={onSearch} isLoading={isLoading} />
         </div>
       ) : (
         /* V0 Chat Component for Vibe and Activity modes */
@@ -114,121 +114,121 @@ const KioskHome = ({ onSearch, isLoading }: KioskHomeProps) => {
       
       {/* Only show info cards for non-cannabis-questions modes */}
       {activeChatMode !== 'cannabis_questions' && (
+      <motion.div 
+        className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6"
+        variants={container}
+        initial="hidden"
+        animate="show"
+        transition={{ delay: 0.3 }}
+      >
+        {/* Personalized Matches Card */}
         <motion.div 
-          className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6"
-          variants={container}
-          initial="hidden"
-          animate="show"
-          transition={{ delay: 0.3 }}
+          className="relative overflow-hidden rounded-2xl shadow-xl h-[320px]"
+          variants={item}
+          whileHover={{ y: -8, transition: { duration: 0.3 } }}
         >
-          {/* Personalized Matches Card */}
-          <motion.div 
-            className="relative overflow-hidden rounded-2xl shadow-xl h-[320px]"
-            variants={item}
-            whileHover={{ y: -8, transition: { duration: 0.3 } }}
-          >
-            {/* Card background image - shows in top 2/3 */}
-            <div className="absolute inset-0 z-0">
-              <img 
-                src="/1.jpg" 
-                alt="" 
-                className="w-full h-full object-cover"
-              />
-              {/* Gradient overlay that gets stronger at bottom to support text */}
-              <div className="absolute inset-0 bg-gradient-to-t from-primary-900 via-primary-900/30 to-transparent" />
-            </div>
-            
-            {/* Card content - positioned at very bottom */}
-            <div className="relative z-10 p-4 flex flex-col justify-end h-full">
-              <div className="mt-auto pb-1">
-                <h3 className="text-lg font-bold text-white mb-1">Personalized Matches</h3>
-                
-                <p className="text-white/90 text-sm mb-3">
-                  Find products perfectly suited to your experience.
-                </p>
-                
-                <div 
-                  className="inline-flex items-center justify-center px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-lg text-xs font-medium text-white border border-white/20 hover:bg-white/20 transition-colors cursor-pointer"
-                  onClick={() => openModal('personalized')}
-                >
-                  Learn More
-                </div>
-              </div>
-            </div>
-          </motion.div>
+          {/* Card background image - shows in top 2/3 */}
+          <div className="absolute inset-0 z-0">
+            <img 
+              src="/1.jpg" 
+              alt="" 
+              className="w-full h-full object-cover"
+            />
+            {/* Gradient overlay that gets stronger at bottom to support text */}
+            <div className="absolute inset-0 bg-gradient-to-t from-primary-900 via-primary-900/30 to-transparent" />
+          </div>
           
-          {/* In-Stock Guarantee Card */}
-          <motion.div 
-            className="relative overflow-hidden rounded-2xl shadow-xl h-[320px]" 
-            variants={item}
-            whileHover={{ y: -8, transition: { duration: 0.3 } }}
-          >
-            {/* Card background image - shows in top 2/3 */}
-            <div className="absolute inset-0 z-0">
-              <img 
-                src="/2.jpg" 
-                alt="" 
-                className="w-full h-full object-cover"
-              />
-              {/* Gradient overlay that gets stronger at bottom to support text */}
-              <div className="absolute inset-0 bg-gradient-to-t from-secondary-900 via-secondary-900/30 to-transparent" />
-            </div>
-            
-            {/* Card content - positioned at very bottom */}
-            <div className="relative z-10 p-4 flex flex-col justify-end h-full">
-              <div className="mt-auto pb-1">
-                <h3 className="text-lg font-bold text-white mb-1">In-Stock Guarantee</h3>
-                
-                <p className="text-white/90 text-sm mb-3">
-                  All recommendations available right now in store.
-                </p>
-                
-                <div 
-                  className="inline-flex items-center justify-center px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-lg text-xs font-medium text-white border border-white/20 hover:bg-white/20 transition-colors cursor-pointer"
-                  onClick={() => openModal('inStock')}
-                >
-                  Learn More
-                </div>
+          {/* Card content - positioned at very bottom */}
+          <div className="relative z-10 p-4 flex flex-col justify-end h-full">
+            <div className="mt-auto pb-1">
+              <h3 className="text-lg font-bold text-white mb-1">Personalized Matches</h3>
+              
+              <p className="text-white/90 text-sm mb-3">
+                Find products perfectly suited to your experience.
+              </p>
+              
+              <div 
+                className="inline-flex items-center justify-center px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-lg text-xs font-medium text-white border border-white/20 hover:bg-white/20 transition-colors cursor-pointer"
+                onClick={() => openModal('personalized')}
+              >
+                Learn More
               </div>
             </div>
-          </motion.div>
-          
-          {/* Expert Guidance Card */}
-          <motion.div 
-            className="relative overflow-hidden rounded-2xl shadow-xl h-[320px]" 
-            variants={item}
-            whileHover={{ y: -8, transition: { duration: 0.3 } }}
-          >
-            {/* Card background image - shows in top 2/3 */}
-            <div className="absolute inset-0 z-0">
-              <img 
-                src="/3-yep.jpg" 
-                alt="" 
-                className="w-full h-full object-cover"
-              />
-              {/* Gradient overlay that gets stronger at bottom to support text */}
-              <div className="absolute inset-0 bg-gradient-to-t from-accent-900 via-accent-900/30 to-transparent" />
-            </div>
-            
-            {/* Card content - positioned at very bottom */}
-            <div className="relative z-10 p-4 flex flex-col justify-end h-full">
-              <div className="mt-auto pb-1">
-                <h3 className="text-lg font-bold text-white mb-1">Expert Guidance</h3>
-                
-                <p className="text-white/90 text-sm mb-3">
-                  Our staff provides insights on any recommendation.
-                </p>
-                
-                <div 
-                  className="inline-flex items-center justify-center px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-lg text-xs font-medium text-white border border-white/20 hover:bg-white/20 transition-colors cursor-pointer"
-                  onClick={() => openModal('expert')}
-                >
-                  Learn More
-                </div>
-              </div>
-            </div>
-          </motion.div>
+          </div>
         </motion.div>
+        
+        {/* In-Stock Guarantee Card */}
+        <motion.div 
+          className="relative overflow-hidden rounded-2xl shadow-xl h-[320px]" 
+          variants={item}
+          whileHover={{ y: -8, transition: { duration: 0.3 } }}
+        >
+          {/* Card background image - shows in top 2/3 */}
+          <div className="absolute inset-0 z-0">
+            <img 
+              src="/2.jpg" 
+              alt="" 
+              className="w-full h-full object-cover"
+            />
+            {/* Gradient overlay that gets stronger at bottom to support text */}
+            <div className="absolute inset-0 bg-gradient-to-t from-secondary-900 via-secondary-900/30 to-transparent" />
+          </div>
+          
+          {/* Card content - positioned at very bottom */}
+          <div className="relative z-10 p-4 flex flex-col justify-end h-full">
+            <div className="mt-auto pb-1">
+              <h3 className="text-lg font-bold text-white mb-1">In-Stock Guarantee</h3>
+              
+              <p className="text-white/90 text-sm mb-3">
+                All recommendations available right now in store.
+              </p>
+              
+              <div 
+                className="inline-flex items-center justify-center px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-lg text-xs font-medium text-white border border-white/20 hover:bg-white/20 transition-colors cursor-pointer"
+                onClick={() => openModal('inStock')}
+              >
+                Learn More
+              </div>
+            </div>
+          </div>
+        </motion.div>
+        
+        {/* Expert Guidance Card */}
+        <motion.div 
+          className="relative overflow-hidden rounded-2xl shadow-xl h-[320px]" 
+          variants={item}
+          whileHover={{ y: -8, transition: { duration: 0.3 } }}
+        >
+          {/* Card background image - shows in top 2/3 */}
+          <div className="absolute inset-0 z-0">
+            <img 
+              src="/3-yep.jpg" 
+              alt="" 
+              className="w-full h-full object-cover"
+            />
+            {/* Gradient overlay that gets stronger at bottom to support text */}
+            <div className="absolute inset-0 bg-gradient-to-t from-accent-900 via-accent-900/30 to-transparent" />
+          </div>
+          
+          {/* Card content - positioned at very bottom */}
+          <div className="relative z-10 p-4 flex flex-col justify-end h-full">
+            <div className="mt-auto pb-1">
+              <h3 className="text-lg font-bold text-white mb-1">Expert Guidance</h3>
+              
+              <p className="text-white/90 text-sm mb-3">
+                Our staff provides insights on any recommendation.
+              </p>
+              
+              <div 
+                className="inline-flex items-center justify-center px-3 py-1.5 bg-white/10 backdrop-blur-sm rounded-lg text-xs font-medium text-white border border-white/20 hover:bg-white/20 transition-colors cursor-pointer"
+                onClick={() => openModal('expert')}
+              >
+                Learn More
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
       )}
 
       {/* Personalized Matches Modal */}

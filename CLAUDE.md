@@ -48,7 +48,7 @@ The `authStore.ts` handles both methods, checking for Supabase sessions first, t
 ### Product Recommendation Engine
 
 Located in `utils/recommendationEngine.ts`. Hybrid approach:
-1. **AI-powered**: Calls Supabase edge function `ai-recommendations` using GPT-4.1-Mini
+1. **AI-powered**: Calls Supabase edge function `ai-recommendations` using gpt-4.1-nano-2025-04-14
 2. **Fallback**: Local terpene-based matching using similarity algorithms
 3. **Logging**: All searches logged to `search_queries` table for analytics
 
@@ -83,7 +83,7 @@ Required environment variables:
 
 ### Supabase Edge Functions
 
-- `ai-recommendations`: GPT-4.1-Mini integration for product recommendations
+- `ai-recommendations`: gpt-4.1-nano-2025-04-14 integration for product recommendations
 - `stripe-checkout`: Payment processing
 - `stripe-webhook`: Stripe webhook handling
 

@@ -59,7 +59,7 @@ const handler = async (req: Request): Promise<Response> => {
       );
     }
 
-    // Call GPT-4.1-Mini API
+    // Call GPT-4.1-nano-2025-04-14 API
     const aiResponse = await callGptApi(query || vibe || activity || '', vibe, activity);
 
     return new Response(

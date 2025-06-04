@@ -31,6 +31,20 @@ const KioskView = () => {
     console.log('🔍 KioskView - searchQuery state changed:', searchQuery);
   }, [searchQuery]);
   
+  // Debug when we're on the results route
+  useEffect(() => {
+    if (window.location.pathname.includes('/results')) {
+      console.log('📍 KioskView - Rendering results route with searchQuery:', searchQuery);
+      console.log('📍 Results data:', {
+        searchQuery,
+        searchQueryLength: searchQuery?.length,
+        searchResults: searchResults.length,
+        isAIPowered,
+        personalizedMessage: personalizedMessage?.slice(0, 50) + '...'
+      });
+    }
+  }, [searchQuery, searchResults, isAIPowered, personalizedMessage]);
+  
   // Ensure products are loaded when component mounts
   useEffect(() => {
     if (organizationId && productsWithVariants.length === 0) {
@@ -42,6 +56,8 @@ const KioskView = () => {
   const handleSearch = async (query: string, mode: 'vibe' | 'activity' | 'cannabis_questions' = 'vibe') => {
     console.log('🔍 KioskView.handleSearch called with query:', query, 'mode:', mode);
     console.log('🔍 Setting searchQuery state to:', query);
+    
+    // Set the search query immediately and synchronously
     setSearchQuery(query);
     setSearchMode(mode);
     
@@ -84,6 +100,7 @@ const KioskView = () => {
         } : null
       });
       
+      // Set all state synchronously before navigation
       setSearchResults(results.products);
       setIsAIPowered(results.isAIPowered);
       setEffects(results.effects);
@@ -97,19 +114,40 @@ const KioskView = () => {
       console.log(`🎯 AI Message: "${results.personalizedMessage}"`);
       console.log(`🎯 Total available: ${results.totalAvailable}`);
       
+      // Navigate regardless of results to show either products or empty state
+      navigate('/kiosk/results', { 
+        state: { 
+          searchQuery: query,
+          searchResults: results.products,
+          isAIPowered: results.isAIPowered,
+          effects: results.effects,
+          personalizedMessage: results.personalizedMessage,
+          contextFactors: results.contextFactors,
+          totalAvailable: results.totalAvailable || 0,
+          currentOffset: 3
+        } 
+      });
+      
       if (results.products.length > 0) {
-        navigate('/kiosk/results');
-        console.log('✅ Navigation to /kiosk/results completed');
+        console.log('✅ Navigation to /kiosk/results completed with products');
       } else {
-        // No results handling
-        setSearchResults([]);
-        navigate('/kiosk/results'); // Still navigate to show the empty state
-        console.log('🚫 No results found, navigating to empty state');
+        console.log('🚫 Navigation to /kiosk/results completed with no products');
       }
     } catch (error) {
       console.error('❌ Search error in KioskView:', error);
       setSearchResults([]);
-      navigate('/kiosk/results'); // Navigate to show error state
+      navigate('/kiosk/results', { 
+        state: { 
+          searchQuery: query,
+          searchResults: [],
+          isAIPowered: false,
+          effects: [],
+          personalizedMessage: undefined,
+          contextFactors: undefined,
+          totalAvailable: 0,
+          currentOffset: 0
+        } 
+      }); // Navigate to show error state
     }
   };
   
