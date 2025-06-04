@@ -7,6 +7,7 @@ import KioskResults from './KioskResults';
 import Logo from '../../components/ui/Logo';
 import { motion } from 'framer-motion';
 import { User, ChevronDown, Home, Settings } from 'lucide-react';
+import AdminPasskeyModal from '../components/auth/AdminPasskeyModal';
 
 const KioskView = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -17,6 +18,7 @@ const KioskView = () => {
   const [isAIPowered, setIsAIPowered] = useState(false);
   const [effects, setEffects] = useState<string[]>([]);
   const [showAdminMenu, setShowAdminMenu] = useState(false);
+  const [showAdminPasskeyModal, setShowAdminPasskeyModal] = useState(false);
   const navigate = useNavigate();
   
   // Ensure products are loaded when component mounts
@@ -100,9 +102,19 @@ const KioskView = () => {
 
   const handleStaffLogin = () => {
     // Switch to admin mode before navigating
+    selectUserMode('employee');
+    navigate('/app/staff');
+    setShowAdminMenu(false);
+  };
+
+  const handleAdminLogin = () => {
+    setShowAdminPasskeyModal(true);
+    setShowAdminMenu(false);
+  };
+
+  const handleAdminLoginSuccess = () => {
     selectUserMode('admin');
     navigate('/app/admin');
-    setShowAdminMenu(false);
   };
 
   const handleDemoHub = () => {
@@ -155,10 +167,20 @@ const KioskView = () => {
                     onClick={handleStaffLogin}
                     className="w-full px-4 py-3 text-left text-gray-700 hover:bg-gray-100 hover:bg-opacity-80 transition-colors duration-200 flex items-center gap-3"
                   >
-                    <Settings size={16} className="text-green-500" />
+                    <User size={16} className="text-blue-500" />
                     <div>
-                      <div className="font-medium">Admin Login</div>
-                      <div className="text-xs text-gray-500">Access management tools</div>
+                      <div className="font-medium">Staff Mode</div>
+                      <div className="text-xs text-gray-500">Access staff dashboard</div>
+                    </div>
+                  </button>
+                  <button
+                    onClick={handleAdminLogin}
+                    className="w-full px-4 py-3 text-left text-gray-700 hover:bg-gray-100 hover:bg-opacity-80 transition-colors duration-200 flex items-center gap-3"
+                  >
+                    <Settings size={16} className="text-purple-500" />
+                    <div>
+                      <div className="font-medium">Admin Access</div>
+                      <div className="text-xs text-gray-500">Requires passkey</div>
                     </div>
                   </button>
                 </motion.div>
@@ -202,8 +224,15 @@ const KioskView = () => {
           </Routes>
         </div>
       </div>
+
+      {/* Admin Passkey Modal */}
+      <AdminPasskeyModal
+        isOpen={showAdminPasskeyModal}
+        onClose={() => setShowAdminPasskeyModal(false)}
+        onSuccess={handleAdminLoginSuccess}
+      />
     </div>
   );
-}
+};
 
 export default KioskView;

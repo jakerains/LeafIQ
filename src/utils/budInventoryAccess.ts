@@ -209,17 +209,17 @@ async function findRelevantProductsForQuery(
   }
   
   if (lowerQuery.includes('edible') || lowerQuery.includes('gummies') || lowerQuery.includes('chocolate')) {
-    const edibleProducts = availableProducts.filter(p => p.category === 'edibles');
+    const edibleProducts = availableProducts.filter(p => p.category === 'edible');
     relevantProducts = [...relevantProducts, ...edibleProducts.slice(0, 3)];
   }
   
   if (lowerQuery.includes('vape') || lowerQuery.includes('cartridge') || lowerQuery.includes('pen')) {
-    const vapeProducts = availableProducts.filter(p => p.category === 'vaporizers');
+    const vapeProducts = availableProducts.filter(p => p.category === 'vaporizer');
     relevantProducts = [...relevantProducts, ...vapeProducts.slice(0, 3)];
   }
   
   if (lowerQuery.includes('concentrate') || lowerQuery.includes('wax') || lowerQuery.includes('shatter')) {
-    const concentrateProducts = availableProducts.filter(p => p.category === 'concentrates');
+    const concentrateProducts = availableProducts.filter(p => p.category === 'concentrate');
     relevantProducts = [...relevantProducts, ...concentrateProducts.slice(0, 3)];
   }
   
@@ -242,15 +242,15 @@ async function findRelevantProductsForQuery(
   // THC/CBD level matches
   if (lowerQuery.includes('high thc') || lowerQuery.includes('potent') || lowerQuery.includes('strong')) {
     const highThcProducts = availableProducts
-      .filter(p => (p.thc_percentage || 0) > 25)
-      .sort((a, b) => (b.thc_percentage || 0) - (a.thc_percentage || 0));
+      .filter(p => (p.variant.thc_percentage || 0) > 25)
+      .sort((a, b) => (b.variant.thc_percentage || 0) - (a.variant.thc_percentage || 0));
     relevantProducts = [...relevantProducts, ...highThcProducts.slice(0, 2)];
   }
   
   if (lowerQuery.includes('low thc') || lowerQuery.includes('mild') || lowerQuery.includes('cbd')) {
     const lowThcProducts = availableProducts
-      .filter(p => (p.thc_percentage || 0) < 20 || (p.cbd_percentage || 0) > 5)
-      .sort((a, b) => (a.thc_percentage || 0) - (b.thc_percentage || 0));
+      .filter(p => (p.variant.thc_percentage || 0) < 20 || (p.variant.cbd_percentage || 0) > 5)
+      .sort((a, b) => (a.variant.thc_percentage || 0) - (b.variant.thc_percentage || 0));
     relevantProducts = [...relevantProducts, ...lowThcProducts.slice(0, 2)];
   }
   
@@ -279,6 +279,15 @@ async function findRelevantProductsForQuery(
       (p.variant.terpene_profile && p.variant.terpene_profile.limonene && p.variant.terpene_profile.limonene > 0.5)
     );
     relevantProducts = [...relevantProducts, ...energizingProducts.slice(0, 2)];
+  }
+  
+  if (lowerQuery.includes('pain') || lowerQuery.includes('relief') || lowerQuery.includes('ache')) {
+    const painReliefProducts = availableProducts.filter(p =>
+      (p.variant.terpene_profile && p.variant.terpene_profile.caryophyllene && p.variant.terpene_profile.caryophyllene > 0.3) ||
+      (p.variant.terpene_profile && p.variant.terpene_profile.myrcene && p.variant.terpene_profile.myrcene > 0.5) ||
+      (p.variant.cbd_percentage && p.variant.cbd_percentage > 1)
+    );
+    relevantProducts = [...relevantProducts, ...painReliefProducts.slice(0, 2)];
   }
   
   // Remove duplicates and limit results
@@ -320,7 +329,7 @@ function generateContextSummary(
   if (relevantProducts.length > 0) {
     summary += `RELEVANT PRODUCTS: `;
     relevantProducts.forEach((product, index) => {
-      summary += `${index + 1}. ${product.name} by ${product.brand} (${product.strain_type}, ${product.thc_percentage?.toFixed(1)}% THC, $${product.price})`;
+      summary += `${index + 1}. ${product.name} by ${product.brand} (${product.strain_type}, ${product.variant.thc_percentage?.toFixed(1)}% THC, $${product.variant.price})`;
       
       if (product.variant.terpene_profile && Object.keys(product.variant.terpene_profile).length > 0) {
         const topTerpenes = Object.entries(product.variant.terpene_profile)
@@ -335,6 +344,27 @@ function generateContextSummary(
   }
   
   return summary;
+}
+
+/**
+ * Format product details for display
+ */
+export function formatProductRecommendation(product: ProductWithVariant): string {
+  const variant = product.variant;
+  const thc = variant?.thc_percentage ? `${variant.thc_percentage.toFixed(1)}% THC` : 'THC info unavailable';
+  const cbd = variant?.cbd_percentage && variant.cbd_percentage > 0 ? `, ${variant.cbd_percentage.toFixed(1)}% CBD` : '';
+  const stock = variant?.inventory_level || 0;
+  const price = variant?.price ? `$${variant.price.toFixed(2)}` : 'Price varies';
+  
+  const topTerpenes = variant?.terpene_profile ? 
+    Object.entries(variant.terpene_profile)
+      .filter(([_, value]) => (value as number) > 0.05)
+      .sort(([,a], [,b]) => (b as number) - (a as number))
+      .slice(0, 2)
+      .map(([name, _]) => name)
+      .join(', ') : '';
+  
+  return `${product.name} by ${product.brand} (${thc}${cbd}) - ${stock} units in stock at ${price}${topTerpenes ? `. Rich in ${topTerpenes} terpenes` : ''}`;
 }
 
 /**
@@ -403,21 +433,19 @@ export async function getInventoryContext(organizationId: string): Promise<Inven
 }
 
 /**
- * Search for products related to a specific topic (for educational responses)
- * Uses the same data source as the admin inventory page
+ * Analyze inventory for specific needs
+ * This function is used to find products for specific customer needs
  */
-export async function findProductsByTopic(
-  topic: string, 
-  organizationId: string,
-  limit: number = 5
+export async function analyzeInventoryForNeed(
+  need: string,
+  organizationId?: string
 ): Promise<ProductWithVariant[]> {
-  const { fetchProducts } = useProductsStore.getState();
-  
   try {
-    // Ensure we have fresh data
+    // Get fresh inventory data
+    const { fetchProducts } = useProductsStore.getState();
     await fetchProducts();
     
-    // Get the current products from the store
+    // Get current products from store
     const allProducts = useProductsStore.getState().productsWithVariants;
     
     // Filter for available products with inventory
@@ -425,153 +453,177 @@ export async function findProductsByTopic(
       p.variant.is_available && p.variant.inventory_level > 0
     );
     
-    // Define topic-to-search mappings
-    const topicSearchMap: Record<string, string[]> = {
-      'terpenes': ['terpene', 'terp', 'myrcene', 'limonene', 'pinene', 'linalool'],
-      'indica': ['indica'],
-      'sativa': ['sativa'],
-      'hybrid': ['hybrid'],
-      'thc': ['high thc', 'potent', 'strong'],
-      'cbd': ['cbd'],
-      'edibles': ['gummies', 'edible', 'candy', 'chocolate'],
-      'concentrates': ['concentrate', 'wax', 'shatter', 'rosin', 'live resin'],
-      'flower': ['flower', 'bud'],
-      'vapes': ['vape', 'cartridge', 'pen', 'disposable'],
-      'anxiety': ['calm', 'relaxing', 'stress'],
-      'pain': ['pain', 'relief', 'inflammation'],
-      'sleep': ['sleep', 'insomnia', 'nighttime']
+    // Handle different need categories
+    const lowerNeed = need.toLowerCase();
+    
+    if (lowerNeed.includes('anxiety') || lowerNeed.includes('stress')) {
+      return availableProducts
+        .filter(p => {
+          const variant = p.variant;
+          const hasCalming = variant?.terpene_profile && (
+            (variant.terpene_profile.linalool > 0.1) ||
+            (variant.terpene_profile.caryophyllene > 0.1) ||
+            (variant.terpene_profile.myrcene > 0.2)
+          );
+          const hasGoodRatio = variant?.cbd_percentage && variant.cbd_percentage > 0.5 || 
+            (variant?.thc_percentage && variant?.cbd_percentage && 
+             variant.thc_percentage / variant.cbd_percentage < 3);
+          
+          return hasCalming || hasGoodRatio;
+        })
+        .sort((a, b) => (b.variant?.cbd_percentage || 0) - (a.variant?.cbd_percentage || 0))
+        .slice(0, 3);
+    }
+    
+    if (lowerNeed.includes('indica')) {
+      return availableProducts
+        .filter(p => p.strain_type === 'indica')
+        .sort((a, b) => (b.variant?.thc_percentage || 0) - (a.variant?.thc_percentage || 0))
+        .slice(0, 3);
+    }
+    
+    if (lowerNeed.includes('sativa')) {
+      return availableProducts
+        .filter(p => p.strain_type === 'sativa')
+        .sort((a, b) => (b.variant?.thc_percentage || 0) - (a.variant?.thc_percentage || 0))
+        .slice(0, 3);
+    }
+    
+    if (lowerNeed.includes('pain')) {
+      return availableProducts
+        .filter(p => {
+          const variant = p.variant;
+          const hasPainTerpenes = variant?.terpene_profile && (
+            (variant.terpene_profile.caryophyllene > 0.15) ||
+            (variant.terpene_profile.myrcene > 0.2) ||
+            (variant.terpene_profile.pinene > 0.1)
+          );
+          const hasHighTHC = variant?.thc_percentage && variant.thc_percentage > 15;
+          
+          return hasPainTerpenes || hasHighTHC;
+        })
+        .sort((a, b) => (b.variant?.thc_percentage || 0) - (a.variant?.thc_percentage || 0))
+        .slice(0, 3);
+    }
+    
+    if (lowerNeed.includes('sleep') || lowerNeed.includes('insomnia')) {
+      return availableProducts
+        .filter(p => {
+          const variant = p.variant;
+          const hasSleepTerpenes = variant?.terpene_profile && (
+            (variant.terpene_profile.myrcene > 0.3) ||
+            (variant.terpene_profile.linalool > 0.1)
+          );
+          const isIndica = p.strain_type === 'indica';
+          
+          return hasSleepTerpenes || isIndica;
+        })
+        .sort((a, b) => (b.variant?.thc_percentage || 0) - (a.variant?.thc_percentage || 0))
+        .slice(0, 3);
+    }
+    
+    if (lowerNeed.includes('energy') || lowerNeed.includes('focus')) {
+      return availableProducts
+        .filter(p => {
+          const variant = p.variant;
+          const hasEnergyTerpenes = variant?.terpene_profile && (
+            (variant.terpene_profile.limonene > 0.1) ||
+            (variant.terpene_profile.pinene > 0.1) ||
+            (variant.terpene_profile.terpinolene > 0.05)
+          );
+          const isSativa = p.strain_type === 'sativa';
+          
+          return hasEnergyTerpenes || isSativa;
+        })
+        .slice(0, 3);
+    }
+    
+    // Default: return top 3 products with highest inventory
+    return availableProducts
+      .sort((a, b) => (b.variant?.inventory_level || 0) - (a.variant?.inventory_level || 0))
+      .slice(0, 3);
+  } catch (error) {
+    console.error('Error analyzing inventory for need:', error);
+    return [];
+  }
+}
+
+/**
+ * Generate product examples for a given query
+ */
+export async function getInventoryExamplesForQuery(query: string): Promise<{
+  products: ProductWithVariant[];
+  introText: string;
+}> {
+  try {
+    const lowerQuery = query.toLowerCase();
+    
+    let introText = '';
+    let products: ProductWithVariant[] = [];
+    
+    // Step 1: Analyze the query to determine what kind of inventory to show
+    if (lowerQuery.includes('terpene') || lowerQuery.includes('terp')) {
+      introText = "Here are some products from our inventory with notable terpene profiles:";
+      products = await analyzeInventoryForNeed('terpenes');
+    } 
+    else if (lowerQuery.includes('indica')) {
+      introText = "Here are some indica strains currently in our inventory:";
+      products = await analyzeInventoryForNeed('indica');
+    }
+    else if (lowerQuery.includes('sativa')) {
+      introText = "Here are some sativa strains currently in our inventory:";
+      products = await analyzeInventoryForNeed('sativa');
+    }
+    else if (lowerQuery.includes('sleep') || lowerQuery.includes('insomnia')) {
+      introText = "Here are some products that may help with sleep:";
+      products = await analyzeInventoryForNeed('sleep');
+    }
+    else if (lowerQuery.includes('pain') || lowerQuery.includes('relief')) {
+      introText = "Here are some products that customers often choose for pain relief:";
+      products = await analyzeInventoryForNeed('pain');
+    }
+    else if (lowerQuery.includes('anxiety') || lowerQuery.includes('stress')) {
+      introText = "Here are some products that might help with anxiety or stress:";
+      products = await analyzeInventoryForNeed('anxiety');
+    }
+    else if (lowerQuery.includes('energy') || lowerQuery.includes('focus')) {
+      introText = "Here are some energizing products from our inventory:";
+      products = await analyzeInventoryForNeed('energy');
+    }
+    else if (lowerQuery.includes('hybrid')) {
+      introText = "Here are some balanced hybrid strains we currently carry:";
+      const { fetchProducts } = useProductsStore.getState();
+      await fetchProducts();
+      
+      const allProducts = useProductsStore.getState().productsWithVariants;
+      products = allProducts
+        .filter(p => p.strain_type === 'hybrid' && p.variant.is_available && p.variant.inventory_level > 0)
+        .sort((a, b) => (b.variant.inventory_level || 0) - (a.variant.inventory_level || 0))
+        .slice(0, 3);
+    }
+    else if (shouldUseInventoryRAG(query)) {
+      // For other relevant questions, show a sample of products
+      introText = "Here are some products from our current inventory that might be relevant:";
+      const { fetchProducts } = useProductsStore.getState();
+      await fetchProducts();
+      
+      const allProducts = useProductsStore.getState().productsWithVariants;
+      products = allProducts
+        .filter(p => p.variant.is_available && p.variant.inventory_level > 0)
+        .sort((a, b) => (b.variant.inventory_level || 0) - (a.variant.inventory_level || 0))
+        .slice(0, 3);
+    }
+    
+    return {
+      products,
+      introText
     };
     
-    const searchTerms = topicSearchMap[topic.toLowerCase()] || [topic];
-    let matchedProducts: ProductWithVariant[] = [];
-    
-    // Search for products that match the topic
-    for (const term of searchTerms) {
-      const termLower = term.toLowerCase();
-      const matches = availableProducts.filter(product => 
-        product.name.toLowerCase().includes(termLower) ||
-        product.brand.toLowerCase().includes(termLower) ||
-        product.category.toLowerCase().includes(termLower) ||
-        product.strain_type?.toLowerCase().includes(termLower) ||
-        product.description?.toLowerCase().includes(termLower) ||
-        // Check terpene profiles
-        (product.variant.terpene_profile && 
-         Object.keys(product.variant.terpene_profile).some(terpene => 
-           terpene.toLowerCase().includes(termLower)
-         ))
-      );
-      matchedProducts = [...matchedProducts, ...matches];
-    }
-    
-    // Remove duplicates and limit results
-    const uniqueResults = matchedProducts.filter((product, index, self) => 
-      index === self.findIndex(p => p.id === product.id)
-    );
-    
-    return uniqueResults.slice(0, limit);
   } catch (error) {
-    console.error('Error finding products by topic:', error);
-    return [];
-  }
-}
-
-/**
- * Get products with specific characteristics for educational examples
- * Uses the same data source as the admin inventory page
- */
-export async function getProductExamples(
-  organizationId: string,
-  criteria: {
-    strainType?: 'indica' | 'sativa' | 'hybrid';
-    category?: string;
-    highTHC?: boolean;
-    highCBD?: boolean;
-    terpeneRich?: boolean;
-  }
-): Promise<ProductWithVariant[]> {
-  const { fetchProducts } = useProductsStore.getState();
-  
-  try {
-    // Ensure we have fresh data
-    await fetchProducts();
-    
-    // Get the current products from the store
-    const allProducts = useProductsStore.getState().productsWithVariants;
-    
-    // Filter for available products with inventory
-    let filtered = allProducts.filter(p => 
-      p.variant.is_available && p.variant.inventory_level > 0
-    );
-    
-    if (criteria.strainType) {
-      filtered = filtered.filter(p => p.strain_type === criteria.strainType);
-    }
-    
-    if (criteria.category) {
-      filtered = filtered.filter(p => p.category === criteria.category);
-    }
-    
-    if (criteria.highTHC) {
-      filtered = filtered.filter(p => (p.thc_percentage || 0) > 20);
-    }
-    
-    if (criteria.highCBD) {
-      filtered = filtered.filter(p => (p.cbd_percentage || 0) > 5);
-    }
-    
-    if (criteria.terpeneRich) {
-      filtered = filtered.filter(p => 
-        p.variant.terpene_profile && 
-        Object.keys(p.variant.terpene_profile).length > 0
-      );
-    }
-    
-    // Return up to 3 examples
-    return filtered.slice(0, 3);
-  } catch (error) {
-    console.error('Error getting product examples:', error);
-    return [];
-  }
-}
-
-/**
- * Generate contextual inventory information for Bud's responses
- * Uses the same data source as the admin inventory page
- */
-export async function generateInventoryInsight(
-  topic: string,
-  organizationId: string
-): Promise<string> {
-  try {
-    const context = await getInventoryContext(organizationId);
-    const relatedProducts = await findProductsByTopic(topic, organizationId, 3);
-    
-    if (context.totalProducts === 0) {
-      return "I don't have access to current inventory right now, but I can still help with general cannabis education!";
-    }
-    
-    let insight = `We currently have ${context.totalProducts} products available. `;
-    
-    if (relatedProducts.length > 0) {
-      const productNames = relatedProducts.slice(0, 2).map(p => `${p.name} by ${p.brand}`);
-      insight += `For ${topic}, you might be interested in products like ${productNames.join(' or ')}. `;
-    }
-    
-    // Add relevant inventory stats based on topic
-    if (topic.toLowerCase().includes('thc') && context.thcRange.max > 0) {
-      insight += `Our THC levels range from ${context.thcRange.min.toFixed(1)}% to ${context.thcRange.max.toFixed(1)}%. `;
-    }
-    
-    if (topic.toLowerCase().includes('strain') || topic.toLowerCase().includes('indica') || topic.toLowerCase().includes('sativa')) {
-      const strainCounts = context.strainTypes.map(type => 
-        `${context.availableProducts.filter(p => p.strain_type === type).length} ${type}`
-      );
-      insight += `We have ${strainCounts.join(', ')} products available. `;
-    }
-    
-    return insight.trim();
-  } catch (error) {
-    console.error('Error generating inventory insight:', error);
-    return "I can help you learn about cannabis! Feel free to ask any questions.";
+    console.error('Error getting inventory examples:', error);
+    return {
+      products: [],
+      introText: ''
+    };
   }
 }
