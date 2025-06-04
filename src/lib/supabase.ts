@@ -71,10 +71,11 @@ export const fetchProducts = async (organizationId: string) => {
 
   try {
     // First, get all products for the organization
+    // Use explicit table name to avoid ambiguous column reference
     const { data: products, error: productsError } = await supabase
       .from('products')
       .select('*')
-      .eq('organization_id', organizationId);
+      .eq('products.organization_id', organizationId);
 
     if (productsError) {
       console.error('Error fetching products:', productsError);
