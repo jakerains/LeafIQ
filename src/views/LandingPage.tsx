@@ -49,14 +49,14 @@ const LandingPage = () => {
               </Link>
             </div>
 
-            {/* Mobile Navigation Button */}
+            {/* Mobile Navigation Button with Glassmorphism */}
             <div className="md:hidden">
               <button 
                 onClick={(e) => {
                   e.stopPropagation(); // Prevent triggering handleClickOutside
                   setIsMobileMenuOpen(!isMobileMenuOpen);
                 }}
-                className="p-2 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200 text-gray-900 menu-toggle"
+                className="p-2 rounded-full bg-white/40 backdrop-blur-xl border border-white/50 text-gray-900 shadow-md menu-toggle hover:bg-white/50 transition-colors"
                 aria-label="Toggle menu"
               >
                 {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
