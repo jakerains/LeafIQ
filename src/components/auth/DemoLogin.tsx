@@ -25,15 +25,28 @@ export const DemoLogin: React.FC = () => {
     setIsLoading(true);
     setError('');
     
+    console.log('🔐 Demo login attempt started...');
+    console.log('🔐 Environment check:', {
+      supabaseUrl: import.meta.env.VITE_SUPABASE_URL ? 'Present' : 'Missing',
+      supabaseKey: import.meta.env.VITE_SUPABASE_ANON_KEY ? 'Present' : 'Missing',
+      urlLength: import.meta.env.VITE_SUPABASE_URL?.length,
+      keyLength: import.meta.env.VITE_SUPABASE_ANON_KEY?.length
+    });
+    
     try {
       const result = await loginDispensary(email, password);
+      console.log('🔐 Login result:', result);
+      
       if (!result.success) {
+        console.error('❌ Login failed:', result.error);
         setError(result.error || 'Login failed');
       } else {
+        console.log('✅ Login successful, navigating to /app...');
         // On successful login, navigate to the app which will show kiosk selection
         navigate('/app');
       }
     } catch (error) {
+      console.error('❌ Login exception:', error);
       setError('An unexpected error occurred');
     } finally {
       setIsLoading(false);

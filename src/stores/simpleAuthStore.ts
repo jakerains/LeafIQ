@@ -184,10 +184,26 @@ export const useSimpleAuthStore = create<SimpleAuthState>()(
         try {
           console.log('Attempting dispensary login for:', email);
           
-          // Use Supabase Auth for proper authentication
-          const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
+          // Add timeout to prevent hanging
+          const authPromise = supabase.auth.signInWithPassword({
             email,
             password
+          });
+          
+          const timeoutPromise = new Promise((_, reject) => {
+            setTimeout(() => reject(new Error('Login timeout after 10 seconds')), 10000);
+          });
+          
+          // Use Supabase Auth for proper authentication with timeout
+          const { data: authData, error: authError } = await Promise.race([
+            authPromise,
+            timeoutPromise
+          ]) as any;
+
+          console.log('🔐 Auth call completed:', {
+            hasUser: !!authData?.user,
+            hasError: !!authError,
+            errorMessage: authError?.message
           });
 
           if (authError || !authData.user) {
@@ -195,6 +211,8 @@ export const useSimpleAuthStore = create<SimpleAuthState>()(
           }
 
           // Get user profile and organization info
+          console.log('🔍 Fetching profile for user ID:', authData.user.id);
+          
           const { data: profile, error: profileError } = await supabase
             .from('profiles')
             .select(`
@@ -211,8 +229,22 @@ export const useSimpleAuthStore = create<SimpleAuthState>()(
             .eq('user_id', authData.user.id)
             .single();
 
+          console.log('🔍 Profile fetch result:', {
+            hasProfile: !!profile,
+            hasError: !!profileError,
+            errorMessage: profileError?.message,
+            errorCode: profileError?.code,
+            profileData: profile ? {
+              id: profile.id,
+              organizationId: profile.organization_id,
+              role: profile.role,
+              orgName: profile.organizations?.name
+            } : null
+          });
+
           if (profileError || !profile) {
-            return { success: false, error: 'User profile not found' };
+            console.error('❌ Profile fetch failed:', profileError);
+            return { success: false, error: profileError?.message || 'User profile not found' };
           }
           
           console.log('✅ Login successful:', {

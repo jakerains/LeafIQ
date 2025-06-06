@@ -237,6 +237,72 @@ async function findRelevantProductsForQuery(
   );
   relevantProducts = [...relevantProducts, ...directMatches];
   
+  // Enhanced brand-specific query detection and filtering
+  const brandIndicators = ['from ', 'by ', 'brand', 'have from', 'stock from', 'carry from', 'offer from', 'made by'];
+  const isBrandSpecificQuery = brandIndicators.some(indicator => lowerQuery.includes(indicator));
+  
+  if (isBrandSpecificQuery) {
+    // Extract the brand name from the query
+    const phrases = ['from ', 'by ', 'stock from ', 'have from ', 'carry from ', 'offer from ', 'made by '];
+    let extractedBrand = '';
+    
+    for (const phrase of phrases) {
+      const index = lowerQuery.indexOf(phrase);
+      if (index !== -1) {
+        extractedBrand = lowerQuery.substring(index + phrase.length).trim();
+        extractedBrand = extractedBrand.replace(/\?$/, '').replace(/ products?$/, '').replace(/ items?$/, '').replace(/ stuff$/, '');
+        break;
+      }
+    }
+    
+    // If no specific phrase found, try to detect brand mentions
+    if (!extractedBrand) {
+      const allBrands = [...new Set(availableProducts.map(p => p.brand.toLowerCase()))];
+      for (const brand of allBrands) {
+        if (lowerQuery.includes(brand)) {
+          extractedBrand = brand;
+          break;
+        }
+      }
+    }
+    
+    if (extractedBrand) {
+      let brandMatches = availableProducts.filter(product => {
+        const productBrand = product.brand.toLowerCase();
+        const queryBrand = extractedBrand.toLowerCase();
+        
+        // Flexible brand matching
+        return productBrand === queryBrand || 
+               productBrand.includes(queryBrand) || 
+               queryBrand.includes(productBrand);
+      });
+      
+      // Also apply category filtering if detected in the query
+      if (lowerQuery.includes('gummies') || lowerQuery.includes('gummy')) {
+        brandMatches = brandMatches.filter(p => p.category === 'edible' && p.name.toLowerCase().includes('gumm'));
+      } else if (lowerQuery.includes('edible') || lowerQuery.includes('chocolate') || lowerQuery.includes('candy')) {
+        brandMatches = brandMatches.filter(p => p.category === 'edible');
+      } else if (lowerQuery.includes('flower') || lowerQuery.includes('bud')) {
+        brandMatches = brandMatches.filter(p => p.category === 'flower');
+      } else if (lowerQuery.includes('vape') || lowerQuery.includes('cartridge') || lowerQuery.includes('cart') || lowerQuery.includes('pen')) {
+        brandMatches = brandMatches.filter(p => p.category === 'vaporizer' || p.category === 'cartridge');
+      } else if (lowerQuery.includes('concentrate') || lowerQuery.includes('wax') || lowerQuery.includes('shatter') || lowerQuery.includes('resin')) {
+        brandMatches = brandMatches.filter(p => p.category === 'concentrate');
+      } else if (lowerQuery.includes('pre-roll') || lowerQuery.includes('preroll') || lowerQuery.includes('joint')) {
+        brandMatches = brandMatches.filter(p => p.category === 'pre-roll');
+      } else if (lowerQuery.includes('tincture')) {
+        brandMatches = brandMatches.filter(p => p.category === 'tincture');
+      } else if (lowerQuery.includes('topical')) {
+        brandMatches = brandMatches.filter(p => p.category === 'topical');
+      }
+      
+      if (brandMatches.length > 0) {
+        console.log(`🎯 findRelevantProductsForQuery: Brand-specific query for "${extractedBrand}" -> Found ${brandMatches.length} products`);
+        return brandMatches.slice(0, 5); // Return only brand matches for brand-specific queries
+      }
+    }
+  }
+  
   // Category matches
   if (lowerQuery.includes('flower') || lowerQuery.includes('bud')) {
     const flowerProducts = availableProducts.filter(p => p.category === 'flower');
@@ -496,9 +562,9 @@ export async function analyzeInventoryForNeed(
         .filter(p => {
           const variant = p.variant;
           const hasCalming = variant?.terpene_profile && (
-            (variant.terpene_profile.linalool > 0.1) ||
-            (variant.terpene_profile.caryophyllene > 0.1) ||
-            (variant.terpene_profile.myrcene > 0.2)
+            (variant.terpene_profile.linalool && variant.terpene_profile.linalool > 0.1) ||
+            (variant.terpene_profile.caryophyllene && variant.terpene_profile.caryophyllene > 0.1) ||
+            (variant.terpene_profile.myrcene && variant.terpene_profile.myrcene > 0.2)
           );
           const hasGoodRatio = variant?.cbd_percentage && variant.cbd_percentage > 0.5 || 
             (variant?.thc_percentage && variant?.cbd_percentage && 
@@ -529,9 +595,9 @@ export async function analyzeInventoryForNeed(
         .filter(p => {
           const variant = p.variant;
           const hasPainTerpenes = variant?.terpene_profile && (
-            (variant.terpene_profile.caryophyllene > 0.15) ||
-            (variant.terpene_profile.myrcene > 0.2) ||
-            (variant.terpene_profile.pinene > 0.1)
+            (variant.terpene_profile.caryophyllene && variant.terpene_profile.caryophyllene > 0.15) ||
+            (variant.terpene_profile.myrcene && variant.terpene_profile.myrcene > 0.2) ||
+            (variant.terpene_profile.pinene && variant.terpene_profile.pinene > 0.1)
           );
           const hasHighTHC = variant?.thc_percentage && variant.thc_percentage > 15;
           
@@ -546,8 +612,8 @@ export async function analyzeInventoryForNeed(
         .filter(p => {
           const variant = p.variant;
           const hasSleepTerpenes = variant?.terpene_profile && (
-            (variant.terpene_profile.myrcene > 0.3) ||
-            (variant.terpene_profile.linalool > 0.1)
+            (variant.terpene_profile.myrcene && variant.terpene_profile.myrcene > 0.3) ||
+            (variant.terpene_profile.linalool && variant.terpene_profile.linalool > 0.1)
           );
           const isIndica = p.strain_type === 'indica';
           
@@ -562,9 +628,9 @@ export async function analyzeInventoryForNeed(
         .filter(p => {
           const variant = p.variant;
           const hasEnergyTerpenes = variant?.terpene_profile && (
-            (variant.terpene_profile.limonene > 0.1) ||
-            (variant.terpene_profile.pinene > 0.1) ||
-            (variant.terpene_profile.terpinolene > 0.05)
+            (variant.terpene_profile.limonene && variant.terpene_profile.limonene > 0.1) ||
+            (variant.terpene_profile.pinene && variant.terpene_profile.pinene > 0.1) ||
+            (variant.terpene_profile.terpinolene && variant.terpene_profile.terpinolene > 0.05)
           );
           const isSativa = p.strain_type === 'sativa';
           
@@ -603,6 +669,115 @@ export async function getInventoryExamplesForQuery(query: string): Promise<{
     const availableProducts = allProducts.filter(p => 
       p.variant.is_available && p.variant.inventory_level > 0
     );
+    
+    // Step 0: Check for brand-specific requests first (highest priority)
+    const brandIndicators = ['from ', 'by ', 'brand', 'have from', 'stock from', 'carry from', 'offer from', 'made by'];
+    const isBrandQuery = brandIndicators.some(indicator => lowerQuery.includes(indicator));
+    
+    if (isBrandQuery) {
+      // Extract potential brand names from the query
+      const phrases = ['from ', 'by ', 'stock from ', 'have from ', 'carry from ', 'offer from ', 'made by '];
+      let extractedBrand = '';
+      
+      for (const phrase of phrases) {
+        const index = lowerQuery.indexOf(phrase);
+        if (index !== -1) {
+          extractedBrand = lowerQuery.substring(index + phrase.length).trim();
+          // Remove common ending words and punctuation
+          extractedBrand = extractedBrand.replace(/\?$/, '').replace(/ products?$/, '').replace(/ items?$/, '').replace(/ stuff$/, '');
+          break;
+        }
+      }
+      
+      // If no specific phrase found, try to detect brand mentions another way
+      if (!extractedBrand) {
+        // Look for brand names in the middle of queries like "sodak selects products"
+        const allBrands = [...new Set(availableProducts.map(p => p.brand.toLowerCase()))];
+        for (const brand of allBrands) {
+          if (lowerQuery.includes(brand)) {
+            extractedBrand = brand;
+            break;
+          }
+        }
+      }
+      
+      if (extractedBrand) {
+        // Find products that match the extracted brand name (flexible matching)
+        let brandMatches = availableProducts.filter(product => {
+          const productBrand = product.brand.toLowerCase();
+          const queryBrand = extractedBrand.toLowerCase();
+          
+          // Exact match or contains match (both directions)
+          return productBrand === queryBrand || 
+                 productBrand.includes(queryBrand) || 
+                 queryBrand.includes(productBrand);
+        });
+        
+        // Enhanced: Also filter by category if mentioned in the query
+        let categoryFilter = '';
+        let categoryName = '';
+        
+        // Detect category mentions in the query
+        if (lowerQuery.includes('gummies') || lowerQuery.includes('gummy')) {
+          categoryFilter = 'edible';
+          categoryName = 'gummies';
+          brandMatches = brandMatches.filter(p => p.category === 'edible' && p.name.toLowerCase().includes('gumm'));
+        } else if (lowerQuery.includes('edible') || lowerQuery.includes('chocolate') || lowerQuery.includes('candy')) {
+          categoryFilter = 'edible';
+          categoryName = 'edibles';
+          brandMatches = brandMatches.filter(p => p.category === 'edible');
+        } else if (lowerQuery.includes('flower') || lowerQuery.includes('bud')) {
+          categoryFilter = 'flower';
+          categoryName = 'flower';
+          brandMatches = brandMatches.filter(p => p.category === 'flower');
+        } else if (lowerQuery.includes('vape') || lowerQuery.includes('cartridge') || lowerQuery.includes('cart') || lowerQuery.includes('pen')) {
+          categoryFilter = 'vaporizer';
+          categoryName = 'vape products';
+          brandMatches = brandMatches.filter(p => p.category === 'vaporizer' || p.category === 'cartridge');
+        } else if (lowerQuery.includes('concentrate') || lowerQuery.includes('wax') || lowerQuery.includes('shatter') || lowerQuery.includes('resin')) {
+          categoryFilter = 'concentrate';
+          categoryName = 'concentrates';
+          brandMatches = brandMatches.filter(p => p.category === 'concentrate');
+        } else if (lowerQuery.includes('pre-roll') || lowerQuery.includes('preroll') || lowerQuery.includes('joint')) {
+          categoryFilter = 'pre-roll';
+          categoryName = 'pre-rolls';
+          brandMatches = brandMatches.filter(p => p.category === 'pre-roll');
+        } else if (lowerQuery.includes('tincture')) {
+          categoryFilter = 'tincture';
+          categoryName = 'tinctures';
+          brandMatches = brandMatches.filter(p => p.category === 'tincture');
+        } else if (lowerQuery.includes('topical')) {
+          categoryFilter = 'topical';
+          categoryName = 'topicals';
+          brandMatches = brandMatches.filter(p => p.category === 'topical');
+        }
+        
+        if (brandMatches.length > 0) {
+          const brandName = brandMatches[0].brand; // Get the actual brand name for display
+          
+          if (categoryFilter) {
+            introText = `Here are the ${brandName} ${categoryName} we currently have in stock:`;
+            console.log(`🎯 Brand + Category query: "${extractedBrand}" + "${categoryName}" -> Found ${brandMatches.length} products`);
+          } else {
+            introText = `Here are the ${brandName} products we currently have in stock:`;
+            console.log(`🔍 Brand-specific query detected: "${extractedBrand}" -> Found ${brandMatches.length} products from ${brandName}`);
+          }
+          
+          products = brandMatches.slice(0, 5);
+          return { products, introText };
+        } else {
+          if (categoryFilter) {
+            introText = `I don't see any ${categoryName} from "${extractedBrand}" in our current inventory.`;
+            console.log(`🚫 Brand + Category query: "${extractedBrand}" + "${categoryName}" -> No products found`);
+          } else {
+            introText = `I don't see any products from "${extractedBrand}" in our current inventory.`;
+            console.log(`🚫 Brand-specific query detected: "${extractedBrand}" -> No products found`);
+          }
+          products = [];
+          return { products, introText };
+        }
+      }
+    }
     
     // Step 1: Check for specific product category requests
     if (lowerQuery.includes('gummies') || lowerQuery.includes('gummy')) {
@@ -711,13 +886,13 @@ export async function getInventoryExamplesForQuery(query: string): Promise<{
     else if (shouldUseInventoryRAG(query)) {
       products = await findRelevantProductsForQuery(query, availableProducts);
       if (products.length > 0) {
-        introText = "Here are some products from our current inventory that might be relevant:";
+      introText = "Here are some products from our current inventory that might be relevant:";
       } else {
         // If no specific matches, show a sample of popular products
         introText = "Here's a sample of what we have in stock:";
         products = availableProducts
-          .sort((a, b) => (b.variant.inventory_level || 0) - (a.variant.inventory_level || 0))
-          .slice(0, 3);
+        .sort((a, b) => (b.variant.inventory_level || 0) - (a.variant.inventory_level || 0))
+        .slice(0, 3);
       }
     }
     
@@ -733,4 +908,219 @@ export async function getInventoryExamplesForQuery(query: string): Promise<{
       introText: ''
     };
   }
+}
+
+/**
+ * Enhanced conversation-context-aware product recommendation
+ * Analyzes the conversation history to provide smarter suggestions
+ */
+export async function getConversationContextualProducts(
+  currentQuery: string,
+  conversationHistory: Array<{type: 'user' | 'bot'; text: string; products?: ProductWithVariant[]}>
+): Promise<{
+  products: ProductWithVariant[];
+  introText: string;
+  contextExplanation: string;
+}> {
+  try {
+    const { fetchProducts } = useProductsStore.getState();
+    await fetchProducts();
+    const allProducts = useProductsStore.getState().productsWithVariants;
+    const availableProducts = allProducts.filter(p => 
+      p.variant.is_available && p.variant.inventory_level > 0
+    );
+
+    // Analyze conversation context
+    const conversationContext = analyzeConversationContext(conversationHistory, currentQuery);
+    
+    let products: ProductWithVariant[] = [];
+    let introText = '';
+    let contextExplanation = '';
+
+    // Use conversation insights to find better products
+    if (conversationContext.mentionedEffects.length > 0) {
+      products = await findProductsForMultipleEffects(conversationContext.mentionedEffects, availableProducts);
+      
+      if (products.length > 0) {
+        const effectsList = conversationContext.mentionedEffects.join(', ');
+        introText = `Based on our conversation about ${effectsList}, here are some products that might work well:`;
+        contextExplanation = `These suggestions consider your interest in ${effectsList} from our earlier discussion.`;
+      }
+    }
+    
+    // If no conversation context products, fall back to current query analysis
+    if (products.length === 0) {
+      const regularResult = await getInventoryExamplesForQuery(currentQuery);
+      products = regularResult.products;
+      introText = regularResult.introText;
+      contextExplanation = 'Based on your current question.';
+    }
+    
+    // Enhanced filtering based on conversation preferences
+    if (conversationContext.preferredCategories.length > 0) {
+      const contextFilteredProducts = products.filter(p => 
+        conversationContext.preferredCategories.includes(p.category.toLowerCase())
+      );
+      
+      if (contextFilteredProducts.length > 0) {
+        products = contextFilteredProducts;
+        contextExplanation += ` Focused on ${conversationContext.preferredCategories.join(', ')} products you've shown interest in.`;
+      }
+    }
+
+    // Smart dosing suggestions based on conversation
+    if (conversationContext.experienceLevel === 'beginner') {
+      products = products.filter(p => {
+        const thc = p.variant?.thc_percentage || 0;
+        return thc <= 20; // Limit high THC products for beginners
+      });
+      
+      if (products.length > 0) {
+        contextExplanation += ' Selected beginner-friendly options based on our conversation.';
+      }
+    }
+
+    return {
+      products: products.slice(0, 4), // Limit to top 4 contextual suggestions
+      introText,
+      contextExplanation
+    };
+
+  } catch (error) {
+    console.error('Error getting contextual products:', error);
+    // Fallback to regular query processing
+    const fallback = await getInventoryExamplesForQuery(currentQuery);
+    return {
+      ...fallback,
+      contextExplanation: 'Using standard product matching.'
+    };
+  }
+}
+
+/**
+ * Analyze conversation history to extract context clues
+ */
+function analyzeConversationContext(
+  conversationHistory: Array<{type: 'user' | 'bot'; text: string; products?: ProductWithVariant[]}>,
+  currentQuery: string
+): {
+  mentionedEffects: string[];
+  preferredCategories: string[];
+  experienceLevel: 'beginner' | 'intermediate' | 'experienced' | 'unknown';
+  previousProductInterest: string[];
+  cannabinoidPreferences: string[];
+} {
+  // Combine all conversation text
+  const allText = [
+    ...conversationHistory.map(m => m.text.toLowerCase()),
+    currentQuery.toLowerCase()
+  ].join(' ');
+
+  // Extract mentioned effects from conversation
+  const effectKeywords = {
+    'sleep': ['sleep', 'insomnia', 'tired', 'rest', 'night'],
+    'pain': ['pain', 'hurt', 'ache', 'sore', 'relief', 'inflammation'],
+    'anxiety': ['anxiety', 'stress', 'nervous', 'worried', 'calm'],
+    'energy': ['energy', 'focus', 'alert', 'productive', 'wake'],
+    'appetite': ['appetite', 'hungry', 'eat', 'munchies'],
+    'creativity': ['creative', 'artistic', 'inspiration', 'music'],
+    'social': ['social', 'party', 'friends', 'conversation']
+  };
+
+  const mentionedEffects: string[] = [];
+  Object.entries(effectKeywords).forEach(([effect, keywords]) => {
+    if (keywords.some(keyword => allText.includes(keyword))) {
+      mentionedEffects.push(effect);
+    }
+  });
+
+  // Extract preferred categories
+  const categoryKeywords = {
+    'edible': ['edible', 'gummy', 'gummies', 'chocolate', 'cookie'],
+    'flower': ['flower', 'bud', 'smoke', 'joint', 'pipe'],
+    'vaporizer': ['vape', 'cartridge', 'cart', 'pen'],
+    'concentrate': ['concentrate', 'wax', 'shatter', 'dab']
+  };
+
+  const preferredCategories: string[] = [];
+  Object.entries(categoryKeywords).forEach(([category, keywords]) => {
+    if (keywords.some(keyword => allText.includes(keyword))) {
+      preferredCategories.push(category);
+    }
+  });
+
+  // Determine experience level
+  let experienceLevel: 'beginner' | 'intermediate' | 'experienced' | 'unknown' = 'unknown';
+  
+  const beginnerIndicators = ['new', 'first time', 'beginner', 'start', 'never tried', 'how much', 'dosing'];
+  const experiencedIndicators = ['usually', 'always', 'prefer', 'tolerance', 'regular', 'experienced'];
+  
+  if (beginnerIndicators.some(indicator => allText.includes(indicator))) {
+    experienceLevel = 'beginner';
+  } else if (experiencedIndicators.some(indicator => allText.includes(indicator))) {
+    experienceLevel = 'experienced';
+  }
+
+  // Extract previous product interest from shown products
+  const previousProductInterest: string[] = [];
+  conversationHistory.forEach(message => {
+    if (message.products && message.products.length > 0) {
+      message.products.forEach(product => {
+        previousProductInterest.push(product.category.toLowerCase());
+        if (product.strain_type) {
+          previousProductInterest.push(product.strain_type.toLowerCase());
+        }
+      });
+    }
+  });
+
+  // Extract cannabinoid preferences
+  const cannabinoidPreferences: string[] = [];
+  if (allText.includes('thc')) cannabinoidPreferences.push('thc');
+  if (allText.includes('cbd')) cannabinoidPreferences.push('cbd');
+  if (allText.includes('high thc') || allText.includes('strongest')) cannabinoidPreferences.push('high-thc');
+  if (allText.includes('low thc') || allText.includes('mild')) cannabinoidPreferences.push('low-thc');
+
+  return {
+    mentionedEffects,
+    preferredCategories,
+    experienceLevel,
+    previousProductInterest: [...new Set(previousProductInterest)],
+    cannabinoidPreferences
+  };
+}
+
+/**
+ * Find products that match multiple effects mentioned in conversation
+ */
+async function findProductsForMultipleEffects(
+  effects: string[],
+  availableProducts: ProductWithVariant[]
+): Promise<ProductWithVariant[]> {
+  const effectToProducts: { [key: string]: ProductWithVariant[] } = {};
+  
+  // Get products for each effect
+  for (const effect of effects) {
+    effectToProducts[effect] = await analyzeInventoryForNeed(effect);
+  }
+  
+  // Find products that appear in multiple effect categories (higher relevance)
+  const productScores: { [key: string]: { product: ProductWithVariant; score: number } } = {};
+  
+  Object.values(effectToProducts).forEach(products => {
+    products.forEach(product => {
+      const key = `${product.id}-${product.variant.id}`;
+      if (productScores[key]) {
+        productScores[key].score += 1;
+      } else {
+        productScores[key] = { product, score: 1 };
+      }
+    });
+  });
+  
+  // Sort by score (products matching multiple effects ranked higher)
+  return Object.values(productScores)
+    .sort((a, b) => b.score - a.score)
+    .map(item => item.product)
+    .slice(0, 4);
 }

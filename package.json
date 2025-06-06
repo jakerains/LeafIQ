@@ -25,6 +25,7 @@
     "dotenv": "^16.5.0",
     "framer-motion": "^11.1.6",
     "lucide-react": "^0.344.0",
+    "motion": "^12.16.0",
     "openai": "^4.47.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

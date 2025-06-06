@@ -155,17 +155,28 @@ const FALLBACK_RESPONSES: Record<string, string> = {
   'microdosing': 'Microdosing cannabis involves taking very small amounts (1-2.5mg THC) to achieve subtle effects without feeling "high." It\'s popular for those seeking therapeutic benefits while remaining functional.',
 };
 
-export const getCannabisKnowledgeResponse = async (query: string): Promise<{ answer: string; shouldRecommendProducts?: boolean }> => {
+
+
+export const getCannabisKnowledgeResponse = async (
+  query: string, 
+  conversationContext?: Array<{ role: string; content: string }>
+): Promise<{ answer: string; shouldRecommendProducts?: boolean; contextUsed?: boolean; fallback?: boolean }> => {
   if (!query.trim()) {
-    return { answer: "Please ask a question about cannabis." };
+    return { answer: "Please ask a question about cannabis.", contextUsed: false, fallback: false };
   }
   
   try {
     console.log('Calling cannabis-knowledge-rag function with query:', query);
     
+    // Prepare the request body with optional conversation context
+    const requestBody: { query: string; conversationContext?: Array<{ role: string; content: string }> } = { query };
+    if (conversationContext && conversationContext.length > 0) {
+      requestBody.conversationContext = conversationContext;
+    }
+    
     // Try to invoke the Edge Function
     const response = await supabase.functions.invoke('cannabis-knowledge-rag', {
-      body: { query }
+      body: requestBody
     });
     
     if (response.error) {
@@ -174,7 +185,9 @@ export const getCannabisKnowledgeResponse = async (query: string): Promise<{ ans
     
     return {
       answer: response.data?.answer || "I couldn't find information about that topic.",
-      shouldRecommendProducts: response.data?.should_recommend_products || false
+      shouldRecommendProducts: response.data?.shouldRecommendProducts || false,
+      contextUsed: response.data?.contextUsed || false,
+      fallback: response.data?.fallback || false
     };
     
   } catch (error) {
@@ -197,7 +210,7 @@ export const getCannabisKnowledgeResponse = async (query: string): Promise<{ ans
       fallbackResponse += "Please try again later or ask about terpenes, THC, CBD, indica, sativa, hybrids, edibles, or the entourage effect.";
     }
     
-    return { answer: fallbackResponse };
+    return { answer: fallbackResponse, contextUsed: false, fallback: true };
   }
 };
 

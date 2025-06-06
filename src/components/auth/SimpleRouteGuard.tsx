@@ -14,6 +14,13 @@ export const SimpleRouteGuard: React.FC<SimpleRouteGuardProps> = ({
 }) => {
   const { userMode, dispensaryName, logout } = useSimpleAuthStore();
 
+  // Debug logging for route guard
+  console.log('🛡️ SimpleRouteGuard check:', {
+    userMode,
+    allowedModes,
+    hasAccess: userMode && allowedModes.includes(userMode)
+  });
+
   // Check if current user mode is allowed
   if (!userMode || !allowedModes.includes(userMode)) {
     return (

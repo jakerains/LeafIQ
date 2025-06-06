@@ -20,6 +20,29 @@ import VersionDisplay from './components/ui/VersionDisplay';
 import SuperadminAuth from './components/auth/SuperadminAuth';
 import SuperadminDashboard from './views/superadmin/SuperadminDashboard';
 
+// Component to redirect based on selected user mode
+const ModeBasedRedirect = () => {
+  const { userMode } = useSimpleAuthStore();
+  
+  console.log('🔄 ModeBasedRedirect: Current userMode =', userMode);
+  
+  // Redirect based on selected mode
+  if (userMode === 'customer') {
+    console.log('   → Redirecting to /app/kiosk');
+    return <Navigate to="/app/kiosk" replace />;
+  } else if (userMode === 'employee') {
+    console.log('   → Redirecting to /app/staff');
+    return <Navigate to="/app/staff" replace />;
+  } else if (userMode === 'admin') {
+    console.log('   → Redirecting to /app/admin');
+    return <Navigate to="/app/admin" replace />;
+  }
+  
+  // Default to kiosk if no mode is set (shouldn't happen due to SimpleAuthProvider)
+  console.log('   → Defaulting to /app/kiosk');
+  return <Navigate to="/app/kiosk" replace />;
+};
+
 function App() {
   const location = useLocation();
 
@@ -67,7 +90,7 @@ function App() {
             path="/kiosk/*" 
             element={
               <SimpleAuthProvider>
-                <SimpleRouteGuard allowedModes={['customer']}>
+                <SimpleRouteGuard allowedModes={['customer', 'employee', 'admin']}>
                   <KioskView />
                 </SimpleRouteGuard>
               </SimpleAuthProvider>
@@ -77,7 +100,7 @@ function App() {
             path="/staff/*" 
             element={
               <SimpleAuthProvider>
-                <SimpleRouteGuard allowedModes={['employee']}>
+                <SimpleRouteGuard allowedModes={['customer', 'employee', 'admin']}>
                   <StaffView />
                 </SimpleRouteGuard>
               </SimpleAuthProvider>
@@ -101,12 +124,12 @@ function App() {
               <SimpleAuthProvider>
                 <Routes>
                   <Route path="kiosk/*" element={
-                    <SimpleRouteGuard allowedModes={['customer']}>
+                    <SimpleRouteGuard allowedModes={['customer', 'employee', 'admin']}>
                       <KioskView />
                     </SimpleRouteGuard>
                   } />
                   <Route path="staff/*" element={
-                    <SimpleRouteGuard allowedModes={['employee']}>
+                    <SimpleRouteGuard allowedModes={['customer', 'employee', 'admin']}>
                       <StaffView />
                     </SimpleRouteGuard>
                   } />
@@ -115,7 +138,7 @@ function App() {
                       <AdminView />
                     </SimpleRouteGuard>
                   } />
-                  <Route path="" element={<Navigate to="/app/kiosk" replace />} />
+                  <Route index element={<ModeBasedRedirect />} />
                 </Routes>
               </SimpleAuthProvider>
             } 

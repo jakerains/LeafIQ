@@ -11,6 +11,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run deploy` - Deploy using bash scripts/deploy.sh
 - `npm run version:show` - Show current version
 - `npm run version:patch` - Bump patch version
+- `npm run version:minor` - Bump minor version
+- `npm run version:major` - Bump major version
+- `npm run create-superadmin` - Create superadmin user
 
 ## Code Quality
 
@@ -60,12 +63,24 @@ Key functions:
 ### Views Structure
 
 - `views/kiosk/`: Customer-facing search interface
-- `views/staff/`: Employee tools with enhanced product data
+- `views/staff/`: Employee tools with enhanced product data and multiple work modes
 - `views/admin/`: Management dashboard with multiple sub-views
   - `AdminInventory.tsx`: Product/variant management
   - `AdminAIModel.tsx`: AI configuration and testing
   - `AdminSettings.tsx`: System settings
   - `AdminDashboard.tsx`: Analytics and overview
+
+### Staff Interface Modes
+
+The staff interface includes multiple specialized modes accessible via `StaffModeSelector`:
+
+- **Product Search Mode** (`ProductSearchMode.tsx`): Advanced product filtering and search with AI-powered recommendations
+- **Staff Chatbot Mode** (`StaffChatbotMode.tsx`): **NEW** - Conversational AI budtender assistant with persistent chat context
+- **Terpene Explorer Mode** (`TerpeneExplorerMode.tsx`): Interactive terpene education and product matching
+- **Inventory Mode** (`StaffInventoryMode.tsx`): Real-time inventory management and stock checking
+- **Consultation Mode**: Coming soon - Customer consultation tools
+- **Training Mode**: Coming soon - Staff education and knowledge base
+- **Analytics Mode**: Coming soon - Performance metrics and insights
 
 ### Data Flow
 
@@ -83,9 +98,17 @@ Required environment variables:
 
 ### Supabase Edge Functions
 
-- `ai-recommendations`: gpt-4.1-nano-2025-04-14 integration for product recommendations
+- `ai-recommendations`: gpt-4.1-nano-2025-04-14 integration for product recommendations **with cannabis-only guardrails**
+- `cannabis-knowledge-rag`: Cannabis education Q&A using knowledge base **with cannabis-only guardrails**
+- `pinecone-ingest`: Vector database ingestion for knowledge base
 - `stripe-checkout`: Payment processing
 - `stripe-webhook`: Stripe webhook handling
+
+**AI Guardrails**: Both chatbot functions (`cannabis-knowledge-rag` and `ai-recommendations`) include **strengthened strict topic boundaries** that keep conversations focused exclusively on cannabis-related topics. They will give a clean redirect response for any non-cannabis questions.
+
+**Guardrail Response**: Non-cannabis questions receive exactly this simple response: *"I'm an AI bud tender, so I'm happy to talk about cannabis-related things. What would you like to know about cannabis?"*
+
+**Cannabis Cooking Allowed**: The guardrails explicitly allow cannabis cooking topics including edibles preparation, decarboxylation, cannabis infusions, cannabutter, cannabis recipes, and cannabis food preparation as these are legitimate cannabis topics.
 
 ### Key Components
 
@@ -93,6 +116,9 @@ Required environment variables:
 - `ProductCard.tsx`: Unified product display component
 - `SearchInput.tsx`: Enhanced search interface with vibe detection
 - `GlassCard.tsx`: Glassmorphic design system component
+- `StaffChatbotMode.tsx`: **NEW** - Conversational AI assistant with persistent context and inventory integration
+- `CannabisQuestionsChat.tsx`: Customer-facing cannabis education chatbot
+- `ResponseStream.tsx`: Streaming text display component for real-time AI responses
 
 ### Styling Conventions
 
@@ -123,3 +149,27 @@ Centralized in `types/index.ts`:
 - **Bulk Loading Scripts**: Root level `.js` files for data import/export
 - **Deployment**: `scripts/deploy.sh` for production deployment
 - **Supabase Functions**: `supabase/functions/` for edge functions
+- **Cannabis Knowledge Base**: `cannabis_education_knowledge_base/` with JSON files for educational content
+- **Demo Data**: `truenorthdemodata/` with sample dispensary inventory data
+
+### Demo Features
+
+Demo credentials provide full access to test all features:
+- Staff: Access to enhanced product search, terpene data, **conversational AI budtender assistant**, and customer assistance tools
+- Admin: Full dashboard access including inventory management, analytics, and AI configuration
+
+Use demo mode to test the complete system without requiring actual inventory or user data.
+
+### Recent Updates
+
+**Staff Chatbot Enhancement** (Latest):
+- Replaced single-shot AI assistant with full conversational chatbot interface
+- **Persistent conversation context**: Chat maintains context throughout the session
+- **Live inventory integration**: Real-time product recommendations based on current stock
+- **Pinecone knowledge base**: Accesses cannabis education database for expert answers
+- **Contextual product suggestions**: Uses conversation history for smarter recommendations
+- **Enhanced UX**: Professional chat interface with typing indicators, conversation history, and product detail modals
+- **Staff-focused features**: Designed specifically for employee use with advanced cannabis knowledge and inventory access
+- **🚫 Cannabis-only guardrails**: Both customer and staff chatbots now strictly stay on cannabis topics and politely redirect non-cannabis questions
+
+The new `StaffChatbotMode.tsx` provides a ChatGPT-like experience specifically tailored for cannabis dispensary staff, combining conversational AI with live inventory data and specialized cannabis knowledge. **All AI responses are now properly guardrailed to maintain focus on cannabis expertise only.**

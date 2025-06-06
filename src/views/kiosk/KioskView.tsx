@@ -215,7 +215,7 @@ const KioskView = () => {
   };
 
   const handleDemoHub = () => {
-    navigate('/');
+    navigate('/app');
     setShowAdminMenu(false);
   };
 

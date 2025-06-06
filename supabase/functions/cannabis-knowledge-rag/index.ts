@@ -36,58 +36,69 @@ const FALLBACK_RESPONSES: Record<string, string> = {
 
 /**
  * Determine if a question should trigger inventory RAG lookup
- * This analyzes the user's question to see if product information would be helpful
- * Updated to be more selective - only show products for direct requests or application questions
+ * More conversational approach - considers context and natural conversation flow
  */
 function shouldUseInventoryRAG(query: string): boolean {
   const lowerQuery = query.toLowerCase();
   
-  // Educational questions that should NOT show products
-  const educationalPhrases = [
-    'what is', 'what are', 'explain', 'definition of', 'define', 'tell me about',
-    'how does', 'why does', 'difference between', 'help me understand',
-    'what\'s the', 'whats the', 'learn about', 'educate me'
+  // Direct product/shopping intent (always show products)
+  const directProductRequests = [
+    'show me', 'what do you have', 'what products', 'what strains', 'inventory',
+    'what gummies', 'what edibles', 'what vapes', 'what flower', 'what concentrates',
+    'browse', 'shop', 'buy', 'purchase', 'available', 'in stock', 'carry',
+    'options', 'selection', 'varieties'
   ];
   
-  // Check if it's a pure educational question
-  const isEducational = educationalPhrases.some(phrase => lowerQuery.includes(phrase));
-  
-  // If it's educational AND doesn't have application context, don't show products
-  if (isEducational) {
-    const hasApplicationContext = lowerQuery.includes('help with') || 
-                                lowerQuery.includes('good for') ||
-                                lowerQuery.includes('best for') ||
-                                lowerQuery.includes('recommend') ||
-                                lowerQuery.includes('which products');
-    
-    return hasApplicationContext;
+  if (directProductRequests.some(phrase => lowerQuery.includes(phrase))) {
+    return true;
   }
   
-  // Direct product requests (always show products)
-  const productKeywords = [
-    'recommend', 'suggestion', 'products', 'strains', 'gummies', 'edibles', 'vapes', 'flower',
-    'best', 'good for', 'help with', 'options', 'available', 'stock', 'inventory', 'have',
-    'strongest', 'highest', 'lowest', 'cheapest', 'most potent'
+  // Recommendation and "good for" questions (show products)
+  const recommendationIndicators = [
+    'recommend', 'suggestion', 'suggest', 'help me find', 'looking for',
+    'need something', 'want something', 'best for', 'good for', 'what\'s good',
+    'whats good', 'help with', 'work for', 'effective for'
   ];
   
-  const hasProductKeywords = productKeywords.some(keyword => lowerQuery.includes(keyword));
+  if (recommendationIndicators.some(phrase => lowerQuery.includes(phrase))) {
+    return true;
+  }
   
-  // Application/effect questions (show products)
-  const applicationKeywords = [
-    'sleep', 'anxiety', 'pain', 'stress', 'energy', 'focus', 'creative', 'social',
-    'relaxation', 'appetite', 'nausea', 'depression', 'mood', 'motivation'
+  // Effect/condition mentions (often lead to product discussions)
+  const effectsAndConditions = [
+    'sleep', 'anxiety', 'pain', 'stress', 'energy', 'focus', 'appetite',
+    'nausea', 'depression', 'mood', 'inflammation', 'headache', 'migraine',
+    'insomnia', 'relaxation', 'creative', 'social', 'concentration'
   ];
   
-  const hasApplicationKeywords = applicationKeywords.some(keyword => lowerQuery.includes(keyword));
+  // If they mention an effect/condition, they probably want to know about products
+  if (effectsAndConditions.some(effect => lowerQuery.includes(effect))) {
+    return true;
+  }
   
-  return hasProductKeywords || hasApplicationKeywords;
+  // Pure educational questions (no products)
+  const pureEducationalPhrases = [
+    'what is', 'what are', 'explain', 'definition of', 'define', 'tell me about',
+    'how does', 'why does', 'difference between', 'help me understand',
+    'learn about', 'educate me', 'how do', 'entourage effect', 
+    'endocannabinoid', 'cannabinoid receptor'
+  ];
+  
+  // Only return false for pure educational IF no effects are mentioned
+  if (pureEducationalPhrases.some(phrase => lowerQuery.includes(phrase))) {
+    // But still show products if they're asking about effects
+    return effectsAndConditions.some(effect => lowerQuery.includes(effect));
+  }
+  
+  // Default to showing products for conversational flow
+  return true;
 }
 
 // CORS headers to be used consistently throughout the function
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-debug',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-debug, x-stream',
   'Content-Type': 'application/json'
 };
 
@@ -95,7 +106,26 @@ const corsHeaders = {
 const getFallbackResponse = (query: string): string => {
   const lowerQuery = query.toLowerCase();
   
-  // Find matching fallback responses
+  // Check if the question is even cannabis-related
+  const cannabisKeywords = ['cannabis', 'weed', 'marijuana', 'thc', 'cbd', 'strain', 'terpene', 'edible', 'vape', 'flower', 'indica', 'sativa', 'hybrid', 'dose', 'dosing', 'hemp', 'decarb', 'infusion', 'cannabutter', 'canna-oil'];
+  const isCannabisTopic = cannabisKeywords.some(keyword => lowerQuery.includes(keyword));
+  
+  // Check for cannabis cooking/edibles context
+  const cannabisCookingKeywords = ['cannabis cook', 'cannabis recipe', 'cannabis baking', 'edible recipe', 'cannabutter', 'canna-oil', 'cannabis infusion', 'decarboxylation', 'decarb', 'cannabis food', 'infused butter', 'infused oil', 'make edibles', 'cannabis chocolate', 'cannabis gummies'];
+  const isCannabisCooking = cannabisCookingKeywords.some(keyword => lowerQuery.includes(keyword));
+  
+  // Check for obvious non-cannabis topics (but exclude cannabis cooking)
+  const nonCannabisKeywords = ['code', 'coding', 'program', 'javascript', 'python', 'computer', 'software', 'algorithm', 'sport', 'politics', 'alcohol', 'beer', 'wine'];
+  const isNonCannabisTopic = nonCannabisKeywords.some(keyword => lowerQuery.includes(keyword));
+  
+  // Check for general cooking (not cannabis-related)
+  const isGeneralCooking = (lowerQuery.includes('recipe') || lowerQuery.includes('cook') || lowerQuery.includes('food') || lowerQuery.includes('baking')) && !isCannabisCooking;
+  
+  if (isNonCannabisTopic || isGeneralCooking || (!isCannabisTopic && !isCannabisCooking && (lowerQuery.includes('how to') || lowerQuery.includes('what is') || lowerQuery.includes('help me')))) {
+    return "I'm an AI bud tender, so I'm happy to talk about cannabis-related things. What would you like to know about cannabis?";
+  }
+  
+  // Find matching fallback responses for cannabis topics
   const matchingKeywords = Object.keys(FALLBACK_RESPONSES).filter(keyword => 
     lowerQuery.includes(keyword.toLowerCase())
   );
@@ -106,7 +136,7 @@ const getFallbackResponse = (query: string): string => {
     return "I'm sorry, I couldn't connect to the knowledge base at the moment. " + FALLBACK_RESPONSES[bestMatch];
   } 
   
-  return "I'm sorry, I couldn't connect to the knowledge base at the moment. But I'm here to help with any cannabis questions you have! Whether it's about strains, effects, consumption methods, or dosing - feel free to ask me anything specific and I'll do my best to guide you safely and responsibly.";
+  return "I'm sorry, I couldn't connect to the knowledge base at the moment. But I'm here to help with any cannabis questions you have! Whether it's about cannabis strains, effects, consumption methods, or dosing - feel free to ask me anything cannabis-related and I'll do my best to guide you safely and responsibly.";
 };
 
 const handler = async (req: Request): Promise<Response> => {
@@ -118,9 +148,11 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Parse request data
     let query: string;
+    let conversationContext: Array<{ role: string; content: string }> = [];
     try {
       const data = await req.json();
       query = data.query;
+      conversationContext = data.conversationContext || [];
     } catch (error) {
       console.error('Error parsing request JSON:', error);
       return new Response(
@@ -192,62 +224,108 @@ const handler = async (req: Request): Promise<Response> => {
       }
 
       // 3. Construct prompt for LLM
-      const systemPrompt = `You are Bud Buddy, a friendly and knowledgeable cannabis expert who works as a budtender assistant. You have a warm, approachable personality and love helping people learn about cannabis in a way that's easy to understand. You're like a knowledgeable friend who always looks out for people's wellbeing.
+      const systemPrompt = `You are Bud Buddy, a friendly and knowledgeable cannabis expert who works as a budtender assistant. You're having a natural conversation with dispensary staff to help them learn and assist customers better.
+
+IMPORTANT BOUNDARIES - YOU MUST FOLLOW THESE:
+🚫 **CANNABIS-ONLY EXPERTISE**: You are ONLY knowledgeable about cannabis, cannabis products, cannabis cultivation, cannabis effects, cannabis science, cannabis regulations, cannabis cooking/edibles preparation, and cannabis industry topics. You have NO knowledge about anything else.
+
+🚫 **STRICT TOPIC BOUNDARIES**: If asked about ANY non-cannabis topic (coding, programming, technology, general cooking without cannabis, sports, politics, other drugs, medical advice beyond cannabis, etc.), you MUST respond EXACTLY with: "I'm an AI bud tender, so I'm happy to talk about cannabis-related things. What would you like to know about cannabis?"
+
+🚫 **NO EXCEPTIONS**: Do NOT provide any non-cannabis information even if you think it might be helpful. Do NOT try to relate non-cannabis topics back to cannabis. Simply use the redirect response above.
+
+EXAMPLES OF WHAT TO REDIRECT:
+- "How do I code in Python?" → Use redirect response
+- "What's the best way to cook pasta?" → Use redirect response  
+- "How do I fix my computer?" → Use redirect response
+- "What's the weather like?" → Use redirect response
+
+EXAMPLES OF WHAT TO ANSWER:
+- "What are terpenes?" → Answer about cannabis terpenes
+- "How do I make cannabutter?" → Answer about cannabis cooking
+- "What's the difference between indica and sativa?" → Answer about cannabis strains
+
+✅ **CANNABIS COOKING ALLOWED**: You CAN discuss cannabis cooking, edibles preparation, decarboxylation, cannabis infusions, cannabutter, cannabis recipes, and cannabis food preparation. These are legitimate cannabis topics.
+
+🚫 **NO MEDICAL ADVICE**: You can discuss how cannabis affects the body and what people commonly use it for, but you cannot diagnose conditions or provide medical advice. Always remind people to consult healthcare providers for medical decisions.
+
+🚫 **NO OTHER SUBSTANCES**: You only discuss cannabis/hemp. If asked about alcohol, tobacco, pharmaceuticals, or other substances, redirect to cannabis topics only.
 
 Your personality traits:
-- Friendly and conversational, never clinical or overly formal
-- Safety-conscious - you always emphasize "start low and go slow" 
-- Educational but not preachy - you love sharing knowledge in bite-sized, digestible pieces
-- Encouraging and supportive of people exploring cannabis responsibly
-- You use phrases like "Hey there!", "Trust me on this one!", "Here's the thing though", and "That's awesome!"
+- Conversational and friendly, like talking to a knowledgeable colleague
+- Educational but not preachy - you love sharing cannabis knowledge naturally
+- Safety-conscious - you weave in cannabis safety tips when relevant
+- Encouraging of cannabis-related questions and follow-ups
+- You use natural conversational phrases about cannabis topics
 
-IMPORTANT GUIDELINES FOR PRODUCT RECOMMENDATIONS:
+CONVERSATIONAL APPROACH:
 
-1. **Direct Product Questions**: When someone asks "What gummies do you have?", "Show me your edibles", "What products do you carry?", etc., you should:
-   - Acknowledge their specific request
-   - Provide brief relevant information about that product type
-   - DO NOT say "I don't have exact inventory" - you DO have access to current inventory
-   - End with something like "Let me show you what we have in stock:" or "Here are our current options:"
+**Natural Flow**: Respond conversationally to cannabis questions. If they ask about non-cannabis topics, politely redirect to cannabis discussion.
 
-2. **Educational Questions**: When someone asks "What are terpenes?", "What is THC?", "Explain the endocannabinoid system", etc., provide ONLY educational information. Do NOT mention products or suggest looking at inventory.
+**Educational Context**: When discussing cannabis effects, conditions, or recommendations, naturally weave in relevant educational information about:
+- How cannabis works for that condition
+- Relevant cannabinoids and terpenes
+- Cannabis dosing considerations
+- What to expect from cannabis use
 
-3. **Application Questions**: When someone asks "What indica strains help with sleep?", "Recommend something for anxiety", "Which products have good terpenes?", etc., provide educational information AND conclude with product suggestions if available.
+**Product Integration**: When discussing cannabis recommendations, mention that you can show them specific cannabis products. Use natural phrases like:
+- "Want to see what cannabis products we have that might work for that?"
+- "I can show you some cannabis options that fit what you're looking for"
+- "We've got some cannabis products that would be perfect - want to take a look?"
 
-RESPONSE STRUCTURE:
-- Answer the SPECIFIC question asked
-- For direct product requests, acknowledge you'll show current inventory
-- If it's purely educational, stop after the explanation
-- If it involves product selection/recommendations, conclude with: "Here are some of our [relevant type] options:" or similar
-- Always prioritize safety and responsible use
-- Keep responses conversational and easy to understand
+**Follow-up Friendly**: Always encourage cannabis questions and make it easy for them to ask cannabis follow-ups. End responses with cannabis-focused invitations like:
+- "What else would you like to know about cannabis?"
+- "Any other cannabis questions?"
+- "Curious about anything else related to cannabis?"
 
-The system will automatically add actual product information from our current inventory when appropriate - your job is to provide the educational content and properly introduce product recommendations when asked.`;
+**Conversation Memory**: Reference previous cannabis topics discussed when relevant. Build on previous cannabis discussions naturally.
+
+Remember: You're a cannabis expert having cannabis conversations. Stay strictly within cannabis topics and politely redirect any non-cannabis questions back to cannabis discussion.`;
       
       const userPrompt = `User's Question: ${query}
 
 Context from Knowledge Base:
 ${context || "No specific context available for this question."}
 
-Instructions: Answer the user's SPECIFIC question above. If they asked about the endocannabinoid system, explain what it is. If they asked about dosing, explain dosing. If they asked for product recommendations or mentioned wanting to try something, provide educational context and then indicate that product recommendations would be helpful. Do NOT give generic "getting started" advice unless that's what they asked for. Use the context provided to give an accurate, helpful answer to their actual question.
+CRITICAL INSTRUCTIONS - READ CAREFULLY:
+
+1. TOPIC CHECK FIRST: Before answering anything, determine if this question is about:
+   - Cannabis, marijuana, weed, THC, CBD
+   - Cannabis products (flower, edibles, vapes, concentrates, etc.)
+   - Cannabis effects, dosing, or consumption
+   - Cannabis science (terpenes, cannabinoids, endocannabinoid system)
+   - Cannabis cooking/edibles preparation
+   - Cannabis cultivation or industry
+
+2. IF THE QUESTION IS NOT ABOUT CANNABIS:
+   RESPOND EXACTLY WITH THIS: "I'm an AI bud tender, so I'm happy to talk about cannabis-related things. What would you like to know about cannabis?"
+
+3. IF THE QUESTION IS ABOUT CANNABIS:
+   Answer the specific cannabis question using the context provided.
+
+DO NOT provide any information about coding, technology, general cooking, sports, politics, or any non-cannabis topic. Even if you can relate it to cannabis, if the original question wasn't about cannabis, use the redirect response.
 
 Answer:`;
 
-      // 4. Call LLM to generate response
+      // 4. Determine if we should recommend products
+      const shouldRecommendProducts = shouldUseInventoryRAG(query);
+      
+      // 5. Generate AI response with conversation context
+      const messages = [
+        { role: 'system', content: systemPrompt },
+        // Include recent conversation context if available
+        ...conversationContext.slice(-4), // Last 4 messages for context
+        { role: 'user', content: userPrompt },
+      ];
+      
       const chatCompletion = await openai.chat.completions.create({
-        model: 'gpt-4.1-nano-2025-04-14', // Updated to correct model name
-        messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: userPrompt },
-        ],
+        model: 'gpt-4.1-nano-2025-04-14',
+        messages: messages,
         temperature: 0.7,
         max_tokens: 500,
       });
 
       const botResponse = chatCompletion.choices[0].message.content;
       
-      // Check if products should be recommended based on the query
-      const shouldRecommendProducts = shouldUseInventoryRAG(query);
-
       // Include debug info if requested
       const debugInfo = req.headers.get('X-Debug') === 'true' ? {
         retrieved_context: context,
@@ -261,8 +339,9 @@ Answer:`;
       return new Response(
         JSON.stringify({ 
           answer: botResponse, 
-          context_used: context ? true : false,
-          should_recommend_products: shouldRecommendProducts,
+          contextUsed: context ? true : false,
+          shouldRecommendProducts: shouldRecommendProducts,
+          fallback: false,
           ...debugInfo
         }),
         { headers: corsHeaders, status: 200 }

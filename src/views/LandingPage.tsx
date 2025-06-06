@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Check } from 'lucide-react';
 import { ShimmerButton } from '../components/ui/shimmer-button';
 import { FeaturesSection } from '../components/ui/bento-demo';
+import { GlowingEffect } from '../components/ui/glowing-effect';
 
 const LandingPage = () => {
   const [isYearly, setIsYearly] = useState(false);
@@ -124,15 +125,27 @@ const LandingPage = () => {
                   transition={{ duration: 0.5 }}
                   className="relative w-5/6"
                 >
-                  <div className="absolute -inset-1 bg-gradient-to-r from-primary-500 to-primary-300 rounded-2xl blur-md opacity-40"></div>
-                  <div className="absolute -inset-0.5 bg-white/10 rounded-2xl backdrop-blur-sm"></div>
-                  <img
-                    src="/leafie-use3.jpeg"
-                    alt="LeafIQ Dashboard"
-                    className="rounded-2xl shadow-2xl relative z-10 border-2 border-white/30 backdrop-blur-sm"
-                  />
-                  <div className="absolute -bottom-3 -right-3 w-24 h-24 bg-primary-500/20 rounded-full blur-xl"></div>
-                  <div className="absolute -top-3 -left-3 w-16 h-16 bg-accent-500/20 rounded-full blur-xl"></div>
+                  <div className="relative rounded-2xl border-[0.75px] border-gray-200/30 p-3">
+                    <GlowingEffect
+                      spread={50}
+                      glow={true}
+                      disabled={false}
+                      proximity={100}
+                      inactiveZone={0.1}
+                      borderWidth={3}
+                      movementDuration={2.5}
+                    />
+                    <div className="relative">
+                      <img
+                        src="/leafie-use3.jpeg"
+                        alt="LeafIQ Dashboard"
+                        className="rounded-xl shadow-2xl w-full border-2 border-white/40 backdrop-blur-sm"
+                      />
+                      {/* Decorative floating elements */}
+                      <div className="absolute -bottom-4 -right-4 w-20 h-20 bg-primary-500/15 rounded-full blur-xl"></div>
+                      <div className="absolute -top-4 -left-4 w-16 h-16 bg-accent-500/15 rounded-full blur-xl"></div>
+                    </div>
+                  </div>
                 </motion.div>
               </div>
             </div>
@@ -226,38 +239,55 @@ const LandingPage = () => {
             </div>
           </div>
           
-          <div className="mt-16 max-w-3xl mx-auto">
+          <motion.div 
+            className="mt-16 max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             <h3 className="text-2xl font-display font-bold mb-6 text-center">Optional Enhancements</h3>
-            <div className="bg-white bg-opacity-20 backdrop-blur-xl rounded-2xl p-6 border border-white/20">
-              <p className="text-lg mb-4">Expand LeafIQ as your needs grow:</p>
-              <ul className="space-y-2 mb-6">
-                <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>Custom AI tuning with your store's historical data</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>Multi-location management dashboard</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>Deep POS & menu integrations (Dutchie, Jane, Weedmaps, etc.)</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>Dedicated account manager & enterprise SLA</span>
-                </li>
-              </ul>
-              <div className="text-center">
-                <Link 
-                  to="/contact"
-                  className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-xl font-medium hover:from-primary-600 hover:to-secondary-600 shadow-md hover:shadow-lg transition-all duration-300"
-                >
-                  Contact Sales for details
-                </Link>
+            <div className="relative rounded-2xl border-[0.75px] border-gray-200/50 p-2">
+              <GlowingEffect
+                spread={45}
+                glow={true}
+                disabled={false}
+                proximity={80}
+                inactiveZone={0.05}
+                borderWidth={2}
+                movementDuration={2}
+              />
+              <div className="relative bg-white/80 backdrop-blur-xl rounded-xl p-8 shadow-sm">
+                <p className="text-lg mb-6 text-gray-900 font-medium">Expand LeafIQ as your needs grow:</p>
+                <ul className="space-y-4 mb-8">
+                  <li className="flex items-start">
+                    <span className="text-primary-500 mr-3 mt-1 text-lg">•</span>
+                    <span className="text-gray-700">Custom AI tuning with your store's historical data</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-primary-500 mr-3 mt-1 text-lg">•</span>
+                    <span className="text-gray-700">Multi-location management dashboard</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-primary-500 mr-3 mt-1 text-lg">•</span>
+                    <span className="text-gray-700">Deep POS & menu integrations (Dutchie, Jane, Weedmaps, etc.)</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-primary-500 mr-3 mt-1 text-lg">•</span>
+                    <span className="text-gray-700">Dedicated account manager & enterprise SLA</span>
+                  </li>
+                </ul>
+                <div className="text-center">
+                  <Link 
+                    to="/contact"
+                    className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-xl font-medium hover:from-primary-600 hover:to-secondary-600 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                  >
+                    Contact Sales for details
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -332,59 +362,74 @@ const PricingCard = ({
 }) => {
   return (
     <motion.div 
-      className={cn(
-        `p-8 rounded-2xl h-full flex flex-col justify-between ${
-          highlighted 
-            ? 'bg-primary-500 text-white shadow-xl scale-105' 
-            : 'bg-white bg-opacity-20 backdrop-blur-2xl text-gray-900 border border-white/20'
-        }`
-      )}
+      className="h-full"
       whileHover={{ y: -4 }}
       transition={{ duration: 0.2 }}
     >
-      <div>
-        <h3 className="text-2xl font-semibold mb-2">{title}</h3>
-        <div className="mb-4">
-          {isYearly && monthlyPrice && highlighted ? (
-            <div className="flex flex-col">
-              <span className="text-4xl font-bold">{price}</span>
-              <div className="flex items-center gap-2 mt-1">
-                <span className="text-lg line-through opacity-70">${parseInt(monthlyPrice.replace('$', '')) * 12}</span>
-                <span className="text-sm bg-primary-400 px-2 py-0.5 rounded-full">2 months free!</span>
-              </div>
+      <div className="relative h-full rounded-2xl border-[0.75px] border-gray-200/50 p-2">
+        <GlowingEffect
+          spread={40}
+          glow={true}
+          disabled={false}
+          proximity={70}
+          inactiveZone={0.05}
+          borderWidth={highlighted ? 3 : 2}
+          movementDuration={1.8}
+        />
+        <div 
+          className={
+            `relative p-8 rounded-xl h-full flex flex-col justify-between ${
+              highlighted 
+                ? 'bg-primary-500 text-white shadow-xl' 
+                : 'bg-white/80 backdrop-blur-xl text-gray-900 shadow-sm'
+            }`
+          }
+        >
+          <div>
+            <h3 className="text-2xl font-semibold mb-2">{title}</h3>
+            <div className="mb-4">
+              {isYearly && monthlyPrice && highlighted ? (
+                <div className="flex flex-col">
+                  <span className="text-4xl font-bold">{price}</span>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="text-lg line-through opacity-70">${parseInt(monthlyPrice.replace('$', '')) * 12}</span>
+                    <span className="text-sm bg-primary-400 px-2 py-0.5 rounded-full">2 months free!</span>
+                  </div>
+                </div>
+              ) : (
+                <div>
+                  <span className="text-4xl font-bold">{price}</span>
+                  {period && <span className="text-lg">{period}</span>}
+                </div>
+              )}
             </div>
-          ) : (
-            <div>
-              <span className="text-4xl font-bold">{price}</span>
-              {period && <span className="text-lg">{period}</span>}
-            </div>
-          )}
+            <p className={`mb-6 ${highlighted ? 'text-primary-100' : 'text-gray-600'}`}>
+              {isYearly && highlighted ? "" : description}
+            </p>
+            <ul className="space-y-3 mb-8">
+              {features.map((feature, index) => (
+                <li key={index} className="flex items-center">
+                  <Check 
+                    className={`w-5 h-5 mr-2 ${highlighted ? 'text-primary-200' : 'text-primary-500'}`}
+                  />
+                  {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
+          
+          <div className="mt-auto">
+            <Link to={buttonLink}>
+              <ShimmerButton
+                className="w-full"
+                shimmerColor={highlighted ? "#ffffff" : "#22c55e"}
+                background={highlighted ? "rgba(255, 255, 255, 0.1)" : "rgba(34, 197, 94, 1)"}
+              >
+                {buttonText}
+              </ShimmerButton>
+            </Link>
+          </div>
         </div>
-        <p className={`mb-6 ${highlighted ? 'text-primary-100' : 'text-gray-600'}`}>
-          {isYearly && highlighted ? "" : description}
-        </p>
-        <ul className="space-y-3 mb-8">
-          {features.map((feature, index) => (
-            <li key={index} className="flex items-center">
-              <Check 
-                className={`w-5 h-5 mr-2 ${highlighted ? 'text-primary-200' : 'text-primary-500'}`}
-              />
-              {feature}
-            </li>
-          ))}
-        </ul>
-      </div>
-      
-      <div className="mt-auto">
-        <Link to={buttonLink}>
-          <ShimmerButton
-            className="w-full"
-            shimmerColor={highlighted ? "#ffffff" : "#22c55e"}
-            background={highlighted ? "rgba(255, 255, 255, 0.1)" : "rgba(34, 197, 94, 1)"}
-          >
-            {buttonText}
-          </ShimmerButton>
-        </Link>
       </div>
     </motion.div>
   );

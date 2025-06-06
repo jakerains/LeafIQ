@@ -1,13 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Send, User, Loader, Info, ShoppingBag, Search } from 'lucide-react';
+import { Send, User, Loader, Info, ShoppingBag, Database, Zap, Target, MessageCircle } from 'lucide-react';
 import { Button } from '../ui/button';
 import { ProductWithVariant } from '../../types';
-import { getCannabisKnowledgeResponse } from '../../lib/supabase'; 
+import { getCannabisKnowledgeResponse } from '../../lib/supabase';
+import { ResponseStream } from '../ui/response-stream'; 
 import {
-  shouldUseInventoryRAG,
   getInventoryExamplesForQuery,
-  formatProductRecommendation
+  getConversationContextualProducts
 } from '../../utils/budInventoryAccess';
 
 interface CannabisQuestionsChatProps {
@@ -15,17 +15,24 @@ interface CannabisQuestionsChatProps {
   isLoading?: boolean;
 }
 
+// Enhanced chat message interface to include context explanations
+interface ChatMessage {
+  type: 'user' | 'bot';
+  text: string;
+  products?: ProductWithVariant[];
+  introText?: string;
+  contextExplanation?: string; // New field for context-aware explanations
+  knowledgeInfo?: { contextUsed: boolean; fallback: boolean };
+  isStreaming?: boolean;
+  streamGenerator?: AsyncIterable<string>;
+}
+
 const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
   onSearch,
   isLoading = false
 }) => {
   const [query, setQuery] = useState('');
-  const [chatHistory, setChatHistory] = useState<Array<{
-    type: 'user' | 'bot'; 
-    text: string;
-    products?: ProductWithVariant[];
-    introText?: string;
-  }>>([
+  const [chatHistory, setChatHistory] = useState<ChatMessage[]>([
     {
       type: 'bot', 
       text: "I'm Bud, and I'm here to answer all your cannabis questions in a friendly, easy-to-understand way. No judgment, just helpful information!"
@@ -33,12 +40,11 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
   ]);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   const chatEndRef = useRef<HTMLDivElement>(null);
-  const [isBotTyping, setIsBotTyping] = useState(false); // State for typing indicator
+  const [isBotTyping, setIsBotTyping] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<ProductWithVariant | null>(null);
   
   // Auto-scroll to bottom of chat container when messages are added
   useEffect(() => {
-    // Only scroll the chat container, not the entire page
     if (chatEndRef.current && chatContainerRef.current) {
       chatEndRef.current.scrollIntoView({ 
         behavior: 'smooth', 
@@ -46,17 +52,18 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
         inline: 'start' 
       });
     }
-  }, [chatHistory, isBotTyping]); // Include isBotTyping to scroll when indicator appears
+  }, [chatHistory, isBotTyping]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!query.trim() || isLoading || isBotTyping) return; // Prevent multiple submissions
+    if (!query.trim() || isLoading || isBotTyping) return;
     
     const userQuery = query.trim();
     // Add user message to chat history
-    setChatHistory(prev => [...prev, {type: 'user', text: userQuery}]);
+    const updatedHistory = [...chatHistory, {type: 'user' as const, text: userQuery}];
+    setChatHistory(updatedHistory);
     setQuery(''); // Clear input immediately
-    setIsBotTyping(true); // Show typing indicator
+    setIsBotTyping(true);
     
     // Forward the search query if onSearch is provided (for logging/analytics)
     if (onSearch) {
@@ -64,47 +71,83 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
     }
     
     try {
-      // Get the knowledge response from the Edge Function
-      const knowledgeResponse = await getCannabisKnowledgeResponse(userQuery);
-      
-      let botResponse: string = knowledgeResponse.answer;
-      let productRecommendations: ProductWithVariant[] = [];
-      let introText = '';
-      
-      // Only get product recommendations if the Edge Function indicates we should
-      if (knowledgeResponse.shouldRecommendProducts) {
-        try {
-          console.log('🛒 Edge Function indicates products should be recommended');
-          const inventoryExamples = await getInventoryExamplesForQuery(userQuery);
-          productRecommendations = inventoryExamples.products;
-          introText = inventoryExamples.introText;
-        } catch (inventoryError) {
-          console.error("Error getting inventory examples:", inventoryError);
+      // Get the response from the Edge Function with conversation context
+      try {
+        // Prepare conversation context for better responses - include current conversation
+        const conversationContext = updatedHistory.slice(-6).map(msg => ({
+          role: msg.type === 'user' ? 'user' : 'assistant',
+          content: msg.text
+        }));
+        
+        const response = await getCannabisKnowledgeResponse(userQuery, conversationContext);
+        
+        // Create bot message with the response
+        const botMessage: ChatMessage = {
+          type: 'bot' as const,
+          text: response.answer,
+          knowledgeInfo: {
+            contextUsed: response.contextUsed || false,
+            fallback: response.fallback || false
+          }
+        };
+        
+        // Enhanced: Use conversation-context-aware product suggestions
+        if (response.shouldRecommendProducts) {
+          try {
+            console.log('🧠 Using conversation-context-aware product suggestions');
+            
+            // Get conversation history for context analysis
+            const currentHistory = updatedHistory.map(msg => ({
+              type: msg.type,
+              text: msg.text,
+              products: msg.products
+            }));
+            
+            // Use enhanced contextual product suggestions
+            const contextualResult = await getConversationContextualProducts(userQuery, currentHistory);
+            
+            if (contextualResult.products.length > 0) {
+              botMessage.products = contextualResult.products;
+              botMessage.introText = contextualResult.introText;
+              botMessage.contextExplanation = contextualResult.contextExplanation;
+            } else {
+              // Fallback to regular inventory examples if contextual fails
+              console.log('🔄 Falling back to regular inventory examples');
+              const inventoryExamples = await getInventoryExamplesForQuery(userQuery);
+              botMessage.products = inventoryExamples.products;
+              botMessage.introText = inventoryExamples.introText;
+            }
+          } catch (inventoryError) {
+            console.error("Error getting contextual product suggestions:", inventoryError);
+          }
         }
-      } else {
-        console.log('🎓 Educational question - no products needed');
+        
+        setChatHistory(prev => [...prev, botMessage]);
+        
+      } catch (error) {
+        console.error("Error getting cannabis knowledge response:", error);
+        setChatHistory(prev => [
+          ...prev, 
+          {
+            type: 'bot',
+            text: "I'm sorry, I encountered an error while trying to answer. Please try again.",
+            knowledgeInfo: { contextUsed: false, fallback: true }
+          }
+        ]);
       }
       
-      setChatHistory(prev => [
-        ...prev, 
-        {
-          type: 'bot', 
-          text: botResponse || "I'm sorry, I couldn't find an answer to that question.",
-          products: productRecommendations.length > 0 ? productRecommendations : undefined,
-          introText: introText || undefined
-        }
-      ]);
     } catch (error) {
-      console.error("Error getting bot response:", error);
+      console.error("Error setting up streaming:", error);
       setChatHistory(prev => [
         ...prev, 
         {
           type: 'bot', 
-          text: "I'm sorry, I encountered an error while trying to answer. Please try again."
+          text: "I'm sorry, I encountered an error while trying to answer. Please try again.",
+          knowledgeInfo: { contextUsed: false, fallback: true }
         }
       ]);
     } finally {
-      setIsBotTyping(false); // Hide typing indicator
+      setIsBotTyping(false);
     }
   };
 
@@ -122,14 +165,65 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
     }
   };
 
-  // Format product card for display in the chat
+  // Format text with proper paragraph breaks and styling
+  const formatBotResponse = (text: string): JSX.Element[] => {
+    // Split text into sentences and paragraphs
+    const sentences = text.split('. ').filter(s => s.trim());
+    
+    // Group sentences into paragraphs (roughly every 2-3 sentences)
+    const paragraphs: string[] = [];
+    let currentParagraph = '';
+    
+    sentences.forEach((sentence, index) => {
+      currentParagraph += sentence;
+      
+      // Add period back if it's not the last sentence
+      if (index < sentences.length - 1) {
+        currentParagraph += '. ';
+      }
+      
+      // Create a new paragraph every 2-3 sentences or if we detect natural breaks
+      const isNaturalBreak = sentence.includes('For example') || 
+                           sentence.includes('Think of it') || 
+                           sentence.includes('Trust me') ||
+                           sentence.includes('Here\'s the thing') ||
+                           sentence.includes('That\'s awesome') ||
+                           sentence.includes('If you\'d like');
+      
+      if ((index + 1) % 3 === 0 || isNaturalBreak || index === sentences.length - 1) {
+        paragraphs.push(currentParagraph.trim());
+        currentParagraph = '';
+      }
+    });
+    
+    // Apply styling to paragraphs
+    return paragraphs.filter(p => p.length > 0).map((paragraph, index) => {
+      // Highlight key phrases for better readability
+      let styledParagraph = paragraph
+        .replace(/(Hey there!|Trust me on this one!|Here's the thing though|That's awesome!)/g, '<span class="font-medium text-emerald-700">$1</span>')
+        .replace(/(For example|Think of it like)/g, '<span class="font-medium text-gray-800">$1</span>')
+        .replace(/("start low and go slow")/g, '<span class="font-medium text-amber-700 bg-amber-50 px-1 rounded">$1</span>');
+      
+      return (
+        <p 
+          key={index} 
+          className="text-gray-700 leading-relaxed text-left"
+          dangerouslySetInnerHTML={{ __html: styledParagraph }}
+        />
+      );
+    });
+  };
+
+  // Enhanced product card that's always clickable
   const ProductCard = ({ product }: { product: ProductWithVariant }) => {
     return (
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="bg-white rounded-lg overflow-hidden shadow-md border border-green-100 hover:shadow-lg transition-all duration-300 cursor-pointer"
+        className="bg-white rounded-lg overflow-hidden shadow-md border border-green-100 hover:shadow-lg transition-all duration-300 cursor-pointer group"
         onClick={() => setSelectedProduct(product)}
+        whileHover={{ scale: 1.02 }}
+        whileTap={{ scale: 0.98 }}
       >
         <div className="flex">
           {product.image_url && (
@@ -141,24 +235,34 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
               />
             </div>
           )}
-          <div className="p-3 flex-1">
-            <h4 className="font-medium text-gray-900 text-sm">{product.name}</h4>
-            <p className="text-xs text-gray-600">{product.brand}</p>
-            
-            <div className="flex items-center justify-between mt-2">
-              <div className="flex gap-1">
-                <span className="px-1.5 py-0.5 bg-green-100 text-green-800 rounded text-xs">
-                  {product.variant.thc_percentage?.toFixed(1)}% THC
-                </span>
-                {product.variant.cbd_percentage && product.variant.cbd_percentage > 0 && (
-                  <span className="px-1.5 py-0.5 bg-blue-100 text-blue-800 rounded text-xs">
-                    {product.variant.cbd_percentage.toFixed(1)}% CBD
+          
+          <div className="flex-1 p-3">
+            <div className="flex items-start justify-between">
+              <div className="min-w-0 flex-1">
+                <h4 className="font-semibold text-gray-900 text-sm truncate group-hover:text-emerald-700 transition-colors">
+                  {product.name}
+                </h4>
+                <p className="text-xs text-gray-600 mb-1">{product.brand}</p>
+                
+                <div className="flex items-center space-x-1 mb-2">
+                  <span className="px-2 py-0.5 bg-green-100 text-green-800 rounded text-xs font-medium">
+                    {product.strain_type}
                   </span>
-                )}
+                  <span className="px-2 py-0.5 bg-blue-100 text-blue-800 rounded text-xs font-medium">
+                    {product.variant.thc_percentage?.toFixed(1)}% THC
+                  </span>
+                </div>
+                
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-bold text-emerald-600">
+                    ${product.variant.price?.toFixed(2)}
+                  </span>
+                  <div className="flex items-center text-xs text-gray-500">
+                    <Info size={12} className="mr-1 group-hover:text-emerald-500 transition-colors" />
+                    Click for details
+                  </div>
+                </div>
               </div>
-              <span className="text-emerald-600 font-medium text-sm">
-                ${product.variant.price?.toFixed(2)}
-              </span>
             </div>
           </div>
         </div>
@@ -338,42 +442,98 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
                 key={index} 
                 className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}
               >
-                <div className={`flex items-start space-x-3 ${message.type === 'user' ? 'flex-row-reverse space-x-reverse' : ''} max-w-[85%]`}>
+                <div className={`flex items-start space-x-3 max-w-[85%] ${message.type === 'user' ? 'flex-row' : ''}`}>
                   {message.type === 'bot' && (
-                    <div className="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden">
-                      <img
-                        src="/budbuddy.png" 
-                        alt="Bud" 
-                        className="h-full w-full object-cover"
-                      />
+                    <div className="flex flex-col items-center space-y-1">
+                      <div className="flex-shrink-0 h-10 w-10 rounded-full overflow-hidden">
+                        <img
+                          src="/budbuddy.png" 
+                          alt="Bud" 
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                      {/* Knowledge Source Badge */}
+                      {message.knowledgeInfo && message.knowledgeInfo.contextUsed && (
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          className="flex items-center space-x-1 bg-green-100 text-green-700 px-2 py-0.5 rounded-full text-xs font-medium border border-green-200"
+                          title="Response powered by Pinecone knowledge base"
+                        >
+                          <Database className="h-3 w-3" />
+                          <span>KB</span>
+                        </motion.div>
+                      )}
+                      {message.knowledgeInfo && message.knowledgeInfo.fallback && (
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          className="flex items-center space-x-1 bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full text-xs font-medium border border-orange-200"
+                          title="Using fallback response - knowledge base unavailable"
+                        >
+                          <Zap className="h-3 w-3" />
+                          <span>Local</span>
+                        </motion.div>
+                      )}
                     </div>
                   )}
-                  <div className={`${
-                    message.type === 'user' 
-                      ? 'bg-emerald-500 text-white rounded-2xl rounded-tr-sm p-4 shadow-sm' 
-                      : 'bg-white rounded-2xl rounded-tl-sm p-4 shadow-sm border border-green-100'
-                  }`}>
-                    <p className={`${message.type === 'user' ? 'text-white' : 'text-gray-700'} leading-relaxed`}>
-                      {message.text}
-                    </p>
-                    
-                    {/* Product recommendations */}
-                    {message.type === 'bot' && message.products && message.products.length > 0 && (
-                      <div className="mt-4">
-                        {message.introText && (
-                          <p className="text-sm text-gray-600 mb-3 italic">{message.introText}</p>
-                        )}
-                        <div className="space-y-2">
-                          {message.products.map((product, productIndex) => (
-                            <ProductCard key={productIndex} product={product} />
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
                   {message.type === 'user' && (
-                    <div className="flex-shrink-0 h-10 w-10 bg-emerald-600 rounded-full flex items-center justify-center">
-                      <User size={20} className="text-white" />
+                    <>
+                      <div className="bg-emerald-500 text-white rounded-2xl rounded-tr-sm p-4 shadow-sm">
+                        <p className="text-white leading-relaxed">
+                          {message.text}
+                        </p>
+                      </div>
+                      <div className="flex-shrink-0 h-10 w-10 bg-emerald-600 rounded-full flex items-center justify-center">
+                        <User size={20} className="text-white" />
+                      </div>
+                    </>
+                  )}
+                  {message.type === 'bot' && (
+                    <div className="bg-white rounded-2xl rounded-tl-sm p-4 shadow-sm border border-green-100">
+                      {message.isStreaming && message.streamGenerator ? (
+                        <div className="text-gray-700 leading-relaxed">
+                          <ResponseStream
+                            textStream={message.streamGenerator}
+                            mode="typewriter"
+                            speed={60}
+                            className="leading-relaxed"
+                          />
+                        </div>
+                      ) : (
+                        <div className="text-gray-700 leading-relaxed space-y-3 text-left">
+                          {formatBotResponse(message.text)}
+                        </div>
+                      )}
+                      
+                      {/* Enhanced Product recommendations with context */}
+                      {message.products && message.products.length > 0 && (
+                        <div className="mt-4">
+                          {message.introText && (
+                            <p className="text-sm text-gray-600 mb-3 italic">{message.introText}</p>
+                          )}
+                          
+                          {/* Context explanation badge */}
+                          {message.contextExplanation && (
+                            <motion.div
+                              initial={{ opacity: 0, scale: 0.95 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              className="flex items-center space-x-2 mb-3 p-2 bg-emerald-50 border border-emerald-200 rounded-lg"
+                            >
+                              <Target size={14} className="text-emerald-600 flex-shrink-0" />
+                              <span className="text-xs text-emerald-700 font-medium">
+                                {message.contextExplanation}
+                              </span>
+                            </motion.div>
+                          )}
+                          
+                          <div className="space-y-2">
+                            {message.products.map((product, productIndex) => (
+                              <ProductCard key={productIndex} product={product} />
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>

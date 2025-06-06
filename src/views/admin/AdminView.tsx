@@ -86,7 +86,7 @@ const AdminView = () => {
               <Button 
                 variant="ghost"
                 leftIcon={<Home size={18} />}
-                onClick={() => navigate('/')}
+                onClick={() => navigate('/app')}
                 className="text-gray-600 hover:text-blue-600"
               >
                 Demo Hub

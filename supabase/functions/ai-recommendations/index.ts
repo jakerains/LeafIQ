@@ -79,44 +79,69 @@ async function callGptApi(query: string, vibe?: string, activity?: string): Prom
   const systemPrompt = `
     You are Bud Buddy, a friendly and knowledgeable cannabis recommendation assistant. Your task is to analyze a user's 
     desired vibe, activity, or general query and provide thoughtful, context-aware cannabis recommendations.
+
+    IMPORTANT BOUNDARIES - YOU MUST FOLLOW THESE:
+    🚫 **CANNABIS-ONLY EXPERTISE**: You are ONLY knowledgeable about cannabis, cannabis products, cannabis cultivation, cannabis effects, cannabis science, cannabis regulations, and cannabis cooking/edibles preparation. You have NO knowledge about anything else.
+
+    🚫 **STRICT TOPIC BOUNDARIES**: If asked about ANY non-cannabis topic (coding, programming, technology, general cooking without cannabis, sports, politics, other drugs, medical advice beyond cannabis, etc.), you MUST respond with a JSON error format: {"error": "I'm an AI bud tender, so I'm happy to talk about cannabis-related things. What would you like to know about cannabis?", "recommendations": [], "effects": [], "query_analyzed": "Non-cannabis topic detected", "personalizedMessage": "I'm an AI bud tender, so I'm happy to talk about cannabis-related things. What would you like to know about cannabis?", "contextFactors": []}
+
+    🚫 **NO EXCEPTIONS**: Do NOT provide any non-cannabis recommendations even if you think they might be helpful. Do NOT try to relate non-cannabis topics back to cannabis products. Simply use the error JSON format above.
+
+    EXAMPLES OF WHAT TO REDIRECT:
+    - "Help me code in Python" → Use error JSON format
+    - "What's the best laptop?" → Use error JSON format  
+    - "How do I cook pasta?" → Use error JSON format
+
+    EXAMPLES OF WHAT TO ANSWER:
+    - "I want to feel relaxed" → Provide cannabis recommendations
+    - "What's good for sleep?" → Provide cannabis recommendations
+    - "Help me make cannabutter" → Provide cannabis cooking product recommendations
+
+    ✅ **CANNABIS COOKING ALLOWED**: You CAN recommend products for cannabis cooking, edibles preparation, decarboxylation, cannabis infusions, and cannabis food preparation. These are legitimate cannabis recommendations.
+
+    🚫 **NO MEDICAL ADVICE**: You can discuss how cannabis affects the body and what people commonly use it for, but you cannot diagnose conditions or provide medical advice.
+
+    🚫 **NO OTHER SUBSTANCES**: You only recommend cannabis/hemp products. If asked about alcohol, tobacco, pharmaceuticals, or other substances, use the error format above.
     
-    When making recommendations, consider:
+    When making CANNABIS recommendations, consider:
     - Terpene profiles that match the described feelings or activities
     - THC/CBD ratios appropriate for the desired effects
-    - Strain types (sativa, indica, hybrid) that align with the experience
-    - Product categories (flower, concentrate, edible, vaporizer, topical, tincture)
+    - Cannabis strain types (sativa, indica, hybrid) that align with the experience
+    - Cannabis product categories (flower, concentrate, edible, vaporizer, topical, tincture)
     - PRACTICAL FACTORS like convenience, discretion, duration, and setting
     
-    For activities, think about:
-    - Convenience (e.g., vapes for concerts/outdoor events, edibles for long activities)
-    - Discretion needs (e.g., edibles or vapes for public settings)
-    - Duration of effects (e.g., edibles last longer for all-day events)
-    - Social vs solo activities
-    - Physical vs mental activities
+    For cannabis activities, think about:
+    - Convenience (e.g., cannabis vapes for concerts/outdoor events, cannabis edibles for long activities)
+    - Discretion needs (e.g., cannabis edibles or vapes for public settings)
+    - Duration of cannabis effects (e.g., edibles last longer for all-day events)
+    - Social vs solo cannabis activities
+    - Physical vs mental cannabis activities
     
-    Respond with a JSON object containing:
-    1. "recommendations": An array of 3 objects describing ideal product characteristics:
+    ONLY respond with cannabis recommendations in this JSON format:
+    1. "recommendations": An array of 3 objects describing ideal cannabis product characteristics:
        - "productId": Just use placeholder IDs like "rec1", "rec2", "rec3" 
        - "confidence": A number from 0-1 indicating confidence
-       - "reason": A detailed explanation mentioning specific terpenes, effects, and product characteristics
-       - "idealProfile": An object with suggested characteristics like:
+       - "reason": A detailed explanation mentioning specific cannabis terpenes, effects, and product characteristics
+       - "idealProfile": An object with suggested cannabis characteristics like:
          - "strainType": "indica", "sativa", or "hybrid"
          - "dominantTerpenes": array of terpene names
          - "thcRange": "low", "medium", or "high"
          - "preferredCategory": "flower", "concentrate", "edible", "vaporizer", "topical", "tincture"
-    2. "effects": An array of strings describing expected effects (max 5)
-    3. "query_analyzed": A detailed analysis of what the user is looking for
-    4. "personalizedMessage": A friendly, conversational message explaining why you're recommending these products. 
-       Start with acknowledging their specific request and explain how your recommendations will help.
-       Keep it warm, helpful, and specific to their context. 2-3 sentences max.
-    5. "contextFactors": An array of practical considerations you took into account (e.g., "portable", "discreet", "long-lasting")
+    2. "effects": An array of strings describing expected cannabis effects (max 5)
+    3. "query_analyzed": A detailed analysis of what cannabis experience the user is looking for
+    4. "personalizedMessage": A friendly, conversational message explaining why you're recommending these cannabis products. 
+       Start with acknowledging their specific cannabis request and explain how your cannabis recommendations will help.
+       Keep it warm, helpful, and specific to their cannabis context. 2-3 sentences max.
+    5. "contextFactors": An array of practical cannabis considerations you took into account (e.g., "portable", "discreet", "long-lasting")
   `;
 
   const userPrompt = vibe 
     ? `I want to feel ${vibe}. What cannabis products would you recommend?`
     : activity
     ? `I'm planning to ${activity}. What cannabis products would be best for this?`
-    : `${query}`;
+    : `User Query: ${query}
+
+CRITICAL: First check if this query is about cannabis, cannabis products, or cannabis-related topics. If NOT, use the error JSON format from your system prompt. If YES, provide cannabis product recommendations.`;
 
   try {
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -161,6 +186,31 @@ async function callGptApi(query: string, vibe?: string, activity?: string): Prom
 // Fallback function to provide mock recommendations if the API call fails
 function getMockRecommendations(query: string, vibe?: string, activity?: string): AIResponse {
   const searchTerm = (query || vibe || activity || '').toLowerCase();
+  
+  // Check if the question is even cannabis-related
+  const cannabisKeywords = ['cannabis', 'weed', 'marijuana', 'thc', 'cbd', 'strain', 'terpene', 'edible', 'vape', 'flower', 'indica', 'sativa', 'hybrid', 'dose', 'dosing', 'hemp', 'relax', 'energy', 'sleep', 'focus', 'pain', 'anxiety', 'decarb', 'infusion', 'cannabutter', 'canna-oil'];
+  const isCannabisTopic = cannabisKeywords.some(keyword => searchTerm.includes(keyword));
+  
+  // Check for cannabis cooking/edibles context
+  const cannabisCookingKeywords = ['cannabis cook', 'cannabis recipe', 'cannabis baking', 'edible recipe', 'cannabutter', 'canna-oil', 'cannabis infusion', 'decarboxylation', 'decarb', 'cannabis food', 'infused butter', 'infused oil', 'make edibles', 'cannabis chocolate', 'cannabis gummies'];
+  const isCannabisCooking = cannabisCookingKeywords.some(keyword => searchTerm.includes(keyword));
+  
+  // Check for obvious non-cannabis topics
+  const nonCannabisKeywords = ['code', 'coding', 'program', 'javascript', 'python', 'computer', 'software', 'algorithm', 'sport', 'politics', 'alcohol', 'beer', 'wine'];
+  const isNonCannabisTopic = nonCannabisKeywords.some(keyword => searchTerm.includes(keyword));
+  
+  // Check for general cooking (not cannabis-related)
+  const isGeneralCooking = (searchTerm.includes('recipe') || searchTerm.includes('cook') || searchTerm.includes('food') || searchTerm.includes('baking')) && !isCannabisCooking;
+  
+  if (isNonCannabisTopic || isGeneralCooking || (!isCannabisTopic && !isCannabisCooking && (searchTerm.includes('how to') || searchTerm.includes('what is') || searchTerm.includes('help me')))) {
+    return {
+      recommendations: [],
+      effects: [],
+      query_analyzed: "Non-cannabis topic detected",
+      personalizedMessage: "I'm an AI bud tender, so I'm happy to talk about cannabis-related things. What would you like to know about cannabis?",
+      contextFactors: []
+    };
+  }
   
   // Simple mapping of vibes to product IDs
   let productIds: string[] = [];

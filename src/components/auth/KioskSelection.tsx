@@ -11,14 +11,21 @@ export const KioskSelection: React.FC = () => {
   const [showAdminPasskeyModal, setShowAdminPasskeyModal] = useState(false);
 
   const handleModeSelection = (mode: 'customer' | 'employee') => {
+    console.log('🎯 KioskSelection: Setting mode to', mode);
     selectUserMode(mode);
     
-    // Navigate to appropriate route based on mode
+    // Navigate immediately since Zustand updates are synchronous
+    console.log('🚀 KioskSelection: Navigating to route for mode', mode);
     if (mode === 'customer') {
+      console.log('   → Navigating to /app/kiosk');
       navigate('/app/kiosk');
     } else if (mode === 'employee') {
+      console.log('   → Navigating to /app/staff');
       navigate('/app/staff');
     }
+    
+    // Additional debugging
+    console.log('🔍 After mode selection - Current store state:', useSimpleAuthStore.getState());
   };
 
   const handleAdminClick = () => {
