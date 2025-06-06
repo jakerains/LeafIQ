@@ -111,7 +111,7 @@ const LandingPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                Transform Your 
+                Transform Your  
                 <motion.span 
                   className="relative inline-block"
                   initial={{ backgroundPosition: "0% 0%" }}
