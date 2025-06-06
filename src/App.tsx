@@ -20,6 +20,17 @@ import VersionDisplay from './components/ui/VersionDisplay';
 import SuperadminAuth from './components/auth/SuperadminAuth';
 import SuperadminDashboard from './views/superadmin/SuperadminDashboard';
 
+// Info Pages
+import FeaturesPage from './views/FeaturesPage';
+import SecurityPage from './views/SecurityPage';
+import AboutPage from './views/AboutPage';
+import ContactPage from './views/ContactPage';
+import CareersPage from './views/CareersPage';
+import PrivacyPage from './views/PrivacyPage';
+import TermsPage from './views/TermsPage';
+import SupportPage from './views/SupportPage';
+import { BlogPage, DocsPage, CompliancePage } from './views/ComingSoonPage';
+
 // Component to redirect based on selected user mode
 const ModeBasedRedirect = () => {
   const { userMode } = useSimpleAuthStore();
@@ -75,6 +86,20 @@ function App() {
 
           <Route path="/demo-login" element={<DemoLogin />} />
           <Route path="/pricing" element={<PricingPage />} />
+          
+          {/* Info Pages */}
+          <Route path="/features" element={<FeaturesPage />} />
+          <Route path="/security" element={<SecurityPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/careers" element={<CareersPage />} />
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/support" element={<SupportPage />} />
+          <Route path="/blog" element={<BlogPage />} />
+          <Route path="/docs" element={<DocsPage />} />
+          <Route path="/compliance" element={<CompliancePage />} />
+          
           <Route path="/auth" element={<AuthLayout />}>
             <Route path="signup" element={<RegisterForm />} />
             <Route path="register" element={<RegisterForm />} />
