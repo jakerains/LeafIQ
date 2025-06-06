@@ -197,23 +197,37 @@ const LandingPage = () => {
                 </Link>
               </motion.div>
               
+              {/* Feature indicators in a glassmorphism box */}
               <motion.div 
-                className="mt-12 flex items-center justify-center lg:justify-start gap-8 text-gray-800"
+                className="mt-8 mb-4 relative"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
               >
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-primary-500 rounded-full"></div>
-                  <span>AI Powered</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-primary-500 rounded-full"></div>
-                  <span>Real-time Data</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-primary-500 rounded-full"></div>
-                  <span>Seamless Integration</span>
+                <div className="relative rounded-xl p-2 w-fit mx-auto lg:mx-0">
+                  <GlowingEffect
+                    spread={40}
+                    glow={true}
+                    disabled={false}
+                    proximity={60}
+                    inactiveZone={0.05}
+                    borderWidth={1}
+                    movementDuration={2}
+                  />
+                  <div className="relative flex items-center justify-center gap-4 md:gap-8 backdrop-blur-sm bg-white/30 border border-white/40 rounded-lg py-2.5 px-4 shadow-lg">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-primary-500 rounded-full"></div>
+                      <span className="text-xs md:text-sm font-medium">AI Powered</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-primary-500 rounded-full"></div>
+                      <span className="text-xs md:text-sm font-medium">Real-time Data</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-primary-500 rounded-full"></div>
+                      <span className="text-xs md:text-sm font-medium">Seamless Integration</span>
+                    </div>
+                  </div>
                 </div>
               </motion.div>
             </div>
