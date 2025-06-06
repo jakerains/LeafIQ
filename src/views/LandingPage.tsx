@@ -26,7 +26,7 @@ const LandingPage = () => {
       {/* Hero Section */}
       <header className="relative overflow-hidden min-h-screen flex items-center">
         <div className="container mx-auto px-4 py-16">
-          <nav className="flex justify-between items-center mb-16">
+          <nav className="flex justify-between items-center mb-16 relative">
             <img 
               src="/leafiq-logo.png" 
               alt="LeafIQ" 
@@ -64,30 +64,41 @@ const LandingPage = () => {
             </div>
           </nav>
           
-          {/* Mobile Menu Dropdown */}
+          {/* Mobile Menu Dropdown - Enhanced with glassmorphism and better positioning */}
           {isMobileMenuOpen && (
             <motion.div 
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="md:hidden absolute top-24 right-4 z-50 bg-white/90 backdrop-blur-md rounded-xl shadow-lg border border-gray-200 py-3 px-1 w-48 mobile-menu"
+              className="md:hidden fixed top-8 right-8 z-50 bg-white/40 backdrop-blur-xl rounded-xl shadow-lg border border-white/50 py-3 px-1 w-48 mobile-menu"
               onClick={(e) => e.stopPropagation()} // Prevent clicks inside the menu from closing it
             >
-              <div className="flex flex-col space-y-2">
-                <Link 
-                  to="/auth/login"
-                  className="px-4 py-3 text-gray-900 font-medium hover:bg-gray-100 rounded-lg"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Log In
-                </Link>
-                <Link 
-                  to="/auth/signup"
-                  className="px-4 py-3 mx-2 bg-primary-500 text-white rounded-lg font-medium hover:bg-primary-600"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Sign Up
-                </Link>
+              <div className="relative rounded-lg p-1">
+                <GlowingEffect
+                  spread={30}
+                  glow={true}
+                  disabled={false}
+                  proximity={50}
+                  inactiveZone={0.05}
+                  borderWidth={2}
+                  movementDuration={1.5}
+                />
+                <div className="relative flex flex-col space-y-2">
+                  <Link 
+                    to="/auth/login"
+                    className="px-4 py-3 text-gray-900 font-medium hover:bg-white/70 rounded-lg transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Log In
+                  </Link>
+                  <Link 
+                    to="/auth/signup"
+                    className="px-4 py-3 mx-2 bg-primary-500/90 text-white rounded-lg font-medium hover:bg-primary-600 transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Sign Up
+                  </Link>
+                </div>
               </div>
             </motion.div>
           )}
