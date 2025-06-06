@@ -104,7 +104,7 @@ const LandingPage = () => {
           )}
 
           <div className="flex flex-col lg:flex-row items-center gap-12 relative z-10">
-            <div className="flex-1 text-center lg:text-left">
+            <div className="flex-1 text-center lg:text-left order-1">
               <motion.h1 
                 className="text-5xl lg:text-7xl font-display font-bold mb-6 text-gray-900"
                 initial={{ opacity: 0, y: 20 }}
@@ -142,6 +142,39 @@ const LandingPage = () => {
               >
                 AI-powered product recommendations, inventory management, and customer insights for modern cannabis retailers.
               </motion.p>
+
+              {/* On mobile, move the image here directly after the text */}
+              <div className="lg:hidden mb-6">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="relative w-5/6 mx-auto"
+                >
+                  <div className="relative rounded-2xl border-[0.75px] border-gray-200/30 p-3">
+                    <GlowingEffect
+                      spread={50}
+                      glow={true}
+                      disabled={false}
+                      proximity={100}
+                      inactiveZone={0.1}
+                      borderWidth={3}
+                      movementDuration={2.5}
+                    />
+                    <div className="relative">
+                      <img
+                        src="/leafie-use3.jpeg"
+                        alt="LeafIQ Dashboard"
+                        className="rounded-xl shadow-2xl w-full border-2 border-white/40 backdrop-blur-sm"
+                      />
+                      {/* Decorative floating elements */}
+                      <div className="absolute -bottom-4 -right-4 w-20 h-20 bg-primary-500/15 rounded-full blur-xl"></div>
+                      <div className="absolute -top-4 -left-4 w-16 h-16 bg-accent-500/15 rounded-full blur-xl"></div>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+
               <motion.div 
                 className="flex flex-row gap-2 justify-center lg:justify-start"
                 initial={{ opacity: 0, y: 20 }}
@@ -184,7 +217,7 @@ const LandingPage = () => {
                 </div>
               </motion.div>
             </div>
-            <div className="flex-1">
+            <div className="flex-1 order-2 hidden lg:block">
               <div className="flex justify-center">
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
