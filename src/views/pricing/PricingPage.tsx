@@ -126,27 +126,27 @@ export default function PricingPage() {
                   />
                   <div className="relative h-full">
                     <PricingCard
-                  title={isYearly ? "Annual Plan" : "Standard Plan"}
-                  price={isYearly ? "$2,490" : "$249"}
-                  period={isYearly ? "/year" : "/month"}
-                  description={isYearly ? "" : "Everything you need to run a smarter dispensary."}
-                  features={[
-                    'AI-Powered Product Matching',
-                    'Real-Time Inventory Sync',
-                    'Live Analytics & Vibe Trends',
-                    'Terpene Effect Explorer',
-                    'Staff Dashboard & Query Logs',
-                    'Priority Email Support',
-                    'Unlimited SKUs'
-                  ]}
-                  priceId={products[0].priceId}
-                  mode="subscription"
-                  buttonText={isYearly ? "Subscribe Yearly" : "Subscribe Monthly"}
-                  highlighted
-                  isCurrentPlan={subscription?.price_id === products[0].priceId && 
-                                ['active', 'trialing'].includes(subscription?.subscription_status)}
-                  isYearly={isYearly}
-                  monthlyPrice="$249"
+                      title={isYearly ? "Annual Plan" : "Standard Plan"}
+                      price={isYearly ? "$2,490" : "$249"}
+                      period={isYearly ? "/year" : "/month"}
+                      description={isYearly ? "" : "Everything you need to run a smarter dispensary."}
+                      features={[
+                        'AI-Powered Product Matching',
+                        'Real-Time Inventory Sync',
+                        'Live Analytics & Vibe Trends',
+                        'Terpene Effect Explorer',
+                        'Staff Dashboard & Query Logs',
+                        'Priority Email Support',
+                        'Unlimited SKUs'
+                      ]}
+                      priceId={products[0].priceId}
+                      mode="subscription"
+                      buttonText={isYearly ? "Subscribe Yearly" : "Subscribe Monthly"}
+                      highlighted
+                      isCurrentPlan={subscription?.price_id === products[0].priceId && 
+                                    ['active', 'trialing'].includes(subscription?.subscription_status)}
+                      isYearly={isYearly}
+                      monthlyPrice="$249"
                     />
                   </div>
                 </div>
@@ -168,20 +168,20 @@ export default function PricingPage() {
                     movementDuration={2}
                   />
                   <div className="relative h-full">
-                <PricingCard
-                  title="Premium Add-ons"
-                  price="From $49"
-                  period="/month"
-                  description="Enhance your capabilities"
-                  features={[
-                    'Custom AI Model Training',
-                    'Multi-Location Support',
-                    'Custom Integrations',
-                    'Dedicated Account Manager',
-                    'Enterprise SLA'
-                  ]}
-                  buttonText="Contact Sales"
-                  buttonLink="/contact"
+                    <PricingCard
+                      title="Premium Add-ons"
+                      price="From $49"
+                      period="/month"
+                      description="Enhance your capabilities"
+                      features={[
+                        'Custom AI Model Training',
+                        'Multi-Location Support',
+                        'Custom Integrations',
+                        'Dedicated Account Manager',
+                        'Enterprise SLA'
+                      ]}
+                      buttonText="Contact Sales"
+                      buttonLink="/contact"
                     />
                   </div>
                 </div>
@@ -207,35 +207,36 @@ export default function PricingPage() {
                 movementDuration={2.5}
               />
               <div className="relative bg-white/20 backdrop-blur-xl rounded-xl p-6 border border-white/20">
-              <p className="text-lg mb-4">Expand LeafIQ as your needs grow:</p>
-              <ul className="space-y-2 mb-6">
-                <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>Custom AI tuning with your store's historical data</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>Multi-location management dashboard</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>Deep POS & menu integrations (Dutchie, Jane, Weedmaps, etc.)</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-primary-500 mr-2">•</span>
-                  <span>Dedicated account manager & enterprise SLA</span>
-                </li>
-              </ul>
-              <div className="text-center">
-                <Link 
-                  to="/contact"
-                  className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-xl font-medium hover:from-primary-600 hover:to-secondary-600 shadow-md hover:shadow-lg transition-all duration-300"
-                >
-                  Contact Sales for details
-                </Link>
+                <p className="text-lg mb-4">Expand LeafIQ as your needs grow:</p>
+                <ul className="space-y-2 mb-6">
+                  <li className="flex items-start">
+                    <span className="text-primary-500 mr-2">•</span>
+                    <span>Custom AI tuning with your store's historical data</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-primary-500 mr-2">•</span>
+                    <span>Multi-location management dashboard</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-primary-500 mr-2">•</span>
+                    <span>Deep POS & menu integrations (Dutchie, Jane, Weedmaps, etc.)</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-primary-500 mr-2">•</span>
+                    <span>Dedicated account manager & enterprise SLA</span>
+                  </li>
+                </ul>
+                <div className="text-center">
+                  <Link 
+                    to="/contact"
+                    className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-xl font-medium hover:from-primary-600 hover:to-secondary-600 shadow-md hover:shadow-lg transition-all duration-300"
+                  >
+                    Contact Sales for details
+                  </Link>
+                </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>
