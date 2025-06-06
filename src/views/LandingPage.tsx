@@ -143,13 +143,13 @@ const LandingPage = () => {
                 AI-powered product recommendations, inventory management, and customer insights for modern cannabis retailers.
               </motion.p>
               <motion.div 
-                className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+                className="flex flex-row gap-2 justify-center lg:justify-start"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
                 <ShimmerButton
-                  className="px-8 py-4 text-lg shadow-lg shadow-primary-500/20"
+                  className="px-4 py-3 text-sm md:px-8 md:py-4 md:text-lg shadow-lg shadow-primary-500/20 flex-1 md:flex-auto"
                   shimmerColor="#22c55e"
                   background="rgba(34, 197, 94, 1)"
                   onClick={() => window.location.href = '/auth/signup'}
@@ -158,7 +158,7 @@ const LandingPage = () => {
                 </ShimmerButton>
                 <Link 
                   to="/demo-login"
-                  className="px-8 py-4 text-lg border border-gray-300 backdrop-blur-sm bg-gray-100/70 rounded-full hover:bg-gray-200/80 transition-all duration-300 text-gray-900 shadow-lg"
+                  className="px-4 py-3 text-sm md:px-8 md:py-4 md:text-lg border border-gray-300 backdrop-blur-sm bg-gray-100/70 rounded-full hover:bg-gray-200/80 transition-all duration-300 text-gray-900 shadow-lg flex-1 md:flex-auto text-center"
                 >
                   Try Live Demo
                 </Link>
