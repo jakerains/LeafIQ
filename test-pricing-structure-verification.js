@@ -22,7 +22,7 @@ console.log('   └─ Enterprise SLA: $99/month');
 console.log('');
 
 console.log('🏢 **EXAMPLE DISPENSARY BILLING**:');
-console.log('   Organization: True North Cannabis Co. (Demo)');
+console.log('   Organization: High Vibe Supply (demo)');
 console.log('   ├─ Base Plan: Standard Annual ($2,490/year)');
 console.log('   ├─ Add-on: Multi-Location Support ($99/month)');
 console.log('   ├─ Add-on: Custom AI Model Training ($149/month)');

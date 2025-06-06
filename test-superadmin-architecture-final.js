@@ -13,7 +13,7 @@ console.log('   └─ Purpose: Manages ALL dispensary organizations from above'
 console.log('');
 
 console.log('🏢 **DISPENSARY ORGANIZATIONS (Tenants)**:');
-console.log('   ├─ True North Cannabis Co. (Demo)');
+console.log('   ├─ High Vibe Supply (demo)');
 console.log('   │  ├─ Subscription: Active');
 console.log('   │  ├─ Plan: Pro ($249/month)');
 console.log('   │  ├─ Users: demo@leafiq.online (admin), staff@leafiq.online (staff)');

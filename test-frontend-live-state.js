@@ -105,7 +105,7 @@ async function testFrontendLiveState() {
     console.log('Current auth context:', policies);
 
     // 5. Check organization existence
-    console.log('\n5️⃣ Verifying True North organization...');
+    console.log('\n5️⃣ Verifying High Vibe Supply organization...');
     const { data: trueNorth, error: tnError } = await supabase
       .from('organizations')
       .select('*')
@@ -113,12 +113,12 @@ async function testFrontendLiveState() {
       .single();
     
     if (trueNorth) {
-      console.log('✅ True North organization found:');
+      console.log('✅ High Vibe Supply organization found:');
       console.log('   Name:', trueNorth.name);
       console.log('   Status:', trueNorth.subscription_status);
       console.log('   Plan:', trueNorth.plan_type);
     } else {
-      console.log('❌ True North organization not found:', tnError?.message);
+      console.log('❌ High Vibe Supply organization not found:', tnError?.message);
     }
 
   } catch (error) {
