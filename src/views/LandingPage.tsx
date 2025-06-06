@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Check } from 'lucide-react';
+import { Check, Menu, X } from 'lucide-react';
 import { ShimmerButton } from '../components/ui/shimmer-button';
 import { FeaturesSection } from '../components/ui/bento-demo';
 import { GlowingEffect } from '../components/ui/glowing-effect';
 
 const LandingPage = () => {
   const [isYearly, setIsYearly] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <div className="min-h-screen">
@@ -15,24 +16,62 @@ const LandingPage = () => {
       <header className="relative overflow-hidden min-h-screen flex items-center">
         <div className="container mx-auto px-4 py-16">
           <nav className="flex justify-between items-center mb-16">
-            <img 
-              src="/leafiq-logo.png" 
-              alt="LeafIQ" 
+            <img
+              src="/leafiq-logo.png"
+              alt="LeafIQ"
               className="h-24 drop-shadow-lg filter shadow-primary-500/50"
             />
-            <div className="flex gap-4">
-              <Link 
+            
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex gap-4">
+              <Link
                 to="/auth/login"
                 className="px-6 py-3 bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200 text-gray-900 font-medium hover:bg-white hover:shadow-md transition-all duration-300"
               >
                 Log In
               </Link>
-              <Link 
+              <Link
                 to="/auth/signup"
                 className="px-6 py-3 bg-primary-500 text-white rounded-xl font-medium hover:bg-primary-600 shadow-md hover:shadow-lg transition-all duration-300"
               >
                 Sign Up
               </Link>
+            </div>
+            
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden p-2 rounded-lg bg-white/80 backdrop-blur-sm border border-gray-200 text-gray-900"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+            
+            {/* Mobile Menu Overlay */}
+            {mobileMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className="absolute top-24 right-4 left-4 z-50 bg-white/95 backdrop-blur-md rounded-xl shadow-xl border border-gray-200 p-4 md:hidden"
+              >
+                <div className="flex flex-col gap-3">
+                  <Link
+                    to="/auth/login"
+                    className="px-6 py-3 bg-white/80 rounded-xl border border-gray-200 text-gray-900 font-medium hover:bg-white hover:shadow-md transition-all duration-300 text-center"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Log In
+                  </Link>
+                  <Link
+                    to="/auth/signup"
+                    className="px-6 py-3 bg-primary-500 text-white rounded-xl font-medium hover:bg-primary-600 shadow-md hover:shadow-lg transition-all duration-300 text-center"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    Sign Up
+                  </Link>
+                </div>
+              </motion.div>
+            )}
             </div>
           </nav>
 
