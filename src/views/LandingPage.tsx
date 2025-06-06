@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Check } from 'lucide-react';
+import { Check, Menu, X } from 'lucide-react';
 import { ShimmerButton } from '../components/ui/shimmer-button';
 import { FeaturesSection } from '../components/ui/bento-demo';
 import { GlowingEffect } from '../components/ui/glowing-effect';
 
 const LandingPage = () => {
   const [isYearly, setIsYearly] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
     <div className="min-h-screen">
@@ -20,7 +21,9 @@ const LandingPage = () => {
               alt="LeafIQ" 
               className="h-24 drop-shadow-lg filter shadow-primary-500/50"
             />
-            <div className="flex gap-4">
+            
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex gap-4">
               <Link 
                 to="/auth/login"
                 className="px-6 py-3 bg-white/80 backdrop-blur-sm rounded-xl border border-gray-200 text-gray-900 font-medium hover:bg-white hover:shadow-md transition-all duration-300"
@@ -34,7 +37,45 @@ const LandingPage = () => {
                 Sign Up
               </Link>
             </div>
+
+            {/* Mobile Navigation Button */}
+            <div className="md:hidden">
+              <button 
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="p-2 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200 text-gray-900"
+                aria-label="Toggle menu"
+              >
+                {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
           </nav>
+          
+          {/* Mobile Menu Dropdown */}
+          {isMobileMenuOpen && (
+            <motion.div 
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="md:hidden absolute top-24 right-4 z-50 bg-white/90 backdrop-blur-md rounded-xl shadow-lg border border-gray-200 py-3 px-1 w-48"
+            >
+              <div className="flex flex-col space-y-2">
+                <Link 
+                  to="/auth/login"
+                  className="px-4 py-3 text-gray-900 font-medium hover:bg-gray-100 rounded-lg"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Log In
+                </Link>
+                <Link 
+                  to="/auth/signup"
+                  className="px-4 py-3 mx-2 bg-primary-500 text-white rounded-lg font-medium hover:bg-primary-600"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Sign Up
+                </Link>
+              </div>
+            </motion.div>
+          )}
 
           <div className="flex flex-col lg:flex-row items-center gap-12 relative z-10">
             <div className="flex-1 text-center lg:text-left">
