@@ -10,8 +10,19 @@ const LandingPage = () => {
   const [isYearly, setIsYearly] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // Close mobile menu when clicking outside
+  const handleClickOutside = (e: React.MouseEvent) => {
+    if (isMobileMenuOpen) {
+      // Check if the click is outside the menu and the menu toggle button
+      const isMenuClick = (e.target as Element).closest('.mobile-menu, .menu-toggle');
+      if (!isMenuClick) {
+        setIsMobileMenuOpen(false);
+      }
+    }
+  };
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen" onClick={handleClickOutside}>
       {/* Hero Section */}
       <header className="relative overflow-hidden min-h-screen flex items-center">
         <div className="container mx-auto px-4 py-16">
@@ -41,8 +52,11 @@ const LandingPage = () => {
             {/* Mobile Navigation Button */}
             <div className="md:hidden">
               <button 
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="p-2 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200 text-gray-900"
+                onClick={(e) => {
+                  e.stopPropagation(); // Prevent triggering handleClickOutside
+                  setIsMobileMenuOpen(!isMobileMenuOpen);
+                }}
+                className="p-2 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200 text-gray-900 menu-toggle"
                 aria-label="Toggle menu"
               >
                 {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -56,7 +70,8 @@ const LandingPage = () => {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="md:hidden absolute top-24 right-4 z-50 bg-white/90 backdrop-blur-md rounded-xl shadow-lg border border-gray-200 py-3 px-1 w-48"
+              className="md:hidden absolute top-24 right-4 z-50 bg-white/90 backdrop-blur-md rounded-xl shadow-lg border border-gray-200 py-3 px-1 w-48 mobile-menu"
+              onClick={(e) => e.stopPropagation()} // Prevent clicks inside the menu from closing it
             >
               <div className="flex flex-col space-y-2">
                 <Link 
