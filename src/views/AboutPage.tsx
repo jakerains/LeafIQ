@@ -278,16 +278,30 @@ const AboutPage = () => {
             ].map((value, index) => (
               <motion.div
                 key={index}
-                className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300"
+                className="h-full"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileHover={{ y: -3 }}
               >
-                <div className="w-14 h-14 bg-gradient-to-br from-emerald-100 to-green-200 rounded-2xl flex items-center justify-center mb-4">
-                  <value.icon className="h-7 w-7 text-emerald-600" />
+                <div className="relative h-full rounded-2xl border-[0.75px] border-gray-200/50 p-2">
+                  <GlowingEffect
+                    spread={35}
+                    glow={true}
+                    disabled={false}
+                    proximity={70}
+                    inactiveZone={0.05}
+                    borderWidth={2}
+                    movementDuration={1.7}
+                  />
+                  <div className="relative bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 h-full flex flex-col">
+                    <div className="w-14 h-14 bg-gradient-to-br from-emerald-100 to-green-200 rounded-2xl flex items-center justify-center mb-4">
+                      <value.icon className="h-7 w-7 text-emerald-600" />
+                    </div>
+                    <h3 className="text-lg font-semibold mb-3">{value.title}</h3>
+                    <p className="text-gray-600 text-sm leading-relaxed flex-grow">{value.description}</p>
+                  </div>
                 </div>
-                <h3 className="text-lg font-semibold mb-3">{value.title}</h3>
-                <p className="text-gray-600 text-sm leading-relaxed">{value.description}</p>
               </motion.div>
             ))}
           </div>

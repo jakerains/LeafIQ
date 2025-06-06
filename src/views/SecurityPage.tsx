@@ -352,11 +352,23 @@ const SecurityPage = () => {
             ].map((item, index) => (
               <motion.div
                 key={index}
-                className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100"
+                className="h-full"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileHover={{ y: -3 }}
               >
+                <div className="relative h-full rounded-2xl border-[0.75px] border-gray-200/50 p-2">
+                  <GlowingEffect
+                    spread={30}
+                    glow={true}
+                    disabled={false}
+                    proximity={65}
+                    inactiveZone={0.05}
+                    borderWidth={2}
+                    movementDuration={1.8}
+                  />
+                  <div className="relative bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-100 h-full flex flex-col">
                 <div className="w-14 h-14 bg-gradient-to-br from-emerald-100 to-green-200 rounded-2xl flex items-center justify-center mb-4">
                   <item.icon className="h-7 w-7 text-emerald-600" />
                 </div>
@@ -386,6 +398,8 @@ const SecurityPage = () => {
                     ))}
                   </ul>
                 )}
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -438,11 +452,22 @@ const SecurityPage = () => {
             </motion.div>
 
             <motion.div
-              className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20"
+              className="relative"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
+              <div className="relative rounded-2xl border-[0.75px] border-white/30 p-2">
+                <GlowingEffect
+                  spread={45}
+                  glow={true}
+                  disabled={false}
+                  proximity={85}
+                  inactiveZone={0.05}
+                  borderWidth={2}
+                  movementDuration={2.2}
+                />
+                <div className="relative bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20">
               <h3 className="text-2xl font-semibold text-white mb-6">Security Stats</h3>
               <div className="grid grid-cols-2 gap-6">
                 {[
@@ -456,6 +481,8 @@ const SecurityPage = () => {
                     <div className="text-blue-200 text-sm">{stat.label}</div>
                   </div>
                 ))}
+              </div>
+                </div>
               </div>
             </motion.div>
           </div>

@@ -6,6 +6,7 @@ import { getUserSubscription } from '../../lib/stripe';
 import Logo from '../../components/ui/Logo';
 import { Link } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
+import { GlowingEffect } from '../../components/ui/glowing-effect';
 
 export default function PricingPage() {
   const [subscription, setSubscription] = useState<any>(null);
@@ -107,8 +108,24 @@ export default function PricingPage() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              <div className="flex flex-col h-full">
-                <PricingCard
+              <motion.div 
+                className="flex flex-col h-full"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
+                <div className="relative h-full rounded-2xl border-[0.75px] border-gray-200/50 p-2">
+                  <GlowingEffect
+                    spread={45}
+                    glow={true}
+                    disabled={false}
+                    proximity={80}
+                    inactiveZone={0.05}
+                    borderWidth={2}
+                    movementDuration={2}
+                  />
+                  <div className="relative h-full">
+                    <PricingCard
                   title={isYearly ? "Annual Plan" : "Standard Plan"}
                   price={isYearly ? "$2,490" : "$249"}
                   period={isYearly ? "/year" : "/month"}
@@ -130,9 +147,27 @@ export default function PricingPage() {
                                 ['active', 'trialing'].includes(subscription?.subscription_status)}
                   isYearly={isYearly}
                   monthlyPrice="$249"
-                />
-              </div>
-              <div className="flex flex-col h-full">
+                    />
+                  </div>
+                </div>
+              </motion.div>
+              <motion.div 
+                className="flex flex-col h-full"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <div className="relative h-full rounded-2xl border-[0.75px] border-gray-200/50 p-2">
+                  <GlowingEffect
+                    spread={45}
+                    glow={true}
+                    disabled={false}
+                    proximity={80}
+                    inactiveZone={0.05}
+                    borderWidth={2}
+                    movementDuration={2}
+                  />
+                  <div className="relative h-full">
                 <PricingCard
                   title="Premium Add-ons"
                   price="From $49"
@@ -147,14 +182,31 @@ export default function PricingPage() {
                   ]}
                   buttonText="Contact Sales"
                   buttonLink="/contact"
-                />
-              </div>
+                    />
+                  </div>
+                </div>
+              </motion.div>
             </div>
           )}
           
-          <div className="mt-16 max-w-3xl mx-auto">
+          <motion.div 
+            className="mt-16 max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+          >
             <h3 className="text-2xl font-display font-bold mb-6 text-center">Optional Enhancements</h3>
-            <div className="bg-white bg-opacity-20 backdrop-blur-xl rounded-2xl p-6 border border-white/20">
+            <div className="relative rounded-2xl border-[0.75px] border-white/30 p-2">
+              <GlowingEffect
+                spread={50}
+                glow={true}
+                disabled={false}
+                proximity={90}
+                inactiveZone={0.05}
+                borderWidth={2}
+                movementDuration={2.5}
+              />
+              <div className="relative bg-white/20 backdrop-blur-xl rounded-xl p-6 border border-white/20">
               <p className="text-lg mb-4">Expand LeafIQ as your needs grow:</p>
               <ul className="space-y-2 mb-6">
                 <li className="flex items-start">
