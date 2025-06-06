@@ -87,6 +87,7 @@ const GridItem = ({ area, icon, title, description, index }: GridItemProps) => {
           inactiveZone={0.01}
           borderWidth={2}
           movementDuration={1.5}
+          debug={index === 0}
         />
         <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] bg-white/80 backdrop-blur-md p-6 shadow-sm">
           <div className="relative flex flex-1 flex-col justify-between gap-4">

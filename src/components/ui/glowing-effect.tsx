@@ -2,7 +2,7 @@
 
 import { memo, useCallback, useEffect, useRef } from "react";
 import { cn } from "../../lib/utils";
-import { animate } from "motion/react";
+// Removed motion/react import to avoid production issues
 
 interface GlowingEffectProps {
   blur?: number;
@@ -15,6 +15,7 @@ interface GlowingEffectProps {
   disabled?: boolean;
   movementDuration?: number;
   borderWidth?: number;
+  debug?: boolean;
 }
 const GlowingEffect = memo(
   ({
@@ -28,6 +29,7 @@ const GlowingEffect = memo(
     movementDuration = 2,
     borderWidth = 1,
     disabled = true,
+    debug = false,
   }: GlowingEffectProps) => {
     const containerRef = useRef<HTMLDivElement>(null);
     const lastPosition = useRef({ x: 0, y: 0 });
@@ -73,6 +75,17 @@ const GlowingEffect = memo(
 
           element.style.setProperty("--active", isActive ? "1" : "0");
 
+          if (debug) {
+            console.log("🌟 GlowingEffect:", { 
+              isActive, 
+              mouseX, 
+              mouseY, 
+              elementRect: { left, top, width, height },
+              proximity,
+              disabled 
+            });
+          }
+
           if (!isActive) return;
 
           const currentAngle =
@@ -85,13 +98,25 @@ const GlowingEffect = memo(
           const angleDiff = ((targetAngle - currentAngle + 180) % 360) - 180;
           const newAngle = currentAngle + angleDiff;
 
-          animate(currentAngle, newAngle, {
-            duration: movementDuration,
-            ease: [0.16, 1, 0.3, 1],
-            onUpdate: (value) => {
-              element.style.setProperty("--start", String(value));
-            },
-          });
+          // Use native animation instead of motion library for better production compatibility
+          const startTime = performance.now();
+          const animateAngle = (timestamp: number) => {
+            const elapsed = timestamp - startTime;
+            const progress = Math.min(elapsed / (movementDuration * 1000), 1);
+            
+            // Cubic bezier easing [0.16, 1, 0.3, 1]
+            const easeProgress = progress < 1 ? 
+              1 - Math.pow(1 - progress, 3) : 1;
+            
+            const currentValue = currentAngle + (newAngle - currentAngle) * easeProgress;
+            element.style.setProperty("--start", String(currentValue));
+            
+            if (progress < 1) {
+              requestAnimationFrame(animateAngle);
+            }
+          };
+          
+          requestAnimationFrame(animateAngle);
         });
       },
       [inactiveZone, proximity, movementDuration]
@@ -174,8 +199,11 @@ const GlowingEffect = memo(
               "after:[border:var(--glowingeffect-border-width)_solid_transparent]",
               "after:[background:var(--gradient)] after:[background-attachment:fixed]",
               "after:opacity-[var(--active)] after:transition-opacity after:duration-300",
+              "after:[-webkit-mask-clip:padding-box,border-box]",
               "after:[mask-clip:padding-box,border-box]",
+              "after:[-webkit-mask-composite:xor]",
               "after:[mask-composite:intersect]",
+              "after:[-webkit-mask-image:linear-gradient(#0000,#0000),conic-gradient(from_calc((var(--start)-var(--spread))*1deg),#00000000_0deg,#fff,#00000000_calc(var(--spread)*2deg))]",
               "after:[mask-image:linear-gradient(#0000,#0000),conic-gradient(from_calc((var(--start)-var(--spread))*1deg),#00000000_0deg,#fff,#00000000_calc(var(--spread)*2deg))]"
             )}
           />
