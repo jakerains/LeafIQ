@@ -52,6 +52,13 @@ export const useSimpleAuthStore = create<SimpleAuthState>()(
           
           if (error) {
             console.error('Session check error:', error);
+            // Clear invalid session data from localStorage
+            try {
+              localStorage.removeItem('simple-auth-storage');
+              console.log('🧹 Cleared invalid session data from localStorage');
+            } catch (e) {
+              console.warn('Could not clear localStorage:', e);
+            }
             set({ isInitialized: true });
             return;
           }
