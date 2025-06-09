@@ -185,6 +185,7 @@ const KioskView = () => {
   };
   
   const handleReset = () => {
+    console.log('🔄 Resetting search state and navigating to kiosk home');
     setSearchQuery('');
     setSearchResults([]);
     setIsAIPowered(false);
