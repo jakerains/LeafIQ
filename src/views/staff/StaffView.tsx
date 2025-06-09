@@ -4,7 +4,6 @@ import { useProductsStore } from "../../stores/productsStore";
 import { useStaffModeStore } from "../../stores/staffModeStore";
 import { StaffHeader } from "../../components/staff/StaffHeader";
 import { StaffModeSelector } from "../../components/staff/StaffModeSelector";
-import { ProductSearchMode } from "../../components/staff/modes/ProductSearchMode";
 import { TerpeneExplorerMode } from "../../components/staff/modes/TerpeneExplorerMode";
 import StaffInventoryMode from "../../components/staff/modes/StaffInventoryMode";
 import StaffChatbotMode from "../../components/staff/modes/StaffChatbotMode";
@@ -90,8 +89,6 @@ const StaffView = () => {
 
   const renderActiveMode = () => {
     switch (activeMode) {
-      case "search":
-        return <ProductSearchMode />;
       case "terpenes":
         return <TerpeneExplorerMode />;
       case "assistant":
@@ -105,7 +102,8 @@ const StaffView = () => {
       case "analytics":
         return <PlaceholderMode mode="Performance Analytics" />;
       default:
-        return <ProductSearchMode />;
+        // Default to Inventory mode since "search" mode is removed
+        return <StaffInventoryMode />;
     }
   };
 

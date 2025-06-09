@@ -2,7 +2,6 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 export type StaffMode =
-  | "search" // Enhanced Product Search (current functionality)
   | "terpenes" // Interactive Terpene Database
   | "assistant" // Staff AI Assistant
   | "inventory" // Inventory Dashboard
@@ -23,16 +22,7 @@ export interface StaffModeConfig {
 }
 
 export const STAFF_MODES: StaffModeConfig[] = [
-  {
-    id: "search",
-    name: "Product Search",
-    description: "Advanced product search and customer consultation tools",
-    icon: "Search",
-    color: "text-blue-600",
-    bgColor: "bg-blue-50",
-    borderColor: "border-blue-200",
-    enabled: true,
-  },
+  // Removed "search" mode since we have inventory that does the same thing
   {
     id: "terpenes",
     name: "Terpene Explorer",
@@ -131,8 +121,8 @@ interface StaffModeState {
 export const useStaffModeStore = create<StaffModeState>()(
   persist(
     (set, get) => ({
-      // Initial state
-      activeMode: "search",
+      // Initial state - changed to "inventory" since "search" is removed
+      activeMode: "inventory",
       showModeSelector: false,
       searchHistory: [],
       notifications: [],
