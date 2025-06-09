@@ -393,4 +393,4 @@ const TerpeneRecommendations: React.FC = () => {
   );
 };
 
-export default TerpeneRecommendations; 
+export default TerpeneRecommendations;
