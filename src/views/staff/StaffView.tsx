@@ -9,7 +9,7 @@ import { TerpeneExplorerMode } from "../../components/staff/modes/TerpeneExplore
 import StaffInventoryMode from "../../components/staff/modes/StaffInventoryMode";
 import StaffChatbotMode from "../../components/staff/modes/StaffChatbotMode";
 import ProductDetailsModal from "../../views/admin/components/ProductDetailsModal";
-import { Button } from "../../components/ui/button"; 
+import { Button } from "../../components/ui/button";
 import {
   Construction,
 } from "lucide-react";
