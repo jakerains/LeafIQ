@@ -1264,6 +1264,4 @@ const SuperadminDashboard: React.FC = () => {
   );
 };
 
-export default SuperadminDashboard; 
-
-export default SuperadminDashboard
+export default SuperadminDashboard;
