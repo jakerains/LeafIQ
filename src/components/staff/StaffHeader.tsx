@@ -35,6 +35,11 @@ export const StaffHeader: React.FC = () => {
     navigate('/kiosk');
   };
 
+  const handleDemoHub = () => {
+    navigate('/app');
+    setShowUserMenu(false);
+  };
+
   const unreadNotifications = notifications.length;
 
   return (
@@ -189,6 +194,14 @@ export const StaffHeader: React.FC = () => {
                       <div className="font-medium text-gray-900 text-xs">{username}</div>
                       <div className="text-xxs text-gray-500">Employee • {dispensaryName}</div>
                     </div>
+                    
+                    <button
+                      onClick={handleDemoHub}
+                      className="w-full px-3 py-2 text-left text-xs text-blue-600 hover:bg-blue-50 flex items-center space-x-2"
+                    >
+                      <Home size={14} />
+                      <span>Demo Hub</span>
+                    </button>
                     
                     {!isAdmin && (
                       <button
