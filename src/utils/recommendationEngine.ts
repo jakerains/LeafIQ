@@ -211,6 +211,133 @@ export const calculateInventoryScore = (inventoryLevel: number): number => {
   return 1.0; // High stock
 };
 
+// Generate personalized message for local recommendations
+const generateLocalPersonalizedMessage = (vibe: string, effects: string[], categoryFilter?: string): string => {
+  const lowercaseVibe = vibe.toLowerCase();
+  
+  // Check if this is an activity query
+  if (lowercaseVibe.startsWith('activity:')) {
+    const activity = lowercaseVibe.replace('activity:', '').trim();
+    
+    if (activity.includes('movie') || activity.includes('netflix') || activity.includes('watch')) {
+      return "Perfect for movie night! I've selected products that will enhance your viewing experience with relaxing effects that won't put you to sleep. The edibles are great for long movie marathons.";
+    } else if (activity.includes('hike') || activity.includes('hiking') || activity.includes('outdoor') || activity.includes('nature')) {
+      return "Adventure awaits! These energizing yet grounding options will enhance your outdoor experience without weighing you down. The portable options are perfect for on-the-go enjoyment.";
+    } else if (activity.includes('concert') || activity.includes('festival') || activity.includes('music')) {
+      return "Let's make that concert unforgettable! I've recommended uplifting options that will keep you dancing and enhance the music experience. These are perfect for social events.";
+    } else if (activity.includes('creative') || activity.includes('art') || activity.includes('painting') || activity.includes('writing')) {
+      return "Time to unleash your creativity! These products enhance artistic flow and inspiration while keeping you focused. Perfect for creative projects and artistic endeavors.";
+    } else if (activity.includes('social') || activity.includes('party') || activity.includes('friends')) {
+      return "Get ready to socialize! These uplifting options will enhance conversation and laughter while keeping you comfortable in social settings.";
+    } else if (activity.includes('exercise') || activity.includes('workout') || activity.includes('gym')) {
+      return "Ready to get active? These energizing options will motivate your workout while helping with focus and endurance. Great for pre-workout preparation.";
+    } else {
+      return `Perfect for your ${activity}! I've selected products that will enhance your experience with the right balance of effects for your planned activity.`;
+    }
+  }
+  
+  // Regular vibe-based messages
+  if (lowercaseVibe.includes('relax') || lowercaseVibe.includes('calm') || lowercaseVibe.includes('chill')) {
+    return "Time to unwind! I've selected products with calming terpenes like linalool and myrcene that will help melt away stress and tension. Perfect for relaxation time.";
+  } else if (lowercaseVibe.includes('energy') || lowercaseVibe.includes('energiz') || lowercaseVibe.includes('active')) {
+    return "Ready to energize? These sativa-dominant options with uplifting terpenes will give you the boost you need without the jitters. Great for daytime activities!";
+  } else if (lowercaseVibe.includes('creative') || lowercaseVibe.includes('creat') || lowercaseVibe.includes('inspir')) {
+    return "Let your creativity flow! I've chosen products with terpenes like limonene and pinene that enhance creativity while keeping you focused and inspired.";
+  } else if (lowercaseVibe.includes('focus') || lowercaseVibe.includes('concentrat')) {
+    return "Time to focus! These products contain terpenes that enhance mental clarity and concentration, perfect for when you need to get things done.";
+  } else if (lowercaseVibe.includes('sleep') || lowercaseVibe.includes('rest')) {
+    return "Sweet dreams ahead! I've selected products with sedating terpenes like myrcene that will help you wind down and get quality rest.";
+  } else if (lowercaseVibe.includes('pain') || lowercaseVibe.includes('relief')) {
+    return "Relief is on the way! These products contain terpenes like caryophyllene and myrcene known for their pain-relieving and anti-inflammatory properties.";
+  } else if (lowercaseVibe.includes('happy') || lowercaseVibe.includes('mood') || lowercaseVibe.includes('uplift')) {
+    return "Time to lift your spirits! These mood-enhancing options with uplifting terpenes will help brighten your day and boost your overall mood.";
+  } else if (lowercaseVibe.includes('social')) {
+    return "Get ready to socialize! These products will enhance conversation and laughter while keeping you comfortable in social settings.";
+  }
+  
+  // Category-specific messages
+  if (categoryFilter) {
+    if (categoryFilter === 'flower') {
+      return "Classic flower power! I've selected premium flower products that offer the full spectrum cannabis experience with rich terpene profiles.";
+    } else if (categoryFilter === 'edible') {
+      return "Delicious and effective! These edibles provide long-lasting effects that are perfect for extended experiences. Remember to start low and go slow.";
+    } else if (categoryFilter === 'vaporizer') {
+      return "Clean and convenient! Vape products offer precise dosing and quick onset, perfect for when you want control over your experience.";
+    } else if (categoryFilter === 'concentrate') {
+      return "Potent and pure! These concentrates offer powerful effects for experienced users who appreciate high-quality extracts.";
+    }
+  }
+  
+  // Default message
+  return "Based on what you're looking for, I've selected products that will give you a well-balanced experience. These options are versatile and perfect for various occasions.";
+};
+
+// Generate context factors for local recommendations
+const generateLocalContextFactors = (vibe: string, categoryFilter?: string): string[] => {
+  const lowercaseVibe = vibe.toLowerCase();
+  const factors: string[] = [];
+  
+  // Activity-based factors
+  if (lowercaseVibe.startsWith('activity:')) {
+    const activity = lowercaseVibe.replace('activity:', '').trim();
+    
+    if (activity.includes('movie') || activity.includes('netflix')) {
+      factors.push('relaxing', 'long-lasting', 'couch-friendly', 'entertainment-enhancing');
+    } else if (activity.includes('hike') || activity.includes('outdoor')) {
+      factors.push('portable', 'energizing', 'nature-friendly', 'adventure-ready');
+    } else if (activity.includes('concert') || activity.includes('festival')) {
+      factors.push('portable', 'discreet', 'social', 'music-enhancing');
+    } else if (activity.includes('creative')) {
+      factors.push('creativity-enhancing', 'focus', 'inspiration', 'artistic');
+    } else if (activity.includes('social')) {
+      factors.push('social-enhancing', 'conversation', 'comfortable', 'confident');
+    } else if (activity.includes('exercise')) {
+      factors.push('energizing', 'motivating', 'pre-workout', 'endurance');
+    } else {
+      factors.push('activity-optimized', 'versatile', 'balanced');
+    }
+  } else {
+    // Vibe-based factors
+    if (lowercaseVibe.includes('relax') || lowercaseVibe.includes('calm')) {
+      factors.push('calming', 'stress-relief', 'comfortable', 'tension-relief');
+    } else if (lowercaseVibe.includes('energy') || lowercaseVibe.includes('active')) {
+      factors.push('energizing', 'daytime-appropriate', 'motivating', 'uplifting');
+    } else if (lowercaseVibe.includes('creative')) {
+      factors.push('creativity-enhancing', 'focus', 'inspiration', 'artistic');
+    } else if (lowercaseVibe.includes('focus')) {
+      factors.push('focusing', 'mental-clarity', 'productivity', 'concentration');
+    } else if (lowercaseVibe.includes('sleep')) {
+      factors.push('sedating', 'sleep-aid', 'nighttime', 'restful');
+    } else if (lowercaseVibe.includes('pain')) {
+      factors.push('pain-relief', 'anti-inflammatory', 'therapeutic', 'medicinal');
+    } else if (lowercaseVibe.includes('happy') || lowercaseVibe.includes('mood')) {
+      factors.push('mood-enhancing', 'uplifting', 'euphoric', 'joyful');
+    } else if (lowercaseVibe.includes('social')) {
+      factors.push('social-enhancing', 'conversation', 'laughter', 'comfortable');
+    }
+  }
+  
+  // Category-based factors
+  if (categoryFilter) {
+    if (categoryFilter === 'flower') {
+      factors.push('full-spectrum', 'traditional', 'aromatic');
+    } else if (categoryFilter === 'edible') {
+      factors.push('long-lasting', 'discreet', 'precise-dosing');
+    } else if (categoryFilter === 'vaporizer') {
+      factors.push('portable', 'clean', 'quick-onset');
+    } else if (categoryFilter === 'concentrate') {
+      factors.push('potent', 'pure', 'experienced-user');
+    }
+  }
+  
+  // Add general factors if none were added
+  if (factors.length === 0) {
+    factors.push('balanced', 'versatile', 'reliable');
+  }
+  
+  return factors;
+};
+
 // Main recommendation function with AI integration
 export const recommendProducts = async (
   products: ProductWithVariant[],
@@ -438,11 +565,17 @@ export const recommendProducts = async (
     
     console.log(`Returning ${paginatedProducts.length} locally processed recommendations (${offset + 1}-${offset + paginatedProducts.length} of ${sortedProducts.length})`);
     
+    // Generate personalized message for local fallback
+    const personalizedMessage = generateLocalPersonalizedMessage(vibe, effects, categoryFilter);
+    const contextFactors = generateLocalContextFactors(vibe, categoryFilter);
+    
     // Return top N results
     return { 
       products: paginatedProducts,
       effects,
       isAIPowered: false,
+      personalizedMessage,
+      contextFactors,
       totalAvailable: sortedProducts.length
     };
   } catch (error) {
@@ -486,10 +619,16 @@ export const recommendProducts = async (
     
     console.log(`Returning ${paginatedProducts.length} fallback recommendations (${offset + 1}-${offset + paginatedProducts.length} of ${sortedProducts.length})`);
     
+    // Generate personalized message for final fallback
+    const personalizedMessage = generateLocalPersonalizedMessage(vibe, effects, categoryFilter);
+    const contextFactors = generateLocalContextFactors(vibe, categoryFilter);
+    
     return { 
       products: paginatedProducts,
       effects,
       isAIPowered: false,
+      personalizedMessage,
+      contextFactors,
       totalAvailable: sortedProducts.length
     };
   }

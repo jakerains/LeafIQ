@@ -135,17 +135,18 @@ const AdminPasskeyModal: React.FC<AdminPasskeyModalProps> = ({
     <AnimatePresence>
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 overflow-y-auto"
           onClick={handleBackdropClick}
           onKeyDown={handleModalKeyDown}
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.9 }}
-            className={`bg-white rounded-2xl p-6 w-full max-w-md relative modal-content ${isShaking ? 'animate-shake' : ''}`}
-            onClick={e => e.stopPropagation()} // Prevent clicks from propagating
-          >
+          <div className="flex min-h-full items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              className={`bg-white rounded-2xl p-6 w-full max-w-md relative modal-content my-8 max-h-[calc(100vh-4rem)] overflow-y-auto ${isShaking ? 'animate-shake' : ''}`}
+              onClick={e => e.stopPropagation()} // Prevent clicks from propagating
+            >
             <button
               onClick={onClose}
               className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
@@ -259,10 +260,11 @@ const AdminPasskeyModal: React.FC<AdminPasskeyModalProps> = ({
                 </p>
               </div>
             </form>
-          </motion.div>
-        </div>
-      )}
-    </AnimatePresence>
+              </motion.div>
+            </div>
+          </div>
+        )}
+      </AnimatePresence>
   );
 };
 
