@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useAuthStore } from '../../stores/authStore';
+import { useSimpleAuthStore } from '../../stores/simpleAuthStore';
 import { useProductsStore } from '../../stores/productsStore';
 import SearchInput from '../../components/ui/SearchInput';
 import ProductCard from '../../components/ui/ProductCard';
@@ -22,6 +23,7 @@ import { getUserSubscription } from '../../lib/stripe';
 
 const AdminView = () => {
   const { logout, role } = useAuthStore();
+  const { selectUserMode } = useSimpleAuthStore();
   const navigate = useNavigate();
   const location = useLocation();
   const currentPath = location.pathname;
@@ -66,6 +68,15 @@ const AdminView = () => {
     navigate(`/admin/${tab === 'dashboard' ? '' : tab}`);
   };
 
+  // Handle Demo Hub navigation
+  const handleDemoHub = () => {
+    // Clear the user mode by setting it to null so they get redirected to kiosk selection
+    // We use the store's set method directly since selectUserMode doesn't accept null
+    const { userMode, ...state } = useSimpleAuthStore.getState();
+    useSimpleAuthStore.setState({ ...state, userMode: null, isAdmin: false });
+    navigate('/app');
+  };
+
   return (
     <div className="min-h-screen">
       <header className="bg-white bg-opacity-90 backdrop-blur-md shadow-sm">
@@ -86,7 +97,7 @@ const AdminView = () => {
               <Button 
                 variant="ghost"
                 leftIcon={<Home size={18} />}
-                onClick={() => navigate('/app')}
+                onClick={handleDemoHub}
                 className="text-gray-600 hover:text-blue-600"
               >
                 Demo Hub

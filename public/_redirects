@@ -1,0 +1,11 @@
+# Netlify redirects for React Router (SPA)
+# This ensures that all routes are handled by the client-side router
+
+# Redirect all non-file requests to index.html for client-side routing
+/*    /index.html   200
+
+# Optional: Force HTTPS redirect (uncomment if needed)
+# http://leafiq.netlify.app/*    https://leafiq.netlify.app/:splat    301!
+
+# Optional: Custom domain redirect (uncomment and update if you have a custom domain)
+# http://yourdomain.com/*    https://yourdomain.com/:splat    301! 
