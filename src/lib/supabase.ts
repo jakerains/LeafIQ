@@ -125,15 +125,43 @@ export const getTerpeneRecommendations = async (query: string) => {
       requestBody = { query, vibe: query };
     }
     
-    const response = await supabase.functions.invoke('ai-recommendations', {
-      body: requestBody
-    });
+    // Try the public AI recommendations function first (no JWT required)
+    try {
+      const response = await supabase.functions.invoke('ai-recommendations-public', {
+        body: requestBody
+      });
 
-    if (response.error) {
-      throw new Error(`Error getting recommendations: ${response.error.message}`);
+      if (response.error) {
+        console.warn('Public AI function error, falling back to authenticated version:', response.error);
+        throw new Error('Public function failed');
+      }
+
+      console.log('✅ Successfully used public AI recommendations function');
+      return response.data;
+    } catch (publicError) {
+      console.warn('Public AI function failed, trying authenticated version:', publicError);
+      
+      // Fallback to authenticated version
+      const { data: session } = await supabase.auth.getSession();
+      
+      const headers: Record<string, string> = {};
+      if (session?.session?.access_token) {
+        headers['Authorization'] = `Bearer ${session.session.access_token}`;
+      }
+      
+      const response = await supabase.functions.invoke('ai-recommendations', {
+        body: requestBody,
+        headers
+      });
+
+      if (response.error) {
+        console.error('Authenticated Edge Function error:', response.error);
+        throw new Error(`Error getting recommendations: ${response.error.message}`);
+      }
+
+      console.log('✅ Successfully used authenticated AI recommendations function');
+      return response.data;
     }
-
-    return response.data;
   } catch (error) {
     console.error('Error getting terpene recommendations:', error);
     throw error;
