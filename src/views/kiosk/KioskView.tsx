@@ -296,11 +296,7 @@ const KioskView = () => {
         <div className="w-full max-w-6xl flex flex-col justify-center">
           {/* Logo positioned above interface */}
           <div className="mb-8 text-center">
-            <img 
-              src="/leafiq-logo.png" 
-              alt="LeafIQ" 
-              className="h-20 mx-auto drop-shadow-lg filter shadow-primary-500/50"
-            />
+            <Logo size="xl" className="mx-auto" />
           </div>
           <Routes>
             <Route 

@@ -259,7 +259,7 @@ const VercelV0Chat: React.FC<VercelV0ChatProps> = ({
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={getPlaceholderText()}
-              className="w-full px-5 py-4 pl-12 pr-4 text-xl bg-white bg-opacity-70 backdrop-blur-sm rounded-2xl border border-gray-200 shadow-sm focus:ring-2 focus:ring-primary-300 focus:border-primary-300 transition-all duration-300"
+              className="w-full px-5 py-4 pl-12 pr-4 text-xl bg-white bg-opacity-70 backdrop-blur-sm rounded-2xl border-2 border-gray-200 shadow-sm focus:outline-none focus:border-primary-500 focus:ring-0 transition-all duration-300"
               disabled={isLoading}
             />
             <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
@@ -305,8 +305,8 @@ const VercelV0Chat: React.FC<VercelV0ChatProps> = ({
           <motion.button
             key={suggestion}
             onClick={() => handleSuggestionClick(suggestion)}
-            className="px-4 py-2 bg-white bg-opacity-60 backdrop-blur-sm rounded-full text-sm font-medium text-gray-700 border border-gray-200 hover:bg-opacity-80 transition-all duration-200"
-            whileHover={{ y: -2, boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}
+            className={`bg-white/80 border border-primary-200 px-3 py-1.5 rounded-full text-xs font-medium text-primary-800 hover:bg-primary-50 hover:border-primary-300 transition-all duration-200 shadow-sm hover:shadow-md ${isLoading ? 'opacity-50 cursor-not-allowed' : ''}`}
+            whileHover={{ y: -2 }}
             whileTap={{ scale: 0.97 }}
             disabled={isLoading}
           >

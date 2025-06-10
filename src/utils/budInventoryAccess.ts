@@ -167,7 +167,7 @@ export async function getInventoryRAGContext(
     const brands = [...new Set(availableProducts.map(p => p.brand))];
     
     const thcValues = availableProducts
-      .map(p => p.thc_percentage || 0)
+      .map(p => p.variant.thc_percentage || 0)
       .filter(thc => thc > 0);
     
     const thcRange = {
@@ -341,11 +341,11 @@ async function findRelevantProductsForQuery(
   }
   
   // THC/CBD level matches
-  if (lowerQuery.includes('high thc') || lowerQuery.includes('potent') || lowerQuery.includes('strong')) {
+  if (lowerQuery.includes('high thc') || lowerQuery.includes('highest thc') || lowerQuery.includes('potent') || lowerQuery.includes('strong') || lowerQuery.includes('most potent')) {
     const highThcProducts = availableProducts
-      .filter(p => (p.variant.thc_percentage || 0) > 25)
+      .filter(p => (p.variant.thc_percentage || 0) > 0) // Show all products with THC data
       .sort((a, b) => (b.variant.thc_percentage || 0) - (a.variant.thc_percentage || 0));
-    relevantProducts = [...relevantProducts, ...highThcProducts.slice(0, 2)];
+    relevantProducts = [...relevantProducts, ...highThcProducts.slice(0, 5)]; // Show top 5 highest THC
   }
   
   if (lowerQuery.includes('low thc') || lowerQuery.includes('mild') || lowerQuery.includes('cbd')) {
@@ -365,30 +365,199 @@ async function findRelevantProductsForQuery(
     relevantProducts = [...relevantProducts, ...terpeneProducts.slice(0, 3)];
   }
   
-  // Effect-based matches (basic heuristics)
-  if (lowerQuery.includes('sleep') || lowerQuery.includes('insomnia') || lowerQuery.includes('relax')) {
-    const relaxingProducts = availableProducts.filter(p => 
+    // ENHANCED NATURAL LANGUAGE PROCESSING FOR INVENTORY QUERIES
+  
+  // Price-based queries
+  if (lowerQuery.includes('cheap') || lowerQuery.includes('budget') || lowerQuery.includes('affordable') || 
+      lowerQuery.includes('under $') || lowerQuery.includes('inexpensive') || lowerQuery.includes('deals') ||
+      lowerQuery.includes('sale') || lowerQuery.includes('discount')) {
+    const budgetProducts = availableProducts
+      .filter(p => p.variant.price && p.variant.price > 0)
+      .sort((a, b) => (a.variant.price || 0) - (b.variant.price || 0));
+    relevantProducts = [...relevantProducts, ...budgetProducts.slice(0, 4)];
+  }
+
+  if (lowerQuery.includes('expensive') || lowerQuery.includes('premium') || lowerQuery.includes('high-end') ||
+      lowerQuery.includes('luxury') || lowerQuery.includes('top shelf') || lowerQuery.includes('best quality')) {
+    const premiumProducts = availableProducts
+      .filter(p => p.variant.price && p.variant.price > 0)
+      .sort((a, b) => (b.variant.price || 0) - (a.variant.price || 0));
+    relevantProducts = [...relevantProducts, ...premiumProducts.slice(0, 4)];
+  }
+
+  // Stock/availability queries
+  if (lowerQuery.includes('in stock') || lowerQuery.includes('available') || lowerQuery.includes('have') ||
+      lowerQuery.includes('what do you carry') || lowerQuery.includes('what\'s available') ||
+      lowerQuery.includes('inventory') || lowerQuery.includes('selection')) {
+    const inStockProducts = availableProducts
+      .filter(p => p.variant.inventory_level > 0)
+      .sort((a, b) => (b.variant.inventory_level || 0) - (a.variant.inventory_level || 0));
+    relevantProducts = [...relevantProducts, ...inStockProducts.slice(0, 6)];
+  }
+
+  if (lowerQuery.includes('low stock') || lowerQuery.includes('running out') || lowerQuery.includes('few left') ||
+      lowerQuery.includes('limited') || lowerQuery.includes('almost gone')) {
+    const lowStockProducts = availableProducts
+      .filter(p => p.variant.inventory_level > 0 && p.variant.inventory_level <= 5)
+      .sort((a, b) => (a.variant.inventory_level || 0) - (b.variant.inventory_level || 0));
+    relevantProducts = [...relevantProducts, ...lowStockProducts.slice(0, 3)];
+  }
+
+  // Experience level queries
+  if (lowerQuery.includes('beginner') || lowerQuery.includes('new to cannabis') || lowerQuery.includes('first time') ||
+      lowerQuery.includes('never tried') || lowerQuery.includes('mild') || lowerQuery.includes('gentle') ||
+      lowerQuery.includes('low dose') || lowerQuery.includes('start small')) {
+    const beginnerProducts = availableProducts
+      .filter(p => {
+        const thc = p.variant.thc_percentage || 0;
+        const cbd = p.variant.cbd_percentage || 0;
+        // Low THC or high CBD products
+        return thc < 15 || cbd > 5 || (cbd > 0 && thc / cbd < 2);
+      })
+      .sort((a, b) => (a.variant.thc_percentage || 0) - (b.variant.thc_percentage || 0));
+    relevantProducts = [...relevantProducts, ...beginnerProducts.slice(0, 4)];
+  }
+
+  if (lowerQuery.includes('experienced') || lowerQuery.includes('veteran') || lowerQuery.includes('regular user') ||
+      lowerQuery.includes('high tolerance') || lowerQuery.includes('something strong')) {
+    const experiencedProducts = availableProducts
+      .filter(p => (p.variant.thc_percentage || 0) > 20)
+      .sort((a, b) => (b.variant.thc_percentage || 0) - (a.variant.thc_percentage || 0));
+    relevantProducts = [...relevantProducts, ...experiencedProducts.slice(0, 4)];
+  }
+
+  // Time of day / occasion queries
+  if (lowerQuery.includes('morning') || lowerQuery.includes('daytime') || lowerQuery.includes('wake up') ||
+      lowerQuery.includes('start the day') || lowerQuery.includes('breakfast') || lowerQuery.includes('productive')) {
+    const morningProducts = availableProducts.filter(p => 
+      p.strain_type === 'sativa' || 
+      (p.variant.terpene_profile && ((p.variant.terpene_profile.limonene && p.variant.terpene_profile.limonene > 0.3) || (p.variant.terpene_profile.pinene && p.variant.terpene_profile.pinene > 0.2)))
+    );
+    relevantProducts = [...relevantProducts, ...morningProducts.slice(0, 3)];
+  }
+
+  if (lowerQuery.includes('evening') || lowerQuery.includes('night') || lowerQuery.includes('before bed') ||
+      lowerQuery.includes('wind down') || lowerQuery.includes('bedtime') || lowerQuery.includes('after work')) {
+    const eveningProducts = availableProducts.filter(p => 
       p.strain_type === 'indica' || 
       (p.variant.terpene_profile && p.variant.terpene_profile.myrcene && p.variant.terpene_profile.myrcene > 0.5)
     );
-    relevantProducts = [...relevantProducts, ...relaxingProducts.slice(0, 2)];
+    relevantProducts = [...relevantProducts, ...eveningProducts.slice(0, 3)];
   }
-  
-  if (lowerQuery.includes('energy') || lowerQuery.includes('focus') || lowerQuery.includes('creative')) {
+
+  if (lowerQuery.includes('party') || lowerQuery.includes('social') || lowerQuery.includes('friends') ||
+      lowerQuery.includes('gathering') || lowerQuery.includes('celebration') || lowerQuery.includes('weekend')) {
+    const socialProducts = availableProducts.filter(p => 
+      p.strain_type === 'hybrid' || p.strain_type === 'sativa' ||
+      (p.variant.terpene_profile && p.variant.terpene_profile.limonene && p.variant.terpene_profile.limonene > 0.3)
+    );
+    relevantProducts = [...relevantProducts, ...socialProducts.slice(0, 3)];
+  }
+
+  // Enhanced effect-based matches with more natural language
+  if (lowerQuery.includes('sleep') || lowerQuery.includes('insomnia') || lowerQuery.includes('relax') ||
+      lowerQuery.includes('calm down') || lowerQuery.includes('chill out') || lowerQuery.includes('unwind') ||
+      lowerQuery.includes('stress relief') || lowerQuery.includes('help me sleep') || lowerQuery.includes('tired') ||
+      lowerQuery.includes('restless') || lowerQuery.includes('can\'t sleep')) {
+    const relaxingProducts = availableProducts.filter(p => 
+      p.strain_type === 'indica' || 
+      (p.variant.terpene_profile && p.variant.terpene_profile.myrcene && p.variant.terpene_profile.myrcene > 0.5) ||
+      (p.variant.terpene_profile && p.variant.terpene_profile.linalool && p.variant.terpene_profile.linalool > 0.2)
+    );
+    relevantProducts = [...relevantProducts, ...relaxingProducts.slice(0, 4)];
+  }
+
+  if (lowerQuery.includes('energy') || lowerQuery.includes('focus') || lowerQuery.includes('creative') ||
+      lowerQuery.includes('motivation') || lowerQuery.includes('wake me up') || lowerQuery.includes('alert') ||
+      lowerQuery.includes('productive') || lowerQuery.includes('concentration') || lowerQuery.includes('studying') ||
+      lowerQuery.includes('work') || lowerQuery.includes('get things done') || lowerQuery.includes('uplift')) {
     const energizingProducts = availableProducts.filter(p => 
       p.strain_type === 'sativa' ||
-      (p.variant.terpene_profile && p.variant.terpene_profile.limonene && p.variant.terpene_profile.limonene > 0.5)
+      (p.variant.terpene_profile && p.variant.terpene_profile.limonene && p.variant.terpene_profile.limonene > 0.5) ||
+      (p.variant.terpene_profile && p.variant.terpene_profile.pinene && p.variant.terpene_profile.pinene > 0.3)
     );
-    relevantProducts = [...relevantProducts, ...energizingProducts.slice(0, 2)];
+    relevantProducts = [...relevantProducts, ...energizingProducts.slice(0, 4)];
   }
-  
-  if (lowerQuery.includes('pain') || lowerQuery.includes('relief') || lowerQuery.includes('ache')) {
+
+  if (lowerQuery.includes('pain') || lowerQuery.includes('relief') || lowerQuery.includes('ache') ||
+      lowerQuery.includes('sore') || lowerQuery.includes('hurt') || lowerQuery.includes('inflammation') ||
+      lowerQuery.includes('arthritis') || lowerQuery.includes('headache') || lowerQuery.includes('migraine') ||
+      lowerQuery.includes('chronic pain') || lowerQuery.includes('back pain') || lowerQuery.includes('joint pain')) {
     const painReliefProducts = availableProducts.filter(p =>
       (p.variant.terpene_profile && p.variant.terpene_profile.caryophyllene && p.variant.terpene_profile.caryophyllene > 0.3) ||
       (p.variant.terpene_profile && p.variant.terpene_profile.myrcene && p.variant.terpene_profile.myrcene > 0.5) ||
       (p.variant.cbd_percentage && p.variant.cbd_percentage > 1)
     );
-    relevantProducts = [...relevantProducts, ...painReliefProducts.slice(0, 2)];
+    relevantProducts = [...relevantProducts, ...painReliefProducts.slice(0, 4)];
+  }
+
+  if (lowerQuery.includes('anxiety') || lowerQuery.includes('anxious') || lowerQuery.includes('nervous') ||
+      lowerQuery.includes('worried') || lowerQuery.includes('panic') || lowerQuery.includes('stress') ||
+      lowerQuery.includes('overwhelmed') || lowerQuery.includes('calm my nerves')) {
+    const anxietyProducts = availableProducts.filter(p => {
+      const cbd = p.variant.cbd_percentage || 0;
+      const thc = p.variant.thc_percentage || 0;
+      const hasCalming = p.variant.terpene_profile && (
+        (p.variant.terpene_profile.linalool && p.variant.terpene_profile.linalool > 0.1) ||
+        (p.variant.terpene_profile.myrcene && p.variant.terpene_profile.myrcene > 0.3)
+      );
+      return cbd > 2 || (cbd > 0 && thc / cbd < 3) || hasCalming;
+    });
+    relevantProducts = [...relevantProducts, ...anxietyProducts.slice(0, 4)];
+  }
+
+  if (lowerQuery.includes('appetite') || lowerQuery.includes('hungry') || lowerQuery.includes('munchies') ||
+      lowerQuery.includes('eat') || lowerQuery.includes('food') || lowerQuery.includes('nausea') ||
+      lowerQuery.includes('stomach') || lowerQuery.includes('digestive')) {
+    const appetiteProducts = availableProducts.filter(p => 
+      p.strain_type === 'indica' || p.strain_type === 'hybrid' ||
+      (p.variant.terpene_profile && p.variant.terpene_profile.myrcene && p.variant.terpene_profile.myrcene > 0.4)
+    );
+    relevantProducts = [...relevantProducts, ...appetiteProducts.slice(0, 3)];
+  }
+
+  if (lowerQuery.includes('mood') || lowerQuery.includes('depression') || lowerQuery.includes('sad') ||
+      lowerQuery.includes('down') || lowerQuery.includes('blue') || lowerQuery.includes('happy') ||
+      lowerQuery.includes('uplift my mood') || lowerQuery.includes('feel better') || lowerQuery.includes('cheer up')) {
+    const moodProducts = availableProducts.filter(p => 
+      p.strain_type === 'sativa' || p.strain_type === 'hybrid' ||
+      (p.variant.terpene_profile && p.variant.terpene_profile.limonene && p.variant.terpene_profile.limonene > 0.4)
+    );
+    relevantProducts = [...relevantProducts, ...moodProducts.slice(0, 4)];
+  }
+
+  // Consumption method preferences with natural language
+  if (lowerQuery.includes('don\'t want to smoke') || lowerQuery.includes('non-smoking') || lowerQuery.includes('no smoking') ||
+      lowerQuery.includes('without smoking') || lowerQuery.includes('healthier option') || lowerQuery.includes('lung friendly')) {
+    const nonSmokingProducts = availableProducts.filter(p => 
+      p.category === 'edible' || p.category === 'vaporizer' || p.category === 'tincture' || p.category === 'topical'
+    );
+    relevantProducts = [...relevantProducts, ...nonSmokingProducts.slice(0, 5)];
+  }
+
+  if (lowerQuery.includes('quick effect') || lowerQuery.includes('fast acting') || lowerQuery.includes('immediate') ||
+      lowerQuery.includes('right away') || lowerQuery.includes('instant') || lowerQuery.includes('quick onset')) {
+    const fastActingProducts = availableProducts.filter(p => 
+      p.category === 'flower' || p.category === 'vaporizer' || p.category === 'concentrate' || p.category === 'pre-roll'
+    );
+    relevantProducts = [...relevantProducts, ...fastActingProducts.slice(0, 4)];
+  }
+
+  if (lowerQuery.includes('long lasting') || lowerQuery.includes('extended') || lowerQuery.includes('all day') ||
+      lowerQuery.includes('hours') || lowerQuery.includes('sustained') || lowerQuery.includes('prolonged')) {
+    const longLastingProducts = availableProducts.filter(p => 
+      p.category === 'edible' || p.category === 'tincture'
+    );
+    relevantProducts = [...relevantProducts, ...longLastingProducts.slice(0, 4)];
+  }
+
+  if (lowerQuery.includes('discrete') || lowerQuery.includes('discreet') || lowerQuery.includes('portable') ||
+      lowerQuery.includes('on the go') || lowerQuery.includes('travel') || lowerQuery.includes('pocket size') ||
+      lowerQuery.includes('convenient') || lowerQuery.includes('no smell')) {
+    const discreteProducts = availableProducts.filter(p => 
+      p.category === 'edible' || p.category === 'vaporizer' || p.category === 'tincture'
+    );
+    relevantProducts = [...relevantProducts, ...discreteProducts.slice(0, 4)];
   }
   
   // Remove duplicates and limit results
@@ -493,7 +662,7 @@ export async function getInventoryContext(organizationId: string): Promise<Inven
     
     // Calculate THC range
     const thcValues = availableProducts
-      .map(p => p.thc_percentage || 0)
+      .map(p => p.variant.thc_percentage || 0)
       .filter(thc => thc > 0);
     
     const thcRange = {

@@ -1,5 +1,5 @@
 interface LogoProps {
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'md' | 'lg' | 'xl';
   variant?: 'primary' | 'white';
   className?: string;
 }
@@ -8,7 +8,8 @@ const Logo = ({ size = 'md', className = '' }: LogoProps) => {
   const sizeClasses = {
     sm: 'h-10',
     md: 'h-16',
-    lg: 'h-24'
+    lg: 'h-24',
+    xl: 'h-32'
   };
   
   return (
