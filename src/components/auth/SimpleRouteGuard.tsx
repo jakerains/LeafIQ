@@ -12,7 +12,7 @@ export const SimpleRouteGuard: React.FC<SimpleRouteGuardProps> = ({
   allowedModes, 
   fallbackMessage = "You don't have access to this area." 
 }) => {
-  const { userMode, dispensaryName, logout } = useSimpleAuthStore();
+  const { userMode, logout } = useSimpleAuthStore();
 
   // Debug logging for route guard
   console.log('🛡️ SimpleRouteGuard check:', {

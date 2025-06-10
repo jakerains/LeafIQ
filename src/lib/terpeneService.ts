@@ -4,7 +4,7 @@ import type { Terpene, TerpeneInsert, TerpeneUpdate, TerpeneFilters } from '../t
 /**
  * Helper function to normalize terpene data from database
  */
-function normalizeTerpene(rawTerpene: any): Terpene {
+function normalizeTerpene(rawTerpene: Record<string, unknown>): Terpene {
   return {
     ...rawTerpene,
     aliases: rawTerpene.aliases || [],

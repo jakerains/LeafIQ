@@ -205,7 +205,7 @@ export const useSimpleAuthStore = create<SimpleAuthState>()(
           const { data: authData, error: authError } = await Promise.race([
             authPromise,
             timeoutPromise
-          ]) as any;
+          ]) as { data: { user: unknown } | null; error: { message?: string } | null };
 
           console.log('🔐 Auth call completed:', {
             hasUser: !!authData?.user,

@@ -4,7 +4,7 @@ import { useAuthStore } from '../../stores/authStore';
 import { UserRole } from '../../types';
 import { Button } from '../ui/button';
 import { motion } from 'framer-motion';
-import { Lock, Mail, AlertCircle, Eye, EyeOff, UserPlus, ArrowLeft } from 'lucide-react';
+import { Lock, Mail, AlertCircle, Eye, EyeOff, ArrowLeft } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
 interface LoginFormProps {
@@ -62,11 +62,11 @@ const LoginForm = ({ role: requiredRole }: LoginFormProps) => {
       // Navigate to appropriate page based on role
       const effectiveRole = displayRole || 'admin';
       const targetPath = `/${effectiveRole}`;
-      const from = (location.state as any)?.from?.pathname || targetPath;
+      const from = (location.state as { from?: { pathname: string } })?.from?.pathname || targetPath;
       navigate(from, { replace: true });
 
-    } catch (err: any) {
-      setError(err.message || 'Login failed. Please try again.');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Login failed. Please try again.');
     } finally {
       setIsLoading(false);
     }

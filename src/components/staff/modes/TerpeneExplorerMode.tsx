@@ -125,7 +125,7 @@ export const TerpeneExplorerMode: React.FC = () => {
             {['cards', 'wheel', 'list'].map((mode) => (
               <button
                 key={mode}
-                onClick={() => setViewMode(mode as any)}
+                onClick={() => setViewMode(mode as 'cards' | 'wheel' | 'list')}
                 className={`px-3 py-1 rounded-md text-xs font-medium transition-colors ${
                   viewMode === mode 
                     ? 'bg-white text-gray-900 shadow-sm' 

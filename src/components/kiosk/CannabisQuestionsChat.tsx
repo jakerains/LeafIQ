@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Send, User, Loader, Info, ShoppingBag, Database, Zap, Target, MessageCircle } from 'lucide-react';
+import { Send, User, Loader, Info, ShoppingBag, Database, Zap, Target } from 'lucide-react';
 import { Button } from '../ui/button';
+import { FlowButton } from '../ui/flow-button';
 import { ProductWithVariant } from '../../types';
 import { getCannabisKnowledgeResponse } from '../../lib/supabase';
 import { ResponseStream } from '../ui/response-stream'; 
@@ -199,7 +200,7 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
     // Apply styling to paragraphs
     return paragraphs.filter(p => p.length > 0).map((paragraph, index) => {
       // Highlight key phrases for better readability
-      let styledParagraph = paragraph
+      const styledParagraph = paragraph
         .replace(/(Hey there!|Trust me on this one!|Here's the thing though|That's awesome!)/g, '<span class="font-medium text-emerald-700">$1</span>')
         .replace(/(For example|Think of it like)/g, '<span class="font-medium text-gray-800">$1</span>')
         .replace(/("start low and go slow")/g, '<span class="font-medium text-amber-700 bg-amber-50 px-1 rounded">$1</span>');
@@ -350,7 +351,7 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
                 <h5 className="text-sm font-medium text-gray-700 mb-2">Terpene Profile</h5>
                 <div className="grid grid-cols-2 gap-2">
                   {Object.entries(selectedProduct.variant.terpene_profile)
-                    .filter(([_, value]) => (value as number) > 0)
+                    .filter(([, value]) => (value as number) > 0)
                     .sort(([, a], [, b]) => (b as number) - (a as number))
                     .slice(0, 6)
                     .map(([terpene, value]) => (
@@ -577,20 +578,13 @@ const CannabisQuestionsChat: React.FC<CannabisQuestionsChatProps> = ({
                 placeholder="Ask about cannabis effects, strains, or consumption methods..."
                 disabled={isLoading || isBotTyping}
               />
-              <Button 
+              <FlowButton
                 type="submit"
+                text="Ask"
+                isLoading={isLoading || isBotTyping}
                 disabled={!query.trim() || isLoading || isBotTyping}
-                className="px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-medium flex items-center shadow-lg"
-              >
-                {isLoading || isBotTyping ? (
-                  <Loader size={20} className="animate-spin" />
-                ) : (
-                  <>
-                    <Send size={20} className="mr-2" />
-                    Ask
-                  </>
-                )}
-              </Button>
+                className="shadow-lg"
+              />
             </div>
           </form>
         </div>

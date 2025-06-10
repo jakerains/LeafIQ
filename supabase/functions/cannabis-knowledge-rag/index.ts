@@ -5,7 +5,6 @@ import OpenAI from 'npm:openai@4.47.1';
 // Initialize OpenAI client
 const openaiKey = Deno.env.get('OPENAI_API_KEY');
 const pineconeKey = Deno.env.get('PINECONE_API_KEY');
-const pineconeEnv = Deno.env.get('PINECONE_ENVIRONMENT') || 'us-east-1';
 
 // Only initialize clients if keys are available
 const openai = openaiKey ? new OpenAI({

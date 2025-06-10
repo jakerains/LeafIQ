@@ -83,7 +83,7 @@ export interface ErrorLog {
   timestamp: string;
   type: string;
   message: string;
-  details?: any;
+  details?: Record<string, unknown>;
 }
 
 export type UserRole = 'staff' | 'admin' | 'super_admin' | null;

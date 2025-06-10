@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Users, UserCheck, LogOut, Building2, Shield } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useSimpleAuthStore } from '../../stores/simpleAuthStore';

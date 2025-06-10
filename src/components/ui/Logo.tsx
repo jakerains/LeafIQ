@@ -1,12 +1,10 @@
-import { ReactNode } from 'react';
-
 interface LogoProps {
   size?: 'sm' | 'md' | 'lg';
   variant?: 'primary' | 'white';
   className?: string;
 }
 
-const Logo = ({ size = 'md', variant = 'primary', className = '' }: LogoProps) => {
+const Logo = ({ size = 'md', className = '' }: LogoProps) => {
   const sizeClasses = {
     sm: 'h-10',
     md: 'h-16',

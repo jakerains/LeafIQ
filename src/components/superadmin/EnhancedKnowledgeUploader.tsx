@@ -42,7 +42,7 @@ const EnhancedKnowledgeUploader: React.FC<EnhancedKnowledgeUploaderProps> = ({ o
   }]);
   const [uploading, setUploading] = useState(false);
   const [dragActive, setDragActive] = useState<string | null>(null);
-  const [uploadResults, setUploadResults] = useState<any>(null);
+  const [uploadResults, setUploadResults] = useState<{ success: boolean; message?: string; error?: string } | null>(null);
 
   // Supported file types
   const supportedTypes = ['txt', 'md', 'json'];
@@ -62,7 +62,7 @@ const EnhancedKnowledgeUploader: React.FC<EnhancedKnowledgeUploaderProps> = ({ o
   const parseFileContent = (content: string, fileType: string): { title?: string; content: string } => {
     try {
       switch (fileType.toLowerCase()) {
-        case 'json':
+        case 'json': {
           const jsonData = JSON.parse(content);
           if (Array.isArray(jsonData)) {
             // Handle array of documents
@@ -79,23 +79,26 @@ const EnhancedKnowledgeUploader: React.FC<EnhancedKnowledgeUploaderProps> = ({ o
             };
           }
           return { content };
+        }
           
         case 'md':
-        case 'markdown':
+        case 'markdown': {
           // Extract title from first h1 heading if present
           const mdLines = content.split('\n');
           const h1Match = mdLines.find(line => line.startsWith('# '));
           const mdTitle = h1Match ? h1Match.replace('# ', '').trim() : undefined;
           return { title: mdTitle, content };
+        }
           
         case 'txt':
         case 'text':
-        default:
+        default: {
           // Extract title from first line if it looks like a title
           const textLines = content.split('\n');
           const firstLine = textLines[0]?.trim();
           const textTitle = (firstLine && firstLine.length < 100 && !firstLine.includes('.')) ? firstLine : undefined;
           return { title: textTitle, content };
+        }
       }
     } catch (error) {
       console.error('Error parsing file content:', error);
@@ -152,7 +155,7 @@ const EnhancedKnowledgeUploader: React.FC<EnhancedKnowledgeUploaderProps> = ({ o
     }
   };
 
-  const handleDrop = (e: React.DragEvent, index: number, docId: string) => {
+  const handleDrop = (e: React.DragEvent, index: number) => {
     e.preventDefault();
     e.stopPropagation();
     setDragActive(null);

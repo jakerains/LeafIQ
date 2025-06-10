@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../ui/button';
-import { Building2, Mail, Lock, AlertCircle, ArrowRight, ArrowLeft, Check, Monitor, Users, Database, MapPin, Gift, Phone, User, HelpCircle, Download, FileJson, X, Settings } from 'lucide-react';
+import { Building2, Mail, Lock, AlertCircle, ArrowRight, ArrowLeft, Check, Monitor, Users, Database, MapPin, Gift, Phone, User, HelpCircle, Download, FileJson, Settings } from 'lucide-react';
 import { signUp } from '../../lib/supabase';
 import { useAuthStore } from '../../stores/authStore';
 
@@ -126,7 +126,7 @@ const RegisterForm = () => {
       
       if (signUpError) {
         console.error('Registration error:', signUpError);
-        const errorMessage = (signUpError as any)?.message || signUpError.toString() || 'Registration failed';
+        const errorMessage = signUpError instanceof Error ? signUpError.message : (signUpError?.toString() || 'Registration failed');
         setErrors({ email: errorMessage });
         setIsLoading(false);
         return;
@@ -173,9 +173,9 @@ const RegisterForm = () => {
         setErrors({ email: 'Registration failed. Please try again.' });
       }
       
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Registration error:', error);
-      setErrors({ email: error.message || 'Registration failed. Please try again.' });
+      setErrors({ email: error instanceof Error ? error.message : 'Registration failed. Please try again.' });
     } finally {
       setIsLoading(false);
     }

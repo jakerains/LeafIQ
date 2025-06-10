@@ -221,82 +221,87 @@ const KioskView = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <div className="container mx-auto px-4 py-16 flex-1 flex flex-col">
-        <header className="flex flex-col items-center mb-8 mt-8">
-          <img 
-            src="/leafiq-logo.png" 
-            alt="LeafIQ" 
-            className="h-48 mb-4 drop-shadow-lg filter shadow-primary-500/50"
-          />
-          
-          <div className="flex items-center space-x-3 absolute top-8 right-8">
-            <div className="relative">
-              <motion.button
-                onClick={() => setShowAdminMenu(!showAdminMenu)}
-                className="flex items-center gap-1 px-3 py-1.5 text-sm bg-white bg-opacity-70 backdrop-blur-sm rounded-xl text-gray-500 hover:bg-opacity-90 hover:text-gray-700 shadow-sm transition-all duration-200"
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.97 }}
-                aria-label="Admin Menu"
-              >
-                <User size={16} />
-                <span>Menu</span>
-                <ChevronDown size={14} className={`transition-transform duration-200 ${showAdminMenu ? 'rotate-180' : ''}`} />
-              </motion.button>
-              
-              {showAdminMenu && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -10 }}
-                  className="absolute top-full mt-2 right-0 w-48 bg-white bg-opacity-95 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200 overflow-hidden z-50"
-                >
-                  <button
-                    onClick={handleDemoHub}
-                    className="w-full px-4 py-3 text-left text-gray-700 hover:bg-gray-100 hover:bg-opacity-80 transition-colors duration-200 flex items-center gap-3"
-                  >
-                    <Home size={16} className="text-blue-500" />
-                    <div>
-                      <div className="font-medium">Demo Hub</div>
-                      <div className="text-xs text-gray-500">Return to demo options</div>
-                    </div>
-                  </button>
-                  <button
-                    onClick={handleStaffLogin}
-                    className="w-full px-4 py-3 text-left text-gray-700 hover:bg-gray-100 hover:bg-opacity-80 transition-colors duration-200 flex items-center gap-3"
-                  >
-                    <User size={16} className="text-blue-500" />
-                    <div>
-                      <div className="font-medium">Staff Mode</div>
-                      <div className="text-xs text-gray-500">Access staff dashboard</div>
-                    </div>
-                  </button>
-                  <button
-                    onClick={handleAdminLogin}
-                    className="w-full px-4 py-3 text-left text-gray-700 hover:bg-gray-100 hover:bg-opacity-80 transition-colors duration-200 flex items-center gap-3"
-                  >
-                    <Settings size={16} className="text-purple-500" />
-                    <div>
-                      <div className="font-medium">Admin Access</div>
-                      <div className="text-xs text-gray-500">Requires passkey</div>
-                    </div>
-                  </button>
-                </motion.div>
-              )}
-            </div>
-            
+    <div className="h-screen flex flex-col">
+      {/* Fixed top navigation */}
+      <div className="absolute top-4 right-4 z-50">
+        <div className="flex items-center space-x-3">
+          <div className="relative">
             <motion.button
-              onClick={handleReset}
-              className="px-4 py-2 bg-white bg-opacity-70 backdrop-blur-sm rounded-xl text-gray-700 hover:bg-opacity-90 shadow-sm transition-all duration-200"
+              onClick={() => setShowAdminMenu(!showAdminMenu)}
+              className="flex items-center gap-1 px-3 py-1.5 text-sm bg-white bg-opacity-70 backdrop-blur-sm rounded-xl text-gray-500 hover:bg-opacity-90 hover:text-gray-700 shadow-sm transition-all duration-200"
               whileHover={{ y: -2 }}
               whileTap={{ scale: 0.97 }}
+              aria-label="Admin Menu"
             >
-              Start Over
+              <User size={16} />
+              <span>Menu</span>
+              <ChevronDown size={14} className={`transition-transform duration-200 ${showAdminMenu ? 'rotate-180' : ''}`} />
             </motion.button>
+            
+            {showAdminMenu && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="absolute top-full mt-2 right-0 w-48 bg-white bg-opacity-95 backdrop-blur-sm rounded-xl shadow-lg border border-gray-200 overflow-hidden z-50"
+              >
+                <button
+                  onClick={handleDemoHub}
+                  className="w-full px-4 py-3 text-left text-gray-700 hover:bg-gray-100 hover:bg-opacity-80 transition-colors duration-200 flex items-center gap-3"
+                >
+                  <Home size={16} className="text-blue-500" />
+                  <div>
+                    <div className="font-medium">Demo Hub</div>
+                    <div className="text-xs text-gray-500">Return to demo options</div>
+                  </div>
+                </button>
+                <button
+                  onClick={handleStaffLogin}
+                  className="w-full px-4 py-3 text-left text-gray-700 hover:bg-gray-100 hover:bg-opacity-80 transition-colors duration-200 flex items-center gap-3"
+                >
+                  <User size={16} className="text-blue-500" />
+                  <div>
+                    <div className="font-medium">Staff Mode</div>
+                    <div className="text-xs text-gray-500">Access staff dashboard</div>
+                  </div>
+                </button>
+                <button
+                  onClick={handleAdminLogin}
+                  className="w-full px-4 py-3 text-left text-gray-700 hover:bg-gray-100 hover:bg-opacity-80 transition-colors duration-200 flex items-center gap-3"
+                >
+                  <Settings size={16} className="text-purple-500" />
+                  <div>
+                    <div className="font-medium">Admin Access</div>
+                    <div className="text-xs text-gray-500">Requires passkey</div>
+                  </div>
+                </button>
+              </motion.div>
+            )}
           </div>
-        </header>
-        
-        <div className="flex-1 flex flex-col justify-center">
+          
+          <motion.button
+            onClick={handleReset}
+            className="px-4 py-2 bg-white bg-opacity-70 backdrop-blur-sm rounded-xl text-gray-700 hover:bg-opacity-90 shadow-sm transition-all duration-200"
+            whileHover={{ y: -2 }}
+            whileTap={{ scale: 0.97 }}
+          >
+            Start Over
+          </motion.button>
+        </div>
+      </div>
+
+      {/* Main centered content */}
+      <div className="flex-1 flex flex-col items-center justify-center px-4">
+        {/* Content Routes */}
+        <div className="w-full max-w-6xl flex flex-col justify-center">
+          {/* Logo positioned above interface */}
+          <div className="mb-8 text-center">
+            <img 
+              src="/leafiq-logo.png" 
+              alt="LeafIQ" 
+              className="h-20 mx-auto drop-shadow-lg filter shadow-primary-500/50"
+            />
+          </div>
           <Routes>
             <Route 
               path="/" 

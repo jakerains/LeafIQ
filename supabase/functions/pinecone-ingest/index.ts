@@ -1,5 +1,5 @@
 import 'jsr:@supabase/functions-js/edge-runtime.d.ts';
-import { Pinecone, RecordMetadata } from 'npm:@pinecone-database/pinecone@2.2.0';
+import { Pinecone } from 'npm:@pinecone-database/pinecone@2.2.0';
 import { createClient } from 'npm:@supabase/supabase-js@2.49.1';
 
 // Initialize Pinecone client
@@ -27,11 +27,9 @@ const pinecone = new Pinecone({
 
 // Updated index configuration for budbudtender
 const PINECONE_INDEX_NAME = 'budbudtender';
-const PINECONE_HOST = 'https://budbudtender-pebqwjs.svc.aped-4627-b74a.pinecone.io';
 
 // Using OpenAI's text-embedding-3-small model (1536 dimensions)
 const EMBEDDING_MODEL = 'text-embedding-3-small';
-const EMBEDDING_DIMENSIONS = 1536;
 
 // Initialize Supabase client
 const supabase = createClient(
@@ -180,7 +178,7 @@ const handler = async (req: Request): Promise<Response> => {
       );
     } else {
       // Handle upsert operation
-      let allDocuments: DocumentData[] = [];
+      const allDocuments: DocumentData[] = [];
       
       // Enhanced: Process documents, checking if any are structured knowledge bases
       for (const doc of documents) {
@@ -315,10 +313,10 @@ const handler = async (req: Request): Promise<Response> => {
 };
 
 // Parse file content based on file type
-function parseFileContent(content: string, fileType: string): { title?: string; content: string; documents?: DocumentData[] } {
+function _parseFileContent(content: string, fileType: string): { title?: string; content: string; documents?: DocumentData[] } {
   try {
     switch (fileType.toLowerCase()) {
-      case 'json':
+      case 'json': {
         const jsonData = JSON.parse(content);
         
         // Enhanced: Detect structured knowledge base format
@@ -342,23 +340,26 @@ function parseFileContent(content: string, fileType: string): { title?: string; 
           };
         }
         return { content };
+      }
         
       case 'md':
-      case 'markdown':
+      case 'markdown': {
         // Extract title from first h1 heading if present
         const mdLines = content.split('\n');
         const h1Match = mdLines.find(line => line.startsWith('# '));
         const mdTitle = h1Match ? h1Match.replace('# ', '').trim() : undefined;
         return { title: mdTitle, content };
+      }
         
       case 'txt':
       case 'text':
-      default:
+      default: {
         // Extract title from first line if it looks like a title
         const textLines = content.split('\n');
         const firstLine = textLines[0]?.trim();
         const textTitle = (firstLine && firstLine.length < 100 && !firstLine.includes('.')) ? firstLine : undefined;
         return { title: textTitle, content };
+      }
     }
   } catch (error) {
     console.error('Error parsing file content:', error);
@@ -429,7 +430,7 @@ function parseStructuredKnowledgeBase(jsonData: any): { content: string; documen
 }
 
 // Enhanced: Create optimized content for better retrieval
-function createOptimizedContent(entry: any, categoryInfo: any, fileMetadata: any): string {
+function createOptimizedContent(entry: any, categoryInfo: any): string {
   const sections = [];
   
   // Add question/prompt prominently
@@ -472,7 +473,7 @@ function createOptimizedContent(entry: any, categoryInfo: any, fileMetadata: any
 }
 
 // Enhanced: Create meaningful document titles
-function createDocumentTitle(entry: any, categoryInfo: any, entryNumber: number): string {
+function createDocumentTitle(entry: any, categoryInfo: any): string {
   // Use the prompt as the primary title (truncated if too long)
   let title = entry.prompt;
   

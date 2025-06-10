@@ -195,16 +195,16 @@ Deno.serve(async (req) => {
     console.log(`Created checkout session ${session.id} for customer ${customerId}`);
 
     return corsResponse({ sessionId: session.id, url: session.url });
-  } catch (error: any) {
-    console.error(`Checkout error: ${error.message}`);
-    return corsResponse({ error: error.message }, 500);
+  } catch (error: unknown) {
+    console.error(`Checkout error: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    return corsResponse({ error: error instanceof Error ? error.message : 'Unknown error' }, 500);
   }
 });
 
 type ExpectedType = 'string' | { values: string[] };
 type Expectations<T> = { [K in keyof T]: ExpectedType };
 
-function validateParameters<T extends Record<string, any>>(values: T, expected: Expectations<T>): string | undefined {
+function validateParameters<T extends Record<string, unknown>>(values: T, expected: Expectations<T>): string | undefined {
   for (const parameter in values) {
     const expectation = expected[parameter];
     const value = values[parameter];

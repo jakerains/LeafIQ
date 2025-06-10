@@ -1,5 +1,4 @@
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
 import LandingPage from './views/LandingPage';
 
 import AuthLayout from './views/auth/AuthLayout';
@@ -15,10 +14,8 @@ import { useSimpleAuthStore } from './stores/simpleAuthStore';
 import PricingPage from './views/pricing/PricingPage';
 import CheckoutSuccess from './views/checkout/CheckoutSuccess';
 import CheckoutCanceled from './views/checkout/CheckoutCanceled';
-import SubscriptionDetails from './views/account/SubscriptionDetails';
 import VersionDisplay from './components/ui/VersionDisplay';
 import SuperadminAuth from './components/auth/SuperadminAuth';
-import SuperadminDashboard from './views/superadmin/SuperadminDashboard';
 
 // Info Pages
 import FeaturesPage from './views/FeaturesPage';

@@ -146,9 +146,9 @@ const LandingPage = () => {
               {/* On mobile, move the image here directly after the text */}
               <div className="lg:hidden mb-6">
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5 }}
+                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
                   className="relative w-5/6 mx-auto"
                 >
                   <div className="relative rounded-2xl border-[0.75px] border-gray-200/30 p-3">
@@ -234,9 +234,9 @@ const LandingPage = () => {
             <div className="flex-1 order-2 hidden lg:block">
               <div className="flex justify-center">
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5 }}
+                  initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
                   className="relative w-5/6"
                 >
                   <div className="relative rounded-2xl border-[0.75px] border-gray-200/30 p-3">
@@ -267,22 +267,202 @@ const LandingPage = () => {
         </div>
       </header>
 
+      {/* Why Choose Us Section */}
+      <section className="py-16 bg-transparent bg-opacity-30 backdrop-blur-xl">
+        <div className="container mx-auto px-4">
+          <motion.div 
+            className="text-center max-w-3xl mx-auto mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <h2 className="text-4xl font-display font-bold mb-4">
+              <span className="text-black">Why Choose </span>
+              <span className="bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">LeafIQ</span>
+            </h2>
+            <p className="text-xl text-gray-600">Experience the difference with our cutting-edge approach to cannabis retail.</p>
+          </motion.div>
+
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.3 }}
+          >
+            {/* Personalized Matches Card */}
+            <motion.div 
+              className="relative h-[320px]"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              whileHover={{ y: -8, transition: { duration: 0.3 } }}
+            >
+              <div className="relative rounded-2xl border-[0.75px] border-gray-200/50 p-2 h-full">
+                <GlowingEffect
+                  spread={40}
+                  glow={true}
+                  disabled={false}
+                  proximity={70}
+                  inactiveZone={0.05}
+                  borderWidth={2}
+                  movementDuration={1.8}
+                />
+                <div className="relative overflow-hidden rounded-xl shadow-xl h-full">
+                  {/* Card background image */}
+                  <div className="absolute inset-0 z-0">
+                    <img 
+                      src="/1.jpg" 
+                      alt="" 
+                      className="w-full h-full object-cover"
+                    />
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary-900 via-primary-900/30 to-transparent" />
+                  </div>
+                  
+                  {/* Card content */}
+                  <div className="relative z-10 p-6 flex flex-col justify-end h-full">
+                    <div className="mt-auto">
+                      <h3 className="text-xl font-bold text-white mb-2">Personalized Matches</h3>
+                      <p className="text-white/90 text-sm mb-4">
+                        AI-powered recommendations based on your unique preferences and desired effects.
+                      </p>
+                      <div className="inline-flex items-center justify-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-lg text-sm font-medium text-white border border-white/20">
+                        Smart Matching
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+            
+            {/* In-Stock Guarantee Card */}
+            <motion.div 
+              className="relative h-[320px]"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              whileHover={{ y: -8, transition: { duration: 0.3 } }}
+            >
+              <div className="relative rounded-2xl border-[0.75px] border-gray-200/50 p-2 h-full">
+                <GlowingEffect
+                  spread={40}
+                  glow={true}
+                  disabled={false}
+                  proximity={70}
+                  inactiveZone={0.05}
+                  borderWidth={2}
+                  movementDuration={1.8}
+                />
+                <div className="relative overflow-hidden rounded-xl shadow-xl h-full">
+                  {/* Card background image */}
+                  <div className="absolute inset-0 z-0">
+                    <img 
+                      src="/2.jpg" 
+                      alt="" 
+                      className="w-full h-full object-cover"
+                    />
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-secondary-900 via-secondary-900/30 to-transparent" />
+                  </div>
+                  
+                  {/* Card content */}
+                  <div className="relative z-10 p-6 flex flex-col justify-end h-full">
+                    <div className="mt-auto">
+                      <h3 className="text-xl font-bold text-white mb-2">In-Stock Guarantee</h3>
+                      <p className="text-white/90 text-sm mb-4">
+                        Real-time inventory tracking ensures every recommendation is available for purchase.
+                      </p>
+                      <div className="inline-flex items-center justify-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-lg text-sm font-medium text-white border border-white/20">
+                        Always Available
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+            
+            {/* Expert Guidance Card */}
+            <motion.div 
+              className="relative h-[320px]"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+              whileHover={{ y: -8, transition: { duration: 0.3 } }}
+            >
+              <div className="relative rounded-2xl border-[0.75px] border-gray-200/50 p-2 h-full">
+                <GlowingEffect
+                  spread={40}
+                  glow={true}
+                  disabled={false}
+                  proximity={70}
+                  inactiveZone={0.05}
+                  borderWidth={2}
+                  movementDuration={1.8}
+                />
+                <div className="relative overflow-hidden rounded-xl shadow-xl h-full">
+                  {/* Card background image */}
+                  <div className="absolute inset-0 z-0">
+                    <img 
+                      src="/3-yep.jpg" 
+                      alt="" 
+                      className="w-full h-full object-cover"
+                    />
+                    {/* Gradient overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-accent-900 via-accent-900/30 to-transparent" />
+                  </div>
+                  
+                  {/* Card content */}
+                  <div className="relative z-10 p-6 flex flex-col justify-end h-full">
+                    <div className="mt-auto">
+                      <h3 className="text-xl font-bold text-white mb-2">Expert Guidance</h3>
+                      <p className="text-white/90 text-sm mb-4">
+                        Knowledgeable staff ready to provide personalized insights and education.
+                      </p>
+                      <div className="inline-flex items-center justify-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-lg text-sm font-medium text-white border border-white/20">
+                        Professional Support
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Features Section */}
       <FeaturesSection />
 
       {/* Pricing Section */}
       <section className="py-20 bg-transparent bg-opacity-30 backdrop-blur-xl">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-8">
+          <motion.div 
+            className="text-center mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
             <h2 className="text-4xl font-display font-bold mb-4">
               <span className="text-black">💵 Clear, Honest </span>
               <span className="bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">Pricing</span>
             </h2>
             <p className="text-xl text-gray-600">All the power. No confusing tiers.</p>
-          </div>
+          </motion.div>
           
           {/* Pricing Toggle */}
-          <div className="mb-12">
+          <motion.div 
+            className="mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
             <div className="relative">
               {isYearly && (
                 <motion.div 
@@ -309,10 +489,22 @@ const LandingPage = () => {
                 <span className={`ml-3 font-medium ${isYearly ? 'text-primary-600' : 'text-gray-500'}`}>Yearly</span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <div className="flex flex-col h-full">
+          <motion.div 
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <motion.div 
+              className="flex flex-col h-full"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
               <PricingCard
                 title={isYearly ? "Annual Plan" : "Standard Plan"}
                 price={isYearly ? "$2,490" : "$249"}
@@ -333,8 +525,14 @@ const LandingPage = () => {
                 isYearly={isYearly}
                 monthlyPrice="$249"
               />
-            </div>
-            <div className="flex flex-col h-full">
+            </motion.div>
+            <motion.div 
+              className="flex flex-col h-full"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
               <PricingCard
                 title="Premium Add-ons"
                 price="From $49"
@@ -350,8 +548,8 @@ const LandingPage = () => {
                 buttonText="Contact Sales"
                 buttonLink="/contact"
               />
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
           
           <motion.div 
             className="mt-16 max-w-3xl mx-auto"
@@ -408,43 +606,75 @@ const LandingPage = () => {
       {/* Footer */}
       <footer className="bg-white bg-opacity-90 border-t border-gray-100 py-12">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div>
+          <motion.div 
+            className="grid grid-cols-2 md:grid-cols-4 gap-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+            >
               <h3 className="font-semibold mb-4">Product</h3>
               <ul className="space-y-2">
                 <li><Link to="/features" className="text-gray-600 hover:text-gray-900">Features</Link></li>
                 <li><Link to="/pricing" className="text-gray-600 hover:text-gray-900">Pricing</Link></li>
                 <li><Link to="/security" className="text-gray-600 hover:text-gray-900">Security</Link></li>
               </ul>
-            </div>
-            <div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
               <h3 className="font-semibold mb-4">Company</h3>
               <ul className="space-y-2">
                 <li><Link to="/about" className="text-gray-600 hover:text-gray-900">About</Link></li>
                 <li><Link to="/contact" className="text-gray-600 hover:text-gray-900">Contact</Link></li>
                 <li><Link to="/careers" className="text-gray-600 hover:text-gray-900">Careers</Link></li>
               </ul>
-            </div>
-            <div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.3 }}
+            >
               <h3 className="font-semibold mb-4">Resources</h3>
               <ul className="space-y-2">
                 <li><Link to="/blog" className="text-gray-600 hover:text-gray-900">Blog</Link></li>
                 <li><Link to="/docs" className="text-gray-600 hover:text-gray-900">Documentation</Link></li>
                 <li><Link to="/support" className="text-gray-600 hover:text-gray-900">Support</Link></li>
               </ul>
-            </div>
-            <div>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
               <h3 className="font-semibold mb-4">Legal</h3>
               <ul className="space-y-2">
                 <li><Link to="/privacy" className="text-gray-600 hover:text-gray-900">Privacy</Link></li>
                 <li><Link to="/terms" className="text-gray-600 hover:text-gray-900">Terms</Link></li>
                 <li><Link to="/compliance" className="text-gray-600 hover:text-gray-900">Compliance</Link></li>
               </ul>
-            </div>
-          </div>
-          <div className="mt-12 pt-8 border-t border-gray-100 text-center text-gray-600">
+            </motion.div>
+          </motion.div>
+          <motion.div 
+            className="mt-12 pt-8 border-t border-gray-100 text-center text-gray-600"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             <p>&copy; {new Date().getFullYear()} LeafIQ. All rights reserved.</p>
-          </div>
+          </motion.div>
         </div>
       </footer>
     </div>

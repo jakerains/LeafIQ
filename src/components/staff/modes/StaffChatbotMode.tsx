@@ -380,7 +380,7 @@ const StaffChatbotMode: React.FC<StaffChatbotModeProps> = ({
                 <h5 className="text-sm font-medium text-gray-700 mb-2">Terpene Profile</h5>
                 <div className="grid grid-cols-2 gap-2">
                   {Object.entries(selectedProduct.variant.terpene_profile)
-                    .filter(([_, value]) => (value as number) > 0)
+                    .filter(([, value]) => (value as number) > 0)
                     .sort(([, a], [, b]) => (b as number) - (a as number))
                     .slice(0, 6)
                     .map(([terpene, value]) => (
@@ -479,7 +479,7 @@ const StaffChatbotMode: React.FC<StaffChatbotModeProps> = ({
           ref={chatContainerRef}
           className="relative z-10 overflow-y-auto p-5 space-y-4 h-96"
         >
-          {chatHistory.map((message, index) => (
+          {chatHistory.map((message) => (
             <div 
               key={message.id} 
               className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Lock, Mail, Eye, EyeOff, ArrowLeft, Shield } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -46,7 +46,7 @@ const SuperadminLogin: React.FC = () => {
 
         // Successful login - the route will re-render and show dashboard
       }
-    } catch (error) {
+    } catch {
       setError('An unexpected error occurred');
     } finally {
       setIsLoading(false);

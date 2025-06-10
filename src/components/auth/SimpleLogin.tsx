@@ -24,7 +24,7 @@ export const SimpleLogin: React.FC = () => {
         setError(result.error || 'Login failed');
       }
       // On success, the auth store will update and trigger navigation
-    } catch (error) {
+    } catch {
       setError('An unexpected error occurred');
     } finally {
       setIsLoading(false);

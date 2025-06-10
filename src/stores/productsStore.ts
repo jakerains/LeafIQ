@@ -114,7 +114,7 @@ export const useProductsStore = create<ProductsState>((set, get) => ({
       console.log(`✅ Fetched ${variants?.length || 0} variants`);
 
       // Group variants by product for easier access
-      const variantsByProduct = (variants || []).reduce((acc: Record<string, Variant[]>, variant: any) => {
+      const variantsByProduct = (variants || []).reduce((acc: Record<string, Variant[]>, variant: Record<string, unknown>) => {
         if (!acc[variant.product_id]) {
           acc[variant.product_id] = [];
         }
@@ -143,7 +143,7 @@ export const useProductsStore = create<ProductsState>((set, get) => ({
       }, {});
 
       // Create combined products with variants
-      const productsWithVariants: ProductWithVariant[] = (products || []).map((product: any) => {
+      const productsWithVariants: ProductWithVariant[] = (products || []).map((product: Record<string, unknown>) => {
         const productVariants = variantsByProduct[product.id] || [];
         const firstVariant = productVariants[0] || {
           id: '',
@@ -188,7 +188,7 @@ export const useProductsStore = create<ProductsState>((set, get) => ({
       });
 
       set({ 
-        products: (products || []).map((p: any) => ({
+        products: (products || []).map((p: Record<string, unknown>) => ({
           id: p.id,
           organization_id: p.organization_id,
           name: p.name,
@@ -202,7 +202,7 @@ export const useProductsStore = create<ProductsState>((set, get) => ({
           created_at: p.created_at ?? '',
           updated_at: p.updated_at ?? ''
         })),
-        variants: (variants || []).map((v: any) => ({
+        variants: (variants || []).map((v: Record<string, unknown>) => ({
           id: v.id,
           product_id: v.product_id,
           size_weight: v.size_weight ?? undefined,
@@ -286,7 +286,7 @@ export const useProductsStore = create<ProductsState>((set, get) => ({
       if (error) throw error;
 
       // Transform the data to match ProductWithVariant interface
-      const productsWithVariants: ProductWithVariant[] = (data || []).map((item: any) => ({
+      const productsWithVariants: ProductWithVariant[] = (data || []).map((item: Record<string, unknown>) => ({
         id: item.product_id,
         organization_id: organizationId,
         name: item.product_name,
@@ -330,7 +330,6 @@ export const useProductsStore = create<ProductsState>((set, get) => ({
   // Search products by text query for Bud
   searchProductsByQuery: async (query: string, organizationId: string) => {
     try {
-      const lowerQuery = query.toLowerCase();
       
       // Fetch products that match the search query
       const { data: products, error: productsError } = await supabase

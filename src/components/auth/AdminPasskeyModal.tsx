@@ -94,7 +94,7 @@ const AdminPasskeyModal: React.FC<AdminPasskeyModalProps> = ({
     // Allow Enter to submit
     if (e.key === 'Enter') {
       e.preventDefault();
-      handleSubmit(e as any);
+      handleSubmit(e as React.FormEvent);
       return;
     }
     
@@ -122,7 +122,7 @@ const AdminPasskeyModal: React.FC<AdminPasskeyModalProps> = ({
   };
 
   // Re-focus input if it loses focus (unless user is interacting with buttons)
-  const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+  const handleInputBlur = () => {
     // Only refocus if the focus is moving to something outside the modal
     setTimeout(() => {
       if (isOpen && inputRef.current && !document.activeElement?.closest('.modal-content')) {
@@ -208,7 +208,7 @@ const AdminPasskeyModal: React.FC<AdminPasskeyModalProps> = ({
               
               {/* Numeric keypad */}
               <div className="grid grid-cols-3 gap-3 mb-6">
-                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((num, index) => (
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((num) => (
                   <button
                     key={num}
                     type="button"

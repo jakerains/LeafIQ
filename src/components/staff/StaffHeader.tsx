@@ -8,7 +8,6 @@ import {
   Clock,
   ChevronDown,
   X,
-  Package,
   Home 
 } from 'lucide-react';
 import { Button } from '../ui/button';

@@ -1,0 +1,4 @@
+project_id = "xaddlctkbrdeigeqfswd"
+
+[functions.ai-recommendations-public]
+verify_jwt = false 
