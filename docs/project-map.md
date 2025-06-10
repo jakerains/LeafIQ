@@ -181,4 +181,4 @@ npm run build        # Build for production
 ---
 
 *Last Updated: January 2024*
-*Version: 0.1.0* 
+*Version: 0.4.2* 

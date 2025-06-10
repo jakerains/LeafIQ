@@ -13,6 +13,7 @@ import {
   Construction,
 } from "lucide-react";
 import { motion } from "framer-motion";
+import { getVersion } from "../../utils/version";
 
 // Placeholder components for modes not yet implemented
 const PlaceholderMode = ({ mode }: { mode: string }) => (
@@ -145,7 +146,7 @@ const StaffView = () => {
       
       {/* Footer with version info */}
       <footer className="py-3 px-6 text-center text-xs text-gray-500">
-        <p>LeafIQ Staff Workstation • Version 2.5.0</p>
+        <p>LeafIQ Staff Workstation • Version {getVersion()}</p>
       </footer>
     </div>
   );
