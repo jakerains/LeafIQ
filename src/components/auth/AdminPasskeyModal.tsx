@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Eye, EyeOff, Shield, AlertCircle } from 'lucide-react';
 import { Button } from '../ui/button';
@@ -131,13 +132,14 @@ const AdminPasskeyModal: React.FC<AdminPasskeyModalProps> = ({
     }, 10);
   };
 
-  return (
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 overflow-y-auto"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9999] overflow-y-auto"
           onClick={handleBackdropClick}
           onKeyDown={handleModalKeyDown}
+          style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
         >
           <div className="flex min-h-full items-center justify-center p-4">
             <motion.div
@@ -264,7 +266,8 @@ const AdminPasskeyModal: React.FC<AdminPasskeyModalProps> = ({
             </div>
           </div>
         )}
-      </AnimatePresence>
+      </AnimatePresence>,
+    document.body
   );
 };
 
