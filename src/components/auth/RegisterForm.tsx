@@ -530,7 +530,7 @@ const RegisterForm = () => {
                     Accept Terms of Service *
                   </div>
                   <div className="text-sm text-gray-500 mt-1">
-                    I agree to the <a href="/terms" className="text-primary-600 hover:underline">Terms of Service</a> and <a href="/privacy" className=\"text-primary-600 hover:underline">Privacy Policy</a>
+                    I agree to the <a href="/terms" className="text-primary-600 hover:underline">Terms of Service</a> and <a href="/privacy" className="text-primary-600 hover:underline">Privacy Policy</a>
                   </div>
                 </div>
               </label>
