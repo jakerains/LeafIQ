@@ -3,7 +3,6 @@ import { useNavigate, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../ui/button';
 import { Building2, Mail, Lock, AlertCircle, ArrowRight, ArrowLeft, Check, Monitor, Users, Database, MapPin, Gift, Phone, User, HelpCircle, Download, FileJson, Settings } from 'lucide-react';
-import { signUp } from '../../lib/supabase';
 import { useAuthStore } from '../../stores/authStore';
 
 interface FormData {
@@ -48,6 +47,7 @@ const RegisterForm = () => {
   });
   
   const navigate = useNavigate();
+  const { signUpWithEmail, signInWithEmail } = useAuthStore();
   const totalSteps = 3;
 
   const updateFormData = (field: keyof FormData, value: string | boolean) => {
@@ -107,8 +107,8 @@ const RegisterForm = () => {
     setIsLoading(true);
     
     try {
-      // Use Supabase signUp function with all form data
-      const { data, error: signUpError } = await signUp(
+      // Use the signUpWithEmail method from the auth store
+      const signUpResult = await signUpWithEmail(
         formData.email,
         formData.password,
         formData.dispensaryName,
@@ -124,53 +124,44 @@ const RegisterForm = () => {
         }
       );
       
-      if (signUpError) {
-        console.error('Registration error:', signUpError);
-        const errorMessage = signUpError instanceof Error ? signUpError.message : (signUpError?.toString() || 'Registration failed');
-        setErrors({ email: errorMessage });
+      if (!signUpResult.success) {
+        console.error('Registration error:', signUpResult.error);
+        setErrors({ email: signUpResult.error || 'Registration failed' });
         setIsLoading(false);
         return;
       }
 
-      if (data?.user) {
-        // Registration successful
-        console.log('Registration successful:', data);
-        
-        // Sign in the user automatically after registration
-        const { signInWithEmail } = useAuthStore.getState();
-        const signInResult = await signInWithEmail(formData.email, formData.password);
-        
-        if (!signInResult.success) {
-          console.error('Auto sign-in failed:', signInResult.error);
-          // If auto sign-in fails, redirect to login
+      // Registration successful - sign in the user automatically
+      const signInResult = await signInWithEmail(formData.email, formData.password);
+      
+      if (!signInResult.success) {
+        console.error('Auto sign-in failed:', signInResult.error);
+        // If auto sign-in fails, redirect to login
         navigate('/auth/login?registered=true');
-          return;
-        }
-        
-        // Check if user wants onboarding
-        if (formData.wantOnboardingHelp) {
-          // Navigate to onboarding flow
-          navigate('/admin/onboarding', { 
-            state: { 
-              fromRegistration: true,
-              enableDemoInventory: formData.enableDemoInventory,
-              menuSource: formData.menuSource
-            } 
-          });
-        } else if (formData.enableDemoInventory) {
-          // If they want demo inventory but no onboarding, go to import
-          navigate('/admin/inventory/import', { 
-            state: { 
-              fromRegistration: true,
-              loadDemoData: true 
-            } 
-          });
-        } else {
-          // Otherwise go to dashboard
-          navigate('/admin');
-        }
+        return;
+      }
+      
+      // Check if user wants onboarding
+      if (formData.wantOnboardingHelp) {
+        // Navigate to onboarding flow
+        navigate('/admin/onboarding', { 
+          state: { 
+            fromRegistration: true,
+            enableDemoInventory: formData.enableDemoInventory,
+            menuSource: formData.menuSource
+          } 
+        });
+      } else if (formData.enableDemoInventory) {
+        // If they want demo inventory but no onboarding, go to import
+        navigate('/admin/inventory/import', { 
+          state: { 
+            fromRegistration: true,
+            loadDemoData: true 
+          } 
+        });
       } else {
-        setErrors({ email: 'Registration failed. Please try again.' });
+        // Otherwise go to dashboard
+        navigate('/admin');
       }
       
     } catch (error: unknown) {
