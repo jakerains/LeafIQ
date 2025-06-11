@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Mic, MicOff, Loader2, X } from 'lucide-react';
-import { Button } from './button';
+import { Search, Mic, MicOff, X } from 'lucide-react';
 import { FlowButton } from './flow-button';
 
 // Extend Window interface for Speech Recognition

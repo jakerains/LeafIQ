@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Send, User, Loader, Info, ShoppingBag, Database, Zap, Target, Mic, MicOff, X } from 'lucide-react';
+import { User, Info, ShoppingBag, Database, Zap, Target, Mic, MicOff, X } from 'lucide-react';
 import { Button } from '../ui/button';
 import { FlowButton } from '../ui/flow-button';
 import { ProductWithVariant } from '../../types';

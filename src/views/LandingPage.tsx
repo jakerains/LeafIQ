@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Check, Menu, X } from 'lucide-react';
 import { ShimmerButton } from '../components/ui/shimmer-button';
@@ -126,7 +126,7 @@ const LandingPage = () => {
                 <br className="md:hidden" /> {/* Line break on mobile */}
                 <FlipWords 
                   words={flipWords}
-                  duration={4000}
+                  duration={6000}
                   className="bg-gradient-to-r from-primary-500 to-emerald-500 bg-clip-text text-transparent inline-block"
                 />
                 <span className="text-gray-900"> Experience</span>

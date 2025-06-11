@@ -1,5 +1,4 @@
 import { supabase } from '../lib/supabase';
-import { Product, Variant } from '../types';
 
 // Define the import data structure
 export interface ImportMetadata {
@@ -229,7 +228,7 @@ export async function importInventoryData(
 
         // The RPC function handles conflict resolution, so we count as created
         stats.productsCreated++;
-        let productId = importProduct.id;
+        const productId = importProduct.id;
 
         // Process variants for this product
         for (const importVariant of importProduct.variants) {

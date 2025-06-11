@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSimpleAuthStore } from "../../stores/simpleAuthStore";
 import { useProductsStore } from "../../stores/productsStore";
 import { useStaffModeStore } from "../../stores/staffModeStore";
@@ -7,7 +7,6 @@ import { StaffModeSelector } from "../../components/staff/StaffModeSelector";
 import { TerpeneExplorerMode } from "../../components/staff/modes/TerpeneExplorerMode";
 import StaffInventoryMode from "../../components/staff/modes/StaffInventoryMode";
 import StaffChatbotMode from "../../components/staff/modes/StaffChatbotMode";
-import ProductDetailsModal from "../../views/admin/components/ProductDetailsModal";
 import { Button } from "../../components/ui/button";
 import {
   Construction,

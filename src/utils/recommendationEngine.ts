@@ -1,4 +1,4 @@
-import { ProductWithVariant, TerpeneProfile, VibesToTerpenes } from '../types';
+import { ProductWithVariant, TerpeneProfile } from '../types';
 import { vibesToTerpenes } from '../data/demoData';
 import { getTerpeneRecommendations, logSearchQuery } from '../lib/supabase';
 

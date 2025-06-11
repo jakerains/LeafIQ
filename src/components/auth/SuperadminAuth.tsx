@@ -39,11 +39,13 @@ const SuperadminLogin: React.FC = () => {
           .single();
 
         if (profileError || !profile || profile.role !== 'super_admin') {
+          console.log('❌ Access denied. Profile:', profile, 'Error:', profileError);
           setError('Access denied. Super admin privileges required.');
           await supabase.auth.signOut();
           return;
         }
 
+        console.log('✅ Super admin login successful for:', data.user.email);
         // Successful login - the route will re-render and show dashboard
       }
     } catch {
@@ -184,53 +186,104 @@ const SuperadminAuth: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    console.log('🚀 SuperadminAuth: Starting simple auth check...');
+    console.log('🚀 SuperadminAuth: Starting auth check...');
     
-    // Just check current user immediately
+    let mounted = true;
+    let authCheckComplete = false;
+    
+    // Safety timeout to prevent infinite loading
+    const timeoutId = setTimeout(() => {
+      if (mounted && !authCheckComplete) {
+        console.log('⏰ Auth check timeout - forcing loading to false');
+        setIsLoading(false);
+      }
+    }, 5000);
+    
+    // Simplified auth check
     const checkAuth = async () => {
       try {
-        const { data: { user }, error } = await supabase.auth.getUser();
+        console.log('🔍 Checking session...');
+        const { data: { session }, error } = await supabase.auth.getSession();
+        
+        if (!mounted) return;
         
         if (error) {
-          console.error('Auth error:', error);
+          console.error('❌ Session error:', error);
+          setUser(null);
+          setIsSuperAdmin(false);
+          authCheckComplete = true;
           setIsLoading(false);
           return;
         }
 
-        if (user) {
-          console.log('✅ User found:', user.email);
-          setUser(user);
+        if (session?.user) {
+          console.log('✅ Session found:', session.user.email);
+          setUser(session.user);
           
-          // Quick superadmin check
-          if (user.email === 'jakerains@gmail.com') {
-            console.log('✅ Superadmin detected by email');
+          // Check superadmin status
+          console.log('🔍 Checking superadmin role for user:', session.user.id);
+          const { data: profile, error: profileError } = await supabase
+            .from('profiles')
+            .select('role, user_id')
+            .eq('user_id', session.user.id)
+            .single();
+
+          if (!mounted) return;
+
+          console.log('📋 Profile result:', { profile, profileError });
+
+          if (!profileError && profile?.role === 'super_admin') {
+            console.log('✅ Superadmin role confirmed');
             setIsSuperAdmin(true);
+          } else {
+            console.log('❌ User does not have super_admin role:', {
+              role: profile?.role,
+              error: profileError?.message,
+              user_id: session.user.id
+            });
+            setIsSuperAdmin(false);
           }
+        } else {
+          console.log('❌ No session found');
+          setUser(null);
+          setIsSuperAdmin(false);
         }
       } catch (error) {
         console.error('Auth check failed:', error);
+        if (mounted) {
+          setUser(null);
+          setIsSuperAdmin(false);
+        }
       } finally {
-        setIsLoading(false);
+        if (mounted) {
+          console.log('✅ Auth check complete, setting loading to false');
+          authCheckComplete = true;
+          clearTimeout(timeoutId);
+          setIsLoading(false);
+        }
       }
     };
 
     checkAuth();
 
-    // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      console.log('Auth state:', event, session?.user?.email);
+    // Simplified auth state listener - but only for sign out events
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      console.log('🔄 Auth state change:', event, session?.user?.email);
       
-      if (session?.user) {
-        setUser(session.user);
-        setIsSuperAdmin(session.user.email === 'jakerains@gmail.com');
-      } else {
+      if (!mounted) return;
+      
+      // Only handle sign out - avoid duplicate processing for sign in
+      if (event === 'SIGNED_OUT') {
         setUser(null);
         setIsSuperAdmin(false);
       }
-      setIsLoading(false);
     });
 
-    return () => subscription.unsubscribe();
+    return () => {
+      mounted = false;
+      clearTimeout(timeoutId);
+      subscription.unsubscribe();
+    };
   }, []);
 
   if (isLoading) {
@@ -238,7 +291,24 @@ const SuperadminAuth: React.FC = () => {
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
         <div className="text-center">
           <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-white mx-auto mb-4"></div>
-          <p className="text-white/70">Checking authentication...</p>
+          <p className="text-white/70 mb-4">Checking authentication...</p>
+          
+          {/* Debug info */}
+          <div className="text-white/50 text-sm mb-4">
+            <p>User: {user ? user.email : 'None'}</p>
+            <p>Super Admin: {isSuperAdmin ? 'Yes' : 'No'}</p>
+          </div>
+          
+          {/* Emergency bypass button for debugging */}
+          <button
+            onClick={() => {
+              console.log('🚨 Emergency bypass clicked');
+              setIsLoading(false);
+            }}
+            className="px-4 py-2 bg-red-600 text-white text-sm rounded hover:bg-red-700 transition-colors"
+          >
+            Force Continue (Debug)
+          </button>
         </div>
       </div>
     );

@@ -207,7 +207,7 @@ function convertToImportProduct(
   const strainType = parseStrainType(parsed.type);
   
   // Parse variants from pricing
-  let variants = parsePricingToVariants(parsed.pricing, parsed.thc, parsed.cbd);
+  const variants = parsePricingToVariants(parsed.pricing, parsed.thc, parsed.cbd);
   
   if (variants.length === 0) {
     // Create a single variant if no pricing found

@@ -16,6 +16,7 @@ import CheckoutSuccess from './views/checkout/CheckoutSuccess';
 import CheckoutCanceled from './views/checkout/CheckoutCanceled';
 import VersionDisplay from './components/ui/VersionDisplay';
 import SuperadminAuth from './components/auth/SuperadminAuth';
+import NotFound from './components/ui/NotFound';
 
 // Info Pages
 import FeaturesPage from './views/FeaturesPage';
@@ -165,6 +166,9 @@ function App() {
               </SimpleAuthProvider>
             } 
           />
+          
+          {/* 404 Catch-all Route */}
+          <Route path="*" element={<NotFound />} />
         </Routes>
 
         {/* Version Display - Positioned based on current route */}
