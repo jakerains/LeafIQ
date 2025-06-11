@@ -20,3 +20,8 @@
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin" 
+
+# Environment variables
+[build.environment]
+  VITE_SUPABASE_URL = "https://xaddlctkbrdeigeqfswd.supabase.co"
+  VITE_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhhZGRsY3RrYnJkZWlnZXFmc3dkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTg3ODEwNTcsImV4cCI6MjAzNDM1NzA1N30.FX4kDdV1s2DKvB0rqMSJ5A0fLUkADp9TpwU-M1KU3vo"
