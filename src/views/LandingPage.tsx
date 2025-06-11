@@ -123,33 +123,13 @@ const LandingPage = () => {
                 <span className="relative inline-block">
                   Your{" "}
                 </span>
-                <motion.span 
-                  className="relative inline-block"
-                  initial={{ backgroundPosition: "0% 0%" }}
-                  animate={{ 
-                    backgroundPosition: ["0% 0%", "100% 0%", "0% 0%"] 
-                  }}
-                  transition={{
-                    duration: 8,
-                    repeat: Infinity,
-                    ease: "linear"
-                  }}
-                  style={{
-                    backgroundImage: "linear-gradient(90deg, #16a34a, #10b981, #22c55e, #16a34a)",
-                    backgroundSize: "200% 100%",
-                    backgroundClip: "text",
-                    WebkitBackgroundClip: "text",
-                    color: "transparent",
-                    display: "inline-block"
-                  }}
-                >
-                  <FlipWords 
-                    words={flipWords}
-                    duration={4000}
-                    className="bg-gradient-to-r from-primary-500 to-emerald-500 bg-clip-text text-transparent"
-                  />
-                </motion.span>
-                <span className="text-gray-900">Experience</span>
+                <br className="md:hidden" /> {/* Line break on mobile */}
+                <FlipWords 
+                  words={flipWords}
+                  duration={4000}
+                  className="bg-gradient-to-r from-primary-500 to-emerald-500 bg-clip-text text-transparent inline-block"
+                />
+                <span className="text-gray-900"> Experience</span>
               </motion.h1>
               <motion.p 
                 className="text-xl text-gray-800 mb-8"
@@ -800,10 +780,5 @@ const PricingCard = ({
     </motion.div>
   );
 };
-
-// Utility function for merging class names
-function cn(...classes: any[]) {
-  return classes.filter(Boolean).join(' ');
-}
 
 export default LandingPage;
