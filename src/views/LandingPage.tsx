@@ -25,9 +25,9 @@ const LandingPage = () => {
 
   return (
     <div className="min-h-screen" onClick={handleClickOutside}>
-      {/* Hero Section */}
+      {/* Hero Section - Modified to be more contained */}
       <header className="relative overflow-hidden min-h-screen flex items-center">
-        <div className="container mx-auto px-4 py-16">
+        <div className="container mx-auto px-4 py-16 max-w-6xl">
           <nav className="flex justify-between items-center mb-16 relative">
             <img 
               src="/leafiq-logo.png" 
@@ -107,7 +107,7 @@ const LandingPage = () => {
             </motion.div>
           )}
 
-          <div className="flex flex-col lg:flex-row items-center gap-12 relative z-10">
+          <div className="flex flex-col lg:flex-row items-center gap-12 relative z-10 max-w-5xl mx-auto">
             <div className="flex-1 text-center lg:text-left order-1">
               <motion.h1 
                 className="text-5xl lg:text-7xl font-display font-bold mb-6 text-gray-900"
