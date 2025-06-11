@@ -29,10 +29,12 @@ import {
   MessageCircle,
   Store,
   Clock,
-  Zap
+  Zap,
+  Mail
 } from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 import EnhancedKnowledgeUploader from '../../components/superadmin/EnhancedKnowledgeUploader';
+import WaitlistManager from './WaitlistManager';
 
 // Component imports will be created
 const SuperadminOverview = () => {
@@ -1164,6 +1166,7 @@ const SuperadminDashboard: React.FC = () => {
   const tabs = [
     { id: 'overview', label: 'Overview', icon: Activity },
     { id: 'organizations', label: 'Organizations', icon: Building2 },
+    { id: 'waitlist', label: 'Waitlist', icon: Mail },
     { id: 'documents', label: 'Knowledge Base', icon: FileText },
     { id: 'settings', label: 'Settings', icon: Settings },
   ];
@@ -1174,6 +1177,8 @@ const SuperadminDashboard: React.FC = () => {
         return <SuperadminOverview />;
       case 'organizations':
         return <OrganizationsManager />;
+      case 'waitlist':
+        return <WaitlistManager />;
       case 'documents':
         return <EnhancedKnowledgeUploader />;
       case 'settings':

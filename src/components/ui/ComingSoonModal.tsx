@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Send, CheckCircle, Mail } from 'lucide-react';
+import { X, Send, CheckCircle, Mail, AlertCircle } from 'lucide-react';
 import { ShimmerButton } from './shimmer-button';
+import { supabase } from '../../lib/supabase';
 
 interface ComingSoonModalProps {
   isOpen: boolean;
@@ -26,16 +27,31 @@ const ComingSoonModal = ({ isOpen, onClose }: ComingSoonModalProps) => {
     setError(null);
     setIsSubmitting(true);
     
-    // Simulate API call to save email
     try {
-      // In a real implementation, this would be an API call to your backend
-      // For example: await fetch('/api/waitlist', { method: 'POST', body: JSON.stringify({ email }) })
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Save the email to Supabase waitlist_signups table
+      const { error: dbError } = await supabase
+        .from('waitlist_signups')
+        .insert({ 
+          email: email.toLowerCase().trim(),
+          source: 'website_modal' 
+        });
       
-      console.log('Email collected:', email);
-      setIsSubmitted(true);
+      if (dbError) {
+        // Handle unique constraint violations (already signed up)
+        if (dbError.code === '23505') {
+          console.log('Email already in waitlist:', email);
+          // Still mark as success for UX purposes
+          setIsSubmitted(true);
+        } else {
+          console.error('Error saving to waitlist:', dbError);
+          throw new Error(dbError.message);
+        }
+      } else {
+        console.log('Email added to waitlist:', email);
+        setIsSubmitted(true);
+      }
     } catch (err) {
-      setError('Failed to submit. Please try again.');
+      setError('Unable to join waitlist. Please try again later.');
       console.error('Error submitting email:', err);
     } finally {
       setIsSubmitting(false);
@@ -123,7 +139,10 @@ const ComingSoonModal = ({ isOpen, onClose }: ComingSoonModalProps) => {
                           />
                         </div>
                         {error && (
-                          <p className="text-red-500 text-sm mt-1">{error}</p>
+                          <div className="flex items-center text-red-500 text-sm mt-1">
+                            <AlertCircle size={14} className="mr-1 flex-shrink-0" />
+                            <span>{error}</span>
+                          </div>
                         )}
                       </div>
                       
