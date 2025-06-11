@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Send, CheckCircle, Mail, AlertCircle } from 'lucide-react';
 import { ShimmerButton } from './shimmer-button';
 import { supabase } from '../../lib/supabase';
+import { createPortal } from 'react-dom';
 
 interface ComingSoonModalProps {
   isOpen: boolean;
@@ -14,6 +15,19 @@ const ComingSoonModal = ({ isOpen, onClose }: ComingSoonModalProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  
+  // Prevent body scrolling when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -64,21 +78,23 @@ const ComingSoonModal = ({ isOpen, onClose }: ComingSoonModalProps) => {
     }
   };
   
-  return (
+  // Use React Portal to mount the modal at the document body level
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+          className="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
           onClick={handleBackdropClick}
+          style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
         >
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
-            className="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden"
+            className="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden m-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="relative bg-gradient-to-r from-primary-500 to-accent-500 p-8 text-white">
@@ -174,7 +190,8 @@ const ComingSoonModal = ({ isOpen, onClose }: ComingSoonModalProps) => {
           </motion.div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 };
 
