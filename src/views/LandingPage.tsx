@@ -6,11 +6,15 @@ import { ShimmerButton } from '../components/ui/shimmer-button';
 import { FeaturesSection } from '../components/ui/bento-demo';
 import { GlowingEffect } from '../components/ui/glowing-effect';
 import ComingSoonModal from '../components/ui/ComingSoonModal';
+import { FlipWords } from '../components/ui/flip-words';
 
 const LandingPage = () => {
   const [isYearly, setIsYearly] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showComingSoonModal, setShowComingSoonModal] = useState(false);
+  
+  // Words for the FlipWords component
+  const flipWords = ["Dispensary", "Customer", "Budtender"];
 
   // Close mobile menu when clicking outside
   const handleClickOutside = (e: React.MouseEvent) => {
@@ -115,7 +119,10 @@ const LandingPage = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                Transform Your{" "}
+                Transform{" "}
+                <span className="relative inline-block">
+                  Your{" "}
+                </span>
                 <motion.span 
                   className="relative inline-block"
                   initial={{ backgroundPosition: "0% 0%" }}
@@ -135,7 +142,13 @@ const LandingPage = () => {
                     color: "transparent",
                     display: "inline-block"
                   }}
-                > Dispensary </motion.span>
+                >
+                  <FlipWords 
+                    words={flipWords}
+                    duration={4000}
+                    className="bg-gradient-to-r from-primary-500 to-emerald-500 bg-clip-text text-transparent"
+                  />
+                </motion.span>
                 <span className="text-gray-900">Experience</span>
               </motion.h1>
               <motion.p 
