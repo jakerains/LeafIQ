@@ -78,100 +78,98 @@ const ComingSoonModal = ({ isOpen, onClose }: ComingSoonModalProps) => {
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
-            className="bg-white rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden"
-            onClick={e => e.stopPropagation()}
+            className="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative">
+            <div className="relative bg-gradient-to-r from-primary-500 to-accent-500 p-8 text-white">
               <button
                 onClick={onClose}
-                className="absolute top-4 right-4 p-2 text-gray-500 hover:text-gray-700 z-10"
+                className="absolute top-4 right-4 p-2 rounded-full bg-white bg-opacity-20 hover:bg-opacity-30 transition-all"
               >
-                <X size={24} />
+                <X size={20} />
               </button>
               
-              <div className="bg-gradient-to-r from-primary-500 to-accent-500 p-8 text-white">
-                <h2 className="text-3xl font-bold mb-3">Coming Soon!</h2>
-                <p className="opacity-90">
-                  LeafIQ is currently in private beta. Join our waitlist to be among the first to experience AI-powered cannabis retail.
-                </p>
-              </div>
+              <h2 className="text-3xl font-bold mb-3">Coming Soon!</h2>
+              <p className="opacity-90">
+                LeafIQ is currently in private beta. Join our waitlist to be among the first to experience AI-powered cannabis retail.
+              </p>
+            </div>
 
-              <div className="p-8">
-                {isSubmitted ? (
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-center"
+            <div className="p-8">
+              {isSubmitted ? (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-center"
+                >
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <CheckCircle size={32} className="text-green-600" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">Thank You!</h3>
+                  <p className="text-gray-600 mb-6">
+                    We'll notify you when LeafIQ launches. In the meantime, we may reach out with exclusive early access offers.
+                  </p>
+                  <ShimmerButton
+                    onClick={onClose}
+                    shimmerColor="#22c55e"
+                    background="rgba(34, 197, 94, 1)"
                   >
-                    <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                      <CheckCircle size={32} className="text-green-600" />
+                    Close
+                  </ShimmerButton>
+                </motion.div>
+              ) : (
+                <>
+                  <h3 className="text-xl font-semibold mb-6">Join the Waitlist</h3>
+                  
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
+                        Email Address
+                      </label>
+                      <div className="relative">
+                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                        <input
+                          type="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          placeholder="you@example.com"
+                          className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                          required
+                        />
+                      </div>
+                      {error && (
+                        <div className="flex items-center text-red-500 text-sm mt-1">
+                          <AlertCircle size={14} className="mr-1 flex-shrink-0" />
+                          <span>{error}</span>
+                        </div>
+                      )}
                     </div>
-                    <h3 className="text-xl font-semibold mb-2">Thank You!</h3>
-                    <p className="text-gray-600 mb-6">
-                      We'll notify you when LeafIQ launches. In the meantime, we may reach out with exclusive early access offers.
-                    </p>
+                    
                     <ShimmerButton
-                      onClick={onClose}
+                      className="w-full"
                       shimmerColor="#22c55e"
                       background="rgba(34, 197, 94, 1)"
+                      disabled={isSubmitting}
                     >
-                      Close
-                    </ShimmerButton>
-                  </motion.div>
-                ) : (
-                  <>
-                    <h3 className="text-xl font-semibold mb-6">Join the Waitlist</h3>
-                    
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-1">
-                          Email Address
-                        </label>
-                        <div className="relative">
-                          <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                          <input
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            placeholder="you@example.com"
-                            className="pl-10 w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-                            required
-                          />
+                      {isSubmitting ? (
+                        <div className="flex items-center justify-center">
+                          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
+                          Submitting...
                         </div>
-                        {error && (
-                          <div className="flex items-center text-red-500 text-sm mt-1">
-                            <AlertCircle size={14} className="mr-1 flex-shrink-0" />
-                            <span>{error}</span>
-                          </div>
-                        )}
-                      </div>
-                      
-                      <ShimmerButton
-                        className="w-full"
-                        shimmerColor="#22c55e"
-                        background="rgba(34, 197, 94, 1)"
-                        disabled={isSubmitting}
-                      >
-                        {isSubmitting ? (
-                          <div className="flex items-center justify-center">
-                            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                            Submitting...
-                          </div>
-                        ) : (
-                          <>
-                            <Send size={18} className="mr-2" />
-                            Notify Me
-                          </>
-                        )}
-                      </ShimmerButton>
-                    </form>
-                    
-                    <p className="text-gray-500 text-sm mt-6">
-                      By joining, you'll be first to know about our launch and may receive early access opportunities. We respect your privacy and will never share your information.
-                    </p>
-                  </>
-                )}
-              </div>
+                      ) : (
+                        <>
+                          <Send size={18} className="mr-2" />
+                          Notify Me
+                        </>
+                      )}
+                    </ShimmerButton>
+                  </form>
+                  
+                  <p className="text-gray-500 text-sm mt-6">
+                    By joining, you'll be first to know about our launch and may receive early access opportunities. We respect your privacy and will never share your information.
+                  </p>
+                </>
+              )}
             </div>
           </motion.div>
         </motion.div>
