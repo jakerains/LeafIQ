@@ -1,14 +1,16 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Check, Menu, X } from 'lucide-react';
 import { ShimmerButton } from '../components/ui/shimmer-button';
 import { FeaturesSection } from '../components/ui/bento-demo';
 import { GlowingEffect } from '../components/ui/glowing-effect';
+import ComingSoonModal from '../components/ui/ComingSoonModal';
 
 const LandingPage = () => {
   const [isYearly, setIsYearly] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [showComingSoonModal, setShowComingSoonModal] = useState(false);
 
   // Close mobile menu when clicking outside
   const handleClickOutside = (e: React.MouseEvent) => {
@@ -41,12 +43,12 @@ const LandingPage = () => {
               >
                 Log In
               </Link>
-              <Link 
-                to="/auth/signup"
+              <button
+                onClick={() => setShowComingSoonModal(true)} 
                 className="px-6 py-3 bg-primary-500 text-white rounded-xl font-medium hover:bg-primary-600 shadow-md hover:shadow-lg transition-all duration-300"
               >
                 Sign Up
-              </Link>
+              </button>
             </div>
 
             {/* Mobile Navigation Button with Glassmorphism */}
@@ -80,7 +82,7 @@ const LandingPage = () => {
                   disabled={false}
                   proximity={50}
                   inactiveZone={0.05}
-                  borderWidth={2}
+                  borderWidth={1}
                   movementDuration={1.5}
                 />
                 <div className="relative flex flex-col space-y-2">
@@ -91,13 +93,15 @@ const LandingPage = () => {
                   >
                     Log In
                   </Link>
-                  <Link 
-                    to="/auth/signup"
+                  <button 
                     className="px-4 py-3 mx-2 bg-primary-500/90 text-white rounded-lg font-medium hover:bg-primary-600 transition-colors"
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={() => {
+                      setShowComingSoonModal(true);
+                      setIsMobileMenuOpen(false);
+                    }}
                   >
                     Sign Up
-                  </Link>
+                  </button>
                 </div>
               </div>
             </motion.div>
@@ -185,7 +189,7 @@ const LandingPage = () => {
                   className="px-4 py-3 text-sm md:px-8 md:py-4 md:text-lg shadow-lg shadow-primary-500/20 flex-1 md:flex-auto"
                   shimmerColor="#22c55e"
                   background="rgba(34, 197, 94, 1)"
-                  onClick={() => window.location.href = '/auth/signup'}
+                  onClick={() => setShowComingSoonModal(true)}
                 >
                   Get Started Now
                 </ShimmerButton>
@@ -520,7 +524,7 @@ const LandingPage = () => {
                   'Unlimited SKUs'
                 ]}
                 buttonText="Get Started"
-                buttonLink="/auth/signup"
+                onClick={() => setShowComingSoonModal(true)}
                 highlighted
                 isYearly={isYearly}
                 monthlyPrice="$249"
@@ -546,7 +550,7 @@ const LandingPage = () => {
                   'Enterprise SLA'
                 ]}
                 buttonText="Contact Sales"
-                buttonLink="/contact"
+                onClick={() => setShowComingSoonModal(true)}
               />
             </motion.div>
           </motion.div>
@@ -590,12 +594,12 @@ const LandingPage = () => {
                   </li>
                 </ul>
                 <div className="text-center">
-                  <Link 
-                    to="/contact"
+                  <button
+                    onClick={() => setShowComingSoonModal(true)}
                     className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-primary-500 to-secondary-500 text-white rounded-xl font-medium hover:from-primary-600 hover:to-secondary-600 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                   >
                     Contact Sales for details
-                  </Link>
+                  </button>
                 </div>
               </div>
             </div>
@@ -677,6 +681,12 @@ const LandingPage = () => {
           </motion.div>
         </div>
       </footer>
+
+      {/* Coming Soon Modal */}
+      <ComingSoonModal 
+        isOpen={showComingSoonModal}
+        onClose={() => setShowComingSoonModal(false)}
+      />
     </div>
   );
 };
@@ -688,7 +698,7 @@ const PricingCard = ({
   description, 
   features, 
   buttonText, 
-  buttonLink,
+  onClick,
   highlighted = false,
   isYearly = false,
   monthlyPrice = ""
@@ -699,7 +709,7 @@ const PricingCard = ({
   description: string;
   features: string[];
   buttonText: string;
-  buttonLink: string;
+  onClick: () => void;
   highlighted?: boolean;
   isYearly?: boolean;
   monthlyPrice?: string;
@@ -763,15 +773,14 @@ const PricingCard = ({
           </div>
           
           <div className="mt-auto">
-            <Link to={buttonLink}>
-              <ShimmerButton
-                className="w-full"
-                shimmerColor={highlighted ? "#ffffff" : "#22c55e"}
-                background={highlighted ? "rgba(255, 255, 255, 0.1)" : "rgba(34, 197, 94, 1)"}
-              >
-                {buttonText}
-              </ShimmerButton>
-            </Link>
+            <ShimmerButton
+              className="w-full"
+              shimmerColor={highlighted ? "#ffffff" : "#22c55e"}
+              background={highlighted ? "rgba(255, 255, 255, 0.1)" : "rgba(34, 197, 94, 1)"}
+              onClick={onClick}
+            >
+              {buttonText}
+            </ShimmerButton>
           </div>
         </div>
       </div>
