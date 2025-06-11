@@ -111,17 +111,7 @@ const RegisterForm = () => {
       const signUpResult = await signUpWithEmail(
         formData.email,
         formData.password,
-        formData.dispensaryName,
-        {
-          useMode: formData.useMode,
-          menuSource: formData.menuSource,
-          enableDemoInventory: formData.enableDemoInventory,
-          locationZip: formData.locationZip,
-          referralCode: formData.referralCode,
-          fullName: formData.fullName,
-          phoneNumber: formData.phoneNumber,
-          wantOnboardingHelp: formData.wantOnboardingHelp
-        }
+        formData.dispensaryName
       );
       
       if (!signUpResult.success) {
@@ -530,7 +520,7 @@ const RegisterForm = () => {
                     Accept Terms of Service *
                   </div>
                   <div className="text-sm text-gray-500 mt-1">
-                    I agree to the <a href="/terms" className="text-primary-600 hover:underline">Terms of Service</a> and <a href="/privacy" className=\"text-primary-600 hover:underline">Privacy Policy</a>
+                    I agree to the <a href="/terms" className="text-primary-600 hover:underline">Terms of Service</a> and <a href="/privacy" className="text-primary-600 hover:underline">Privacy Policy</a>
                   </div>
                 </div>
               </label>
