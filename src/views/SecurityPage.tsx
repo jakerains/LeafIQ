@@ -18,10 +18,14 @@ import {
   Award
 } from 'lucide-react';
 import { GlowingEffect } from '../components/ui/glowing-effect';
+import HamburgerMenu from '../components/ui/HamburgerMenu';
 
 const SecurityPage = () => {
   return (
     <div className="min-h-screen">
+      {/* Hamburger Menu */}
+      <HamburgerMenu />
+      
       {/* Header */}
       <header className="bg-white bg-opacity-90 backdrop-blur-md shadow-sm">
         <div className="container mx-auto px-4 py-4">

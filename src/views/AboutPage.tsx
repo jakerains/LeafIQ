@@ -18,14 +18,19 @@ import {
   ExternalLink
 } from 'lucide-react';
 import { GlowingEffect } from '../components/ui/glowing-effect';
+import HamburgerMenu from '../components/ui/HamburgerMenu';
 
 const AboutPage = () => {
   return (
     <div className="min-h-screen">
-      {/* Header */}
-      <header className="bg-white bg-opacity-90 backdrop-blur-md shadow-sm">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
+      {/* Hamburger Menu */}
+      <HamburgerMenu />
+      
+      {/* Hero Section with Transparent Navigation - Updated */}
+      <header className="relative overflow-hidden min-h-screen flex items-center">
+        <div className="container mx-auto px-4 py-16 max-w-6xl">
+          {/* Navigation */}
+          <nav className="flex justify-between items-center mb-16 relative">
             <Link to="/">
               <img 
                 src="/leafiq-logo.png" 
@@ -48,13 +53,9 @@ const AboutPage = () => {
                 Get Started
               </Link>
             </div>
-          </div>
-        </div>
-      </header>
+          </nav>
 
-      {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-emerald-50 via-white to-green-50">
-        <div className="container mx-auto px-4">
+          {/* Hero Content */}
           <motion.div 
             className="text-center max-w-4xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
@@ -78,7 +79,7 @@ const AboutPage = () => {
             </p>
           </motion.div>
         </div>
-      </section>
+      </header>
 
       {/* Mission Section */}
       <section className="py-20 bg-white">

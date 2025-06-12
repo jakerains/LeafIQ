@@ -7,6 +7,7 @@ import Logo from '../../components/ui/Logo';
 import { Link } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
 import { GlowingEffect } from '../../components/ui/glowing-effect';
+import HamburgerMenu from '../../components/ui/HamburgerMenu';
 
 export default function PricingPage() {
   const [subscription, setSubscription] = useState<any>(null);
@@ -31,6 +32,9 @@ export default function PricingPage() {
 
   return (
     <div className="min-h-screen">
+      {/* Hamburger Menu */}
+      <HamburgerMenu />
+      
       <header className="bg-white bg-opacity-90 backdrop-blur-md shadow-sm">
         <div className="container mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
