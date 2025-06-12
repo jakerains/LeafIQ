@@ -131,46 +131,88 @@ const AboutPage = () => {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {/* AI-Driven Recommendations */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 h-full"
+                className="h-full"
               >
-                <Brain className="h-12 w-12 text-emerald-600 mb-4" />
-                <h3 className="text-xl font-semibold mb-3">AI-Driven Recommendations</h3>
-                <p className="text-gray-600">
-                  Match shoppers to the right SKUs in seconds, using terpene and cannabinoid profiles combined with live store inventory.
-                </p>
+                <div className="relative rounded-2xl border-[0.75px] border-gray-200/50 p-2 h-full">
+                  <GlowingEffect
+                    spread={35}
+                    glow={true}
+                    disabled={false}
+                    proximity={65}
+                    inactiveZone={0.05}
+                    borderWidth={2}
+                    movementDuration={1.8}
+                  />
+                  <div className="relative bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-100 h-full">
+                    <Brain className="h-12 w-12 text-emerald-600 mb-4" />
+                    <h3 className="text-xl font-semibold mb-3">AI-Driven Recommendations</h3>
+                    <p className="text-gray-600">
+                      Match shoppers to the right SKUs in seconds, using terpene and cannabinoid profiles combined with live store inventory.
+                    </p>
+                  </div>
+                </div>
               </motion.div>
               
+              {/* Actionable Education */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 h-full"
+                className="h-full"
               >
-                <Lightbulb className="h-12 w-12 text-emerald-600 mb-4" />
-                <h3 className="text-xl font-semibold mb-3">Actionable Education</h3>
-                <p className="text-gray-600">
-                  Translate complex cannabis science into plain-language insights for customers and staff.
-                </p>
+                <div className="relative rounded-2xl border-[0.75px] border-gray-200/50 p-2 h-full">
+                  <GlowingEffect
+                    spread={35}
+                    glow={true}
+                    disabled={false}
+                    proximity={65}
+                    inactiveZone={0.05}
+                    borderWidth={2}
+                    movementDuration={1.8}
+                  />
+                  <div className="relative bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-100 h-full">
+                    <Lightbulb className="h-12 w-12 text-emerald-600 mb-4" />
+                    <h3 className="text-xl font-semibold mb-3">Actionable Education</h3>
+                    <p className="text-gray-600">
+                      Translate complex cannabis science into plain-language insights for customers and staff.
+                    </p>
+                  </div>
+                </div>
               </motion.div>
               
+              {/* Built-In Compliance */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.3 }}
-                className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 h-full"
+                className="h-full"
               >
-                <Shield className="h-12 w-12 text-emerald-600 mb-4" />
-                <h3 className="text-xl font-semibold mb-3">Built-In Compliance</h3>
-                <p className="text-gray-600">
-                  Help dispensaries stay aligned with ever-changing state regulations and labeling requirements.
-                </p>
+                <div className="relative rounded-2xl border-[0.75px] border-gray-200/50 p-2 h-full">
+                  <GlowingEffect
+                    spread={35}
+                    glow={true}
+                    disabled={false}
+                    proximity={65}
+                    inactiveZone={0.05}
+                    borderWidth={2}
+                    movementDuration={1.8}
+                  />
+                  <div className="relative bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-gray-100 h-full">
+                    <Shield className="h-12 w-12 text-emerald-600 mb-4" />
+                    <h3 className="text-xl font-semibold mb-3">Built-In Compliance</h3>
+                    <p className="text-gray-600">
+                      Help dispensaries stay aligned with ever-changing state regulations and labeling requirements.
+                    </p>
+                  </div>
+                </div>
               </motion.div>
             </div>
           </motion.div>
@@ -272,15 +314,28 @@ const AboutPage = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: value.delay }}
-                  className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 h-full"
+                  className="h-full"
                 >
-                  <div className="flex items-start">
-                    <div className="bg-emerald-100 rounded-lg p-3 mr-4">
-                      <value.icon className="h-6 w-6 text-emerald-600" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-semibold mb-2">{value.title}</h3>
-                      <p className="text-gray-600 text-sm">{value.desc}</p>
+                  <div className="relative rounded-2xl border-[0.75px] border-gray-200/50 p-2 h-full">
+                    <GlowingEffect
+                      spread={30}
+                      glow={true}
+                      disabled={false}
+                      proximity={60}
+                      inactiveZone={0.05}
+                      borderWidth={2}
+                      movementDuration={1.6}
+                    />
+                    <div className="relative bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-sm border border-gray-100 h-full">
+                      <div className="flex items-start">
+                        <div className="bg-emerald-100 rounded-lg p-3 mr-4">
+                          <value.icon className="h-6 w-6 text-emerald-600" />
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-semibold mb-2">{value.title}</h3>
+                          <p className="text-gray-600 text-sm">{value.desc}</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </motion.div>
@@ -310,17 +365,28 @@ const AboutPage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100"
+              className="relative rounded-2xl border-[0.75px] border-gray-200/50 p-2"
             >
-              <div className="flex flex-col md:flex-row items-center">
-                <div className="w-32 h-32 bg-emerald-100 rounded-full flex items-center justify-center mb-6 md:mb-0 md:mr-8 flex-shrink-0">
-                  <User className="w-16 h-16 text-emerald-600" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-semibold mb-2">Jake Rains — Founder & CEO</h3>
-                  <p className="text-gray-700">
-                    Serial tech entrepreneur focused on turning AI research into practical products that improve everyday experiences.
-                  </p>
+              <GlowingEffect
+                spread={40}
+                glow={true}
+                disabled={false}
+                proximity={75}
+                inactiveZone={0.05}
+                borderWidth={2}
+                movementDuration={1.9}
+              />
+              <div className="relative bg-white/90 backdrop-blur-sm rounded-xl p-8 shadow-lg">
+                <div className="flex flex-col md:flex-row items-center">
+                  <div className="w-32 h-32 bg-emerald-100 rounded-full flex items-center justify-center mb-6 md:mb-0 md:mr-8 flex-shrink-0">
+                    <User className="w-16 h-16 text-emerald-600" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-semibold mb-2">Jake Rains — Founder & CEO</h3>
+                    <p className="text-gray-700">
+                      Serial tech entrepreneur focused on turning AI research into practical products that improve everyday experiences.
+                    </p>
+                  </div>
                 </div>
               </div>
             </motion.div>
@@ -350,19 +416,32 @@ const AboutPage = () => {
               If you run a dispensary and want to shape the future of data-driven cannabis retail, we'd love to talk.
             </p>
             
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Link 
-                to="/contact"
-                className="px-8 py-4 bg-emerald-500 text-white rounded-xl font-medium hover:bg-emerald-600 shadow-lg hover:shadow-xl transition-all duration-300"
-              >
-                Request Info
-              </Link>
-              <Link 
-                to="/contact"
-                className="px-8 py-4 border-2 border-emerald-500 text-emerald-600 rounded-xl font-medium hover:bg-emerald-50 transition-all duration-300"
-              >
-                Request a Demo
-              </Link>
+            <div className="relative rounded-2xl border-[0.75px] border-gray-200/50 p-2 inline-block">
+              <GlowingEffect
+                spread={50}
+                glow={true}
+                disabled={false}
+                proximity={90}
+                inactiveZone={0.05}
+                borderWidth={2}
+                movementDuration={2.2}
+              />
+              <div className="relative bg-white/90 backdrop-blur-sm rounded-xl p-4 shadow-lg">
+                <div className="flex flex-col sm:flex-row justify-center gap-4">
+                  <Link 
+                    to="/contact"
+                    className="px-8 py-4 bg-emerald-500 text-white rounded-xl font-medium hover:bg-emerald-600 shadow-lg hover:shadow-xl transition-all duration-300"
+                  >
+                    Request Info
+                  </Link>
+                  <Link 
+                    to="/contact"
+                    className="px-8 py-4 border-2 border-emerald-500 text-emerald-600 rounded-xl font-medium hover:bg-emerald-50 transition-all duration-300"
+                  >
+                    Request a Demo
+                  </Link>
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>
