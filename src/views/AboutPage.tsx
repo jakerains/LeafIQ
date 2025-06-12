@@ -13,7 +13,9 @@ import {
   Star,
   MapPin,
   Calendar,
-  User
+  User,
+  MessageSquare,
+  ExternalLink
 } from 'lucide-react';
 import { GlowingEffect } from '../components/ui/glowing-effect';
 
@@ -64,350 +66,302 @@ const AboutPage = () => {
             </div>
             <h1 className="text-5xl font-display font-bold mb-6">
               <span className="bg-gradient-to-r from-emerald-600 to-green-600 bg-clip-text text-transparent">
-                Revolutionizing Cannabis
+                Smarter Cannabis Retail
               </span>
               <br />
-              <span className="text-gray-900">Retail Intelligence</span>
+              <span className="text-gray-900">Powered by AI</span>
             </h1>
             <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-              We're building the future of cannabis retail through AI-powered technology that makes 
-              dispensaries smarter, customers happier, and the industry more professional.
+              LeafIQ is an early-stage startup building intelligent recommendation tools for dispensaries. 
+              Our platform connects real-time inventory, cannabinoid data, and customer preferences to make 
+              every visit more informed, personalized, and compliant.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Mission & Vision */}
+      {/* Mission Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-4xl font-display font-bold mb-6">
-                Our Mission
-              </h2>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
-                To democratize cannabis knowledge and make every dispensary visit an informed, 
-                personalized experience. We believe technology should bridge the gap between 
-                complex cannabis science and everyday consumers seeking the right products for their needs.
-              </p>
-              <div className="space-y-4">
-                {[
-                  {
-                    icon: Brain,
-                    title: "AI-Powered Education",
-                    description: "Making cannabis science accessible to everyone"
-                  },
-                  {
-                    icon: Heart,
-                    title: "Patient-Centered",
-                    description: "Prioritizing medical cannabis patients' needs"
-                  },
-                  {
-                    icon: Shield,
-                    title: "Compliance First",
-                    description: "Building trust through regulatory excellence"
-                  }
-                ].map((value, index) => (
-                  <div key={index} className="flex items-start space-x-4">
-                    <div className="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <value.icon className="h-5 w-5 text-emerald-600" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-gray-900">{value.title}</h3>
-                      <p className="text-gray-600 text-sm">{value.description}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div
-              className="relative"
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <div className="relative rounded-3xl border-[0.75px] border-emerald-200/50 p-2">
-                <GlowingEffect
-                  spread={50}
-                  glow={true}
-                  disabled={false}
-                  proximity={90}
-                  inactiveZone={0.05}
-                  borderWidth={3}
-                  movementDuration={2.2}
-                />
-                <div className="relative bg-gradient-to-br from-emerald-500 to-green-600 rounded-2xl p-8 text-white">
-                <h3 className="text-2xl font-semibold mb-6">Our Vision</h3>
-                <p className="text-emerald-100 mb-8 leading-relaxed">
-                  A cannabis industry where every transaction is informed, every recommendation is 
-                  personalized, and every customer leaves with exactly what they need to improve their life.
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl mx-auto"
+          >
+            <div className="flex items-center mb-8">
+              <Target className="h-8 w-8 text-emerald-600 mr-4 flex-shrink-0" />
+              <h2 className="text-3xl font-display font-bold">Mission</h2>
+            </div>
+            
+            <div className="relative rounded-2xl border-[0.75px] border-gray-200/50 p-2">
+              <GlowingEffect
+                spread={45}
+                glow={true}
+                disabled={false}
+                proximity={85}
+                inactiveZone={0.05}
+                borderWidth={2}
+                movementDuration={2}
+              />
+              <div className="relative bg-white/90 backdrop-blur-sm rounded-xl p-8 shadow-lg">
+                <p className="text-xl text-gray-700 leading-relaxed">
+                  To remove the guesswork and stigma from cannabis shopping by turning deep plant science into clear, approachable guidance. We aim to make education effortless and accessible, shortening the distance between cannabis users and cannabis understanding—so every dispensary experience feels confident, informed, and stigma-free.
                 </p>
-                <div className="grid grid-cols-2 gap-6">
-                  {[
-                    { label: "Dispensaries Served", value: "150+" },
-                    { label: "Customer Interactions", value: "50K+" },
-                    { label: "Product Matches", value: "1M+" },
-                    { label: "Accuracy Rate", value: "96%" }
-                  ].map((stat, index) => (
-                    <div key={index} className="text-center">
-                      <div className="text-2xl font-bold mb-1">{stat.value}</div>
-                      <div className="text-emerald-200 text-sm">{stat.label}</div>
-                    </div>
-                  ))}
-                </div>
-                </div>
               </div>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Company Story */}
-      <section className="py-20 bg-gray-50">
+      {/* What We Do Section */}
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-display font-bold mb-4">Our Story</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              From a simple idea to revolutionizing cannabis retail
-            </p>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl mx-auto"
+          >
+            <div className="flex items-center mb-8">
+              <Brain className="h-8 w-8 text-emerald-600 mr-4 flex-shrink-0" />
+              <h2 className="text-3xl font-display font-bold">What We Do</h2>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 h-full"
+              >
+                <Brain className="h-12 w-12 text-emerald-600 mb-4" />
+                <h3 className="text-xl font-semibold mb-3">AI-Driven Recommendations</h3>
+                <p className="text-gray-600">
+                  Match shoppers to the right SKUs in seconds, using terpene and cannabinoid profiles combined with live store inventory.
+                </p>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 h-full"
+              >
+                <Lightbulb className="h-12 w-12 text-emerald-600 mb-4" />
+                <h3 className="text-xl font-semibold mb-3">Actionable Education</h3>
+                <p className="text-gray-600">
+                  Translate complex cannabis science into plain-language insights for customers and staff.
+                </p>
+              </motion.div>
+              
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100 h-full"
+              >
+                <Shield className="h-12 w-12 text-emerald-600 mb-4" />
+                <h3 className="text-xl font-semibold mb-3">Built-In Compliance</h3>
+                <p className="text-gray-600">
+                  Help dispensaries stay aligned with ever-changing state regulations and labeling requirements.
+                </p>
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
-          <div className="max-w-4xl mx-auto">
-            <div className="space-y-12">
+      {/* Where We Are Now Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl mx-auto"
+          >
+            <div className="flex items-center mb-8">
+              <TrendingUp className="h-8 w-8 text-emerald-600 mr-4 flex-shrink-0" />
+              <h2 className="text-3xl font-display font-bold">Where We Are Now</h2>
+            </div>
+            
+            <div className="relative rounded-2xl border-[0.75px] border-gray-200/50 p-2">
+              <GlowingEffect
+                spread={45}
+                glow={true}
+                disabled={false}
+                proximity={85}
+                inactiveZone={0.05}
+                borderWidth={2}
+                movementDuration={2}
+              />
+              <div className="relative bg-white/90 backdrop-blur-sm rounded-xl p-8 shadow-lg">
+                <p className="text-xl text-gray-700 leading-relaxed">
+                  LeafIQ is actively piloting with a small group of forward-thinking dispensaries while we refine our algorithms and integrations. Feedback from these early partners directly shapes how we build and improve the platform.
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Values Section */}
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl mx-auto"
+          >
+            <div className="flex items-center mb-8">
+              <Heart className="h-8 w-8 text-emerald-600 mr-4 flex-shrink-0" />
+              <h2 className="text-3xl font-display font-bold">Values</h2>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
                 {
-                  year: "2022",
-                  title: "The Problem",
-                  description: "Visiting a dispensary shouldn't feel overwhelming. We realized that despite cannabis legalization, customers were still struggling to find the right products. Budtenders, while knowledgeable, couldn't possibly remember every detail about hundreds of products.",
-                  icon: Lightbulb
+                  title: "Customer Outcomes First",
+                  desc: "Every feature we build starts with a simple question: how does this help someone find the right product?",
+                  icon: Users,
+                  delay: 0.1
                 },
                 {
-                  year: "2023",
-                  title: "The Solution",
-                  description: "We started building AI technology that could understand cannabis science, customer preferences, and inventory data to make intelligent product recommendations. Our first prototype helped a small dispensary in Colorado increase customer satisfaction by 40%.",
-                  icon: Brain
+                  title: "Rooted in Cannabis Science",
+                  desc: "Our system is grounded in real research—not marketing buzzwords.",
+                  icon: Leaf,
+                  delay: 0.2
                 },
                 {
-                  year: "2024",
-                  title: "Rapid Growth",
-                  description: "Word spread quickly in the cannabis community. We expanded to 150+ dispensaries across 12 states, processed over 1 million product recommendations, and helped thousands of customers find their perfect cannabis experience.",
-                  icon: TrendingUp
+                  title: "Compliance by Design",
+                  desc: "We bake regulatory safeguards into everything we build.",
+                  icon: Shield,
+                  delay: 0.3
                 },
                 {
-                  year: "2025",
-                  title: "The Future",
-                  description: "Today, we're the leading AI platform for cannabis retail. But we're just getting started. Our vision includes predictive inventory management, personalized dosing recommendations, and making cannabis accessible to everyone who can benefit from it.",
-                  icon: Star
+                  title: "Community-Driven Development",
+                  desc: "We build alongside dispensary operators, budtenders, and customers.",
+                  icon: Users,
+                  delay: 0.4
+                },
+                {
+                  title: "Radically Accessible",
+                  desc: "Cannabis education should be easy for anyone to understand—regardless of experience.",
+                  icon: MessageSquare,
+                  delay: 0.5
+                },
+                {
+                  title: "Commitment to Craft",
+                  desc: "Whether it's code, copy, or customer support—we do it right.",
+                  icon: Star,
+                  delay: 0.6
                 }
-              ].map((milestone, index) => (
+              ].map((value, index) => (
                 <motion.div
                   key={index}
-                  className="flex items-start space-x-6"
                   initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: value.delay }}
+                  className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 h-full"
                 >
-                  <div className="flex-shrink-0">
-                    <div className="w-16 h-16 bg-white rounded-2xl shadow-lg flex items-center justify-center">
-                      <milestone.icon className="h-8 w-8 text-emerald-600" />
+                  <div className="flex items-start">
+                    <div className="bg-emerald-100 rounded-lg p-3 mr-4">
+                      <value.icon className="h-6 w-6 text-emerald-600" />
                     </div>
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center mb-2">
-                      <span className="text-sm font-medium text-emerald-600 bg-emerald-100 px-3 py-1 rounded-full mr-4">
-                        {milestone.year}
-                      </span>
-                      <h3 className="text-xl font-semibold">{milestone.title}</h3>
+                    <div>
+                      <h3 className="text-lg font-semibold mb-2">{value.title}</h3>
+                      <p className="text-gray-600 text-sm">{value.desc}</p>
                     </div>
-                    <p className="text-gray-600 leading-relaxed">{milestone.description}</p>
                   </div>
                 </motion.div>
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Values */}
+      {/* Founder Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-display font-bold mb-4">Our Values</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              The principles that guide everything we do
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Target,
-                title: "Customer First",
-                description: "Every feature we build starts with asking: how does this help customers find the right cannabis products for their needs?"
-              },
-              {
-                icon: Brain,
-                title: "Science-Based",
-                description: "We base our recommendations on peer-reviewed research, terpene science, and cannabinoid profiles - not marketing hype."
-              },
-              {
-                icon: Shield,
-                title: "Compliance Obsessed",
-                description: "Cannabis regulations are complex and ever-changing. We ensure our platform always keeps dispensaries compliant."
-              },
-              {
-                icon: Users,
-                title: "Community Driven",
-                description: "We listen to budtenders, customers, and dispensary owners to build features that solve real problems."
-              },
-              {
-                icon: Heart,
-                title: "Accessible",
-                description: "Cannabis should be accessible to all who can benefit from it, regardless of their technical knowledge or experience."
-              },
-              {
-                icon: Award,
-                title: "Excellence",
-                description: "We hold ourselves to the highest standards in everything from code quality to customer support."
-              }
-            ].map((value, index) => (
-              <motion.div
-                key={index}
-                className="h-full"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ y: -3 }}
-              >
-                <div className="relative h-full rounded-2xl border-[0.75px] border-gray-200/50 p-2">
-                  <GlowingEffect
-                    spread={35}
-                    glow={true}
-                    disabled={false}
-                    proximity={70}
-                    inactiveZone={0.05}
-                    borderWidth={2}
-                    movementDuration={1.7}
-                  />
-                  <div className="relative bg-white/90 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 h-full flex flex-col">
-                    <div className="w-14 h-14 bg-gradient-to-br from-emerald-100 to-green-200 rounded-2xl flex items-center justify-center mb-4">
-                      <value.icon className="h-7 w-7 text-emerald-600" />
-                    </div>
-                    <h3 className="text-lg font-semibold mb-3">{value.title}</h3>
-                    <p className="text-gray-600 text-sm leading-relaxed flex-grow">{value.description}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-display font-bold mb-4">Meet the Team</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Cannabis enthusiasts, tech innovators, and retail experts
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {[
-              {
-                name: "Jake Rains",
-                role: "Founder & CEO",
-                bio: "Former tech entrepreneur with 10+ years building consumer products. Passionate about using AI to solve real-world problems.",
-                location: "Denver, CO",
-                experience: "Previous: Tech Startup Founder"
-              },
-              {
-                name: "Dr. Sarah Chen",
-                role: "Head of Cannabis Science",
-                bio: "PhD in Pharmacology with expertise in cannabinoid research. Published 15+ papers on terpene interactions and effects.",
-                location: "San Francisco, CA",
-                experience: "Previous: Cannabis Research Lab"
-              },
-              {
-                name: "Marcus Rodriguez",
-                role: "VP of Engineering",
-                bio: "15 years in enterprise software with expertise in AI/ML systems. Built recommendation engines for Fortune 500 companies.",
-                location: "Austin, TX",
-                experience: "Previous: Google, Netflix"
-              }
-            ].map((member, index) => (
-              <motion.div
-                key={index}
-                className="bg-white rounded-2xl p-6 shadow-lg border border-gray-100"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-              >
-                <div className="w-20 h-20 bg-gradient-to-br from-emerald-100 to-green-200 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <User className="h-10 w-10 text-emerald-600" />
-                </div>
-                <h3 className="text-lg font-semibold text-center mb-1">{member.name}</h3>
-                <p className="text-emerald-600 text-center font-medium mb-3">{member.role}</p>
-                <p className="text-gray-600 text-sm text-center mb-4 leading-relaxed">{member.bio}</p>
-                <div className="space-y-2">
-                  <div className="flex items-center justify-center text-xs text-gray-500">
-                    <MapPin className="h-3 w-3 mr-1" />
-                    {member.location}
-                  </div>
-                  <div className="flex items-center justify-center text-xs text-gray-500">
-                    <Calendar className="h-3 w-3 mr-1" />
-                    {member.experience}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Link 
-              to="/careers"
-              className="inline-flex items-center px-8 py-4 bg-emerald-500 text-white rounded-xl font-medium hover:bg-emerald-600 shadow-lg hover:shadow-xl transition-all duration-300"
-            >
-              Join Our Team
-              <Users className="ml-2 h-5 w-5" />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-emerald-500 to-green-600">
-        <div className="container mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="max-w-4xl mx-auto"
           >
-            <h2 className="text-4xl font-display font-bold text-white mb-6">
-              Ready to Transform Your Dispensary?
+            <div className="flex items-center mb-8">
+              <User className="h-8 w-8 text-emerald-600 mr-4 flex-shrink-0" />
+              <h2 className="text-3xl font-display font-bold">Founder</h2>
+            </div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100"
+            >
+              <div className="flex flex-col md:flex-row items-center">
+                <div className="w-32 h-32 bg-emerald-100 rounded-full flex items-center justify-center mb-6 md:mb-0 md:mr-8 flex-shrink-0">
+                  <User className="w-16 h-16 text-emerald-600" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-semibold mb-2">Jake Rains — Founder & CEO</h3>
+                  <p className="text-gray-700">
+                    Serial tech entrepreneur focused on turning AI research into practical products that improve everyday experiences.
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Join the Journey Section */}
+      <section className="py-20 bg-gradient-to-br from-emerald-50 via-white to-green-50">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-4xl mx-auto text-center"
+          >
+            <div className="w-20 h-20 bg-gradient-to-br from-emerald-100 to-green-200 rounded-3xl flex items-center justify-center mx-auto mb-8">
+              <ExternalLink className="h-10 w-10 text-emerald-600" />
+            </div>
+            
+            <h2 className="text-3xl font-display font-bold mb-6">
+              Join the Journey
             </h2>
-            <p className="text-xl text-emerald-100 mb-8 max-w-2xl mx-auto">
-              Join hundreds of dispensaries using LeafIQ to provide better customer experiences 
-              and increase sales through intelligent product recommendations.
+            
+            <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+              If you run a dispensary and want to shape the future of data-driven cannabis retail, we'd love to talk.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link 
-                to="/auth/signup"
-                className="px-8 py-4 bg-white text-emerald-600 rounded-xl font-medium hover:bg-emerald-50 shadow-lg hover:shadow-xl transition-all duration-300"
+                to="/contact"
+                className="px-8 py-4 bg-emerald-500 text-white rounded-xl font-medium hover:bg-emerald-600 shadow-lg hover:shadow-xl transition-all duration-300"
               >
-                Start Free Trial
+                Request Info
               </Link>
               <Link 
-                to="/demo-login"
-                className="px-8 py-4 border-2 border-white text-white rounded-xl font-medium hover:bg-white hover:text-emerald-600 transition-all duration-300"
+                to="/contact"
+                className="px-8 py-4 border-2 border-emerald-500 text-emerald-600 rounded-xl font-medium hover:bg-emerald-50 transition-all duration-300"
               >
-                Try Demo
+                Request a Demo
               </Link>
             </div>
           </motion.div>
@@ -460,4 +414,4 @@ const AboutPage = () => {
   );
 };
 
-export default AboutPage; 
+export default AboutPage;
