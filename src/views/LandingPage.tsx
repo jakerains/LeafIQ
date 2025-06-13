@@ -234,7 +234,7 @@ const LandingPage = () => {
                   initial={{ opacity: 0, scale: 0.9, y: 20 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 }}
-                  className="relative w-5/6"
+                  className="relative w-full max-w-xl mx-auto"
                 >
                   <div className="relative rounded-2xl border-[0.75px] border-gray-200/30 p-3">
                     <GlowingEffect
