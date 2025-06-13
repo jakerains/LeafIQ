@@ -146,9 +146,9 @@ const LandingPage = () => {
                   initial={{ opacity: 0, scale: 0.9, y: 20 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 }}
-                  className="relative w-5/6 mx-auto"
+                  className="relative w-full max-w-md mx-auto"
                 >
-                  <div className="relative rounded-2xl border-[0.75px] border-gray-200/30 p-3">
+                  <div className="relative rounded-2xl border-[0.75px] border-gray-200/30 p-3 aspect-[4/3]">
                     <GlowingEffect
                       spread={50}
                       glow={true}
@@ -158,11 +158,11 @@ const LandingPage = () => {
                       borderWidth={3}
                       movementDuration={2.5}
                     />
-                    <div className="relative">
+                    <div className="relative h-full">
                       <img
                         src="/leafie-use3.jpeg"
                         alt="LeafIQ Dashboard"
-                        className="rounded-xl shadow-2xl w-full border-2 border-white/40 backdrop-blur-sm"
+                        className="rounded-xl shadow-2xl w-full h-full object-cover border-2 border-white/40 backdrop-blur-sm"
                       />
                       {/* Decorative floating elements */}
                       <div className="absolute -bottom-4 -right-4 w-20 h-20 bg-primary-500/15 rounded-full blur-xl"></div>
