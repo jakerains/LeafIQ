@@ -229,12 +229,12 @@ const LandingPage = () => {
               </motion.div>
             </div>
             <div className="flex-1 order-2 hidden lg:block">
-              <div className="flex justify-center pl-6"> {/* Added left padding (pl-6) to create space */}
+              <div className="flex justify-center pl-8"> {/* Increased left padding to 2rem (pl-8) */}
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9, y: 20 }}
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: 0.3 }}
-                  className="relative w-full max-w-xl mx-auto"
+                  className="relative w-full max-w-2xl mx-auto" /* Increased from max-w-xl to max-w-2xl */
                 >
                   <div className="relative rounded-2xl border-[0.75px] border-gray-200/30 p-3">
                     <GlowingEffect
